@@ -2,10 +2,12 @@
   "galleries": [
     {
       "path": "/Mu3D.maui/gallery/",
+      "bootResources": 60,
       "hashedResources": 58
     },
     {
       "path": "/Mu3D.maui/gallery-interpreted/",
+      "bootResources": 60,
       "hashedResources": 58
     }
   ]
