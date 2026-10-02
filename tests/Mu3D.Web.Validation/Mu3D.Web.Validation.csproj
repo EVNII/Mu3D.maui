@@ -45,8 +45,15 @@
   <ItemGroup Condition="'$(Mu3DWebRootCore)' == 'true'">
     <TrimmerRootAssembly Include="Mu3D.Core" />
   </ItemGroup>
+  <PropertyGroup Condition="'$(Mu3DWebSuite)' == 'HostContracts'">
+    <!-- Closed Blazor recording-renderer fixture only; production Gallery retains its own trim settings. -->
+    <_ExtraTrimmerArgs>$(_ExtraTrimmerArgs) --link-attributes &quot;$(MSBuildThisFileDirectory)../Mu3D.Web.Viewer.Tests/GalleryRoutingTrimAttributes.xml&quot;</_ExtraTrimmerArgs>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileDirectory)../Mu3D.Web.Viewer.Tests/GalleryRoutingTrimAttributes.xml</MSBuildAllProjects>
+  </PropertyGroup>
   <!-- Run the same host/shared test sources in desktop and WASM; no parallel feature fixture. -->
   <ItemGroup Condition="'$(Mu3DWebSuite)' == 'HostContracts'">
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="10.0.12" />
+    <Compile Include="../../samples/Mu3D.Gallery/Web/Infrastructure/GalleryPage.cs" Link="Gallery/GalleryPage.cs" />
     <Compile Include="../Mu3D.Web.Viewer.Tests/*.cs" Link="HostContracts/%(Filename)%(Extension)" />
     <Compile Include="../Mu3D.Core.Tests/RecordingGraphicsBackend.cs" Link="RecordingGraphicsBackend.cs" />
     <Compile Include="../Mu3D.Toolkit.Tests/SceneNodeAnchorSourceChecks.cs" Link="SceneNodeAnchorSourceChecks.cs" />

@@ -1,6 +1,6 @@
 @page "/about"
 @page "/licenses"
-@inject NavigationManager Navigation
+@inherits GalleryPage
 @using Mu3D.GalleryApp.Web.Infrastructure
 
 <main>
@@ -13,4 +13,4 @@
             <a href="assets/Hdri/README.md">HDRI notices</a></p>
     }
 </main>
-@code { private bool IsLicenses => Navigation.ToBaseRelativePath(Navigation.Uri).Split('?', '#')[0].Trim('/') == "licenses"; }
+@code { private bool IsLicenses => RouteId == "licenses"; }

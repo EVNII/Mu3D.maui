@@ -3,6 +3,7 @@
 @implements IAsyncDisposable
 @inject IJSRuntime JS
 @inject NavigationManager Navigation
+@inherits GalleryPage
 @using Mu3D.Color
 @using Mu3D.Graphics
 @using Mu3D.Rendering.OpenPbr
@@ -93,14 +94,12 @@
     protected override async Task OnParametersSetAsync()
     {
         if (disposed) return;
-        bool next = Navigation.ToBaseRelativePath(Navigation.Uri).Split('?', '#')[0].EndsWith("openpbr-white-furnace", StringComparison.Ordinal);
+        bool next = RouteId == "openpbr-white-furnace";
         if (next != isFurnace && startup is { IsCompleted: false })
         {
             // A reused route cannot dispose the pass while startup is publishing prepared GPU resources.
             await startup;
             if (disposed) return;
-            // A second navigation may have arrived while preparation completed.
-            next = Navigation.ToBaseRelativePath(Navigation.Uri).Split('?', '#')[0].EndsWith("openpbr-white-furnace", StringComparison.Ordinal);
         }
         if (example is null && furnace is null || next != isFurnace)
         {

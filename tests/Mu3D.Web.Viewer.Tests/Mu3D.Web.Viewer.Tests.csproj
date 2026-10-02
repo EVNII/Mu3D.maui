@@ -5,6 +5,8 @@
     <DefineConstants Condition="'$(EnableMu3DPrinting)' == 'true'">$(DefineConstants);MU3D_PRINTING</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="10.0.12" />
+    <Compile Include="../../samples/Mu3D.Gallery/Web/Infrastructure/GalleryPage.cs" Link="Gallery/GalleryPage.cs" />
     <Compile Include="../../samples/Mu3D.Gallery/GalleryCatalog.cs" Link="Gallery/GalleryCatalog.cs" />
     <ProjectReference Include="../../src/Mu3D.Toolkit/Mu3D.Toolkit.csproj" />
     <ProjectReference Include="../../src/Mu3D.Web/Mu3D.Web.csproj" />

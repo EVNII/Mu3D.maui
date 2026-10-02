@@ -2,6 +2,7 @@
 @page "/examples"
 @page "/examples/gallery-overview"
 @page "/sections/{SectionId}"
+@inherits GalleryPage
 @using Mu3D.GalleryApp
 @using Mu3D.Gallery
 @using Mu3D.GalleryApp.Web.Infrastructure
@@ -31,8 +32,6 @@
 
 @code {
     [Parameter] public string? SectionId { get; set; }
-    [SupplyParameterFromQuery(Name = "search")] public string? Search { get; set; }
-    [Inject] private NavigationManager Navigation { get; set; } = null!;
     private GallerySection? section;
     private GalleryEntry[] results = [];
     private bool overview;
@@ -40,7 +39,7 @@
     protected override void OnParametersSet()
     {
         section = GalleryCatalog.Sections.FirstOrDefault(item => item.Id == SectionId);
-        results = GalleryCatalog.Search(Search, SectionId).ToArray();
-        overview = Navigation.ToBaseRelativePath(Navigation.Uri).Split('?', '#')[0] == "examples/gallery-overview";
+        results = GalleryCatalog.Search(GalleryWebCatalog.SearchQuery(MatchedRoute), SectionId).ToArray();
+        overview = RoutePath == "examples/gallery-overview";
     }
 }

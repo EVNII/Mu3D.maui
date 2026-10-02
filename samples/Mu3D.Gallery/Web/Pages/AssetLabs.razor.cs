@@ -47,8 +47,9 @@ public partial class AssetLabs
 
     protected override async Task OnParametersSetAsync()
     {
+        if (disposed) return;
         GalleryAssets.Configure(new Uri(Navigation.BaseUri));
-        string next = new Uri(Navigation.Uri).AbsolutePath.TrimEnd('/').Split('/')[^1];
+        string next = RouteId;
         if (next == feature) return;
         generation++; loading?.Cancel(); DisposePresenters(); surface = null;
         feature = next; status = "Ready"; details = ""; animationTime = 0; busy = false;

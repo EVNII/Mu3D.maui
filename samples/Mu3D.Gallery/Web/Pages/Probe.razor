@@ -2,7 +2,7 @@
 @page "/examples/surface-probe"
 @implements IAsyncDisposable
 @inject IJSRuntime JS
-@inject NavigationManager Navigation
+@inherits GalleryPage
 @using Mu3D.Graphics
 @using Mu3D.Native.Wgpu
 @using Mu3D.GalleryApp.Web.Infrastructure
@@ -57,11 +57,13 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        bool next = Navigation.ToBaseRelativePath(Navigation.Uri).Split('?', '#')[0].TrimEnd('/').EndsWith("surface-probe", StringComparison.Ordinal);
+        if (disposed) return;
+        bool next = RouteId == "surface-probe";
         if (initialized && next != surfacePage)
         {
             if (probe is not null) await probe;
             await StopSurfaceAsync();
+            if (disposed) return;
         }
         surfacePage = next;
         initialized = true;

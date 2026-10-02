@@ -1,7 +1,7 @@
 @page "/examples/progress-bridge"
 @page "/examples/playback-toolbar"
 @implements IAsyncDisposable
-@inject NavigationManager Navigation
+@inherits GalleryPage
 @inject IJSRuntime JS
 @using Mu3D.GalleryApp.Web.Infrastructure
 @using Mu3D.Graphics
@@ -45,7 +45,7 @@
 
     protected override void OnParametersSet()
     {
-        bool next = Navigation.Uri.Contains("/playback-toolbar", StringComparison.Ordinal);
+        bool next = RouteId == "playback-toolbar";
         if (example is not null && next == playback) return;
         playback = next; animating = false; player.Stop(); progress = 0;
         ReleaseRenderer(); example = new(playback ? "PlaybackToolbarPage" : "ProgressBridgePage", RequestFrame);

@@ -5,6 +5,7 @@
 @implements IAsyncDisposable
 @inject IJSRuntime JS
 @inject NavigationManager Navigation
+@inherits GalleryPage
 @using System.Diagnostics
 @using Mu3D.Color
 @using Mu3D.Graphics
@@ -110,7 +111,8 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        string next = Navigation.ToBaseRelativePath(Navigation.Uri).Split('?', '#')[0].TrimEnd('/').Split('/').Last();
+        if (disposed) return;
+        string next = RouteId;
         if (next != page)
         {
             configurationVersion++; loadCancellation?.Cancel(); DisposePresenters(); page = next;

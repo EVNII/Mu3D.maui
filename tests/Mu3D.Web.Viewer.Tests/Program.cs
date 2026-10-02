@@ -25,6 +25,7 @@ CanvasViewHandlerChecks.Validate(Check);
 GalleryPortChecks.Validate(Check);
 NewGalleryCaseChecks.Validate(Check);
 GalleryCatalogChecks.Validate(Check);
+await GalleryRoutingChecks.Validate(Check);
 #if MU3D_WEB_CONTRACTS
 SceneNodeAnchorSourceChecks.Validate(Check);
 await SceneNodeAnchorSourceChecks.ValidateBorrowedReferences(Check);

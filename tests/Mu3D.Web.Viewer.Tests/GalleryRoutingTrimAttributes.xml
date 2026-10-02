@@ -1,0 +1,43 @@
+<linker>
+  <!--
+    Test-only external attributes for the closed recording-renderer fixture.
+    ILLink attribute format: dotnet/runtime docs/tools/illink/data-formats.md.
+    TestActivator permits exactly GridPage, SearchPage, CascadingValue<string>, RouteView
+    and LayoutView; ContentHost is attached directly. Validate explicitly roots the fixture,
+    inherited GalleryPage/SnapshotPage parameters, CascadingValue and RouteView. RouteView's
+    typed OpenComponent&lt;LayoutView&gt; retains LayoutView's reflected parameter contract without
+    independently rooting its annotated backing fields or private layout-method parameters.
+    Both published modes
+    execute actual parameter binding and lifecycle rather than assuming reflection survives.
+    The production Gallery and other suites do not load these suppressions.
+  -->
+  <assembly fullname="Microsoft.AspNetCore.Components">
+    <type fullname="Microsoft.AspNetCore.Components.CascadingParameterState">
+      <method name="FindCascadingParameters">
+        <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute" assembly="System.Private.CoreLib">
+          <argument>Trimming</argument>
+          <argument>IL2072</argument>
+          <property name="Justification">The recording renderer's closed component set and inherited cascading parameters are explicitly preserved by GalleryRoutingChecks.Validate.</property>
+        </attribute>
+      </method>
+    </type>
+    <type fullname="Microsoft.AspNetCore.Components.ComponentFactory">
+      <method name="PerformPropertyInjection">
+        <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute" assembly="System.Private.CoreLib">
+          <argument>Trimming</argument>
+          <argument>IL2072</argument>
+          <property name="Justification">TestActivator rejects every component outside its explicit whitelist; all reflected component members are preserved by GalleryRoutingChecks.Validate.</property>
+        </attribute>
+      </method>
+    </type>
+    <type fullname="Microsoft.AspNetCore.Components.Reflection.ComponentProperties">
+      <method name="SetProperties">
+        <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute" assembly="System.Private.CoreLib">
+          <argument>Trimming</argument>
+          <argument>IL2072</argument>
+          <property name="Justification">The fixture roots the complete reflected parameter sets of every instantiated component and executes their binding in both trimmed WASM modes.</property>
+        </attribute>
+      </method>
+    </type>
+  </assembly>
+</linker>

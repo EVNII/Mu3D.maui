@@ -52,9 +52,11 @@ public partial class ToolkitExamples
 
     protected override async Task OnParametersSetAsync()
     {
-        string next = Navigation.ToBaseRelativePath(Navigation.Uri).Split('?', '#')[0].TrimEnd('/').Split('/')[^1];
-        if (next == id) return;
-        await StopAsync(); id = next; frame = 0; status = "正在连接 GPU…"; example = new(id);
+        string next = RouteId;
+        if (disposed || next == id) return;
+        await StopAsync();
+        if (disposed) return;
+        id = next; frame = 0; status = "正在连接 GPU…"; example = new(id);
     }
     protected override async Task OnAfterRenderAsync(bool firstRender)
     { if (startup is null && !disposed) { startup = StartAsync(); await startup; } }

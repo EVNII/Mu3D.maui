@@ -1,10 +1,11 @@
 @inject NavigationManager Navigation
-<GalleryShell>
 <Router AppAssembly="@typeof(App).Assembly">
-    <Found Context="route"><RouteView @key="Navigation.ToBaseRelativePath(Navigation.Uri).Split('#')[0]" RouteData="@route" /></Found>
-    <NotFound><main><h1>页面不存在</h1><a href="examples">All Examples</a></main></NotFound>
+    <Found Context="route">
+        @{ RenderFragment content = GalleryRouteView.Content(route, Navigation.ToBaseRelativePath(Navigation.Uri)); }
+        <GalleryShell>@content</GalleryShell>
+    </Found>
+    <NotFound><GalleryShell><main><h1>页面不存在</h1><a href="examples">All Examples</a></main></GalleryShell></NotFound>
 </Router>
-</GalleryShell>
 
 @code {
     // Preserve the sample pages discovered by Router in both trimmed execution modes.

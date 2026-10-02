@@ -3,7 +3,8 @@
 Non-packable host for a library Web target. Shared Core/Graphics/Toolkit runs in WASM; thin
 Canvas/JS handlers adapt lifecycle/input/bindings. The Emdawn device bridge is diagnostic-only,
 with source-linked shared WGPU adapter code. Native bindings, the v29.0.1.1 pin and supported
-1.0 platform matrix remain unchanged. This host uses the standalone WebAssembly SDK, without Blazor.
+1.0 platform matrix remain unchanged. This host uses the standalone WebAssembly SDK without a
+Blazor UI host; HostContracts additionally exercises the core Blazor component renderer headlessly.
 
 Validate Web features with trimmed Release AOT and compare the affected browser paths with
 interpreted execution. Node and recording-device suites check shared logic and host contracts;
@@ -18,7 +19,7 @@ Public usage/defaults/ownership live in [Mu3D.Web](../../src/Mu3D.Web/README.md)
 | Smoke | Core scene/mesh/camera, Creative FP16 values, static C P/Invoke and asynchronous reverse callback |
 | Creative | Existing Creative test source (215 checks) |
 | Graphics | Existing resource/command/output/device-loss contracts with test devices |
-| HostContracts | Same desktop Viewer sources and shared Toolkit anchor checks; Canvas handler resize/status/reentry/disposal and generated serialization |
+| HostContracts | Same desktop Viewer sources and shared Toolkit anchor checks; Canvas lifecycle/serialization and real Gallery route snapshot, query replacement and owner disposal |
 | WgpuAbi | 20 sampled wasm32 layouts/constants, exact 64-bit future sentinel and C-flattened reverse callback |
 | Emdawn | Actual bridge linking and asynchronous adapter request; browser success or Node unavailable path |
 | Render | Actual shared SceneRenderer/PBR/Toolkit plus original Lighting/Occlusion and five OpenPBR Gallery modes/preparation → FP16 source → HDR/explicit SDR Canvas and GPU readback |
@@ -29,6 +30,9 @@ property/input/selection/anchor mapping, submitted-frame diagnostics and JSON. J
 browser adapter/DOM/lifecycle behavior with shared fixtures. HostContracts reuses those C# sources
 in both WASM modes; no separate feature consumer is added. Helper recording checks share
 HelperRenderChecks.cs; include it when source-linking an individual helper fixture elsewhere.
+The Gallery renderer fixture explicitly preserves its closed component set. HostContracts applies
+method-scoped IL2072 annotations to three framework reflection methods; production Gallery and
+other suites do not use these test-only suppressions.
 
 Intermediates are isolated by suite and Interpreted/Aot flavor. AOT strips intermediate method
 bodies, so an interpreter build must use its own intermediates. Static asset compression is
