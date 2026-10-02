@@ -1,0 +1,55 @@
+@page "/source/{Feature}"
+@implements IDisposable
+@inject NavigationManager Navigation
+@inject IJSRuntime JS
+@using Mu3D.GalleryApp
+@using Mu3D.GalleryApp.Web.Infrastructure
+
+<main>
+    <a href="">返回 Gallery</a>
+    <h1>@title · Source</h1>
+    <p>这里显示原生 Gallery 的实际 XAML、C# 和共享示例文件。XAML 用于 MAUI；Web 的界面由 Razor 提供。复制时保留列出的依赖及原示例资源。</p>
+    <p role="status">@status</p>
+    @foreach (var file in files)
+    {
+        <details open>
+            <summary>@file.Name <button @onclick="() => Copy(file.Text)">Copy</button></summary>
+            <textarea readonly spellcheck="false" rows="18" aria-label="@file.Name" style="width:100%;font-family:monospace">@file.Text</textarea>
+        </details>
+    }
+</main>
+
+@code {
+    [Parameter] public string Feature { get; set; } = "";
+    private readonly List<(string Name, string Text)> files = [];
+    private readonly CancellationTokenSource lifetime = new();
+    private HttpClient? client;
+    private string title = "Gallery", status = "正在读取源文件…", loadedFeature = "";
+    private bool disposed;
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Feature == loadedFeature) return;
+        loadedFeature = Feature;
+        GalleryExample? entry = GalleryNavigationCatalog.Examples.FirstOrDefault(example => GalleryWebCatalog.FeatureId(example) == Feature);
+        string? route = entry?.Route ?? (Feature == "material-conformance" ? GalleryRoutes.ModelLab : null);
+        if (route is null) { status = "没有这个 Gallery 示例。"; return; }
+        title = entry?.Title ?? "Material Conformance";
+        string pageName = GallerySourceCatalog.PageName(route);
+        client = new() { BaseAddress = new Uri(Navigation.BaseUri) };
+        try {
+            foreach (string file in new[] { pageName + ".xaml", pageName + ".xaml.cs" }.Concat(GallerySourceCatalog.Helpers(pageName))) {
+                string text = await client.GetStringAsync("GallerySource/" + file, lifetime.Token);
+                if (disposed) return;
+                files.Add((file, text));
+            }
+            status = $"{files.Count} 个实际源文件；仅在打开此页面时读取。";
+        } catch (OperationCanceledException) when (lifetime.IsCancellationRequested) { }
+        catch (Exception error) { status = $"源文件读取失败：{error.Message}"; }
+    }
+    private async Task Copy(string text)
+    {
+        try { await JS.InvokeVoidAsync("navigator.clipboard.writeText", text); status = "已复制。"; }
+        catch (JSException) { status = "浏览器未允许剪贴板写入；可以在文本框内选中并复制。"; }
+    }
+    public void Dispose() { if (disposed) return; disposed = true; lifetime.Cancel(); client?.Dispose(); lifetime.Dispose(); }
+}

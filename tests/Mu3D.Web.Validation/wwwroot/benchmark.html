@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mu3D · WASM 性能对照</title>
+<style>
+  :root { font: 15px/1.5 system-ui,sans-serif; color: #233044; background: #f5f7fa; }
+  body { max-width: 900px; margin: 24px auto; padding: 0 20px; }
+  h1 { font-size: 24px; margin-bottom: 4px; }
+  button, a { font: inherit; color: #174c99; }
+  button { padding: 6px 14px; }
+  #canvas-frame { position: relative; width: min(100%,480px); aspect-ratio: 5/3; }
+  canvas { width: 100%; height: 100%; display: block; }
+  .scene-card { background: white; padding: 4px 8px; font-size: 12px; border: 1px solid #bbc9da; border-radius: 4px; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  th,td { padding: 5px 10px; border-bottom: 1px solid #dce2e9; text-align: left; }
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; }
+  textarea { width: 100%; height: 100px; }
+  .note { color: #526173; font-size: 13px; }
+</style>
+<h1>WASM 性能对照</h1>
+<p id="build">正在加载运行时…</p>
+<div id="canvas-frame"><canvas id="mu3d-canvas" width="960" height="576" aria-label="Mu3D HDR 性能测试场景"></canvas></div>
+<div hidden><span id="blue-label" class="scene-card">蓝球 · HTML</span><span id="green-label" class="scene-card">绿球 · HTML</span></div>
+<p id="status" role="status" data-state="loading">准备固定场景与 HDR 像素检查…</p>
+<p><button id="start" disabled>开始测量</button> <button id="reload">重新加载</button> <a href="./?demo=viewer">交互查看器</a></p>
+<p class="note">960 × 576 GPU 像素 · HDR / 0 EV · 固定 1/60 秒动画步长。先预热 120 帧，再测 180 帧普通调用、300 帧分段统计。测量时保持此页可见、不调整窗口。</p>
+<p class="note">结果是 CPU 墙钟耗时和托管分配，包含互操作与浏览器调度影响；不是 GPU 耗时、屏幕刷新率或 HDR 亮度测量。这里是独立性能测试，不是 Toolkit FPS 控件。</p>
+<table id="results" hidden><thead><tr><th>阶段</th><th>中位数 ms</th><th>P95 ms</th><th>平均托管分配 B/帧</th></tr></thead><tbody></tbody></table>
+<details><summary>原始结果</summary><textarea id="benchmark-json" readonly aria-label="性能对照 JSON"></textarea></details>
+<pre id="log" aria-label="验证日志"></pre>
+<script type="module" src="./benchmark-host.mjs"></script>
+</html>

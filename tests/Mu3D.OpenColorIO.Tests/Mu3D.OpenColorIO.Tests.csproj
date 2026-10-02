@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/Mu3D.Native.OpenColorIO/Mu3D.Native.OpenColorIO.csproj" />
+    <None Include="reference.ocio" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="oracle.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

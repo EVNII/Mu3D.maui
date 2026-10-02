@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../eng/Mu3D.WgpuNativeVersion.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Mu3D.Native.Wgpu</RootNamespace>
+    <AssemblyName>Mu3D.Native.Wgpu</AssemblyName>
+    <PackageId>Mu3D.Native.Wgpu</PackageId>
+    <Description>Generated bindings and default wgpu-native graphics backend for Mu3D.</Description>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Mu3DUseRuntimeProjectReferences Condition="'$(Mu3DUseRuntimeProjectReferences)' == ''">true</Mu3DUseRuntimeProjectReferences>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AssemblyMetadata Include="WgpuNativeVersion" Value="$(Mu3DWgpuNativeVersion)" />
+    <AssemblyMetadata Include="WgpuNativeCommit" Value="$(Mu3DWgpuNativeCommit)" />
+    <ProjectReference Include="../Mu3D.Color/Mu3D.Color.csproj" />
+    <ProjectReference Include="../Mu3D.Graphics/Mu3D.Graphics.csproj" />
+    <ProjectReference Include="../Mu3D.Native.Wgpu.Runtime/Mu3D.Native.Wgpu.Runtime.csproj"
+                      ReferenceOutputAssembly="false"
+                      Condition="'$(Mu3DUseRuntimeProjectReferences)' == 'true'" />
+    <PackageReference Include="Mu3D.Native.Wgpu.Runtime"
+                      Version="[$(Mu3DPackageVersion)]"
+                      Condition="'$(Mu3DUseRuntimeProjectReferences)' != 'true'" />
+  </ItemGroup>
+
+  <Target Name="RequireVerifiedWgpuRuntimeFeedForPack" BeforeTargets="GenerateNuspec">
+    <Error Condition="'$(Mu3DUseRuntimeProjectReferences)' == 'true'"
+           Text="Pack Mu3D.Native.Wgpu through eng/pack-managed-packages.ps1 so its runtime dependency is exact and comes from a verified feed." />
+  </Target>
+</Project>

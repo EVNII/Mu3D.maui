@@ -1,0 +1,20 @@
+[
+  {
+    "name": "ocio_reach_m_table_0",
+    "offset": 0,
+    "width": 363,
+    "height": 1,
+    "depth": 1,
+    "interpolation": "nearest",
+    "channels": 1
+  },
+  {
+    "name": "ocio_gamut_cusp_table_0",
+    "offset": 363,
+    "width": 363,
+    "height": 1,
+    "depth": 1,
+    "interpolation": "nearest",
+    "channels": 3
+  }
+]

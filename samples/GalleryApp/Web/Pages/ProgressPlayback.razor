@@ -1,0 +1,98 @@
+@page "/examples/progress-bridge"
+@page "/examples/playback-toolbar"
+@implements IAsyncDisposable
+@inject NavigationManager Navigation
+@inject IJSRuntime JS
+@using Mu3D.GalleryApp.Web.Infrastructure
+@using Mu3D.Graphics
+@using Mu3D.Rendering
+@using Mu3D.SceneGraph
+@using Mu3D.Toolkit.Animation
+
+<main><a href="">Mu3D Gallery</a><h1>@(playback ? "Playback Toolbar" : "Progress Bridge")</h1>
+    <p>@(playback ? "应用拥有 IPlayable，控件只负责播放、暂停、起点、进度和循环。" : "同一组进度映射驱动物体和相机；滑块、滚动条和动画共享进度。")</p>
+    <div class="controls">
+        @if (playback)
+        {
+            <button @onclick="TogglePlay">@(player.State == PlaybackState.Playing ? "Pause" : "Play")</button>
+            <button @onclick="Start">Start</button>
+            <label><input type="checkbox" @bind="player.IsLooping" /> Loop</label>
+        }
+        else { <button @onclick="Animate">Animate</button> }
+        <input aria-label="Progress" type="range" min="0" max="1" step="0.001" @bind="progress" @bind:event="oninput" @bind:after="Seek" />
+        <span>@(playback ? $"{player.Position.TotalSeconds:0.00} / 6.00 s" : $"Progress {progress:0.000}")</span>
+    </div>
+    <GalleryCanvas @key="playback" @ref="viewport" Title="Progress / Playback" Continuous="Running" Draw="Draw" Disconnected="ReleaseRenderer" />
+    @if (!playback)
+    {
+        <div @ref="scrollTrack" class="progress-scroll"><div class="progress-strip">0% — start <span>33%</span><span>66%</span><span>100% — end</span></div></div>
+    }
+    <p>@status</p>
+</main>
+
+@code {
+    private ProgressGalleryExample? example;
+    private GalleryCanvas? viewport;
+    private SceneRenderer? renderer;
+    private readonly GalleryPlayable player = new();
+    private IJSObjectReference? scrollModule, scroller;
+    private DotNetObjectReference<ProgressPlayback>? reference;
+    private ElementReference scrollTrack;
+    private bool playback, animating, disposed;
+    private double progress, animationTime, animationStart, animationTarget;
+    private string status = "Ready";
+    private bool Running => animating || playback && player.State == PlaybackState.Playing;
+
+    protected override void OnParametersSet()
+    {
+        bool next = Navigation.Uri.Contains("/playback-toolbar", StringComparison.Ordinal);
+        if (example is not null && next == playback) return;
+        playback = next; animating = false; player.Stop(); progress = 0;
+        ReleaseRenderer(); example = new(playback ? "PlaybackToolbarPage" : "ProgressBridgePage", RequestFrame);
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (playback || scroller is not null || disposed) return;
+        scrollModule ??= await JS.InvokeAsync<IJSObjectReference>("import", "./progress-scroll.mjs");
+        reference ??= DotNetObjectReference.Create(this);
+        scroller = await scrollModule.InvokeAsync<IJSObjectReference>("attach", scrollTrack, reference);
+    }
+    private void RequestFrame() { if (viewport is not null && !disposed) _ = viewport.InvalidateAsync(); }
+    private void Seek()
+    {
+        animating = false; player.Seek(TimeSpan.FromSeconds(progress * 6));
+        example?.Controller.SetProgress(progress);
+    }
+    private void TogglePlay() { if (player.State == PlaybackState.Playing) player.Pause(); else player.Play(); }
+    private void Start() { player.Stop(); progress = 0; example?.Controller.SetProgress(0); }
+    private void Animate()
+    { animationStart = progress; animationTarget = progress < .5 ? 1 : 0; animationTime = 0; animating = true; status = "VSync animation drives the shared progress mappings."; }
+    private void Draw(GraphicsDevice device, GraphicsTexture target, GraphicsTexture? depth, double delta)
+    {
+        if (example is null) return;
+        if (playback && player.State == PlaybackState.Playing) { player.Advance(delta); progress = player.Position.TotalSeconds / 6; }
+        if (animating)
+        {
+            animationTime += delta; double t = Math.Clamp(animationTime / 1.4, 0, 1);
+            double eased = t < .5 ? 4 * t * t * t : 1 - Math.Pow(-2 * t + 2, 3) / 2;
+            progress = animationStart + (animationTarget - animationStart) * eased;
+            if (t == 1) { animating = false; status = "Animation completed; only mapped frames were requested."; }
+        }
+        example.Controller.SetProgress(progress);
+        example.Definition.Camera.AspectRatio = (float)target.Descriptor.Size.Width / target.Descriptor.Size.Height;
+        renderer ??= new(device, GraphicsTextureFormat.Rgba16Float);
+        renderer.Render(example.Definition.Scene, example.Definition.Camera, target, depth!);
+        if (!disposed) _ = InvokeAsync(StateHasChanged);
+    }
+    [JSInvokable] public Task ScrollProgress(double value)
+    { if (disposed || playback) return Task.CompletedTask; progress = Math.Clamp(value, 0, 1); Seek(); return InvokeAsync(StateHasChanged); }
+    private void ReleaseRenderer() { renderer?.Dispose(); renderer = null; }
+    public async ValueTask DisposeAsync()
+    {
+        disposed = true; player.Pause();
+        if (scroller is not null) { await scroller.InvokeVoidAsync("dispose"); await scroller.DisposeAsync(); }
+        if (viewport is not null) await viewport.DisposeAsync();
+        ReleaseRenderer(); reference?.Dispose();
+        if (scrollModule is not null) await scrollModule.DisposeAsync();
+    }
+}

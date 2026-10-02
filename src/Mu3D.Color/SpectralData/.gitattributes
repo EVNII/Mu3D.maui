@@ -1,0 +1,3 @@
+# Preserve official byte-level checksums on every checkout, including Windows.
+*.csv -text
+*.json -text

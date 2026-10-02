@@ -1,0 +1,223 @@
+name: Native Mac Catalyst
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/native-maccatalyst.yml
+      - eng/Mu3D.WgpuNativeVersion.props
+      - eng/wgpu-native-assets.json
+      - src/Mu3D.Native.Wgpu/Generated/WgpuNative.Raw.g.cs
+      - src/Mu3D.Native.Wgpu.Runtime/**
+      - tools/Mu3D.WgpuGen/**
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    if: github.repository == 'EVNII/Mu3D.maui'
+    name: ${{ matrix.rid }} / ${{ matrix.configuration }}
+    runs-on: macos-15
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rid: maccatalyst-arm64
+            target: aarch64-apple-ios-macabi
+            archive_arch: aarch64
+            configuration: release
+            cargo_profile: release
+          - rid: maccatalyst-arm64
+            target: aarch64-apple-ios-macabi
+            archive_arch: aarch64
+            configuration: debug
+            cargo_profile: debug
+          - rid: maccatalyst-x64
+            target: x86_64-apple-ios-macabi
+            archive_arch: x86_64
+            configuration: release
+            cargo_profile: release
+          - rid: maccatalyst-x64
+            target: x86_64-apple-ios-macabi
+            archive_arch: x86_64
+            configuration: debug
+            cargo_profile: debug
+
+    steps:
+      - name: Check out Mu3D
+        uses: actions/checkout@v7
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Check out pinned wgpu-native commit
+        env:
+          WGPU_NATIVE_COMMIT: 6aed50955d934ac36049ba8d002034841633ae02
+        run: |
+          git init upstream
+          git -C upstream remote add origin https://github.com/gfx-rs/wgpu-native.git
+          git -C upstream fetch --depth 1 origin "$WGPU_NATIVE_COMMIT"
+          git -C upstream checkout --detach FETCH_HEAD
+          test "$(git -C upstream rev-parse HEAD)" = "$WGPU_NATIVE_COMMIT"
+          git -C upstream submodule update --init --recursive --depth 1
+
+      - name: Install pinned Rust target
+        working-directory: upstream
+        run: rustup target add ${{ matrix.target }}
+
+      - name: Install matching LLVM symbol tools
+        run: brew install llvm@21
+
+      - name: Build wgpu-native
+        working-directory: upstream
+        env:
+          CARGO_TERM_COLOR: always
+        run: |
+          if [[ "${{ matrix.configuration }}" == "release" ]]; then
+            cargo build --locked --release --target "${{ matrix.target }}"
+          else
+            cargo build --locked --target "${{ matrix.target }}"
+          fi
+
+      - name: Verify native exports
+        run: |
+          symbol_tool="$(brew --prefix llvm@21)/bin/llvm-nm"
+          test -x "$symbol_tool"
+          MU3D_NATIVE_SYMBOL_TOOL="$symbol_tool" \
+            dotnet run --project tools/Mu3D.WgpuGen -- \
+            verify-native-exports \
+            src/Mu3D.Native.Wgpu/Generated/WgpuNative.Raw.g.cs \
+            "upstream/target/${{ matrix.target }}/${{ matrix.cargo_profile }}/libwgpu_native.a"
+
+      - name: Create immutable archive
+        env:
+          ARCHIVE_NAME: wgpu-maccatalyst-${{ matrix.archive_arch }}-${{ matrix.configuration }}.zip
+          WGPU_NATIVE_COMMIT: 6aed50955d934ac36049ba8d002034841633ae02
+        run: |
+          mkdir -p dist/stage/include/webgpu dist/stage/lib dist/stage/wgpu-native-meta
+          cp upstream/ffi/webgpu-headers/webgpu.h dist/stage/include/webgpu/webgpu.h
+          cp upstream/ffi/wgpu.h dist/stage/include/webgpu/wgpu.h
+          cp "upstream/target/${{ matrix.target }}/${{ matrix.cargo_profile }}/libwgpu_native.a" \
+            dist/stage/lib/libwgpu_native.a
+          printf '%s\n' "$WGPU_NATIVE_COMMIT" > dist/stage/wgpu-native-meta/wgpu-native-git-commit
+          printf '%s\n' 'v29.0.1.1' > dist/stage/wgpu-native-meta/wgpu-native-git-tag
+          ditto -c -k --norsrc dist/stage "dist/$ARCHIVE_NAME"
+          shasum -a 256 "dist/$ARCHIVE_NAME" > "dist/$ARCHIVE_NAME.sha256"
+
+      - name: Upload precompiled artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: wgpu-maccatalyst-${{ matrix.archive_arch }}-${{ matrix.configuration }}
+          path: |
+            dist/*.zip
+            dist/*.sha256
+          if-no-files-found: error
+          retention-days: 30
+
+  verify-package:
+    if: github.repository == 'EVNII/Mu3D.maui'
+    name: Verify packed Mac Catalyst DebugRuntime
+    needs: build
+    runs-on: macos-15
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out Mu3D
+        uses: actions/checkout@v7
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Install Mac Catalyst workload
+        run: dotnet workload install maui-maccatalyst
+
+      - name: Install matching LLVM symbol tools
+        run: brew install llvm@21
+
+      - name: Download all built slices
+        uses: actions/download-artifact@v6
+        with:
+          pattern: wgpu-maccatalyst-*
+          path: artifacts/maccatalyst-ci
+          merge-multiple: true
+
+      - name: Fetch and stage all pinned Release runtimes
+        env:
+          MU3D_GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          dotnet run --project tools/Mu3D.WgpuGen --configuration Release -- \
+            prepare-runtimes eng/wgpu-native-assets.json eng/Mu3D.WgpuNativeVersion.props \
+            release artifacts/downloads artifacts/wgpu-native
+
+      - name: Verify every pinned Release export set
+        run: |
+          symbol_tool="$(brew --prefix llvm@21)/bin/llvm-nm"
+          test -x "$symbol_tool"
+          find artifacts/wgpu-native/v29.0.1.1/release/runtimes -type f \
+            \( -name 'libwgpu_native.so' -o -name 'libwgpu_native.a' -o -name 'wgpu_native.dll' \) \
+            -print0 | while IFS= read -r -d '' library; do
+              MU3D_NATIVE_SYMBOL_TOOL="$symbol_tool" \
+                dotnet run --project tools/Mu3D.WgpuGen --configuration Release -- \
+                  verify-native-exports src/Mu3D.Native.Wgpu/Generated/WgpuNative.Raw.g.cs "$library"
+            done
+
+      - name: Stage Mac Catalyst Release and Debug slices for packaging
+        run: |
+          for configuration in release debug; do
+            for pair in 'arm64 aarch64' 'x64 x86_64'; do
+              set -- $pair
+              rid_arch="$1"
+              archive_arch="$2"
+              archive="artifacts/maccatalyst-ci/wgpu-maccatalyst-${archive_arch}-${configuration}.zip"
+              stage="artifacts/maccatalyst-${rid_arch}-${configuration}"
+              ditto -x -k "$archive" "$stage"
+              destination="artifacts/wgpu-native/v29.0.1.1/${configuration}/runtimes/maccatalyst-${rid_arch}/native"
+              mkdir -p "$destination"
+              cp "$stage/lib/libwgpu_native.a" "$destination/libwgpu_native.a"
+            done
+          done
+
+      - name: Pack complete Release backend and Mac Catalyst DebugRuntime
+        run: |
+          dotnet pack src/Mu3D.Color/Mu3D.Color.csproj \
+            --configuration Release --output artifacts/packages
+          dotnet pack src/Mu3D.Graphics/Mu3D.Graphics.csproj \
+            --configuration Release --output artifacts/packages
+          dotnet pack src/Mu3D.Native.Wgpu.Runtime/Mu3D.Native.Wgpu.Runtime.csproj \
+            --configuration Release --output artifacts/packages
+          dotnet restore src/Mu3D.Native.Wgpu/Mu3D.Native.Wgpu.csproj \
+            -p:Mu3DUseRuntimeProjectReferences=false \
+            --source artifacts/packages --source https://api.nuget.org/v3/index.json
+          dotnet pack src/Mu3D.Native.Wgpu/Mu3D.Native.Wgpu.csproj \
+            --configuration Release --output artifacts/packages --no-restore \
+            -p:Mu3DUseRuntimeProjectReferences=false
+          dotnet pack \
+            src/Mu3D.Native.Wgpu.DebugRuntime.MacCatalyst/Mu3D.Native.Wgpu.DebugRuntime.MacCatalyst.csproj \
+            --configuration Release --output artifacts/packages
+
+      - name: Restore packed consumer from local feed
+        run: |
+          dotnet restore tests/Mu3D.DebugRuntime.Tests/PackageConsumer/MacCatalystConsumer.proj \
+            --source "$GITHUB_WORKSPACE/artifacts/packages" \
+            --source https://api.nuget.org/v3/index.json
+
+      - name: Verify packed Debug slice replaces Release input
+        run: >-
+          dotnet msbuild tests/Mu3D.DebugRuntime.Tests/PackageConsumer/MacCatalystConsumer.proj
+          /t:VerifyDebugRuntimePackage /p:Configuration=Release
+          /nologo /v:minimal
+
+      - name: Upload verified DebugRuntime package
+        uses: actions/upload-artifact@v7
+        with:
+          name: Mu3D.Native.Wgpu.Packages.MacCatalystVerified
+          path: |
+            artifacts/packages/Mu3D.Native.Wgpu.*.nupkg
+          if-no-files-found: error
+          retention-days: 30

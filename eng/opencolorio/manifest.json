@@ -1,0 +1,55 @@
+{
+  "abiVersion": 1,
+  "openColorIO": {
+    "name": "OpenColorIO",
+    "version": "2.5.2",
+    "commit": "c52966a6677723d5bd2dbef0ccec3fed9cbc3790",
+    "url": "https://codeload.github.com/AcademySoftwareFoundation/OpenColorIO/tar.gz/refs/tags/v2.5.2",
+    "archive": "ocio-v2.5.2.tar.gz",
+    "sha256": "722601e01b78b7a12da4829cb450674935f404b0e508f3f20046fa77570e3272"
+  },
+  "dependencies": [
+    {
+      "name": "expat",
+      "version": "2.7.2",
+      "url": "https://codeload.github.com/libexpat/libexpat/tar.gz/refs/tags/R_2_7_2",
+      "archive": "expat-2.7.2.tar.gz",
+      "sha256": "d09e2dd23398805cec1bac2860304714c96dc2fde629a7a1a77d0880ab7cd242"
+    },
+    {
+      "name": "yaml-cpp",
+      "version": "0.8.0",
+      "url": "https://codeload.github.com/jbeder/yaml-cpp/tar.gz/refs/tags/0.8.0",
+      "archive": "yaml-cpp-0.8.0.tar.gz",
+      "sha256": "fbe74bbdcee21d656715688706da3c8becfd946d92cd44705cc6098bb23b3a16"
+    },
+    {
+      "name": "pystring",
+      "version": "1.1.4",
+      "url": "https://codeload.github.com/imageworks/pystring/tar.gz/refs/tags/v1.1.4",
+      "archive": "pystring-1.1.4.tar.gz",
+      "sha256": "49da0fe2a049340d3c45cce530df63a2278af936003642330287b68cefd788fb"
+    },
+    {
+      "name": "Imath",
+      "version": "3.2.1",
+      "url": "https://codeload.github.com/AcademySoftwareFoundation/Imath/tar.gz/refs/tags/v3.2.1",
+      "archive": "Imath-3.2.1.tar.gz",
+      "sha256": "b2c8a44c3e4695b74e9644c76f5f5480767355c6f98cde58ba0e82b4ad8c63ce"
+    },
+    {
+      "name": "ZLIB",
+      "version": "1.3.1",
+      "url": "https://codeload.github.com/madler/zlib/tar.gz/refs/tags/v1.3.1",
+      "archive": "ZLIB-1.3.1.tar.gz",
+      "sha256": "17e88863f3600672ab49182f217281b6fc4d3c762bde361935e436a95214d05c"
+    },
+    {
+      "name": "minizip-ng",
+      "version": "4.0.10",
+      "url": "https://codeload.github.com/zlib-ng/minizip-ng/tar.gz/refs/tags/4.0.10",
+      "archive": "minizip-ng-4.0.10.tar.gz",
+      "sha256": "c362e35ee973fa7be58cc5e38a4a6c23cc8f7e652555daf4f115a9eb2d3a6be7"
+    }
+  ]
+}

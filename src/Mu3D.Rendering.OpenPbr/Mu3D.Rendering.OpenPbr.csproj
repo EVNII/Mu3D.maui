@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Mu3D.Rendering.OpenPbr</RootNamespace>
+    <AssemblyName>Mu3D.Rendering.OpenPbr</AssemblyName>
+    <PackageId>Mu3D.Rendering.OpenPbr</PackageId>
+    <Description>Optional OpenPBR raster, hybrid and progressive HDR rendering for Mu3D.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Mu3D.Core/Mu3D.Core.csproj" />
+    <EmbeddedResource Include="Shaders/*.wgsl" />
+    <EmbeddedResource Include="Shaders/Lut.bin" />
+    <None Include="README.md" Pack="true" PackagePath="/" />
+    <None Include="ThirdParty/Adobe-LICENSE" Pack="true" PackagePath="licenses/" />
+    <None Include="ThirdParty/NOTICE.md" Pack="true" PackagePath="licenses/" />
+    <None Include="buildTransitive/Mu3D.Rendering.OpenPbr.targets" Pack="true" PackagePath="buildTransitive/" />
+    <None Update="precompiled/windows/*.bin;precompiled/windows/manifest.json" Pack="true" PackagePath="precompiled/windows/%(Filename)%(Extension)" />
+  </ItemGroup>
+</Project>

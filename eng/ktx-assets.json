@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "libktx": {
+    "version": "v4.4.2",
+    "commit": "4d6fc70eaf62ad0558e63e8d97eb9766118327a6",
+    "repository": "https://github.com/KhronosGroup/KTX-Software",
+    "license": "Apache-2.0 AND BSD-1-Clause AND BSD-3-Clause",
+    "licenseFiles": [
+      "src/Mu3D.Native.Ktx/licenses/KTX-Software-LICENSE.md",
+      "src/Mu3D.Native.Ktx/licenses/Apache-2.0.txt",
+      "src/Mu3D.Native.Ktx/licenses/BSD-1-Clause.txt",
+      "src/Mu3D.Native.Ktx/licenses/Zstandard-BSD-3-Clause.txt"
+    ],
+    "cmakeTarget": "ktx_read",
+    "appleStaticMergePatch": "eng/native/KtxReadAppleStaticMerge.patch",
+    "windowsX86CallingConventionPatch": "eng/native/KtxWindowsX86CallingConvention.patch",
+    "windowsX86PublicExports": "eng/native/KtxWindowsX86PublicExports.def",
+    "x64AstcBaseline": "SSE2",
+    "etcUnpackEnabled": false
+  },
+  "gltfSampleAssets": {
+    "commit": "2bac6f8c57bf471df0d2a1e8a8ec023c7801dddf",
+    "repository": "https://github.com/KhronosGroup/glTF-Sample-Assets"
+  },
+  "fixtures": [
+    {
+      "file": "color_grid_basis.ktx2",
+      "kind": "ETC1S color",
+      "url": "https://media.githubusercontent.com/media/KhronosGroup/KTX-Software/v4.4.2/tests/testimages/color_grid_basis.ktx2",
+      "sha256": "284ee77af748b9e640186916a6754fd07cab4a75bb99f92c87242b3e97efde1b"
+    },
+    {
+      "file": "StainedGlassLamp_grill_normal.ktx2",
+      "kind": "UASTC linear data",
+      "url": "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/2bac6f8c57bf471df0d2a1e8a8ec023c7801dddf/Models/StainedGlassLamp/glTF-KTX-BasisU/StainedGlassLamp_grill_normal.ktx2",
+      "sha256": "9123bdcb18e8bc04be404dc6cb72b90b33f715306b58035084d22e1b066c4c26"
+    }
+  ],
+  "artifacts": [
+    {
+      "rid": "android-arm",
+      "configuration": "Release",
+      "linkKind": "shared"
+    },
+    {
+      "rid": "android-arm64",
+      "configuration": "Release",
+      "linkKind": "shared"
+    },
+    {
+      "rid": "android-x86",
+      "configuration": "Release",
+      "linkKind": "shared"
+    },
+    {
+      "rid": "android-x64",
+      "configuration": "Release",
+      "linkKind": "shared"
+    },
+    {
+      "rid": "ios-arm64",
+      "configuration": "Release",
+      "linkKind": "static"
+    },
+    {
+      "rid": "iossimulator-arm64",
+      "configuration": "Release",
+      "linkKind": "static"
+    },
+    {
+      "rid": "iossimulator-x64",
+      "configuration": "Release",
+      "linkKind": "static"
+    },
+    {
+      "rid": "maccatalyst-arm64",
+      "configuration": "Release",
+      "linkKind": "static"
+    },
+    {
+      "rid": "maccatalyst-x64",
+      "configuration": "Release",
+      "linkKind": "static"
+    },
+    {
+      "rid": "win-arm64",
+      "configuration": "Release",
+      "linkKind": "shared",
+      "sha256": {
+        "ktx.dll": "e28998bd83871ba8d4266f4a1c09697c5ab4648dd39e98127cd347106d643c98"
+      }
+    },
+    {
+      "rid": "win-x86",
+      "configuration": "Release",
+      "linkKind": "shared",
+      "sha256": {
+        "ktx.dll": "d4319d13d321ca05b60012faee69bde4cf9411e25446748e7bfd39f3689cd695"
+      }
+    },
+    {
+      "rid": "win-x64",
+      "configuration": "Release",
+      "linkKind": "shared",
+      "sha256": {
+        "ktx.dll": "92adf7f8f5e4dc34a4e45cb78402237627f6b7b732672a68b8e2823951b9917e"
+      }
+    }
+  ]
+}

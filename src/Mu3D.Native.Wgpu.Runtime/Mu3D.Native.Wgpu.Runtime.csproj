@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../eng/Mu3D.WgpuNativeVersion.props" />
+  <Import Project="../../eng/Mu3D.RuntimePackage.props" />
+
+  <PropertyGroup>
+    <PackageId>Mu3D.Native.Wgpu.Runtime</PackageId>
+    <Description>Runtime-only, ABI-locked wgpu-native assets for the Mu3D default backend.</Description>
+    <PackageLicenseExpression>MIT OR Apache-2.0</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="README.md" Pack="true" PackagePath="README.md" />
+    <None Update="THIRD-PARTY-NOTICES.md" Pack="true" PackagePath="THIRD-PARTY-NOTICES.md" />
+    <None Update="licenses/**/*" Pack="true" PackagePath="licenses/%(Filename)%(Extension)" />
+    <None Include="../Mu3D.Native.Ktx/licenses/Apache-2.0.txt"
+          Pack="true"
+          PackagePath="licenses/Apache-2.0.txt"
+          Visible="false" />
+    <None Include="../Mu3D.Native.Wgpu/buildTransitive/Mu3D.Native.Wgpu.targets"
+          Pack="true"
+          PackagePath="buildTransitive/Mu3D.Native.Wgpu.targets" />
+    <None Update="buildTransitive/Mu3D.Native.Wgpu.Runtime.targets"
+          Pack="true"
+          PackagePath="buildTransitive/Mu3D.Native.Wgpu.Runtime.targets" />
+    <None Include="../../artifacts/wgpu-native/$(Mu3DWgpuNativeVersion)/release/runtimes/**/*"
+          Exclude="../../artifacts/wgpu-native/$(Mu3DWgpuNativeVersion)/release/runtimes/**/SHA256SUMS*"
+          Pack="true"
+          PackagePath="runtimes/%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_Mu3DRequiredRuntime Include="android-arm/native/libwgpu_native.so" />
+    <_Mu3DRequiredRuntime Include="android-arm64/native/libwgpu_native.so" />
+    <_Mu3DRequiredRuntime Include="android-x86/native/libwgpu_native.so" />
+    <_Mu3DRequiredRuntime Include="android-x64/native/libwgpu_native.so" />
+    <_Mu3DRequiredRuntime Include="ios-arm64/native/libwgpu_native.a" />
+    <_Mu3DRequiredRuntime Include="iossimulator-arm64/native/libwgpu_native.a" />
+    <_Mu3DRequiredRuntime Include="iossimulator-x64/native/libwgpu_native.a" />
+    <_Mu3DRequiredRuntime Include="maccatalyst-arm64/native/libwgpu_native.a" />
+    <_Mu3DRequiredRuntime Include="maccatalyst-x64/native/libwgpu_native.a" />
+    <_Mu3DRequiredRuntime Include="win-arm64/native/wgpu_native.dll" />
+    <_Mu3DRequiredRuntime Include="win-x86/native/wgpu_native.dll" />
+    <_Mu3DRequiredRuntime Include="win-x64/native/wgpu_native.dll" />
+    <_Mu3DRequiredRuntime Include="win-x64/native/dxcompiler.dll;win-x64/native/dxil.dll" />
+    <_Mu3DRequiredRuntime Include="win-x86/native/dxcompiler.dll;win-x86/native/dxil.dll" />
+    <_Mu3DRequiredRuntime Include="win-arm64/native/dxcompiler.dll;win-arm64/native/dxil.dll" />
+  </ItemGroup>
+
+  <Target Name="ValidateMu3DWgpuRuntimePackage" BeforeTargets="GenerateNuspec">
+    <Exec Command="pwsh -NoProfile -File &quot;$(MSBuildThisFileDirectory)../../eng/verify-wgpu-shader-cache.ps1&quot;" />
+    <Error Condition="!Exists('licenses/wgpu-native-dependencies.html')"
+           Text="Cannot pack $(PackageId): generate and review the complete pinned Cargo dependency license report at licenses/wgpu-native-dependencies.html first." />
+    <Error Condition="!Exists('../../artifacts/wgpu-native/$(Mu3DWgpuNativeVersion)/release/runtimes/%(_Mu3DRequiredRuntime.Identity)')"
+           Text="Cannot pack $(PackageId): verified Release runtime '%(_Mu3DRequiredRuntime.Identity)' is missing for $(Mu3DWgpuNativeVersion)." />
+  </Target>
+</Project>

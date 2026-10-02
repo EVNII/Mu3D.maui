@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Mu3D.GalleryApp.Pages.HdrCanvasPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    Title="HDR Canvas">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="hdr-canvas" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <mu3d:Mu3DSceneView BackgroundColor="Black" SurfaceError="OnSurfaceError">
+            <mu3d:Scene3D>
+                <mu3d:Scene3D.Camera>
+                    <mu3d:PerspectiveCamera3D Z="4" FieldOfView="50" />
+                </mu3d:Scene3D.Camera>
+                <mu3d:Sphere3D Radius="1.1">
+                    <mu3d:UnlitMaterial3D x:Name="CanvasMaterial" />
+                </mu3d:Sphere3D>
+            </mu3d:Scene3D>
+        </mu3d:Mu3DSceneView>
+        <VerticalStackLayout Grid.Row="1" Padding="16" Spacing="6">
+            <Label Text="Linear HDR canvas → scene texture" FontAttributes="Bold" />
+            <HorizontalStackLayout Spacing="10">
+                <Button Text="Add HDR dab" Clicked="OnDabClicked" />
+                <Button Text="Reset" Clicked="OnResetClicked" />
+            </HorizontalStackLayout>
+            <Label x:Name="StatusLabel" FontSize="12" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

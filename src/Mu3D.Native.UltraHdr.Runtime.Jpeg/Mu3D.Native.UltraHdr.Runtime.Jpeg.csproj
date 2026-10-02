@@ -1,0 +1,61 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../eng/Mu3D.UltraHdrNativeVersion.props" />
+  <Import Project="../../eng/Mu3D.RuntimePackage.props" />
+
+  <PropertyGroup>
+    <PackageId>Mu3D.Native.UltraHdr.Runtime.Jpeg</PackageId>
+    <Description>Runtime-only JPEG, Ultra HDR and ISO gain-map native assets for Mu3D.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="README.md" Pack="true" PackagePath="README.md" />
+    <None Include="../Mu3D.Native.UltraHdr/THIRD-PARTY-NOTICES.md" Pack="true" PackagePath="THIRD-PARTY-NOTICES.md" />
+    <None Include="../Mu3D.Native.UltraHdr/licenses/**/*" Pack="true" PackagePath="licenses/%(Filename)%(Extension)" />
+    <None Include="../Mu3D.Native.UltraHdr/buildTransitive/Mu3D.Native.UltraHdr.targets"
+          Pack="true"
+          PackagePath="buildTransitive/Mu3D.Native.UltraHdr.targets" />
+    <None Include="../Mu3D.Native.UltraHdr/buildTransitive/Mu3D.Native.UltraHdr.Symbols.props"
+          Pack="true"
+          PackagePath="buildTransitive/Mu3D.Native.UltraHdr.Symbols.props" />
+    <None Update="buildTransitive/Mu3D.Native.UltraHdr.Runtime.Jpeg.targets"
+          Pack="true"
+          PackagePath="buildTransitive/Mu3D.Native.UltraHdr.Runtime.Jpeg.targets" />
+    <None Include="../../artifacts/ultrahdr/$(Mu3DUltraHdrNativeVersion)/release/runtimes/**/*"
+          Exclude="../../artifacts/ultrahdr/$(Mu3DUltraHdrNativeVersion)/release/runtimes/**/SHA256SUMS*"
+          Pack="true"
+          PackagePath="runtimes/%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_Mu3DRequiredRuntime Include="android-arm/native/libuhdr.so" />
+    <_Mu3DRequiredRuntime Include="android-arm/native/libturbojpeg.so" />
+    <_Mu3DRequiredRuntime Include="android-arm64/native/libuhdr.so" />
+    <_Mu3DRequiredRuntime Include="android-arm64/native/libturbojpeg.so" />
+    <_Mu3DRequiredRuntime Include="android-x86/native/libuhdr.so" />
+    <_Mu3DRequiredRuntime Include="android-x86/native/libturbojpeg.so" />
+    <_Mu3DRequiredRuntime Include="android-x64/native/libuhdr.so" />
+    <_Mu3DRequiredRuntime Include="android-x64/native/libturbojpeg.so" />
+    <_Mu3DRequiredRuntime Include="ios-arm64/native/libuhdr.a" />
+    <_Mu3DRequiredRuntime Include="ios-arm64/native/libturbojpeg.a" />
+    <_Mu3DRequiredRuntime Include="iossimulator-arm64/native/libuhdr.a" />
+    <_Mu3DRequiredRuntime Include="iossimulator-arm64/native/libturbojpeg.a" />
+    <_Mu3DRequiredRuntime Include="iossimulator-x64/native/libuhdr.a" />
+    <_Mu3DRequiredRuntime Include="iossimulator-x64/native/libturbojpeg.a" />
+    <_Mu3DRequiredRuntime Include="maccatalyst-arm64/native/libuhdr.a" />
+    <_Mu3DRequiredRuntime Include="maccatalyst-arm64/native/libturbojpeg.a" />
+    <_Mu3DRequiredRuntime Include="maccatalyst-x64/native/libuhdr.a" />
+    <_Mu3DRequiredRuntime Include="maccatalyst-x64/native/libturbojpeg.a" />
+    <_Mu3DRequiredRuntime Include="win-arm64/native/uhdr.dll" />
+    <_Mu3DRequiredRuntime Include="win-arm64/native/turbojpeg.dll" />
+    <_Mu3DRequiredRuntime Include="win-x86/native/uhdr.dll" />
+    <_Mu3DRequiredRuntime Include="win-x86/native/turbojpeg.dll" />
+    <_Mu3DRequiredRuntime Include="win-x64/native/uhdr.dll" />
+    <_Mu3DRequiredRuntime Include="win-x64/native/turbojpeg.dll" />
+  </ItemGroup>
+
+  <Target Name="ValidateMu3DUltraHdrJpegRuntimePackage" BeforeTargets="GenerateNuspec">
+    <Error Condition="!Exists('../../artifacts/ultrahdr/$(Mu3DUltraHdrNativeVersion)/release/runtimes/%(_Mu3DRequiredRuntime.Identity)')"
+           Text="Cannot pack $(PackageId): verified JPEG runtime '%(_Mu3DRequiredRuntime.Identity)' is missing for $(Mu3DUltraHdrNativeVersion)." />
+  </Target>
+</Project>

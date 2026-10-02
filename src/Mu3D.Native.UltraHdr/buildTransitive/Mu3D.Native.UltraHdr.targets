@@ -1,0 +1,44 @@
+<Project>
+  <Import Project="Mu3D.Native.UltraHdr.Symbols.props" />
+  <PropertyGroup>
+    <_Mu3DUltraHdrNativeRuntimeDirectory>$(MSBuildThisFileDirectory)..\runtimes\$(RuntimeIdentifier)\native</_Mu3DUltraHdrNativeRuntimeDirectory>
+    <Mu3DUltraHdrNativeAbiVersion>v2.0.1</Mu3DUltraHdrNativeAbiVersion>
+    <Mu3DUltraHdrNativeAbiCommit>a532a8c1418890cff7ce1e90cbe59ba6ebc6fa6d</Mu3DUltraHdrNativeAbiCommit>
+    <Mu3DJpegTurboNativeAbiVersion>3.1.0</Mu3DJpegTurboNativeAbiVersion>
+    <Mu3DJpegTurboNativeAbiCommit>20ade4dea9589515a69793e447a6c6220b464535</Mu3DJpegTurboNativeAbiCommit>
+  </PropertyGroup>
+
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' Or $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
+    <NativeReference Include="$(_Mu3DUltraHdrNativeRuntimeDirectory)\libuhdr.a"
+                     Condition="Exists('$(_Mu3DUltraHdrNativeRuntimeDirectory)\libuhdr.a')">
+      <Kind>Static</Kind>
+      <SmartLink>true</SmartLink>
+      <ForceLoad>true</ForceLoad>
+      <IsCxx>true</IsCxx>
+    </NativeReference>
+    <NativeReference Include="$(_Mu3DUltraHdrNativeRuntimeDirectory)\libturbojpeg.a"
+                     Condition="Exists('$(_Mu3DUltraHdrNativeRuntimeDirectory)\libturbojpeg.a')">
+      <Kind>Static</Kind>
+      <SmartLink>true</SmartLink>
+      <ForceLoad>true</ForceLoad>
+    </NativeReference>
+    <LinkerArgument Include="-force_load"
+                    Condition="Exists('$(_Mu3DUltraHdrNativeRuntimeDirectory)\libuhdr.a')" />
+    <LinkerArgument Include="$(_Mu3DUltraHdrNativeRuntimeDirectory)\libuhdr.a"
+                    Condition="Exists('$(_Mu3DUltraHdrNativeRuntimeDirectory)\libuhdr.a')" />
+    <LinkerArgument Include="-force_load"
+                    Condition="Exists('$(_Mu3DUltraHdrNativeRuntimeDirectory)\libturbojpeg.a')" />
+    <LinkerArgument Include="$(_Mu3DUltraHdrNativeRuntimeDirectory)\libturbojpeg.a"
+                    Condition="Exists('$(_Mu3DUltraHdrNativeRuntimeDirectory)\libturbojpeg.a')" />
+    <LinkerArgument Include="-lc++"
+                    Condition="Exists('$(_Mu3DUltraHdrNativeRuntimeDirectory)\libuhdr.a')" />
+    <ReferenceNativeSymbol Include="@(_Mu3DUltraHdrNativeSymbol)"
+                           Condition="Exists('$(_Mu3DUltraHdrNativeRuntimeDirectory)\libuhdr.a')">
+      <SymbolType>Function</SymbolType>
+    </ReferenceNativeSymbol>
+    <ReferenceNativeSymbol Include="@(_Mu3DTurboJpegNativeSymbol)"
+                           Condition="Exists('$(_Mu3DUltraHdrNativeRuntimeDirectory)\libturbojpeg.a')">
+      <SymbolType>Function</SymbolType>
+    </ReferenceNativeSymbol>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,148 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../eng/Mu3D.WgpuNativeVersion.props" />
+  <Import Project="../../eng/Mu3D.WindowsDxc.targets" />
+
+  <PropertyGroup>
+    <!-- AdaptiveShell.Maui 0.1.1 ships net10.0-android / net10.0-ios26.5 / net10.0-maccatalyst26.5
+         and net10.0-windows10.0.19041.0, so this sample targets all four 1.0 platforms. -->
+    <TargetFrameworks>net10.0-android</TargetFrameworks>
+    <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('linux'))">$(TargetFrameworks);net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
+
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Mu3D.Gallery</RootNamespace>
+    <AssemblyName>Mu3D.Gallery</AssemblyName>
+    <IsPackable>false</IsPackable>
+    <UseMaui>true</UseMaui>
+    <!-- Official MAUI project-level opt-in. MAUI applies it only to Android; Apple retains its
+         native platform controls. -->
+    <UseMaterial3>true</UseMaterial3>
+    <SingleProject>true</SingleProject>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <!-- MAUI generates public resource-dictionary helpers without XML documentation.
+         NU1608: AdaptiveShell.Maui pulls Xamarin.Google.Android.Material 1.14, whose AndroidX
+         closures resolve slightly newer than MAUI 10.0.100's pinned expectations; the drift is
+         the usual AndroidX binding version skew, not an API break. -->
+    <NoWarn>$(NoWarn);CS1591;XCODE_27_0_PREVIEW;NU1608</NoWarn>
+    <ApplicationTitle>Mu3D Gallery</ApplicationTitle>
+    <ApplicationId>com.mu3d.adaptivegallery</ApplicationId>
+    <ApplicationDisplayVersion>0.1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <WindowsPackageType>None</WindowsPackageType>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">26.0</SupportedOSPlatformVersion>
+    <!-- AdaptiveShell.Maui declares an iOS 18.0 minimum; this sample adopts it. -->
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">18.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">17.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+    <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+  </PropertyGroup>
+
+  <!--
+    Keep the generated bindings and native runtime in one atomic APK. Android Fast Deployment can
+    otherwise leave an older managed surface configuration beside a newly staged wgpu-native
+    library, and invalid surface configurations are process-fatal in wgpu-native v29 rather than
+    catchable managed exceptions.
+  -->
+  <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+  </PropertyGroup>
+
+  <!-- Workload set 10.0.401 contains both the Xcode 26.6 SDK (26.5 bindings) and the opt-in
+       Xcode 27 SDK. Select the latter because the installed Xcode is 27.0; the 26.5 bindings
+       refuse to build against it. AdaptiveShell.Maui's 26.5 libraries remain compatible.
+       ValidateXcodeVersion=false (mirroring the AdaptiveShell ExampleAShellApp) additionally
+       permits building with a newer Xcode than the binding pack expects: Duo fullscreen
+       requires linking the iOS 27.1 SDK, so build the iOS target with Xcode 27.1 selected
+       (DEVELOPER_DIR=/Applications/Xcode-27.1.0-Beta.app/Contents/Developer or xcode-select).
+       The native link always uses the selected Xcode's SDK; TargetPlatformVersion only selects
+       the bindings. -->
+  <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' Or $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
+    <TargetPlatformVersion>27.0</TargetPlatformVersion>
+    <ValidateXcodeVersion>false</ValidateXcodeVersion>
+  </PropertyGroup>
+
+  <!-- The Xcode 27 preview SDK omits AppBundleManifest from this target's file inputs.
+       Track it explicitly so scene/lifecycle edits invalidate the generated Info.plist. -->
+  <Target Name="TrackMacCatalystAppManifest"
+          AfterTargets="_CompileAppManifestInputs"
+          BeforeTargets="_CompileAppManifest"
+          Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst' And '$(TargetPlatformVersion)' == '27.0'">
+    <ItemGroup>
+      <_CompileAppManifestInputFile Include="$(AppBundleManifest)" Condition="Exists('$(AppBundleManifest)')" />
+    </ItemGroup>
+  </Target>
+
+  <!-- Optional device harness: when the pinned wgpu-native runtimes are staged under
+       artifacts/wgpu-native, link them so Mu3DView actually renders on device/simulator.
+       Without staged runtimes the app still builds; Mu3D surface creation then fails at run
+       time with a managed error instead of a missing-symbol abort. -->
+  <PropertyGroup>
+    <_Mu3DWgpuRuntimeRoot>$(MSBuildThisFileDirectory)..\..\artifacts\wgpu-native\$(Mu3DWgpuNativeVersion)\release\runtimes</_Mu3DWgpuRuntimeRoot>
+    <!-- A plain multi-target `dotnet run` evaluates this property in the outer build before the
+         Mac Catalyst workload supplies RuntimeIdentifier to its inner build. Derive the local Mac
+         RID from the SDK host RID so the native archive decision is identical to an invocation
+         with an explicit Mac Catalyst runtime argument. -->
+    <_Mu3DDefaultMacCatalystRuntimeIdentifier Condition="'$(NETCoreSdkRuntimeIdentifier)' == 'osx-arm64'">maccatalyst-arm64</_Mu3DDefaultMacCatalystRuntimeIdentifier>
+    <_Mu3DDefaultMacCatalystRuntimeIdentifier Condition="'$(NETCoreSdkRuntimeIdentifier)' == 'osx-x64'">maccatalyst-x64</_Mu3DDefaultMacCatalystRuntimeIdentifier>
+    <_Mu3DWgpuAppleRuntimeIdentifier Condition="'$(RuntimeIdentifier)' != ''">$(RuntimeIdentifier)</_Mu3DWgpuAppleRuntimeIdentifier>
+    <_Mu3DWgpuAppleRuntimeIdentifier Condition="'$(_Mu3DWgpuAppleRuntimeIdentifier)' == '' And $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">$(_Mu3DDefaultMacCatalystRuntimeIdentifier)</_Mu3DWgpuAppleRuntimeIdentifier>
+  </PropertyGroup>
+
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android' And Exists('$(_Mu3DWgpuRuntimeRoot)\android-arm64\native\libwgpu_native.so')">
+    <AndroidNativeLibrary Include="$(_Mu3DWgpuRuntimeRoot)\android-arm\native\libwgpu_native.so" Abi="armeabi-v7a" />
+    <AndroidNativeLibrary Include="$(_Mu3DWgpuRuntimeRoot)\android-arm64\native\libwgpu_native.so" Abi="arm64-v8a" />
+    <AndroidNativeLibrary Include="$(_Mu3DWgpuRuntimeRoot)\android-x86\native\libwgpu_native.so" Abi="x86" />
+    <AndroidNativeLibrary Include="$(_Mu3DWgpuRuntimeRoot)\android-x64\native\libwgpu_native.so" Abi="x86_64" />
+  </ItemGroup>
+
+  <ItemGroup Condition="($([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' Or $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst') And '$(_Mu3DWgpuAppleRuntimeIdentifier)' != '' And Exists('$(_Mu3DWgpuRuntimeRoot)\$(_Mu3DWgpuAppleRuntimeIdentifier)\native\libwgpu_native.a')">
+    <NativeReference Include="$(_Mu3DWgpuRuntimeRoot)\$(_Mu3DWgpuAppleRuntimeIdentifier)\native\libwgpu_native.a">
+      <Kind>Static</Kind>
+      <SmartLink>true</SmartLink>
+      <ForceLoad>true</ForceLoad>
+      <Frameworks>Metal QuartzCore Foundation</Frameworks>
+    </NativeReference>
+    <LinkerArgument Include="-force_load" />
+    <LinkerArgument Include="$(_Mu3DWgpuRuntimeRoot)\$(_Mu3DWgpuAppleRuntimeIdentifier)\native\libwgpu_native.a" />
+    <ReferenceNativeSymbol Include="wgpu%2A">
+      <SymbolType>Function</SymbolType>
+    </ReferenceNativeSymbol>
+  </ItemGroup>
+
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' And Exists('$(_Mu3DWgpuRuntimeRoot)\win-x64\native\wgpu_native.dll')">
+    <Content Include="$(_Mu3DWgpuRuntimeRoot)\win-x64\native\wgpu_native.dll">
+      <Link>wgpu_native.dll</Link>
+      <TargetPath>wgpu_native.dll</TargetPath>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="../GalleryApp/Pages/OpenPbrParameterEditor.cs" Link="Pages/OpenPbrParameterEditor.cs" />
+    <Compile Include="../GalleryApp/Examples/OpenPbrParameterFields.cs" Link="Pages/OpenPbrParameterFields.cs" />
+    <Compile Include="../GalleryApp/Pages/SurfaceReferencePattern.cs" Link="Pages/SurfaceReferencePattern.cs" />
+    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#111827" />
+    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#111827" BaseSize="128,128" />
+    <MauiImage Include="Resources\Images\*" />
+    <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- AdaptiveShell.Maui 0.1.0 requires Microsoft.Maui.Controls 10.0.100 or newer; the pinned
+         workload resolves $(MauiVersion) to an older build, so pin explicitly. -->
+    <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.100" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.11" />
+    <PackageReference Include="AdaptiveShell.Maui" Version="0.1.1" />
+    <ProjectReference Include="../../src/Mu3D.Maui/Mu3D.Maui.csproj" />
+    <ProjectReference Include="../../src/Mu3D.Maui.Toolkit/Mu3D.Maui.Toolkit.csproj" />
+    <ProjectReference Include="../../src/Mu3D.Creative/Mu3D.Creative.csproj" />
+    <!-- Backend-specific diagnostic references: the Basic probe pages inspect the pinned wgpu
+         adapter directly. General sample code must stay backend-neutral. -->
+    <ProjectReference Include="../../src/Mu3D.Native.Wgpu/Mu3D.Native.Wgpu.csproj" />
+    <ProjectReference Include="../../src/Mu3D.Rendering.OpenPbr/Mu3D.Rendering.OpenPbr.csproj" />
+    <ProjectReference Include="../../src/Mu3D.Formats.MaterialX/Mu3D.Formats.MaterialX.csproj" />
+  </ItemGroup>
+  <Import Project="../../src/Mu3D.Rendering.OpenPbr/buildTransitive/Mu3D.Rendering.OpenPbr.targets" />
+</Project>

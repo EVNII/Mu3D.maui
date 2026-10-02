@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <Mu3DUseWgpuDebugRuntimeIos>true</Mu3DUseWgpuDebugRuntimeIos>
+    <_Mu3DExpectedWgpuDebugAbiVersion>v29.0.1.1</_Mu3DExpectedWgpuDebugAbiVersion>
+    <_Mu3DExpectedWgpuDebugAbiCommit>6aed50955d934ac36049ba8d002034841633ae02</_Mu3DExpectedWgpuDebugAbiCommit>
+  </PropertyGroup>
+</Project>

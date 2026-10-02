@@ -1,0 +1,15 @@
+<Project>
+  <!-- Optional renderer-owned assets. This target is never imported by Mu3D.Maui itself. -->
+  <PropertyGroup>
+    <_Mu3DOpenPbrTargetPlatform>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</_Mu3DOpenPbrTargetPlatform>
+  </PropertyGroup>
+  <ItemGroup Condition="('$(OutputType)' == 'Exe' Or '$(OutputType)' == 'WinExe') And ('$(_Mu3DOpenPbrTargetPlatform)' == 'windows' Or $(RuntimeIdentifier.StartsWith('win-')) Or ('$(_Mu3DOpenPbrTargetPlatform)' == '' And '$(RuntimeIdentifier)' == '' And $([MSBuild]::IsOSPlatform('windows'))))">
+    <Content Include="$(MSBuildThisFileDirectory)../precompiled/windows/*.bin">
+      <Link>Mu3D/ShaderCache/%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <Visible>false</Visible>
+      <Pack>false</Pack>
+    </Content>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="src/Mu3D.Color.Printing/Mu3D.Color.Printing.csproj" />
+  <Project Path="tests/Mu3D.Color.Printing.Tests/Mu3D.Color.Printing.Tests.csproj" />
+</Solution>

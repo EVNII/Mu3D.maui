@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-ios</TargetFramework>
+    <RuntimeIdentifier>iossimulator-arm64</RuntimeIdentifier>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Mu3D.Native.Wgpu.DebugRuntime.iOS" Version="1.0.0" />
+  </ItemGroup>
+  <Target Name="VerifyDebugRuntimePackage" DependsOnTargets="PrepareForBuild;ResolvePackageAssets">
+    <Error Condition="'@(NativeReference->Count())' != '1'"
+           Text="Expected one native linker input, got @(NativeReference->Count())." />
+    <Error Condition="!$([System.String]::Copy('%(NativeReference.Identity)').Contains('mu3d-debug-runtimes'))"
+           Text="The selected linker input is not from the DebugRuntime package: %(NativeReference.Identity)" />
+    <Message Importance="high" Text="Verified packed NuGet consumer selected only %(NativeReference.Identity)" />
+  </Target>
+</Project>

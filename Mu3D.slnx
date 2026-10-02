@@ -1,0 +1,62 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Mu3D.Color/Mu3D.Color.csproj" />
+    <Project Path="src/Mu3D.Native.OpenColorIO/Mu3D.Native.OpenColorIO.csproj" />
+    <Project Path="src/Mu3D.Core/Mu3D.Core.csproj" />
+    <Project Path="src/Mu3D.Rendering.OpenPbr/Mu3D.Rendering.OpenPbr.csproj" />
+    <Project Path="src/Mu3D.Creative/Mu3D.Creative.csproj" />
+    <Project Path="src/Mu3D.Formats.MaterialX/Mu3D.Formats.MaterialX.csproj" />
+    <Project Path="src/Mu3D.Formats.Gltf/Mu3D.Formats.Gltf.csproj" />
+    <Project Path="src/Mu3D.Graphics/Mu3D.Graphics.csproj" />
+    <Project Path="src/Mu3D.Maui/Mu3D.Maui.csproj" />
+    <Project Path="src/Mu3D.Maui.Toolkit/Mu3D.Maui.Toolkit.csproj" />
+    <Project Path="src/Mu3D.Toolkit/Mu3D.Toolkit.csproj" />
+    <Project Path="src/Mu3D.Web/Mu3D.Web.csproj" />
+    <Project Path="src/Mu3D.Web.Toolkit/Mu3D.Web.Toolkit.csproj" />
+    <Project Path="src/Mu3D.Native.Wgpu/Mu3D.Native.Wgpu.csproj" />
+    <Project Path="src/Mu3D.Native.Wgpu.Runtime/Mu3D.Native.Wgpu.Runtime.csproj" />
+    <Project Path="src/Mu3D.Native.Ktx/Mu3D.Native.Ktx.csproj" />
+    <Project Path="src/Mu3D.Native.Ktx.Runtime/Mu3D.Native.Ktx.Runtime.csproj" />
+    <Project Path="src/Mu3D.Native.UltraHdr/Mu3D.Native.UltraHdr.csproj" />
+    <Project Path="src/Mu3D.Native.UltraHdr.Runtime.Jpeg/Mu3D.Native.UltraHdr.Runtime.Jpeg.csproj" />
+    <Project Path="src/Mu3D.Native.Wgpu.DebugRuntime.Android/Mu3D.Native.Wgpu.DebugRuntime.Android.csproj" />
+    <Project Path="src/Mu3D.Native.Wgpu.DebugRuntime.iOS/Mu3D.Native.Wgpu.DebugRuntime.iOS.csproj" />
+    <Project Path="src/Mu3D.Native.Wgpu.DebugRuntime.MacCatalyst/Mu3D.Native.Wgpu.DebugRuntime.MacCatalyst.csproj" />
+    <Project Path="src/Mu3D.Native.Wgpu.DebugRuntime.Windows/Mu3D.Native.Wgpu.DebugRuntime.Windows.csproj" />
+  </Folder>
+  <Folder Name="/samples/">
+    <Project Path="samples/GalleryApp/GalleryApp.csproj">
+      <Deploy Solution="Release|*" />
+    </Project>
+    <Project Path="samples/Mu3D.Gallery/Mu3D.Gallery.csproj" />
+    <Project Path="samples/GalleryApp/Web/Mu3D.GalleryApp.Web.csproj" />
+  </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/Mu3D.WgpuGen/Mu3D.WgpuGen.csproj" />
+    <Project Path="tools/Mu3D.Docs/Mu3D.Docs.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Mu3D.Core.Tests/Mu3D.Core.Tests.csproj" />
+    <Project Path="tests/Mu3D.Color.Tests/Mu3D.Color.Tests.csproj" />
+    <Project Path="tests/Mu3D.Color.Views.Tests/Mu3D.Color.Views.Tests.csproj" />
+    <Project Path="tests/Mu3D.Color.Views.Gpu.Tests/Mu3D.Color.Views.Gpu.Tests.csproj" />
+    <Project Path="tests/Mu3D.Color.Management.Tests/Mu3D.Color.Management.Tests.csproj" />
+    <Project Path="tests/Mu3D.OpenColorIO.Tests/Mu3D.OpenColorIO.Tests.csproj" />
+    <Project Path="tests/Mu3D.Color.Gpu.Tests/Mu3D.Color.Gpu.Tests.csproj" />
+    <Project Path="tests/Mu3D.Creative.Tests/Mu3D.Creative.Tests.csproj" />
+    <Project Path="tests/Mu3D.OpenPbr.Tests/Mu3D.OpenPbr.Tests.csproj" />
+    <Project Path="tests/Mu3D.OpenPbr.Rendering.Tests/Mu3D.OpenPbr.Rendering.Tests.csproj" />
+    <Project Path="tests/Mu3D.Formats.MaterialX.Tests/Mu3D.Formats.MaterialX.Tests.csproj" />
+    <Project Path="tests/Mu3D.Maui.Authoring.Tests/Mu3D.Maui.Authoring.Tests.csproj" />
+    <Project Path="tests/Mu3D.DebugRuntime.Tests/Mu3D.DebugRuntime.Tests.csproj" />
+    <Project Path="tests/Mu3D.Graphics.Tests/Mu3D.Graphics.Tests.csproj" />
+    <Project Path="tests/Mu3D.Maui.Toolkit.Tests/Mu3D.Maui.Toolkit.Tests.csproj" />
+    <Project Path="tests/Mu3D.Maui.Toolkit.Host.Tests/Mu3D.Maui.Toolkit.Host.Tests.csproj" />
+    <Project Path="tests/Mu3D.Toolkit.Tests/Mu3D.Toolkit.Tests.csproj" />
+    <Project Path="tests/Mu3D.Web.Viewer.Tests/Mu3D.Web.Viewer.Tests.csproj" />
+    <Project Path="tests/Mu3D.Native.UltraHdr.Tests/Mu3D.Native.UltraHdr.Tests.csproj" />
+    <Project Path="tests/Mu3D.Native.Ktx.Tests/Mu3D.Native.Ktx.Tests.csproj" />
+    <Project Path="tests/Mu3D.Native.Wgpu.Tests/Mu3D.Native.Wgpu.Tests.csproj" />
+    <Project Path="tests/Mu3D.WgpuGen.Tests/Mu3D.WgpuGen.Tests.csproj" />
+  </Folder>
+</Solution>

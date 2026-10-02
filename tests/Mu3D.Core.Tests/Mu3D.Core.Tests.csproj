@@ -1,0 +1,77 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Mu3D.Core/Mu3D.Core.csproj" />
+    <ProjectReference Include="../../src/Mu3D.Formats.Gltf/Mu3D.Formats.Gltf.csproj" />
+    <None Include="../../samples/GalleryApp/Resources/Raw/Hdri/studio_small_02_1k.hdr"
+          Link="Assets/studio_small_02_1k.hdr"
+          CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="../../samples/GalleryApp/Resources/Raw/GltfSamples/BoxInterleaved.glb"
+          Link="Assets/BoxInterleaved.glb"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../samples/GalleryApp/Resources/Raw/GltfSamples/AnimatedMorphCube.glb"
+          Link="Assets/AnimatedMorphCube.glb"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../samples/GalleryApp/Resources/Raw/GltfSamples/Fox.glb"
+          Link="Assets/Fox.glb"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../samples/GalleryApp/Resources/Raw/GltfSamples/AlphaBlendModeTest.glb"
+          Link="Assets/AlphaBlendModeTest.glb"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../samples/GalleryApp/Resources/Raw/GltfSamples/InterpolationTest.glb"
+          Link="Assets/InterpolationTest.glb"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../samples/GalleryApp/Resources/Raw/GltfSamples/NormalTangentMirrorTest.glb"
+          Link="Assets/NormalTangentMirrorTest.glb"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../samples/GalleryApp/Resources/Raw/GltfSamples/NormalTangentTest.glb"
+          Link="Assets/NormalTangentTest.glb"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../samples/GalleryApp/Resources/Raw/GltfSamples/AnisotropyBarnLampKtx/*"
+          Link="Assets/AnisotropyBarnLampKtx/%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../samples/GalleryApp/Resources/Raw/GltfSamples/TextureTransformTest/*"
+          Link="Assets/TextureTransformTest/%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../samples/GalleryApp/Resources/Raw/GltfSamples/TextureSettingsTest.glb"
+          Link="Assets/TextureSettingsTest.glb"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../samples/GalleryApp/Resources/Raw/GltfSamples/BoomBox.glb"
+          Link="Assets/BoomBox.glb"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../samples/GalleryApp/Resources/Raw/GltfSamples/EmissiveStrengthTest.glb"
+          Link="Assets/EmissiveStrengthTest.glb"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../samples/GalleryApp/Resources/Raw/GltfSamples/SheenTestGrid.glb"
+          Link="Assets/SheenTestGrid.glb"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../samples/GalleryApp/Resources/Raw/GltfSamples/DiffuseTransmissionPlant.glb"
+          Link="Assets/DiffuseTransmissionPlant.glb"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../samples/GalleryApp/Resources/Raw/GltfSamples/UnlitTest.glb"
+          Link="Assets/UnlitTest.glb"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../samples/GalleryApp/Resources/Raw/GltfSamples/TransmissionRoughnessTest.glb"
+          Link="Assets/TransmissionRoughnessTest.glb"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../samples/GalleryApp/Resources/Raw/GltfSamples/ClearCoatTest.glb"
+          Link="Assets/ClearCoatTest.glb"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../samples/GalleryApp/Resources/Raw/GltfSamples/IORTestGrid.glb"
+          Link="Assets/IORTestGrid.glb"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../samples/GalleryApp/Resources/Raw/GltfSamples/TransmissionTest.glb"
+          Link="Assets/TransmissionTest.glb"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../samples/GalleryApp/Resources/Raw/GltfSamples/GlassHurricaneCandleHolder.glb"
+          Link="Assets/GlassHurricaneCandleHolder.glb"
+          CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.SceneAssetPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    Title="Scene Assets">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="scene-assets" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="2">
+            <Grid RowDefinitions="Auto,*">
+                <Label
+                    Padding="12,8"
+                    BackgroundColor="#182238"
+                    Text="Room A"
+                    TextColor="White" />
+                <mu3d:Mu3DSceneView
+                    x:Name="LeftSceneView"
+                    Grid.Row="1"
+                    BackgroundColor="Black"
+                    SurfaceError="OnSurfaceError" />
+            </Grid>
+            <Grid Grid.Column="1" RowDefinitions="Auto,*">
+                <Label
+                    Padding="12,8"
+                    BackgroundColor="#182238"
+                    Text="Room B"
+                    TextColor="White" />
+                <mu3d:Mu3DSceneView
+                    x:Name="RightSceneView"
+                    Grid.Row="1"
+                    BackgroundColor="Black"
+                    SurfaceError="OnSurfaceError" />
+            </Grid>
+        </Grid>
+        <VerticalStackLayout Grid.Row="1" Padding="16" Spacing="8">
+            <Label
+                FontAttributes="Bold"
+                Text="One asset, two isolated instances, two independent SceneViews." />
+            <HorizontalStackLayout Spacing="8">
+                <Button Clicked="OnMoveClicked" Text="Move blue lamp" />
+                <Button Clicked="OnRotateClicked" Text="Rotate blue lamp" />
+                <Button Clicked="OnResetClicked" Text="Reset" />
+            </HorizontalStackLayout>
+            <Label x:Name="StatusLabel" FontSize="12" LineBreakMode="WordWrap" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

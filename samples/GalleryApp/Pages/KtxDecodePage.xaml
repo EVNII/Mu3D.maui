@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.KtxDecodePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="KTX Decode">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="ktx2-decode" />
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="12">
+            <Label Text="Bounded async decode with an application-owned encoded-source cache." />
+            <Grid ColumnDefinitions="Auto,Auto,*" ColumnSpacing="8">
+                <Label VerticalOptions="Center" Text="Retain encoded source" />
+                <Switch
+                    x:Name="RetainSourceSwitch"
+                    Grid.Column="1"
+                    VerticalOptions="Center" />
+                <Button
+                    x:Name="ClearCacheButton"
+                    Grid.Column="2"
+                    HorizontalOptions="End"
+                    Clicked="OnClearCacheClicked"
+                    Text="Clear source cache" />
+            </Grid>
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                <Button
+                    x:Name="DecodeButton"
+                    Clicked="OnDecodeClicked"
+                    Text="Decode / Reload KTX2" />
+                <Button
+                    x:Name="CancelButton"
+                    Grid.Column="1"
+                    Clicked="OnCancelClicked"
+                    IsEnabled="False"
+                    Text="Cancel" />
+            </Grid>
+            <Label x:Name="StatusLabel" Text="Ready" />
+            <Label x:Name="DetailsLabel" FontSize="12" LineBreakMode="WordWrap" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

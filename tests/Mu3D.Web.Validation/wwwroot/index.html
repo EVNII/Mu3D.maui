@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mu3D 浏览器验证</title>
+<style>
+  :root { font: 16px/1.65 system-ui, sans-serif; color: #233044; background: #f5f7fa; }
+  body { max-width: 960px; margin: 48px auto; padding: 0 24px; }
+  h1 { margin-bottom: 8px; font-size: 28px; }
+  nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0; }
+  a, button { font: inherit; color: #174c99; background: white; border: 1px solid #ccd5e1;
+    border-radius: 6px; padding: 7px 14px; text-decoration: none; }
+  a[aria-current="page"] { background: #174c99; color: white; }
+  button { cursor: pointer; }
+  section { background: white; padding: 24px; border: 1px solid #dce2e9; border-radius: 8px; }
+  h2 { margin-top: 0; font-size: 21px; }
+  #status { font-weight: 650; }
+  #status[data-state="passed"] { color: #137144; }
+  #status[data-state="failed"] { color: #b02d28; }
+  #environment, .note { color: #526173; font-size: 14px; }
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #f3f5f8;
+    padding: 16px; min-height: 100px; font: 13px/1.6 ui-monospace, monospace; }
+  #canvas-frame { position: relative; width: 100%; aspect-ratio: 5 / 3; }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; background: #07111e; }
+  .controls { display: flex; flex-wrap: wrap; gap: 12px 24px; margin: 16px 0; }
+  select { font: inherit; }
+  #render-panel[hidden] { display: none; }
+  #viewer-controls[hidden] { display: none; }
+  #viewer-controls { margin-top: 16px; }
+  #viewer-statistics { font-variant-numeric: tabular-nums; }
+  canvas:focus-visible { outline: 2px solid #174c99; outline-offset: 3px; }
+  .scene-label, .scene-card { background: #fff; color: #233044; border: 1px solid #bbc9da;
+    border-radius: 4px; padding: 4px 8px; font-size: 12px; line-height: 1.5; }
+  .scene-label { border-color: #568ec9; }
+  .scene-card { display: grid; gap: 4px; }
+  .scene-card button { font-size: 12px; padding: 3px 8px; }
+  .scene-card button:focus-visible { outline: 2px solid #174c99; }
+  /* Opt-in layout comparison: same Canvas dimensions, outside the validation card. */
+  .bare-render { background: white; }
+  .bare-render body { max-width: 910px; margin: 24px auto; padding: 0 49px; }
+  .bare-render body > :not(#canvas-frame):not(#bare-render-info) { display: none; }
+  .bare-render canvas { background: transparent; }
+</style>
+<div id="bare-render-info" hidden>
+  <p>Mu3D 精简布局对照 · 同一套 WASM 场景与 HDR 输出。默认 0 EV；画布底部色块亮度为 0.25、1、2、4。</p>
+  <p>请先观察首次高亮，不做触控板缩放。<a href="./">返回完整页面</a></p>
+</div>
+<h1>Mu3D 浏览器验证</h1>
+<p>在当前浏览器里加载并执行 Mu3D 的 WebAssembly 测试。</p>
+<nav aria-label="选择验证项目">
+  <a href="/Render/">实际渲染</a>
+  <a href="/Smoke/">基础运行</a>
+  <a href="/Creative/">HDR 画布逻辑</a>
+  <a href="/Graphics/">图形接口</a>
+  <a href="/SmokeAot/">AOT 构建</a>
+  <a href="/WgpuAbi/">WGPU 接口</a>
+  <a href="/Emdawn/">WebGPU 接入</a>
+</nav>
+<section>
+  <h2 id="suite">准备验证</h2>
+  <p id="description"></p>
+  <p id="environment"></p>
+  <p id="status" role="status" data-state="loading">正在加载 WASM…</p>
+  <div id="render-panel" hidden>
+    <div class="controls">
+      <label for="output-mode">显示模式</label><select id="output-mode"><option value="hdr">HDR</option><option value="sdr">普通屏幕预览（SDR）</option></select>
+      <label for="exposure">预览曝光</label><select id="exposure"><option value="0">0 EV</option><option value="-2">−2 EV（观察高光层次）</option></select>
+    </div>
+    <p id="display-state">正在启用 HDR 画布…</p>
+    <div id="canvas-frame"><canvas id="mu3d-canvas" aria-label="Mu3D 场景渲染"></canvas></div>
+    <div id="viewer-controls" hidden>
+      <div id="overlay-content" hidden>
+        <span id="blue-anchor-label" class="scene-label">蓝球 · HTML</span>
+        <div id="tracked-anchor-card" class="scene-card">
+          <strong><span id="overlay-title">绿球</span> · HTML</strong>
+          <button id="overlay-material" type="button" title="切换整组物体的 PBR 材质">切换整组材质</button>
+        </div>
+      </div>
+      <div class="controls">
+        <button id="animation-toggle" type="button" aria-pressed="true">暂停旋转</button>
+        <button id="camera-reset" type="button">重置视角</button>
+        <label for="material-preset">PBR 材质</label>
+        <select id="material-preset"><option value="satin">半光泽</option><option value="metal">抛光金属</option><option value="matte">哑光非金属</option><option value="custom">自定义</option></select>
+      </div>
+      <div class="controls">
+        <label for="metallic">金属度 <output id="metallic-value">0.35</output></label>
+        <input id="metallic" type="range" min="0" max="1" step="0.01" value="0.35">
+        <label for="roughness">粗糙度 <output id="roughness-value">0.28</output></label>
+        <input id="roughness" type="range" min="0.04" max="1" step="0.01" value="0.28">
+      </div>
+      <div class="controls">
+        <label><input id="gizmo-enabled" type="checkbox" checked> 三轴操作杆</label>
+        <label for="gizmo-mode">编辑</label>
+        <select id="gizmo-mode"><option value="0">平移</option><option value="1">旋转</option><option value="2">缩放</option></select>
+        <label for="gizmo-space">坐标系</label>
+        <select id="gizmo-space"><option value="world">世界</option><option value="local">局部</option></select>
+        <button id="model-reset" type="button">重置所选</button>
+      </div>
+      <p id="viewer-instructions" class="note">点击物体进行选择，手柄、高亮和卡片一起跟随；也可在下方选择整组。拖动彩色轴或圆环编辑所选物体，开始编辑时暂停旋转，帧统计继续刷新。Esc 撤销本次拖拽。缩放使用局部轴，中心方块等比缩放。拖动空白处旋转视角，滚轮拉近或拉远。聚焦画布后也可用方向键和 + / −。</p>
+      <p id="model-pose" class="note"></p>
+      <div class="controls">
+        <label><input id="overlay-enabled" type="checkbox" checked> HTML 跟随 UI</label>
+        <label for="overlay-target">选中物体</label>
+        <select id="overlay-target"><option value="model" selected>整组</option><option value="green">绿球</option><option value="blue">蓝球</option><option value="cone">圆锥</option><option value="none">清空选中</option></select>
+        <label><input id="selection-enabled" type="checkbox" checked> 点击选择</label>
+        <label><input id="selection-clear-miss" type="checkbox" checked> 点击空白清空</label>
+        <label><input id="highlight-enabled" type="checkbox" checked> 选中轮廓</label>
+        <label for="overlay-height">物体上的高度</label>
+        <input id="overlay-height" type="range" min="0" max="1.2" step="0.05" value="0.8">
+      </div>
+      <p class="note">所选物体的操作手柄、轮廓和 HTML 卡片共用同一个选中状态。修改高度可调整卡片在物体上的跟随位置；清空选中会隐藏手柄、轮廓和卡片。轮廓按场景深度遮挡，HTML 卡片不检测物体遮挡。按钮保留键盘操作，标签允许指针穿透。</p>
+      <div class="controls" aria-label="帧统计设置">
+        <label><input id="statistics-visible" type="checkbox" checked> 帧统计面板</label>
+        <label><input id="statistics-enabled" type="checkbox" checked> 采集</label>
+        <label><input id="statistics-detailed" type="checkbox"> 详细信息</label>
+        <label><input id="statistics-graph" type="checkbox" checked> 历史图表</label>
+        <label for="statistics-interval">刷新</label>
+        <select id="statistics-interval"><option value="50">50 ms</option><option value="250">250 ms</option><option value="500" selected>500 ms</option><option value="1000">1000 ms</option></select>
+        <label for="statistics-placement">位置</label>
+        <select id="statistics-placement"><option value="top-right">右上</option><option value="top-left">左上</option><option value="bottom-right">右下</option><option value="bottom-left">左下</option></select>
+        <button id="statistics-reset" type="button">重置统计</button>
+      </div>
+      <p class="note">帧率按成功提交的间隔统计，耗时为 CPU 计时。GPU 执行时间与屏幕实际呈现率未测量；缺少的数据显示为 —。面板不控制动画。</p>
+      <details><summary>手写笔 / 指针诊断</summary>
+        <p><label><input id="pen-inspect" type="checkbox"> 笔只采样，不控制场景</label></p>
+        <p id="pointer-diagnostics" class="note">将鼠标或笔移入画布。笔可直接操作三轴手柄。</p>
+        <p class="note">显示浏览器报告的压力、倾斜、侧键等数据；默认值不代表设备支持对应传感器。此页没有绘画工具。</p>
+      </details>
+      <p id="viewer-statistics" class="note" role="status">正在启动旋转…</p>
+    </div>
+    <p id="resolution" class="note"></p>
+    <p>下方四块的原始线性亮度：0.25 · 1 · 2 · 4。HDR 模式保留超过白色的亮度；普通屏幕预览会裁切。</p>
+    <p class="note">曝光仅改变显示。调整窗口或屏幕像素比例时，自动以原生分辨率重绘。</p>
+    <p id="pixel-report" class="note"></p>
+    <p class="note"><a href="./hdr-diagnostic.html">Chrome 首次 HDR 对照测试</a></p>
+    <p class="note"><a href="./?demo=viewer#mu3d-canvas">旋转动画 · PBR 材质 · Toolkit 相机</a> · <a href="./#mu3d-canvas">静态 HDR 验证</a></p>
+  </div>
+  <pre id="log" aria-label="验证日志"></pre>
+  <button type="button" id="rerun">重新运行</button>
+</section>
+<p class="note">实际渲染页使用共享 Mu3D SceneRenderer 和 WGPU 适配器；其余页面为独立检查。FP16 GPU 数据与屏幕 HDR 显示分别验证。</p>
+<script>
+  if (location.protocol === 'file:') {
+    document.getElementById('suite').textContent = '请通过本地服务打开';
+    document.getElementById('description').textContent = '直接打开 HTML 文件无法加载 WASM 模块。请使用已发布页面的 HTTP 地址。';
+    const status = document.getElementById('status');
+    status.dataset.state = 'failed';
+    status.textContent = '当前是文件地址，请打开下方运行页面。';
+    const links = document.createElement('p');
+    const viewer = document.createElement('a');
+    viewer.href = 'http://127.0.0.1:8765/Render/?demo=viewer#mu3d-canvas';
+    viewer.textContent = '打开运行页面';
+    links.appendChild(viewer);
+    status.after(links);
+    document.getElementById('log').textContent = '如果本地服务尚未启动，请在仓库目录运行：\npython3 eng/serve-web-validation.py\n使用其他端口时，请相应修改运行页面地址。';
+    for (const link of document.querySelectorAll('nav a'))
+      link.href = new URL(link.getAttribute('href'), 'http://127.0.0.1:8765').href;
+    document.getElementById('rerun').addEventListener('click', () => location.reload());
+  } else {
+    import('./main.mjs').catch(error => {
+      const status = document.getElementById('status');
+      status.dataset.state = 'failed';
+      status.textContent = '页面模块加载失败，请查看日志。';
+      document.getElementById('log').textContent = error?.stack ?? String(error);
+    });
+  }
+</script>
+</html>

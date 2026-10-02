@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "blender": {
+    "version": "5.0.0",
+    "commit": "a37564c4df7a9b604809e5192918400e46a0205f",
+    "repository": "https://github.com/blender/blender",
+    "config": "release/datafiles/colormanagement/config.ocio",
+    "licenseSource": "https://github.com/blender/blender/blob/65762c880fcbff57a273bf0fb18a6150d2eef652/release/license/OpenColorIO.txt",
+    "licenseConsolidationCommit": "0a4dbc57b80fec06b740e66f3846951e886aa735"
+  },
+  "ocio": {
+    "version": "2.5.2",
+    "commit": "c52966a6677723d5bd2dbef0ccec3fed9cbc3790",
+    "archiveSha256": "722601e01b78b7a12da4829cb450674935f404b0e508f3f20046fa77570e3272",
+    "builtinConfig": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+    "wheel": "opencolorio-2.5.2-cp314-cp314-macosx_11_0_arm64.whl",
+    "wheelSha256": "142eafd6c31aa7da3c97d2af5ce0403ccd2859be1252336ef9a2aea9a5082dce",
+    "moduleSha256": "1f7e833799a1c0ae79421e2966f61bd8505d1204c7d4f91822eaa05e9b17acdc",
+    "librarySha256": "cedc0bd10da8b50657586536bb6d3d6ba5ef57541af51c4467f5abc1ae77f344"
+  },
+  "numpy": {
+    "version": "2.4.3",
+    "wheel": "numpy-2.4.3-cp314-cp314-macosx_14_0_arm64.whl",
+    "wheelSha256": "a111698b4a3f8dcbe54c64a7708f049355abd603e619013c346553c1fd4ca90b"
+  },
+  "slang": {
+    "version": "2026.14",
+    "archiveSha256": "a5c82b66eac051bc78a06d2d8becf0e1003310f9947d9b645d7da0a1e48545c1",
+    "executableSha256": "092eacba4d2dcfff218d17a2b8ac0d7af0f7e17e02c887fc4a385ef907a82fac",
+    "librarySha256": "07343b2154f806dff2077dba374445888ec1ee1181125f7ae8df1118394a2e7b"
+  },
+  "inputs": [
+    {
+      "path": "eng/color-management/upstream/blender/config.ocio",
+      "sha256": "6a3ebdc460f052419c87c3ecba049c2ee578e19494995ac20fd4c99286c63998"
+    },
+    {
+      "path": "eng/color-management/upstream/blender/luts/AgX_Base_sRGB.cube",
+      "sha256": "e707a36f3e90ee79bc342332febf91334c02ce3974cac700ece00ca9d4507491"
+    },
+    {
+      "path": "eng/color-management/upstream/blender/luts/AgX_Rec2100-HLG_p3_lim.cube",
+      "sha256": "4422eb9a8d3ecc16836d241287b171758e2f2db202934d9ff51865543dd360c0"
+    },
+    {
+      "path": "eng/color-management/upstream/blender/luts/xyz_E_to_D65.spimtx",
+      "sha256": "24c1d78b42022f9a996b0f568b3fd6ceadb70a41e58520bc720fd618559c5301"
+    },
+    {
+      "path": "src/Mu3D.Color/ColorViews/BLENDER-LICENSE",
+      "sha256": "e39e97c2149a821e3e3b3c07839f8cadf6a98fb0a816b8ed69f16dd8817066fc"
+    },
+    {
+      "path": "src/Mu3D.Color/ColorViews/OCIO-LICENSE",
+      "sha256": "82a40c52065ee968aa62015735e84378ac11425db7a233e6a2dcd2c83fc24276"
+    },
+    {
+      "path": "eng/color-management/upstream/blender/luts/AgX_Base_Rec2020.cube",
+      "sha256": "e0ea8fcba273798517baa5ee877197b36cb471fefab188756815af82e8424a3a"
+    },
+    {
+      "path": "eng/color-management/upstream/blender/filmic/filmic_desat_33.cube",
+      "sha256": "77776b30ffc12d3d2a377039aa6a4faec083a5391cb77881244a5fb7f7d31908"
+    },
+    {
+      "path": "eng/color-management/upstream/blender/filmic/filmic_to_0-70_1-03.spi1d",
+      "sha256": "ff0e4cd3745c3d6857c163ee33caa2c796d6c5bddd91859e4646518110bf5b13"
+    }
+  ]
+}

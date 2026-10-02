@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../eng/Mu3D.WindowsDxc.targets" />
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/Mu3D.Maui/Controls/PresentationWhite.cs" Link="Presentation/PresentationWhite.cs" />
+    <Compile Include="../../samples/GalleryApp/Pages/SurfaceReferencePattern.cs" Link="Gallery/SurfaceReferencePattern.cs" />
+    <Compile Include="../../samples/GalleryApp/Pages/OpenPbrFurnaceRenderer.cs" Link="Gallery/OpenPbrFurnaceRenderer.cs" />
+    <ProjectReference Include="../../src/Mu3D.Rendering.OpenPbr/Mu3D.Rendering.OpenPbr.csproj" />
+    <ProjectReference Include="../../src/Mu3D.Native.Wgpu/Mu3D.Native.Wgpu.csproj" />
+    <None Include="Shaders/reference.wgsl" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../Mu3D.OpenPbr.Tests/Reference/oracle.json" Link="Reference/oracle.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../../src/Mu3D.Rendering.OpenPbr/Shaders/Lut.bin" Link="Shaders/Lut.bin" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <Import Project="../../src/Mu3D.Rendering.OpenPbr/buildTransitive/Mu3D.Rendering.OpenPbr.targets" />
+</Project>

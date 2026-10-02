@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Mu3D.Web</RootNamespace>
+    <AssemblyName>Mu3D.Web</AssemblyName>
+    <PackageId>Mu3D.Web</PackageId>
+    <Description>Optional browser viewport lifecycle and frame-scheduling adapters for Mu3D.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Mu3D.Graphics/Mu3D.Graphics.csproj" />
+    <Content Include="wwwroot/*.mjs" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest"
+             TargetPath="wwwroot/mu3d/%(Filename)%(Extension)" Pack="true" PackagePath="browser/" />
+    <None Include="buildTransitive/Mu3D.Web.targets" Pack="true" PackagePath="buildTransitive/" />
+    <None Include="README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+</Project>

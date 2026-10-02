@@ -1,0 +1,111 @@
+diff --git a/Cargo.lock b/Cargo.lock
+index 3e218bb..6e8ef07 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -1186,0 +1187 @@ dependencies = [
++ "windows-core",
+diff --git a/Cargo.toml b/Cargo.toml
+index dde9a8c..554debc 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -112,0 +113 @@ hal = { workspace = true, features = ["dx12", "renderdoc"] }
++windows-core = { version = "0.62", default-features = false }
+diff --git a/ffi/wgpu.h b/ffi/wgpu.h
+index 4f7d4e0..a5e103c 100644
+--- a/ffi/wgpu.h
++++ b/ffi/wgpu.h
+@@ -1506,0 +1507,17 @@ extern "C"
++    /**
++     * Returns the backend-native `ID3D12Device*` as a borrowed opaque pointer.
++     *
++     * Returns null when the device does not use the D3D12 backend. The caller must
++     * retain the device independently before keeping the pointer beyond this call.
++     */
++    void *wgpuDeviceGetNativeD3D12Device(WGPUDevice device);
++
++    /**
++     * Returns the backend-native `ID3D12CommandQueue*` used for graphics/presentation
++     * as a borrowed opaque pointer.
++     *
++     * Returns null when the device does not use the D3D12 backend. The caller must
++     * retain the queue independently before keeping the pointer beyond this call.
++     */
++    void *wgpuDeviceGetNativeD3D12CommandQueue(WGPUDevice device);
++
+@@ -1524,0 +1542,8 @@ extern "C"
++    /**
++     * Returns the backend-native `ID3D12Resource*` as a borrowed opaque pointer.
++     *
++     * Returns null when the texture does not use the D3D12 backend. The caller must
++     * retain the resource independently before keeping the pointer beyond this call.
++     */
++    void *wgpuTextureGetNativeD3D12Resource(WGPUTexture texture);
++
+diff --git a/src/lib.rs b/src/lib.rs
+index ba92673..93d7029 100644
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -2688,0 +2689,40 @@ pub unsafe extern "C" fn wgpuDeviceGetNativeMetalDevice(device: native::WGPUDevi
++#[no_mangle]
++pub unsafe extern "C" fn wgpuDeviceGetNativeD3D12Device(
++    device: native::WGPUDevice,
++) -> *mut c_void {
++    #[cfg(all(target_os = "windows", feature = "dx12"))]
++    {
++        let device = device.as_ref().expect("invalid device");
++        let hal_device = device.context.device_as_hal::<hal::api::Dx12>(device.id);
++        if let Some(hal_device) = hal_device {
++            return windows_core::Interface::as_raw(hal_device.raw_device()) as *mut c_void;
++        }
++        std::ptr::null_mut()
++    }
++    #[cfg(not(all(target_os = "windows", feature = "dx12")))]
++    {
++        let _ = device;
++        std::ptr::null_mut()
++    }
++}
++
++#[no_mangle]
++pub unsafe extern "C" fn wgpuDeviceGetNativeD3D12CommandQueue(
++    device: native::WGPUDevice,
++) -> *mut c_void {
++    #[cfg(all(target_os = "windows", feature = "dx12"))]
++    {
++        let device = device.as_ref().expect("invalid device");
++        let hal_device = device.context.device_as_hal::<hal::api::Dx12>(device.id);
++        if let Some(hal_device) = hal_device {
++            return windows_core::Interface::as_raw(hal_device.raw_queue()) as *mut c_void;
++        }
++        std::ptr::null_mut()
++    }
++    #[cfg(not(all(target_os = "windows", feature = "dx12")))]
++    {
++        let _ = device;
++        std::ptr::null_mut()
++    }
++}
++
+@@ -4420,0 +4461,22 @@ pub unsafe extern "C" fn wgpuTextureGetNativeMetalTexture(
++#[no_mangle]
++pub unsafe extern "C" fn wgpuTextureGetNativeD3D12Resource(
++    texture: native::WGPUTexture,
++) -> *mut c_void {
++    #[cfg(all(target_os = "windows", feature = "dx12"))]
++    {
++        let texture = texture.as_ref().expect("invalid texture");
++        let hal_texture = texture
++            .context
++            .texture_as_hal::<hal::api::Dx12>(texture.id);
++        if let Some(hal_texture) = hal_texture {
++            return windows_core::Interface::as_raw(hal_texture.raw_resource()) as *mut c_void;
++        }
++        std::ptr::null_mut()
++    }
++    #[cfg(not(all(target_os = "windows", feature = "dx12")))]
++    {
++        let _ = texture;
++        std::ptr::null_mut()
++    }
++}
++

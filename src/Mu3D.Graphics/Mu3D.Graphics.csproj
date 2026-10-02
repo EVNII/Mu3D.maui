@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Mu3D.Graphics</RootNamespace>
+    <AssemblyName>Mu3D.Graphics</AssemblyName>
+    <PackageId>Mu3D.Graphics</PackageId>
+    <Description>Backend-independent graphics abstractions for Mu3D.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Mu3D.Color/Mu3D.Color.csproj" />
+  </ItemGroup>
+</Project>

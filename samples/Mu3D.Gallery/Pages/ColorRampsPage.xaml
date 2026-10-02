@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Mu3D.Gallery.Pages.ColorRampsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    Title="Color Ramps">
+    <ScrollView>
+      <VerticalStackLayout Padding="16" Spacing="8">
+        <Label Text="Standard、AgX、ACES 2.0 与 Filmic" FontSize="24" FontAttributes="Bold" />
+        <Picker x:Name="ScenePicker" Title="测试场景" SelectedIndex="0" SelectedIndexChanged="OnSettingsChanged">
+          <Picker.Items><x:String>RGB / CMY / 白色色带</x:String><x:String>连续色相色带</x:String><x:String>3D 高光球体</x:String></Picker.Items>
+        </Picker>
+        <Picker x:Name="RangePicker" Title="比较输出" SelectedIndex="0" SelectedIndexChanged="OnSettingsChanged">
+          <Picker.Items><x:String>HDR · 1000 nit · P3 D65</x:String><x:String>SDR · 100 nit · Rec.709</x:String></Picker.Items>
+        </Picker>
+        <Label x:Name="ComparisonDescription" Text="各栏共用线性 Rec.2020 输入、曝光与饱和度。Standard 只做显示转换，不压缩高光；不同于 Blender 的 Raw 数值检查。AgX 与 ACES 的输出条件一致。选择 SDR 可加入 Blender 原版 Filmic（无额外 Look）：处理 HDR 输入，映射到 SDR 显示。" />
+        <Label x:Name="ExposureLabel" Text="曝光 0.0 EV" />
+        <Slider x:Name="ExposureSlider" Minimum="-6" Maximum="6" Value="0" ValueChanged="OnExposureChanged" />
+        <VerticalStackLayout x:Name="SaturationControls">
+          <Label x:Name="SaturationLabel" Text="色带饱和度 100%" />
+          <Slider x:Name="SaturationSlider" Minimum="0" Maximum="1" Value="1" ValueChanged="OnSaturationChanged" />
+        </VerticalStackLayout>
+        <VerticalStackLayout x:Name="ComparisonPanel" Spacing="6">
+          <Label x:Name="BandLegend" Text="从上到下：红 R、绿 G、蓝 B、青 C、品红 M、黄 Y、白。每行通道峰值相同，亮度 Y 不相同。" />
+          <Grid x:Name="OutputGrid" ColumnDefinitions="*,*,*" ColumnSpacing="12" RowSpacing="12" SizeChanged="OnComparisonSizeChanged">
+            <VerticalStackLayout Spacing="4">
+              <Label x:Name="StandardTitle" Text="Standard · HDR 直出" FontAttributes="Bold" />
+              <mu3d:Mu3DView x:Name="StandardView" HeightRequest="350" BackgroundColor="Black" Draw="OnComparisonDraw" SurfaceError="OnComparisonError" PresentationSessionChanged="OnComparisonSessionChanged" />
+              <Label Text="−6 → −3 → 0 → +3 → +6 → +9 → +12 档" FontSize="12" />
+              <Label x:Name="StandardStatus" FontSize="12" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="1" Spacing="4">
+              <Label x:Name="AgxTitle" Text="AgX · HDR 1000 nit · P3" FontAttributes="Bold" />
+              <mu3d:Mu3DView x:Name="AgxView" HeightRequest="350" BackgroundColor="Black" Draw="OnComparisonDraw" SurfaceError="OnComparisonError" PresentationSessionChanged="OnComparisonSessionChanged" />
+              <Label Text="−6 → −3 → 0 → +3 → +6 → +9 → +12 档" FontSize="12" />
+              <Label x:Name="AgxStatus" FontSize="12" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="2" Spacing="4">
+              <Label x:Name="AcesTitle" Text="ACES 2.0 · HDR 1000 nit · P3" FontAttributes="Bold" />
+              <mu3d:Mu3DView x:Name="AcesView" HeightRequest="350" BackgroundColor="Black" Draw="OnComparisonDraw" SurfaceError="OnComparisonError" PresentationSessionChanged="OnComparisonSessionChanged" />
+              <Label Text="−6 → −3 → 0 → +3 → +6 → +9 → +12 档" FontSize="12" />
+              <Label x:Name="AcesStatus" FontSize="12" />
+            </VerticalStackLayout>
+            <VerticalStackLayout x:Name="FilmicPanel" Grid.Row="1" Spacing="4" IsVisible="False">
+              <Label Text="Filmic · SDR 100 nit · Rec.709 · 无 Look" FontAttributes="Bold" />
+              <mu3d:Mu3DView x:Name="FilmicView" HeightRequest="350" BackgroundColor="Black" Draw="OnComparisonDraw" SurfaceError="OnComparisonError" PresentationSessionChanged="OnComparisonSessionChanged" />
+              <Label Text="−6 → −3 → 0 → +3 → +6 → +9 → +12 档" FontSize="12" />
+              <Label x:Name="FilmicStatus" FontSize="12" />
+            </VerticalStackLayout>
+          </Grid>
+          <Label Text="横轴 0 档的通道峰值为 0.18；未加曝光时范围约 0.0028–737.28。饱和度 0% 时全部变成中性灰，便于比较明暗曲线。" FontSize="12" />
+        </VerticalStackLayout>
+        <VerticalStackLayout x:Name="ScenePanel" IsVisible="False" Spacing="6">
+          <Label Text="同一组材质和灯光，切换 AgX / ACES 2.0；HDR 模式共享 P3 1000 nit 输出条件。" />
+          <Picker x:Name="ViewPicker" Title="3D 视图" SelectedIndex="0" SelectedIndexChanged="OnSettingsChanged">
+            <Picker.Items><x:String>AgX</x:String><x:String>ACES 2.0</x:String></Picker.Items>
+          </Picker>
+          <mu3d:Mu3DSceneView x:Name="SceneView" HeightRequest="350" BackgroundColor="Black" SurfaceError="OnSurfaceError">
+            <mu3d:Mu3DSceneView.DisplayTransform>
+              <mu3d:ColorView3D x:Name="DisplayView" Preset="AgXHdr1000" ReferenceWhiteNits="100"
+                ExposureStops="{Binding Value, Source={x:Reference ExposureSlider}, x:DataType=Slider}" />
+            </mu3d:Mu3DSceneView.DisplayTransform>
+            <mu3d:Scene3D>
+              <mu3d:Scene3D.Camera><mu3d:PerspectiveCamera3D Z="6" FieldOfView="48" /></mu3d:Scene3D.Camera>
+              <mu3d:Sphere3D X="-1.7" Radius="0.72"><mu3d:PbrMaterial3D Color="#FA341A" Roughness="0.3" /></mu3d:Sphere3D>
+              <mu3d:Sphere3D Radius="0.72"><mu3d:PbrMaterial3D Color="White" Roughness="0.18" /></mu3d:Sphere3D>
+              <mu3d:Sphere3D X="1.7" Radius="0.72"><mu3d:PbrMaterial3D Color="#1254FC" Roughness="0.3" /></mu3d:Sphere3D>
+              <mu3d:DirectionalLight3D Intensity="18" RotationX="-25" RotationY="-30" />
+            </mu3d:Scene3D>
+          </mu3d:Mu3DSceneView>
+        </VerticalStackLayout>
+        <Label x:Name="StatusLabel" Text="ACES 2.0 已采用新的亮度、色度与色域压缩。HDR 的实际高光亮度取决于显示器余量；不支持 HDR 时请显式选择 SDR 比较。" FontSize="12" />
+      </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

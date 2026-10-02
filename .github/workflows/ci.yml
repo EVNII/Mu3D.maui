@@ -1,0 +1,165 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  bindings-and-managed-tests:
+    if: github.repository == 'EVNII/Mu3D.maui'
+    name: Bindings and managed tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out Mu3D
+        uses: actions/checkout@v7
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Restore maintainer tools
+        run: dotnet tool restore
+
+      - name: Validate pinned native manifest
+        run: >-
+          dotnet run --project tools/Mu3D.WgpuGen --configuration Release --
+          validate-manifest eng/wgpu-native-assets.json eng/Mu3D.WgpuNativeVersion.props
+
+      - name: Fetch verified binding headers
+        run: |
+          dotnet run --project tools/Mu3D.WgpuGen --configuration Release -- \
+            fetch-artifact eng/wgpu-native-assets.json eng/Mu3D.WgpuNativeVersion.props \
+            ios-arm64 release artifacts/downloads
+          dotnet run --project tools/Mu3D.WgpuGen --configuration Release -- \
+            extract-binding-input eng/wgpu-native-assets.json eng/Mu3D.WgpuNativeVersion.props \
+            ios-arm64 release artifacts/downloads/wgpu-ios-aarch64-release.zip artifacts/binding-input
+
+      - name: Verify generated binding drift
+        run: |
+          dotnet run --project tools/Mu3D.WgpuGen --configuration Release -- \
+            verify-bindings eng/wgpu-native-assets.json eng/Mu3D.WgpuNativeVersion.props \
+            artifacts/binding-input/webgpu.h \
+            artifacts/binding-input/wgpu.h \
+            src/Mu3D.Native.Wgpu/Generated/WgpuNative.Raw.g.cs
+
+      - name: Run generator tests
+        run: dotnet run --project tests/Mu3D.WgpuGen.Tests --configuration Release -- "$GITHUB_WORKSPACE"
+
+      - name: Run backend-independent graphics tests
+        run: dotnet run --project tests/Mu3D.Graphics.Tests --configuration Release
+
+      - name: Run scene-domain tests
+        run: dotnet run --project tests/Mu3D.Core.Tests --configuration Release
+
+      - name: Run ABI layout and ownership tests
+        run: dotnet run --project tests/Mu3D.Native.Wgpu.Tests --configuration Release
+
+      - name: Run DebugRuntime MSBuild tests
+        run: dotnet run --project tests/Mu3D.DebugRuntime.Tests --configuration Release -- "$GITHUB_WORKSPACE"
+
+  maui-android:
+    if: github.repository == 'EVNII/Mu3D.maui'
+    name: MAUI / Android
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out Mu3D
+        uses: actions/checkout@v7
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Install MAUI Android workload
+        run: dotnet workload install maui-android
+
+      - name: Build Mu3D.Maui
+        run: dotnet build src/Mu3D.Maui/Mu3D.Maui.csproj --configuration Release --framework net10.0-android
+
+      - name: Stage verified Android Release runtimes
+        run: >-
+          dotnet run --project tools/Mu3D.WgpuGen --configuration Release --
+          prepare-platform-runtimes eng/wgpu-native-assets.json eng/Mu3D.WgpuNativeVersion.props
+          android release artifacts/downloads artifacts/wgpu-native
+
+      - name: Build GalleryApp Android smoke target
+        run: dotnet build samples/GalleryApp/GalleryApp.csproj --configuration Release --framework net10.0-android
+
+  maui-apple:
+    if: github.repository == 'EVNII/Mu3D.maui'
+    name: MAUI / ${{ matrix.framework }}
+    runs-on: macos-15
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        framework:
+          - net10.0-ios
+          - net10.0-maccatalyst
+
+    steps:
+      - name: Check out Mu3D
+        uses: actions/checkout@v7
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Install MAUI Apple workloads
+        run: dotnet workload install maui-ios maui-maccatalyst
+
+      - name: Build Mu3D.Maui
+        run: dotnet build src/Mu3D.Maui/Mu3D.Maui.csproj --configuration Release --framework "${{ matrix.framework }}"
+
+  maui-windows:
+    if: github.repository == 'EVNII/Mu3D.maui'
+    name: MAUI / Windows
+    runs-on: windows-2025
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out Mu3D
+        uses: actions/checkout@v7
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Install MAUI Windows workload
+        run: dotnet workload install maui-windows
+
+      - name: Build Mu3D.Maui
+        run: dotnet build src/Mu3D.Maui/Mu3D.Maui.csproj --configuration Release --framework net10.0-windows10.0.19041.0
+
+      - name: Stage verified Windows x64 Release runtime
+        run: >-
+          dotnet run --project tools/Mu3D.WgpuGen --configuration Release --
+          prepare-platform-runtimes eng/wgpu-native-assets.json eng/Mu3D.WgpuNativeVersion.props
+          windows release artifacts/downloads artifacts/wgpu-native
+
+      - name: Build GalleryApp Windows x64
+        run: >-
+          dotnet build samples/GalleryApp/GalleryApp.csproj --configuration Release
+          --framework net10.0-windows10.0.19041.0
+          -p:RuntimeIdentifierOverride=win-x64
+
+      - name: Verify GalleryApp Windows native runtime
+        shell: pwsh
+        run: |
+          $expected = "artifacts/wgpu-native/v29.0.1.1/release/runtimes/win-x64/native/wgpu_native.dll"
+          $actual = Get-ChildItem "samples/GalleryApp/bin/Release" -Recurse -Filter "wgpu_native.dll" |
+            Select-Object -First 1 -ExpandProperty FullName
+          if (-not $actual) { throw "GalleryApp output does not contain wgpu_native.dll." }
+          if ((Get-FileHash $expected).Hash -ne (Get-FileHash $actual).Hash) {
+            throw "GalleryApp output does not contain the pinned Windows Release runtime."
+          }

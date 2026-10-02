@@ -1,0 +1,60 @@
+name: Web Gallery Pages
+
+# Heavy WASM/AOT builds are opt-in while hosted Actions capacity is limited.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: web-gallery-pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.repository == 'EVNII/Mu3D.maui' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      DOTNET_INSTALL_DIR: ${{ github.workspace }}/artifacts/toolchain/dotnet
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Check out Mu3D
+        uses: actions/checkout@v7
+
+      - name: Check existing Pages configuration before the expensive build
+        run: >-
+          test "$(gh api "repos/$GITHUB_REPOSITORY/pages"
+          --jq '.source.branch == "gh-pages" and .source.path == "/" and .build_type == "legacy"')" = true
+
+      - name: Set up pinned .NET SDK
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Install pinned WASM workload and codec build tools
+        run: |
+          # global.json selects the workload set; do not also pass --version here.
+          dotnet workload install wasm-tools --skip-manifest-update
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build
+
+      - name: Check browser host contracts
+        run: node --test tests/Mu3D.Web.Viewer.Tests/*.test.mjs
+
+      - name: Build the actual Gallery in both modes
+        run: python3 eng/build-web-gallery.py --dotnet "$(command -v dotnet)" --prepare --mode both
+
+      - name: Publish from an isolated gh-pages worktree
+        # Retains the locally built public DocFX site already on gh-pages.
+        # One-time Pages setup is performed by an administrator with the local script.
+        run: >-
+          python3 eng/publish-web-pages.py
+          --aot artifacts/web-wasm/GalleryAot
+          --interpreted artifacts/web-wasm/Gallery
+          --base-path "/${{ github.event.repository.name }}/"
+          --repository "${{ github.repository }}"
+          --deploy

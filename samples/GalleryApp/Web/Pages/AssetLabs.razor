@@ -1,0 +1,109 @@
+@page "/examples/gltf-loading"
+@page "/examples/gltf-instances"
+@page "/examples/gltf-animation"
+@page "/examples/gltf-material-variants"
+@page "/examples/hdr-jpeg"
+@page "/examples/ktx2-decode"
+@page "/examples/ktx2-gpu-sampling"
+@page "/examples/material-conformance"
+@implements IAsyncDisposable
+@inject NavigationManager Navigation
+@using Mu3D.GalleryApp.Pages
+@using Mu3D.SceneGraph
+@using Mu3D.Rendering
+
+<PageTitle>@Title · Mu3D Gallery</PageTitle>
+<h1>@Title</h1>
+@if (HasCanvas)
+{
+    <GalleryCanvas @ref="viewport" @key="feature" Title="@Title" Draw="Draw" Connected="ConnectAsync" Disconnected="Disconnect"
+                   Continuous="@(feature == "material-conformance" || playing && asset?.Animations.Count > 0)" />
+}
+<div class="controls">
+    @if (feature == "hdr-jpeg")
+    {
+        <p>原 Gallery 的 Display P3 HDR 渐变和色块，通过实际 gain-map JPEG 编码、线性 FP32 解码并比较误差。</p>
+        <button @onclick="ReloadAsync" disabled="@busy">Run HDR JPEG round trip</button>
+    }
+    else
+    {
+        @if (feature == "material-conformance")
+        {
+            <label>Official Khronos model
+                <select @bind="modelIndex" @bind:after="ReloadAsync">
+                    @for (int index = 0; index < ModelLabCatalog.Models.Length; index++)
+                    { <option value="@index">@ModelLabCatalog.Models[index].DisplayName</option> }
+                </select>
+            </label>
+            <p>@ModelLabCatalog.Models[modelIndex].GateDescription</p>
+        }
+        @if (feature is "gltf-loading" or "ktx2-decode")
+        {
+            <label><input type="checkbox" @bind="retainSources" /> Retain encoded source on next load</label>
+            <button @onclick="ClearCache">Clear source cache</button>
+        }
+        <button @onclick="ReloadAsync" disabled="@(HasCanvas && surface is null)">@(feature == "ktx2-gpu-sampling" ? "Reload and transcode fixtures" : "Load / Reload")</button>
+        <button @onclick="CancelLoad" disabled="@(!busy)">Cancel</button>
+        @if (asset is not null && feature is "gltf-material-variants" or "material-conformance")
+        {
+            <label>Authored material variant <select @bind="variantIndex" @bind:after="ApplyVariants">
+                <option value="0">Default material</option>
+                @for (int index = 0; index < asset.MaterialVariants.Count; index++)
+                { <option value="@(index + 1)">@asset.MaterialVariants[index].Name</option> }
+            </select></label>
+        }
+        @if (leftInstance is not null && asset is not null)
+        {
+            <label>Left instance <select @bind="leftVariant" @bind:after="ApplyVariants">
+                <option value="0">Default material</option>
+                @for (int index = 0; index < asset.MaterialVariants.Count; index++)
+                { <option value="@(index + 1)">@asset.MaterialVariants[index].Name</option> }
+            </select></label>
+            <label>Right instance <select @bind="rightVariant" @bind:after="ApplyVariants">
+                <option value="0">Default material</option>
+                @for (int index = 0; index < asset.MaterialVariants.Count; index++)
+                { <option value="@(index + 1)">@asset.MaterialVariants[index].Name</option> }
+            </select></label>
+        }
+        @if (asset?.Animations.Count > 0)
+        {
+            <label>Animation clip <select @bind="clipIndex" @bind:after="ChangeClip" disabled="@(feature == "material-conformance" && ModelLabCatalog.Models[modelIndex].ApplyAllAnimations)">
+                @for (int index = 0; index < asset.Animations.Count; index++)
+                { <option value="@index">@(asset.Animations[index].Name ?? $"Clip {index + 1}")</option> }
+            </select></label>
+            <label><input type="checkbox" @bind="playing" @bind:after="ChangePlayback" /> Play</label>
+            @if (feature == "material-conformance")
+            {
+                <button @onclick="Replay">Replay</button>
+                <label><input type="checkbox" @bind="loop" @bind:after="ChangeLoop" /> Loop</label>
+                <label>Timeline @animationTime.ToString("F2") / @Duration.ToString("F2") s
+                    <input type="range" min="0" max="@Duration" step="0.01" @bind="animationTime" @bind:event="oninput" />
+                </label>
+            }
+        }
+        @if (feature == "material-conformance")
+        {
+            <label>Render layer <select @bind="layer" @bind:after="ApplyModelControls">
+                @foreach (SceneRenderLayer value in Enum.GetValues<SceneRenderLayer>())
+                { <option value="@value">@value</option> }
+            </select></label>
+            <label><input type="checkbox" @bind="shadows" @bind:after="ApplyModelControls" /> Shadows</label>
+            <label><input type="checkbox" @bind="ao" @bind:after="ApplyModelControls" /> AO</label>
+            <label><input type="checkbox" @bind="bloom" @bind:after="ApplyModelControls" /> HDR Bloom (Beauty only)</label>
+            <label>Bloom composition <select @bind="bloomMode" @bind:after="ApplyModelControls">
+                @foreach (BloomCompositeMode value in Enum.GetValues<BloomCompositeMode>())
+                { <option value="@value">@value</option> }
+            </select></label>
+            @foreach (ModelControl control in modelControls)
+            {
+                <label>@control.Label: @control.Value.ToString("F2")
+                    <input type="range" min="@control.Minimum" max="@control.Maximum" step="@control.Step"
+                        @bind="control.Value" @bind:event="oninput" @bind:after="ApplyModelControls" />
+                </label>
+            }
+        }
+    }
+</div>
+<p role="status">@status</p>
+<pre>@details</pre>
+@if (feature == "material-conformance") { <pre>@performance</pre> }

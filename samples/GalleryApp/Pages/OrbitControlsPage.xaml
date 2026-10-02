@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.OrbitControlsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    xmlns:toolkit="clr-namespace:Mu3D.Maui.Toolkit.Controls;assembly=Mu3D.Maui.Toolkit"
+    Title="Orbit Controls">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="orbit-controls" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto,Auto">
+        <mu3d:Mu3DSceneView
+            x:Name="SceneView"
+            BackgroundColor="#111827"
+            FeatureError="OnFeatureError"
+            SurfaceError="OnSurfaceError">
+            <mu3d:Mu3DSceneView.SceneContent>
+                <mu3d:Scene3D Name="Orbit controls scene">
+                    <mu3d:Scene3D.Camera>
+                        <mu3d:PerspectiveCamera3D
+                            x:Name="OrbitCamera"
+                            FarClip="80"
+                            FieldOfView="50"
+                            Name="Orbit camera"
+                            X="5.2"
+                            Y="3.8"
+                            Z="7.6" />
+                    </mu3d:Scene3D.Camera>
+                    <mu3d:Sphere3D
+                        Name="Orbit target"
+                        Radius="1.05"
+                        Y="0.5">
+                        <mu3d:PbrMaterial3D
+                            Color="#FF7A35"
+                            Metallic="0.16"
+                            Roughness="0.25" />
+                    </mu3d:Sphere3D>
+                    <mu3d:Cone3D
+                        Height="1.7"
+                        Name="Left reference"
+                        Radius="0.62"
+                        X="-2.6"
+                        Y="0.35"
+                        Z="-0.9">
+                        <mu3d:PbrMaterial3D
+                            Color="#3B9EFF"
+                            Metallic="0.1"
+                            Roughness="0.28" />
+                    </mu3d:Cone3D>
+                    <mu3d:Sphere3D
+                        Name="Rear reference"
+                        Radius="0.7"
+                        X="2.3"
+                        Y="0.2"
+                        Z="-2.2">
+                        <mu3d:UnlitMaterial3D Color="#4DE3A8" />
+                    </mu3d:Sphere3D>
+                    <mu3d:Sphere3D
+                        Name="Ground"
+                        Radius="0.42"
+                        ScaleX="10"
+                        ScaleY="0.16"
+                        ScaleZ="10"
+                        Y="-0.72">
+                        <mu3d:UnlitMaterial3D Color="#1E2B43" />
+                    </mu3d:Sphere3D>
+                    <mu3d:DirectionalLight3D
+                        Intensity="4.2"
+                        RotationX="-38"
+                        RotationY="-30" />
+                </mu3d:Scene3D>
+            </mu3d:Mu3DSceneView.SceneContent>
+            <mu3d:Mu3DSceneView.Features>
+                <toolkit:ViewportTools>
+                    <toolkit:OrbitTool
+                        x:Name="OrbitNavigation"
+                        Camera="{x:Reference OrbitCamera}"
+                        DampingEnabled="True"
+                        DampingTime="0.1"
+                        MaximumDistance="24"
+                        MinimumDistance="2.5"
+                        NavigationDollyStep="0.12"
+                        NavigationPanStep="0.05"
+                        NavigationRotationStepRadians="0.08726646"
+                        PinchDollyMultiplier="1.6"
+                        TargetY="0.5">
+                        <toolkit:OrbitTool.Input>
+                            <toolkit:ViewportInput>
+                                <toolkit:ViewportInput.Mouse>
+                                    <toolkit:MouseInput
+                                        LeftButtonDragAction="Rotate"
+                                        RightButtonDragAction="Pan" />
+                                </toolkit:ViewportInput.Mouse>
+                                <toolkit:ViewportInput.Trackpad>
+                                    <toolkit:TrackpadInput TwoFingerDragAction="Pan" />
+                                </toolkit:ViewportInput.Trackpad>
+                                <toolkit:ViewportInput.Touchscreen>
+                                    <toolkit:TouchscreenInput
+                                        OneFingerDragAction="Rotate"
+                                        TwoFingerDragAction="Pan" />
+                                </toolkit:ViewportInput.Touchscreen>
+                                <toolkit:ViewportInput.Keyboard>
+                                    <toolkit:KeyboardInput IsEnabled="False" />
+                                </toolkit:ViewportInput.Keyboard>
+                            </toolkit:ViewportInput>
+                        </toolkit:OrbitTool.Input>
+                    </toolkit:OrbitTool>
+                </toolkit:ViewportTools>
+            </mu3d:Mu3DSceneView.Features>
+        </mu3d:Mu3DSceneView>
+        <gallery:ControlsHelpOverlay
+            Grid.Row="0"
+            Margin="12"
+            Title="Orbit controls"
+            ZIndex="10">
+            <gallery:ControlsHelpOverlay.Settings>
+                <gallery:ControlSensitivityItem
+                    Label="Rotation"
+                    Value="{Binding Source={x:Reference OrbitNavigation}, Path=RotationSensitivity, Mode=TwoWay}" />
+                <gallery:ControlSensitivityItem
+                    Label="Pan"
+                    Value="{Binding Source={x:Reference OrbitNavigation}, Path=PanSensitivity, Mode=TwoWay}" />
+                <gallery:ControlSensitivityItem
+                    Label="Dolly"
+                    Value="{Binding Source={x:Reference OrbitNavigation}, Path=DollySensitivity, Mode=TwoWay}" />
+            </gallery:ControlsHelpOverlay.Settings>
+            <gallery:ControlHelpItem Icon="🖱" Text="Left drag · orbit around the target" />
+            <gallery:ControlHelpItem Icon="🖱" Text="Right drag · pan across the view plane" />
+            <gallery:ControlHelpItem Icon="▱" Text="Trackpad two-finger drag · pan" />
+            <gallery:ControlHelpItem Icon="☝" Text="Touch: one finger orbits · two fingers pan" />
+            <gallery:ControlHelpItem Icon="🤏" Text="Pinch or wheel · dolly in and out" />
+            <gallery:ControlHelpItem Icon="⌨" Text="Buttons below · discrete orbit, pan and dolly" />
+        </gallery:ControlsHelpOverlay>
+        <ScrollView
+            Grid.Row="1"
+            HorizontalScrollBarVisibility="Always"
+            Orientation="Horizontal">
+            <HorizontalStackLayout
+                Padding="12,8"
+                Spacing="6"
+                x:DataType="toolkit:OrbitTool">
+                <Button
+                    Command="{Binding Source={x:Reference OrbitNavigation}, Path=NavigationCommand}"
+                    CommandParameter="{x:Static toolkit:OrbitNavigationAction.RotateLeft}"
+                    Text="Rotate left" />
+                <Button
+                    Command="{Binding Source={x:Reference OrbitNavigation}, Path=NavigationCommand}"
+                    CommandParameter="{x:Static toolkit:OrbitNavigationAction.RotateRight}"
+                    Text="Rotate right" />
+                <Button
+                    Command="{Binding Source={x:Reference OrbitNavigation}, Path=NavigationCommand}"
+                    CommandParameter="{x:Static toolkit:OrbitNavigationAction.RotateUp}"
+                    Text="Rotate up" />
+                <Button
+                    Command="{Binding Source={x:Reference OrbitNavigation}, Path=NavigationCommand}"
+                    CommandParameter="{x:Static toolkit:OrbitNavigationAction.RotateDown}"
+                    Text="Rotate down" />
+                <Button
+                    Command="{Binding Source={x:Reference OrbitNavigation}, Path=NavigationCommand}"
+                    CommandParameter="{x:Static toolkit:OrbitNavigationAction.PanLeft}"
+                    Text="Pan left" />
+                <Button
+                    Command="{Binding Source={x:Reference OrbitNavigation}, Path=NavigationCommand}"
+                    CommandParameter="{x:Static toolkit:OrbitNavigationAction.PanRight}"
+                    Text="Pan right" />
+                <Button
+                    Command="{Binding Source={x:Reference OrbitNavigation}, Path=NavigationCommand}"
+                    CommandParameter="{x:Static toolkit:OrbitNavigationAction.PanUp}"
+                    Text="Pan up" />
+                <Button
+                    Command="{Binding Source={x:Reference OrbitNavigation}, Path=NavigationCommand}"
+                    CommandParameter="{x:Static toolkit:OrbitNavigationAction.PanDown}"
+                    Text="Pan down" />
+                <Button
+                    Command="{Binding Source={x:Reference OrbitNavigation}, Path=NavigationCommand}"
+                    CommandParameter="{x:Static toolkit:OrbitNavigationAction.DollyIn}"
+                    Text="Dolly in" />
+                <Button
+                    Command="{Binding Source={x:Reference OrbitNavigation}, Path=NavigationCommand}"
+                    CommandParameter="{x:Static toolkit:OrbitNavigationAction.DollyOut}"
+                    Text="Dolly out" />
+            </HorizontalStackLayout>
+        </ScrollView>
+        <Grid
+            Grid.Row="2"
+            Padding="16,8"
+            ColumnDefinitions="Auto,Auto,*"
+            ColumnSpacing="14"
+            RowDefinitions="Auto,Auto">
+            <HorizontalStackLayout Spacing="6">
+                <Label Text="Enabled" VerticalTextAlignment="Center" />
+                <Switch
+                    IsToggled="{Binding IsEnabled, Mode=TwoWay, Source={x:Reference OrbitNavigation}, x:DataType=toolkit:OrbitTool}" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Grid.Column="1" Spacing="6">
+                <Label Text="Damping" VerticalTextAlignment="Center" />
+                <Switch
+                    IsToggled="{Binding DampingEnabled, Mode=TwoWay, Source={x:Reference OrbitNavigation}, x:DataType=toolkit:OrbitTool}" />
+            </HorizontalStackLayout>
+            <Label
+                Grid.Column="2"
+                FontAttributes="Bold"
+                HorizontalTextAlignment="End"
+                Text="Target (0, 0.5, 0) · screen-space pan"
+                VerticalTextAlignment="Center" />
+            <Label
+                x:Name="StatusLabel"
+                Grid.Row="1"
+                Grid.ColumnSpan="3"
+                FontSize="12"
+                Text="One pointer rotates; two fingers pan while pinch dollies; supported wheels also dolly." />
+        </Grid>
+    </Grid>
+</ContentPage>

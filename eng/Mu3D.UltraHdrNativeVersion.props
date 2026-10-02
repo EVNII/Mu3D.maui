@@ -1,0 +1,8 @@
+<Project>
+  <PropertyGroup>
+    <Mu3DUltraHdrNativeVersion>v2.0.1</Mu3DUltraHdrNativeVersion>
+    <Mu3DUltraHdrNativeCommit>a532a8c1418890cff7ce1e90cbe59ba6ebc6fa6d</Mu3DUltraHdrNativeCommit>
+    <Mu3DJpegTurboNativeVersion>3.1.0</Mu3DJpegTurboNativeVersion>
+    <Mu3DJpegTurboNativeCommit>20ade4dea9589515a69793e447a6c6220b464535</Mu3DJpegTurboNativeCommit>
+  </PropertyGroup>
+</Project>

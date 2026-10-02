@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <Mu3DPackageVersion Condition="'$(Mu3DPackageVersion)' == ''">0.1.0-preview.1</Mu3DPackageVersion>
+    <PackageVersion Condition="'$(PackageVersion)' == ''">$(Mu3DPackageVersion)</PackageVersion>
+    <Version Condition="'$(Version)' == ''">$(Mu3DPackageVersion)</Version>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Mu3D.Creative</RootNamespace>
+    <AssemblyName>Mu3D.Creative</AssemblyName>
+    <PackageId>Mu3D.Creative</PackageId>
+    <Description>Optional UI-independent HDR tiled canvas, compositing and brush primitives for Mu3D.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Mu3D.Color/Mu3D.Color.csproj" />
+    <None Include="README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.ProductFeedPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:pages="clr-namespace:Mu3D.GalleryApp.Pages"
+    xmlns:toolkit="clr-namespace:Mu3D.Maui.Toolkit.Controls;assembly=Mu3D.Maui.Toolkit"
+    x:DataType="pages:ProductFeedPage"
+    Title="3D Product Feed">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="gltf-product-feed" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="Auto,*">
+        <Grid Padding="16,12" RowDefinitions="Auto,Auto,Auto">
+            <Label
+                FontAttributes="Bold"
+                FontSize="20"
+                Text="{Binding OutputHeading}" />
+            <Label
+                x:Name="StatusLabel"
+                Grid.Row="1"
+                FontSize="12"
+                HeightRequest="{OnPlatform Default=60, MacCatalyst=78}"
+                LineBreakMode="WordWrap"
+                MaximumHeightRequest="{OnPlatform Default=60, MacCatalyst=78}"
+                MinimumHeightRequest="{OnPlatform Default=60, MacCatalyst=78}" />
+            <ScrollView
+                Grid.Row="2"
+                Margin="0,8,0,0"
+                BackgroundColor="#101827"
+                InputTransparent="{OnPlatform Default=True, MacCatalyst=False}"
+                HeightRequest="{OnPlatform Default=132, MacCatalyst=216}"
+                Orientation="Both">
+                <Label
+                    x:Name="DiagnosticsLabel"
+                    Padding="8,6"
+                    FontSize="11"
+                    LineBreakMode="WordWrap"
+                    TextColor="#E5E7EB" />
+            </ScrollView>
+        </Grid>
+        <toolkit:SceneViewProxyHost
+            x:Name="ProxyHost"
+            Grid.Row="1"
+            SurfaceError="OnProxyHostSurfaceError">
+            <pages:ProductFeedCollectionView
+                x:Name="ProductsView"
+                BackgroundColor="Transparent"
+                ItemSizingStrategy="MeasureFirstItem"
+                ItemsSource="{Binding Products}"
+                ItemsUpdatingScrollMode="KeepScrollOffset"
+                Scrolled="OnProductsScrolled"
+                SizeChanged="OnProductsSizeChanged">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        HorizontalItemSpacing="8"
+                        Orientation="Vertical"
+                        Span="2"
+                        VerticalItemSpacing="8" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="pages:ProductPreview">
+                        <Grid
+                            BackgroundColor="#FFF4E6"
+                            Padding="8"
+                            HeightRequest="260"
+                            MaximumHeightRequest="260"
+                            MinimumHeightRequest="260"
+                            RowDefinitions="190,Auto,Auto,*"
+                            RowSpacing="4">
+                            <Grid
+                                HeightRequest="190"
+                                MaximumHeightRequest="190"
+                                MinimumHeightRequest="190">
+                                <toolkit:SceneViewProxy
+                                    x:Name="PreviewProxy"
+                                    BindingContextChanged="OnProxyBindingContextChanged"
+                                    Camera="{Binding Camera}"
+                                    HeightRequest="190"
+                                    HorizontalOptions="Fill"
+                                    InputTransparent="True"
+                                    Loaded="OnProxyLoaded"
+                                    Host="{x:Reference ProxyHost}"
+                                    IsRenderingEnabled="{Binding IsLive}"
+                                    MaximumHeightRequest="190"
+                                    MinimumHeightRequest="190"
+                                    SceneBackgroundColor="{Binding SceneBackgroundColor}"
+                                    Scene="{Binding Scene}"
+                                    FramePresented="OnProxyFramePresented"
+                                    SurfaceError="OnProxySurfaceError"
+                                    Unloaded="OnProxyUnloaded"
+                                    VerticalOptions="Fill">
+                                    <toolkit:SceneViewProxy.Underlay>
+                                        <Grid InputTransparent="True">
+                                            <BoxView
+                                                Color="#FFF4E6"
+                                                InputTransparent="True" />
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="20"
+                                                HorizontalOptions="Center"
+                                                HorizontalTextAlignment="Center"
+                                                Rotation="-12"
+                                                Text="MAUI MASK UNDERLAY&#10;VISIBLE OUTSIDE MODEL"
+                                                TextColor="#D32F2F"
+                                                VerticalOptions="Center" />
+                                        </Grid>
+                                    </toolkit:SceneViewProxy.Underlay>
+                                    <toolkit:SceneViewProxy.Placeholder>
+                                        <Grid BackgroundColor="#182238">
+                                            <VerticalStackLayout
+                                                HorizontalOptions="Center"
+                                                Spacing="8"
+                                                VerticalOptions="Center">
+                                                <ActivityIndicator IsRunning="{Binding IsLoading}" />
+                                                <Label
+                                                    HorizontalTextAlignment="Center"
+                                                    Text="{Binding StateText}"
+                                                    TextColor="White" />
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </toolkit:SceneViewProxy.Placeholder>
+                                </toolkit:SceneViewProxy>
+                            </Grid>
+                            <Label
+                                Grid.Row="1"
+                                BackgroundColor="#F4F5F7"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation"
+                                Padding="4,2"
+                                Text="{Binding Name}" />
+                            <Grid
+                                Grid.Row="2"
+                                BackgroundColor="#F4F5F7"
+                                ColumnDefinitions="*,Auto"
+                                Padding="4,2">
+                                <Label FontSize="12" Text="{Binding Price}" />
+                                <Label
+                                    Grid.Column="1"
+                                    FontSize="11"
+                                    Text="{Binding StateText}" />
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </pages:ProductFeedCollectionView>
+        </toolkit:SceneViewProxyHost>
+    </Grid>
+</ContentPage>

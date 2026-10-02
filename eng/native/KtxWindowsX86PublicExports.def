@@ -1,0 +1,13 @@
+LIBRARY ktx_read
+EXPORTS
+    ktxTexture2_CreateFromMemory=_ktxTexture2_CreateFromMemory@16
+    ktxTexture2_Destroy=_ktxTexture2_Destroy@4
+    ktxTexture2_NeedsTranscoding=_ktxTexture2_NeedsTranscoding@4
+    ktxTexture2_GetTransferFunction_e=_ktxTexture2_GetTransferFunction_e@4
+    ktxTexture2_GetPrimaries_e=_ktxTexture2_GetPrimaries_e@4
+    ktxTexture2_GetPremultipliedAlpha=_ktxTexture2_GetPremultipliedAlpha@4
+    ktxTexture2_TranscodeBasis=_ktxTexture2_TranscodeBasis@12
+    ktxTexture2_GetImageOffset=_ktxTexture2_GetImageOffset@20
+    ktxTexture_GetData=_ktxTexture_GetData@4
+    ktxTexture_GetDataSize=_ktxTexture_GetDataSize@4
+    ktxHashList_FindValue=_ktxHashList_FindValue@16

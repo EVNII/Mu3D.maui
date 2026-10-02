@@ -1,0 +1,43 @@
+ocio_profile_version: 2
+environment: {}
+search_path: ""
+strictparsing: true
+roles:
+  default: Linear
+  scene_linear: Linear
+file_rules:
+  - !<Rule> {name: Default, colorspace: Linear}
+displays:
+  Test:
+    - !<View> {name: Plain, colorspace: Encoded}
+    - !<View> {name: WithLook, colorspace: Encoded, looks: Half}
+active_displays: [Test]
+active_views: [Plain, WithLook]
+looks:
+  - !<Look>
+    name: Half
+    process_space: Linear
+    transform: !<MatrixTransform> {matrix: [0.5,0,0,0, 0,0.5,0,0, 0,0,0.5,0, 0,0,0,1]}
+colorspaces:
+  - !<ColorSpace>
+    name: Linear
+    family: Test
+    bitdepth: 32f
+    isdata: false
+    encoding: scene-linear
+    allocation: uniform
+  - !<ColorSpace>
+    name: Scaled
+    family: Test
+    bitdepth: 32f
+    isdata: false
+    encoding: scene-linear
+    allocation: uniform
+    to_scene_reference: !<MatrixTransform> {matrix: [0.5,0,0,0, 0,0.5,0,0, 0,0,0.5,0, 0,0,0,1]}
+  - !<ColorSpace>
+    name: Encoded
+    family: Test
+    bitdepth: 32f
+    isdata: false
+    allocation: uniform
+    to_scene_reference: !<ExponentTransform> {value: [2,2,2,1]}

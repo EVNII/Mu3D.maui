@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Mu3D.GalleryApp.Pages.OpenPbrFurnacePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    Title="OpenPBR White Furnace">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="openpbr-white-furnace" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto" Padding="12" RowSpacing="8">
+        <mu3d:Mu3DSceneView x:Name="SceneView" MinimumHeightRequest="160"
+            SurfaceError="OnSurfaceError" RendererChanged="OnRendererChanged"
+            PresentationSessionChanged="OnPresentationSessionChanged" FramePresented="OnFramePresented">
+            <mu3d:Scene3D x:Name="DeclaredScene">
+                <mu3d:Scene3D.Camera>
+                    <mu3d:PerspectiveCamera3D Z="4" FieldOfView="40" />
+                </mu3d:Scene3D.Camera>
+                <mu3d:Sphere3D Radius="1">
+                    <mu3d:OpenPbrMaterial3D>
+                        <mu3d:OpenPbrSurface3D x:Name="Surface" BaseColor="1,1,1;acescg" SpecularWeight="0" SpecularIor="1" />
+                    </mu3d:OpenPbrMaterial3D>
+                </mu3d:Sphere3D>
+            </mu3d:Scene3D>
+        </mu3d:Mu3DSceneView>
+        <ScrollView Grid.Row="1" MaximumHeightRequest="380">
+            <VerticalStackLayout Spacing="5">
+                <Label Text="白色熔炉 · OpenPBR 能量检查" FontAttributes="Bold" />
+                <Label Text="均匀白色环境，无直接灯光、无色调映射。无吸收材质充分收敛后应融入背景；默认白漫反射看不到球是预期结果。" FontSize="12" />
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                    <Picker x:Name="PresetPicker" Title="材质" SelectedIndex="0" SelectedIndexChanged="OnSettingsChanged">
+                        <Picker.Items>
+                            <x:String>白漫反射</x:String><x:String>白金属</x:String><x:String>白色涂层</x:String>
+                            <x:String>白色绒毛</x:String><x:String>无吸收玻璃</x:String><x:String>白色次表面</x:String><x:String>50% 灰色吸收对照</x:String>
+                        </Picker.Items>
+                    </Picker>
+                    <Picker x:Name="ModePicker" Grid.Column="1" Title="渲染模式" SelectedIndex="0" SelectedIndexChanged="OnSettingsChanged">
+                        <Picker.Items>
+                            <x:String>Reference</x:String><x:String>Hybrid</x:String><x:String>Interactive</x:String><x:String>Raster（近似）</x:String><x:String>Fast（近似）</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </Grid>
+                <Picker x:Name="ViewPicker" Title="显示" SelectedIndex="0" SelectedIndexChanged="OnViewChanged">
+                    <Picker.Items><x:String>原始线性 HDR</x:String><x:String>Lout / Lenv 比值</x:String><x:String>目标差值 ×10 · 红偏高 / 蓝偏低 / 灰为零</x:String></Picker.Items>
+                </Picker>
+                <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="8">
+                    <Label Text="粗糙度" VerticalOptions="Center" />
+                    <Slider x:Name="Roughness" Grid.Column="1" Minimum="0" Maximum="1" Value="0.3" ValueChanged="OnValueChanged" />
+                    <Label Grid.Column="2" Text="{Binding Value, Source={x:Reference Roughness}, StringFormat='{0:F2}', x:DataType=Slider}" VerticalOptions="Center" />
+                    <Label Grid.Row="1" Text="高光各向异性" VerticalOptions="Center" />
+                    <Slider x:Name="Anisotropy" Grid.Row="1" Grid.Column="1" Minimum="0" Maximum="0.9" Value="0" ValueChanged="OnValueChanged" />
+                    <Label Grid.Row="1" Grid.Column="2" Text="{Binding Value, Source={x:Reference Anisotropy}, StringFormat='{0:F2}', x:DataType=Slider}" VerticalOptions="Center" />
+                    <Label Grid.Row="2" Text="环境 EV" VerticalOptions="Center" />
+                    <Slider x:Name="EnvironmentEv" Grid.Row="2" Grid.Column="1" Minimum="-4" Maximum="4" Value="0" ValueChanged="OnValueChanged" />
+                    <Label Grid.Row="2" Grid.Column="2" Text="{Binding Value, Source={x:Reference EnvironmentEv}, StringFormat='{0:F1}', x:DataType=Slider}" VerticalOptions="Center" />
+                </Grid>
+                <Grid ColumnDefinitions="Auto,Auto,*,Auto" ColumnSpacing="8">
+                    <Label Text="继续采样" VerticalOptions="Center" />
+                    <Switch x:Name="RunSwitch" Grid.Column="1" IsToggled="True" Toggled="OnRunChanged" />
+                    <Picker x:Name="BouncePicker" Grid.Column="2" Title="路径事件上限" SelectedIndex="2" SelectedIndexChanged="OnSettingsChanged">
+                        <Picker.Items><x:String>4 次事件</x:String><x:String>8 次事件</x:String><x:String>32 次事件</x:String><x:String>64 次事件</x:String><x:String>128 次事件</x:String></Picker.Items>
+                    </Picker>
+                    <Button Grid.Column="3" Text="重置" Clicked="OnResetClicked" />
+                </Grid>
+                <Label x:Name="SamplingLabel" FontSize="12" />
+                <Label x:Name="ExpectationLabel" FontSize="12" />
+                <Button x:Name="MeasureButton" Text="测量当前线性结果（一次 GPU 回读）" Clicked="OnMeasureClicked" />
+                <Label x:Name="MeasurementLabel" Text="尚未测量。数值取自色彩显示前的球体内部区域，避开背景与轮廓。" FontSize="12" />
+                <Label x:Name="StatusLabel" FontSize="12" Text="有限采样、反弹截断和光栅近似都会影响结果；数值不自动判定通过或失败。" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

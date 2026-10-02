@@ -1,0 +1,20 @@
+[
+  {
+    "name": "ocio_lut1d_1",
+    "offset": 0,
+    "width": 4096,
+    "height": 17,
+    "depth": 1,
+    "interpolation": "linear",
+    "channels": 1
+  },
+  {
+    "name": "ocio_lut3d_0",
+    "offset": 69632,
+    "width": 57,
+    "height": 57,
+    "depth": 57,
+    "interpolation": "nearest",
+    "channels": 3
+  }
+]

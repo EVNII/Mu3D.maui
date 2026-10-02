@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="Mu3D.GalleryApp.Controls.GalleryDebugSceneControls"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Mu3D.GalleryApp.Controls"
+    x:DataType="controls:GalleryDebugSceneControls"
+    x:Name="Root">
+    <Border
+        BackgroundColor="{AppThemeBinding Light=#E6FFFFFF, Dark=#D91B1B1B}"
+        Padding="0"
+        StrokeThickness="0">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="12" />
+        </Border.StrokeShape>
+        <VerticalStackLayout Spacing="0">
+            <Button
+                Clicked="OnToggleExpanded"
+                FontAttributes="Bold"
+                HorizontalOptions="Fill"
+                Text="{Binding ToggleText, Source={x:Reference Root}}" />
+
+            <VerticalStackLayout
+                IsVisible="{Binding IsExpanded, Source={x:Reference Root}}"
+                MinimumWidthRequest="220"
+                Padding="12,4,12,12"
+                Spacing="8">
+                <Grid
+                    ColumnDefinitions="*,Auto"
+                    IsVisible="{Binding HasOrbit, Source={x:Reference Root}}">
+                    <Label Text="Controller" VerticalTextAlignment="Center" />
+                    <Switch
+                        Grid.Column="1"
+                        IsToggled="{Binding Orbit.IsEnabled, Mode=TwoWay, Source={x:Reference Root}}" />
+                </Grid>
+
+                <Grid
+                    ColumnDefinitions="*,Auto"
+                    IsVisible="{Binding HasSelection, Source={x:Reference Root}}">
+                    <Label Text="Selection" VerticalTextAlignment="Center" />
+                    <Switch
+                        Grid.Column="1"
+                        IsToggled="{Binding Selection.IsEnabled, Mode=TwoWay, Source={x:Reference Root}}" />
+                </Grid>
+
+                <Grid
+                    ColumnDefinitions="*,Auto"
+                    IsVisible="{Binding HasGizmo, Source={x:Reference Root}}">
+                    <Label Text="Transform Gizmo" VerticalTextAlignment="Center" />
+                    <Switch
+                        Grid.Column="1"
+                        IsToggled="{Binding Gizmo.IsEnabled, Mode=TwoWay, Source={x:Reference Root}}" />
+                </Grid>
+
+                <Grid
+                    ColumnDefinitions="*,Auto"
+                    IsVisible="{Binding HasGrid, Source={x:Reference Root}}">
+                    <Label Text="Grid" VerticalTextAlignment="Center" />
+                    <Switch
+                        Grid.Column="1"
+                        IsToggled="{Binding ReferenceGrid.IsVisible, Mode=TwoWay, Source={x:Reference Root}}" />
+                </Grid>
+
+                <Grid
+                    ColumnDefinitions="*,Auto"
+                    IsVisible="{Binding HasAxes, Source={x:Reference Root}}">
+                    <Label Text="Orientation Axes" VerticalTextAlignment="Center" />
+                    <Switch
+                        Grid.Column="1"
+                        IsToggled="{Binding Axes.IsVisible, Mode=TwoWay, Source={x:Reference Root}}" />
+                </Grid>
+
+                <Grid
+                    ColumnDefinitions="*,Auto"
+                    IsVisible="{Binding HasStatistics, Source={x:Reference Root}}">
+                    <Label Text="Frame Statistics" VerticalTextAlignment="Center" />
+                    <Switch
+                        Grid.Column="1"
+                        IsToggled="{Binding Statistics.IsVisible, Mode=TwoWay, Source={x:Reference Root}}" />
+                </Grid>
+
+                <Label
+                    FontSize="12"
+                    IsVisible="{Binding HasSelection, Source={x:Reference Root}}"
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding Selection.SelectedNode.Name, Source={x:Reference Root}, StringFormat='Selected: {0}', TargetNullValue='Selected: none'}" />
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </Border>
+</ContentView>

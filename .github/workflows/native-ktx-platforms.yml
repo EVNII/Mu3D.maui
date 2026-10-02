@@ -1,0 +1,525 @@
+name: Native KTX / Platform matrix
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/native-ktx-platforms.yml
+      - eng/Mu3D.KtxNativeVersion.props
+      - eng/ktx-assets.json
+      - eng/native/Mu3D.AppleMobile.toolchain.cmake
+      - eng/native/KtxAndroidX86Read.patch
+      - eng/native/KtxReadAppleStaticMerge.patch
+      - src/Mu3D.Native.Ktx/**
+      - src/Mu3D.Native.Ktx.Runtime/**
+      - tests/Mu3D.Native.Ktx.Tests/**
+
+permissions:
+  contents: read
+
+env:
+  KTX_COMMIT: 4d6fc70eaf62ad0558e63e8d97eb9766118327a6
+  KTX_VERSION: v4.4.2
+
+jobs:
+  apple:
+    if: github.repository == 'EVNII/Mu3D.maui'
+    name: ${{ matrix.rid }} / Release
+    runs-on: macos-15
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rid: ios-arm64
+            arch: arm64
+            platform: ios
+            sdk: iphoneos
+            clang_target: arm64-apple-ios15.0
+            vtool_platform: IOS
+          - rid: iossimulator-arm64
+            arch: arm64
+            platform: iossimulator
+            sdk: iphonesimulator
+            clang_target: arm64-apple-ios15.0-simulator
+            vtool_platform: IOSSIMULATOR
+          - rid: iossimulator-x64
+            arch: x86_64
+            platform: iossimulator
+            sdk: iphonesimulator
+            clang_target: x86_64-apple-ios15.0-simulator
+            vtool_platform: IOSSIMULATOR
+          - rid: maccatalyst-arm64
+            arch: arm64
+            platform: maccatalyst
+            sdk: macosx
+            clang_target: arm64-apple-ios15.0-macabi
+            vtool_platform: MACCATALYST
+          - rid: maccatalyst-x64
+            arch: x86_64
+            platform: maccatalyst
+            sdk: macosx
+            clang_target: x86_64-apple-ios15.0-macabi
+            vtool_platform: MACCATALYST
+
+    steps:
+      - name: Check out Mu3D
+        uses: actions/checkout@v7
+
+      - name: Check out pinned KTX source
+        run: |
+          git init upstream
+          git -C upstream remote add origin https://github.com/KhronosGroup/KTX-Software.git
+          git -C upstream fetch --depth 1 origin "refs/tags/$KTX_VERSION:refs/tags/$KTX_VERSION"
+          git -C upstream checkout --detach FETCH_HEAD
+          test "$(git -C upstream rev-parse HEAD)" = "$KTX_COMMIT"
+          test "$(git -C upstream describe --tags --exact-match)" = "$KTX_VERSION"
+
+      - name: Keep the Apple ktx_read archive reader-only
+        run: git -C upstream apply "$GITHUB_WORKSPACE/eng/native/KtxReadAppleStaticMerge.patch"
+
+      - name: Configure static transcoder
+        run: >-
+          cmake -S upstream -B build -G Ninja
+          -DCMAKE_TOOLCHAIN_FILE="$GITHUB_WORKSPACE/eng/native/Mu3D.AppleMobile.toolchain.cmake"
+          -DMU3D_APPLE_PLATFORM=${{ matrix.platform }}
+          -DMU3D_APPLE_ARCH=${{ matrix.arch }}
+          -DCMAKE_BUILD_TYPE=Release
+          -DBUILD_SHARED_LIBS=OFF
+          -DKTX_FEATURE_TOOLS=OFF
+          -DKTX_FEATURE_TESTS=OFF
+          -DKTX_FEATURE_LOADTEST_APPS=OFF
+          -DKTX_FEATURE_GL_UPLOAD=OFF
+          -DKTX_FEATURE_VK_UPLOAD=OFF
+          -DKTX_FEATURE_ETC_UNPACK=OFF
+          -DKTX_FEATURE_KTX1=ON
+          -DBASISU_SUPPORT_OPENCL=OFF
+          -DBASISU_SUPPORT_SSE=OFF
+          -DASTCENC_ISA_SSE2=ON
+
+      - name: Build pinned libktx
+        run: cmake --build build --config Release --target ktx_read --parallel
+
+      - name: Stage and verify platform plus ABI
+        env:
+          RID: ${{ matrix.rid }}
+        run: |
+          library="$(find build -name libktx_read.a -print -quit)"
+          test -n "$library"
+          destination="artifacts/ktx/$KTX_VERSION/release/runtimes/$RID/native"
+          mkdir -p "$destination"
+          cp "$library" "$destination/libktx.a"
+
+          object_directory="$(mktemp -d)"
+          xcrun lipo "$destination/libktx.a" -verify_arch ${{ matrix.arch }}
+
+          symbols="$(xcrun nm -gU "$destination/libktx.a")"
+          for symbol in \
+            _ktxTexture2_CreateFromMemory _ktxTexture2_Destroy \
+            _ktxTexture2_NeedsTranscoding _ktxTexture2_GetTransferFunction_e \
+            _ktxTexture2_GetPrimaries_e _ktxTexture2_GetPremultipliedAlpha \
+            _ktxTexture2_TranscodeBasis _ktxTexture2_GetImageOffset \
+            _ktxTexture_GetData _ktxTexture_GetDataSize _ktxHashList_FindValue; do
+            grep -q " $symbol$" <<< "$symbols" || { echo "Missing native export: $symbol"; exit 1; }
+          done
+          if grep -q ' _ktxTexture2_CompressBasis$' <<< "$symbols"; then
+            echo 'Apple ktx_read archive unexpectedly contains writer/encoder symbols.'
+            exit 1
+          fi
+          shasum -a 256 "$destination/libktx.a"
+
+          sdk_path="$(xcrun --sdk ${{ matrix.sdk }} --show-sdk-path)"
+          printf '%s\n' 'extern "C" void mu3d_ktx_link_probe() {}' | \
+            xcrun clang++ \
+              -target "${{ matrix.clang_target }}" \
+              -isysroot "$sdk_path" -dynamiclib -x c++ - -x none \
+              -Wl,-u,_ktxTexture2_CreateFromMemory \
+              -Wl,-u,_ktxTexture2_Destroy \
+              -Wl,-u,_ktxTexture2_NeedsTranscoding \
+              -Wl,-u,_ktxTexture2_GetTransferFunction_e \
+              -Wl,-u,_ktxTexture2_GetPrimaries_e \
+              -Wl,-u,_ktxTexture2_GetPremultipliedAlpha \
+              -Wl,-u,_ktxTexture2_TranscodeBasis \
+              -Wl,-u,_ktxTexture2_GetImageOffset \
+              -Wl,-u,_ktxTexture_GetData \
+              -Wl,-u,_ktxTexture_GetDataSize \
+              -Wl,-u,_ktxHashList_FindValue \
+              "$destination/libktx.a" -lc++ \
+              -o "$object_directory/libktx-link-probe.dylib"
+          xcrun vtool -show-build "$object_directory/libktx-link-probe.dylib" | \
+            grep -q 'platform ${{ matrix.vtool_platform }}'
+
+      - name: Upload candidate runtime
+        uses: actions/upload-artifact@v7
+        with:
+          name: Mu3D.Native.Ktx-${{ matrix.rid }}-release
+          path: artifacts/ktx/v4.4.2/release/runtimes/${{ matrix.rid }}/native/libktx.a
+          if-no-files-found: error
+          retention-days: 30
+
+  android:
+    if: github.repository == 'EVNII/Mu3D.maui'
+    name: ${{ matrix.rid }} / Release
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rid: android-arm
+            abi: armeabi-v7a
+          - rid: android-arm64
+            abi: arm64-v8a
+          - rid: android-x86
+            abi: x86
+          - rid: android-x64
+            abi: x86_64
+
+    steps:
+      - name: Check out Mu3D
+        uses: actions/checkout@v7
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install pinned Android NDK
+        env:
+          ANDROID_NDK_VERSION: 28.2.13676358
+        run: |
+          sdkmanager --install "ndk;$ANDROID_NDK_VERSION"
+          echo "ANDROID_NDK_HOME=$ANDROID_SDK_ROOT/ndk/$ANDROID_NDK_VERSION" >> "$GITHUB_ENV"
+
+      - name: Check out pinned KTX source
+        run: |
+          git init upstream
+          git -C upstream remote add origin https://github.com/KhronosGroup/KTX-Software.git
+          git -C upstream fetch --depth 1 origin "refs/tags/$KTX_VERSION:refs/tags/$KTX_VERSION"
+          git -C upstream checkout --detach FETCH_HEAD
+          test "$(git -C upstream rev-parse HEAD)" = "$KTX_COMMIT"
+          test "$(git -C upstream describe --tags --exact-match)" = "$KTX_VERSION"
+          git -C upstream apply --check "$GITHUB_WORKSPACE/eng/native/KtxAndroidX86Read.patch"
+          git -C upstream apply "$GITHUB_WORKSPACE/eng/native/KtxAndroidX86Read.patch"
+
+      - name: Configure Android reader/transcoder
+        run: >-
+          cmake -S upstream -B build -G Ninja
+          -DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake"
+          -DANDROID_ABI=${{ matrix.abi }}
+          -DANDROID_PLATFORM=android-24
+          -DANDROID_STL=c++_static
+          -DCMAKE_BUILD_TYPE=Release
+          -DBUILD_SHARED_LIBS=ON
+          -DKTX_FEATURE_TOOLS=OFF
+          -DKTX_FEATURE_TESTS=OFF
+          -DKTX_FEATURE_LOADTEST_APPS=OFF
+          -DKTX_FEATURE_GL_UPLOAD=OFF
+          -DKTX_FEATURE_VK_UPLOAD=OFF
+          -DKTX_FEATURE_ETC_UNPACK=OFF
+          -DKTX_FEATURE_KTX1=ON
+          -DBASISU_SUPPORT_OPENCL=OFF
+          -DBASISU_SUPPORT_SSE=OFF
+          -DMU3D_ALLOW_ANDROID_X86=ON
+          -DASTCENC_ISA_SSE2=ON
+
+      - name: Build pinned Android libktx
+        run: cmake --build build --config Release --target ktx_read --parallel
+
+      - name: Stage and verify Android ABI plus exports
+        env:
+          RID: ${{ matrix.rid }}
+        run: |
+          library="$(find build -name libktx_read.so -print -quit)"
+          test -n "$library"
+          destination="artifacts/ktx/$KTX_VERSION/release/runtimes/$RID/native"
+          mkdir -p "$destination"
+          cp "$library" "$destination/libktx.so"
+
+          llvm_bin="$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin"
+          symbols="$($llvm_bin/llvm-nm -D --defined-only "$destination/libktx.so")"
+          for symbol in \
+            ktxTexture2_CreateFromMemory ktxTexture2_Destroy \
+            ktxTexture2_NeedsTranscoding ktxTexture2_GetTransferFunction_e \
+            ktxTexture2_GetPrimaries_e ktxTexture2_GetPremultipliedAlpha \
+            ktxTexture2_TranscodeBasis ktxTexture2_GetImageOffset \
+            ktxTexture_GetData ktxTexture_GetDataSize ktxHashList_FindValue; do
+            grep -q " $symbol$" <<< "$symbols" || { echo "Missing native export: $symbol"; exit 1; }
+          done
+          if "$llvm_bin/llvm-readelf" -d "$destination/libktx.so" | grep -q libc++_shared; then
+            echo 'Android libktx unexpectedly depends on libc++_shared.so.'
+            exit 1
+          fi
+          "$llvm_bin/llvm-readelf" -h "$destination/libktx.so"
+          sha256sum "$destination/libktx.so"
+
+      - name: Upload candidate runtime
+        uses: actions/upload-artifact@v7
+        with:
+          name: Mu3D.Native.Ktx-${{ matrix.rid }}-release
+          path: artifacts/ktx/v4.4.2/release/runtimes/${{ matrix.rid }}/native/libktx.so
+          if-no-files-found: error
+          retention-days: 30
+
+  windows:
+    if: github.repository == 'EVNII/Mu3D.maui'
+    name: ${{ matrix.rid }} / Release
+    runs-on: windows-2025
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rid: win-x86
+            cmake_arch: Win32
+            dev_arch: x86
+            machine: x86
+          - rid: win-x64
+            cmake_arch: x64
+            dev_arch: x64
+            machine: x64
+          - rid: win-arm64
+            cmake_arch: ARM64
+            dev_arch: amd64_arm64
+            machine: ARM64
+
+    steps:
+      - name: Check out Mu3D
+        uses: actions/checkout@v7
+
+      - name: Enter the Visual C++ environment
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: ${{ matrix.dev_arch }}
+
+      - name: Check out pinned KTX source
+        shell: pwsh
+        run: |
+          git init upstream
+          git -C upstream remote add origin https://github.com/KhronosGroup/KTX-Software.git
+          git -C upstream fetch --depth 1 origin "refs/tags/$env:KTX_VERSION`:refs/tags/$env:KTX_VERSION"
+          git -C upstream checkout --detach FETCH_HEAD
+          if ((git -C upstream rev-parse HEAD) -ne $env:KTX_COMMIT) {
+            throw 'Pinned libktx commit verification failed.'
+          }
+          if ((git -C upstream describe --tags --exact-match) -ne $env:KTX_VERSION) {
+            throw 'Pinned libktx tag verification failed.'
+          }
+
+      - name: Apply pinned Windows calling-convention patch
+        shell: pwsh
+        run: |
+          git -C upstream apply --check eng/native/KtxWindowsX86CallingConvention.patch
+          git -C upstream apply eng/native/KtxWindowsX86CallingConvention.patch
+
+      - name: Configure Windows reader/transcoder
+        shell: pwsh
+        run: >-
+          cmake -S upstream -B build -G "Visual Studio 17 2022"
+          -A ${{ matrix.cmake_arch }}
+          -DBUILD_SHARED_LIBS=ON
+          -DCMAKE_C_FLAGS=/Gz
+          -DCMAKE_CXX_FLAGS=/Gz
+          -DKTX_MU3D_PUBLIC_EXPORTS_ONLY=ON
+          -DKTX_MU3D_WINDOWS_EXPORTS_FILE="$GITHUB_WORKSPACE/eng/native/KtxWindowsX86PublicExports.def"
+          -DKTX_FEATURE_TOOLS=OFF
+          -DKTX_FEATURE_TESTS=OFF
+          -DKTX_FEATURE_LOADTEST_APPS=OFF
+          -DKTX_FEATURE_GL_UPLOAD=OFF
+          -DKTX_FEATURE_VK_UPLOAD=OFF
+          -DKTX_FEATURE_ETC_UNPACK=OFF
+          -DKTX_FEATURE_KTX1=ON
+          -DBASISU_SUPPORT_OPENCL=OFF
+          -DBASISU_SUPPORT_SSE=OFF
+          -DASTCENC_ISA_SSE2=ON
+
+      - name: Build pinned Windows libktx
+        run: cmake --build build --config Release --target ktx_read --parallel
+
+      - name: Stage and verify Windows machine plus exports
+        shell: pwsh
+        run: |
+          $library = Get-ChildItem build -Recurse -Filter ktx_read.dll |
+            Select-Object -First 1 -ExpandProperty FullName
+          if (-not $library) { throw 'ktx_read.dll was not produced.' }
+          $destination = "artifacts/ktx/$env:KTX_VERSION/release/runtimes/${{ matrix.rid }}/native"
+          New-Item -ItemType Directory -Force $destination | Out-Null
+          Copy-Item $library "$destination/ktx.dll"
+
+          $headers = dumpbin /headers "$destination/ktx.dll"
+          if ($headers -notmatch 'machine \(${{ matrix.machine }}\)') {
+            throw 'Windows libktx machine does not match the requested RID.'
+          }
+          $exports = dumpbin /exports "$destination/ktx.dll"
+          $required = @(
+            'ktxTexture2_CreateFromMemory', 'ktxTexture2_Destroy',
+            'ktxTexture2_NeedsTranscoding', 'ktxTexture2_GetTransferFunction_e',
+            'ktxTexture2_GetPrimaries_e', 'ktxTexture2_GetPremultipliedAlpha',
+            'ktxTexture2_TranscodeBasis', 'ktxTexture2_GetImageOffset',
+            'ktxTexture_GetData', 'ktxTexture_GetDataSize', 'ktxHashList_FindValue'
+          )
+          foreach ($symbol in $required) {
+            if ($exports -notmatch "\s$symbol\s") { throw "Missing native export: $symbol" }
+          }
+          Get-FileHash "$destination/ktx.dll" -Algorithm SHA256
+
+      - name: Upload candidate runtime
+        uses: actions/upload-artifact@v7
+        with:
+          name: Mu3D.Native.Ktx-${{ matrix.rid }}-release
+          path: artifacts/ktx/v4.4.2/release/runtimes/${{ matrix.rid }}/native/ktx.dll
+          if-no-files-found: error
+          retention-days: 30
+
+  host-native-tests:
+    if: github.repository == 'EVNII/Mu3D.maui'
+    name: Real ETC1S and UASTC fixtures
+    runs-on: macos-15
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out Mu3D
+        uses: actions/checkout@v7
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Check out pinned KTX source
+        run: |
+          git init upstream
+          git -C upstream remote add origin https://github.com/KhronosGroup/KTX-Software.git
+          git -C upstream fetch --depth 1 origin "refs/tags/$KTX_VERSION:refs/tags/$KTX_VERSION"
+          git -C upstream checkout --detach FETCH_HEAD
+          test "$(git -C upstream rev-parse HEAD)" = "$KTX_COMMIT"
+          test "$(git -C upstream describe --tags --exact-match)" = "$KTX_VERSION"
+
+      - name: Build host test runtime
+        run: |
+          cmake -S upstream -B build -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DBUILD_SHARED_LIBS=ON \
+            -DKTX_FEATURE_TOOLS=OFF \
+            -DKTX_FEATURE_TESTS=OFF \
+            -DKTX_FEATURE_LOADTEST_APPS=OFF \
+            -DKTX_FEATURE_GL_UPLOAD=OFF \
+            -DKTX_FEATURE_VK_UPLOAD=OFF \
+            -DKTX_FEATURE_ETC_UNPACK=OFF \
+            -DKTX_FEATURE_KTX1=ON \
+            -DBASISU_SUPPORT_OPENCL=OFF \
+            -DASTCENC_ISA_SSE2=ON
+          cmake --build build --config Release --target ktx_read --parallel
+          library="$(find build -name 'libktx_read.4.4.2.dylib' -print -quit)"
+          test -n "$library"
+          mkdir -p build/test-runtime
+          cp "$library" build/test-runtime/libktx.dylib
+          echo "DYLD_LIBRARY_PATH=$GITHUB_WORKSPACE/build/test-runtime" >> "$GITHUB_ENV"
+
+      - name: Download and verify official fixtures
+        run: |
+          mkdir -p "$RUNNER_TEMP/ktx-fixtures"
+          curl --fail --location --retry 3 \
+            --output "$RUNNER_TEMP/ktx-fixtures/color_grid_basis.ktx2" \
+            https://raw.githubusercontent.com/KhronosGroup/KTX-Software/v4.4.2/tests/testimages/color_grid_basis.ktx2
+          curl --fail --location --retry 3 \
+            --output "$RUNNER_TEMP/ktx-fixtures/StainedGlassLamp_grill_normal.ktx2" \
+            https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/2bac6f8c57bf471df0d2a1e8a8ec023c7801dddf/Models/StainedGlassLamp/glTF-KTX-BasisU/StainedGlassLamp_grill_normal.ktx2
+          echo '284ee77af748b9e640186916a6754fd07cab4a75bb99f92c87242b3e97efde1b  '"$RUNNER_TEMP/ktx-fixtures/color_grid_basis.ktx2" | shasum -a 256 -c -
+          echo '9123bdcb18e8bc04be404dc6cb72b90b33f715306b58035084d22e1b066c4c26  '"$RUNNER_TEMP/ktx-fixtures/StainedGlassLamp_grill_normal.ktx2" | shasum -a 256 -c -
+
+      - name: Exercise native transcode and decoded fallback
+        env:
+          MU3D_KTX_FIXTURE_DIRECTORY: ${{ runner.temp }}/ktx-fixtures
+        run: >-
+          dotnet run
+          --project tests/Mu3D.Native.Ktx.Tests/Mu3D.Native.Ktx.Tests.csproj
+          --configuration Release
+
+  verify-package:
+    if: github.repository == 'EVNII/Mu3D.maui'
+    name: Verify complete NuGet runtime layout
+    needs: [apple, android, windows, host-native-tests]
+    runs-on: macos-15
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out Mu3D
+        uses: actions/checkout@v7
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Download all verified runtimes
+        uses: actions/download-artifact@v6
+        with:
+          pattern: Mu3D.Native.Ktx-*-release
+          path: artifacts/ktx-ci
+
+      - name: Stage verified runtimes
+        run: |
+          for rid in android-arm android-arm64 android-x86 android-x64; do
+            destination="artifacts/ktx/$KTX_VERSION/release/runtimes/$rid/native"
+            mkdir -p "$destination"
+            cp artifacts/ktx-ci/Mu3D.Native.Ktx-$rid-release/libktx.so "$destination/"
+          done
+          for rid in ios-arm64 iossimulator-arm64 iossimulator-x64 \
+            maccatalyst-arm64 maccatalyst-x64; do
+            destination="artifacts/ktx/$KTX_VERSION/release/runtimes/$rid/native"
+            mkdir -p "$destination"
+            cp artifacts/ktx-ci/Mu3D.Native.Ktx-$rid-release/libktx.a "$destination/"
+          done
+          for rid in win-arm64 win-x86 win-x64; do
+            destination="artifacts/ktx/$KTX_VERSION/release/runtimes/$rid/native"
+            mkdir -p "$destination"
+            cp artifacts/ktx-ci/Mu3D.Native.Ktx-$rid-release/ktx.dll "$destination/"
+          done
+
+      - name: Pack KTX runtime carrier
+        run: >-
+          dotnet pack src/Mu3D.Native.Ktx.Runtime/Mu3D.Native.Ktx.Runtime.csproj
+          --configuration Release --output artifacts/packages
+
+      - name: Verify package contents
+        run: |
+          package="$(find artifacts/packages -name 'Mu3D.Native.Ktx.Runtime.*.nupkg' -print -quit)"
+          test -n "$package"
+          unzip -l "$package" > package-files.txt
+          grep -q 'README.md' package-files.txt
+          grep -q 'THIRD-PARTY-NOTICES.md' package-files.txt
+          grep -q 'licenses/KTX-Software-LICENSE.md' package-files.txt
+          grep -q 'licenses/Apache-2.0.txt' package-files.txt
+          grep -q 'licenses/BSD-1-Clause.txt' package-files.txt
+          grep -q 'licenses/Zstandard-BSD-3-Clause.txt' package-files.txt
+          grep -q 'buildTransitive/Mu3D.Native.Ktx.targets' package-files.txt
+          for rid in android-arm android-arm64 android-x86 android-x64; do
+            grep -q "runtimes/$rid/native/libktx.so" package-files.txt
+          done
+          for rid in ios-arm64 iossimulator-arm64 iossimulator-x64 \
+            maccatalyst-arm64 maccatalyst-x64; do
+            grep -q "runtimes/$rid/native/libktx.a" package-files.txt
+          done
+          for rid in win-arm64 win-x86 win-x64; do
+            grep -q "runtimes/$rid/native/ktx.dll" package-files.txt
+          done
+
+      - name: Record complete runtime hashes
+        run: |
+          cd "artifacts/ktx/$KTX_VERSION/release"
+          find runtimes -type f | sort | xargs shasum -a 256 > SHA256SUMS
+
+      - name: Upload verified runtime set
+        uses: actions/upload-artifact@v7
+        with:
+          name: Mu3D.Native.Ktx.Runtimes.PlatformMatrixVerified
+          path: artifacts/ktx/v4.4.2/release
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload verified package
+        uses: actions/upload-artifact@v7
+        with:
+          name: Mu3D.Native.Ktx.Runtime.Package.PlatformMatrixVerified
+          path: artifacts/packages/Mu3D.Native.Ktx.Runtime.*.nupkg
+          if-no-files-found: error
+          retention-days: 30

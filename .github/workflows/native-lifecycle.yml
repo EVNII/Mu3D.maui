@@ -1,0 +1,49 @@
+name: Native Lifecycle
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows-fallback-adapter:
+    if: github.repository == 'EVNII/Mu3D.maui'
+    name: Windows / D3D12 fallback adapter
+    runs-on: windows-2025
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out Mu3D
+        uses: actions/checkout@v7
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Fetch and stage pinned Windows x64 Release runtime
+        shell: bash
+        run: |
+          dotnet run --project tools/Mu3D.WgpuGen --configuration Release -- \
+            fetch-artifact eng/wgpu-native-assets.json eng/Mu3D.WgpuNativeVersion.props \
+            win-x64 release artifacts/downloads
+          dotnet run --project tools/Mu3D.WgpuGen --configuration Release -- \
+            stage-runtime eng/wgpu-native-assets.json eng/Mu3D.WgpuNativeVersion.props \
+            win-x64 release artifacts/downloads/wgpu-windows-x86_64-msvc-release.zip \
+            artifacts/wgpu-native
+
+      - name: Build native lifecycle test host
+        run: dotnet build tests/Mu3D.Native.Wgpu.Tests --configuration Release
+
+      - name: Install the exact verified x64 runtime beside the test host
+        shell: pwsh
+        run: >-
+          Copy-Item
+          artifacts/wgpu-native/v29.0.1.1/release/runtimes/win-x64/native/wgpu_native.dll
+          tests/Mu3D.Native.Wgpu.Tests/bin/Release/net10.0/wgpu_native.dll
+
+      - name: Submit a backend-independent FP16 offscreen triangle
+        run: >-
+          dotnet tests/Mu3D.Native.Wgpu.Tests/bin/Release/net10.0/Mu3D.Native.Wgpu.Tests.dll
+          native-graphics --force-fallback

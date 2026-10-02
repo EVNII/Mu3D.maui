@@ -1,0 +1,23 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 632ad8d..cc50d03 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1291,9 +1291,17 @@ macro(set_astc_dependencies target)
+     if(NOT BUILD_SHARED_LIBS AND APPLE)
+         # Make a single static library to simplify linking.
+         add_dependencies(${target} ${ASTCENC_LIB_TARGET})
++        # Preserve this target's own archive before replacing it with the
++        # merged result. Upstream used $<TARGET_FILE:ktx> here for both
++        # targets, which accidentally puts the complete writer/encoder
++        # library into ktx_read.
+         add_custom_command( TARGET ${target}
+             POST_BUILD
+-            COMMAND libtool -static -o $<TARGET_FILE:${target}> $<TARGET_FILE:ktx> $<TARGET_FILE:${ASTCENC_LIB_TARGET}>
++            COMMAND ${CMAKE_COMMAND} -E copy
++                $<TARGET_FILE:${target}> $<TARGET_FILE:${target}>.unmerged
++            COMMAND libtool -static -o $<TARGET_FILE:${target}>
++                $<TARGET_FILE:${target}>.unmerged $<TARGET_FILE:${ASTCENC_LIB_TARGET}>
++            COMMAND ${CMAKE_COMMAND} -E rm $<TARGET_FILE:${target}>.unmerged
+         )
+
+         # Don't know libtool equivalent on Windows or Emscripten. Applications

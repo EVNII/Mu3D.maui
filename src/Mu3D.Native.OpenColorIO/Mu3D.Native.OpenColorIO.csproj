@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Description>Explicit optional OpenColorIO CPU configuration and processor adapter for Mu3D.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Mu3D.Color/Mu3D.Color.csproj" />
+    <None Include="README.md" Pack="true" PackagePath="/" />
+    <None Include="ThirdParty/*" Pack="true" PackagePath="licenses/" />
+    <None Update="buildTransitive/Mu3D.Native.OpenColorIO.targets" Pack="true" PackagePath="buildTransitive/Mu3D.Native.OpenColorIO.targets" />
+  </ItemGroup>
+  <!-- Optional maintainer-time staging only. Consumer builds never execute the native recipe. -->
+  <ItemGroup Condition="'$(Mu3DOpenColorIORuntimeRoot)' != ''">
+    <None Include="$(Mu3DOpenColorIORuntimeRoot)/osx-arm64/native/libmu3d_opencolorio.dylib" Pack="true" PackagePath="runtimes/osx-arm64/native/" />
+    <None Include="$(Mu3DOpenColorIORuntimeRoot)/maccatalyst-arm64/native/libmu3d_opencolorio.a" Pack="true" PackagePath="runtimes/maccatalyst-arm64/native/" />
+    <None Include="$(Mu3DOpenColorIORuntimeRoot)/verification.json" Pack="true" PackagePath="runtimes/verification.json" />
+  </ItemGroup>
+  <Target Name="ValidateOpenColorIORuntimeStaging" BeforeTargets="GenerateNuspec" Condition="'$(Mu3DOpenColorIORuntimeRoot)' != ''">
+    <Error Condition="!Exists('$(Mu3DOpenColorIORuntimeRoot)/osx-arm64/native/libmu3d_opencolorio.dylib') Or !Exists('$(Mu3DOpenColorIORuntimeRoot)/maccatalyst-arm64/native/libmu3d_opencolorio.a') Or !Exists('$(Mu3DOpenColorIORuntimeRoot)/verification.json')"
+           Text="Mu3DOpenColorIORuntimeRoot must contain the two verified native artifacts and verification.json produced by eng/opencolorio/stage_runtime.py." />
+  </Target>
+</Project>

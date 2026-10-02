@@ -1,0 +1,88 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -686,12 +686,18 @@ macro(common_libktx_settings target enable_write library_type)
+             # the mingw toolchain targets msvcrt instead.
+             target_link_options(${target} PUBLIC -static-libgcc -static-libstdc++)
+         else()
+-            target_sources(
+-                ${target}
+-            PRIVATE
+-                lib/internalexport.def
+-                $<${enable_write}:lib/internalexport_write.def>
+-            )
++            if(KTX_MU3D_PUBLIC_EXPORTS_ONLY)
++                if(KTX_MU3D_WINDOWS_EXPORTS_FILE AND CMAKE_SIZEOF_VOID_P EQUAL 4)
++                    target_sources(${target} PRIVATE ${KTX_MU3D_WINDOWS_EXPORTS_FILE})
++                endif()
++            else()
++                target_sources(
++                    ${target}
++                PRIVATE
++                    lib/internalexport.def
++                    $<${enable_write}:lib/internalexport_write.def>
++                )
++            endif()
+         endif()
+     elseif(EMSCRIPTEN)
+         target_compile_definitions(${target} PRIVATE
+         endif()
+     elseif(EMSCRIPTEN)
+         target_compile_definitions(${target} PRIVATE
+diff --git a/lib/astc_codec.cpp b/lib/astc_codec.cpp
+--- a/lib/astc_codec.cpp
++++ b/lib/astc_codec.cpp
+@@ -332,7 +332,7 @@
+  *                              not happen in release package.
+  */
+ KTX_error_code
+-ktxTexture2_DecodeAstc(ktxTexture2 *This) {
++KTX_APIENTRY ktxTexture2_DecodeAstc(ktxTexture2 *This) {
+     // Decompress This using astc-decoder
+     uint32_t* BDB = This->pDfd + 1;
+     khr_df_model_e colorModel = (khr_df_model_e)KHR_DFDVAL(BDB, MODEL);
+@@ -927,7 +927,7 @@
+  *                              not happen in release package.
+  */
+ extern "C" KTX_error_code
+-ktxTexture2_CompressAstcEx(ktxTexture2* This, ktxAstcParams* params) {
++KTX_APIENTRY ktxTexture2_CompressAstcEx(ktxTexture2* This, ktxAstcParams* params) {
+     assert(This->classId == ktxTexture2_c && "Only support ktx2 ASTC.");
+ 
+     ktx_error_code_e result;
+@@ -1202,7 +1202,7 @@
+  * @exception KTX_OUT_OF_MEMORY Not enough memory to carry out supercompression.
+  */
+ extern "C" KTX_error_code
+-ktxTexture2_CompressAstc(ktxTexture2* This, ktx_uint32_t quality) {
++KTX_APIENTRY ktxTexture2_CompressAstc(ktxTexture2* This, ktx_uint32_t quality) {
+     ktxAstcParams params = astcDefaultOptions();
+ 
+     if (quality >= KTX_PACK_ASTC_QUALITY_LEVEL_FASTEST)
+@@ -1224,12 +1224,12 @@
+ }
+ #else
+ extern "C" KTX_error_code
+-ktxTexture2_CompressAstcEx(ktxTexture2*, ktxAstcParams*) {
++KTX_APIENTRY ktxTexture2_CompressAstcEx(ktxTexture2*, ktxAstcParams*) {
+     return KTX_INVALID_OPERATION;
+ }
+ 
+ extern "C" KTX_error_code
+-ktxTexture2_CompressAstc(ktxTexture2*, ktx_uint32_t) {
++KTX_APIENTRY ktxTexture2_CompressAstc(ktxTexture2*, ktx_uint32_t) {
+     return KTX_INVALID_OPERATION;
+ }
+ #endif /* KTX_FEATURE_WRITE */
+diff --git a/lib/basis_transcode.cpp b/lib/basis_transcode.cpp
+--- a/lib/basis_transcode.cpp
++++ b/lib/basis_transcode.cpp
+@@ -131,7 +131,7 @@
+  * @exception KTX_OUT_OF_MEMORY Not enough memory to carry out transcoding.
+  */
+  KTX_error_code
+- ktxTexture2_TranscodeBasis(ktxTexture2* This,
++ KTX_APIENTRY ktxTexture2_TranscodeBasis(ktxTexture2* This,
+                             ktx_transcode_fmt_e outputFormat,
+                             ktx_transcode_flags transcodeFlags)
+ {

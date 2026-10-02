@@ -1,0 +1,15 @@
+**/bin/
+**/obj/
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+.idea/
+.vs/
+.vscode/
+artifacts/
+docs-public/.docfx.generated.json
+docs-public/.docfx-dependencies/
+TestResults/
+*.user
+*.suo

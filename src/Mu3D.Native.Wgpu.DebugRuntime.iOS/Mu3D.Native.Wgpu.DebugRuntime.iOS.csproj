@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../eng/Mu3D.DebugRuntimePackage.props" />
+
+  <PropertyGroup>
+    <RootNamespace>Mu3D.Native.Wgpu.DebugRuntime.iOS</RootNamespace>
+    <AssemblyName>Mu3D.Native.Wgpu.DebugRuntime.iOS</AssemblyName>
+    <PackageId>Mu3D.Native.Wgpu.DebugRuntime.iOS</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Mu3D.Native.Wgpu/Mu3D.Native.Wgpu.csproj" />
+    <None Include="buildTransitive/Mu3D.Native.Wgpu.DebugRuntime.iOS.props" Pack="true" PackagePath="buildTransitive/" />
+    <None Include="buildTransitive/Mu3D.Native.Wgpu.DebugRuntime.iOS.targets" Pack="true" PackagePath="buildTransitive/" />
+    <None Include="../../artifacts/wgpu-native/$(Mu3DWgpuNativeVersion)/debug/runtimes/ios-arm64/native/libwgpu_native.a" Pack="true" PackagePath="mu3d-debug-runtimes/ios-arm64/native/" />
+    <None Include="../../artifacts/wgpu-native/$(Mu3DWgpuNativeVersion)/debug/runtimes/iossimulator-arm64/native/libwgpu_native.a" Pack="true" PackagePath="mu3d-debug-runtimes/iossimulator-arm64/native/" />
+    <None Include="../../artifacts/wgpu-native/$(Mu3DWgpuNativeVersion)/debug/runtimes/iossimulator-x64/native/libwgpu_native.a" Pack="true" PackagePath="mu3d-debug-runtimes/iossimulator-x64/native/" />
+  </ItemGroup>
+
+  <Target Name="ValidateMu3DIosDebugRuntimePackage" BeforeTargets="GenerateNuspec">
+    <Error Condition="!Exists('%(None.FullPath)') And $([System.String]::Copy('%(None.PackagePath)').StartsWith('mu3d-debug-runtimes/'))"
+           Text="Cannot pack $(PackageId): Debug runtime '%(None.Identity)' is missing." />
+  </Target>
+</Project>

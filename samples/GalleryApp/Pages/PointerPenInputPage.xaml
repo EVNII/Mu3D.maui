@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.PointerPenInputPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    xmlns:pages="clr-namespace:Mu3D.GalleryApp.Pages"
+    Title="Pointer + Pen Input">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="pointer-pen-input" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <mu3d:Mu3DSceneView
+            x:Name="SceneView"
+            BackgroundColor="Black"
+            SurfaceError="OnSurfaceError">
+            <mu3d:Mu3DSceneView.Behaviors>
+                <pages:PointerInputBridge
+                    Sampled="OnPointerSampled"
+                    SuppressDirectTouchPressWhilePenActive="True" />
+            </mu3d:Mu3DSceneView.Behaviors>
+            <mu3d:Mu3DSceneView.SceneContent>
+                <mu3d:Scene3D
+                    x:Name="PointerScene"
+                    Name="Application pointer scene">
+                    <mu3d:Scene3D.Camera>
+                        <mu3d:PerspectiveCamera3D
+                            FieldOfView="50"
+                            Name="Pointer camera"
+                            Z="6.5" />
+                    </mu3d:Scene3D.Camera>
+                    <mu3d:Cone3D
+                        Height="2.1"
+                        Name="Blue cone"
+                        Radius="0.75"
+                        ShadowCastingMode="Off"
+                        X="-1.35"
+                        Y="-0.05">
+                        <mu3d:PbrMaterial3D
+                            Color="#368CFF"
+                            Metallic="0.18"
+                            Roughness="0.28" />
+                    </mu3d:Cone3D>
+                    <mu3d:Sphere3D
+                        Name="Orange sphere"
+                        Radius="0.9"
+                        ShadowCastingMode="Off"
+                        X="1.25"
+                        Y="-0.15">
+                        <mu3d:PbrMaterial3D
+                            Color="#FF7C35"
+                            Metallic="0.1"
+                            Roughness="0.3" />
+                    </mu3d:Sphere3D>
+                    <mu3d:Sphere3D
+                        Name="Raycast ground"
+                        Radius="0.42"
+                        ScaleX="7.5"
+                        ScaleY="0.18"
+                        ScaleZ="7.5"
+                        ShadowCastingMode="Off"
+                        Y="-1.35">
+                        <mu3d:PbrMaterial3D
+                            Color="#17243A"
+                            Metallic="0"
+                            Roughness="0.92" />
+                    </mu3d:Sphere3D>
+                    <mu3d:Sphere3D
+                        x:Name="HitMarker"
+                        IsVisible="False"
+                        LatitudeSegments="10"
+                        LongitudeSegments="16"
+                        Name="Application-owned hit marker"
+                        Radius="0.12"
+                        ShadowCastingMode="Off">
+                        <mu3d:UnlitMaterial3D
+                            x:Name="HitMarkerMaterial"
+                            Color="#35F2D0" />
+                    </mu3d:Sphere3D>
+                    <mu3d:DirectionalLight3D
+                        Intensity="4.2"
+                        RotationX="-35"
+                        RotationY="-30" />
+                </mu3d:Scene3D>
+            </mu3d:Mu3DSceneView.SceneContent>
+        </mu3d:Mu3DSceneView>
+        <Grid
+            x:Name="DrawingCursor"
+            Grid.Row="0"
+            CascadeInputTransparent="True"
+            HeightRequest="42"
+            HorizontalOptions="Start"
+            InputTransparent="True"
+            IsVisible="False"
+            VerticalOptions="Start"
+            WidthRequest="42"
+            ZIndex="100">
+            <Ellipse
+                x:Name="DrawingCursorRing"
+                Fill="#2435F2D0"
+                Stroke="#FF35F2D0"
+                StrokeThickness="2" />
+            <BoxView
+                x:Name="DrawingCursorTiltLine"
+                AnchorY="0.78"
+                Color="#FF35F2D0"
+                HeightRequest="29"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="2" />
+            <Ellipse
+                Fill="White"
+                HeightRequest="6"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="6" />
+        </Grid>
+        <Grid
+            Grid.Row="1"
+            Padding="16"
+            ColumnDefinitions="*,Auto"
+            RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+            RowSpacing="7">
+            <Label
+                FontAttributes="Bold"
+                Text="Hover or drag over the scene. Pen pressure changes size; pen tilt changes color and the cross-platform tip preview." />
+            <Button
+                Grid.Column="1"
+                Margin="12,0,0,0"
+                Clicked="OnClearClicked"
+                Text="Clear marker" />
+            <Label
+                x:Name="PencilTipPreviewLabel"
+                Grid.Row="1"
+                VerticalOptions="Center"
+                Text="Physical Apple Pencil shadow · awaiting supported iPad hover" />
+            <Switch
+                x:Name="PencilTipPreviewSwitch"
+                Grid.Row="1"
+                Grid.Column="1"
+                IsEnabled="False"
+                IsToggled="True"
+                Toggled="OnPencilTipPreviewToggled" />
+            <Label
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                VerticalOptions="Center"
+                Text="Display-normal surface shadow · maximum hover is 0×; contact is 1×; caster-to-surface distance controls Gaussian softness" />
+            <Label
+                x:Name="PencilShadowCoefficientLabel"
+                Grid.Row="3"
+                VerticalOptions="Center"
+                Text="Shadow coefficient · 0.78" />
+            <Slider
+                x:Name="PencilShadowCoefficientSlider"
+                Grid.Row="3"
+                Grid.Column="1"
+                Maximum="1"
+                Minimum="0"
+                Value="0.78"
+                ValueChanged="OnPencilShadowCoefficientChanged"
+                WidthRequest="240" />
+            <Label
+                x:Name="PencilBlurDecayLabel"
+                Grid.Row="4"
+                VerticalOptions="Center"
+                Text="Blur falloff coefficient · 0.55 px/mm" />
+            <Slider
+                x:Name="PencilBlurDecaySlider"
+                Grid.Row="4"
+                Grid.Column="1"
+                Maximum="1.5"
+                Minimum="0"
+                Value="0.55"
+                ValueChanged="OnPencilBlurDecayChanged"
+                WidthRequest="240" />
+            <Label
+                x:Name="PencilShadowDecayLabel"
+                Grid.Row="5"
+                VerticalOptions="Center"
+                Text="Shadow falloff coefficient · 0.024 /mm" />
+            <Slider
+                x:Name="PencilShadowDecaySlider"
+                Grid.Row="5"
+                Grid.Column="1"
+                Maximum="0.15"
+                Minimum="0"
+                Value="0.0238095238"
+                ValueChanged="OnPencilShadowDecayChanged"
+                WidthRequest="240" />
+            <Label
+                x:Name="StatusLabel"
+                Grid.Row="6"
+                Grid.ColumnSpan="2"
+                FontFamily="OpenSansRegular"
+                FontSize="12"
+                LineBreakMode="TailTruncation"
+                Text="Application owns native input; Mu3D receives only one explicit physical-pixel raycast." />
+        </Grid>
+    </Grid>
+</ContentPage>

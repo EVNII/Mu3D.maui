@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.HdrJpegLabPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="HDR JPEG Lab">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="hdr-jpeg" />
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <VerticalStackLayout HorizontalOptions="Center" MaximumWidthRequest="820" Padding="24" Spacing="16">
+            <Label FontAttributes="Bold" FontSize="32" Text="Ultra HDR / ISO Gain-map JPEG" />
+            <Label
+                Text="Creates an opaque linear Display P3 HDR gradient plus near-black, neutral, HDR-white, and saturated color patches. It encodes an SDR JPEG base plus gain map through the pinned libultrahdr backend, decodes to linear FP32, and reports RGB error, peak-relative error, PSNR, and CIEDE2000. Linear value 1.0 maps to 203 nits for this codec boundary; CIEDE2000 is a codec regression metric, not a physical HDR display measurement." />
+            <Button
+                x:Name="RunRoundTripButton"
+                Clicked="OnRunRoundTripClicked"
+                Text="Run HDR JPEG round trip" />
+            <Label
+                x:Name="ResultLabel"
+                FontFamily="OpenSansRegular"
+                LineBreakMode="WordWrap"
+                Text="Not run" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

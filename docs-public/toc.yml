@@ -1,0 +1,6 @@
+- name: Mu3D
+  href: index.md
+- name: Guides
+  href: articles/toc.yml
+- name: API reference
+  href: api.md

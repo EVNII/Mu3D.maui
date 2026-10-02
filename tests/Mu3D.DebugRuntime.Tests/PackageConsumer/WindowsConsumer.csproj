@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Mu3D.Native.Wgpu.DebugRuntime.Windows" Version="1.0.0" />
+  </ItemGroup>
+  <Target Name="VerifyDebugRuntimePackage" DependsOnTargets="PrepareForBuild;ResolvePackageAssets">
+    <Error Condition="'@(ContentWithTargetPath->WithMetadataValue('TargetPath', 'wgpu_native.dll')->Count())' != '1'"
+           Text="Expected one Debug Windows native output item." />
+    <Error Condition="!$([System.String]::Copy('%(ContentWithTargetPath.Identity)').Contains('mu3d-debug-runtimes'))"
+           Text="The selected Windows native output is not from the DebugRuntime package: %(ContentWithTargetPath.Identity)" />
+    <Error Condition="'@(NativeCopyLocalItems->WithMetadataValue('Filename', 'wgpu_native')->Count())' != '0'"
+           Text="A Release wgpu-native copy-local item survived Debug replacement." />
+    <Message Importance="high" Text="Verified packed NuGet consumer selected one Debug Windows DLL" />
+  </Target>
+</Project>

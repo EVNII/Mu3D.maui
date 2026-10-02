@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.MapControlsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    xmlns:toolkit="clr-namespace:Mu3D.Maui.Toolkit.Controls;assembly=Mu3D.Maui.Toolkit"
+    Title="Map Controls">
+    <ContentPage.MenuBarItems>
+        <MenuBarItem Text="Map navigation" x:DataType="toolkit:MapTool">
+            <MenuFlyoutItem
+                x:Name="RotateLeftMenuItem"
+                Command="{Binding Source={x:Reference MapNavigation}, Path=NavigationCommand}"
+                CommandParameter="{x:Static toolkit:OrbitNavigationAction.RotateLeft}"
+                Text="Rotate left" />
+            <MenuFlyoutItem
+                x:Name="RotateRightMenuItem"
+                Command="{Binding Source={x:Reference MapNavigation}, Path=NavigationCommand}"
+                CommandParameter="{x:Static toolkit:OrbitNavigationAction.RotateRight}"
+                Text="Rotate right" />
+            <MenuFlyoutItem
+                x:Name="RotateUpMenuItem"
+                Command="{Binding Source={x:Reference MapNavigation}, Path=NavigationCommand}"
+                CommandParameter="{x:Static toolkit:OrbitNavigationAction.RotateUp}"
+                Text="Rotate up" />
+            <MenuFlyoutItem
+                x:Name="RotateDownMenuItem"
+                Command="{Binding Source={x:Reference MapNavigation}, Path=NavigationCommand}"
+                CommandParameter="{x:Static toolkit:OrbitNavigationAction.RotateDown}"
+                Text="Rotate down" />
+            <MenuFlyoutItem
+                Command="{Binding Source={x:Reference MapNavigation}, Path=NavigationCommand}"
+                CommandParameter="{x:Static toolkit:OrbitNavigationAction.PanLeft}"
+                Text="Pan left" />
+            <MenuFlyoutItem
+                Command="{Binding Source={x:Reference MapNavigation}, Path=NavigationCommand}"
+                CommandParameter="{x:Static toolkit:OrbitNavigationAction.PanRight}"
+                Text="Pan right" />
+            <MenuFlyoutItem
+                Command="{Binding Source={x:Reference MapNavigation}, Path=NavigationCommand}"
+                CommandParameter="{x:Static toolkit:OrbitNavigationAction.PanUp}"
+                Text="Pan up" />
+            <MenuFlyoutItem
+                Command="{Binding Source={x:Reference MapNavigation}, Path=NavigationCommand}"
+                CommandParameter="{x:Static toolkit:OrbitNavigationAction.PanDown}"
+                Text="Pan down" />
+            <MenuFlyoutItem
+                x:Name="DollyInMenuItem"
+                Command="{Binding Source={x:Reference MapNavigation}, Path=NavigationCommand}"
+                CommandParameter="{x:Static toolkit:OrbitNavigationAction.DollyIn}"
+                Text="Dolly in" />
+            <MenuFlyoutItem
+                x:Name="DollyOutMenuItem"
+                Command="{Binding Source={x:Reference MapNavigation}, Path=NavigationCommand}"
+                CommandParameter="{x:Static toolkit:OrbitNavigationAction.DollyOut}"
+                Text="Dolly out" />
+        </MenuBarItem>
+    </ContentPage.MenuBarItems>
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="map-controls" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto,Auto">
+        <mu3d:Mu3DSceneView
+            x:Name="SceneView"
+            BackgroundColor="Black"
+            FeatureError="OnFeatureError"
+            SurfaceError="OnSurfaceError">
+            <mu3d:Mu3DSceneView.SceneContent>
+                <mu3d:Scene3D Name="Map controls scene">
+                    <mu3d:Scene3D.Camera>
+                        <mu3d:PerspectiveCamera3D
+                            x:Name="MapCamera"
+                            FieldOfView="48"
+                            Name="Map camera"
+                            X="7"
+                            Y="7"
+                            Z="7" />
+                    </mu3d:Scene3D.Camera>
+                    <mu3d:Sphere3D
+                        Name="West marker"
+                        Radius="0.75"
+                        X="-2.2"
+                        Y="0.75"
+                        Z="-1.2">
+                        <mu3d:PbrMaterial3D
+                            Color="#3B9EFF"
+                            Metallic="0.15"
+                            Roughness="0.25" />
+                    </mu3d:Sphere3D>
+                    <mu3d:Cone3D
+                        Height="2.2"
+                        Name="Central marker"
+                        Radius="0.82"
+                        X="0.2"
+                        Y="1.1"
+                        Z="0.4">
+                        <mu3d:PbrMaterial3D
+                            Color="#FF7A28"
+                            Metallic="0.08"
+                            Roughness="0.3" />
+                    </mu3d:Cone3D>
+                    <mu3d:Sphere3D
+                        Name="East marker"
+                        Radius="0.58"
+                        X="2.5"
+                        Y="0.58"
+                        Z="-2.1">
+                        <mu3d:UnlitMaterial3D Color="#50E3A4" />
+                    </mu3d:Sphere3D>
+                    <mu3d:DirectionalLight3D
+                        Intensity="4.2"
+                        RotationX="-42"
+                        RotationY="-25" />
+                </mu3d:Scene3D>
+            </mu3d:Mu3DSceneView.SceneContent>
+            <mu3d:Mu3DSceneView.Features>
+                <toolkit:ViewportTools>
+                    <toolkit:MapTool
+                        x:Name="MapNavigation"
+                        Camera="{x:Reference MapCamera}"
+                        DampingEnabled="True"
+                        DampingTime="0.1"
+                        MaximumDistance="40"
+                        MinimumDistance="2.5"
+                        PanSensitivity="1"
+                        PinchDollyMultiplier="1.6"
+                        RotationSensitivity="1">
+                        <toolkit:OrbitTool.Input>
+                            <toolkit:ViewportInput>
+                                <toolkit:ViewportInput.Mouse>
+                                    <toolkit:MouseInput
+                                        LeftButtonDragAction="Pan"
+                                        RightButtonDragAction="Rotate" />
+                                </toolkit:ViewportInput.Mouse>
+                                <toolkit:ViewportInput.Trackpad>
+                                    <toolkit:TrackpadInput TwoFingerDragAction="Rotate" />
+                                </toolkit:ViewportInput.Trackpad>
+                                <toolkit:ViewportInput.Touchscreen>
+                                    <toolkit:TouchscreenInput
+                                        OneFingerDragAction="Pan"
+                                        TwoFingerDragAction="Rotate" />
+                                </toolkit:ViewportInput.Touchscreen>
+                                <toolkit:ViewportInput.Keyboard>
+                                    <toolkit:KeyboardInput
+                                        x:Name="MapKeyboardInput"
+                                        AlternateDollyInKey="PageUp"
+                                        AlternateDollyOutKey="PageDown"
+                                        DollyInKey="E"
+                                        DollyOutKey="Q"
+                                        IsEnabled="False"
+                                        RotateDownKey="S"
+                                        RotateLeftKey="A"
+                                        RotateRightKey="D"
+                                        RotateUpKey="W" />
+                                </toolkit:ViewportInput.Keyboard>
+                            </toolkit:ViewportInput>
+                        </toolkit:OrbitTool.Input>
+                    </toolkit:MapTool>
+                    <toolkit:GridHelper
+                        Divisions="32"
+                        MajorLineEvery="4"
+                        Plane="XZ"
+                        ShowCenterAxes="True"
+                        Size="16" />
+                </toolkit:ViewportTools>
+            </mu3d:Mu3DSceneView.Features>
+        </mu3d:Mu3DSceneView>
+        <gallery:ControlsHelpOverlay
+            Grid.Row="0"
+            Margin="12"
+            Title="Map controls"
+            ZIndex="10">
+            <gallery:ControlsHelpOverlay.Settings>
+                <gallery:ControlSensitivityItem
+                    Label="Rotation"
+                    Value="{Binding Source={x:Reference MapNavigation}, Path=RotationSensitivity, Mode=TwoWay}" />
+                <gallery:ControlSensitivityItem
+                    Label="Pan"
+                    Value="{Binding Source={x:Reference MapNavigation}, Path=PanSensitivity, Mode=TwoWay}" />
+                <gallery:ControlSensitivityItem
+                    Label="Dolly"
+                    Value="{Binding Source={x:Reference MapNavigation}, Path=DollySensitivity, Mode=TwoWay}" />
+            </gallery:ControlsHelpOverlay.Settings>
+            <gallery:ControlHelpItem Icon="🖱" Text="Left drag · pan across the XZ map plane" />
+            <gallery:ControlHelpItem Icon="🖱" Text="Right drag · rotate around the map target" />
+            <gallery:ControlHelpItem Icon="▱" Text="Trackpad two-finger drag · rotate" />
+            <gallery:ControlHelpItem Icon="☝" Text="Touch: one finger pans · two fingers rotate" />
+            <gallery:ControlHelpItem Icon="🤏" Text="Pinch or wheel · dolly in and out" />
+            <gallery:ControlHelpItem Icon="⌨" Text="W/A/S/D rotate · E/Q dolly" />
+        </gallery:ControlsHelpOverlay>
+        <ScrollView
+            Grid.Row="1"
+            Orientation="Horizontal"
+            HorizontalScrollBarVisibility="Always">
+            <HorizontalStackLayout Padding="16,8" Spacing="12">
+                <VerticalStackLayout Spacing="2" WidthRequest="132">
+                    <Label FontSize="12" Text="Rotate left" />
+                    <Picker
+                        x:Name="RotateLeftPicker"
+                        x:DataType="toolkit:KeyboardInput"
+                        SelectedIndexChanged="OnKeyboardBindingChanged"
+                        SelectedItem="{Binding Source={x:Reference MapKeyboardInput}, Path=RotateLeftKey, Mode=TwoWay}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="2" WidthRequest="132">
+                    <Label FontSize="12" Text="Rotate right" />
+                    <Picker
+                        x:Name="RotateRightPicker"
+                        x:DataType="toolkit:KeyboardInput"
+                        SelectedIndexChanged="OnKeyboardBindingChanged"
+                        SelectedItem="{Binding Source={x:Reference MapKeyboardInput}, Path=RotateRightKey, Mode=TwoWay}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="2" WidthRequest="132">
+                    <Label FontSize="12" Text="Rotate up" />
+                    <Picker
+                        x:Name="RotateUpPicker"
+                        x:DataType="toolkit:KeyboardInput"
+                        SelectedIndexChanged="OnKeyboardBindingChanged"
+                        SelectedItem="{Binding Source={x:Reference MapKeyboardInput}, Path=RotateUpKey, Mode=TwoWay}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="2" WidthRequest="132">
+                    <Label FontSize="12" Text="Rotate down" />
+                    <Picker
+                        x:Name="RotateDownPicker"
+                        x:DataType="toolkit:KeyboardInput"
+                        SelectedIndexChanged="OnKeyboardBindingChanged"
+                        SelectedItem="{Binding Source={x:Reference MapKeyboardInput}, Path=RotateDownKey, Mode=TwoWay}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="2" WidthRequest="132">
+                    <Label FontSize="12" Text="Dolly in" />
+                    <Picker
+                        x:Name="DollyInPicker"
+                        x:DataType="toolkit:KeyboardInput"
+                        SelectedIndexChanged="OnKeyboardBindingChanged"
+                        SelectedItem="{Binding Source={x:Reference MapKeyboardInput}, Path=DollyInKey, Mode=TwoWay}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="2" WidthRequest="132">
+                    <Label FontSize="12" Text="Dolly out" />
+                    <Picker
+                        x:Name="DollyOutPicker"
+                        x:DataType="toolkit:KeyboardInput"
+                        SelectedIndexChanged="OnKeyboardBindingChanged"
+                        SelectedItem="{Binding Source={x:Reference MapKeyboardInput}, Path=DollyOutKey, Mode=TwoWay}" />
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+        </ScrollView>
+        <VerticalStackLayout Grid.Row="2" Padding="16" Spacing="6">
+            <Label
+                FontAttributes="Bold"
+                Text="One finger or left drag pans · two-finger, trackpad or right drag rotates · pinch/wheel dollies · W/A/S/D and E/Q also navigate." />
+            <Label
+                x:Name="StatusLabel"
+                FontSize="12"
+                Text="Configured keys combine on MAUI VSync; menu items remain discrete MapTool commands." />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

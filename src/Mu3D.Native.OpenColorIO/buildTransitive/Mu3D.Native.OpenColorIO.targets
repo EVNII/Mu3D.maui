@@ -1,0 +1,18 @@
+<Project>
+  <!-- The package does not download/build native code. Supply the exact maintainer-produced
+       archive explicitly, or distribute it in this package's RID directory in a future release. -->
+  <PropertyGroup Condition="'$(Mu3DOpenColorIONativeArchive)' == ''">
+    <Mu3DOpenColorIONativeArchive>$(MSBuildThisFileDirectory)..\runtimes\$(RuntimeIdentifier)\native\libmu3d_opencolorio.a</Mu3DOpenColorIONativeArchive>
+  </PropertyGroup>
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst' And '$(RuntimeIdentifier)' == 'maccatalyst-arm64' And Exists('$(Mu3DOpenColorIONativeArchive)')">
+    <NativeReference Include="$(Mu3DOpenColorIONativeArchive)">
+      <Kind>Static</Kind>
+      <SmartLink>true</SmartLink>
+      <IsCxx>true</IsCxx>
+    </NativeReference>
+    <LinkerArgument Include="-lc++" />
+    <ReferenceNativeSymbol Include="mu3d_ocio_abi_version;mu3d_ocio_version;mu3d_ocio_last_error;mu3d_ocio_config_create;mu3d_ocio_config_delete;mu3d_ocio_config_count;mu3d_ocio_config_string;mu3d_ocio_processor_colorspace;mu3d_ocio_processor_display;mu3d_ocio_processor_delete;mu3d_ocio_processor_cache_id;mu3d_ocio_apply">
+      <SymbolType>Function</SymbolType>
+    </ReferenceNativeSymbol>
+  </ItemGroup>
+</Project>

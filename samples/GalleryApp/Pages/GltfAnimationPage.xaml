@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.GltfAnimationPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    Title="glTF Animation">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="gltf-animation" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <mu3d:Mu3DView
+            x:Name="SurfaceView"
+            BackgroundColor="Black"
+            Draw="OnSurfaceDraw" />
+        <VerticalStackLayout Grid.Row="1" Padding="16" Spacing="10">
+            <Label x:Name="StatusLabel" Text="Loading Fox.glb…" />
+            <Picker
+                x:Name="ClipPicker"
+                Title="Animation clip"
+                SelectedIndexChanged="OnClipChanged" />
+            <Grid ColumnDefinitions="*,Auto">
+                <Label VerticalOptions="Center" Text="Play" />
+                <Switch
+                    x:Name="PlaySwitch"
+                    Grid.Column="1"
+                    IsToggled="True"
+                    Toggled="OnPlayChanged" />
+            </Grid>
+            <Label x:Name="DetailsLabel" FontSize="12" LineBreakMode="WordWrap" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <PackageId>Mu3D.Native.Wgpu</PackageId>
+    <Version>1.0.0</Version>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IsPackable>true</IsPackable>
+    <NoWarn>NU5128</NoWarn>
+    <Mu3DRepositoryRoot Condition="'$(Mu3DRepositoryRoot)' == ''">$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\..'))</Mu3DRepositoryRoot>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="$(Mu3DRepositoryRoot)/src/Mu3D.Native.Wgpu/bin/Release/net10.0/Mu3D.Native.Wgpu.dll"
+          Pack="true" PackagePath="lib/net10.0/" />
+    <None Include="$(Mu3DRepositoryRoot)/src/Mu3D.Native.Wgpu/buildTransitive/Mu3D.Native.Wgpu.targets"
+          Pack="true" PackagePath="buildTransitive/" />
+  </ItemGroup>
+</Project>

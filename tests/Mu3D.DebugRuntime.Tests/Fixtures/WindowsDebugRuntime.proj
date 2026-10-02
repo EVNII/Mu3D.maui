@@ -1,0 +1,29 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PackageId>Mu3D.Native.Wgpu.DebugRuntime.Windows</PackageId>
+  </PropertyGroup>
+
+  <Import Project="$(Mu3DRepositoryRoot)/src/Mu3D.Native.Wgpu.DebugRuntime.Windows/buildTransitive/Mu3D.Native.Wgpu.DebugRuntime.Windows.props" />
+  <Import Project="$(Mu3DRepositoryRoot)/src/Mu3D.Native.Wgpu/buildTransitive/Mu3D.Native.Wgpu.targets" />
+  <Import Project="$(Mu3DRepositoryRoot)/src/Mu3D.Native.Wgpu.DebugRuntime.Windows/buildTransitive/Mu3D.Native.Wgpu.DebugRuntime.Windows.targets" />
+
+  <PropertyGroup>
+    <_Mu3DDebugRuntimeFile>$(MSBuildThisFileDirectory)assets/wgpu_native.dll</_Mu3DDebugRuntimeFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <NativeCopyLocalItems Include="release/wgpu_native.dll" />
+    <RuntimeTargetsCopyLocalItems Include="release/wgpu_native.dll" />
+  </ItemGroup>
+
+  <Target Name="ResolvePackageAssets" />
+  <Target Name="ResolveCopyLocalAssets" DependsOnTargets="ResolvePackageAssets" />
+  <Target Name="Verify" DependsOnTargets="ResolveCopyLocalAssets">
+    <Error Condition="'@(NativeCopyLocalItems->Count())' != '0'" Text="Release NativeCopyLocalItems were not removed." />
+    <Error Condition="'@(RuntimeTargetsCopyLocalItems->Count())' != '0'" Text="Release RuntimeTargetsCopyLocalItems were not removed." />
+    <Error Condition="'@(ContentWithTargetPath->Count())' != '1'" Text="Expected one Debug Windows content item." />
+    <Error Condition="'%(ContentWithTargetPath.TargetPath)' != 'wgpu_native.dll'" Text="Debug Windows DLL has the wrong target path." />
+    <Message Importance="high" Text="Verified one Debug Windows content item" />
+  </Target>
+</Project>

@@ -1,0 +1,27 @@
+<Project>
+  <PropertyGroup>
+    <_Mu3DDebugRuntimeFile>$(MSBuildThisFileDirectory)..\mu3d-debug-runtimes\$(RuntimeIdentifier)\native\wgpu_native.dll</_Mu3DDebugRuntimeFile>
+  </PropertyGroup>
+
+  <Target Name="ValidateMu3DWindowsDebugRuntimeAbi" BeforeTargets="PrepareForBuild"
+          Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
+    <Error Condition="'$(Mu3DNativeWgpuAbiVersion)' != '$(_Mu3DExpectedWgpuDebugAbiVersion)' Or '$(Mu3DNativeWgpuAbiCommit)' != '$(_Mu3DExpectedWgpuDebugAbiCommit)'"
+           Text="Mu3D.Native.Wgpu.DebugRuntime.Windows requires the exactly matched Mu3D.Native.Wgpu v29.0.1.1 ABI." />
+    <Error Condition="!Exists('$(_Mu3DDebugRuntimeFile)')"
+           Text="Mu3D.Native.Wgpu.DebugRuntime.Windows has no Debug runtime for $(RuntimeIdentifier)." />
+  </Target>
+
+  <Target Name="UseMu3DWindowsDebugRuntime" AfterTargets="ResolvePackageAssets"
+          BeforeTargets="ResolveCopyLocalAssets"
+          Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
+    <ItemGroup>
+      <NativeCopyLocalItems Remove="@(NativeCopyLocalItems)" Condition="'%(Filename)%(Extension)' == 'wgpu_native.dll'" />
+      <RuntimeTargetsCopyLocalItems Remove="@(RuntimeTargetsCopyLocalItems)" Condition="'%(Filename)%(Extension)' == 'wgpu_native.dll'" />
+      <ContentWithTargetPath Include="$(_Mu3DDebugRuntimeFile)">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        <TargetPath>wgpu_native.dll</TargetPath>
+      </ContentWithTargetPath>
+    </ItemGroup>
+  </Target>
+</Project>

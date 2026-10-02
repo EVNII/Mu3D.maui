@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../eng/Mu3D.DebugRuntimePackage.props" />
+
+  <PropertyGroup>
+    <RootNamespace>Mu3D.Native.Wgpu.DebugRuntime.Windows</RootNamespace>
+    <AssemblyName>Mu3D.Native.Wgpu.DebugRuntime.Windows</AssemblyName>
+    <PackageId>Mu3D.Native.Wgpu.DebugRuntime.Windows</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Mu3D.Native.Wgpu/Mu3D.Native.Wgpu.csproj" />
+    <None Include="buildTransitive/Mu3D.Native.Wgpu.DebugRuntime.Windows.props" Pack="true" PackagePath="buildTransitive/" />
+    <None Include="buildTransitive/Mu3D.Native.Wgpu.DebugRuntime.Windows.targets" Pack="true" PackagePath="buildTransitive/" />
+    <None Include="../../artifacts/wgpu-native/$(Mu3DWgpuNativeVersion)/debug/runtimes/win-arm64/native/wgpu_native.dll" Pack="true" PackagePath="mu3d-debug-runtimes/win-arm64/native/" />
+    <None Include="../../artifacts/wgpu-native/$(Mu3DWgpuNativeVersion)/debug/runtimes/win-x86/native/wgpu_native.dll" Pack="true" PackagePath="mu3d-debug-runtimes/win-x86/native/" />
+    <None Include="../../artifacts/wgpu-native/$(Mu3DWgpuNativeVersion)/debug/runtimes/win-x64/native/wgpu_native.dll" Pack="true" PackagePath="mu3d-debug-runtimes/win-x64/native/" />
+  </ItemGroup>
+
+  <Target Name="ValidateMu3DWindowsDebugRuntimePackage" BeforeTargets="GenerateNuspec">
+    <Error Condition="!Exists('%(None.FullPath)') And $([System.String]::Copy('%(None.PackagePath)').StartsWith('mu3d-debug-runtimes/'))"
+           Text="Cannot pack $(PackageId): Debug runtime '%(None.Identity)' is missing." />
+  </Target>
+</Project>

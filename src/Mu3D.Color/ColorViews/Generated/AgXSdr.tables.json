@@ -1,0 +1,11 @@
+[
+  {
+    "name": "ocio_lut3d_0",
+    "offset": 0,
+    "width": 57,
+    "height": 57,
+    "depth": 57,
+    "interpolation": "nearest",
+    "channels": 3
+  }
+]

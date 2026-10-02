@@ -1,0 +1,86 @@
+- name: XAML components
+  href: xaml-components.md
+- name: Features
+  items:
+  - name: Gallery overview
+    href: features/gallery-overview.md
+  - name: Device probe
+    href: features/device-probe.md
+  - name: Surface probe
+    href: features/surface-probe.md
+  - name: Custom draw
+    href: features/custom-draw.md
+  - name: Scene assets and instances
+    href: features/scene-assets.md
+  - name: Declarative scenes
+    href: features/declarative-scene.md
+  - name: Declarative viewport tools
+    href: features/declarative-tools.md
+  - name: Target-centered orbit controls
+    href: features/orbit-controls.md
+  - name: Map and CAD camera controls
+    href: features/map-controls.md
+  - name: First-person fly controls
+    href: features/fly-controls.md
+  - name: Application-owned pointer and pen input
+    href: features/pointer-pen-input.md
+  - name: MAUI animation and progress bridge
+    href: features/progress-bridge.md
+  - name: Playback toolbar and IPlayable
+    href: features/playback-toolbar.md
+  - name: Orientation axes helper
+    href: features/axes-helper.md
+  - name: Scene grid helper
+    href: features/grid-helper.md
+  - name: Scene bounds and outline helpers
+    href: features/bounds-helper.md
+  - name: UI anchors
+    href: features/ui-anchors.md
+  - name: Render outputs
+    href: features/render-outputs.md
+  - name: Transform gizmo
+    href: features/transform-gizmo.md
+  - name: Frame statistics
+    href: features/frame-statistics.md
+  - name: Direct and image-based lighting
+    href: features/lighting-direct-ibl.md
+  - name: Shadows and ambient occlusion
+    href: features/shadows-ao.md
+  - name: PBR material and textures
+    href: features/pbr-material-textures.md
+  - name: Skinning and animation
+    href: features/skinning-animation.md
+  - name: glTF loading
+    href: features/gltf-loading.md
+  - name: Reusable glTF assets and instances
+    href: features/gltf-instances.md
+  - name: Shared-device HDR Surface product feeds
+    href: features/gltf-product-feed.md
+  - name: glTF animation
+    href: features/gltf-animation.md
+  - name: glTF material variants
+    href: features/gltf-material-variants.md
+  - name: HDR JPEG
+    href: features/hdr-jpeg.md
+  - name: KTX2 decode
+    href: features/ktx2-decode.md
+  - name: KTX2 GPU sampling
+    href: features/ktx2-gpu-sampling.md
+  - name: Material conformance
+    href: features/material-conformance.md
+
+- name: OpenPBR and MaterialX
+  href: features/openpbr-materialx.md
+- name: OpenPBR white furnace
+  href: features/openpbr-white-furnace.md
+- name: HDR canvas
+  href: features/hdr-canvas.md
+- name: Color lookup tables
+  href: color-lookup-tables.md
+- name: GPU color lookup tables
+  href: features/color-lut.md
+
+- name: Color management
+  href: features/color-management.md
+- name: Optional CMYK printing
+  href: features/cmyk-printing.md

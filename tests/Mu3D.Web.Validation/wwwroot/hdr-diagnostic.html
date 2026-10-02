@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HDR 首次显示对照</title>
+<style>
+  :root { font: 16px/1.6 system-ui; color: #243043; background: #f4f6fa; }
+  body { max-width: 940px; margin: 24px auto; padding: 0 20px; }
+  h1 { font-size: 25px; } canvas { width: 100%; height: 160px; display: block; }
+  .controls { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+  button, select { font: inherit; padding: 6px 10px; }
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; background: white; padding: 12px; }
+  #reference { background: white; color: black; padding: 10px; }
+  .viewport-canvas body { margin: 0; max-width: none; padding: 0; }
+  .viewport-canvas #canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; }
+  .viewport-canvas body > :not(#canvas) { position: relative; z-index: 1; max-width: min(860px, 55vw); margin: 8px 20px; background: #f4f6fae8; }
+  .viewport-canvas #reference { background: white; }
+</style>
+<h1>HDR 首次显示对照</h1>
+<p>此页直接使用浏览器 WebGPU，不加载 Mu3D、WASM 或 Emdawn，用于隔离显示问题。</p>
+<p id="variant"></p>
+<p>Three.js 差异对照（每次只打开一项观察初始亮度）：
+  <a href="./hdr-diagnostic.html">A：opaque，单帧</a> ·
+  <a href="./hdr-diagnostic.html?alpha=premultiplied">B：premultiplied，单帧</a> ·
+  <a href="./hdr-diagnostic.html?loop=1">C：opaque，连续帧</a> ·
+  <a href="./hdr-diagnostic.html?alpha=premultiplied&amp;loop=1">D：premultiplied，连续帧</a>。
+  四项颜色与像素 alpha（均为 1）相同，页面不加载 Three.js。</p>
+<p><a href="./hdr-diagnostic.html?alpha=premultiplied&amp;loop=1&amp;readback=0">E：与 D 相同，但初始不回读 GPU</a>。此模式不会声称像素检查通过；点“停止连续提交并检查像素”才执行回读。</p>
+<p><a href="./hdr-diagnostic.html?alpha=premultiplied&amp;loop=1&amp;readback=0&amp;layout=viewport">F：与 E 相同，但画布铺满视口并放在文字下方</a>。这是布局/合成对照。</p>
+<p id="reference">普通网页白色参考。下方四块线性亮度分别为 0.25、1、2、4。</p>
+<canvas id="canvas" aria-label="HDR 参考色块"></canvas>
+<p id="status" role="status">正在准备…</p>
+<p>先观察初始亮度；再只打开下面的无关下拉框，按 Esc 关闭，不改变选项。它不会调用任何 GPU 操作。</p>
+<div class="controls">
+  <label>无关下拉框 <select id="unrelated"><option>保持此项</option><option>此项也不影响画面</option></select></label>
+  <button id="noop">普通按钮（不重绘）</button><span id="clicks">点击 0 次</span>
+</div>
+<div class="controls">
+  <button id="redraw">仅重绘 HDR</button>
+  <button id="reconfigure">重新配置 HDR</button>
+  <button id="range-cycle">仅切换动态范围</button>
+  <button id="format-cycle">模拟 SDR → HDR</button>
+  <button id="loop">开始连续提交</button>
+</div>
+<p>下方帧数、配置次数用于区分“界面交互”与“重新渲染”。每项测试前刷新页面，避免前一次操作影响结果。</p>
+<pre id="log" aria-label="对照日志"></pre>
+<a href="./">返回 Mu3D 场景</a>
+<script type="module" src="./hdr-diagnostic.mjs"></script>
+</html>

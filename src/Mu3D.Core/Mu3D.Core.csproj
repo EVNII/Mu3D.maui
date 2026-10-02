@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Mu3D</RootNamespace>
+    <AssemblyName>Mu3D.Core</AssemblyName>
+    <PackageId>Mu3D.Core</PackageId>
+    <Description>Scene and renderer domain model for Mu3D.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Mu3D.Color/Mu3D.Color.csproj" />
+    <ProjectReference Include="../Mu3D.Graphics/Mu3D.Graphics.csproj" />
+  </ItemGroup>
+</Project>

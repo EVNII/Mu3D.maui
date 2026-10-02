@@ -1,0 +1,24 @@
+<Project>
+  <PropertyGroup>
+    <_Mu3DDebugRuntimeRoot>$(MSBuildThisFileDirectory)..\mu3d-debug-runtimes</_Mu3DDebugRuntimeRoot>
+  </PropertyGroup>
+
+  <Target Name="ValidateMu3DAndroidDebugRuntimeAbi" BeforeTargets="PrepareForBuild"
+          Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+    <Error Condition="'$(Mu3DNativeWgpuAbiVersion)' != '$(_Mu3DExpectedWgpuDebugAbiVersion)' Or '$(Mu3DNativeWgpuAbiCommit)' != '$(_Mu3DExpectedWgpuDebugAbiCommit)'"
+           Text="Mu3D.Native.Wgpu.DebugRuntime.Android requires the exactly matched Mu3D.Native.Wgpu v29.0.1.1 ABI." />
+  </Target>
+
+  <Target Name="UseMu3DAndroidDebugRuntime" AfterTargets="ResolvePackageAssets"
+          BeforeTargets="ResolveCopyLocalAssets"
+          Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+    <ItemGroup>
+      <NativeCopyLocalItems Remove="@(NativeCopyLocalItems)" Condition="'%(Filename)%(Extension)' == 'libwgpu_native.so'" />
+      <RuntimeTargetsCopyLocalItems Remove="@(RuntimeTargetsCopyLocalItems)" Condition="'%(Filename)%(Extension)' == 'libwgpu_native.so'" />
+      <AndroidNativeLibrary Include="$(_Mu3DDebugRuntimeRoot)\android-arm\native\libwgpu_native.so" Abi="armeabi-v7a" />
+      <AndroidNativeLibrary Include="$(_Mu3DDebugRuntimeRoot)\android-arm64\native\libwgpu_native.so" Abi="arm64-v8a" />
+      <AndroidNativeLibrary Include="$(_Mu3DDebugRuntimeRoot)\android-x86\native\libwgpu_native.so" Abi="x86" />
+      <AndroidNativeLibrary Include="$(_Mu3DDebugRuntimeRoot)\android-x64\native\libwgpu_native.so" Abi="x86_64" />
+    </ItemGroup>
+  </Target>
+</Project>

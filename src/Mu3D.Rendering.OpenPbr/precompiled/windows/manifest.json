@@ -1,0 +1,2633 @@
+{
+  "schema": 1,
+  "native": "v29.0.1.1",
+  "hal": "29.0.3",
+  "compiler_release": "1.8.2505.32",
+  "compilers": {
+    "x64": "5888d3e590f5bfd8743484e7f31313996734adec5741506271a5c6368cbe8ba9",
+    "x86": "092915b9db67e7f57b8cac7c902e73744690b7a2ce6425f60f959e46eb4a7a65",
+    "arm64": "0258ea93be90fe9d1b107a48bddec3a245f8510213c363076dc1863445802e3e"
+  },
+  "sources": {
+    "src/Mu3D.Rendering.OpenPbr/Shaders/fast.wgsl": "97d1ec7c9c6054c8ed9d3789bca702539b5e260b89b48ccf88d94e8c8198e2e1",
+    "src/Mu3D.Rendering.OpenPbr/Shaders/raster.wgsl": "82502c8c873b86e6fde01a5b63e0e348e216c8a17d59db4f8ffdd2e05e00bb1f",
+    "src/Mu3D.Rendering.OpenPbr/Shaders/render.wgsl": "a4efb38228d263639d3dd3e60c2d6a340a6bb0242ebd028fef51aa1fd8f17c31",
+    "src/Mu3D.Rendering.OpenPbr/Shaders/visibility.wgsl": "6dfcea0c15ed203a6a21a080aa4d8ae0b481ab3e61b9f0f16aba5d7b569b691e",
+    "eng/native/WgpuDx12ShaderCache.rs": "060a818cba7d97ed4d1cc488590e8382814916ad542d3393933f748febe8c456",
+    "eng/prepare-wgpu-shader-cache.py": "5dd1e0149605328fafae4a92667f6b0d2e8cac952a24fc19a4c1c7377d954a18"
+  },
+  "profiles": [
+    "ps_6_0",
+    "ps_6_1",
+    "ps_6_2",
+    "ps_6_3",
+    "ps_6_4",
+    "ps_6_5",
+    "ps_6_6",
+    "ps_6_7",
+    "ps_6_8",
+    "vs_6_0",
+    "vs_6_1",
+    "vs_6_2",
+    "vs_6_3",
+    "vs_6_4",
+    "vs_6_5",
+    "vs_6_6",
+    "vs_6_7",
+    "vs_6_8"
+  ],
+  "entries": {
+    "00796d22dc7fc9375aa40aac3a9c5f2979bf119f76605458044332e04ad7783d.bin": {
+      "sha256": "edd1402786ee912993428021dd279cab41da87b89c424450b896f7803d35dcf1",
+      "profile": "ps_6_5",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "5d06c7a9ee669a22c08a97aea6c0b7fd0fb7bffe12bead552cb9df441c0a2df0.bin": {
+      "sha256": "edd1402786ee912993428021dd279cab41da87b89c424450b896f7803d35dcf1",
+      "profile": "ps_6_5",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "17519ecbd7cd71bac113c0861ba5ee6b095acf871028ad860e1bcc718e84c720.bin": {
+      "sha256": "edd1402786ee912993428021dd279cab41da87b89c424450b896f7803d35dcf1",
+      "profile": "ps_6_5",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "00dbb02a68f536f20ea62c3ad09955b9886acaf2a844ee3b1bfda2663862a45c.bin": {
+      "sha256": "fc354dc74c54ec36da0eb51f37623ef70991a95cb9af1186c472196d09017c08",
+      "profile": "ps_6_1",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "b8c82348ca73b730a32023e29e340e4ece4aec0d0aa2f8e10d450131cc503f3e.bin": {
+      "sha256": "fc354dc74c54ec36da0eb51f37623ef70991a95cb9af1186c472196d09017c08",
+      "profile": "ps_6_1",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "366a0946118489f8601ce62a4ebde50ef470ddf54c30e74fad5fbd542641797b.bin": {
+      "sha256": "fc354dc74c54ec36da0eb51f37623ef70991a95cb9af1186c472196d09017c08",
+      "profile": "ps_6_1",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "016f8ab1eb3491e57adfbf0d6b0f85e9c31417ee1b480f6baa1b165b8e8c7d31.bin": {
+      "sha256": "5103a901f488fd4b79aaf3df78c8b1a9894a1cbf64b0709e2010ebf15b7573ce",
+      "profile": "ps_6_4",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "de289dd755be59bb3703f89f7a59c81090ae76602b9e6228c5181ecc666f3016.bin": {
+      "sha256": "5103a901f488fd4b79aaf3df78c8b1a9894a1cbf64b0709e2010ebf15b7573ce",
+      "profile": "ps_6_4",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "b7df5464f96d9f07f9b00beb5fc6e693be8cb78614f0ca4e70793a51cf540c34.bin": {
+      "sha256": "5103a901f488fd4b79aaf3df78c8b1a9894a1cbf64b0709e2010ebf15b7573ce",
+      "profile": "ps_6_4",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "0249ee1f7c9bd11ea79f447994970033128fa07abfe77fb4f09049e4abf81b48.bin": {
+      "sha256": "f5219e4054a3d9ad1d0a0b47f7f39d579f89614c839c69a53a6ea87a91c03f32",
+      "profile": "vs_6_1",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "2bd244f54fb60081096e9d8357a06fce816c200965db5a0c0eb2b352ca342a8b.bin": {
+      "sha256": "f5219e4054a3d9ad1d0a0b47f7f39d579f89614c839c69a53a6ea87a91c03f32",
+      "profile": "vs_6_1",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "2b3d42f37a628dc71592771d80eccf33d66169733b1597cb7ba6f164227d048b.bin": {
+      "sha256": "f5219e4054a3d9ad1d0a0b47f7f39d579f89614c839c69a53a6ea87a91c03f32",
+      "profile": "vs_6_1",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "0aefb8b778bea57f7b2fe631d725aff2ba3f007baf3c5f735476d0543b45c89e.bin": {
+      "sha256": "87d8035a95a8922a3b6fd2f47d45c33b3a63f882ec59890983e94c6ef2a20874",
+      "profile": "ps_6_5",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "f0e965961bb56a12d0624545ffecc640f61caa8c5f2444e40a560dc510848bbe.bin": {
+      "sha256": "87d8035a95a8922a3b6fd2f47d45c33b3a63f882ec59890983e94c6ef2a20874",
+      "profile": "ps_6_5",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "73b34d185ace193873b7c078c3fd5819ca58d6c1f377a071ea16db1e6f8ac3a7.bin": {
+      "sha256": "87d8035a95a8922a3b6fd2f47d45c33b3a63f882ec59890983e94c6ef2a20874",
+      "profile": "ps_6_5",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "0b34251ead70f43c42afb949c3c9f817ceb1ce19955126a2a3dac291f7f78bd1.bin": {
+      "sha256": "3d2bb8c3e8a7078baa5c3628685d010cafaf7d65597bd0faad1da1fd69aff33b",
+      "profile": "ps_6_5",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "49dbb3c71c394bcd5ae4678d9dd1b815cb2377c9b13944c5ecbae4d9aaaff6ec.bin": {
+      "sha256": "3d2bb8c3e8a7078baa5c3628685d010cafaf7d65597bd0faad1da1fd69aff33b",
+      "profile": "ps_6_5",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "ebfc295e543e1368e57b7dd4684abf3586bc70bf374d56dad52b19fc6ed38dc6.bin": {
+      "sha256": "3d2bb8c3e8a7078baa5c3628685d010cafaf7d65597bd0faad1da1fd69aff33b",
+      "profile": "ps_6_5",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "0b4061e1ff4f41a06e54e5c9ecaa0ba58fffaf5dcd61236e0d38a2af99c6b854.bin": {
+      "sha256": "9540f6a6252eafb3ad6279b200ee6d631a388f9f90d06d24bf45ad89e5d700fd",
+      "profile": "vs_6_2",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "351a97ddd639d908ac0c5646f90bc51de909eb8a6b7beb6fef14f2bcddde5b07.bin": {
+      "sha256": "9540f6a6252eafb3ad6279b200ee6d631a388f9f90d06d24bf45ad89e5d700fd",
+      "profile": "vs_6_2",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "d38f80ed0660486dbecf97c2588467f6bc018f1f5d3b7ab4f709d135bdc4f629.bin": {
+      "sha256": "9540f6a6252eafb3ad6279b200ee6d631a388f9f90d06d24bf45ad89e5d700fd",
+      "profile": "vs_6_2",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "0cacb4d6b294a6f0f8047fa39e8c3db2b83438edd23c0c8ef4421a5ca53085db.bin": {
+      "sha256": "4243dacbf4c5db28773d808ee33edbfdeea1b2daccc27dc4f6fa05f4eea206d1",
+      "profile": "vs_6_6",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "9dbbd60238568c9451fd2658a2e005288f0c35bdbef6e0d556aa4b59a9cb4f1e.bin": {
+      "sha256": "4243dacbf4c5db28773d808ee33edbfdeea1b2daccc27dc4f6fa05f4eea206d1",
+      "profile": "vs_6_6",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "324e6ec58199ac86e3352ca8a9ed1cc76a4ea026124d293ea82be419faa69ea6.bin": {
+      "sha256": "4243dacbf4c5db28773d808ee33edbfdeea1b2daccc27dc4f6fa05f4eea206d1",
+      "profile": "vs_6_6",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "0f7112a4416dda119b9a1905ca82ec22b79e89786980949728020826ef51c8c5.bin": {
+      "sha256": "810a2a5d2444fbef34b34694e4292847f5fb9eadd6b09fb38d5cf72b46a63841",
+      "profile": "vs_6_2",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "d2859daaf293d23ebf461c54129c436db398522d479c295431cad4b0cd797ff3.bin": {
+      "sha256": "810a2a5d2444fbef34b34694e4292847f5fb9eadd6b09fb38d5cf72b46a63841",
+      "profile": "vs_6_2",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "9ce540751b82587b00a21d70addd89c4869903544126579b01a429c51cf1bde7.bin": {
+      "sha256": "810a2a5d2444fbef34b34694e4292847f5fb9eadd6b09fb38d5cf72b46a63841",
+      "profile": "vs_6_2",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "0f86727147deac6eb450a37d18a1d95c4a7f4ff135c73799741440f68c4e5d85.bin": {
+      "sha256": "1d3ba30fcae2cdf7663064eb92295ea22f11a7394208c5195d5eb940bfe130f5",
+      "profile": "vs_6_7",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "a7586d738694650666e3477ae82f696d4f4d0315887b54e2833a2a4f846e4bb8.bin": {
+      "sha256": "1d3ba30fcae2cdf7663064eb92295ea22f11a7394208c5195d5eb940bfe130f5",
+      "profile": "vs_6_7",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "d371752c6288caf1e8cdef35294b25392723efcf868bd3214372fdde3949e3cc.bin": {
+      "sha256": "1d3ba30fcae2cdf7663064eb92295ea22f11a7394208c5195d5eb940bfe130f5",
+      "profile": "vs_6_7",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "110710eae88acf00abd3a6b68f1e3eca7f48e0599b4f1dd078785d3957e83ea8.bin": {
+      "sha256": "27725eb44155acb8af714d128dcf3fceeb32547fc1a3250ef63d6790cbc76854",
+      "profile": "ps_6_2",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "18bc8fec28ac659dc5ffe8df346008bdf69a16843cda48ea2492783de87e3be3.bin": {
+      "sha256": "27725eb44155acb8af714d128dcf3fceeb32547fc1a3250ef63d6790cbc76854",
+      "profile": "ps_6_2",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "2b861b7a22d7f7aeb00a020063861ff923acc54dba960fc9a57037d656a7c17c.bin": {
+      "sha256": "27725eb44155acb8af714d128dcf3fceeb32547fc1a3250ef63d6790cbc76854",
+      "profile": "ps_6_2",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "133e4245b52a4297501b36e5d0988a0c3765e92011298d0fde36873f073f6de9.bin": {
+      "sha256": "7e12a3ad670fd012da77223cb8fec253ca6497a8f985e05d9006c33900701eef",
+      "profile": "ps_6_8",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "c5783094feaefff36c9262e1e8e38a55d96ca70a9630010f748bac41564437df.bin": {
+      "sha256": "7e12a3ad670fd012da77223cb8fec253ca6497a8f985e05d9006c33900701eef",
+      "profile": "ps_6_8",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "f9fdabaf04e5e49f5769efae18a8500535845aaaea752e7fd9e4108421134753.bin": {
+      "sha256": "7e12a3ad670fd012da77223cb8fec253ca6497a8f985e05d9006c33900701eef",
+      "profile": "ps_6_8",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "137f28d6064d7573f55893cdef55b4471ea2388fd4eab61661fd03e3e7f68d29.bin": {
+      "sha256": "74eb486220a69a1a06a210babf4934264450bf088e6cb890ca34d354ee9493fd",
+      "profile": "vs_6_4",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "300065d20c918142679f0dbb3d06197c795818e35452966208d52cb59805acb9.bin": {
+      "sha256": "74eb486220a69a1a06a210babf4934264450bf088e6cb890ca34d354ee9493fd",
+      "profile": "vs_6_4",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "01683346cdaa32f2df208e202320ad8e4a8e9394414b704688241e68128e7e68.bin": {
+      "sha256": "74eb486220a69a1a06a210babf4934264450bf088e6cb890ca34d354ee9493fd",
+      "profile": "vs_6_4",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "1822f3eb06f506e31f61dbd9ff9c9ebe94b1bdebc606339314423760e3b314fb.bin": {
+      "sha256": "f35fef5e274aa451eb9bb96e6d670608e3dbf50886e415cf534df2a708606ba7",
+      "profile": "ps_6_2",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "fd35bfd66f9382a827e40086dec250b49ea86934d310e1796068a9bd0c97c2af.bin": {
+      "sha256": "f35fef5e274aa451eb9bb96e6d670608e3dbf50886e415cf534df2a708606ba7",
+      "profile": "ps_6_2",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "fb58b53fb9c98466cc79ac7844523afc2c498e6d81b621f88ee981fad98adb23.bin": {
+      "sha256": "f35fef5e274aa451eb9bb96e6d670608e3dbf50886e415cf534df2a708606ba7",
+      "profile": "ps_6_2",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "191330cf47438bf4495a79c4f0b13a45b6ec8d318f2b259dce3edf05af1e4383.bin": {
+      "sha256": "c6ba93e3a9038afaa551be39c39986e0869cb8a18604237c4cfb4217bfba0796",
+      "profile": "vs_6_3",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "4871e9654ce911263b9c59515d5dc5797178a8d1a2856458e3ea0305e0c5eeb4.bin": {
+      "sha256": "c6ba93e3a9038afaa551be39c39986e0869cb8a18604237c4cfb4217bfba0796",
+      "profile": "vs_6_3",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "0343481c52554d0a449f4bdca6333f95670b7552a7cf43d6308c1ad82d555442.bin": {
+      "sha256": "c6ba93e3a9038afaa551be39c39986e0869cb8a18604237c4cfb4217bfba0796",
+      "profile": "vs_6_3",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "197ae86e83e05596a2c64fefb9e9ea0248953246ea5e7967c858037a44424da8.bin": {
+      "sha256": "cfa170d9ff1d54079df23617f3790e4f4a6bd5f2e3823e8fe9ff16516dbdda5c",
+      "profile": "ps_6_5",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "0d488388668bb8ca29792f6f40935e27d126d744d86ff8053af17b63cadc9c5f.bin": {
+      "sha256": "cfa170d9ff1d54079df23617f3790e4f4a6bd5f2e3823e8fe9ff16516dbdda5c",
+      "profile": "ps_6_5",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "b5bdcfb24980acc9646ee201b9b017e44b844de0d22c11eb6b9f59a7160d7881.bin": {
+      "sha256": "cfa170d9ff1d54079df23617f3790e4f4a6bd5f2e3823e8fe9ff16516dbdda5c",
+      "profile": "ps_6_5",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "19a48655c9bb478534f097d5169987df30b21781345c0766f9205c107be8c360.bin": {
+      "sha256": "7bf099b9d32ad1905017e07ac588873bcf18de0318a7d5f74e29e1fac84b2b43",
+      "profile": "vs_6_7",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "00ad0b3bf25270034b6e2b5a1354b6b5ead29950e85bc690fad7d499565380e8.bin": {
+      "sha256": "7bf099b9d32ad1905017e07ac588873bcf18de0318a7d5f74e29e1fac84b2b43",
+      "profile": "vs_6_7",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "b8f9ca97d6ea0b375d3d73cc5e9f980c4de1ed407277eac6b38aa66559240df1.bin": {
+      "sha256": "7bf099b9d32ad1905017e07ac588873bcf18de0318a7d5f74e29e1fac84b2b43",
+      "profile": "vs_6_7",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "1cbdb532fd4b1e5f17e22ed823dffbddf25d1ff5e5d2eee6308cdda2b4049333.bin": {
+      "sha256": "8b4162c17eaef061a0a67a23d9c44073acbd50f0db7d09371a70e32576e9ac96",
+      "profile": "ps_6_4",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "94af76e08783fd245b2cc03caae867aad8371f1761965e2b92359e24759c6017.bin": {
+      "sha256": "8b4162c17eaef061a0a67a23d9c44073acbd50f0db7d09371a70e32576e9ac96",
+      "profile": "ps_6_4",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "ab914a3edf271843fd05dcdf5c07e3b3db25e6748ad1739248eee5def82beae7.bin": {
+      "sha256": "8b4162c17eaef061a0a67a23d9c44073acbd50f0db7d09371a70e32576e9ac96",
+      "profile": "ps_6_4",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "20d67ad462a192d21591f678cc12f4ec92beced9364efff881d665db5120f3dd.bin": {
+      "sha256": "0d6a7fba41fadd0464bd0269e0b47763018463ab5edd45ea609cbc1e9088a375",
+      "profile": "vs_6_4",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "b45337f4269871c61c606884e0203b90883f869928824cb1e7ec69932eb02b57.bin": {
+      "sha256": "0d6a7fba41fadd0464bd0269e0b47763018463ab5edd45ea609cbc1e9088a375",
+      "profile": "vs_6_4",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "fd4f9962e0479bdd9401ba6f55e836a7235c0a222c0eead8c640c77ff1cb2468.bin": {
+      "sha256": "0d6a7fba41fadd0464bd0269e0b47763018463ab5edd45ea609cbc1e9088a375",
+      "profile": "vs_6_4",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "210c832759f9e5cfa7a98225904806fbfe62647ccebb5fb7f28f921c91c7ff62.bin": {
+      "sha256": "e5843bb38a6d263a978b95495443cf3fdbfa4107433f4116ddc404861528dc5b",
+      "profile": "vs_6_7",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "75f5ec43cb4e94475ccca22bfe0b7c5e03e3f9fda924827561269f2966ba28b4.bin": {
+      "sha256": "e5843bb38a6d263a978b95495443cf3fdbfa4107433f4116ddc404861528dc5b",
+      "profile": "vs_6_7",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "339714bab613f3ac31cc1cf96adb577ba591b323ff30ae4608957a20392302b1.bin": {
+      "sha256": "e5843bb38a6d263a978b95495443cf3fdbfa4107433f4116ddc404861528dc5b",
+      "profile": "vs_6_7",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "23fe710f1f0445ebd88cbd4e6f66a74d63f62b15a0684b3cd5ef2f1cda811455.bin": {
+      "sha256": "125e20e9324a956e088970d434ebdc3c510b36dc30a893ae68b24e101b45e874",
+      "profile": "ps_6_3",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "02cee66161dacd3fd6fd31215119ce3fb4cce0a6b508808aed41d72ca5f31f85.bin": {
+      "sha256": "125e20e9324a956e088970d434ebdc3c510b36dc30a893ae68b24e101b45e874",
+      "profile": "ps_6_3",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "44a83dd7d7a947ad04251421bd29eda4d8194aa8f9d0e5f13cae85e24b01ac17.bin": {
+      "sha256": "125e20e9324a956e088970d434ebdc3c510b36dc30a893ae68b24e101b45e874",
+      "profile": "ps_6_3",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "248692410e9d6e3da224f659d11b7aba2c92b34fcd50dbaffe3300f1086a5ed1.bin": {
+      "sha256": "0084d0da1977068a18c760a41187da33899e978f9c4f14981f025cde3d65ecb1",
+      "profile": "vs_6_4",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "cdfa531084f3a62a5d508655f463a430116caebf5a57c88469c0e91b63919f33.bin": {
+      "sha256": "0084d0da1977068a18c760a41187da33899e978f9c4f14981f025cde3d65ecb1",
+      "profile": "vs_6_4",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "1846b84fcbae8c0632fe9372f291aecc94ef721ef257b132d7180f2ea6336fa3.bin": {
+      "sha256": "0084d0da1977068a18c760a41187da33899e978f9c4f14981f025cde3d65ecb1",
+      "profile": "vs_6_4",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "249957961fcf50a3ac8c9d0ec1d1623f6d1e5566ffdc793ca6332b61bc95daba.bin": {
+      "sha256": "72d941c908251c301a80a0a954d89b4e525a5c950be098be844fe44a987fcf32",
+      "profile": "vs_6_4",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "9cb0540de90f9c09efae3cc21f61f397f8998d08cdc1636b6ec1b5c7fd8e6785.bin": {
+      "sha256": "72d941c908251c301a80a0a954d89b4e525a5c950be098be844fe44a987fcf32",
+      "profile": "vs_6_4",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "9006d3d7941601a6f83b33d2fd7e24c010ce67364e1a2ee6f027b621642fb7b9.bin": {
+      "sha256": "72d941c908251c301a80a0a954d89b4e525a5c950be098be844fe44a987fcf32",
+      "profile": "vs_6_4",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "25aa2f6d5e0b4555ab08f372e7c2affb5b18ec73f8877fc8808acbb541b4e20c.bin": {
+      "sha256": "16e6bff2b3af85aeaeb5a95d980d0d56afe6dd21018ae2043d4d86d3f9b7b0f1",
+      "profile": "vs_6_5",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "ea633b73fc17aa7aa2d4bd806e7f4ca67c4587527bced60369906636fb69158e.bin": {
+      "sha256": "16e6bff2b3af85aeaeb5a95d980d0d56afe6dd21018ae2043d4d86d3f9b7b0f1",
+      "profile": "vs_6_5",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "84193ca89d855333dc94d75ecbcc90364408d5649afc583e1cf6b60dfd0a79c5.bin": {
+      "sha256": "16e6bff2b3af85aeaeb5a95d980d0d56afe6dd21018ae2043d4d86d3f9b7b0f1",
+      "profile": "vs_6_5",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "25b3bb3d6beba108c0cf8d80e4319dc6513650ebfed7c0b818dcee41e5c44eaa.bin": {
+      "sha256": "5ec7f541b1afd4bcf302fcc1c1ad71760abeb81287dfae6ff5f71d91d1143ec7",
+      "profile": "vs_6_2",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "2a7db4804b7eb62259dcec2b0d93cb49a7eb8367be3728d9930cb7cd527e66b1.bin": {
+      "sha256": "5ec7f541b1afd4bcf302fcc1c1ad71760abeb81287dfae6ff5f71d91d1143ec7",
+      "profile": "vs_6_2",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "b9b2588ec7fb3f420089795d2695d9576d9175c55ee0a6953cd405b902a822d0.bin": {
+      "sha256": "5ec7f541b1afd4bcf302fcc1c1ad71760abeb81287dfae6ff5f71d91d1143ec7",
+      "profile": "vs_6_2",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "26ac764838c6bd204f402d0a88e72c8c511ce547644dea2abbdc576100efd318.bin": {
+      "sha256": "c4b854d0a1886ecf78f932f3a8aafc5c8017c4a8cfedebe8bd8eaceeaab41044",
+      "profile": "ps_6_7",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "85055fc5b9ab6f4dafae1db1341792e56a3c52c84c6d66ed00675e42c4e2c24e.bin": {
+      "sha256": "c4b854d0a1886ecf78f932f3a8aafc5c8017c4a8cfedebe8bd8eaceeaab41044",
+      "profile": "ps_6_7",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "7cf6c35273ac0ba8f89519ddf6bce3f2bc49530279d80ddb13318bec2ca4dfb2.bin": {
+      "sha256": "c4b854d0a1886ecf78f932f3a8aafc5c8017c4a8cfedebe8bd8eaceeaab41044",
+      "profile": "ps_6_7",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "2761d4a347cacde5e14c6f3b74813349eb273568a9a0d6fd25ee1e702cc410ec.bin": {
+      "sha256": "725a2962de2e9e9a28ca971ac4db2cc3788a0a39422ec9f26be864e6e759f015",
+      "profile": "ps_6_6",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "dd020125ad72446203d3a45a6d1c6a520eb8eed3cf625fe9c33301203a61feaa.bin": {
+      "sha256": "725a2962de2e9e9a28ca971ac4db2cc3788a0a39422ec9f26be864e6e759f015",
+      "profile": "ps_6_6",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "2848a3627af932ad982cb208fab30f6ee6ed266e67eb4bb1953037022301b922.bin": {
+      "sha256": "725a2962de2e9e9a28ca971ac4db2cc3788a0a39422ec9f26be864e6e759f015",
+      "profile": "ps_6_6",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "2827a53e7183e8a266a721a84891ec268397c57d5fe0ff04c80a0bba47f80753.bin": {
+      "sha256": "1f048fca4455a4e10b7aeb874ffbc0c53d920798c7a056c0bb498155943e22c6",
+      "profile": "vs_6_5",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "83a3eb5c2e3526a4e68db0ccc65f14ed48bcbe14bf6cfbc624c8a40bec4a1a60.bin": {
+      "sha256": "1f048fca4455a4e10b7aeb874ffbc0c53d920798c7a056c0bb498155943e22c6",
+      "profile": "vs_6_5",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "67f9843bc8db8261b4b01a9cbb85e9d004503d4a59416dff739ec84e475f497e.bin": {
+      "sha256": "1f048fca4455a4e10b7aeb874ffbc0c53d920798c7a056c0bb498155943e22c6",
+      "profile": "vs_6_5",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "2af0fa7dafe922e528a8ff5fe2c02b487093e6bd58d6d8d0d56d757dfb923528.bin": {
+      "sha256": "01277b410cc5b6647c8e28131bab39172dc795e38b880b9bcf9edad94b96b90b",
+      "profile": "vs_6_8",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "91e7f4f54c5df175648c9a0fcb1ddb965e95159fb575eda7cd4e63f43e625772.bin": {
+      "sha256": "01277b410cc5b6647c8e28131bab39172dc795e38b880b9bcf9edad94b96b90b",
+      "profile": "vs_6_8",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "2a824ad6c72c1d8992b52ac39789b8434a41de17c81a5a501359cb54ac460562.bin": {
+      "sha256": "01277b410cc5b6647c8e28131bab39172dc795e38b880b9bcf9edad94b96b90b",
+      "profile": "vs_6_8",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "2b4b9ceffd8fb1d0086dbef13b97982b3874e3616f616b15e96a65921a2d6d5a.bin": {
+      "sha256": "22bd462683d8c6c010ac01642853d71dc6b93efde5c809bcb864e6ee0235b61b",
+      "profile": "vs_6_7",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "9507e18c51eb165015d94d401d2dc4cadb8b4a01a4834c877d4a789140001bd7.bin": {
+      "sha256": "22bd462683d8c6c010ac01642853d71dc6b93efde5c809bcb864e6ee0235b61b",
+      "profile": "vs_6_7",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "a404adf0ddaf87a13f93514529b0180979cfb9256d0ab2d005e807f0d4bd032e.bin": {
+      "sha256": "22bd462683d8c6c010ac01642853d71dc6b93efde5c809bcb864e6ee0235b61b",
+      "profile": "vs_6_7",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "2f09d1a37b3c1b8f9c11b32da9bf7439e6bda3a2231090d74cd2bc29d3f8c6d4.bin": {
+      "sha256": "1101daad4f8eda5c1dac71f265ad44a1ff5b17021f1436cee4976980ecfd1a07",
+      "profile": "vs_6_6",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "f6d34976b8d4a613eedaa83c9f61dec22aa265d8320e4789acb79fdc51bca406.bin": {
+      "sha256": "1101daad4f8eda5c1dac71f265ad44a1ff5b17021f1436cee4976980ecfd1a07",
+      "profile": "vs_6_6",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "9eae726f2d1ab665b9f24fc54b9d911527472762cf0ff3a254ec9833949f9266.bin": {
+      "sha256": "1101daad4f8eda5c1dac71f265ad44a1ff5b17021f1436cee4976980ecfd1a07",
+      "profile": "vs_6_6",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "2f887f0989213125d24653f670dbc96e0f358105aa49850ec43f9cf361ed7331.bin": {
+      "sha256": "af3289ec64ff68f4cfff25070515709cc6a98c7a4690866ed9bc29ebacb53e7e",
+      "profile": "vs_6_4",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "804c78e24540448fc0121441fb83e8ddfce5e34df734a88807212b12bb862d77.bin": {
+      "sha256": "af3289ec64ff68f4cfff25070515709cc6a98c7a4690866ed9bc29ebacb53e7e",
+      "profile": "vs_6_4",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "e87449b0537ae3e20748bfaa82039c9a58734bd717dda185e93c2432eab0fac6.bin": {
+      "sha256": "af3289ec64ff68f4cfff25070515709cc6a98c7a4690866ed9bc29ebacb53e7e",
+      "profile": "vs_6_4",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "2f8ffdd45c6513e0250690adf47a73867924087e2c13ea385a5d45de4c7888d8.bin": {
+      "sha256": "9a1997b8454a9d1bfe7648384604a56090124b9ba8fd96140b0bca0497e423cf",
+      "profile": "ps_6_3",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "1ada148dbaafe47f0273500e3c5060234a4e442ac6857ca2bd2eebaedddd0a6f.bin": {
+      "sha256": "9a1997b8454a9d1bfe7648384604a56090124b9ba8fd96140b0bca0497e423cf",
+      "profile": "ps_6_3",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "73d99c596f99521eabae7be42086c2b5b5f278d98357a3107f77d0917b578ce1.bin": {
+      "sha256": "9a1997b8454a9d1bfe7648384604a56090124b9ba8fd96140b0bca0497e423cf",
+      "profile": "ps_6_3",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "303956e5ab3c2b147c16ece05c42fb90845819902166d986ecc65f8b4e9a9d58.bin": {
+      "sha256": "6f0708374cd28f8d3e9c12a01bd9eef89656b871afd7bf17f46db68ec7ee2ae2",
+      "profile": "ps_6_7",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "5e2b1de64de9e3bd9813bd818e7618a58449d049af76a7fd20c82fe9de1d5f9b.bin": {
+      "sha256": "6f0708374cd28f8d3e9c12a01bd9eef89656b871afd7bf17f46db68ec7ee2ae2",
+      "profile": "ps_6_7",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "f90a9621daa6c6af6327312686ba405c8a1a1a740e99fd091cbbd5ecaecfa3ef.bin": {
+      "sha256": "6f0708374cd28f8d3e9c12a01bd9eef89656b871afd7bf17f46db68ec7ee2ae2",
+      "profile": "ps_6_7",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "32ebd37c32d91c052cfbc2488dc4d81dd4d8b9397d38700c2f23e9cef110105c.bin": {
+      "sha256": "baa84b981e03701b4aee2ffd4fd01dc69840863fd070e249d857263631413cc8",
+      "profile": "ps_6_8",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "3be228be203fabfd84381e06c35c0fc7455473b0628c73f541ce1b85f263cfae.bin": {
+      "sha256": "baa84b981e03701b4aee2ffd4fd01dc69840863fd070e249d857263631413cc8",
+      "profile": "ps_6_8",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "e9d4ca8188f3b911f789d6e42a11ba8034b08d9b7b36269b9447ba40470fe18d.bin": {
+      "sha256": "baa84b981e03701b4aee2ffd4fd01dc69840863fd070e249d857263631413cc8",
+      "profile": "ps_6_8",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "35dc818c1bb3c10723352a4859f3e2d727a31de9c7f7ae9dc164c2a7e20b2b43.bin": {
+      "sha256": "3d1a97d378778de3aeb4e9bfea606bcb3c3c4742d1a0f597766cc2c5fe25d47b",
+      "profile": "ps_6_3",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "94bfd10fc78125a20d74d6764acf13b15e84b4bf89ff42cb3bbfe6143e929401.bin": {
+      "sha256": "3d1a97d378778de3aeb4e9bfea606bcb3c3c4742d1a0f597766cc2c5fe25d47b",
+      "profile": "ps_6_3",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "05d13638d3d37cd9fda22e9d681377192861dbc8598d14d2d80f1fa6c39c2e80.bin": {
+      "sha256": "3d1a97d378778de3aeb4e9bfea606bcb3c3c4742d1a0f597766cc2c5fe25d47b",
+      "profile": "ps_6_3",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "388b7d7b06bff57de374c777f94ff77686e6860c828f9f3400b391f7b83e165b.bin": {
+      "sha256": "db566ae136793c8c09b6234f10add31fe6be2c4d715db6ec42cb3092e7a5e633",
+      "profile": "vs_6_0",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "d9d5a7591c950e60a28a7948e61e42f48c453a5a4e22c5ce3c0700e2c857870c.bin": {
+      "sha256": "db566ae136793c8c09b6234f10add31fe6be2c4d715db6ec42cb3092e7a5e633",
+      "profile": "vs_6_0",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "8aa51419c1c536073c364317f6169362b5a37c8d2740f61513dddbbf9c87e4c3.bin": {
+      "sha256": "db566ae136793c8c09b6234f10add31fe6be2c4d715db6ec42cb3092e7a5e633",
+      "profile": "vs_6_0",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "39c0a09ce076f22ac9c7e1e4e7d7e76487402eda658edab45abcc3eda64973f0.bin": {
+      "sha256": "a9d10a6393aba3fefd22e4163595bbbc34b24fbbadea90e1a76306837a098b38",
+      "profile": "vs_6_2",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "e0e8ab60d9bec0736f74db8c433c4b7d631f37531732d8622d3f8a77a741627c.bin": {
+      "sha256": "a9d10a6393aba3fefd22e4163595bbbc34b24fbbadea90e1a76306837a098b38",
+      "profile": "vs_6_2",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "ab5572377c1506bf355ced8dba89966ce74e4c81d4f6d1b4fd18d06ce15f3902.bin": {
+      "sha256": "a9d10a6393aba3fefd22e4163595bbbc34b24fbbadea90e1a76306837a098b38",
+      "profile": "vs_6_2",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "3b5e87ad5a4cfd725d3c91ed84e7323ffabf0eaad4a79562216bf7c241d9f0c9.bin": {
+      "sha256": "7b2556cfa9f50e2dbb3151a61d370fc4c61b2072165a1ab6965b9a24838d3a7f",
+      "profile": "ps_6_3",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "5d5743cb37f26756884237e5bb6b32330df81a7d764a79154b0a062cc6c38f03.bin": {
+      "sha256": "7b2556cfa9f50e2dbb3151a61d370fc4c61b2072165a1ab6965b9a24838d3a7f",
+      "profile": "ps_6_3",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "fd7fee399eaf1061891a15cac3869be0a436a0f862a8f67f33880e8fdc672222.bin": {
+      "sha256": "7b2556cfa9f50e2dbb3151a61d370fc4c61b2072165a1ab6965b9a24838d3a7f",
+      "profile": "ps_6_3",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "3bbf3137bcdf302230c716d9482ce07d0d604a690ee7433066e7c3cfafd9f522.bin": {
+      "sha256": "4b4ced2b3e5ee6e181d59de669288627fe0a260cda1714b908eced48f846b6bd",
+      "profile": "ps_6_2",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "7a0a5562fe37bc73a7f8f2b80e921b3317d83c37545fbe9abf390719348856e7.bin": {
+      "sha256": "4b4ced2b3e5ee6e181d59de669288627fe0a260cda1714b908eced48f846b6bd",
+      "profile": "ps_6_2",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "513ddd642ec5b8e39f98342067d4d646c886c54df95bd66684d7839a7b241f0a.bin": {
+      "sha256": "4b4ced2b3e5ee6e181d59de669288627fe0a260cda1714b908eced48f846b6bd",
+      "profile": "ps_6_2",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "3d5b20e932c1747387908af0017133bb5f71c259d578c70b99837f98c6cee0d8.bin": {
+      "sha256": "e02e85b783ce13fc4dca6ad779cf4da27ba81c5a359bb827b05b2ac37911a9f7",
+      "profile": "ps_6_4",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "6d32ffe9072477bd3887dab39941311fcb9150a6a214b284e9ca79abbf5de9c5.bin": {
+      "sha256": "e02e85b783ce13fc4dca6ad779cf4da27ba81c5a359bb827b05b2ac37911a9f7",
+      "profile": "ps_6_4",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "e9fc989079645d39508baadfab4f58b2a7fe1ef4c4e1b0f2edcaca3a2cd25f3c.bin": {
+      "sha256": "e02e85b783ce13fc4dca6ad779cf4da27ba81c5a359bb827b05b2ac37911a9f7",
+      "profile": "ps_6_4",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "3e0bbfa862ce7551d9ad3eb94f384c26f1a56c1085a46a5bc22fbcc03b301adc.bin": {
+      "sha256": "a2e7662ecef54765ff95e7d487b528648750a75b52c8fba6538d89d17166ee14",
+      "profile": "ps_6_6",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "9183abcfc0559a5de881e5cf6fe8238b2edb3b2273757ee482e0b8dccc1544f4.bin": {
+      "sha256": "a2e7662ecef54765ff95e7d487b528648750a75b52c8fba6538d89d17166ee14",
+      "profile": "ps_6_6",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "fd07c537c98ecf4316d345f19a42b2156d14f4c279149bb69ab6e7ed65ef63d1.bin": {
+      "sha256": "a2e7662ecef54765ff95e7d487b528648750a75b52c8fba6538d89d17166ee14",
+      "profile": "ps_6_6",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "3ea6d1f138c0c996e35341e1088af374297ac2375d426f50dd2a4bdf7f8995ce.bin": {
+      "sha256": "3663b4670bbb39bec4a6aafc8a8068f388c28f3537127f669425c509e3dd0823",
+      "profile": "vs_6_2",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "06819b13f44b80d6991ae6f6ad8a63e276bbf1196abebc2329faab17c27d7ee6.bin": {
+      "sha256": "3663b4670bbb39bec4a6aafc8a8068f388c28f3537127f669425c509e3dd0823",
+      "profile": "vs_6_2",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "9dac84efe5567e843ed4403a1653154aa818d377dd2b802eb87ad186c8f7a46c.bin": {
+      "sha256": "3663b4670bbb39bec4a6aafc8a8068f388c28f3537127f669425c509e3dd0823",
+      "profile": "vs_6_2",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "411a397e24fa52a76e0f271459ac446e398a7849368bf6459be1d707ce5455ab.bin": {
+      "sha256": "fca20d787e600b37797bef3f910c1c340a6c354a10f85b025d0f8540f21a6dbf",
+      "profile": "vs_6_5",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "39826edf69101351a78b70523b00c25247e68ed7857ecf723f43188390cb28b7.bin": {
+      "sha256": "fca20d787e600b37797bef3f910c1c340a6c354a10f85b025d0f8540f21a6dbf",
+      "profile": "vs_6_5",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "740d7e9f54856cc446dbc37ccf9defa62e4e490633e6fbb635cabb9ff0af6fa4.bin": {
+      "sha256": "fca20d787e600b37797bef3f910c1c340a6c354a10f85b025d0f8540f21a6dbf",
+      "profile": "vs_6_5",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "4182a3f690b59bc17735bb8d3734f380201a0d5d5aa9c1accd4eec4cbfccf38e.bin": {
+      "sha256": "d99591de17853a0d1446603525ec9cac8e013a13209dd56996f22f3bfecacbf2",
+      "profile": "vs_6_8",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "949ce34b99feb5b522a496d49d03c22265dde74976ba696dd823e1613f7e70e6.bin": {
+      "sha256": "d99591de17853a0d1446603525ec9cac8e013a13209dd56996f22f3bfecacbf2",
+      "profile": "vs_6_8",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "826529ce950e5ca3176c50ed3844761639931809ec77c5e6eef468047e908ce4.bin": {
+      "sha256": "d99591de17853a0d1446603525ec9cac8e013a13209dd56996f22f3bfecacbf2",
+      "profile": "vs_6_8",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "421505b27cff98dacf97d68be2e54a54597e82a873dc49d80e0a07635bdfe802.bin": {
+      "sha256": "7f675eb76dba6b32d844af2e3f078cc80bb22b64a8208d608fe222e86e6a0f20",
+      "profile": "ps_6_6",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "0d977781b061a73eacf07ddaa1c5388293aca3246cbbeebd4c5f7dfc272d9db5.bin": {
+      "sha256": "7f675eb76dba6b32d844af2e3f078cc80bb22b64a8208d608fe222e86e6a0f20",
+      "profile": "ps_6_6",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "5ac35c9972a7134ed40285e7bad5f274d254992dd672679b619e4b8adb488a7b.bin": {
+      "sha256": "7f675eb76dba6b32d844af2e3f078cc80bb22b64a8208d608fe222e86e6a0f20",
+      "profile": "ps_6_6",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "42d3411a3d6c9fc1abb5eea6db0a19e3a8caa82cebbdfda6f8945ea623024b27.bin": {
+      "sha256": "a5209ce71a4f1f8b56012e29f1baab9160570a95de537c54ea2243a964c53aa7",
+      "profile": "vs_6_6",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "721074fca6f262fcce8cb63827a613472649175c6278d557f3f7e7d0d75fb3ab.bin": {
+      "sha256": "a5209ce71a4f1f8b56012e29f1baab9160570a95de537c54ea2243a964c53aa7",
+      "profile": "vs_6_6",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "b2ea335a0c2ce272ccfaf47890b6c3427977c5e9fed5c9aaa6f1a3709488dab1.bin": {
+      "sha256": "a5209ce71a4f1f8b56012e29f1baab9160570a95de537c54ea2243a964c53aa7",
+      "profile": "vs_6_6",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "43abcbc0f4f249b01f9c34d5eaecd9820c7baca7e69a7a66fbc6a95ff0700456.bin": {
+      "sha256": "4f303eaacccaf0b4cd1bb83ea3d918118333b566411a7ab55a7343544ecde99f",
+      "profile": "vs_6_0",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "8270945eff668db64960062710a6bae1d9e945c991a3f40ca650aca749ae1351.bin": {
+      "sha256": "4f303eaacccaf0b4cd1bb83ea3d918118333b566411a7ab55a7343544ecde99f",
+      "profile": "vs_6_0",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "1798a7dcb107c960b960bdc34e7ce822dc72f0efa50b78444424c7bbedefa2b6.bin": {
+      "sha256": "4f303eaacccaf0b4cd1bb83ea3d918118333b566411a7ab55a7343544ecde99f",
+      "profile": "vs_6_0",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "4474c7e9079218f59456034e82f500a83e4c7160fa66d14d14896198c3d7db61.bin": {
+      "sha256": "9adaf6221c4e635164f9fd77a1a3a3cd1eb1f3a4110153c6cee80e8b4e3973ac",
+      "profile": "vs_6_3",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "38a0d73a61aae87e62dd0dcd7b85c149dbf7a2c8ee31ee885a40adc85a13230a.bin": {
+      "sha256": "9adaf6221c4e635164f9fd77a1a3a3cd1eb1f3a4110153c6cee80e8b4e3973ac",
+      "profile": "vs_6_3",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "a375b4fb9b4e1bfbf5a7bb0ff8c22778b870586a3235fafdf332a4a4492b04da.bin": {
+      "sha256": "9adaf6221c4e635164f9fd77a1a3a3cd1eb1f3a4110153c6cee80e8b4e3973ac",
+      "profile": "vs_6_3",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "447b570f712ff291976f31544d97cc6cd66ebb197c455f54801987cdae74c856.bin": {
+      "sha256": "fda8779a790ec36105140b2d41ae6169cde758899e9af870042d21c7e809932e",
+      "profile": "ps_6_1",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "8d00b2c5e8bc980d54f63a510a2c464799b7d41bb847634ca15611afb8f7527d.bin": {
+      "sha256": "fda8779a790ec36105140b2d41ae6169cde758899e9af870042d21c7e809932e",
+      "profile": "ps_6_1",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "a61281b234f1257dc9692c3e0dae406386360722fecbff037c98d01eb9e99317.bin": {
+      "sha256": "fda8779a790ec36105140b2d41ae6169cde758899e9af870042d21c7e809932e",
+      "profile": "ps_6_1",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "44c170d36edd118758370337114629dd97aa1d9883c29f39cba380363a7407e4.bin": {
+      "sha256": "2d22685b532b1ebd2c80f0bfe8565509b0e4b44c1acbd06b9d16d965211c7837",
+      "profile": "vs_6_5",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "4be004cd7f06a0665a0930d8f901938af368966046d9a736065929db775c2d16.bin": {
+      "sha256": "2d22685b532b1ebd2c80f0bfe8565509b0e4b44c1acbd06b9d16d965211c7837",
+      "profile": "vs_6_5",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "c6816ff2d8a48ca5b33013903097ff02ac5dc78a09aef341b91b8f212537ba79.bin": {
+      "sha256": "2d22685b532b1ebd2c80f0bfe8565509b0e4b44c1acbd06b9d16d965211c7837",
+      "profile": "vs_6_5",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "4548a8ad6f0a3af229742b45a75588083dba54bb3aab48a8354c72ed631e4b9a.bin": {
+      "sha256": "3671db867030def62f2ec90da53539d97cdbe24d1ae65457718dc1e7f373dc01",
+      "profile": "vs_6_8",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "7266f52ef1aba1dd4cf398be72031a996ab2f83a06108ed29253fdb42c88e3a0.bin": {
+      "sha256": "3671db867030def62f2ec90da53539d97cdbe24d1ae65457718dc1e7f373dc01",
+      "profile": "vs_6_8",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "b74509ea5bab11e092350a9d602e68acefbde71d4c1038575b2c5747adb1a4bf.bin": {
+      "sha256": "3671db867030def62f2ec90da53539d97cdbe24d1ae65457718dc1e7f373dc01",
+      "profile": "vs_6_8",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "454c258de1698d86eab4358fe8dac6dedb9bf173c50f6027ef9e0a2842ff7204.bin": {
+      "sha256": "471973975bb7969b1f1d356d01ad021b0808c3a1b30c0433846ac2a834d2295a",
+      "profile": "vs_6_6",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "b2cc48a77c4fbb453251ac87844e7fed6f9d77822bf9721d2261087f62c2500f.bin": {
+      "sha256": "471973975bb7969b1f1d356d01ad021b0808c3a1b30c0433846ac2a834d2295a",
+      "profile": "vs_6_6",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "419ce7326bf78ea36663cb86675e09cda6103bde9a771dbb6c20e77858e853a0.bin": {
+      "sha256": "471973975bb7969b1f1d356d01ad021b0808c3a1b30c0433846ac2a834d2295a",
+      "profile": "vs_6_6",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "48dd5a798fcf331bf359adabd3a9678e10a4e1af9cebb775bbf7dbb4f90311da.bin": {
+      "sha256": "cd906ba48041b1a13a57ebfc5749b05807f664fc934b85202584f3391fa227e0",
+      "profile": "vs_6_2",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "ccfb0e6f61538563aedaa61b75369a2730eb661dbafe5500ec7ff17b365d616d.bin": {
+      "sha256": "cd906ba48041b1a13a57ebfc5749b05807f664fc934b85202584f3391fa227e0",
+      "profile": "vs_6_2",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "c512756d205393784a695eea6dd575e5b5e32b49cf9bd99d014223f56c86a13c.bin": {
+      "sha256": "cd906ba48041b1a13a57ebfc5749b05807f664fc934b85202584f3391fa227e0",
+      "profile": "vs_6_2",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "4e9436afa41231253ce23e3083f506e09f0d4913ad4721de4cf6c1682ab671bb.bin": {
+      "sha256": "a38b189eebfa67ee025ae34903a807bfb23dfd8b64fa1f3a43ede9947f19f382",
+      "profile": "ps_6_4",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "b529071cec588cb9f7b4ac7fbe20d410732ac7495fe421178a7f46996f3db6e7.bin": {
+      "sha256": "a38b189eebfa67ee025ae34903a807bfb23dfd8b64fa1f3a43ede9947f19f382",
+      "profile": "ps_6_4",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "457890a4aa161a58a0c68afe791db8984a443ab428672b273c7d56558d5e0d58.bin": {
+      "sha256": "a38b189eebfa67ee025ae34903a807bfb23dfd8b64fa1f3a43ede9947f19f382",
+      "profile": "ps_6_4",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "4efeeeb53b06da70f30f8c34715a44d5afee1256a63010454c748976f9f849d0.bin": {
+      "sha256": "d2563ab2306349623bd7019d0abe9e83ca7b97c263163a923f9b8c37ea463631",
+      "profile": "ps_6_6",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "d134437191880802c65727cb75d80073c37e0e8f42d36ee9b34e3f748a4b2c78.bin": {
+      "sha256": "d2563ab2306349623bd7019d0abe9e83ca7b97c263163a923f9b8c37ea463631",
+      "profile": "ps_6_6",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "30830526ecab2526533e5c88de415b77a66510946fd30cfb4128ff1abc56d56b.bin": {
+      "sha256": "d2563ab2306349623bd7019d0abe9e83ca7b97c263163a923f9b8c37ea463631",
+      "profile": "ps_6_6",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "501fe4f3895b638d4cb1a64fff0957eade8672278a9ad7b30bc0d61e28430528.bin": {
+      "sha256": "506c54f511c82768b63f1ecef9fc819dcfe8298e9077e27f27ccf867e82c8ae0",
+      "profile": "ps_6_4",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "a51166bfc97b425e790b8f07746e0c5384855ee431e32e0531405287c053a011.bin": {
+      "sha256": "506c54f511c82768b63f1ecef9fc819dcfe8298e9077e27f27ccf867e82c8ae0",
+      "profile": "ps_6_4",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "0fd62403463cafbab89ffe7c141bc42a7aa1782ad05820c0f662f3ab91f97e72.bin": {
+      "sha256": "506c54f511c82768b63f1ecef9fc819dcfe8298e9077e27f27ccf867e82c8ae0",
+      "profile": "ps_6_4",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "5136b368325adcdbe326c7562446a6343474066a7c3ec02aa34884bb21631a81.bin": {
+      "sha256": "a147d5ebbd46ff95c59b4588c26a232b348d5aec64dafb60767e37e086ba568f",
+      "profile": "ps_6_7",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "685cf1d3ab240ff2281bfd327b5bc7e1285635373587137f24218fe3f6fd4ef7.bin": {
+      "sha256": "a147d5ebbd46ff95c59b4588c26a232b348d5aec64dafb60767e37e086ba568f",
+      "profile": "ps_6_7",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "1a46d69919deb3a3dae7526d0ae8d5a955fb21e7fcb90a4bc116e0e3d65a2ede.bin": {
+      "sha256": "a147d5ebbd46ff95c59b4588c26a232b348d5aec64dafb60767e37e086ba568f",
+      "profile": "ps_6_7",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "54fd29207e24c7934f33a7e4aa4e404424ae25a6d97c0dacb2f86a07f58568bf.bin": {
+      "sha256": "4e55c89ec6c548a4c19a23367ba45b190459e715576b37a7916664c7ce7a74df",
+      "profile": "ps_6_3",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "e339bd82e63486ffa73a29b2a7c7a9fb550d97b3b650bcc7927206e6bb4b972d.bin": {
+      "sha256": "4e55c89ec6c548a4c19a23367ba45b190459e715576b37a7916664c7ce7a74df",
+      "profile": "ps_6_3",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "a3d899e183ad856dabe9aa741507ec9d3333fe1323026109e4ee6e04175bed3f.bin": {
+      "sha256": "4e55c89ec6c548a4c19a23367ba45b190459e715576b37a7916664c7ce7a74df",
+      "profile": "ps_6_3",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "5592da79e8b313ded04e305d88757c642ff3d671b160e700f9e663389101dadf.bin": {
+      "sha256": "cc8dd5c749d5ad903067f0103be4330f62e301a44b9bffdab7e13327fbcd3247",
+      "profile": "vs_6_7",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "307719a4db3515b6772e1082b7090218f4c88c458ca0ba940af61d3a5b37356a.bin": {
+      "sha256": "cc8dd5c749d5ad903067f0103be4330f62e301a44b9bffdab7e13327fbcd3247",
+      "profile": "vs_6_7",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "28b011a44fb1c02c9a751cfcf6fcd7d08a5bcc7410688731d9ab18578c441aa3.bin": {
+      "sha256": "cc8dd5c749d5ad903067f0103be4330f62e301a44b9bffdab7e13327fbcd3247",
+      "profile": "vs_6_7",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "566e0198db8063aa579de4866d8e13c76bc3023a6bd9f6885a1efc705dd23e59.bin": {
+      "sha256": "a29f3654dc37b18e4b08429af41d2792b979c05f6bffe00ce82841ed807478fa",
+      "profile": "vs_6_2",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "b17abdb2c52e132457e1315b37aa1c2b7d1f150ce44e76b6f2ab213731d0ea2b.bin": {
+      "sha256": "a29f3654dc37b18e4b08429af41d2792b979c05f6bffe00ce82841ed807478fa",
+      "profile": "vs_6_2",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "39d82c275b3ba6c9ea5c5774fb831427aee33722aa6e80de61e58c9d2fc1760f.bin": {
+      "sha256": "a29f3654dc37b18e4b08429af41d2792b979c05f6bffe00ce82841ed807478fa",
+      "profile": "vs_6_2",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "57f2dc29f861009ed0b746f06e85ae794ff8a59513a110d3f9c4d45c45bba84f.bin": {
+      "sha256": "104fc5c3c3a78b264377fad9a17e095217e7f24a5d225c20976a95ee696de210",
+      "profile": "vs_6_4",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "53976e9a10e6956db73af6823127ce5989e71d6f2352428d16ed3e9c1a22535b.bin": {
+      "sha256": "104fc5c3c3a78b264377fad9a17e095217e7f24a5d225c20976a95ee696de210",
+      "profile": "vs_6_4",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "6dc29f3010ffce63d21d2a4aa36b95e603ee1ef5e0a840004a748799470672ff.bin": {
+      "sha256": "104fc5c3c3a78b264377fad9a17e095217e7f24a5d225c20976a95ee696de210",
+      "profile": "vs_6_4",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "584df91ce3f22755f23dc7f8d49ad806f17821249ce81826c0f53d1f496a654d.bin": {
+      "sha256": "78b2ace8e61eafbaa5765ab6971de05fbdfe16ef4ec0039a924f539311608560",
+      "profile": "ps_6_2",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "a0de75538faafa0ac4d322be1bf315de947b44068f731dccde766ea7fc26b3ac.bin": {
+      "sha256": "78b2ace8e61eafbaa5765ab6971de05fbdfe16ef4ec0039a924f539311608560",
+      "profile": "ps_6_2",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "40ed33b88dff3538c03691777a9b7130f8a7d59ed15f16a1a53cba3cc412ae1b.bin": {
+      "sha256": "78b2ace8e61eafbaa5765ab6971de05fbdfe16ef4ec0039a924f539311608560",
+      "profile": "ps_6_2",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "5a2b0923eb3f906176563f0746e4be3091aa74a8614364094934e6f0e28d692b.bin": {
+      "sha256": "b77b27821f7af5ce57c30b3a08c07a39d6577a63ace173b7754ab916a24704b6",
+      "profile": "ps_6_3",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "62050457a1c1d0cbb322751a2d6559160bd3ed405b670822435e59ecef3a5050.bin": {
+      "sha256": "b77b27821f7af5ce57c30b3a08c07a39d6577a63ace173b7754ab916a24704b6",
+      "profile": "ps_6_3",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "7b3dfddcce5a64d39e2e93771b8740b3906a2e937272de961adc76fb82213026.bin": {
+      "sha256": "b77b27821f7af5ce57c30b3a08c07a39d6577a63ace173b7754ab916a24704b6",
+      "profile": "ps_6_3",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "61c65954988bc0d01a425ed8e3680bfc57af267147f81032b2e6b753c1fb2ba7.bin": {
+      "sha256": "1ae6d0c70a4192d261803b836b3ca28c77a6befa6474e4497947f1a5401b8008",
+      "profile": "ps_6_7",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "cad4ceadf6800709f1b91a0529002ab853a6603adb549601aef3013002f7eea9.bin": {
+      "sha256": "1ae6d0c70a4192d261803b836b3ca28c77a6befa6474e4497947f1a5401b8008",
+      "profile": "ps_6_7",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "ec64930191be8dd1552cb5057d629a5547020b477f91449669de79bb7e5a3300.bin": {
+      "sha256": "1ae6d0c70a4192d261803b836b3ca28c77a6befa6474e4497947f1a5401b8008",
+      "profile": "ps_6_7",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "6350eb392dc007eafe8bfa879dd065ce7e676d6714e2eda435d2865478ce1a85.bin": {
+      "sha256": "ad1308f62f4bbf29ad02bd29295c196a408d5d1de9b6275ef8f6b47e759741f2",
+      "profile": "vs_6_1",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "8b1ff0dbe0b81d1632f068359e6d86a88f978b228209fc87e835c9bb91f7d805.bin": {
+      "sha256": "ad1308f62f4bbf29ad02bd29295c196a408d5d1de9b6275ef8f6b47e759741f2",
+      "profile": "vs_6_1",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "a97734dc568092e62e81347e858e44a3d5bc31fb1a1e6c970a0a7369f0efbeb7.bin": {
+      "sha256": "ad1308f62f4bbf29ad02bd29295c196a408d5d1de9b6275ef8f6b47e759741f2",
+      "profile": "vs_6_1",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "64df0e6b080fadbd551072f10a4a233a0c578ba7dab8888931cf66e0821830c7.bin": {
+      "sha256": "c206c10c2987c572a24a0191a8e0b3a27c9c7b0fcc1c6673cd58e1b84e38e03b",
+      "profile": "vs_6_6",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "a983181faa127dbb924ad49654128e8c9d3e505e4cafa86a61f2c446789fe787.bin": {
+      "sha256": "c206c10c2987c572a24a0191a8e0b3a27c9c7b0fcc1c6673cd58e1b84e38e03b",
+      "profile": "vs_6_6",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "c5416db68cd5eff1939afe0628f43e8405732027bc64da286ab1dda87ab9c945.bin": {
+      "sha256": "c206c10c2987c572a24a0191a8e0b3a27c9c7b0fcc1c6673cd58e1b84e38e03b",
+      "profile": "vs_6_6",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "667e54b501d090d179d0a1400042ef92e83169f74b99ec87057f61493cf014aa.bin": {
+      "sha256": "23532911e5320e62c2d6ebdcc881731fa6d8205310f010ea36e4c3d1948a0b77",
+      "profile": "ps_6_3",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "99be1fbbf5458dacddfd6413cf28463e69fca5a875ccf91ec3b91cdec3a263fb.bin": {
+      "sha256": "23532911e5320e62c2d6ebdcc881731fa6d8205310f010ea36e4c3d1948a0b77",
+      "profile": "ps_6_3",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "4b57ad20519072b853e5a8ef9f5d3fe0e6eb4e1222cfcfbc6d181f32c2bc68b4.bin": {
+      "sha256": "23532911e5320e62c2d6ebdcc881731fa6d8205310f010ea36e4c3d1948a0b77",
+      "profile": "ps_6_3",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "6764338240211380aac589159ce43bded3dc7a0b259922089694fd61eab7a34d.bin": {
+      "sha256": "522eec710bd940fe681e85e60f8771f46636c783832a63ce5304c0835e44af41",
+      "profile": "ps_6_8",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "823364d1be6bbb40ed9bcc4195e5ccf3166d1a205643637d2d53ba00bfc9f307.bin": {
+      "sha256": "522eec710bd940fe681e85e60f8771f46636c783832a63ce5304c0835e44af41",
+      "profile": "ps_6_8",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "bc913730be42090e623db8f8ce9a7862d10f6667abfb831031f233633a6b7382.bin": {
+      "sha256": "522eec710bd940fe681e85e60f8771f46636c783832a63ce5304c0835e44af41",
+      "profile": "ps_6_8",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "69b45238517b00c30adc093f137a5195f9bbc0b9af2705131c215673eefecc3a.bin": {
+      "sha256": "cf5cfcddc1140f353f282ba2344b91c4d502e784a3afe4403dda41b9e3460953",
+      "profile": "ps_6_4",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "de0e1edff68a4a96517ac7736c18817e6ec59505a61143cd529d4b375243261b.bin": {
+      "sha256": "cf5cfcddc1140f353f282ba2344b91c4d502e784a3afe4403dda41b9e3460953",
+      "profile": "ps_6_4",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "f324513ff1c1e904051421998f2985d4ccf03becd3f5820583a0f960277b4578.bin": {
+      "sha256": "cf5cfcddc1140f353f282ba2344b91c4d502e784a3afe4403dda41b9e3460953",
+      "profile": "ps_6_4",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "6aff0f7a9dc7d73dcd72495b197d998d0a1cb053e2e8817f90c16ba07a7fdb7c.bin": {
+      "sha256": "6ffd0ce7c58f40577ead3501ad4bf6d547c81351865e927bb5c4f740bcb1a2d7",
+      "profile": "ps_6_8",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "26a7cae7d4293c50c0455c82a840b4b2910994e3c23e914b3ee749ea1327fa21.bin": {
+      "sha256": "6ffd0ce7c58f40577ead3501ad4bf6d547c81351865e927bb5c4f740bcb1a2d7",
+      "profile": "ps_6_8",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "6e07d651f47c6017450739aaf29d45132a16785c4789246dda5c988837ae494b.bin": {
+      "sha256": "6ffd0ce7c58f40577ead3501ad4bf6d547c81351865e927bb5c4f740bcb1a2d7",
+      "profile": "ps_6_8",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "6f945e41aa18f7bb7222be93a2618fd9b3cbd2f621f4de99730f3ae36990f04f.bin": {
+      "sha256": "d2625be16e007f3ced5a8ca232e7129deaeec5e2d8f2af22902da353076c4a2a",
+      "profile": "vs_6_8",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "9a6c6bfa87cf58d95f1e023fce50bd835a80f127cf6fca221d7872279bd882c1.bin": {
+      "sha256": "d2625be16e007f3ced5a8ca232e7129deaeec5e2d8f2af22902da353076c4a2a",
+      "profile": "vs_6_8",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "349e8e7dde1f523b3e56f7c841642655bd3498bb450490a55d5f6db78c53e48b.bin": {
+      "sha256": "d2625be16e007f3ced5a8ca232e7129deaeec5e2d8f2af22902da353076c4a2a",
+      "profile": "vs_6_8",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "7179b774224ce14e368a2f329491b60194d8cd3a7001774aed4eac87adaa05e6.bin": {
+      "sha256": "566d902bb6638488be07571535c9e75b7eb85fdf90cdf50469baac2cca3bab6a",
+      "profile": "vs_6_3",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "82a9ca47dce7df3b76d3691493137c25982ac6c023c14cb0698fb75138a14d56.bin": {
+      "sha256": "566d902bb6638488be07571535c9e75b7eb85fdf90cdf50469baac2cca3bab6a",
+      "profile": "vs_6_3",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "5da58b9c6e1e823d8a82d8dd327714a287ab30f2feb05196835958969877f4b9.bin": {
+      "sha256": "566d902bb6638488be07571535c9e75b7eb85fdf90cdf50469baac2cca3bab6a",
+      "profile": "vs_6_3",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "7184c39cda9e745bae07cca18b26a51eb6e8ce73cafc495dd96b37e3e6f42420.bin": {
+      "sha256": "2e49d73f817db826259c5057a4e8ec2f0c74ba460deabbd058b74480276826a9",
+      "profile": "vs_6_6",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "b9b177495be1c49f7b6c89b6d518cf125a074aef339fc66f5c62d31519a73509.bin": {
+      "sha256": "2e49d73f817db826259c5057a4e8ec2f0c74ba460deabbd058b74480276826a9",
+      "profile": "vs_6_6",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "94119dd541ac8610f53a8b085394345034238abfe73ec6c67501c905b70689f4.bin": {
+      "sha256": "2e49d73f817db826259c5057a4e8ec2f0c74ba460deabbd058b74480276826a9",
+      "profile": "vs_6_6",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "7414bf23db1f8020a465e146348214c16ff92fafac0090b5f19e420df8cd5812.bin": {
+      "sha256": "562e5661327673dd9f8922ba24dfc90144ff93c7c02c2d143486d988531dc175",
+      "profile": "ps_6_2",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "687d06d0c039e0afd018c576111d9b0771f73fce5326f782e1f73e901e62814a.bin": {
+      "sha256": "562e5661327673dd9f8922ba24dfc90144ff93c7c02c2d143486d988531dc175",
+      "profile": "ps_6_2",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "3f91f1f63035b2afa24cba748011fa98c7c1248a4e5f0bb5edb90e784e410fff.bin": {
+      "sha256": "562e5661327673dd9f8922ba24dfc90144ff93c7c02c2d143486d988531dc175",
+      "profile": "ps_6_2",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "753e911c9050fd9a2173c671ca2e15c7947206aaa0a5e7ae327776689a555346.bin": {
+      "sha256": "69ef309a0a909296cc53e3a787eb247dc3075674a412469e82e6ca1a9491ecba",
+      "profile": "vs_6_3",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "6da491b3e0b880d225dcf27768c2056bdf1027de469fd40075ab8dafce51127b.bin": {
+      "sha256": "69ef309a0a909296cc53e3a787eb247dc3075674a412469e82e6ca1a9491ecba",
+      "profile": "vs_6_3",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "d6e06ec776e59d96c087d9a5c938fe34c2b3cd0554ec6f782ec3203fc134d16d.bin": {
+      "sha256": "69ef309a0a909296cc53e3a787eb247dc3075674a412469e82e6ca1a9491ecba",
+      "profile": "vs_6_3",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "7689ac07394c092c1678f598316d2cd1f6e16797b447e7679297a66c2e37eb34.bin": {
+      "sha256": "9d99f66ebc70d19be3f126a5475b25b58bdae3e096fce66c56e83e7b118d4d9c",
+      "profile": "ps_6_7",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "d6f85cfa080492d9a98e25a238f2f032592598ade86268ca9f96c2bda18783be.bin": {
+      "sha256": "9d99f66ebc70d19be3f126a5475b25b58bdae3e096fce66c56e83e7b118d4d9c",
+      "profile": "ps_6_7",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "caa51b57890fb76749861b710cc0f700acd5996759687245384b4a5783375046.bin": {
+      "sha256": "9d99f66ebc70d19be3f126a5475b25b58bdae3e096fce66c56e83e7b118d4d9c",
+      "profile": "ps_6_7",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "77923b1db4fa6468f749466e53530ad332ea7004a59e2b0ce444d9789d64a2e4.bin": {
+      "sha256": "66e45c26eff468218dfe6e2041ce447abd9ce94ff160ae3ab2eca9d888106c7b",
+      "profile": "ps_6_4",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "8a76c552b947e24aaf0379b78d1a3d4819715672b2cbed31c6600cbfdae3c924.bin": {
+      "sha256": "66e45c26eff468218dfe6e2041ce447abd9ce94ff160ae3ab2eca9d888106c7b",
+      "profile": "ps_6_4",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "46811bcdc0356ca1aa6bd97caf170ce149a32dc28e604e65a9d26b85791c8243.bin": {
+      "sha256": "66e45c26eff468218dfe6e2041ce447abd9ce94ff160ae3ab2eca9d888106c7b",
+      "profile": "ps_6_4",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "7ab1a4108d145c8084cec7d27f4319be87f1c9a3601204a5fe8d0d8de5d2945d.bin": {
+      "sha256": "1e20dcf1bac2f361f0d39884fd46b446460b43a2f5163681e56df950a2039982",
+      "profile": "ps_6_5",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "08d361381af147bb47a49c1c61debf8e438251ddd5d9acdda305c5a3430c4855.bin": {
+      "sha256": "1e20dcf1bac2f361f0d39884fd46b446460b43a2f5163681e56df950a2039982",
+      "profile": "ps_6_5",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "c45dd24f9e268402fa2a834690d734481fd0a68c7c7c7e99a8b390c458a0b667.bin": {
+      "sha256": "1e20dcf1bac2f361f0d39884fd46b446460b43a2f5163681e56df950a2039982",
+      "profile": "ps_6_5",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "808e5de5bfff5f8b1680d9e68e669da8f24cacd6f8c0e57ffe76377304d19afa.bin": {
+      "sha256": "d54d60e9330f44e3d559dd0ad256a5798f366e96aee3521f97353e4855a3a4c5",
+      "profile": "vs_6_7",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "25c03db7f8bcaca3f54a555178169a0ff114b6b474d7fab7ed56b936bbb0a67c.bin": {
+      "sha256": "d54d60e9330f44e3d559dd0ad256a5798f366e96aee3521f97353e4855a3a4c5",
+      "profile": "vs_6_7",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "5b24017031d2f4722e0241e5a44bed9f4c448f1a20ab34dd843ad2458fec70fa.bin": {
+      "sha256": "d54d60e9330f44e3d559dd0ad256a5798f366e96aee3521f97353e4855a3a4c5",
+      "profile": "vs_6_7",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "829288e4c3a120f1ed8e4c5be2464a2dc3bbe05266330ad693ca3518db8f5b09.bin": {
+      "sha256": "d1faa99ca8634134d6a4a1cd3cd09a654e63bb0dff58d23e12561bb15ffeeff0",
+      "profile": "ps_6_8",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "222cb3ca2cb1cb4f197d02790e7875bcfdf4f846156bcc626cd331e8b3a6ba0f.bin": {
+      "sha256": "d1faa99ca8634134d6a4a1cd3cd09a654e63bb0dff58d23e12561bb15ffeeff0",
+      "profile": "ps_6_8",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "4914277498c651dbec13db71d120e52b0b4094bfcc536c0df881ce4ed1abc531.bin": {
+      "sha256": "d1faa99ca8634134d6a4a1cd3cd09a654e63bb0dff58d23e12561bb15ffeeff0",
+      "profile": "ps_6_8",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "84114bac74062828600895458f500dbed8198d67f67c7be37067d7ac45d88bfb.bin": {
+      "sha256": "e43ce794b8fdba9823d4734088933e0d1257845563b8b0d619de97531a5b6d59",
+      "profile": "ps_6_6",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "670bd822ee4560acb23a67b40dbb46ffa7f5339a5632a8abde65e9a96f61f023.bin": {
+      "sha256": "e43ce794b8fdba9823d4734088933e0d1257845563b8b0d619de97531a5b6d59",
+      "profile": "ps_6_6",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "d401f2db38512c553996e6a416ae2b4457c5a34986adf83eee7348fa09dbb9ad.bin": {
+      "sha256": "e43ce794b8fdba9823d4734088933e0d1257845563b8b0d619de97531a5b6d59",
+      "profile": "ps_6_6",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "8535ea365756619cb83d71628e17964c238c36d20a28345062be50eb6f14eae2.bin": {
+      "sha256": "f94176cec6b4d955d7ca83d89e75828477f8a22d153b57900421c602e228d500",
+      "profile": "ps_6_3",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "35d2d8517bddebe1394c0fc5c2db84dabd57311a2ec4fea19e1734b0d95546d1.bin": {
+      "sha256": "f94176cec6b4d955d7ca83d89e75828477f8a22d153b57900421c602e228d500",
+      "profile": "ps_6_3",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "ed065bce2ef1956c8065eb7547429e6fb81e66ac74c9942c9e93730707b966cf.bin": {
+      "sha256": "f94176cec6b4d955d7ca83d89e75828477f8a22d153b57900421c602e228d500",
+      "profile": "ps_6_3",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "85d7349a95ba983c7d4cd17f1d9efbe0dfad2d58a40fb06b4c0991f698187353.bin": {
+      "sha256": "b70764a88bf9622dfb435016e8f5897c6183ec4f0c4c381741c80abe78e0ad79",
+      "profile": "vs_6_1",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "06ef218fde58674ab3de80043ed97e07a491ab5b9be18dfa51d7ef560207f54f.bin": {
+      "sha256": "b70764a88bf9622dfb435016e8f5897c6183ec4f0c4c381741c80abe78e0ad79",
+      "profile": "vs_6_1",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "fd23f1c5fc30f9f2cc71dd38a9443fd071a7de69ffbc84bb3f9359165d70b764.bin": {
+      "sha256": "b70764a88bf9622dfb435016e8f5897c6183ec4f0c4c381741c80abe78e0ad79",
+      "profile": "vs_6_1",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "878263d7e90ed4666a15188ebb521cc183217bd6f1991a142bfea9f82cf4ee0f.bin": {
+      "sha256": "d34afe7f88208446310c25d52658b4bb98b3bc8accdf9182476642e7655b5fe7",
+      "profile": "ps_6_0",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "1f768cba0104fe79fbc01d75d578d64e86cfcc7d94f0cbab9923eb201181910f.bin": {
+      "sha256": "d34afe7f88208446310c25d52658b4bb98b3bc8accdf9182476642e7655b5fe7",
+      "profile": "ps_6_0",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "67b164d87d581d75e9d31cc25da28f6a2b0e15e493371377e0f456db30863e59.bin": {
+      "sha256": "d34afe7f88208446310c25d52658b4bb98b3bc8accdf9182476642e7655b5fe7",
+      "profile": "ps_6_0",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "88782cb90b4bb35eb4688b7de00ce5b48a004b0d720bce6f54ef4b36484987ac.bin": {
+      "sha256": "c3a0e382ec09e9237a5dc354b77b8b18c8699bf8fbf2a5374771479c269d7685",
+      "profile": "vs_6_5",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "a05f7bebb917113148adea492707e6718f0b911ac9fd82eb5092bb9296517788.bin": {
+      "sha256": "c3a0e382ec09e9237a5dc354b77b8b18c8699bf8fbf2a5374771479c269d7685",
+      "profile": "vs_6_5",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "1f097a24cedd3bd912c09a61965a2179d968a13fa640bcd3512cb7ee0bba8411.bin": {
+      "sha256": "c3a0e382ec09e9237a5dc354b77b8b18c8699bf8fbf2a5374771479c269d7685",
+      "profile": "vs_6_5",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "89b16372871af0fff0c85e7055b5d4e8f30f147765d4361de6bc5c20e00d4738.bin": {
+      "sha256": "3773e8a97a93916aca348697d31a0eb634ab801a6198fe4278a1ac448d312005",
+      "profile": "vs_6_3",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "49a0029a1ea98b83d9ef09f753280aa7c0ac85ed8af429144ad57b56edf9c602.bin": {
+      "sha256": "3773e8a97a93916aca348697d31a0eb634ab801a6198fe4278a1ac448d312005",
+      "profile": "vs_6_3",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "9989ea63e2fd2c0695799c44d07fee4b858fd0a8de178f30be8d0f07db117633.bin": {
+      "sha256": "3773e8a97a93916aca348697d31a0eb634ab801a6198fe4278a1ac448d312005",
+      "profile": "vs_6_3",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "89cfc630765536108b474445939bedd07d198c30fddb0cb6aaed59335497960a.bin": {
+      "sha256": "4280cb05a10763e3ae2007d35525633e307d95bc9afc233ff652bfa180308262",
+      "profile": "ps_6_8",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "7b7314f85e8e141698e72b234a0fba0bc9bfbbad5a00d812159fa18fb1add260.bin": {
+      "sha256": "4280cb05a10763e3ae2007d35525633e307d95bc9afc233ff652bfa180308262",
+      "profile": "ps_6_8",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "86fe7445113de16440d0c6281ebb320700e8ea7ca96dfcaad473f1eb4940cab9.bin": {
+      "sha256": "4280cb05a10763e3ae2007d35525633e307d95bc9afc233ff652bfa180308262",
+      "profile": "ps_6_8",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "8c4edc7f94f26f9c994e3a614911f1b7c2b05e6266a6e70058803a75234a9986.bin": {
+      "sha256": "d8685f8730d86e9f45fc987d9a8a0dcb94ce92ee59e222fb3faaeb73ac5d8e4a",
+      "profile": "vs_6_8",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "6928ba202cf07abd47da1c3f3a967d58f5024014b097d4f326bded48b32b7647.bin": {
+      "sha256": "d8685f8730d86e9f45fc987d9a8a0dcb94ce92ee59e222fb3faaeb73ac5d8e4a",
+      "profile": "vs_6_8",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "40d5005ba48148ac6d06c7d9231a4059337dfcb86d80f236c1f2d32a52180fc0.bin": {
+      "sha256": "d8685f8730d86e9f45fc987d9a8a0dcb94ce92ee59e222fb3faaeb73ac5d8e4a",
+      "profile": "vs_6_8",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "8e67a535594b2f267be74795e9a670ff4cb9adecff643c57620849c44e5a74ad.bin": {
+      "sha256": "7805844521f62097b848009b9e3e7d0a7408b4defa63272acfb85e4998ef8d0b",
+      "profile": "ps_6_7",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "dae85dfb143a4711cdbf19ca013ef0a98e0a959e961097aa27e5527a98ba4128.bin": {
+      "sha256": "7805844521f62097b848009b9e3e7d0a7408b4defa63272acfb85e4998ef8d0b",
+      "profile": "ps_6_7",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "49051cff48126e3b9733469ed9178ca375c56a4e0ecf5e38b92d0ddeeca27a0e.bin": {
+      "sha256": "7805844521f62097b848009b9e3e7d0a7408b4defa63272acfb85e4998ef8d0b",
+      "profile": "ps_6_7",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "8ea71e26e3facc216f94cbffc3745f5f3ddc30fd1d0f609251bd68f84c69360d.bin": {
+      "sha256": "eaa45537d69ac2514932355c243faa35d3456c959184213a0af6d657a87e5088",
+      "profile": "ps_6_1",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "b16663266161575c9e8c92cb2b233d4eb3b8003dd6457072e4c2825676742411.bin": {
+      "sha256": "eaa45537d69ac2514932355c243faa35d3456c959184213a0af6d657a87e5088",
+      "profile": "ps_6_1",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "0482b4929a284246676dbc22389b4caeac1f93c1425e1d5a68a0aa95f004ee23.bin": {
+      "sha256": "eaa45537d69ac2514932355c243faa35d3456c959184213a0af6d657a87e5088",
+      "profile": "ps_6_1",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "930777ebb4db758ffeeb4ae7d3bddadb860a455fc4678f503217320a6ce5abdf.bin": {
+      "sha256": "881d6554b0e357cac229801bdc2fcbf2c656eac982ca2d0fca7698e636d0064f",
+      "profile": "ps_6_0",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "97ef557d20f73195bbdc16ead06a0b8e6631a04a2d050c596cb20243306a99f4.bin": {
+      "sha256": "881d6554b0e357cac229801bdc2fcbf2c656eac982ca2d0fca7698e636d0064f",
+      "profile": "ps_6_0",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "17d710fd4f83a0765d7fe6a640a2a336059874c605399dbb6028586507bcaee2.bin": {
+      "sha256": "881d6554b0e357cac229801bdc2fcbf2c656eac982ca2d0fca7698e636d0064f",
+      "profile": "ps_6_0",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "94070044195afe616cdb808614367bd1f62593d4226ff28f86969e3bf1ea4d78.bin": {
+      "sha256": "cc70e39155dea8f991691b5e060390e3515ca44f686d1e7e66f1278225f3be29",
+      "profile": "vs_6_0",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "a3be308f866bcc9f9ffa0dc44020b0b73f06a30d56c2a1e9c992a3432b20d9bc.bin": {
+      "sha256": "cc70e39155dea8f991691b5e060390e3515ca44f686d1e7e66f1278225f3be29",
+      "profile": "vs_6_0",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "23607e87f4369c484e417909eee8aa583548da60854124b7ea6b982f3c646aa3.bin": {
+      "sha256": "cc70e39155dea8f991691b5e060390e3515ca44f686d1e7e66f1278225f3be29",
+      "profile": "vs_6_0",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "956d3607b2d71d23854a6500b3281f21e249e372671019cb09032f186c183a09.bin": {
+      "sha256": "19b6fed71d02122096015c22e892cd2283baae3c658d4cc7727aa84a9770221c",
+      "profile": "ps_6_6",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "5741a83a369f800b8b24e806487dc724b6a832c9af8538c78c723c29889fd418.bin": {
+      "sha256": "19b6fed71d02122096015c22e892cd2283baae3c658d4cc7727aa84a9770221c",
+      "profile": "ps_6_6",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "8c88016b8d8e830ab6e03aa937f858f10a2fd03327d7263177d7feefea3091c7.bin": {
+      "sha256": "19b6fed71d02122096015c22e892cd2283baae3c658d4cc7727aa84a9770221c",
+      "profile": "ps_6_6",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "992e555394b58c259ef1f4f7e7965109300bac6b489f77a19b19699bd45bfdc9.bin": {
+      "sha256": "91a541a235569133d0933fcf955027d4430d45aa7617e3b7c2ff7d3d0878d3bb",
+      "profile": "vs_6_0",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "e588e4507df46ebe0883d08da5284c2dafa77e0784d95e3edaa146c1ad3fa9b4.bin": {
+      "sha256": "91a541a235569133d0933fcf955027d4430d45aa7617e3b7c2ff7d3d0878d3bb",
+      "profile": "vs_6_0",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "0f91b3e29c87478c42b3151220c07f62b7bd217cf0fec02ac4e34eaba2d8496a.bin": {
+      "sha256": "91a541a235569133d0933fcf955027d4430d45aa7617e3b7c2ff7d3d0878d3bb",
+      "profile": "vs_6_0",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "9975e2ce725cd932f1a5b8befdd8c16b09547b898b6f5fd7b4ae5a7b641381b1.bin": {
+      "sha256": "ecd19cd648018f09a6d6196be75cfdf23d7ac0f34314f957da1f37fd59b5af01",
+      "profile": "ps_6_5",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "8ea50b5c5e7df068ec90f38f74f6c12a491da7c27e4b4a54b849766aa92bd8d0.bin": {
+      "sha256": "ecd19cd648018f09a6d6196be75cfdf23d7ac0f34314f957da1f37fd59b5af01",
+      "profile": "ps_6_5",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "e9d133326e791fade0953704a0e28f471b40d9480ab92906ca537ac3e90e86aa.bin": {
+      "sha256": "ecd19cd648018f09a6d6196be75cfdf23d7ac0f34314f957da1f37fd59b5af01",
+      "profile": "ps_6_5",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "9e1cfc5cbdd5498490e0b336fc3eea05eb8f9814be4dca0835d4639aca9b2d95.bin": {
+      "sha256": "990d39a75fca15b2056c372ee6d4941952a21599c9e0ae66ffc9ab54db8daccf",
+      "profile": "ps_6_8",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "2d12af93c3356fe6477d19efeeaf48d4d229e61374642d3e5a1279e88d9a3f44.bin": {
+      "sha256": "990d39a75fca15b2056c372ee6d4941952a21599c9e0ae66ffc9ab54db8daccf",
+      "profile": "ps_6_8",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "df120c088af1c9b0d45d896756ef4881169aa672ba4ae28d1f3dca7cd9d65c63.bin": {
+      "sha256": "990d39a75fca15b2056c372ee6d4941952a21599c9e0ae66ffc9ab54db8daccf",
+      "profile": "ps_6_8",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "a18de157bcc6857a0228908b708705828fa4a89f98b43abe3194552b21e5138f.bin": {
+      "sha256": "25834310c0177edd67f0d88422f2793feeb5dff67486a577ab7d8adc5caed49d",
+      "profile": "ps_6_6",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "5efcdc7cdd5cc330bd7a359c2dca51ae026d3f6d96b187e2169d4ca115f9032b.bin": {
+      "sha256": "25834310c0177edd67f0d88422f2793feeb5dff67486a577ab7d8adc5caed49d",
+      "profile": "ps_6_6",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "4ba2d7ccbd2578075690ecec85fc173fadb2991b62f01af33a4cd4244dd0226c.bin": {
+      "sha256": "25834310c0177edd67f0d88422f2793feeb5dff67486a577ab7d8adc5caed49d",
+      "profile": "ps_6_6",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "a1ee43eebd5f755e85712fc977a8cc149c63d61e3cefd60c78c4c1282f577d77.bin": {
+      "sha256": "de77d4b0c846f936eb66298fe5f2a2f963be17488242fc4b76e336bdb3debc6a",
+      "profile": "vs_6_4",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "b10692ba6e3df10132567864fac0e331241c97b20be7d7ad8544ec2334b00f98.bin": {
+      "sha256": "de77d4b0c846f936eb66298fe5f2a2f963be17488242fc4b76e336bdb3debc6a",
+      "profile": "vs_6_4",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "39c5cbceaceb26cdf1b3cd3fdb68ea4ccb211641f904995839eebc139c3b6b75.bin": {
+      "sha256": "de77d4b0c846f936eb66298fe5f2a2f963be17488242fc4b76e336bdb3debc6a",
+      "profile": "vs_6_4",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "a25fc271972957adb124de37d5103846fe0c5015b8a0d6687073a2e2ec8da64f.bin": {
+      "sha256": "43e9e85680b45d4af45c75f35d8f4c5f7bb8d9779db941a0e51983d23bbaa76f",
+      "profile": "ps_6_6",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "41bc35f8a276634580af5f66d5a2fb91721ea605abdf633c0c6e3eb05b2b44fd.bin": {
+      "sha256": "43e9e85680b45d4af45c75f35d8f4c5f7bb8d9779db941a0e51983d23bbaa76f",
+      "profile": "ps_6_6",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "9b0e6bf223180742dedff9e263ca51ead668bc7dc6db728306f05e36d76af801.bin": {
+      "sha256": "43e9e85680b45d4af45c75f35d8f4c5f7bb8d9779db941a0e51983d23bbaa76f",
+      "profile": "ps_6_6",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "aa544a33a8b37f11c936a49606eaf289076c05be119c57305da991003ea732d3.bin": {
+      "sha256": "63229958144eae4403e2740415304ba5698df41e31cb5b18125ef4adf03ee4be",
+      "profile": "vs_6_8",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "443d0b55c83d929cf67a366daadd7238840a476263e03a9a4c3cc9b6d6bafea2.bin": {
+      "sha256": "63229958144eae4403e2740415304ba5698df41e31cb5b18125ef4adf03ee4be",
+      "profile": "vs_6_8",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "303c015fe1e8f50a784612de3fc90f4049d9e0deb908e7b5ec866ff96dd940e7.bin": {
+      "sha256": "63229958144eae4403e2740415304ba5698df41e31cb5b18125ef4adf03ee4be",
+      "profile": "vs_6_8",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "aa6caed5de9024d7f91a63a8126f2902cc8ef58c56076249b9613f52a9d58af1.bin": {
+      "sha256": "87232577a4056d7837bb2036bbdc12be2db5123316708c566c80e9d695c559c7",
+      "profile": "ps_6_8",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "9b5e4653578b93aecf3cdf888372e5c64733cb9c2991d9b4328e0812bead6cb2.bin": {
+      "sha256": "87232577a4056d7837bb2036bbdc12be2db5123316708c566c80e9d695c559c7",
+      "profile": "ps_6_8",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "fe777fad6c2923490fa2e673938549a5ef84496d51e5ff60f62de67c2b27099d.bin": {
+      "sha256": "87232577a4056d7837bb2036bbdc12be2db5123316708c566c80e9d695c559c7",
+      "profile": "ps_6_8",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "ac0ab95c6da92b289894295cd155ce9adf74ee30bd77e607556e7cb3db3cd95e.bin": {
+      "sha256": "369b5d4a14d83b700d972d2e9dbf8b5adea503ca86360a1f27a977c36b566040",
+      "profile": "ps_6_2",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "b0ba79b856868821c7be00fa850f9d67685fc024cb178fabdc2a4d52bd3994b1.bin": {
+      "sha256": "369b5d4a14d83b700d972d2e9dbf8b5adea503ca86360a1f27a977c36b566040",
+      "profile": "ps_6_2",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "3f733446f83ffb01969114c59bb0949e30654b4ec4680b73fd8e5bc923c16a57.bin": {
+      "sha256": "369b5d4a14d83b700d972d2e9dbf8b5adea503ca86360a1f27a977c36b566040",
+      "profile": "ps_6_2",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "ac0dc540d0f30df8ffc826c1bfab470eb3a37b8a5475e86f71677855b100fd6b.bin": {
+      "sha256": "9e9b34af95de459eeefcf3e98afe45164efd304e370251b25fad3a22b3b9b62f",
+      "profile": "ps_6_2",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "b22a9c3ff2e8cf189fe3b3bd673da344c28772993ac93fd9a00401f35fe0f1c3.bin": {
+      "sha256": "9e9b34af95de459eeefcf3e98afe45164efd304e370251b25fad3a22b3b9b62f",
+      "profile": "ps_6_2",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "052a1328e284b0291dfabcdd0e84233d408eecc2cbdb25b6eb4c4b195b7ead91.bin": {
+      "sha256": "9e9b34af95de459eeefcf3e98afe45164efd304e370251b25fad3a22b3b9b62f",
+      "profile": "ps_6_2",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "ac9ae64a26c210f5abcb022c1e86dc6f89a0e5b858e707ca9aa11b158199549b.bin": {
+      "sha256": "91e2c02df94779b0d73a633088f5aaad48ec6d91fe08df596b2035558a5f1760",
+      "profile": "ps_6_4",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "37a8e1de23617e265dae08660a8064f0043de62ac6b52980749acad01ce78789.bin": {
+      "sha256": "91e2c02df94779b0d73a633088f5aaad48ec6d91fe08df596b2035558a5f1760",
+      "profile": "ps_6_4",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "1a5a3b784bd8e6e0b6731ded0d9309d1a67f959decf9aabc965e754f6489ca05.bin": {
+      "sha256": "91e2c02df94779b0d73a633088f5aaad48ec6d91fe08df596b2035558a5f1760",
+      "profile": "ps_6_4",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "ad8f34d8cb08257af405c30b90aa483af8e2d47aaea24bcf73fd3a6fee8540d9.bin": {
+      "sha256": "88160d2407376100126359be2d1d76d5fdab70fd97cf0093d361f70fb7545344",
+      "profile": "ps_6_1",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "0c4f2bcdc3ea652327737f98afd3b24ae6f5c1fd087f9e327657697f5c0e0038.bin": {
+      "sha256": "88160d2407376100126359be2d1d76d5fdab70fd97cf0093d361f70fb7545344",
+      "profile": "ps_6_1",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "4bba4962de5b14725d9cb7b4674496b8be91fad348dca5caa2a38c9421afed7f.bin": {
+      "sha256": "88160d2407376100126359be2d1d76d5fdab70fd97cf0093d361f70fb7545344",
+      "profile": "ps_6_1",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "afc9c3881cac8babb3606d44edfa1458c0b72c9dd1cee31651af0776fa165260.bin": {
+      "sha256": "b4f3857602bba501cdc7ed19a61c515b563691e5b8852e854c3197da8873629b",
+      "profile": "ps_6_0",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "115578ff199bd36ae90ea13e0057defdaa35669e25d97632882a5f2f0ee96c43.bin": {
+      "sha256": "b4f3857602bba501cdc7ed19a61c515b563691e5b8852e854c3197da8873629b",
+      "profile": "ps_6_0",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "9ef4fa1c662db20e7c5478dc2f83d5a77214c8efe23f52469b72558563345a70.bin": {
+      "sha256": "b4f3857602bba501cdc7ed19a61c515b563691e5b8852e854c3197da8873629b",
+      "profile": "ps_6_0",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "b43e79db10534a67ca7703701d381c5b14f22d6865d322b6cfd8892426cf64da.bin": {
+      "sha256": "ed3dfe69396e4265ba47a64ba114e12f4d53d717ad1f34f94f442bfd92563199",
+      "profile": "ps_6_5",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "1f8d163bd54eed4666f5d4fb177e8712043b38171e6a2045331e477ddf34995b.bin": {
+      "sha256": "ed3dfe69396e4265ba47a64ba114e12f4d53d717ad1f34f94f442bfd92563199",
+      "profile": "ps_6_5",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "11113f0545e37d68c320eeb37f5a9d538117888bf29f7623f889d9cde7cec9a3.bin": {
+      "sha256": "ed3dfe69396e4265ba47a64ba114e12f4d53d717ad1f34f94f442bfd92563199",
+      "profile": "ps_6_5",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "b6cef7039021c017098f5720d82ab846673eea576da2867652edc864b31dffcb.bin": {
+      "sha256": "2f4f0095228f2a3e3a3304efbff437d0782996b843f3c777cf69a55a3a79d7cf",
+      "profile": "vs_6_8",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "19d3f34d60275a2788ebfe9fe8b9b047227f04b6d36fa7d4685287e9af547fc2.bin": {
+      "sha256": "2f4f0095228f2a3e3a3304efbff437d0782996b843f3c777cf69a55a3a79d7cf",
+      "profile": "vs_6_8",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "9fea909a30f7e8679bb048b53d0020ee0c4643ffc9a19d2088655347ad1d474c.bin": {
+      "sha256": "2f4f0095228f2a3e3a3304efbff437d0782996b843f3c777cf69a55a3a79d7cf",
+      "profile": "vs_6_8",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "b88492b7c5b3a79def180139268197d2519c0d5a3b8ad43d596a4b34e3992716.bin": {
+      "sha256": "6e1d0b6867d532859b19f056239058cf33b986fc507572cb68cdd1e97a05600d",
+      "profile": "vs_6_4",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "937565802ccc370f24b108f0f11f88906e0f236e36505c046f5e6d791638db5d.bin": {
+      "sha256": "6e1d0b6867d532859b19f056239058cf33b986fc507572cb68cdd1e97a05600d",
+      "profile": "vs_6_4",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "b7364ac10fc050d203042ee030f944d7e23e63ed6548c147ea7583b2979c693f.bin": {
+      "sha256": "6e1d0b6867d532859b19f056239058cf33b986fc507572cb68cdd1e97a05600d",
+      "profile": "vs_6_4",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "b97448a2cae7357d6f638d55af05bd9343366cc1f15bf442ba87da3c29f0a6a7.bin": {
+      "sha256": "031230338ef6a606925d977611c3f2ce3f9542af3ad62adeb78b7db95b69a8c5",
+      "profile": "ps_6_2",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "f3fa4dc264996927f3b03181dc934b7f353578dff311ad4185939170e56aa6da.bin": {
+      "sha256": "031230338ef6a606925d977611c3f2ce3f9542af3ad62adeb78b7db95b69a8c5",
+      "profile": "ps_6_2",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "ef56f4d43b19e60dcbf930149844aa679b06dac5a2f6e15b74a9cb2923635245.bin": {
+      "sha256": "031230338ef6a606925d977611c3f2ce3f9542af3ad62adeb78b7db95b69a8c5",
+      "profile": "ps_6_2",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "ba18567db49fb9b0e8f0ca4c116a7f1f326940f513596310010f785486d526ff.bin": {
+      "sha256": "357f7008e1895cb48fdb6da438aa7847f3252b569bd498ca876f44ec98efe7ad",
+      "profile": "vs_6_6",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "9a6b48cced2f6df0a6e4ee9ee1f6272c1977d53a1c879e332f1260977d2cbb3a.bin": {
+      "sha256": "357f7008e1895cb48fdb6da438aa7847f3252b569bd498ca876f44ec98efe7ad",
+      "profile": "vs_6_6",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "cff80576f58cbb16a7e7b0f99a53169a817bbce8840d1980bfae1b2997f4499e.bin": {
+      "sha256": "357f7008e1895cb48fdb6da438aa7847f3252b569bd498ca876f44ec98efe7ad",
+      "profile": "vs_6_6",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "ba9e7360df0c2ae3072b1074d73ccb80700a5abe992dc38c1357ce85d0cd7451.bin": {
+      "sha256": "2f5c989d8dcfdd9493634787b8332c6097dd47868d412128926872585f4dd7f7",
+      "profile": "vs_6_7",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "847f09a95aabcd3a6b7a1965b6786c17b7f8fe464e568706ec385fe7e40e9d1b.bin": {
+      "sha256": "2f5c989d8dcfdd9493634787b8332c6097dd47868d412128926872585f4dd7f7",
+      "profile": "vs_6_7",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "cbdf86550c4488698bfa837989a7ea81960151549c4599c29b9adf70c54a0df6.bin": {
+      "sha256": "2f5c989d8dcfdd9493634787b8332c6097dd47868d412128926872585f4dd7f7",
+      "profile": "vs_6_7",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "bb07333185b560e81d8dfd44a69bcfd8a04a7f8697b11d3eda4f07fa99132858.bin": {
+      "sha256": "755efd78cb50d9259563f04b748f8eae1e42f6996db4557ca02394a3b0b3ef23",
+      "profile": "ps_6_5",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "bef1553bcab32a7bf31cd410ea0ced6008d035caaf01f9d5d3607095f01a469e.bin": {
+      "sha256": "755efd78cb50d9259563f04b748f8eae1e42f6996db4557ca02394a3b0b3ef23",
+      "profile": "ps_6_5",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "2096aac1f7eb12a8d251e7729ad1a450e0053041796627f202958ca3f30544f0.bin": {
+      "sha256": "755efd78cb50d9259563f04b748f8eae1e42f6996db4557ca02394a3b0b3ef23",
+      "profile": "ps_6_5",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "bd1344724462185f4d8e1ccf2970a6b5815efd8740647ee9972207b2e4549a83.bin": {
+      "sha256": "766670bf472feedf36c2bf651b1e7a2e3cc6f87d368c9b2ce29391a7d9e6d400",
+      "profile": "ps_6_6",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "a5129e96f4e516972c79c77c20ca97c098d409358b3f9a0487554490f2b32411.bin": {
+      "sha256": "766670bf472feedf36c2bf651b1e7a2e3cc6f87d368c9b2ce29391a7d9e6d400",
+      "profile": "ps_6_6",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "8a733f56c05c1f2b3eac0f8e35db243c7c539edf2b13b5b24e62fec098d0390d.bin": {
+      "sha256": "766670bf472feedf36c2bf651b1e7a2e3cc6f87d368c9b2ce29391a7d9e6d400",
+      "profile": "ps_6_6",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "bff70d2111a600f06f49fc7a1377249eff9441e4ccdae87f1e50ac03165cf27b.bin": {
+      "sha256": "2dc8b80109f037e6081eab5ffb2d6d87ad0b5eae767c1f8ae442b0615a05c2b3",
+      "profile": "ps_6_2",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "7424a79f59aeef0e593a661aeed0a1d4959b63e22d23c648731afc491c1e45cd.bin": {
+      "sha256": "2dc8b80109f037e6081eab5ffb2d6d87ad0b5eae767c1f8ae442b0615a05c2b3",
+      "profile": "ps_6_2",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "ec4dfc80f10b7c6204bd5175946f9e37ae78e966097209a571cba6c893b20333.bin": {
+      "sha256": "2dc8b80109f037e6081eab5ffb2d6d87ad0b5eae767c1f8ae442b0615a05c2b3",
+      "profile": "ps_6_2",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "c069b0bb34936321630290b388e71be9f7b81430c9573dbdf1aee7acd81aaee4.bin": {
+      "sha256": "b7b26517abf1a1f12385ac604d323083223ad76b59f697f10b48808c07e9f8a5",
+      "profile": "ps_6_5",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "63cda0ac266c2e71f04e26c113cab55ec3ee9ef2e782cb0267fdb47081287388.bin": {
+      "sha256": "b7b26517abf1a1f12385ac604d323083223ad76b59f697f10b48808c07e9f8a5",
+      "profile": "ps_6_5",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "e514c972f30655cbe7afc45046d2b58a068e2125d8b225d7d3e98ce4acc8d7f1.bin": {
+      "sha256": "b7b26517abf1a1f12385ac604d323083223ad76b59f697f10b48808c07e9f8a5",
+      "profile": "ps_6_5",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "c07dc8a2864c9dc87160f82bd99aa00f6b7678a5e5fb7df1906aac307823a83d.bin": {
+      "sha256": "9e0e8b69d0f7d9d72da42281b6f4829e0b0af30f702fde724eb01dd526850626",
+      "profile": "ps_6_6",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "3366765f2cb6da090c9031bea61c5f83a3d8c4fa983a3475085c510eb4ffc4bd.bin": {
+      "sha256": "9e0e8b69d0f7d9d72da42281b6f4829e0b0af30f702fde724eb01dd526850626",
+      "profile": "ps_6_6",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "bbbbff8207434a77594e91be92395a85103231d2b75efd799164f588803addd9.bin": {
+      "sha256": "9e0e8b69d0f7d9d72da42281b6f4829e0b0af30f702fde724eb01dd526850626",
+      "profile": "ps_6_6",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "c135cbab1ce6d0349a55964f5fe757f18e4382f9a243e4853612271b6e84442a.bin": {
+      "sha256": "c8f4c20b7e1b3fe58a784762a75ee242ad7cd6d82af5cd5376a254018737b0a7",
+      "profile": "vs_6_5",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "7eab02c338611765b3a27e966dfafa2f5f83ea43c55090c37d2d72578e1b0336.bin": {
+      "sha256": "c8f4c20b7e1b3fe58a784762a75ee242ad7cd6d82af5cd5376a254018737b0a7",
+      "profile": "vs_6_5",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "224cde5ae15cbb39f86005da6e9d07f473d9ac259619f87cb03e032e15a19b4d.bin": {
+      "sha256": "c8f4c20b7e1b3fe58a784762a75ee242ad7cd6d82af5cd5376a254018737b0a7",
+      "profile": "vs_6_5",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "c20f48c9225fff21d8d94d01ed8127d7175434a84fedc1e17f119c03c1537296.bin": {
+      "sha256": "6c268f4cda104e982bc619ccdfdc2ed7aa002de30b01fa090c5b9837318b0c56",
+      "profile": "vs_6_3",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "bdc0a227d2929e4957d90f14c1c5d8f4459295126255a1be9509ced348ae345e.bin": {
+      "sha256": "6c268f4cda104e982bc619ccdfdc2ed7aa002de30b01fa090c5b9837318b0c56",
+      "profile": "vs_6_3",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "bbf9d8346320718144ffd4728abfb431c98b0de752a92587a36a8af4d35aab38.bin": {
+      "sha256": "6c268f4cda104e982bc619ccdfdc2ed7aa002de30b01fa090c5b9837318b0c56",
+      "profile": "vs_6_3",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "c3fa7bd97c54ebbf8edc206a531bbc409da5c7255da3dea1c4a2961282dcb382.bin": {
+      "sha256": "a382d7231037f74d036af9f64c6ed5ae56712e91bbd1152877bc07d5f126f42a",
+      "profile": "ps_6_7",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "5860ae6f6e2536127d6eb285c2930e6e2108734832bf4a21ce301e18cbaac90c.bin": {
+      "sha256": "a382d7231037f74d036af9f64c6ed5ae56712e91bbd1152877bc07d5f126f42a",
+      "profile": "ps_6_7",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "2d64d023505782817d9d862e520e6f7711bd67fd9f68e15340e3292af64d1c5d.bin": {
+      "sha256": "a382d7231037f74d036af9f64c6ed5ae56712e91bbd1152877bc07d5f126f42a",
+      "profile": "ps_6_7",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "c7dbf4a5669fb8481264e375204e7776630746e648b41a40330bf0897a3b0b15.bin": {
+      "sha256": "0e4c000ea458ea0b6350ffad9cf6b399fd692a5be796bb5e5e7ca396fce6424a",
+      "profile": "ps_6_7",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "46adb353ca682ea879867d52627f745cc5214344b5c6815b91ea85eab5f5329b.bin": {
+      "sha256": "0e4c000ea458ea0b6350ffad9cf6b399fd692a5be796bb5e5e7ca396fce6424a",
+      "profile": "ps_6_7",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "cfc4bddd3935ed3fd5961082f1a4d1045f684393cc5e48761df90ca8251f0a6b.bin": {
+      "sha256": "0e4c000ea458ea0b6350ffad9cf6b399fd692a5be796bb5e5e7ca396fce6424a",
+      "profile": "ps_6_7",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "ca3bce8f2416054c3bfbd05088d24eac97ea5a8ac5ad084ee6313e695e1776cc.bin": {
+      "sha256": "ee3a8e2fa506b87ae524b70401500469c2e256a8fcdd9057ea764afaabc68a47",
+      "profile": "ps_6_4",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "3fd5bf644ceac5b0d4eff0b342991c982e868db70362cb0dc4288e1b6777d1d6.bin": {
+      "sha256": "ee3a8e2fa506b87ae524b70401500469c2e256a8fcdd9057ea764afaabc68a47",
+      "profile": "ps_6_4",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "32efe61e0e5bc1c6334abafa1fa53db5653be10173c932088efb6479655c94aa.bin": {
+      "sha256": "ee3a8e2fa506b87ae524b70401500469c2e256a8fcdd9057ea764afaabc68a47",
+      "profile": "ps_6_4",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "ca9a646887d16d0f1df4338bd2cac26c1e9b22f5c742fd6d810d40d859442ec3.bin": {
+      "sha256": "e63c0415dbeb6689a41fce4c34507ff67e0924ec00f95707655203e9c68d9ad7",
+      "profile": "vs_6_3",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "259bad16687f8289bf046ee8a61816171007d28d4b0f8aa8f6ef43f014d0bfbf.bin": {
+      "sha256": "e63c0415dbeb6689a41fce4c34507ff67e0924ec00f95707655203e9c68d9ad7",
+      "profile": "vs_6_3",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "dceae2ffff6b569669b5b5de864614e9c3919271236c0a1673cb75db6ea0c6b0.bin": {
+      "sha256": "e63c0415dbeb6689a41fce4c34507ff67e0924ec00f95707655203e9c68d9ad7",
+      "profile": "vs_6_3",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "ccebdbc3852d57b8291b898256d1bbd1d22f7a01da33d302f6a3bb04d4d12362.bin": {
+      "sha256": "16ada6c714b51707bd41ba3d19084236b9e7335744a42da9bcda080045326eed",
+      "profile": "ps_6_7",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "ff08a857564d37a1147eb05490fc8cf2c8b8d8364792ebb499d7048a1881c6d5.bin": {
+      "sha256": "16ada6c714b51707bd41ba3d19084236b9e7335744a42da9bcda080045326eed",
+      "profile": "ps_6_7",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "2bc99b61fb25e16deee7b4d6298c0334e2852c26de9b7d6b002c3f3e390eca61.bin": {
+      "sha256": "16ada6c714b51707bd41ba3d19084236b9e7335744a42da9bcda080045326eed",
+      "profile": "ps_6_7",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "d0219ae69ce4950b1e37560114e49c1ee3b62ad711474eb1d76f6f625ece14dc.bin": {
+      "sha256": "71925340d6f864fda752872f459fae50449ee7b55ae7701310bf42e1a85f8547",
+      "profile": "ps_6_4",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "964801b2c81e798789b06def30761442b19bef402c3bf358c2c54d99279c43d3.bin": {
+      "sha256": "71925340d6f864fda752872f459fae50449ee7b55ae7701310bf42e1a85f8547",
+      "profile": "ps_6_4",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "f12ede708a1a6db910063f528b0f6982e808dce735efd5b834454c884e5c1920.bin": {
+      "sha256": "71925340d6f864fda752872f459fae50449ee7b55ae7701310bf42e1a85f8547",
+      "profile": "ps_6_4",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "d199f68fd08f00522cb784c2c0fe7033cdacad20d60723c5939d7c99101ba39e.bin": {
+      "sha256": "21fd38411e9b74fa89b08130e8ee243d840a33ec543c8c1d28a7a4d5d0d381e6",
+      "profile": "ps_6_0",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "3cde5bcdb95ff924bec4a3eb58bf56239c84d86929597c3a76da566848f35697.bin": {
+      "sha256": "21fd38411e9b74fa89b08130e8ee243d840a33ec543c8c1d28a7a4d5d0d381e6",
+      "profile": "ps_6_0",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "49e7066d15919bf8a1d309f452f21eeacf036b9b026be2d3e12a000dba1e2360.bin": {
+      "sha256": "21fd38411e9b74fa89b08130e8ee243d840a33ec543c8c1d28a7a4d5d0d381e6",
+      "profile": "ps_6_0",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "d53cbcd889e348196c15fb5c0b665623bcc6383f420177e8817ccf03c674b1d0.bin": {
+      "sha256": "49b5d770c4213a2e40a0ffc575b52028276a2eb7e3e08a5c198b4da9e01c0533",
+      "profile": "ps_6_7",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "30839528078e23b0b6b4b56aa8812faa1dfabfadf62bf02e74f6491d6c5ed684.bin": {
+      "sha256": "49b5d770c4213a2e40a0ffc575b52028276a2eb7e3e08a5c198b4da9e01c0533",
+      "profile": "ps_6_7",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "ea53f835843b73497f602b99e49600c2e1501879678d4cf1d1d7e480f426ee76.bin": {
+      "sha256": "49b5d770c4213a2e40a0ffc575b52028276a2eb7e3e08a5c198b4da9e01c0533",
+      "profile": "ps_6_7",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "d5a6b6f0aeeeb9b10a3ac3e4653ffda3a9d9f2caae443e1baaee4ebae4564fe1.bin": {
+      "sha256": "86f53a918cb92aadbfd3a3b2cc79d1ea61b85c91905a70577d2e7575b3eaaeb7",
+      "profile": "ps_6_0",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "0e399e6278d1e0d994f6f11cc06b9a603751b796d325723f18f8cf19f4ba1db9.bin": {
+      "sha256": "86f53a918cb92aadbfd3a3b2cc79d1ea61b85c91905a70577d2e7575b3eaaeb7",
+      "profile": "ps_6_0",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "facada7bf529de582e9f90a2f0191f5f6e47e14e4b1d2a5d796585e8bb1a4c2b.bin": {
+      "sha256": "86f53a918cb92aadbfd3a3b2cc79d1ea61b85c91905a70577d2e7575b3eaaeb7",
+      "profile": "ps_6_0",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "d691770c663aa639f091328359c8a076e97053bfc41bc2612b3812776cab5c62.bin": {
+      "sha256": "b38a11fa55cb6e4310390803dd503beebd72a364d47e577c41c7cc0026aebc10",
+      "profile": "ps_6_1",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "070fdde3615f31f41af5732a5a754b34a6202435a3d1ce39f88c7f35ed9a4893.bin": {
+      "sha256": "b38a11fa55cb6e4310390803dd503beebd72a364d47e577c41c7cc0026aebc10",
+      "profile": "ps_6_1",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "901bc4f19bc090ebbeab6d4527dfd955345461e6e67b8828ddb6ffaa51a374e6.bin": {
+      "sha256": "b38a11fa55cb6e4310390803dd503beebd72a364d47e577c41c7cc0026aebc10",
+      "profile": "ps_6_1",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "d7120d46f6f7e3b93fb37e147a2aaea2ffaa7fe4be37340804c3185eb0c7ec05.bin": {
+      "sha256": "ea6e110fad2313506af5712e56212a774010ab167f10d29255359a68df4ab19a",
+      "profile": "vs_6_7",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "0de2338b23d771f8f566216e9893b4d9ec4a8433ad8774a8ebd2b56a41a268a8.bin": {
+      "sha256": "ea6e110fad2313506af5712e56212a774010ab167f10d29255359a68df4ab19a",
+      "profile": "vs_6_7",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "26def0b5550f2f0949d53d23dfdb73b762d5e7b5495c63581b3bcdc5a272f518.bin": {
+      "sha256": "ea6e110fad2313506af5712e56212a774010ab167f10d29255359a68df4ab19a",
+      "profile": "vs_6_7",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "de693f46bcc70c46d449cb8bd3cf8cceb7b6e0ea4c0250ab4a3c5902af323f66.bin": {
+      "sha256": "093ace7a410746617b01f009ee9a63d44dc0fd2455d26aad32e7b7cd15c9ea48",
+      "profile": "ps_6_3",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "9a7fab2f6300008657a2ec1ec33ce10b2babaa517706797d2c671f41a5a109ea.bin": {
+      "sha256": "093ace7a410746617b01f009ee9a63d44dc0fd2455d26aad32e7b7cd15c9ea48",
+      "profile": "ps_6_3",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "5e58f2b35de3300a0b2f0f76becfceb57a056d8b4761cfe3efb8a75cdd5bebc2.bin": {
+      "sha256": "093ace7a410746617b01f009ee9a63d44dc0fd2455d26aad32e7b7cd15c9ea48",
+      "profile": "ps_6_3",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "dec3a976288c45f50070326c1dce05078e6c74d39a12231ba895caf6a1b40a2b.bin": {
+      "sha256": "61015759ab1c96179462f41c7daa7fcd11164d4c32ca15c6efd264cbccc8eaba",
+      "profile": "vs_6_1",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "01ca3e9fca1021cd78db94c7e436f4cb471a61622f31f7d2b5683b4e1fe1254b.bin": {
+      "sha256": "61015759ab1c96179462f41c7daa7fcd11164d4c32ca15c6efd264cbccc8eaba",
+      "profile": "vs_6_1",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "5131f19e091512d6bef769adb7f184ab830ce61ebbf5bfab124b9a868f48763d.bin": {
+      "sha256": "61015759ab1c96179462f41c7daa7fcd11164d4c32ca15c6efd264cbccc8eaba",
+      "profile": "vs_6_1",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "e0379ecd2c36c514c5f8147b6a2dd774f9955f6172aa9994fdce993ae4aaab66.bin": {
+      "sha256": "6054c2e3cfbf26ad4b06215022ee744241256b189ba1b6e36fccbc0620d9d236",
+      "profile": "vs_6_5",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "f8dfdd00dce85c48dafaab6227d8bdfe81ff8255fa1aeecd59decfd593d1b7f1.bin": {
+      "sha256": "6054c2e3cfbf26ad4b06215022ee744241256b189ba1b6e36fccbc0620d9d236",
+      "profile": "vs_6_5",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "445c419922ba113c37ac1f828d100f27f04b5d9354349208c0d7da21ff56d6e1.bin": {
+      "sha256": "6054c2e3cfbf26ad4b06215022ee744241256b189ba1b6e36fccbc0620d9d236",
+      "profile": "vs_6_5",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "e2b97e00b4e9d271156962efdddfe529416ca6bc8405520c4414946210876227.bin": {
+      "sha256": "12cc9d568e9cdcee3c0ccbc095a4ca6864cb0b5f3bf977acdc0259169fae46b8",
+      "profile": "ps_6_3",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "1b9678db2b70a9c05a8bfec96a3e02d0a8729d0444417336925c169eccd24922.bin": {
+      "sha256": "12cc9d568e9cdcee3c0ccbc095a4ca6864cb0b5f3bf977acdc0259169fae46b8",
+      "profile": "ps_6_3",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "79034efd6f33d72d14cdb5a1b2ef41ef920338c73606c4885761af8d6f23b8a9.bin": {
+      "sha256": "12cc9d568e9cdcee3c0ccbc095a4ca6864cb0b5f3bf977acdc0259169fae46b8",
+      "profile": "ps_6_3",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "e624d00292fa98107f5ab87b29f54f645aa95e7324a51b1416ec08e4489c6c5a.bin": {
+      "sha256": "0e2c5f3e3e4ed753351dfee10fdd49fcdf13b80065f20f606534a53dfc41db94",
+      "profile": "vs_6_8",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "32ac7bab96c3fe6646183e411a702f305039c1dc79015162baa14768ea8178fc.bin": {
+      "sha256": "0e2c5f3e3e4ed753351dfee10fdd49fcdf13b80065f20f606534a53dfc41db94",
+      "profile": "vs_6_8",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "9d9494a894f1c4a139d76e7aeb2048ebbda69ce2016241bf78edb31ead163451.bin": {
+      "sha256": "0e2c5f3e3e4ed753351dfee10fdd49fcdf13b80065f20f606534a53dfc41db94",
+      "profile": "vs_6_8",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "ee9b6c89488875f2af0374e08730adda9f600c8e3ebc9a6fbd67eda11bf744a5.bin": {
+      "sha256": "1739670f4b441c8433bc3f9af4466ae28414d90dab1c66f42912e3316af17af8",
+      "profile": "ps_6_2",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "4d2a89de5f9e14aa5b2eca46c3f8bc9389f051138c2e223f98dac52090cd3cb1.bin": {
+      "sha256": "1739670f4b441c8433bc3f9af4466ae28414d90dab1c66f42912e3316af17af8",
+      "profile": "ps_6_2",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "4f5013ac70b4ace45d8eb534519d2ced2cf1edccd90fa5dbb84f52a7142f2697.bin": {
+      "sha256": "1739670f4b441c8433bc3f9af4466ae28414d90dab1c66f42912e3316af17af8",
+      "profile": "ps_6_2",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "f2d7beb61622dd0efb4ccc603e0e32382cbfe632bd888cc4ae8d733ec5ba529a.bin": {
+      "sha256": "ee8362da12d2d1808bba77e451ad97972843c1b70b6e2acaa0b9af593104c808",
+      "profile": "ps_6_5",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "d387bb7440b432f1cb78e9821ae6ca49983de7d7a1e65415a126f42590d5a3fa.bin": {
+      "sha256": "ee8362da12d2d1808bba77e451ad97972843c1b70b6e2acaa0b9af593104c808",
+      "profile": "ps_6_5",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "c03ee0ce291973711daac42f4ffc7a40ca9e5f5d9a288926136f089635798e0d.bin": {
+      "sha256": "ee8362da12d2d1808bba77e451ad97972843c1b70b6e2acaa0b9af593104c808",
+      "profile": "ps_6_5",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "f53d785f5f3d37572433e38ca07db8c04d8f58297a19526d88feb7744c191594.bin": {
+      "sha256": "76bd161ef6ee7e8fc1ebf94e9cd74201524de1856a017870287356f42da3e99a",
+      "profile": "vs_6_5",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "9b5256acc75dc5f09ba7173d44f4a8e1b64002cf502cf287bd9d162941734e2e.bin": {
+      "sha256": "76bd161ef6ee7e8fc1ebf94e9cd74201524de1856a017870287356f42da3e99a",
+      "profile": "vs_6_5",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "dbbf16fe0fe2276a7914955cabfca79115aa837310215dfdffc3ba27ff4f222a.bin": {
+      "sha256": "76bd161ef6ee7e8fc1ebf94e9cd74201524de1856a017870287356f42da3e99a",
+      "profile": "vs_6_5",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "f753b6219869955858faed7442a42d7e87c9d1c72b80ddbcf85ba752bab06419.bin": {
+      "sha256": "1f22c5b39a65bf90af2bb6d9543b2eb9fc9cd5f7171360b3353875eb75ed2cb8",
+      "profile": "vs_6_6",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "b7c8dbf2c426d5cca9f840ae52c32a543c577ee05e11b70657204609cc360fd6.bin": {
+      "sha256": "1f22c5b39a65bf90af2bb6d9543b2eb9fc9cd5f7171360b3353875eb75ed2cb8",
+      "profile": "vs_6_6",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "9a800ff3b29be023f55323ef21708551dbef0ac5e3c270af76c441a961160fe6.bin": {
+      "sha256": "1f22c5b39a65bf90af2bb6d9543b2eb9fc9cd5f7171360b3353875eb75ed2cb8",
+      "profile": "vs_6_6",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "f8f094b3642c4f78126f839623bc1742f4b3b73f2002c71e7b84ea918bca1dba.bin": {
+      "sha256": "991ad086fcbd30ac13bc710bf80c65f36c7726a6ef0aa86cb20124d070fa9de8",
+      "profile": "ps_6_8",
+      "architecture": "x64",
+      "shader_f16": true
+    },
+    "a9c94338b6c5a699200ce770919d992517785a98c46e549812f0f4500441e7f5.bin": {
+      "sha256": "991ad086fcbd30ac13bc710bf80c65f36c7726a6ef0aa86cb20124d070fa9de8",
+      "profile": "ps_6_8",
+      "architecture": "x86",
+      "shader_f16": true
+    },
+    "00a9ea2da829d9045ec9eef1c337c6d85cb4704b53530679932e0e500a95c7d5.bin": {
+      "sha256": "991ad086fcbd30ac13bc710bf80c65f36c7726a6ef0aa86cb20124d070fa9de8",
+      "profile": "ps_6_8",
+      "architecture": "arm64",
+      "shader_f16": true
+    },
+    "fb5083ebb7bb7bcac49e4d29624e33371d6da63e609619b461e24602bdf0453f.bin": {
+      "sha256": "936f0ebadb1b97e733f603b0af7f60440d7db8c5e8ca6eaec357e608169698c8",
+      "profile": "vs_6_2",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "646012b8cd483107f8ccd1fd1b6b3b85892fb1159d808a3f75e051b90406b2ae.bin": {
+      "sha256": "936f0ebadb1b97e733f603b0af7f60440d7db8c5e8ca6eaec357e608169698c8",
+      "profile": "vs_6_2",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "117a80c1557165122b17e5dd9dfc48f516af5ad169fc3f3f13004bb8657b188d.bin": {
+      "sha256": "936f0ebadb1b97e733f603b0af7f60440d7db8c5e8ca6eaec357e608169698c8",
+      "profile": "vs_6_2",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "feea2ef696cb3cf2562a81b4f872d70da871a2c7760936c62b5d4098a412435b.bin": {
+      "sha256": "144107519addfc2e3c2cbbdda17d4d35b629bb00287075f2d490442312c640f4",
+      "profile": "vs_6_3",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "6155a237f7bef2f2925e8f6bbb3a5421b074a4380ee9cc756a70fcbe94428194.bin": {
+      "sha256": "144107519addfc2e3c2cbbdda17d4d35b629bb00287075f2d490442312c640f4",
+      "profile": "vs_6_3",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "02369d5a80f6cc2c54c95841c608ca72427065d3f62a75fdfb6914df2478738d.bin": {
+      "sha256": "144107519addfc2e3c2cbbdda17d4d35b629bb00287075f2d490442312c640f4",
+      "profile": "vs_6_3",
+      "architecture": "arm64",
+      "shader_f16": false
+    },
+    "feee44059868862c432f190329429d3f5e466b9394f6ec2123ceb8d266e571ae.bin": {
+      "sha256": "f5b55b36ad01f708b26fc82e14783a20e10086badfd0c5cf2884ea19c7c5c268",
+      "profile": "ps_6_8",
+      "architecture": "x64",
+      "shader_f16": false
+    },
+    "3740da948a97d028ccc566fe27da9de40c6e431c73f8c861f91b21f54755ce1b.bin": {
+      "sha256": "f5b55b36ad01f708b26fc82e14783a20e10086badfd0c5cf2884ea19c7c5c268",
+      "profile": "ps_6_8",
+      "architecture": "x86",
+      "shader_f16": false
+    },
+    "ab45b15dc5584657adfb57e3ed514617249c79792b41df97cf7d066ad5cbc28b.bin": {
+      "sha256": "f5b55b36ad01f708b26fc82e14783a20e10086badfd0c5cf2884ea19c7c5c268",
+      "profile": "ps_6_8",
+      "architecture": "arm64",
+      "shader_f16": false
+    }
+  }
+}

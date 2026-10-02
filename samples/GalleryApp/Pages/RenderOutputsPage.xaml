@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.RenderOutputsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    xmlns:overlays="clr-namespace:Mu3D.Maui.Toolkit.Overlays;assembly=Mu3D.Maui.Toolkit"
+    xmlns:pages="clr-namespace:Mu3D.GalleryApp.Pages"
+    xmlns:rendering="clr-namespace:Mu3D.Rendering;assembly=Mu3D.Core"
+    xmlns:toolkit="clr-namespace:Mu3D.Maui.Toolkit.Controls;assembly=Mu3D.Maui.Toolkit"
+    Title="Render Outputs">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="render-outputs" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <mu3d:Mu3DSceneView
+            x:Name="SceneView"
+            BackgroundColor="Black"
+            FeatureError="OnFeatureError"
+            RendererChanged="OnRendererChanged"
+            SurfaceError="OnSurfaceError">
+            <mu3d:Mu3DSceneView.Features>
+                <toolkit:ViewportTools>
+                    <toolkit:RenderOutputToolbar
+                        x:Name="OutputTool"
+                        Margin="14"
+                        MaximumWidth="720"
+                        Output="{x:Static rendering:RenderOutputIds.Beauty}"
+                        Placement="TopLeft">
+                        <toolkit:RenderOutputOption
+                            Description="Gallery-owned ID resolved by an explicit pass factory"
+                            Label="Alias"
+                            Output="{x:Static pages:RenderOutputsPage.GalleryNormalAlias}" />
+                    </toolkit:RenderOutputToolbar>
+                    <overlays:ViewportOverlay
+                        InputMode="PassThrough"
+                        Margin="14"
+                        Placement="BottomRight">
+                        <Border
+                            Padding="10,7"
+                            BackgroundColor="#E6111827"
+                            Stroke="#53647D"
+                            StrokeThickness="1">
+                            <VerticalStackLayout Spacing="1">
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="12"
+                                    Text="Custom MAUI overlay"
+                                    TextColor="White" />
+                                <Label
+                                    FontSize="10"
+                                    Text="Arbitrary layout · input pass-through"
+                                    TextColor="#B9C7DC" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </overlays:ViewportOverlay>
+                </toolkit:ViewportTools>
+            </mu3d:Mu3DSceneView.Features>
+        </mu3d:Mu3DSceneView>
+        <VerticalStackLayout Grid.Row="1" Padding="16" Spacing="8">
+            <Label
+                FontAttributes="Bold"
+                Text="Use the toolbar inside the viewport; it changes output without changing visibility or pass order." />
+            <Label
+                FontSize="12"
+                Text="{Binding Output.Value, StringFormat='Selected output: {0}', Source={x:Reference OutputTool}, x:DataType=toolkit:RenderOutputToolbar}" />
+            <Label x:Name="StatusLabel" FontSize="12" LineBreakMode="WordWrap" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

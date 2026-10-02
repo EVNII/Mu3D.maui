@@ -1,0 +1,24 @@
+<Project>
+  <PropertyGroup>
+    <_Mu3DKtxNativeRuntimeDirectory>$(MSBuildThisFileDirectory)..\runtimes\$(RuntimeIdentifier)\native</_Mu3DKtxNativeRuntimeDirectory>
+    <Mu3DKtxNativeAbiVersion>v4.4.2</Mu3DKtxNativeAbiVersion>
+    <Mu3DKtxNativeAbiCommit>4d6fc70eaf62ad0558e63e8d97eb9766118327a6</Mu3DKtxNativeAbiCommit>
+  </PropertyGroup>
+
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' Or $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
+    <NativeReference Include="$(_Mu3DKtxNativeRuntimeDirectory)\libktx.a"
+                     Condition="Exists('$(_Mu3DKtxNativeRuntimeDirectory)\libktx.a')">
+      <Kind>Static</Kind>
+      <SmartLink>true</SmartLink>
+      <IsCxx>true</IsCxx>
+    </NativeReference>
+    <LinkerArgument Include="-lc++"
+                    Condition="Exists('$(_Mu3DKtxNativeRuntimeDirectory)\libktx.a')" />
+    <!-- P/Invoke lookup does not create a native object-file reference. Keep every consumed
+         libktx C ABI entry alive explicitly; ReferenceNativeSymbol does not expand wildcards. -->
+    <ReferenceNativeSymbol Include="ktxTexture2_CreateFromMemory;ktxTexture2_Destroy;ktxTexture2_NeedsTranscoding;ktxTexture2_GetTransferFunction_e;ktxTexture2_GetPrimaries_e;ktxTexture2_GetPremultipliedAlpha;ktxTexture2_TranscodeBasis;ktxTexture2_GetImageOffset;ktxTexture_GetData;ktxTexture_GetDataSize;ktxHashList_FindValue"
+                           Condition="Exists('$(_Mu3DKtxNativeRuntimeDirectory)\libktx.a')">
+      <SymbolType>Function</SymbolType>
+    </ReferenceNativeSymbol>
+  </ItemGroup>
+</Project>

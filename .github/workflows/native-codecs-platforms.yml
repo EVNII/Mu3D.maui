@@ -1,0 +1,556 @@
+name: Native codecs / Platform matrix
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/native-codecs-platforms.yml
+      - eng/Mu3D.UltraHdrNativeVersion.props
+      - eng/native/Mu3D.AppleMobile.toolchain.cmake
+      - eng/ultrahdr-assets.json
+      - src/Mu3D.Native.UltraHdr/**
+      - src/Mu3D.Native.UltraHdr.Runtime.Jpeg/**
+      - tests/Mu3D.Native.UltraHdr.Tests/**
+
+permissions:
+  contents: read
+
+env:
+  ULTRAHDR_COMMIT: a532a8c1418890cff7ce1e90cbe59ba6ebc6fa6d
+  ULTRAHDR_VERSION: v2.0.1
+  JPEG_TURBO_COMMIT: 20ade4dea9589515a69793e447a6c6220b464535
+
+jobs:
+  apple:
+    if: github.repository == 'EVNII/Mu3D.maui'
+    name: ${{ matrix.rid }} / Release
+    runs-on: macos-15
+    timeout-minutes: 75
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rid: ios-arm64
+            arch: arm64
+            platform: ios
+            sdk: iphoneos
+            clang_target: arm64-apple-ios15.0
+            vtool_platform: IOS
+          - rid: iossimulator-arm64
+            arch: arm64
+            platform: iossimulator
+            sdk: iphonesimulator
+            clang_target: arm64-apple-ios15.0-simulator
+            vtool_platform: IOSSIMULATOR
+          - rid: iossimulator-x64
+            arch: x86_64
+            platform: iossimulator
+            sdk: iphonesimulator
+            clang_target: x86_64-apple-ios15.0-simulator
+            vtool_platform: IOSSIMULATOR
+          - rid: maccatalyst-arm64
+            arch: arm64
+            platform: maccatalyst
+            sdk: macosx
+            clang_target: arm64-apple-ios15.0-macabi
+            vtool_platform: MACCATALYST
+          - rid: maccatalyst-x64
+            arch: x86_64
+            platform: maccatalyst
+            sdk: macosx
+            clang_target: x86_64-apple-ios15.0-macabi
+            vtool_platform: MACCATALYST
+
+    steps:
+      - name: Check out Mu3D
+        uses: actions/checkout@v7
+
+      - name: Check out pinned libultrahdr
+        uses: actions/checkout@v7
+        with:
+          repository: google/libultrahdr
+          ref: a532a8c1418890cff7ce1e90cbe59ba6ebc6fa6d
+          path: ultrahdr
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Check out pinned libjpeg-turbo
+        uses: actions/checkout@v7
+        with:
+          repository: libjpeg-turbo/libjpeg-turbo
+          ref: 20ade4dea9589515a69793e447a6c6220b464535
+          path: jpeg-turbo
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Verify pinned codec sources
+        run: |
+          test "$(git -C ultrahdr rev-parse HEAD)" = "$ULTRAHDR_COMMIT"
+          test "$(git -C jpeg-turbo rev-parse HEAD)" = "$JPEG_TURBO_COMMIT"
+
+      - name: Build pinned Apple libjpeg-turbo
+        run: >-
+          cmake -S jpeg-turbo -B build-turbo -G Ninja
+          -DCMAKE_TOOLCHAIN_FILE="$GITHUB_WORKSPACE/eng/native/Mu3D.AppleMobile.toolchain.cmake"
+          -DMU3D_APPLE_PLATFORM=${{ matrix.platform }}
+          -DMU3D_APPLE_ARCH=${{ matrix.arch }}
+          -DCMAKE_BUILD_TYPE=Release
+          -DENABLE_SHARED=OFF
+          -DENABLE_STATIC=ON
+          -DWITH_TURBOJPEG=ON
+      - run: cmake --build build-turbo --config Release --target jpeg-static turbojpeg-static --parallel
+
+      - name: Build pinned JPEG-only libultrahdr
+        run: >-
+          cmake -S ultrahdr -B build-uhdr -G Ninja
+          -DCMAKE_TOOLCHAIN_FILE="$GITHUB_WORKSPACE/eng/native/Mu3D.AppleMobile.toolchain.cmake"
+          -DMU3D_APPLE_PLATFORM=${{ matrix.platform }}
+          -DMU3D_APPLE_ARCH=${{ matrix.arch }}
+          -DCMAKE_BUILD_TYPE=Release
+          -DBUILD_SHARED_LIBS=OFF
+          -DUHDR_BUILD_DEPS=OFF
+          -DUHDR_BUILD_TESTS=OFF
+          -DUHDR_BUILD_EXAMPLES=OFF
+          -DUHDR_BUILD_BENCHMARK=OFF
+          -DUHDR_ENABLE_HEIF=OFF
+          -DUHDR_ENABLE_INSTALL=OFF
+          -DUHDR_WRITE_ISO=ON
+          -DUHDR_WRITE_XMP=OFF
+          -DJPEG_LIBRARY="$GITHUB_WORKSPACE/build-turbo/libjpeg.a"
+          -DJPEG_INCLUDE_DIR="$GITHUB_WORKSPACE/jpeg-turbo/src;$GITHUB_WORKSPACE/build-turbo"
+      - run: cmake --build build-uhdr --config Release --target uhdr --parallel
+
+      - name: Stage and verify Apple platform plus ABI
+        env:
+          RID: ${{ matrix.rid }}
+        run: |
+          destination="artifacts/ultrahdr/$ULTRAHDR_VERSION/release/runtimes/$RID/native"
+          mkdir -p "$destination"
+          cp build-uhdr/libuhdr.a "$destination/libuhdr.a"
+          cp build-turbo/libturbojpeg.a "$destination/libturbojpeg.a"
+
+          xcrun lipo "$destination/libuhdr.a" -verify_arch ${{ matrix.arch }}
+          xcrun lipo "$destination/libturbojpeg.a" -verify_arch ${{ matrix.arch }}
+          symbols="$(xcrun nm -gU "$destination/libuhdr.a" "$destination/libturbojpeg.a")"
+          for symbol in \
+            _uhdr_create_decoder _uhdr_release_decoder _uhdr_dec_set_image \
+            _uhdr_dec_set_out_img_format _uhdr_dec_set_out_color_transfer \
+            _uhdr_dec_probe _uhdr_dec_get_gainmap_width _uhdr_dec_get_gainmap_height \
+            _uhdr_decode _uhdr_get_decoded_image _is_uhdr_image \
+            _uhdr_create_encoder _uhdr_release_encoder _uhdr_enc_set_raw_image \
+            _uhdr_enc_set_quality _uhdr_enc_set_using_multi_channel_gainmap \
+            _uhdr_enc_set_gainmap_scale_factor _uhdr_enc_set_target_display_peak_brightness \
+            _uhdr_enc_set_preset _uhdr_enc_set_output_format _uhdr_encode \
+            _uhdr_get_encoded_stream _tj3Init _tj3Destroy _tj3GetErrorStr \
+            _tj3Get _tj3Set _tj3Compress8 _tj3Free _tj3DecompressHeader _tj3Decompress8; do
+            grep -Eq " $symbol(@@?[^[:space:]]+)?$" <<< "$symbols" || { echo "Missing native export: $symbol"; exit 1; }
+          done
+
+          probe_directory="$(mktemp -d)"
+          sdk_path="$(xcrun --sdk ${{ matrix.sdk }} --show-sdk-path)"
+          printf '%s\n' 'extern "C" void mu3d_codec_link_probe() {}' | \
+            xcrun clang++ -target "${{ matrix.clang_target }}" -isysroot "$sdk_path" \
+              -dynamiclib -x c++ - -x none \
+              -Wl,-u,_uhdr_create_decoder -Wl,-u,_uhdr_release_decoder \
+              -Wl,-u,_tj3Init -Wl,-u,_tj3Destroy \
+              "$destination/libuhdr.a" "$destination/libturbojpeg.a" -lc++ \
+              -o "$probe_directory/libcodec-link-probe.dylib"
+          xcrun vtool -show-build "$probe_directory/libcodec-link-probe.dylib" | \
+            grep -q 'platform ${{ matrix.vtool_platform }}'
+          shasum -a 256 "$destination/libuhdr.a" "$destination/libturbojpeg.a"
+
+      - name: Upload candidate runtime
+        uses: actions/upload-artifact@v7
+        with:
+          name: Mu3D.Native.UltraHdr-${{ matrix.rid }}-release
+          path: artifacts/ultrahdr/v2.0.1/release/runtimes/${{ matrix.rid }}/native/*.a
+          if-no-files-found: error
+          retention-days: 30
+
+  android:
+    if: github.repository == 'EVNII/Mu3D.maui'
+    name: ${{ matrix.rid }} / Release
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rid: android-arm
+            abi: armeabi-v7a
+          - rid: android-arm64
+            abi: arm64-v8a
+          - rid: android-x86
+            abi: x86
+          - rid: android-x64
+            abi: x86_64
+
+    steps:
+      - name: Check out Mu3D
+        uses: actions/checkout@v7
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+      - name: Install pinned Android NDK
+        env:
+          ANDROID_NDK_VERSION: 28.2.13676358
+        run: |
+          sdkmanager --install "ndk;$ANDROID_NDK_VERSION"
+          echo "ANDROID_NDK_HOME=$ANDROID_SDK_ROOT/ndk/$ANDROID_NDK_VERSION" >> "$GITHUB_ENV"
+      - name: Check out pinned libultrahdr
+        uses: actions/checkout@v7
+        with:
+          repository: google/libultrahdr
+          ref: a532a8c1418890cff7ce1e90cbe59ba6ebc6fa6d
+          path: ultrahdr
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Check out pinned libjpeg-turbo
+        uses: actions/checkout@v7
+        with:
+          repository: libjpeg-turbo/libjpeg-turbo
+          ref: 20ade4dea9589515a69793e447a6c6220b464535
+          path: jpeg-turbo
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Verify pinned codec sources
+        run: |
+          test "$(git -C ultrahdr rev-parse HEAD)" = "$ULTRAHDR_COMMIT"
+          test "$(git -C jpeg-turbo rev-parse HEAD)" = "$JPEG_TURBO_COMMIT"
+
+      - name: Build pinned Android libjpeg-turbo
+        run: >-
+          cmake -S jpeg-turbo -B build-turbo -G Ninja
+          -DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake"
+          -DANDROID_ABI=${{ matrix.abi }}
+          -DANDROID_PLATFORM=android-24
+          -DANDROID_STL=c++_static
+          -DCMAKE_BUILD_TYPE=Release
+          -DENABLE_SHARED=ON
+          -DENABLE_STATIC=ON
+          -DWITH_TURBOJPEG=ON
+      - run: cmake --build build-turbo --config Release --target jpeg-static turbojpeg --parallel
+
+      - name: Build pinned Android JPEG-only libultrahdr
+        run: >-
+          cmake -S ultrahdr -B build-uhdr -G Ninja
+          -DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake"
+          -DANDROID_ABI=${{ matrix.abi }}
+          -DANDROID_PLATFORM=android-24
+          -DANDROID_STL=c++_static
+          -DCMAKE_BUILD_TYPE=Release
+          -DBUILD_SHARED_LIBS=ON
+          -DUHDR_BUILD_DEPS=OFF
+          -DUHDR_BUILD_TESTS=OFF
+          -DUHDR_BUILD_EXAMPLES=OFF
+          -DUHDR_BUILD_BENCHMARK=OFF
+          -DUHDR_ENABLE_HEIF=OFF
+          -DUHDR_ENABLE_INSTALL=OFF
+          -DUHDR_WRITE_ISO=ON
+          -DUHDR_WRITE_XMP=OFF
+          -DJPEG_LIBRARY="$GITHUB_WORKSPACE/build-turbo/libjpeg.a"
+          -DJPEG_INCLUDE_DIR="$GITHUB_WORKSPACE/jpeg-turbo/src;$GITHUB_WORKSPACE/build-turbo"
+      - run: cmake --build build-uhdr --config Release --target uhdr --parallel
+
+      - name: Stage and verify Android ABI plus exports
+        env:
+          RID: ${{ matrix.rid }}
+        run: |
+          destination="artifacts/ultrahdr/$ULTRAHDR_VERSION/release/runtimes/$RID/native"
+          mkdir -p "$destination"
+          cp build-uhdr/libuhdr.so "$destination/libuhdr.so"
+          cp build-turbo/libturbojpeg.so "$destination/libturbojpeg.so"
+          llvm_bin="$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin"
+          symbols="$($llvm_bin/llvm-nm -D --defined-only "$destination/libuhdr.so" "$destination/libturbojpeg.so")"
+          for symbol in uhdr_create_decoder uhdr_release_decoder uhdr_dec_set_image \
+            uhdr_dec_set_out_img_format uhdr_dec_set_out_color_transfer uhdr_dec_probe \
+            uhdr_dec_get_gainmap_width uhdr_dec_get_gainmap_height uhdr_decode \
+            uhdr_get_decoded_image is_uhdr_image \
+            uhdr_create_encoder uhdr_release_encoder uhdr_enc_set_raw_image \
+            uhdr_enc_set_quality uhdr_enc_set_using_multi_channel_gainmap \
+            uhdr_enc_set_gainmap_scale_factor uhdr_enc_set_target_display_peak_brightness \
+            uhdr_enc_set_preset uhdr_enc_set_output_format uhdr_encode uhdr_get_encoded_stream \
+            tj3Init tj3Destroy tj3GetErrorStr tj3Get tj3Set tj3Compress8 tj3Free \
+            tj3DecompressHeader tj3Decompress8; do
+            grep -Eq " $symbol(@@?[^[:space:]]+)?$" <<< "$symbols" || { echo "Missing native export: $symbol"; exit 1; }
+          done
+          for library in "$destination/libuhdr.so" "$destination/libturbojpeg.so"; do
+            if "$llvm_bin/llvm-readelf" -d "$library" | grep -q libc++_shared; then
+              echo "$library unexpectedly depends on libc++_shared.so"
+              exit 1
+            fi
+            "$llvm_bin/llvm-readelf" -h "$library"
+            sha256sum "$library"
+          done
+
+      - name: Upload candidate runtime
+        uses: actions/upload-artifact@v7
+        with:
+          name: Mu3D.Native.UltraHdr-${{ matrix.rid }}-release
+          path: artifacts/ultrahdr/v2.0.1/release/runtimes/${{ matrix.rid }}/native/*.so
+          if-no-files-found: error
+          retention-days: 30
+
+  windows:
+    if: github.repository == 'EVNII/Mu3D.maui'
+    name: ${{ matrix.rid }} / Release
+    runs-on: windows-2025
+    timeout-minutes: 75
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rid: win-x86
+            cmake_arch: Win32
+            dev_arch: x86
+            machine: x86
+            simd: ON
+          - rid: win-x64
+            cmake_arch: x64
+            dev_arch: x64
+            machine: x64
+            simd: ON
+          - rid: win-arm64
+            cmake_arch: ARM64
+            dev_arch: amd64_arm64
+            machine: ARM64
+            simd: OFF
+
+    steps:
+      - name: Check out Mu3D
+        uses: actions/checkout@v7
+      - name: Enter the Visual C++ environment
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: ${{ matrix.dev_arch }}
+      - name: Check out pinned libultrahdr
+        uses: actions/checkout@v7
+        with:
+          repository: google/libultrahdr
+          ref: a532a8c1418890cff7ce1e90cbe59ba6ebc6fa6d
+          path: ultrahdr
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Check out pinned libjpeg-turbo
+        uses: actions/checkout@v7
+        with:
+          repository: libjpeg-turbo/libjpeg-turbo
+          ref: 20ade4dea9589515a69793e447a6c6220b464535
+          path: jpeg-turbo
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Verify pinned codec sources
+        shell: pwsh
+        run: |
+          if ((git -C ultrahdr rev-parse HEAD) -ne $env:ULTRAHDR_COMMIT) { throw 'libultrahdr commit mismatch.' }
+          if ((git -C jpeg-turbo rev-parse HEAD) -ne $env:JPEG_TURBO_COMMIT) { throw 'libjpeg-turbo commit mismatch.' }
+
+      - name: Build pinned Windows libjpeg-turbo
+        shell: pwsh
+        run: >-
+          cmake -S jpeg-turbo -B build-turbo -G "Visual Studio 17 2022"
+          -A ${{ matrix.cmake_arch }}
+          -DENABLE_SHARED=ON
+          -DENABLE_STATIC=ON
+          -DWITH_TURBOJPEG=ON
+          -DWITH_CRT_DLL=ON
+          -DWITH_SIMD=${{ matrix.simd }}
+      - run: cmake --build build-turbo --config Release --target jpeg-static turbojpeg --parallel
+
+      - name: Stage libjpeg-turbo development inputs
+        shell: pwsh
+        run: |
+          cmake --install build-turbo --config Release --component include --prefix build-turbo-install
+          $jpegLibrary = (Resolve-Path build-turbo/Release/jpeg-static.lib).Path.Replace('\', '/')
+          $jpegInclude = (Resolve-Path build-turbo-install/include).Path.Replace('\', '/')
+          "JPEG_STATIC_LIBRARY=$jpegLibrary" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "JPEG_INCLUDE_DIRECTORY=$jpegInclude" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: Build pinned Windows JPEG-only libultrahdr
+        shell: pwsh
+        run: >-
+          cmake -S ultrahdr -B build-uhdr -G "Visual Studio 17 2022"
+          -A ${{ matrix.cmake_arch }}
+          -DBUILD_SHARED_LIBS=ON
+          -DUHDR_BUILD_DEPS=OFF
+          -DUHDR_BUILD_TESTS=OFF
+          -DUHDR_BUILD_EXAMPLES=OFF
+          -DUHDR_BUILD_BENCHMARK=OFF
+          -DUHDR_ENABLE_HEIF=OFF
+          -DUHDR_ENABLE_INSTALL=OFF
+          -DUHDR_WRITE_ISO=ON
+          -DUHDR_WRITE_XMP=OFF
+          -DJPEG_LIBRARY="$env:JPEG_STATIC_LIBRARY"
+          -DJPEG_INCLUDE_DIR="$env:JPEG_INCLUDE_DIRECTORY"
+      - run: cmake --build build-uhdr --config Release --target uhdr --parallel
+
+      - name: Stage and verify Windows machine plus exports
+        shell: pwsh
+        run: |
+          $destination = "artifacts/ultrahdr/$env:ULTRAHDR_VERSION/release/runtimes/${{ matrix.rid }}/native"
+          New-Item -ItemType Directory -Force $destination | Out-Null
+          Copy-Item build-uhdr/Release/uhdr.dll "$destination/uhdr.dll"
+          Copy-Item build-turbo/Release/turbojpeg.dll "$destination/turbojpeg.dll"
+          foreach ($library in @("$destination/uhdr.dll", "$destination/turbojpeg.dll")) {
+            $headers = dumpbin /headers $library
+            if ($headers -notmatch 'machine \(${{ matrix.machine }}\)') { throw "$library has the wrong machine." }
+            Get-FileHash $library -Algorithm SHA256
+          }
+          $exports = (dumpbin /exports "$destination/uhdr.dll") + (dumpbin /exports "$destination/turbojpeg.dll")
+          $required = @(
+            'uhdr_create_decoder', 'uhdr_release_decoder', 'uhdr_dec_set_image',
+            'uhdr_dec_set_out_img_format', 'uhdr_dec_set_out_color_transfer',
+            'uhdr_dec_probe', 'uhdr_dec_get_gainmap_width', 'uhdr_dec_get_gainmap_height',
+            'uhdr_decode', 'uhdr_get_decoded_image', 'is_uhdr_image',
+            'uhdr_create_encoder', 'uhdr_release_encoder', 'uhdr_enc_set_raw_image',
+            'uhdr_enc_set_quality', 'uhdr_enc_set_using_multi_channel_gainmap',
+            'uhdr_enc_set_gainmap_scale_factor', 'uhdr_enc_set_target_display_peak_brightness',
+            'uhdr_enc_set_preset', 'uhdr_enc_set_output_format', 'uhdr_encode',
+            'uhdr_get_encoded_stream',
+            'tj3Init', 'tj3Destroy', 'tj3GetErrorStr', 'tj3Get', 'tj3Set',
+            'tj3Compress8', 'tj3Free', 'tj3DecompressHeader', 'tj3Decompress8'
+          )
+          foreach ($symbol in $required) {
+            if ($exports -notmatch "\s$symbol\s") { throw "Missing native export: $symbol" }
+          }
+
+      - name: Upload candidate runtime
+        uses: actions/upload-artifact@v7
+        with:
+          name: Mu3D.Native.UltraHdr-${{ matrix.rid }}-release
+          path: artifacts/ultrahdr/v2.0.1/release/runtimes/${{ matrix.rid }}/native/*.dll
+          if-no-files-found: error
+          retention-days: 30
+
+  host-native-tests:
+    if: github.repository == 'EVNII/Mu3D.maui'
+    name: Real host-native JPEG and gain-map round trip
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - name: Check out Mu3D
+        uses: actions/checkout@v7
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+      - name: Check out pinned libultrahdr
+        uses: actions/checkout@v7
+        with:
+          repository: google/libultrahdr
+          ref: a532a8c1418890cff7ce1e90cbe59ba6ebc6fa6d
+          path: ultrahdr
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Check out pinned libjpeg-turbo
+        uses: actions/checkout@v7
+        with:
+          repository: libjpeg-turbo/libjpeg-turbo
+          ref: 20ade4dea9589515a69793e447a6c6220b464535
+          path: jpeg-turbo
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Verify pinned codec sources
+        run: |
+          test "$(git -C ultrahdr rev-parse HEAD)" = "$ULTRAHDR_COMMIT"
+          test "$(git -C jpeg-turbo rev-parse HEAD)" = "$JPEG_TURBO_COMMIT"
+      - name: Build host test runtimes
+        run: |
+          cmake -S jpeg-turbo -B build-turbo -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release -DENABLE_SHARED=ON -DENABLE_STATIC=ON \
+            -DWITH_TURBOJPEG=ON
+          cmake --build build-turbo --config Release --target jpeg-static turbojpeg --parallel
+          cmake -S ultrahdr -B build-uhdr -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DUHDR_BUILD_DEPS=OFF \
+            -DUHDR_BUILD_TESTS=OFF -DUHDR_BUILD_EXAMPLES=OFF -DUHDR_BUILD_BENCHMARK=OFF \
+            -DUHDR_ENABLE_HEIF=OFF -DUHDR_ENABLE_INSTALL=OFF \
+            -DJPEG_LIBRARY="$GITHUB_WORKSPACE/build-turbo/libjpeg.a" \
+            -DJPEG_INCLUDE_DIR="$GITHUB_WORKSPACE/jpeg-turbo/src;$GITHUB_WORKSPACE/build-turbo"
+          cmake --build build-uhdr --config Release --target uhdr --parallel
+          mkdir -p build/test-runtime
+          uhdr_library="$(find build-uhdr -name 'libuhdr.*.dylib' -type f -print -quit)"
+          turbojpeg_library="$(find build-turbo -name 'libturbojpeg.*.dylib' -type f -print -quit)"
+          test -n "$uhdr_library"
+          test -n "$turbojpeg_library"
+          cp "$uhdr_library" build/test-runtime/libuhdr.dylib
+          cp "$turbojpeg_library" build/test-runtime/libturbojpeg.dylib
+          echo "DYLD_LIBRARY_PATH=$GITHUB_WORKSPACE/build/test-runtime" >> "$GITHUB_ENV"
+      - name: Exercise native JPEG and gain-map paths
+        env:
+          MU3D_RUN_ULTRAHDR_NATIVE_TESTS: "true"
+        run: dotnet run --project tests/Mu3D.Native.UltraHdr.Tests --configuration Release
+
+  verify-package:
+    if: github.repository == 'EVNII/Mu3D.maui'
+    name: Verify complete NuGet runtime layout
+    needs: [apple, android, windows, host-native-tests]
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - name: Check out Mu3D
+        uses: actions/checkout@v7
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+      - name: Download all verified runtimes
+        uses: actions/download-artifact@v6
+        with:
+          pattern: Mu3D.Native.UltraHdr-*-release
+          path: artifacts/ultrahdr-ci
+      - name: Stage verified runtimes
+        run: |
+          for rid in android-arm android-arm64 android-x86 android-x64; do
+            destination="artifacts/ultrahdr/$ULTRAHDR_VERSION/release/runtimes/$rid/native"
+            mkdir -p "$destination"
+            cp artifacts/ultrahdr-ci/Mu3D.Native.UltraHdr-$rid-release/*.so "$destination/"
+          done
+          for rid in ios-arm64 iossimulator-arm64 iossimulator-x64 \
+            maccatalyst-arm64 maccatalyst-x64; do
+            destination="artifacts/ultrahdr/$ULTRAHDR_VERSION/release/runtimes/$rid/native"
+            mkdir -p "$destination"
+            cp artifacts/ultrahdr-ci/Mu3D.Native.UltraHdr-$rid-release/*.a "$destination/"
+          done
+          for rid in win-arm64 win-x86 win-x64; do
+            destination="artifacts/ultrahdr/$ULTRAHDR_VERSION/release/runtimes/$rid/native"
+            mkdir -p "$destination"
+            cp artifacts/ultrahdr-ci/Mu3D.Native.UltraHdr-$rid-release/*.dll "$destination/"
+          done
+      - name: Pack JPEG runtime carrier
+        run: >-
+          dotnet pack src/Mu3D.Native.UltraHdr.Runtime.Jpeg/Mu3D.Native.UltraHdr.Runtime.Jpeg.csproj
+          --configuration Release --output artifacts/packages
+      - name: Verify package contents
+        run: |
+          package="$(find artifacts/packages -name 'Mu3D.Native.UltraHdr.Runtime.Jpeg.*.nupkg' -print -quit)"
+          test -n "$package"
+          unzip -l "$package" > package-files.txt
+          grep -q 'buildTransitive/Mu3D.Native.UltraHdr.targets' package-files.txt
+          for rid in android-arm android-arm64 android-x86 android-x64; do
+            grep -q "runtimes/$rid/native/libuhdr.so" package-files.txt
+            grep -q "runtimes/$rid/native/libturbojpeg.so" package-files.txt
+          done
+          for rid in ios-arm64 iossimulator-arm64 iossimulator-x64 \
+            maccatalyst-arm64 maccatalyst-x64; do
+            grep -q "runtimes/$rid/native/libuhdr.a" package-files.txt
+            grep -q "runtimes/$rid/native/libturbojpeg.a" package-files.txt
+          done
+          for rid in win-arm64 win-x86 win-x64; do
+            grep -q "runtimes/$rid/native/uhdr.dll" package-files.txt
+            grep -q "runtimes/$rid/native/turbojpeg.dll" package-files.txt
+          done
+      - name: Record complete runtime hashes
+        run: |
+          cd "artifacts/ultrahdr/$ULTRAHDR_VERSION/release"
+          find runtimes -type f | sort | xargs shasum -a 256 > SHA256SUMS
+      - name: Upload verified runtime set
+        uses: actions/upload-artifact@v7
+        with:
+          name: Mu3D.Native.UltraHdr.Runtimes.PlatformMatrixVerified
+          path: artifacts/ultrahdr/v2.0.1/release
+          if-no-files-found: error
+          retention-days: 30
+      - name: Upload verified package
+        uses: actions/upload-artifact@v7
+        with:
+          name: Mu3D.Native.UltraHdr.Runtime.Jpeg.Package.PlatformMatrixVerified
+          path: artifacts/packages/Mu3D.Native.UltraHdr.Runtime.Jpeg.*.nupkg
+          if-no-files-found: error
+          retention-days: 30

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<a:AShell
+    x:Class="Mu3D.Gallery.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:a="clr-namespace:AdaptiveShell.Controls;assembly=AdaptiveShell"
+    xmlns:pages="clr-namespace:Mu3D.Gallery.Pages"
+    Title="Mu3D Gallery">
+
+    <!-- On small windows the rendering pages extend under the floating navigation bar;
+         on large windows they stay clear of it. -->
+    <a:AShell.Resources>
+        <Style x:Key="FullBleedStateStyle" TargetType="a:AShellContent">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup>
+                        <VisualState x:Name="Small">
+                            <VisualState.StateTriggers>
+                                <AdaptiveTrigger MinWindowWidth="0" />
+                            </VisualState.StateTriggers>
+                            <VisualState.Setters>
+                                <Setter Property="a:AShellContent.FullBleed" Value="True" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Large">
+                            <VisualState.StateTriggers>
+                                <AdaptiveTrigger MinWindowWidth="600" />
+                            </VisualState.StateTriggers>
+                            <VisualState.Setters>
+                                <Setter Property="a:AShellContent.FullBleed" Value="False" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </a:AShell.Resources>
+
+    <a:AShellGroup Title="Basic" Icon="palette.svg">
+        <a:AShellContent
+            Title="HDR Probe"
+            Icon="canvas.svg"
+            Style="{StaticResource FullBleedStateStyle}"
+            ContentTemplate="{DataTemplate pages:HdrProbePage}" />
+        <a:AShellContent
+            Title="Color Ramps"
+            Icon="ramps.svg"
+            Style="{StaticResource FullBleedStateStyle}"
+            ContentTemplate="{DataTemplate pages:ColorRampsPage}" />
+        <a:AShellContent
+            Title="Color LUT"
+            Icon="lut.svg"
+            Style="{StaticResource FullBleedStateStyle}"
+            ContentTemplate="{DataTemplate pages:ColorLutPage}" />
+        <a:AShellContent
+            Title="Device Probe"
+            Icon="device.svg"
+            ContentTemplate="{DataTemplate pages:DeviceProbePage}" />
+    </a:AShellGroup>
+
+    <a:AShellGroup Title="Materials" Icon="material.svg">
+        <a:AShellContent
+            Title="PBR Material"
+            Icon="scene.svg"
+            Style="{StaticResource FullBleedStateStyle}"
+            ContentTemplate="{DataTemplate pages:PbrMaterialPage}" />
+        <a:AShellContent
+            Title="OpenPBR"
+            Icon="material.svg"
+            Style="{StaticResource FullBleedStateStyle}"
+            ContentTemplate="{DataTemplate pages:OpenPbrPage}" />
+        <a:AShellContent
+            Title="Emissive"
+            Icon="glow.svg"
+            Style="{StaticResource FullBleedStateStyle}"
+            ContentTemplate="{DataTemplate pages:EmissiveMaterialPage}" />
+    </a:AShellGroup>
+
+    <a:AShellGroup Title="Accessory" Icon="toolbox.svg">
+        <a:AShellContent
+            Title="Toolkit 3D"
+            Icon="gizmo.svg"
+            Style="{StaticResource FullBleedStateStyle}"
+            ContentTemplate="{DataTemplate pages:Toolkit3DPage}" />
+        <a:AShellContent
+            Title="Translucent Canvas"
+            Icon="translucent.svg"
+            Style="{StaticResource FullBleedStateStyle}"
+            ContentTemplate="{DataTemplate pages:TranslucentCanvasPage}" />
+        <a:AShellContent
+            Title="Feed"
+            Icon="feed.svg"
+            ContentTemplate="{DataTemplate pages:FeedPage}" />
+    </a:AShellGroup>
+
+    <a:AShellGroup Title="About" Icon="about.svg">
+        <a:AShellContent
+            Title="License"
+            Icon="license.svg"
+            ContentTemplate="{DataTemplate pages:LicensePage}" />
+    </a:AShellGroup>
+</a:AShell>

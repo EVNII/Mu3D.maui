@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../eng/Mu3D.KtxNativeVersion.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Mu3D.Native.Ktx</RootNamespace>
+    <AssemblyName>Mu3D.Native.Ktx</AssemblyName>
+    <PackageId>Mu3D.Native.Ktx</PackageId>
+    <Description>Pinned Khronos libktx texture-transcoding adapter for Mu3D.</Description>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Mu3DUseRuntimeProjectReferences Condition="'$(Mu3DUseRuntimeProjectReferences)' == ''">true</Mu3DUseRuntimeProjectReferences>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AssemblyMetadata Include="KtxNativeVersion" Value="$(Mu3DKtxNativeVersion)" />
+    <AssemblyMetadata Include="KtxNativeCommit" Value="$(Mu3DKtxNativeCommit)" />
+    <ProjectReference Include="../Mu3D.Core/Mu3D.Core.csproj" />
+    <ProjectReference Include="../Mu3D.Native.Ktx.Runtime/Mu3D.Native.Ktx.Runtime.csproj"
+                      ReferenceOutputAssembly="false"
+                      Condition="'$(Mu3DUseRuntimeProjectReferences)' == 'true'" />
+    <PackageReference Include="Mu3D.Native.Ktx.Runtime"
+                      Version="[$(Mu3DPackageVersion)]"
+                      Condition="'$(Mu3DUseRuntimeProjectReferences)' != 'true'" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md" Pack="true" PackagePath="README.md" />
+    <None Update="THIRD-PARTY-NOTICES.md" Pack="true" PackagePath="THIRD-PARTY-NOTICES.md" />
+    <None Update="licenses/**/*" Pack="true" PackagePath="licenses/%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <Target Name="RequireVerifiedKtxRuntimeFeedForPack" BeforeTargets="GenerateNuspec">
+    <Error Condition="'$(Mu3DUseRuntimeProjectReferences)' == 'true'"
+           Text="Pack Mu3D.Native.Ktx through eng/pack-managed-packages.ps1 so its runtime dependency is exact and comes from a verified feed." />
+  </Target>
+</Project>

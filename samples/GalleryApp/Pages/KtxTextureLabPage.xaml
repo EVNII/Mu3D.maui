@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.KtxTextureLabPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    Title="KTX Texture Lab">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="ktx2-gpu-sampling" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <Grid BackgroundColor="Black">
+            <mu3d:Mu3DView x:Name="SurfaceView" Draw="OnSurfaceDraw" />
+            <Grid
+                Padding="12"
+                ColumnDefinitions="*,*"
+                InputTransparent="True"
+                RowDefinitions="*,*">
+                        <Label
+                            Margin="6"
+                            BackgroundColor="#99000000"
+                            HorizontalOptions="Start"
+                            Padding="8,4"
+                            Text="Decoded RGBA8 · Color"
+                            TextColor="White"
+                            VerticalOptions="Start" />
+                        <Label
+                            Grid.Column="1"
+                            Margin="6"
+                            BackgroundColor="#99000000"
+                            HorizontalOptions="Start"
+                            Padding="8,4"
+                            Text="GPU compressed · Color"
+                            TextColor="White"
+                            VerticalOptions="Start" />
+                        <Label
+                            Grid.Row="1"
+                            Margin="6"
+                            BackgroundColor="#99000000"
+                            HorizontalOptions="Start"
+                            Padding="8,4"
+                            Text="Decoded RGBA8 · Color + Normal"
+                            TextColor="White"
+                            VerticalOptions="Start" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="6"
+                            BackgroundColor="#99000000"
+                            HorizontalOptions="Start"
+                            Padding="8,4"
+                            Text="GPU compressed · Color + Normal"
+                            TextColor="White"
+                            VerticalOptions="Start" />
+            </Grid>
+        </Grid>
+        <ScrollView Grid.Row="1" MaximumHeightRequest="280">
+            <VerticalStackLayout Padding="16" Spacing="10">
+                <Label
+                    Text="Uses the optional pinned libktx adapter. Left is decoded RGBA8; right is the GPU-compressed path. The top row isolates color and the bottom row adds the UASTC normal map on explicit tangent-safe cards." />
+                <Label
+                    x:Name="StatusLabel"
+                    FontAttributes="Bold"
+                    LineBreakMode="WordWrap"
+                    Text="Waiting for a native surface…" />
+                <Button
+                    x:Name="ReloadButton"
+                    Clicked="OnReloadClicked"
+                    IsEnabled="False"
+                    Text="Reload and transcode fixtures" />
+                <Label
+                    x:Name="DetailsLabel"
+                    FontFamily="OpenSansRegular"
+                    LineBreakMode="WordWrap" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

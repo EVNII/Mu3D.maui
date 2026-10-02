@@ -1,0 +1,18 @@
+<Project>
+  <PropertyGroup>
+    <Mu3DWgpuNativeVersion>v29.0.1.1</Mu3DWgpuNativeVersion>
+    <Mu3DWgpuNativeCommit>6aed50955d934ac36049ba8d002034841633ae02</Mu3DWgpuNativeCommit>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <_Mu3DPinnedWgpuNativeVersion Include="v29.0.1.1" />
+    <_Mu3DPinnedWgpuNativeCommit Include="6aed50955d934ac36049ba8d002034841633ae02" />
+  </ItemGroup>
+
+  <Target Name="ValidateMu3DWgpuNativeVersionLock" BeforeTargets="PrepareForBuild;GenerateNuspec">
+    <Error Condition="'$(Mu3DWgpuNativeVersion)' != '@(_Mu3DPinnedWgpuNativeVersion)'"
+           Text="Mu3DWgpuNativeVersion is ABI-locked to @(_Mu3DPinnedWgpuNativeVersion); consumer overrides are not supported." />
+    <Error Condition="'$(Mu3DWgpuNativeCommit)' != '@(_Mu3DPinnedWgpuNativeCommit)'"
+           Text="Mu3DWgpuNativeCommit is ABI-locked to @(_Mu3DPinnedWgpuNativeCommit); consumer overrides are not supported." />
+  </Target>
+</Project>

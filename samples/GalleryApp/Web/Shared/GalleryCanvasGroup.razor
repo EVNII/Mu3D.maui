@@ -1,0 +1,120 @@
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+@using System.Diagnostics.CodeAnalysis
+@using Mu3D.Graphics
+@using Mu3D.GalleryApp.Web.Infrastructure
+
+<div class="native-gallery-panels @(StackNarrow ? "stack-narrow" : "")" style="--columns:@(Panels.Count == 4 ? 2 : Panels.Count)">
+    @for (int index = 0; index < Panels.Count; index++)
+    {
+        int current = index;
+        <section><h2>@Panels[current].Title</h2><canvas id="@ids[current]" tabindex="0" aria-label="@Panels[current].Title" style="height:350px"></canvas><p class="status" role="status">@statuses[current]</p></section>
+    }
+</div>
+<style>.native-gallery-panels{display:grid;grid-template-columns:repeat(var(--columns),minmax(0,1fr));gap:12px}.native-gallery-panels section{min-width:0}@@media(max-width:899px){.native-gallery-panels.stack-narrow{grid-template-columns:1fr}}</style>
+
+@code {
+    /// <summary>Gets the fixed panel collection for this group lifetime.</summary>
+    [Parameter] public IReadOnlyList<GalleryCanvasPanel> Panels { get; set; } = [];
+    /// <summary>Gets whether the Canvas output preserves extended HDR range.</summary>
+    [Parameter] public bool Hdr { get; set; } = true;
+    /// <summary>Gets whether panels stack below the native comparison breakpoint.</summary>
+    [Parameter] public bool StackNarrow { get; set; } = true;
+    /// <summary>Releases parent-owned render resources after every panel draw has settled.</summary>
+    [Parameter] public Action? Disconnected { get; set; }
+    private readonly List<RenderSession> sessions = [];
+    private readonly List<IJSObjectReference> hosts = [];
+    private readonly List<DotNetObjectReference<CanvasBridge>> references = [];
+    private IJSObjectReference? module;
+    private string[] ids = [], statuses = [];
+    private Task? startup, disposal;
+    private bool disposed, released;
+    private bool? configuredHdr;
+    private readonly HashSet<int> disconnected = [];
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (ids.Length == 0)
+        {
+            if (Panels.Count == 0) throw new InvalidOperationException("A Canvas group needs at least one panel.");
+            string prefix = "mu3d-" + Guid.NewGuid().ToString("N");
+            ids = Enumerable.Range(0, Panels.Count).Select(index => $"{prefix}-{index}").ToArray();
+            statuses = Enumerable.Repeat("正在连接 GPU…", Panels.Count).ToArray();
+        }
+        if (ids.Length != Panels.Count) throw new InvalidOperationException("Recreate the Canvas group when its panel count changes.");
+        if (configuredHdr != Hdr) await InvalidateAsync();
+    }
+    [DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(CanvasBridge))]
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    { if (firstRender) { startup = StartAsync(); await startup; } }
+    private async Task StartAsync()
+    {
+        try
+        {
+            module = await JS.InvokeAsync<IJSObjectReference>("import", "./gallery-viewport.mjs");
+            if (disposed) return;
+            for (int index = 0; index < Panels.Count && !disposed; index++)
+            {
+                RenderSession session = index == 0 ? await RenderSession.OpenAsync("#" + ids[index]) : sessions[0].CreateSharedCanvas("#" + ids[index]);
+                sessions.Add(session);
+                if (disposed) break;
+                var reference = DotNetObjectReference.Create(new CanvasBridge(this, index, session)); references.Add(reference);
+                var host = await module.InvokeAsync<IJSObjectReference>("createById", ids[index], reference, session.MaximumDimension); hosts.Add(host);
+                if (!disposed) await host.InvokeVoidAsync("configure", false, false, Hdr, false);
+            }
+            configuredHdr = Hdr;
+        }
+        catch (Exception error)
+        {
+            if (!disposed) { Array.Fill(statuses, error.Message); await InvokeAsync(StateHasChanged); }
+            foreach (var host in hosts) await host.InvokeVoidAsync("dispose");
+            Release();
+        }
+    }
+    private Task Report(int index, string value)
+    { if (disposed || released) return Task.CompletedTask; statuses[index] = value; return InvokeAsync(StateHasChanged); }
+    /// <summary>Requests one coalesced frame for each visible panel after example state changes.</summary>
+    public async Task InvalidateAsync()
+    {
+        foreach (var host in hosts) if (!disposed && !released) await host.InvokeVoidAsync("configure", false, false, Hdr, false);
+        configuredHdr = Hdr;
+    }
+    private void PanelDisconnected(int index)
+    { disconnected.Add(index); if (disconnected.Count == Panels.Count) Release(); }
+    private void Release()
+    {
+        if (released) return;
+        released = true;
+        try { Disconnected?.Invoke(); }
+        finally { for (int index = sessions.Count - 1; index >= 0; index--) sessions[index].Dispose(); sessions.Clear(); }
+    }
+    /// <inheritdoc />
+    public ValueTask DisposeAsync() => new(disposal ??= DisposeCoreAsync());
+    private async Task DisposeCoreAsync()
+    {
+        disposed = true;
+        if (startup is not null) await startup;
+        try { foreach (var host in hosts) { await host.InvokeVoidAsync("dispose"); await host.DisposeAsync(); } }
+        finally
+        {
+            Release(); foreach (var reference in references) reference.Dispose();
+            if (module is not null) await module.DisposeAsync();
+        }
+    }
+    private sealed class CanvasBridge(GalleryCanvasGroup owner, int index, RenderSession session)
+    {
+        /// <summary>Draws one panel using the shared device and its separately owned attachments.</summary>
+        [JSInvokable] public async Task DrawFrame(int width, int height, double delta, double interval, double ratio,
+            double logicalWidth, double logicalHeight, float rotateX, float rotateY, float dolly, bool hdr, bool refresh)
+        {
+            if (owner.disposed || owner.released) return;
+            var report = await session.DrawExampleAsync(width, height, 0, hdr, refresh,
+                (device, target, depth) => owner.Panels[index].Draw(device, target, depth, delta));
+            await owner.Report(index, $"{report.Width} × {report.Height} · {(hdr ? "FP16 HDR" : "SDR 预览")}");
+        }
+        /// <summary>Records settled callbacks; parent GPU resources release only after the final panel.</summary>
+        [JSInvokable] public void Disconnect() => owner.PanelDisconnected(index);
+        /// <summary>Displays the affected panel's render error.</summary>
+        [JSInvokable] public Task RenderFailed(string message) => owner.Report(index, message);
+    }
+}

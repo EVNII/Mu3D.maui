@@ -1,0 +1,8 @@
+<Project>
+  <!-- Shared by the runtime NuGet and the Gallery local-archive harness.
+       Apple P/Invoke resolves through the main program; these names must survive native stripping. -->
+  <ItemGroup>
+    <_Mu3DUltraHdrNativeSymbol Include="uhdr_create_decoder;uhdr_release_decoder;uhdr_dec_set_image;uhdr_dec_set_out_img_format;uhdr_dec_set_out_color_transfer;uhdr_dec_probe;uhdr_dec_get_gainmap_width;uhdr_dec_get_gainmap_height;uhdr_decode;uhdr_get_decoded_image;uhdr_create_encoder;uhdr_release_encoder;uhdr_enc_set_raw_image;uhdr_enc_set_quality;uhdr_enc_set_using_multi_channel_gainmap;uhdr_enc_set_gainmap_scale_factor;uhdr_enc_set_target_display_peak_brightness;uhdr_enc_set_preset;uhdr_enc_set_output_format;uhdr_encode;uhdr_get_encoded_stream;is_uhdr_image" />
+    <_Mu3DTurboJpegNativeSymbol Include="tj3Init;tj3Destroy;tj3GetErrorStr;tj3Get;tj3Set;tj3Compress8;tj3Free;tj3DecompressHeader;tj3Decompress8" />
+  </ItemGroup>
+</Project>

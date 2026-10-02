@@ -1,0 +1,54 @@
+<Project>
+  <!-- Experimental browser bridge for the Mono 10.0.12 cross-compiler. Keep the pinned
+       source untouched and preserve explicit Cdecl in the P/Invoke metadata. Gallery and
+       Render use this same bridge in both execution modes. -->
+  <UsingTask TaskName="Mu3DPrepareBrowserWgpuBindings"
+             TaskFactory="RoslynCodeTaskFactory"
+             AssemblyFile="$(MSBuildToolsPath)/Microsoft.Build.Tasks.Core.dll">
+    <ParameterGroup>
+      <SourceFile ParameterType="System.String" Required="true" />
+      <DestinationFile ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Text" />
+      <Using Namespace="System.Text.RegularExpressions" />
+      <Code Type="Fragment" Language="cs"><![CDATA[
+        string source = File.ReadAllText(SourceFile).Replace("\r\n", "\n");
+        const string import = "[LibraryImport(\"wgpu_native\")]\n        [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]";
+        const string declaration = "internal static partial ";
+        // Fail closed when the pinned generator's shape changes; never emit a partly
+        // converted binding or silently remove a non-Cdecl convention.
+        if (Regex.Matches(source, Regex.Escape(import)).Count != 228 ||
+            Regex.Matches(source, Regex.Escape(declaration)).Count != 228 ||
+            Regex.Matches(source, "\\[LibraryImport\\(").Count != 228 ||
+            Regex.Matches(source, "\\[UnmanagedCallConv\\(").Count != 228)
+        {
+            Log.LogError("Pinned WebGPU binding shape changed; review the browser Cdecl bridge.");
+            return false;
+        }
+        string result = source
+            .Replace(import, "[DllImport(\"wgpu_native\", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]")
+            .Replace(declaration, "internal static extern ");
+        result = "// Browser validation copy: see BrowserWgpuBindings.targets.\n#pragma warning disable SYSLIB1054\n" + result;
+        Directory.CreateDirectory(Path.GetDirectoryName(DestinationFile));
+        if (!File.Exists(DestinationFile) || File.ReadAllText(DestinationFile) != result)
+            File.WriteAllText(DestinationFile, result, new UTF8Encoding(false));
+      ]]></Code>
+    </Task>
+  </UsingTask>
+  <Target Name="PrepareMu3DBrowserWgpuBindings" BeforeTargets="CoreCompile"
+          Condition="'$(Mu3DIncludeBrowserBackend)' == 'true'">
+    <PropertyGroup>
+      <_Mu3DBrowserWgpuBindings>$(IntermediateOutputPath)WgpuNative.Browser.g.cs</_Mu3DBrowserWgpuBindings>
+    </PropertyGroup>
+    <Mu3DPrepareBrowserWgpuBindings
+      SourceFile="$(MSBuildThisFileDirectory)../../../../src/Mu3D.Native.Wgpu/Generated/WgpuNative.Raw.g.cs"
+      DestinationFile="$(_Mu3DBrowserWgpuBindings)" />
+    <ItemGroup>
+      <Compile Remove="$(Mu3DNativeSource)/Generated/WgpuNative.Raw.g.cs" />
+      <Compile Include="$(_Mu3DBrowserWgpuBindings)" />
+      <FileWrites Include="$(_Mu3DBrowserWgpuBindings)" />
+    </ItemGroup>
+  </Target>
+</Project>

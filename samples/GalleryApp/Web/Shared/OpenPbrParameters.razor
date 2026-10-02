@@ -1,0 +1,60 @@
+@using Mu3D.GalleryApp.Examples
+@using Mu3D.SceneGraph
+
+<section>
+    <button @onclick="() => expanded = !expanded">@(expanded ? "Hide material parameters" : "Show material parameters · 41 inputs")</button>
+    @if (expanded)
+    {
+        <p>Apply before changing groups; unapplied edits are discarded. Coat and specular roughness are independent. Switch off a connection to edit its constant.</p>
+        <label>Material parameter group <select @bind="group" @bind:after="Refresh">
+            @foreach (string choice in OpenPbrParameterFields.Groups) { <option value="@choice">@choice</option> }
+        </select></label>
+        @foreach (var edit in edits)
+        {
+            <div @key="edit" style="margin:8px 0">
+                <strong>@edit.Field.Name</strong>
+                @if (edit.Connection is { } node)
+                {
+                    <label><input type="checkbox" @bind="edit.UseConnection" />Use texture / graph</label>
+                    @if (node.Type == OpenPbrNodeType.Float)
+                    { <small>Connected range: @node.Minimum.X.ToString("G4")–@node.Maximum.X.ToString("G4"). The constant below is inactive.</small> }
+                }
+                @if (edit.Field.ValueType == typeof(bool))
+                { <label><input type="checkbox" disabled="@edit.UseConnection" @bind="edit.Boolean" />@edit.Field.Name</label> }
+                else
+                { <input aria-label="@edit.Field.Name" disabled="@edit.UseConnection" @bind="edit.Text" @bind:event="oninput" placeholder="Empty = inherit mesh direction" /> }
+                <small style="display:block">@edit.Field.Hint</small>
+            </div>
+        }
+        <button @onclick="Apply">Apply this group</button><button @onclick="Refresh">Discard group edits</button>
+        <p role="status">@message</p>
+    }
+</section>
+
+@code {
+    [Parameter, EditorRequired] public OpenPbrSurface Surface { get; set; } = null!;
+    [Parameter] public EventCallback<OpenPbrSurface> Applied { get; set; }
+    private OpenPbrSurface? observed;
+    private OpenPbrParameterEdit[] edits = [];
+    private string group = "Specular", message = "";
+    private bool expanded;
+
+    protected override void OnParametersSet()
+    { if (!ReferenceEquals(observed, Surface)) { observed = Surface; Refresh(); } }
+
+    private void Refresh()
+    { edits = OpenPbrParameterFields.EditGroup(Surface, group); message = ""; }
+
+    private async Task Apply()
+    {
+        try
+        {
+            OpenPbrSurface candidate = OpenPbrParameterFields.Apply(Surface, edits);
+            await Applied.InvokeAsync(candidate);
+            edits = OpenPbrParameterFields.EditGroup(candidate, group);
+            message = "Applied. Other groups retain their current values.";
+        }
+        catch (Exception error) when (error is ArgumentException or FormatException or OverflowException or NotSupportedException)
+        { message = error.Message; }
+    }
+}

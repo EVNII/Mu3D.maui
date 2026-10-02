@@ -1,0 +1,13 @@
+{
+  "version": "1.8.2505.32",
+  "url": "https://api.nuget.org/v3-flatcontainer/microsoft.direct3d.dxc/1.8.2505.32/microsoft.direct3d.dxc.1.8.2505.32.nupkg",
+  "sha256": "c6e82b70c14552f1dd58e4a79c93eeab1567eeb0a9ee63a51564c410429bce3e",
+  "files": {
+    "arm64/dxcompiler.dll": "0258ea93be90fe9d1b107a48bddec3a245f8510213c363076dc1863445802e3e",
+    "arm64/dxil.dll": "41d520cb7c431c2b98be1b62b9d5460d033cf7d58cecb201a952080a628b493d",
+    "x64/dxcompiler.dll": "5888d3e590f5bfd8743484e7f31313996734adec5741506271a5c6368cbe8ba9",
+    "x64/dxil.dll": "0cf5fa4b90f74550166108b3870c883f4a85243976b246b1da3ea90ad5b92015",
+    "x86/dxcompiler.dll": "092915b9db67e7f57b8cac7c902e73744690b7a2ce6425f60f959e46eb4a7a65",
+    "x86/dxil.dll": "05d75d025f9831a80441cf7b617a7fe8eb40cfdfe34b8f68e60375fe51aefdd7"
+  }
+}

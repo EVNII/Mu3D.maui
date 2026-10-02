@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Mu3D.Maui.Toolkit.Tests</RootNamespace>
+    <AssemblyName>Mu3D.Maui.Toolkit.Tests</AssemblyName>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Mu3D.Toolkit/Mu3D.Toolkit.csproj" />
+    <Compile Include="../../src/Mu3D.Maui/Controls/SurfaceFrameScheduler.cs"
+             Link="Controls/SurfaceFrameScheduler.cs" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Controls/OrbitGestureState.cs"
+             Link="Controls/OrbitGestureState.cs" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Controls/FlyNavigationAction.cs"
+             Link="Controls/FlyNavigationAction.cs" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Controls/FlyNavigationState.cs"
+             Link="Controls/FlyNavigationState.cs" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Controls/OrbitHardwareInputState.cs"
+             Link="Controls/OrbitHardwareInputState.cs" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Controls/ViewportKeyboardBindingState.cs"
+             Link="Controls/ViewportKeyboardBindingState.cs" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Controls/OrbitNavigationAction.cs"
+             Link="Controls/OrbitNavigationAction.cs" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Controls/PlaybackToolbarState.cs"
+             Link="Controls/PlaybackToolbarState.cs" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Controls/RenderOutputToolState.cs"
+             Link="Controls/RenderOutputToolState.cs" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Controls/TransformGizmoPointerState.cs"
+             Link="Controls/TransformGizmoPointerState.cs" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Diagnostics/FrameStatisticsSamplingState.cs"
+             Link="Diagnostics/FrameStatisticsSamplingState.cs" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Diagnostics/FrameStatisticsHistory.cs"
+             Link="Diagnostics/FrameStatisticsHistory.cs" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Diagnostics/FrameStatisticsTextFormatter.cs"
+             Link="Diagnostics/FrameStatisticsTextFormatter.cs" />
+  </ItemGroup>
+</Project>

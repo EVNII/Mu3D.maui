@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.Gallery.Pages.LicensePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="License">
+    <ScrollView>
+        <VerticalStackLayout
+            HorizontalOptions="Center"
+            MaximumWidthRequest="820"
+            Padding="24"
+            Spacing="14">
+            <Label FontAttributes="Bold" FontSize="32" Text="Licenses and acknowledgements" />
+            <Label Text="The distributable NuGet packages contain the complete applicable notices and license texts. This page is a readable index for Gallery users." />
+
+            <VerticalStackLayout Padding="0,12" Spacing="6">
+                <Label FontAttributes="Bold" FontSize="18" Text="AdaptiveShell.Maui 0.1.1" />
+                <Label Text="MIT" />
+                <Label Text="Adaptive shell navigation for .NET MAUI: sidebar, rail and bottom navigation that adapt to platform, window size and navigation groups." />
+            </VerticalStackLayout>
+            <VerticalStackLayout Padding="0,12" Spacing="6">
+                <Label FontAttributes="Bold" FontSize="18" Text="wgpu-native 29.0.1.1" />
+                <Label Text="MIT OR Apache-2.0" />
+                <Label Text="The runtime package also carries the reviewed license report for the exact pinned Cargo dependency graph." />
+            </VerticalStackLayout>
+            <VerticalStackLayout Padding="0,12" Spacing="6">
+                <Label FontAttributes="Bold" FontSize="18" Text="Sample assets" />
+                <Label Text="Poly Haven HDRIs (CC0) · Khronos glTF sample assets" />
+                <Label Text="Per-asset attribution files are bundled beside the corresponding resources." />
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

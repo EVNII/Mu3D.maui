@@ -1,0 +1,200 @@
+{
+  "schemaVersion": 1,
+  "features": [
+    {
+      "id": "gallery-overview",
+      "route": "gallery-welcome",
+      "article": "articles/features/gallery-overview.html"
+    },
+    {
+      "id": "device-probe",
+      "route": "gallery-device-probe",
+      "article": "articles/features/device-probe.html"
+    },
+    {
+      "id": "surface-probe",
+      "route": "gallery-surface-probe",
+      "article": "articles/features/surface-probe.html"
+    },
+    {
+      "id": "custom-draw",
+      "route": "gallery-custom-draw",
+      "article": "articles/features/custom-draw.html"
+    },
+    {
+      "id": "scene-assets",
+      "route": "gallery-scene-assets",
+      "article": "articles/features/scene-assets.html"
+    },
+    {
+      "id": "declarative-scene",
+      "route": "gallery-declarative-scene",
+      "article": "articles/features/declarative-scene.html"
+    },
+    {
+      "id": "declarative-tools",
+      "route": "gallery-declarative-tools",
+      "article": "articles/features/declarative-tools.html"
+    },
+    {
+      "id": "orbit-controls",
+      "route": "gallery-orbit-controls",
+      "article": "articles/features/orbit-controls.html"
+    },
+    {
+      "id": "map-controls",
+      "route": "gallery-map-controls",
+      "article": "articles/features/map-controls.html"
+    },
+    {
+      "id": "fly-controls",
+      "route": "gallery-fly-controls",
+      "article": "articles/features/fly-controls.html"
+    },
+    {
+      "id": "pointer-pen-input",
+      "route": "gallery-pointer-pen-input",
+      "article": "articles/features/pointer-pen-input.html"
+    },
+    {
+      "id": "progress-bridge",
+      "route": "gallery-progress-bridge",
+      "article": "articles/features/progress-bridge.html"
+    },
+    {
+      "id": "playback-toolbar",
+      "route": "gallery-playback-toolbar",
+      "article": "articles/features/playback-toolbar.html"
+    },
+    {
+      "id": "axes-helper",
+      "route": "gallery-axes-helper",
+      "article": "articles/features/axes-helper.html"
+    },
+    {
+      "id": "grid-helper",
+      "route": "gallery-grid-helper",
+      "article": "articles/features/grid-helper.html"
+    },
+    {
+      "id": "bounds-helper",
+      "route": "gallery-bounds-helper",
+      "article": "articles/features/bounds-helper.html"
+    },
+    {
+      "id": "ui-anchors",
+      "route": "gallery-ui-anchors",
+      "article": "articles/features/ui-anchors.html"
+    },
+    {
+      "id": "render-outputs",
+      "route": "gallery-render-outputs",
+      "article": "articles/features/render-outputs.html"
+    },
+    {
+      "id": "transform-gizmo",
+      "route": "gallery-transform-gizmo",
+      "article": "articles/features/transform-gizmo.html"
+    },
+    {
+      "id": "frame-statistics",
+      "route": "gallery-frame-statistics",
+      "article": "articles/features/frame-statistics.html"
+    },
+    {
+      "id": "lighting-direct-ibl",
+      "route": "gallery-lighting-lab",
+      "article": "articles/features/lighting-direct-ibl.html"
+    },
+    {
+      "id": "shadows-ao",
+      "route": "gallery-occlusion-lab",
+      "article": "articles/features/shadows-ao.html"
+    },
+    {
+      "id": "pbr-material-textures",
+      "route": "gallery-material-texture",
+      "article": "articles/features/pbr-material-textures.html"
+    },
+    {
+      "id": "skinning-animation",
+      "route": "gallery-animation-lab",
+      "article": "articles/features/skinning-animation.html"
+    },
+    {
+      "id": "gltf-loading",
+      "route": "gallery-gltf-load",
+      "article": "articles/features/gltf-loading.html"
+    },
+    {
+      "id": "gltf-instances",
+      "route": "gallery-gltf-instances",
+      "article": "articles/features/gltf-instances.html"
+    },
+    {
+      "id": "gltf-product-feed",
+      "route": "gallery-gltf-product-feed",
+      "article": "articles/features/gltf-product-feed.html"
+    },
+    {
+      "id": "gltf-animation",
+      "route": "gallery-gltf-animation",
+      "article": "articles/features/gltf-animation.html"
+    },
+    {
+      "id": "gltf-material-variants",
+      "route": "gallery-gltf-variants",
+      "article": "articles/features/gltf-material-variants.html"
+    },
+    {
+      "id": "hdr-jpeg",
+      "route": "gallery-hdr-jpeg-lab",
+      "article": "articles/features/hdr-jpeg.html"
+    },
+    {
+      "id": "ktx2-decode",
+      "route": "gallery-ktx-decode",
+      "article": "articles/features/ktx2-decode.html"
+    },
+    {
+      "id": "ktx2-gpu-sampling",
+      "route": "gallery-ktx-texture-lab",
+      "article": "articles/features/ktx2-gpu-sampling.html"
+    },
+    {
+      "id": "material-conformance",
+      "route": "gallery-model-lab",
+      "article": "articles/features/material-conformance.html"
+    },
+    {
+      "id": "openpbr-materialx",
+      "route": "gallery-openpbr",
+      "article": "articles/features/openpbr-materialx.html"
+    },
+    {
+      "id": "openpbr-white-furnace",
+      "route": "gallery-openpbr-furnace",
+      "article": "articles/features/openpbr-white-furnace.html"
+    },
+    {
+      "id": "hdr-canvas",
+      "route": "gallery-hdr-canvas",
+      "article": "articles/features/hdr-canvas.html"
+    },
+    {
+      "id": "color-management",
+      "route": "gallery-color-management",
+      "article": "articles/features/color-management.html"
+    },
+    {
+      "id": "cmyk-printing",
+      "route": "gallery-cmyk-printing",
+      "article": "articles/features/cmyk-printing.html"
+    },
+    {
+      "id": "color-lut",
+      "route": "gallery-color-lut",
+      "article": "articles/features/color-lut.html"
+    }
+  ]
+}

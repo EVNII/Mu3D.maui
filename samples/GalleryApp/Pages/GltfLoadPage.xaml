@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.GltfLoadPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    Title="glTF Loading">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="gltf-loading" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <mu3d:Mu3DView
+            x:Name="SurfaceView"
+            BackgroundColor="Black"
+            Draw="OnSurfaceDraw" />
+        <VerticalStackLayout Grid.Row="1" Padding="16" Spacing="8">
+            <Label x:Name="StatusLabel" Text="Loading TextureTransformTest.gltf…" />
+            <Label x:Name="DetailsLabel" FontSize="12" LineBreakMode="WordWrap" />
+            <Grid ColumnDefinitions="Auto,Auto,*" ColumnSpacing="8">
+                <Label
+                    VerticalOptions="Center"
+                    Text="Retain encoded sources" />
+                <Switch
+                    x:Name="RetainSourcesSwitch"
+                    Grid.Column="1"
+                    VerticalOptions="Center" />
+                <Button
+                    x:Name="ClearCacheButton"
+                    Grid.Column="2"
+                    HorizontalOptions="End"
+                    Text="Clear external cache"
+                    Clicked="OnClearCacheClicked" />
+            </Grid>
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                <Button
+                    Text="Reload"
+                    Clicked="OnReloadClicked" />
+                <Button
+                    x:Name="CancelButton"
+                    Grid.Column="1"
+                    Text="Cancel"
+                    IsEnabled="False"
+                    Clicked="OnCancelClicked" />
+            </Grid>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

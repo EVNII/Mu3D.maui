@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.WebAssembly">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <IsPackable>false</IsPackable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <WasmEnableHotReload>false</WasmEnableHotReload>
+    <CompressionEnabled>false</CompressionEnabled>
+    <Mu3DWebBuildFlavor>Interpreted</Mu3DWebBuildFlavor>
+    <Mu3DWebBuildFlavor Condition="'$(RunAOTCompilation)' == 'true'">Aot</Mu3DWebBuildFlavor>
+    <OutputPath>bin/$(Configuration)/$(Mu3DWebBuildFlavor)/</OutputPath>
+    <IntermediateOutputPath>obj/$(Configuration)/$(Mu3DWebBuildFlavor)/</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../../samples/GalleryApp/Pages/HdrJpegRoundTrip.cs" Link="HdrJpegRoundTrip.cs" />
+    <Compile Include="../../../samples/GalleryApp/Pages/ModelLabCatalog.cs;../../../samples/GalleryApp/Pages/ModelLabAssets.cs;../../../samples/GalleryApp/Pages/GltfInstancesExample.cs" Link="Examples/%(Filename)%(Extension)" />
+    <ProjectReference Include="../../../src/Mu3D.Formats.Gltf/Mu3D.Formats.Gltf.csproj" />
+    <EmbeddedResource Include="../../../samples/GalleryApp/Resources/Raw/KtxSamples/color_grid_basis.ktx2" LogicalName="Color.ktx2" />
+    <EmbeddedResource Include="../../../samples/GalleryApp/Resources/Raw/KtxSamples/StainedGlassLamp_grill_normal.ktx2" LogicalName="Normal.ktx2" />
+    <EmbeddedResource Include="../../../samples/GalleryApp/Resources/Raw/GltfSamples/**/*.glb;../../../samples/GalleryApp/Resources/Raw/GltfSamples/**/*.gltf;../../../samples/GalleryApp/Resources/Raw/GltfSamples/**/*.bin;../../../samples/GalleryApp/Resources/Raw/GltfSamples/**/*.png;../../../samples/GalleryApp/Resources/Raw/GltfSamples/**/*.ktx2"
+                      LogicalName="GltfSamples/%(RecursiveDir)%(Filename)%(Extension)" />
+    <EmbeddedResource Include="../../../samples/GalleryApp/Resources/Raw/Hdri/*.hdr" LogicalName="Hdri/%(Filename)%(Extension)" />
+  </ItemGroup>
+  <Import Project="../../../samples/GalleryApp/Web/Infrastructure/BrowserCodecs.targets" />
+</Project>

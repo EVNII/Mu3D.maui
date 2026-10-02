@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Mu3D.Formats.MaterialX</RootNamespace>
+    <AssemblyName>Mu3D.Formats.MaterialX</AssemblyName>
+    <PackageId>Mu3D.Formats.MaterialX</PackageId>
+    <Description>Optional bounded MaterialX XML interchange for OpenPBR surface constants and typed input graphs.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Mu3D.Core/Mu3D.Core.csproj" />
+    <None Include="README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+</Project>

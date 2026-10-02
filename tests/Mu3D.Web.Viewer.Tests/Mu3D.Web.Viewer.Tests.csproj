@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework><IsPackable>false</IsPackable></PropertyGroup>
+  <PropertyGroup>
+    <EnableMu3DPrinting Condition="'$(EnableMu3DPrinting)' == ''">true</EnableMu3DPrinting>
+    <DefineConstants Condition="'$(EnableMu3DPrinting)' == 'true'">$(DefineConstants);MU3D_PRINTING</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/Mu3D.Toolkit/Mu3D.Toolkit.csproj" />
+    <ProjectReference Include="../../src/Mu3D.Web/Mu3D.Web.csproj" />
+    <Compile Include="../Mu3D.Core.Tests/RecordingGraphicsBackend.cs" Link="RecordingGraphicsBackend.cs" />
+    <Compile Include="../../samples/GalleryApp/Web/Infrastructure/ViewerScene.cs" Link="ViewerScene.cs" />
+    <Compile Include="../../samples/GalleryApp/Web/Infrastructure/ViewerScene.Diagnostics.cs" Link="ViewerScene.Diagnostics.cs" />
+    <Compile Include="../../samples/GalleryApp/Web/Infrastructure/ViewerBenchmark.cs" Link="ViewerBenchmark.cs" />
+    <Compile Include="../../samples/GalleryApp/Web/Infrastructure/ViewerScene.Gizmo.cs" Link="ViewerScene.Gizmo.cs" />
+    <Compile Include="../../samples/GalleryApp/Web/Infrastructure/ViewerScene.Anchors.cs" Link="ViewerScene.Anchors.cs" />
+    <Compile Include="../../samples/GalleryApp/Web/Infrastructure/ViewerScene.NodeAnchors.cs" Link="ViewerScene.NodeAnchors.cs" />
+    <Compile Include="../../samples/GalleryApp/Web/Infrastructure/ViewerScene.Selection.cs" Link="ViewerScene.Selection.cs" />
+    <Compile Include="../../samples/GalleryApp/Web/Infrastructure/SharedValidationScene.cs" Link="SharedValidationScene.cs" />
+    <Compile Include="../../samples/GalleryApp/Web/Infrastructure/NativeGalleryScene.cs;../../samples/GalleryApp/Web/Infrastructure/ProgressGalleryExample.cs;../../samples/GalleryApp/Web/Infrastructure/GalleryPlayable.cs" Link="Gallery/%(Filename)%(Extension)" />
+    <Compile Include="../../samples/GalleryApp/Examples/SceneAssetExample.cs" Link="Gallery/SceneAssetExample.cs" />
+    <EmbeddedResource Include="../../samples/GalleryApp/Pages/*Page.xaml" LogicalName="Mu3D.GalleryApp.NativePages.%(Filename).xaml" />
+    <Compile Include="../../samples/GalleryApp/GallerySourceCatalog.cs;../../samples/GalleryApp/GalleryNavigationCatalog.cs;../../samples/GalleryApp/GalleryRoutes.cs;../../samples/GalleryApp/Web/Infrastructure/GalleryWebCatalog.cs" Link="Gallery/%(Filename)%(Extension)" />
+    <EmbeddedResource Include="../../samples/GalleryApp/Pages/*.cs;../../samples/GalleryApp/Examples/*.cs" Exclude="../../samples/GalleryApp/Pages/CmykPrinting*;../../samples/GalleryApp/Examples/CmykPrintingExample.cs" LogicalName="Mu3D.GalleryApp.Sources.%(Filename)%(Extension)" />
+    <EmbeddedResource Include="../../samples/GalleryApp/Pages/CmykPrinting*.cs;../../samples/GalleryApp/Examples/CmykPrintingExample.cs" Condition="'$(EnableMu3DPrinting)' == 'true'" LogicalName="Mu3D.GalleryApp.Sources.%(Filename)%(Extension)" />
+  </ItemGroup>
+</Project>

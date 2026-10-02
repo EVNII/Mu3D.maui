@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="Mu3D.GalleryApp.ControlsHelpOverlay"
+    x:Name="Root"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    HorizontalOptions="End"
+    VerticalOptions="Start">
+    <ContentView.Content>
+        <VerticalStackLayout Spacing="8">
+            <HorizontalStackLayout HorizontalOptions="End" Spacing="8">
+                <Button
+                    AutomationId="ControlsHelpButton"
+                    BackgroundColor="#E6111827"
+                    Clicked="OnHelpClicked"
+                    CornerRadius="22"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    HeightRequest="44"
+                    Padding="0"
+                    SemanticProperties.Description="Show camera controls"
+                    Text="?"
+                    TextColor="White"
+                    WidthRequest="44" />
+                <Button
+                    AutomationId="ControlsSettingsButton"
+                    BackgroundColor="#E6111827"
+                    Clicked="OnSettingsClicked"
+                    CornerRadius="22"
+                    FontSize="19"
+                    HeightRequest="44"
+                    Padding="0"
+                    SemanticProperties.Description="Adjust camera sensitivity"
+                    Text="⚙︎"
+                    TextColor="White"
+                    WidthRequest="44" />
+            </HorizontalStackLayout>
+            <Border
+                x:Name="HelpPanel"
+                Padding="14,12"
+                BackgroundColor="#F2111827"
+                IsVisible="False"
+                Stroke="#53647D"
+                StrokeThickness="1"
+                WidthRequest="300">
+                <Grid RowDefinitions="Auto,Auto" RowSpacing="10">
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            Text="{Binding Title, Source={x:Reference Root}}"
+                            TextColor="White"
+                            VerticalTextAlignment="Center" />
+                            <Button
+                                Grid.Column="1"
+                                BackgroundColor="Transparent"
+                                Clicked="OnCloseHelpClicked"
+                            FontSize="18"
+                            HeightRequest="32"
+                            Padding="0"
+                            SemanticProperties.Description="Close camera controls"
+                            Text="×"
+                            TextColor="#D8E2F1"
+                            WidthRequest="32" />
+                    </Grid>
+                    <VerticalStackLayout
+                        Grid.Row="1"
+                        Spacing="9"
+                        BindableLayout.ItemsSource="{Binding Items, Source={x:Reference Root}}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="gallery:ControlHelpItem">
+                                <Grid ColumnDefinitions="34,*" ColumnSpacing="9">
+                                    <Label
+                                        FontSize="19"
+                                        HorizontalTextAlignment="Center"
+                                        Text="{Binding Icon}"
+                                        TextColor="#8CC8FF"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        Grid.Column="1"
+                                        FontSize="12"
+                                        LineBreakMode="WordWrap"
+                                        Text="{Binding Text}"
+                                        TextColor="#E6EDF7"
+                                        VerticalTextAlignment="Center" />
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+            <Border
+                x:Name="SettingsPanel"
+                Padding="14,12"
+                BackgroundColor="#F2111827"
+                IsVisible="False"
+                Stroke="#53647D"
+                StrokeThickness="1"
+                WidthRequest="300">
+                <Grid RowDefinitions="Auto,Auto" RowSpacing="10">
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            Text="Sensitivity"
+                            TextColor="White"
+                            VerticalTextAlignment="Center" />
+                        <Button
+                            Grid.Column="1"
+                            BackgroundColor="Transparent"
+                            Clicked="OnCloseSettingsClicked"
+                            FontSize="18"
+                            HeightRequest="32"
+                            Padding="0"
+                            SemanticProperties.Description="Close sensitivity settings"
+                            Text="×"
+                            TextColor="#D8E2F1"
+                            WidthRequest="32" />
+                    </Grid>
+                    <VerticalStackLayout
+                        Grid.Row="1"
+                        Spacing="10"
+                        BindableLayout.ItemsSource="{Binding Settings, Source={x:Reference Root}}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="gallery:ControlSensitivityItem">
+                                <Grid
+                                    ColumnDefinitions="*,Auto"
+                                    RowDefinitions="Auto,Auto"
+                                    ColumnSpacing="8"
+                                    RowSpacing="2">
+                                    <Label
+                                        FontSize="12"
+                                        Text="{Binding Label}"
+                                        TextColor="#E6EDF7" />
+                                    <Label
+                                        Grid.Column="1"
+                                        FontAttributes="Bold"
+                                        FontSize="12"
+                                        Text="{Binding Value, StringFormat='{0:F2}×'}"
+                                        TextColor="#8CC8FF" />
+                                    <Slider
+                                        Grid.Row="1"
+                                        Grid.ColumnSpan="2"
+                                        Maximum="{Binding Maximum}"
+                                        Minimum="{Binding Minimum}"
+                                        Value="{Binding Value, Mode=TwoWay}" />
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+        </VerticalStackLayout>
+    </ContentView.Content>
+</ContentView>

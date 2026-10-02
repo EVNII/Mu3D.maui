@@ -1,0 +1,27 @@
+<Project>
+  <PropertyGroup>
+    <_Mu3DDebugRuntimeDirectory>$(MSBuildThisFileDirectory)..\mu3d-debug-runtimes\$(RuntimeIdentifier)\native</_Mu3DDebugRuntimeDirectory>
+  </PropertyGroup>
+
+  <Target Name="ValidateMu3DIosDebugRuntimeAbi" BeforeTargets="PrepareForBuild"
+          Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+    <Error Condition="'$(Mu3DNativeWgpuAbiVersion)' != '$(_Mu3DExpectedWgpuDebugAbiVersion)' Or '$(Mu3DNativeWgpuAbiCommit)' != '$(_Mu3DExpectedWgpuDebugAbiCommit)'"
+           Text="Mu3D.Native.Wgpu.DebugRuntime.iOS requires the exactly matched Mu3D.Native.Wgpu v29.0.1.1 ABI." />
+    <Error Condition="!Exists('$(_Mu3DDebugRuntimeDirectory)\libwgpu_native.a')"
+           Text="Mu3D.Native.Wgpu.DebugRuntime.iOS has no Debug runtime for $(RuntimeIdentifier)." />
+  </Target>
+
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+    <NativeReference Include="$(_Mu3DDebugRuntimeDirectory)\libwgpu_native.a">
+      <Kind>Static</Kind>
+      <SmartLink>true</SmartLink>
+      <ForceLoad>true</ForceLoad>
+      <Frameworks>Metal QuartzCore Foundation</Frameworks>
+    </NativeReference>
+    <LinkerArgument Include="-force_load" />
+    <LinkerArgument Include="$(_Mu3DDebugRuntimeDirectory)\libwgpu_native.a" />
+    <ReferenceNativeSymbol Include="wgpu%2A">
+      <SymbolType>Function</SymbolType>
+    </ReferenceNativeSymbol>
+  </ItemGroup>
+</Project>

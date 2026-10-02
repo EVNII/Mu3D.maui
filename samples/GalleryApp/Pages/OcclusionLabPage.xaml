@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.OcclusionLabPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    Title="Shadows and Ambient Occlusion">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="shadows-ao" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <mu3d:Mu3DView
+            x:Name="SurfaceView"
+            BackgroundColor="Black"
+            Draw="OnSurfaceDraw" />
+        <ScrollView Grid.Row="1" MaximumHeightRequest="320">
+            <VerticalStackLayout Padding="16" Spacing="10">
+                <Label x:Name="StatusLabel" Text="Preparing occlusion scene…" />
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label VerticalOptions="Center" Text="Directional shadows" />
+                    <Switch
+                        x:Name="ShadowSwitch"
+                        Grid.Column="1"
+                        IsToggled="True"
+                        Toggled="OnControlChanged" />
+                </Grid>
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label VerticalOptions="Center" Text="Ambient occlusion" />
+                    <Switch
+                        x:Name="AoSwitch"
+                        Grid.Column="1"
+                        IsToggled="True"
+                        Toggled="OnControlChanged" />
+                </Grid>
+                <Label x:Name="AoRadiusLabel" Text="AO radius: 0.70" />
+                <Slider
+                    x:Name="AoRadiusSlider"
+                    Maximum="2"
+                    Minimum="0.05"
+                    Value="0.7"
+                    ValueChanged="OnControlChanged" />
+                <Label x:Name="AoStrengthLabel" Text="AO strength: 1.00" />
+                <Slider
+                    x:Name="AoStrengthSlider"
+                    Maximum="1"
+                    Minimum="0"
+                    Value="1"
+                    ValueChanged="OnControlChanged" />
+                <Label x:Name="DetailsLabel" FontSize="12" LineBreakMode="WordWrap" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

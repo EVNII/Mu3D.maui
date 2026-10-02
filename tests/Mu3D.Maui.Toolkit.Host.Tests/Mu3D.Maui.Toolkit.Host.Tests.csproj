@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>Mu3D.Maui.Toolkit.Host.Tests</AssemblyName>
+    <RootNamespace>Mu3D.Maui.Toolkit.Host.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.90" />
+    <ProjectReference Include="../../src/Mu3D.Toolkit/Mu3D.Toolkit.csproj" />
+    <Using Include="Microsoft.Maui.Controls" />
+    <Using Include="Microsoft.Maui" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Controls/TransformGizmoPointerBehavior.cs"
+             Link="Actual/TransformGizmoPointerBehavior.cs" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Controls/TransformGizmoPointerState.cs"
+             Link="Actual/TransformGizmoPointerState.cs" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Overlays/ViewportOverlay.cs"
+             Link="Actual/ViewportOverlay.cs" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Overlays/SceneNodeAnchorLayer.cs"
+             Link="Actual/SceneNodeAnchorLayer.cs" />
+    <Compile Include="../../src/Mu3D.Toolkit/Helpers/SceneTargetEligibility.cs"
+             Link="Actual/SceneTargetEligibility.cs" />
+  </ItemGroup>
+</Project>

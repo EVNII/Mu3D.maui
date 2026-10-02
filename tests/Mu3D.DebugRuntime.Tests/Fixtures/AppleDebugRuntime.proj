@@ -1,0 +1,22 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net10.0-ios</TargetFramework>
+    <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
+    <PackageId>Mu3D.Native.Wgpu.DebugRuntime.iOS</PackageId>
+  </PropertyGroup>
+
+  <Import Project="$(Mu3DRepositoryRoot)/src/Mu3D.Native.Wgpu.DebugRuntime.iOS/buildTransitive/Mu3D.Native.Wgpu.DebugRuntime.iOS.props" />
+  <Import Project="$(Mu3DRepositoryRoot)/src/Mu3D.Native.Wgpu/buildTransitive/Mu3D.Native.Wgpu.targets" />
+  <Import Project="$(Mu3DRepositoryRoot)/src/Mu3D.Native.Wgpu.DebugRuntime.iOS/buildTransitive/Mu3D.Native.Wgpu.DebugRuntime.iOS.targets" />
+
+  <PropertyGroup>
+    <_Mu3DDebugRuntimeDirectory>$(MSBuildThisFileDirectory)assets</_Mu3DDebugRuntimeDirectory>
+  </PropertyGroup>
+
+  <Target Name="PrepareForBuild" />
+  <Target Name="Verify" DependsOnTargets="PrepareForBuild">
+    <Error Condition="'@(NativeReference->Count())' != '1'" Text="Expected exactly one Debug NativeReference, got @(NativeReference->Count())." />
+    <Error Condition="!$([System.String]::Copy('%(NativeReference.Identity)').Contains('Fixtures/assets')) And !$([System.String]::Copy('%(NativeReference.Identity)').Contains('Fixtures\assets'))" Text="The selected NativeReference is not the Debug fixture asset." />
+    <Message Importance="high" Text="Verified one Debug NativeReference" />
+  </Target>
+</Project>

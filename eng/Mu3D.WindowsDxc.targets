@@ -1,0 +1,27 @@
+<Project>
+  <!-- Source-checkout executables only. NuGet consumers get these from the runtime carrier. -->
+  <Import Project="Mu3D.WgpuNativeVersion.props" Condition="'$(Mu3DWgpuNativeVersion)' == ''" />
+  <PropertyGroup>
+    <_Mu3DDxcRuntimeRoot>$(MSBuildThisFileDirectory)../artifacts/wgpu-native/$(Mu3DWgpuNativeVersion)/release/runtimes</_Mu3DDxcRuntimeRoot>
+  </PropertyGroup>
+  <Target Name="IncludeMu3DWindowsDxc" BeforeTargets="AssignTargetPaths"
+          Condition="'$(Mu3DUseRuntimePackages)' != 'true' And $([MSBuild]::IsOSPlatform('Windows')) And '$(TargetFramework)' != '' And ($([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' Or $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == '')">
+    <PropertyGroup>
+      <_Mu3DDxcRid>$(RuntimeIdentifier)</_Mu3DDxcRid>
+      <_Mu3DDxcRid Condition="'$(_Mu3DDxcRid)' == ''">$(NETCoreSdkRuntimeIdentifier)</_Mu3DDxcRid>
+      <_Mu3DDxcRid Condition="'$(PlatformTarget)' == 'x86'">win-x86</_Mu3DDxcRid>
+      <_Mu3DDxcRid Condition="'$(PlatformTarget)' == 'ARM64'">win-arm64</_Mu3DDxcRid>
+      <_Mu3DDxcRid>$([System.String]::Copy('$(_Mu3DDxcRid)').Replace('win10-', 'win-'))</_Mu3DDxcRid>
+    </PropertyGroup>
+    <ItemGroup Condition="Exists('$(_Mu3DDxcRuntimeRoot)/$(_Mu3DDxcRid)/native/dxcompiler.dll')">
+      <Content Include="$(_Mu3DDxcRuntimeRoot)/$(_Mu3DDxcRid)/native/dxcompiler.dll"
+               Link="dxcompiler.dll" TargetPath="dxcompiler.dll"
+               CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+      <Content Include="$(_Mu3DDxcRuntimeRoot)/$(_Mu3DDxcRid)/native/dxil.dll"
+               Link="dxil.dll" TargetPath="dxil.dll"
+               CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    </ItemGroup>
+    <Error Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' And (!Exists('$(_Mu3DDxcRuntimeRoot)/$(_Mu3DDxcRid)/native/dxcompiler.dll') Or !Exists('$(_Mu3DDxcRuntimeRoot)/$(_Mu3DDxcRid)/native/dxil.dll'))"
+           Text="Pinned Windows DXC runtime assets are missing. Run pwsh -File eng/prepare-windows-dxc.ps1 before building the source sample." />
+  </Target>
+</Project>

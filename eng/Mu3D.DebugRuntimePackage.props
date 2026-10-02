@@ -1,0 +1,17 @@
+<Project>
+  <Import Project="Mu3D.WgpuNativeVersion.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IsPackable>true</IsPackable>
+    <Authors>Mu3D</Authors>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Description>Opt-in wgpu-native Debug runtime assets for Mu3D native-layer diagnostics.</Description>
+    <NoWarn>$(NoWarn);NU5100;NU5128</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,58 @@
+{
+  "Aces2Hdr1000P3LinearSrgb": {
+    "shaderSha256": "507dde1cf89be5e8b83702bbc8a8454797f7d4d97c50e7ac2f97402f60037ff7",
+    "tableSha256": "a42667560736a3a3b078e429b592fd1605c85caffdd5c5d888138bd5f6ea8600"
+  },
+  "Aces2Hdr1000P3AcesCg": {
+    "shaderSha256": "46261a7dec45c57c65f23f115246f7f5ad35e3658c483a9d4c6db4f9ed5077bd",
+    "tableSha256": "a42667560736a3a3b078e429b592fd1605c85caffdd5c5d888138bd5f6ea8600"
+  },
+  "AgXSdrRec2020LinearSrgb": {
+    "shaderSha256": "70df6931485c2cd28495230a2beabbda2672b9cc968c4d70ff7444a2454ea287",
+    "tableSha256": "9b9285ab7e2192c65725e40ae428ce84ee0fa66c5d0ecc1dbb15d87de18a5eec"
+  },
+  "AgXSdrRec2020AcesCg": {
+    "shaderSha256": "1faadf395c1dbdaa17c30e568a7747820c52f7a40e47a5370513b6fd1212b9eb",
+    "tableSha256": "9b9285ab7e2192c65725e40ae428ce84ee0fa66c5d0ecc1dbb15d87de18a5eec"
+  },
+  "AgXSdrLinearSrgb": {
+    "shaderSha256": "d7356536c6cce6e7eb0241497038b0fbf97867bc5b479f64d074239e7ed04702",
+    "tableSha256": "a1f2c8cf8cd4c2e5ed1abad685d3217f89e745b63c11a39eac57b17b4d237069"
+  },
+  "AgXSdrAcesCg": {
+    "shaderSha256": "b1d2bdabb18da9e3c0df33a0bbd7dde51ce88c8fca74d6083f6f31bf27ed81a4",
+    "tableSha256": "a1f2c8cf8cd4c2e5ed1abad685d3217f89e745b63c11a39eac57b17b4d237069"
+  },
+  "AgXHdr1000LinearSrgb": {
+    "shaderSha256": "02c1a3528de7410a4e8cb229fdef7e7c97e7bf1a1acfb820bfb157fd27133fcb",
+    "tableSha256": "6ba6ce1ec0a33286cc6e0601047d79c251cdcb7894e9cd9d15b486db1c841b04"
+  },
+  "AgXHdr1000AcesCg": {
+    "shaderSha256": "07ca6521574cff058f3002dabaef59f34f3a58af43e3f21f30d02968a3d8dc32",
+    "tableSha256": "6ba6ce1ec0a33286cc6e0601047d79c251cdcb7894e9cd9d15b486db1c841b04"
+  },
+  "Aces2SdrLinearSrgb": {
+    "shaderSha256": "97243662881df85e8eb92650a608964d5db0f4e97ffdea4e127817ce338e5edc",
+    "tableSha256": "55627b13b59a8b6dcf68999b3fd1c6d3b5f9ea6bb3349bd221b73734a9c5ad71"
+  },
+  "Aces2SdrAcesCg": {
+    "shaderSha256": "c5761ec219196d3720b68f62bfe61f8271f62f34931311cedf716187063d076e",
+    "tableSha256": "55627b13b59a8b6dcf68999b3fd1c6d3b5f9ea6bb3349bd221b73734a9c5ad71"
+  },
+  "Aces2Hdr1000LinearSrgb": {
+    "shaderSha256": "0c953c5f66d76bd498f4b4846447fa27a4def9ad5abf57a0ad0cf05a4b2c882e",
+    "tableSha256": "93dead6d768acc5dea21eb2cd50dad73502ab23dd5505661047a6e6b4ecfe158"
+  },
+  "Aces2Hdr1000AcesCg": {
+    "shaderSha256": "bd22a83b5baf5863e733707d374120195b8ace8ef459d87454c04b07b8421317",
+    "tableSha256": "93dead6d768acc5dea21eb2cd50dad73502ab23dd5505661047a6e6b4ecfe158"
+  },
+  "FilmicSdrLinearSrgb": {
+    "shaderSha256": "d7a1bbd4540edbeb88291623003995fbad55cea7a87c3807906d4c911fc7a364",
+    "tableSha256": "6a99af4d1d378ef6215e94517509e85c6b91feeb3419b30f5ddb7fe6b8541463"
+  },
+  "FilmicSdrAcesCg": {
+    "shaderSha256": "484c528097724a99c663619d47576ccb81dda12258c4dc9cdd79d2c9b7c2841c",
+    "tableSha256": "6a99af4d1d378ef6215e94517509e85c6b91feeb3419b30f5ddb7fe6b8541463"
+  }
+}

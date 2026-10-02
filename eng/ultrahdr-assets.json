@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 2,
+  "ultraHdr": {
+    "version": "v2.0.1",
+    "commit": "a532a8c1418890cff7ce1e90cbe59ba6ebc6fa6d",
+    "repository": "https://github.com/google/libultrahdr"
+  },
+  "jpegTurbo": {
+    "version": "3.1.0",
+    "commit": "20ade4dea9589515a69793e447a6c6220b464535",
+    "repository": "https://github.com/libjpeg-turbo/libjpeg-turbo"
+  },
+  "heif": {
+    "defaultEnabled": false,
+    "msbuildProperty": "Mu3DUltraHdrEnableHeif",
+    "jpegOnlyConfiguration": "release",
+    "enabledConfiguration": "release-heif",
+    "note": "HEIF-enabled archives are a distinct maintainer-built feature set; consumers never compile libheif during application builds."
+  },
+  "artifacts": [
+    { "rid": "android-arm", "platform": "android", "architecture": "armeabi-v7a", "configuration": "Release", "featureSet": "jpeg", "linkKind": "shared", "files": ["libuhdr.so", "libturbojpeg.so"] },
+    { "rid": "android-arm64", "platform": "android", "architecture": "arm64-v8a", "configuration": "Release", "featureSet": "jpeg", "linkKind": "shared", "files": ["libuhdr.so", "libturbojpeg.so"] },
+    { "rid": "android-x86", "platform": "android", "architecture": "x86", "configuration": "Release", "featureSet": "jpeg", "linkKind": "shared", "files": ["libuhdr.so", "libturbojpeg.so"] },
+    { "rid": "android-x64", "platform": "android", "architecture": "x86_64", "configuration": "Release", "featureSet": "jpeg", "linkKind": "shared", "files": ["libuhdr.so", "libturbojpeg.so"] },
+    { "rid": "ios-arm64", "platform": "ios", "architecture": "arm64", "configuration": "Release", "featureSet": "jpeg", "linkKind": "static", "files": ["libuhdr.a", "libturbojpeg.a"] },
+    { "rid": "iossimulator-arm64", "platform": "ios-simulator", "architecture": "arm64", "configuration": "Release", "featureSet": "jpeg", "linkKind": "static", "files": ["libuhdr.a", "libturbojpeg.a"] },
+    { "rid": "iossimulator-x64", "platform": "ios-simulator", "architecture": "x86_64", "configuration": "Release", "featureSet": "jpeg", "linkKind": "static", "files": ["libuhdr.a", "libturbojpeg.a"] },
+    {
+      "rid": "maccatalyst-arm64",
+      "platform": "maccatalyst",
+      "architecture": "arm64",
+      "configuration": "Release",
+      "featureSet": "jpeg",
+      "linkKind": "static",
+      "files": ["libuhdr.a", "libturbojpeg.a"],
+      "sha256": {
+        "libuhdr.a": "1e61637435592a3d3e824712cf6dbc69408a996afd1ae96cd2d426558c61cd81",
+        "libturbojpeg.a": "d0ec1be985ac419cd21b64140120bfaa11d2b9459037046b2913dd224dd83303"
+      }
+    },
+    {
+      "rid": "maccatalyst-x64",
+      "platform": "maccatalyst",
+      "architecture": "x86_64",
+      "configuration": "Release",
+      "featureSet": "jpeg",
+      "linkKind": "static",
+      "files": ["libuhdr.a", "libturbojpeg.a"],
+      "sha256": {
+        "libuhdr.a": "f170c080c99051cfef83d702ae2457ad49da44555c4f0bfa0f1fbb56ad9fd012",
+        "libturbojpeg.a": "0096cb2a5baec05dcad66de3cb685a4fa050178ac1dd44b3681796eb3147e556"
+      }
+    },
+    {
+      "rid": "win-arm64",
+      "platform": "windows",
+      "architecture": "ARM64",
+      "configuration": "Release",
+      "featureSet": "jpeg",
+      "linkKind": "shared",
+      "files": ["uhdr.dll", "turbojpeg.dll"],
+      "sha256": {
+        "uhdr.dll": "0099c123389482acf9c84c56a59d78fb56dd7228d902b2c9908fc4ac7f82c66d",
+        "turbojpeg.dll": "914215d9e1dd96897a8c79a68646cdbdc268db007b34f1f9368b59373e451f34"
+      }
+    },
+    {
+      "rid": "win-x86",
+      "platform": "windows",
+      "architecture": "x86",
+      "configuration": "Release",
+      "featureSet": "jpeg",
+      "linkKind": "shared",
+      "files": ["uhdr.dll", "turbojpeg.dll"],
+      "sha256": {
+        "uhdr.dll": "da75ffb32bc8ce1f21a4100962b5ed58bd6b07c3c3c170f37e19fda47afcb59a",
+        "turbojpeg.dll": "7e1e755a44dc4ac6de8af797d02cd4b21e3b6e5cf8f66bfc3cdec7e8785ede2b"
+      }
+    },
+    {
+      "rid": "win-x64",
+      "platform": "windows",
+      "architecture": "x64",
+      "configuration": "Release",
+      "featureSet": "jpeg",
+      "linkKind": "shared",
+      "files": ["uhdr.dll", "turbojpeg.dll"],
+      "sha256": {
+        "uhdr.dll": "1c5ad1eba0b97812bff2e503eb0cac967a09f7084ccc9b2dd2e4fe22d347c5e3",
+        "turbojpeg.dll": "99212cf537f973475837ad3c6875e7370bb54d2cdc3085a9fc846d826fe0adb8"
+      }
+    }
+  ]
+}

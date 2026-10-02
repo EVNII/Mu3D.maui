@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../eng/Mu3D.UltraHdrNativeVersion.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Mu3D.Native.UltraHdr</RootNamespace>
+    <AssemblyName>Mu3D.Native.UltraHdr</AssemblyName>
+    <PackageId>Mu3D.Native.UltraHdr</PackageId>
+    <Description>Pinned JPEG/HEIF adapters with Ultra HDR gain-map capability for Mu3D.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Mu3DUltraHdrEnableHeif Condition="'$(Mu3DUltraHdrEnableHeif)' == ''">false</Mu3DUltraHdrEnableHeif>
+    <DefineConstants Condition="'$(Mu3DUltraHdrEnableHeif)' == 'true'">$(DefineConstants);MU3D_ULTRAHDR_HEIF</DefineConstants>
+    <Mu3DUseRuntimeProjectReferences Condition="'$(Mu3DUseRuntimeProjectReferences)' == ''">true</Mu3DUseRuntimeProjectReferences>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AssemblyMetadata Include="UltraHdrNativeVersion" Value="$(Mu3DUltraHdrNativeVersion)" />
+    <AssemblyMetadata Include="UltraHdrNativeCommit" Value="$(Mu3DUltraHdrNativeCommit)" />
+    <AssemblyMetadata Include="JpegTurboNativeVersion" Value="$(Mu3DJpegTurboNativeVersion)" />
+    <AssemblyMetadata Include="JpegTurboNativeCommit" Value="$(Mu3DJpegTurboNativeCommit)" />
+    <AssemblyMetadata Include="UltraHdrHeifEnabled" Value="$(Mu3DUltraHdrEnableHeif)" />
+    <ProjectReference Include="../Mu3D.Color/Mu3D.Color.csproj" />
+    <ProjectReference Include="../Mu3D.Core/Mu3D.Core.csproj" />
+    <ProjectReference Include="../Mu3D.Native.UltraHdr.Runtime.Jpeg/Mu3D.Native.UltraHdr.Runtime.Jpeg.csproj"
+                      ReferenceOutputAssembly="false"
+                      Condition="'$(Mu3DUseRuntimeProjectReferences)' == 'true' And '$(Mu3DUltraHdrEnableHeif)' != 'true'" />
+    <PackageReference Include="Mu3D.Native.UltraHdr.Runtime.Jpeg"
+                      Version="[$(Mu3DPackageVersion)]"
+                      Condition="'$(Mu3DUseRuntimeProjectReferences)' != 'true' And '$(Mu3DUltraHdrEnableHeif)' != 'true'" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md" Pack="true" PackagePath="README.md" />
+    <None Update="THIRD-PARTY-NOTICES.md" Pack="true" PackagePath="THIRD-PARTY-NOTICES.md" />
+    <None Update="licenses/**/*" Pack="true" PackagePath="licenses/%(Filename)%(Extension)" />
+    <None Include="../Mu3D.Native.Ktx/licenses/Apache-2.0.txt"
+          Pack="true"
+          PackagePath="licenses/Apache-2.0.txt"
+          Visible="false" />
+  </ItemGroup>
+
+  <Target Name="ValidateMu3DUltraHdrFeaturePackage" BeforeTargets="GenerateNuspec">
+    <Error Condition="'$(Mu3DUseRuntimeProjectReferences)' == 'true'"
+           Text="Pack Mu3D.Native.UltraHdr through eng/pack-managed-packages.ps1 so its runtime dependency is exact and comes from a verified feed." />
+    <Error Condition="'$(Mu3DUltraHdrEnableHeif)' != 'true' And '$(Mu3DUltraHdrEnableHeif)' != 'false'"
+           Text="Mu3DUltraHdrEnableHeif must be true or false, not '$(Mu3DUltraHdrEnableHeif)'." />
+    <Error Condition="'$(Mu3DUltraHdrEnableHeif)' == 'true'"
+           Text="Cannot publish Mu3D.Native.UltraHdr with HEIF enabled until the separately licensed Runtime.Heif package is implemented and approved." />
+  </Target>
+</Project>

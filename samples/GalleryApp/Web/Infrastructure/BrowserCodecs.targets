@@ -1,0 +1,30 @@
+<Project>
+  <!-- Sample-owned static wasm32 codecs; consumers never build or fetch native dependencies. -->
+  <PropertyGroup>
+    <Mu3DCodecSourceRoot>$(MSBuildThisFileDirectory)../../../../src</Mu3DCodecSourceRoot>
+    <Mu3DBrowserCodecRoot Condition="'$(Mu3DBrowserCodecRoot)' == ''">$(MSBuildThisFileDirectory)../../../../artifacts/web-wasm/codecs/lib</Mu3DBrowserCodecRoot>
+    <EmccExtraCFlags>$(EmccExtraCFlags) -fwasm-exceptions</EmccExtraCFlags>
+    <EmccExtraLDFlags>$(EmccExtraLDFlags) -fwasm-exceptions -sSUPPORT_LONGJMP=wasm</EmccExtraLDFlags>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(Mu3DCodecSourceRoot)/Mu3D.Native.UltraHdr/**/*.cs;$(Mu3DCodecSourceRoot)/Mu3D.Native.Ktx/**/*.cs"
+             Exclude="$(Mu3DCodecSourceRoot)/**/obj/**/*.cs;$(Mu3DCodecSourceRoot)/**/bin/**/*.cs;$(Mu3DCodecSourceRoot)/**/Properties/AssemblyInfo.cs;$(Mu3DCodecSourceRoot)/**/Interop/*NativeLibraryResolver.cs" />
+    <NativeFileReference Include="$(Mu3DBrowserCodecRoot)/libjpeg.a;$(Mu3DBrowserCodecRoot)/libturbojpeg.a;$(Mu3DBrowserCodecRoot)/libuhdr.a;$(Mu3DBrowserCodecRoot)/libktx.a;$(Mu3DBrowserCodecRoot)/libastcenc-none.a" />
+    <NativeFileReference Include="$(MSBuildThisFileDirectory)BrowserCodecCompat.c" />
+  </ItemGroup>
+  <Target Name="ValidateBrowserCodecs" BeforeTargets="PrepareForBuild">
+    <Error Condition="!Exists('$(Mu3DBrowserCodecRoot)/libjpeg.a') Or !Exists('$(Mu3DBrowserCodecRoot)/libturbojpeg.a') Or !Exists('$(Mu3DBrowserCodecRoot)/libuhdr.a') Or !Exists('$(Mu3DBrowserCodecRoot)/libktx.a') Or !Exists('$(Mu3DBrowserCodecRoot)/libastcenc-none.a')"
+           Text="Build the pinned wasm32 codec archives with python3 eng/build-web-codecs.py before publishing Gallery." />
+  </Target>
+  <Target Name="GenerateBrowserCodecResolvers" BeforeTargets="CoreCompile">
+    <!-- Static P/Invoke lookup is provided by the WASM toolchain, not desktop DLL loading. -->
+    <WriteLinesToFile File="$(IntermediateOutputPath)BrowserCodecResolvers.g.cs" Overwrite="true" WriteOnlyWhenDifferent="true"
+      Lines="namespace Mu3D.Native.UltraHdr.Interop { internal static class UltraHdrNativeLibraryResolver { internal static void Register() { } } }%0Anamespace Mu3D.Native.Ktx.Interop { internal static class KtxNativeLibraryResolver { internal static void Register() { } } }" />
+    <ItemGroup><Compile Include="$(IntermediateOutputPath)BrowserCodecResolvers.g.cs" /></ItemGroup>
+  </Target>
+  <Target Name="RegisterBrowserCodecPInvokeModules" BeforeTargets="_GenerateManagedToNative">
+    <!-- .NET 10's static lookup otherwise scans the archive basename (libuhdr),
+         while the unchanged native bindings import the logical module (uhdr). -->
+    <ItemGroup><_WasmPInvokeModules Include="uhdr;turbojpeg;ktx" /></ItemGroup>
+  </Target>
+</Project>

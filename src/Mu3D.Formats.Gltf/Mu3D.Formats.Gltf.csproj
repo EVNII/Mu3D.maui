@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Mu3D.Formats.Gltf</RootNamespace>
+    <AssemblyName>Mu3D.Formats.Gltf</AssemblyName>
+    <PackageId>Mu3D.Formats.Gltf</PackageId>
+    <Description>Optional glTF 2.0 and GLB importer for Mu3D scenes.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Mu3D.Color/Mu3D.Color.csproj" />
+    <ProjectReference Include="../Mu3D.Core/Mu3D.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+</Project>

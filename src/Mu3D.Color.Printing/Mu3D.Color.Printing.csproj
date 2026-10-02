@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Description>Optional managed ICC CMYK conversion, print diagnostics and soft proofing for Mu3D.</Description>
+  </PropertyGroup>
+  <ItemGroup><ProjectReference Include="../Mu3D.Color/Mu3D.Color.csproj" /></ItemGroup>
+<ItemGroup><None Include="README.md" Pack="true" PackagePath="/" /></ItemGroup>
+</Project>

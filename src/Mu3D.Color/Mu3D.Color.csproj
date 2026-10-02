@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Mu3D.Color</RootNamespace>
+    <AssemblyName>Mu3D.Color</AssemblyName>
+    <PackageId>Mu3D.Color</PackageId>
+    <Description>Color science, HDR output and color transform primitives for Mu3D.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ColorViews/Generated/*.bin;ColorViews/Generated/*.wgsl" />
+    <None Include="ColorViews/*LICENSE" Pack="true" PackagePath="licenses/" />
+    <None Update="ColorViews/NOTICE.md" Pack="true" PackagePath="licenses/NOTICE.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SpectralData/*.csv;SpectralData/*.json" />
+    <None Update="SpectralData/NOTICE.md;SpectralData/*.json;SpectralData/*.csv" Pack="true" PackagePath="SpectralData/%(Filename)%(Extension)" />
+  </ItemGroup>
+</Project>

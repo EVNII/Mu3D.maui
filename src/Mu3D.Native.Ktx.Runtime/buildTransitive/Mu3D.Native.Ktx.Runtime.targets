@@ -1,0 +1,3 @@
+<Project>
+  <Import Project="$(MSBuildThisFileDirectory)Mu3D.Native.Ktx.targets" />
+</Project>

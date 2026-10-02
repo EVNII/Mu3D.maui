@@ -1,0 +1,16 @@
+<Project>
+  <PropertyGroup>
+    <Mu3DNativeSource>$(MSBuildThisFileDirectory)../../../../src/Mu3D.Native.Wgpu</Mu3DNativeSource>
+    <EmccExtraCFlags>$(EmccExtraCFlags) --use-port=&quot;$(EmdawnWebGpuRoot)/emdawnwebgpu.port.py&quot;</EmccExtraCFlags>
+    <EmccExtraLDFlags>$(EmccExtraLDFlags) --use-port=&quot;$(EmdawnWebGpuRoot)/emdawnwebgpu.port.py&quot;</EmccExtraLDFlags>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(Mu3DNativeSource)/WgpuGraphicsDevice.cs;$(Mu3DNativeSource)/WgpuGraphicsResources.cs;$(Mu3DNativeSource)/WgpuGraphicsCommands.cs;$(Mu3DNativeSource)/WgpuGraphicsMapper.cs;$(Mu3DNativeSource)/WgpuReferencePatternRenderer.cs;$(Mu3DNativeSource)/WgpuOffscreenTriangleRenderer.cs;$(Mu3DNativeSource)/Interop/OwnedWgpuHandles.cs;$(Mu3DNativeSource)/Generated/WgpuNative.Raw.g.cs" />
+    <NativeFileReference Include="$(MSBuildThisFileDirectory)wgpu_native.c" />
+  </ItemGroup>
+  <Import Project="BrowserWgpuBindings.targets" />
+  <Target Name="ValidateMu3DBrowserBackend" BeforeTargets="PrepareForBuild">
+    <Error Condition="!Exists('$(EmdawnWebGpuRoot)/webgpu/include/webgpu/webgpu.h')"
+           Text="Set EmdawnWebGpuRoot to the pinned compatibility port; see the Gallery Web README." />
+  </Target>
+</Project>

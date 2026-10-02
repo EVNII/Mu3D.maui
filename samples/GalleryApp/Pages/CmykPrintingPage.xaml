@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Mu3D.GalleryApp.Pages.CmykPrintingPage"
+ xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+ xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+ xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+ xmlns:gallery="clr-namespace:Mu3D.GalleryApp" Title="CMYK + Soft Proof">
+ <ContentPage.ToolbarItems><gallery:GalleryDocumentationToolbarItem FeatureId="cmyk-printing" /></ContentPage.ToolbarItems>
+ <ScrollView>
+  <VerticalStackLayout Padding="20" Spacing="12">
+   <Label Text="CMYK 印刷与软打样" FontSize="24" FontAttributes="Bold" />
+   <Label Text="同一份线性 Adobe RGB 数据：原始 HDR → 打印 RGB 映射 → ICC 软打样。0 EV 不改变输入；亮度较高的颜色会在 AgX 中逐渐变淡。" />
+   <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+    <Picker x:Name="ProfilePicker" Title="选择印刷 ICC" SelectedIndexChanged="OnSettingsChanged" />
+    <Button Grid.Column="1" Text="加载 ICC…" Clicked="OnLoadProfile" />
+   </Grid>
+   <Picker x:Name="IntentPicker" Title="渲染意图" SelectedIndexChanged="OnSettingsChanged" SelectedIndex="0">
+    <Picker.Items><x:String>相对色度</x:String><x:String>感知</x:String><x:String>饱和度</x:String></Picker.Items>
+   </Picker>
+   <HorizontalStackLayout Spacing="12">
+    <Switch x:Name="PaperSwitch" IsToggled="True" Toggled="OnPaperChanged" /><Label Text="模拟纸白" VerticalOptions="Center" />
+    <Switch x:Name="GamutSwitch" Toggled="OnPaperChanged" /><Label Text="标记 ΔE76 &gt; 2 的色块" VerticalOptions="Center" />
+   </HorizontalStackLayout>
+   <Picker x:Name="MappingPicker" Title="打印映射" SelectedIndex="0" SelectedIndexChanged="OnSettingsChanged">
+    <Picker.Items><x:String>AgX Rec.2020 + 目标色域映射</x:String><x:String>简单亮度压缩 + 目标色域映射</x:String></Picker.Items>
+   </Picker>
+   <Picker x:Name="TargetPicker" Title="目标 RGB" SelectedIndex="0" SelectedIndexChanged="OnSettingsChanged">
+    <Picker.Items><x:String>Adobe RGB</x:String><x:String>ProPhoto RGB</x:String></Picker.Items>
+   </Picker>
+   <Label Text="AgX 使用 Blender Rec.2020 原版视图，再收缩到目标色域；不是原生 Adobe / ProPhoto AgX。ProPhoto 不恢复此前压缩的颜色。" FontSize="12" />
+   <Label x:Name="ExposureLabel" />
+   <Slider x:Name="ExposureSlider" Minimum="-4" Maximum="4" Value="0" ValueChanged="OnExposureChanged" />
+   <Label Text="色带：横向为色相，纵向由暗到亮；通道峰值 0.0028–11.52。下方灰阶依次为 0、0.018、0.18（中灰）、0.5、1、2、4、8。" />
+   <Label Text="原始 HDR 色带（无色调映射）" FontAttributes="Bold" />
+   <mu3d:Mu3DView x:Name="HdrView" HeightRequest="220" BackgroundColor="Black"
+       Draw="OnHdrDraw" SurfaceError="OnHdrError" PresentationSessionChanged="OnHdrSessionChanged" />
+   <Label x:Name="HdrStatusLabel" Text="等待 HDR 表面…" FontSize="12" />
+   <Label x:Name="MappingValuesLabel" FontSize="12" />
+   <Grid ColumnDefinitions="*,*" ColumnSpacing="16" RowDefinitions="Auto,260">
+    <Label x:Name="MappedTitle" Text="映射后的 RGB（sRGB 屏幕预览）" FontAttributes="Bold" />
+    <Label Grid.Column="1" Text="CMYK 软打样" FontAttributes="Bold" />
+    <GraphicsView x:Name="OriginalView" Grid.Row="1" />
+    <GraphicsView x:Name="ProofView" Grid.Row="1" Grid.Column="1" />
+   </Grid>
+   <Label x:Name="StatusLabel" Text="请选择 ICC。未内置第三方配置文件，可加载印厂提供的 .icc / .icm。" />
+   <Label Text="总墨量警戒值（%）" />
+   <Slider x:Name="InkSlider" Minimum="0" Maximum="400" Value="300" ValueChanged="OnInkChanged" />
+   <Label x:Name="InkLabel" />
+   <Label Text="下方两张打印预览显式映射 HDR 后使用 MAUI 的 sRGB 显示，显示超色域时显式裁切。它不是校准后的合同打样；原始颜色与 CMYK 黑版数据保持不变。" FontSize="12" />
+  </VerticalStackLayout>
+ </ScrollView>
+</ContentPage>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.Gallery.Pages.FeedPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:Mu3D.Gallery.Pages"
+    xmlns:toolkit="clr-namespace:Mu3D.Maui.Toolkit.Controls;assembly=Mu3D.Maui.Toolkit"
+    x:DataType="pages:FeedPage"
+    Title="Feed">
+    <Grid RowDefinitions="Auto,*">
+        <VerticalStackLayout Padding="16,10" Spacing="4">
+            <Label
+                FontAttributes="Bold"
+                FontSize="18"
+                Text="Live 3D product feed" />
+            <Label
+                FontSize="12"
+                Text="Every card presents its own shared-device surface; scrolling preloads near rows, suspends rendering just outside them and releases content far away." />
+            <Label x:Name="StatusLabel" FontSize="12" Text="Preparing shared device…" />
+            <Label
+                x:Name="ErrorLabel"
+                FontSize="12"
+                IsVisible="False"
+                TextColor="#FFB00020" />
+        </VerticalStackLayout>
+        <toolkit:SceneViewProxyHost
+            x:Name="ProxyHost"
+            Grid.Row="1"
+            SurfaceError="OnProxyHostSurfaceError">
+            <CollectionView
+                x:Name="ProductsView"
+                BackgroundColor="Transparent"
+                ItemsSource="{Binding Products}"
+                Scrolled="OnProductsScrolled">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        HorizontalItemSpacing="8"
+                        Orientation="Vertical"
+                        Span="2"
+                        VerticalItemSpacing="8" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="pages:FeedProduct">
+                        <Grid
+                            BackgroundColor="#FFF4F5F7"
+                            HeightRequest="240"
+                            MaximumHeightRequest="240"
+                            MinimumHeightRequest="240"
+                            Padding="8"
+                            RowDefinitions="170,Auto,*"
+                            RowSpacing="4">
+                            <toolkit:SceneViewProxy
+                                Camera="{Binding Camera}"
+                                HeightRequest="170"
+                                HorizontalOptions="Fill"
+                                Host="{x:Reference ProxyHost}"
+                                InputTransparent="True"
+                                IsRenderingEnabled="{Binding IsLive}"
+                                MaximumHeightRequest="170"
+                                MinimumHeightRequest="170"
+                                Scene="{Binding Scene}"
+                                SceneBackgroundColor="#FF7D8998"
+                                FramePresented="OnProxyFramePresented"
+                                SurfaceError="OnProxySurfaceError"
+                                VerticalOptions="Fill">
+                                <toolkit:SceneViewProxy.Placeholder>
+                                    <Grid BackgroundColor="#182238">
+                                        <Label
+                                            HorizontalOptions="Center"
+                                            Text="Preparing preview…"
+                                            TextColor="White"
+                                            VerticalOptions="Center" />
+                                    </Grid>
+                                </toolkit:SceneViewProxy.Placeholder>
+                            </toolkit:SceneViewProxy>
+                            <Label
+                                Grid.Row="1"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation"
+                                Text="{Binding Name}" />
+                            <Label
+                                Grid.Row="2"
+                                FontSize="12"
+                                Text="{Binding Price}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </toolkit:SceneViewProxyHost>
+    </Grid>
+</ContentPage>

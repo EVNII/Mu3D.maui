@@ -1,0 +1,119 @@
+name: Native Debug Runtimes
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    if: github.repository == 'EVNII/Mu3D.maui'
+    name: ${{ matrix.platform }} Debug package
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: android
+            runner: ubuntu-24.04
+            package_project: src/Mu3D.Native.Wgpu.DebugRuntime.Android/Mu3D.Native.Wgpu.DebugRuntime.Android.csproj
+            consumer_project: tests/Mu3D.DebugRuntime.Tests/PackageConsumer/AndroidConsumer.csproj
+            workload: maui-android
+          - platform: ios
+            runner: macos-15
+            package_project: src/Mu3D.Native.Wgpu.DebugRuntime.iOS/Mu3D.Native.Wgpu.DebugRuntime.iOS.csproj
+            consumer_project: tests/Mu3D.DebugRuntime.Tests/PackageConsumer/IosConsumer.proj
+            workload: maui-ios
+          - platform: windows
+            runner: macos-15
+            package_project: src/Mu3D.Native.Wgpu.DebugRuntime.Windows/Mu3D.Native.Wgpu.DebugRuntime.Windows.csproj
+            consumer_project: tests/Mu3D.DebugRuntime.Tests/PackageConsumer/WindowsConsumer.csproj
+            workload: none
+
+    steps:
+      - name: Check out Mu3D
+        uses: actions/checkout@v7
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Install platform workload
+        if: matrix.workload != 'none'
+        run: dotnet workload install "${{ matrix.workload }}"
+
+      - name: Fetch, verify, and stage pinned Debug runtimes
+        run: |
+          dotnet run --project tools/Mu3D.WgpuGen --configuration Release -- \
+            prepare-platform-runtimes eng/wgpu-native-assets.json eng/Mu3D.WgpuNativeVersion.props \
+            "${{ matrix.platform }}" debug artifacts/downloads \
+            artifacts/wgpu-native
+
+      - name: Verify every native export set
+        run: |
+          find artifacts/wgpu-native/v29.0.1.1/debug/runtimes -type f \
+            \( -name 'libwgpu_native.so' -o -name 'libwgpu_native.a' -o -name 'wgpu_native.dll' \) \
+            -print0 | while IFS= read -r -d '' library; do
+              dotnet run --project tools/Mu3D.WgpuGen --configuration Release -- \
+                verify-native-exports src/Mu3D.Native.Wgpu/Generated/WgpuNative.Raw.g.cs "$library"
+            done
+
+      - name: Build managed backend and create base fixture package
+        run: |
+          dotnet build src/Mu3D.Native.Wgpu/Mu3D.Native.Wgpu.csproj --configuration Release
+          dotnet pack tests/Mu3D.DebugRuntime.Tests/PackageConsumer/BasePackageFixture.csproj \
+            --configuration Release --output artifacts/packages \
+            -p:Mu3DRepositoryRoot="$GITHUB_WORKSPACE"
+
+      - name: Pack platform DebugRuntime
+        run: >-
+          dotnet pack "${{ matrix.package_project }}" --configuration Release
+          --output artifacts/packages
+
+      - name: Restore packed consumer from local feed
+        run: |
+          dotnet restore "${{ matrix.consumer_project }}" \
+            --source "$GITHUB_WORKSPACE/artifacts/packages" \
+            --source https://api.nuget.org/v3/index.json
+
+      - name: Verify packed native asset selection
+        run: >-
+          dotnet msbuild "${{ matrix.consumer_project }}"
+          /t:VerifyDebugRuntimePackage /p:Configuration=Release /p:RestoreIgnoreFailedSources=true
+          /nologo /v:minimal
+
+      - name: Build Android consumer archive
+        if: matrix.platform == 'android'
+        run: dotnet build "${{ matrix.consumer_project }}" --configuration Release --no-restore
+
+      - name: Verify Android archive contains staged Debug libraries
+        if: matrix.platform == 'android'
+        run: |
+          aar="$(find tests/Mu3D.DebugRuntime.Tests/PackageConsumer/bin/Release -name '*.aar' -print -quit)"
+          test -n "$aar"
+          dotnet run --project tests/Mu3D.DebugRuntime.Tests --configuration Release -- \
+            verify-android-aar "$aar" artifacts/wgpu-native/v29.0.1.1/debug/runtimes
+
+      - name: Build Windows consumer output
+        if: matrix.platform == 'windows'
+        run: dotnet build "${{ matrix.consumer_project }}" --configuration Release --no-restore
+
+      - name: Verify Windows output is the staged Debug DLL
+        if: matrix.platform == 'windows'
+        run: |
+          output="$(find tests/Mu3D.DebugRuntime.Tests/PackageConsumer/bin/Release -name wgpu_native.dll -print -quit)"
+          test -n "$output"
+          dotnet run --project tests/Mu3D.DebugRuntime.Tests --configuration Release -- \
+            verify-windows-output "$output" \
+            artifacts/wgpu-native/v29.0.1.1/debug/runtimes/win-x64/native/wgpu_native.dll
+
+      - name: Upload verified DebugRuntime package
+        uses: actions/upload-artifact@v7
+        with:
+          name: Mu3D.Native.Wgpu.DebugRuntime.${{ matrix.platform }}
+          path: artifacts/packages/Mu3D.Native.Wgpu.DebugRuntime.*.nupkg
+          if-no-files-found: error
+          retention-days: 14

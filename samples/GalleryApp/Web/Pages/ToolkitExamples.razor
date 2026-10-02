@@ -1,0 +1,129 @@
+@page "/examples/orbit-controls"
+@page "/examples/map-controls"
+@page "/examples/fly-controls"
+@page "/examples/axes-helper"
+@page "/examples/grid-helper"
+@page "/examples/bounds-helper"
+@page "/examples/transform-gizmo"
+@page "/examples/frame-statistics"
+@page "/examples/ui-anchors"
+@page "/examples/declarative-scene"
+@page "/examples/declarative-tools"
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+@using Mu3D.Toolkit.Gizmos
+
+<main @key="id">
+    <a href="">返回 Gallery</a>
+    <h1>@Title</h1>
+    <a href="@($"https://evnii.github.io/Mu3D.maui/v0.1/articles/features/{id}.html")" target="_blank" rel="noopener">示例文档</a>
+    <p>@Instructions</p>
+    <div class="viewport" @ref="container">
+        <canvas id="mu3d-canvas" @ref="canvas" tabindex="0" aria-label="@Title"></canvas>
+        @if (id == "ui-anchors")
+        {
+            <span @ref="cyanLabel" style="color:#6CEBFF;background:#D9142238;padding:4px 8px;font-weight:bold;pointer-events:none">● Cyan object</span>
+            <span @ref="magentaLabel" style="color:#FF75DC;background:#D9142238;padding:4px 8px;font-weight:bold;pointer-events:none">● Magenta object</span>
+        }
+    </div>
+    @if (example is not null)
+    {
+        <div class="controls">
+            <label>输出 <select @bind="OutputMode" @bind:after="SettingsChanged"><option value="hdr">HDR</option><option value="sdr">SDR 预览</option></select></label>
+            @if (example.Orbit is not null || example.Fly is not null)
+            {
+                <label><input type="checkbox" @bind="ControllerEnabled" @bind:after="SettingsChanged" /> Controller</label>
+                <label><input type="checkbox" @bind="DampingEnabled" @bind:after="SettingsChanged" /> Damping</label>
+            }
+            @if (id is "orbit-controls" or "map-controls" or "fly-controls")
+            {
+                <label>Rotation <input type="range" min="0.1" max="3" step="0.05" @bind="RotationSensitivity" @bind:event="oninput" @bind:after="SettingsChanged" /> @RotationSensitivity.ToString("0.00")</label>
+                <label>Pan <input type="range" min="0.1" max="3" step="0.05" @bind="PanSensitivity" @bind:event="oninput" @bind:after="SettingsChanged" /> @PanSensitivity.ToString("0.00")</label>
+                <label>Dolly <input type="range" min="0.1" max="3" step="0.05" @bind="DollySensitivity" @bind:event="oninput" @bind:after="SettingsChanged" /> @DollySensitivity.ToString("0.00")</label>
+                @foreach (string action in NavigationActions)
+                {
+                    <button @onclick="() => NavigateButton(action)">@action</button>
+                }
+            }
+            @if (id == "map-controls")
+            {
+                @for (int i = 0; i < MapKeyNames.Length; i++)
+                {
+                    int index = i;
+                    <label>@MapKeyNames[index] key <select @bind="mapKeys[index]" @bind:after="SettingsChanged">
+                        @foreach (string key in AllowedKeys) { <option value="@key">@key</option> }
+                    </select></label>
+                }
+            }
+            @if (example.Grid is not null)
+            {
+                <label><input type="checkbox" @bind="example.GridVisible" @bind:after="SettingsChanged" /> Grid</label>
+                @if (id == "grid-helper")
+                {
+                    <label><input type="checkbox" @bind="example.Grid.ShowMinorLines" @bind:after="SettingsChanged" /> Minor lines</label>
+                    <label><input type="checkbox" @bind="example.Grid.ShowMajorLines" @bind:after="SettingsChanged" /> Major lines</label>
+                    <label><input type="checkbox" @bind="example.Grid.ShowCenterAxes" @bind:after="SettingsChanged" /> Center axes</label>
+                }
+            }
+            @if (example.Axes is not null)
+            {
+                <label><input type="checkbox" @bind="example.AxesVisible" @bind:after="SettingsChanged" /> Orientation axes</label>
+                @if (id == "axes-helper")
+                {
+                    <label><input type="checkbox" @bind="example.AxesInteractive" @bind:after="SettingsChanged" /> Interactive</label>
+                    <label><input type="checkbox" @bind="example.Axes.ShowDiagonalViews" @bind:after="SettingsChanged" /> 45° directions</label>
+                    <label><input type="checkbox" @bind="example.Axes.ShowNegativeAxes" @bind:after="SettingsChanged" /> Negative axes</label>
+                }
+            }
+            @if (example.Bounds is not null)
+            {
+                <label><input type="checkbox" @bind="example.BoundsVisible" @bind:after="SettingsChanged" /> Bounds</label>
+                <label><input type="checkbox" @bind="example.OutlineVisible" @bind:after="SettingsChanged" /> Outline</label>
+                <label><input type="checkbox" @bind="example.OverlayDepth" @bind:after="SettingsChanged" /> Overlay</label>
+                <label><input type="checkbox" @bind="TargetVisible" @bind:after="SettingsChanged" /> Target</label>
+                <label><input type="checkbox" @bind="IncludeInvisible" @bind:after="SettingsChanged" /> Include invisible</label>
+                <label><input type="checkbox" @bind="example.Bounds.Precise" @bind:after="SettingsChanged" /> Precise</label>
+            }
+            @if (example.Gizmo is not null)
+            {
+                <label><input type="checkbox" @bind="example.FeaturesEnabled" @bind:after="SettingsChanged" /> SceneView Features attached</label>
+                <label><input type="checkbox" @bind="example.GizmoEnabled" @bind:after="SettingsChanged" /> Transform Gizmo</label>
+                <fieldset disabled="@example.Drag.IsActive">
+                    <label><input type="checkbox" @bind="example.Gizmo.IsTranslateEnabled" @bind:after="SettingsChanged" /> Move</label>
+                    <label><input type="checkbox" @bind="example.Gizmo.IsRotateEnabled" @bind:after="SettingsChanged" /> Rotate</label>
+                    <label><input type="checkbox" @bind="example.Gizmo.IsScaleEnabled" @bind:after="SettingsChanged" /> Scale</label>
+                    <label><input type="checkbox" @bind="LocalAxes" @bind:after="SettingsChanged" /> Local move/rotate axes</label>
+                    <label>Handle size <input type="range" min="64" max="180" step="1" @bind="example.Gizmo.ScreenSizePixels" @bind:event="oninput" @bind:after="SettingsChanged" /> @example.Gizmo.ScreenSizePixels.ToString("0")</label>
+                    <label>Move step <input type="number" min="0" max="2" step="0.05" @bind="MoveStep" @bind:event="oninput" @bind:after="SettingsChanged" /></label>
+                    <label>Rotate step <input type="number" min="0" max="90" step="5" @bind="RotationStep" @bind:event="oninput" @bind:after="SettingsChanged" /> °</label>
+                    <label>Scale step <input type="number" min="0" max="1" step="0.05" @bind="ScaleStep" @bind:event="oninput" @bind:after="SettingsChanged" /></label>
+                </fieldset>
+                <button @onclick="ResetPose">Reset transform</button>
+                @if (id == "declarative-tools")
+                {
+                    <label><input type="checkbox" @bind="example.SelectionEnabled" @bind:after="SettingsChanged" /> Selection</label>
+                    <label>Selection mask <select @bind="selectionMask" @bind:after="SettingsChanged"><option value="3">Cone + sphere</option><option value="1">Cone</option><option value="2">Sphere</option><option value="0">None</option></select></label>
+                    <label><input type="checkbox" @bind="example.StatisticsVisible" @bind:after="SettingsChanged" /> Frame statistics</label>
+                }
+            }
+            @if (id == "frame-statistics")
+            {
+                <label><input type="checkbox" @bind="example.Continuous" @bind:after="SettingsChanged" /> Continuous</label>
+                <label><input type="checkbox" @bind="example.StatisticsDetailed" @bind:after="SettingsChanged" /> Detailed</label>
+                <label>Refresh <input type="number" min="50" max="1000" step="50" @bind="SnapshotInterval" @bind:event="oninput" @bind:after="SettingsChanged" /> ms</label>
+                <button @onclick="ResetStatistics">Reset statistics and graph</button>
+            }
+            @if (id == "ui-anchors")
+            {
+                <button @onclick="ToggleMotion">@(example.Continuous ? "Pause motion" : "Resume motion")</button>
+            }
+        </div>
+        @if (example.Gizmo is not null) { <pre>@example.Pose</pre> }
+    }
+    <p class="status" role="status">@status</p>
+</main>
+
+@code {
+    private string OutputMode { get => hdr ? "hdr" : "sdr"; set => hdr = value switch { "hdr" => true, "sdr" => false, _ => hdr }; }
+}
