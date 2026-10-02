@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.TransformGizmoPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    xmlns:toolkit="clr-namespace:Mu3D.Maui.Toolkit.Controls;assembly=Mu3D.Maui.Toolkit"
+    Title="Transform Gizmo">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="transform-gizmo" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <mu3d:Mu3DSceneView
+            x:Name="SceneView"
+            BackgroundColor="Black"
+            FeatureError="OnFeatureError"
+            SurfaceError="OnSurfaceError">
+            <mu3d:Mu3DSceneView.Features>
+                <toolkit:OrbitSceneViewFeature x:Name="OrbitFeature" />
+                <toolkit:TransformGizmoSceneViewFeature x:Name="GizmoFeature" />
+            </mu3d:Mu3DSceneView.Features>
+        </mu3d:Mu3DSceneView>
+        <ScrollView Grid.Row="1" MaximumHeightRequest="390">
+            <VerticalStackLayout Padding="16" Spacing="10">
+                <Label
+                    FontAttributes="Bold"
+                    Text="Drag an enabled overlay handle to transform the centered cone." />
+                <Label
+                    FontSize="12"
+                    Text="Drag empty space to orbit; vertical rotation now follows the drag direction. Wheel or pinch zooms." />
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                    <Label VerticalOptions="Center" Text="SceneView Features attached" />
+                    <Switch
+                        x:Name="FeaturesEnabledSwitch"
+                        Grid.Column="1"
+                        IsToggled="True" />
+                </Grid>
+                <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnSpacing="6">
+                    <Label VerticalOptions="Center" Text="Handles" />
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Move" />
+                    <Switch x:Name="TranslateSwitch" Grid.Column="2" IsToggled="True" />
+                    <Label Grid.Column="3" VerticalOptions="Center" Text="Rotate" />
+                    <Switch x:Name="RotateSwitch" Grid.Column="4" IsToggled="True" />
+                    <HorizontalStackLayout Grid.Column="5" Spacing="4">
+                        <Label VerticalOptions="Center" Text="Scale" />
+                        <Switch x:Name="ScaleSwitch" IsToggled="True" />
+                    </HorizontalStackLayout>
+                </Grid>
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                    <Label VerticalOptions="Center" Text="Axes" />
+                    <Label
+                        Grid.Column="1"
+                        VerticalOptions="Center"
+                        Text="Move/rotate use target-local orientation" />
+                    <Switch x:Name="LocalAxesSwitch" Grid.Column="2" />
+                </Grid>
+                <Label
+                    FontSize="12"
+                    Text="Scale diamonds always follow the target-local axes, matching the scale components." />
+                <Grid
+                    ColumnDefinitions="Auto,*,Auto"
+                    ColumnSpacing="10"
+                    RowDefinitions="Auto,Auto,Auto,Auto"
+                    RowSpacing="4">
+                    <Label VerticalOptions="Center" Text="Handle size" />
+                    <Slider
+                        x:Name="HandleSizeSlider"
+                        Grid.Column="1"
+                        Maximum="180"
+                        Minimum="64"
+                        Value="110" />
+                    <Label x:Name="HandleSizeValueLabel" Grid.Column="2" VerticalOptions="Center" />
+
+                    <Label Grid.Row="1" VerticalOptions="Center" Text="Move step" />
+                    <Stepper
+                        x:Name="TranslationSnapStepper"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        HorizontalOptions="Start"
+                        Increment="0.05"
+                        Maximum="2"
+                        Minimum="0"
+                        Value="0.1" />
+                    <Label x:Name="TranslationSnapValueLabel" Grid.Row="1" Grid.Column="2" VerticalOptions="Center" />
+
+                    <Label Grid.Row="2" VerticalOptions="Center" Text="Rotate step" />
+                    <Stepper
+                        x:Name="RotationSnapStepper"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        HorizontalOptions="Start"
+                        Increment="5"
+                        Maximum="90"
+                        Minimum="0"
+                        Value="15" />
+                    <Label x:Name="RotationSnapValueLabel" Grid.Row="2" Grid.Column="2" VerticalOptions="Center" />
+
+                    <Label Grid.Row="3" VerticalOptions="Center" Text="Scale step" />
+                    <Stepper
+                        x:Name="ScaleSnapStepper"
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        HorizontalOptions="Start"
+                        Increment="0.05"
+                        Maximum="1"
+                        Minimum="0"
+                        Value="0.1" />
+                    <Label x:Name="ScaleSnapValueLabel" Grid.Row="3" Grid.Column="2" VerticalOptions="Center" />
+                </Grid>
+                <Button x:Name="ResetButton" Clicked="OnResetClicked" Text="Reset transform" />
+                <Label x:Name="StatusLabel" Text="Preparing HDR scene…" />
+                <Label
+                    x:Name="PoseLabel"
+                    FontSize="12"
+                    LineBreakMode="WordWrap" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

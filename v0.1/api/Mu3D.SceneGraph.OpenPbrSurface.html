@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class OpenPbrSurface | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class OpenPbrSurface | Mu3D documentation ">
+      
+      <meta name="description" content="Stores constant and connected authoring inputs for OpenPBR Surface 1.1.1 independently of the renderer. This is not a  and does not assert OpenPBR scattering conformance.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.SceneGraph.OpenPbrSurface">
+
+
+
+  <h1 id="Mu3D_SceneGraph_OpenPbrSurface" data-uid="Mu3D.SceneGraph.OpenPbrSurface" class="text-break">
+Class OpenPbrSurface  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.SceneGraph.html">SceneGraph</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Stores constant and connected authoring inputs for OpenPBR Surface 1.1.1 independently of the renderer.
+This is not a <a class="xref" href="Mu3D.SceneGraph.Material.html">Material</a> and does not assert OpenPBR scattering conformance.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class OpenPbrSurface</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">OpenPbrSurface</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="Mu3D_SceneGraph_OpenPbrSurface_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>Defaults and parameter identities follow the pinned OpenPBR v1.1.1 reference nodedef.
+Color3 values carry linear-light metadata and alpha one; signed and extended-range authoring
+values are retained without implicit gamut mapping. Numeric bounds follow the nodedef's hard
+scalar bounds, not its soft UI bounds. Geometry vectors default to inherited world-space
+normal/tangent semantics. Graph connections are immutable and override the associated constants.</p>
+</div>
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface__ctor_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.#ctor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface__ctor" data-uid="Mu3D.SceneGraph.OpenPbrSurface.#ctor">
+  OpenPbrSurface()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPbrSurface()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_SpecificationVersion" data-uid="Mu3D.SceneGraph.OpenPbrSurface.SpecificationVersion">
+  SpecificationVersion
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the pinned normative OpenPBR specification and reference nodedef.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string SpecificationVersion = &quot;1.1.1&quot;</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_BaseColor_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.BaseColor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_BaseColor" data-uid="Mu3D.SceneGraph.OpenPbrSurface.BaseColor">
+  BaseColor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>base_color</code> with explicit linear RGB identity and alpha one.
+The default is (0.8, 0.8, 0.8) in ACEScg; signed and HDR components are preserved.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgba BaseColor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_BaseDiffuseRoughness_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.BaseDiffuseRoughness*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_BaseDiffuseRoughness" data-uid="Mu3D.SceneGraph.OpenPbrSurface.BaseDiffuseRoughness">
+  BaseDiffuseRoughness
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>base_diffuse_roughness</code>. Diffuse lobe roughness, in [0, 1]. Default: 0.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float BaseDiffuseRoughness { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_BaseMetalness_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.BaseMetalness*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_BaseMetalness" data-uid="Mu3D.SceneGraph.OpenPbrSurface.BaseMetalness">
+  BaseMetalness
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>base_metalness</code>. Dielectric-to-metal mixture, in [0, 1]. Default: 0.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float BaseMetalness { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_BaseWeight_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.BaseWeight*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_BaseWeight" data-uid="Mu3D.SceneGraph.OpenPbrSurface.BaseWeight">
+  BaseWeight
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>base_weight</code>. Base reflection multiplier, in [0, 1]. Default: 1.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float BaseWeight { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_CoatColor_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.CoatColor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_CoatColor" data-uid="Mu3D.SceneGraph.OpenPbrSurface.CoatColor">
+  CoatColor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>coat_color</code> with explicit linear RGB identity and alpha one.
+The default is (1, 1, 1) in ACEScg; signed and HDR components are preserved.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgba CoatColor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_CoatDarkening_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.CoatDarkening*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_CoatDarkening" data-uid="Mu3D.SceneGraph.OpenPbrSurface.CoatDarkening">
+  CoatDarkening
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>coat_darkening</code>. Coat-induced substrate darkening strength, in [0, 1]. Default: 1.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float CoatDarkening { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_CoatIor_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.CoatIor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_CoatIor" data-uid="Mu3D.SceneGraph.OpenPbrSurface.CoatIor">
+  CoatIor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>coat_ior</code>. Nonnegative coat index of refraction. Default: 1.6.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float CoatIor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_CoatRoughness_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.CoatRoughness*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_CoatRoughness" data-uid="Mu3D.SceneGraph.OpenPbrSurface.CoatRoughness">
+  CoatRoughness
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>coat_roughness</code>. Coat lobe roughness, in [0, 1]. Default: 0.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float CoatRoughness { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_CoatRoughnessAnisotropy_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.CoatRoughnessAnisotropy*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_CoatRoughnessAnisotropy" data-uid="Mu3D.SceneGraph.OpenPbrSurface.CoatRoughnessAnisotropy">
+  CoatRoughnessAnisotropy
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>coat_roughness_anisotropy</code>. Coat roughness anisotropy, in [0, 1]. Default: 0.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float CoatRoughnessAnisotropy { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_CoatWeight_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.CoatWeight*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_CoatWeight" data-uid="Mu3D.SceneGraph.OpenPbrSurface.CoatWeight">
+  CoatWeight
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>coat_weight</code>. Coat layer coverage, in [0, 1]. Default: 0.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float CoatWeight { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_EmissionColor_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.EmissionColor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_EmissionColor" data-uid="Mu3D.SceneGraph.OpenPbrSurface.EmissionColor">
+  EmissionColor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>emission_color</code> with explicit linear RGB identity and alpha one.
+The default is (1, 1, 1) in ACEScg; signed and HDR components are preserved.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgba EmissionColor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_EmissionLuminance_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.EmissionLuminance*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_EmissionLuminance" data-uid="Mu3D.SceneGraph.OpenPbrSurface.EmissionLuminance">
+  EmissionLuminance
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>emission_luminance</code>. White emission luminance in cd/m² (nits); no SDR upper bound is imposed. Default: 0.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float EmissionLuminance { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_FuzzColor_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.FuzzColor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_FuzzColor" data-uid="Mu3D.SceneGraph.OpenPbrSurface.FuzzColor">
+  FuzzColor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>fuzz_color</code> with explicit linear RGB identity and alpha one.
+The default is (1, 1, 1) in ACEScg; signed and HDR components are preserved.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgba FuzzColor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_FuzzRoughness_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.FuzzRoughness*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_FuzzRoughness" data-uid="Mu3D.SceneGraph.OpenPbrSurface.FuzzRoughness">
+  FuzzRoughness
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>fuzz_roughness</code>. Fuzz lobe roughness, in [0, 1]. Default: 0.5.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float FuzzRoughness { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_FuzzWeight_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.FuzzWeight*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_FuzzWeight" data-uid="Mu3D.SceneGraph.OpenPbrSurface.FuzzWeight">
+  FuzzWeight
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>fuzz_weight</code>. Fuzz layer coverage, in [0, 1]. Default: 0.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float FuzzWeight { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_GeometryCoatNormal_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.GeometryCoatNormal*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_GeometryCoatNormal" data-uid="Mu3D.SceneGraph.OpenPbrSurface.GeometryCoatNormal">
+  GeometryCoatNormal
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the finite nonzero world-space <code>geometry_coat_normal</code> override.
+Null inherits the geometry's <code>Nworld</code>; explicit vectors are preserved without normalization.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3? GeometryCoatNormal { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.vector3">Vector3</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_GeometryCoatTangent_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.GeometryCoatTangent*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_GeometryCoatTangent" data-uid="Mu3D.SceneGraph.OpenPbrSurface.GeometryCoatTangent">
+  GeometryCoatTangent
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the finite nonzero world-space <code>geometry_coat_tangent</code> override.
+Null inherits the geometry's <code>Tworld</code>; explicit vectors are preserved without normalization.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3? GeometryCoatTangent { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.vector3">Vector3</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_GeometryNormal_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.GeometryNormal*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_GeometryNormal" data-uid="Mu3D.SceneGraph.OpenPbrSurface.GeometryNormal">
+  GeometryNormal
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the finite nonzero world-space <code>geometry_normal</code> override.
+Null inherits the geometry's <code>Nworld</code>; explicit vectors are preserved without normalization.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3? GeometryNormal { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.vector3">Vector3</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_GeometryOpacity_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.GeometryOpacity*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_GeometryOpacity" data-uid="Mu3D.SceneGraph.OpenPbrSurface.GeometryOpacity">
+  GeometryOpacity
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>geometry_opacity</code>. Surface presence weight, in [0, 1]. Default: 1.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float GeometryOpacity { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_GeometryTangent_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.GeometryTangent*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_GeometryTangent" data-uid="Mu3D.SceneGraph.OpenPbrSurface.GeometryTangent">
+  GeometryTangent
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the finite nonzero world-space <code>geometry_tangent</code> override.
+Null inherits the geometry's <code>Tworld</code>; explicit vectors are preserved without normalization.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3? GeometryTangent { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.vector3">Vector3</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_GeometryThinWalled_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.GeometryThinWalled*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_GeometryThinWalled" data-uid="Mu3D.SceneGraph.OpenPbrSurface.GeometryThinWalled">
+  GeometryThinWalled
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>geometry_thin_walled</code>. The default is false.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool GeometryThinWalled { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_Graph_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.Graph*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_Graph" data-uid="Mu3D.SceneGraph.OpenPbrSurface.Graph">
+  Graph
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets immutable texture and expression connections overriding constant inputs.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPbrGraph? Graph { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrGraph.html">OpenPbrGraph</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_MetersPerUnit_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.MetersPerUnit*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_MetersPerUnit" data-uid="Mu3D.SceneGraph.OpenPbrSurface.MetersPerUnit">
+  MetersPerUnit
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the positive number of metres represented by one scene length unit.
+The explicit default convention is metres. Thin-film thickness always uses micrometres.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float MetersPerUnit { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_Name_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.Name*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_Name" data-uid="Mu3D.SceneGraph.OpenPbrSurface.Name">
+  Name
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the optional application-facing material name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Name { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_SpecularColor_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.SpecularColor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_SpecularColor" data-uid="Mu3D.SceneGraph.OpenPbrSurface.SpecularColor">
+  SpecularColor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>specular_color</code> with explicit linear RGB identity and alpha one.
+The default is (1, 1, 1) in ACEScg; signed and HDR components are preserved.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgba SpecularColor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_SpecularIor_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.SpecularIor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_SpecularIor" data-uid="Mu3D.SceneGraph.OpenPbrSurface.SpecularIor">
+  SpecularIor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>specular_ior</code>. Nonnegative dielectric index of refraction; preview may require a narrower domain. Default: 1.5.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float SpecularIor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_SpecularRoughness_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.SpecularRoughness*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_SpecularRoughness" data-uid="Mu3D.SceneGraph.OpenPbrSurface.SpecularRoughness">
+  SpecularRoughness
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>specular_roughness</code>. Specular lobe roughness, in [0, 1]. Default: 0.3.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float SpecularRoughness { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_SpecularRoughnessAnisotropy_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.SpecularRoughnessAnisotropy*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_SpecularRoughnessAnisotropy" data-uid="Mu3D.SceneGraph.OpenPbrSurface.SpecularRoughnessAnisotropy">
+  SpecularRoughnessAnisotropy
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>specular_roughness_anisotropy</code>. Base roughness anisotropy, in [0, 1]. Default: 0.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float SpecularRoughnessAnisotropy { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_SpecularWeight_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.SpecularWeight*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_SpecularWeight" data-uid="Mu3D.SceneGraph.OpenPbrSurface.SpecularWeight">
+  SpecularWeight
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>specular_weight</code>. Nonnegative specular multiplier; values above one are authoring overrides. Default: 1.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float SpecularWeight { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_SubsurfaceColor_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.SubsurfaceColor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_SubsurfaceColor" data-uid="Mu3D.SceneGraph.OpenPbrSurface.SubsurfaceColor">
+  SubsurfaceColor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>subsurface_color</code> with explicit linear RGB identity and alpha one.
+The default is (0.8, 0.8, 0.8) in ACEScg; signed and HDR components are preserved.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgba SubsurfaceColor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_SubsurfaceRadius_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.SubsurfaceRadius*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_SubsurfaceRadius" data-uid="Mu3D.SceneGraph.OpenPbrSurface.SubsurfaceRadius">
+  SubsurfaceRadius
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>subsurface_radius</code>. Subsurface mean-free-path scale in scene units. Default: 1.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float SubsurfaceRadius { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_SubsurfaceRadiusScale_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.SubsurfaceRadiusScale*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_SubsurfaceRadiusScale" data-uid="Mu3D.SceneGraph.OpenPbrSurface.SubsurfaceRadiusScale">
+  SubsurfaceRadiusScale
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>subsurface_radius_scale</code>, nonnegative per-channel length multipliers.
+These are numeric RGB-channel data, not a color to transform. Default: (1, 0.5, 0.25).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 SubsurfaceRadiusScale { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.vector3">Vector3</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_SubsurfaceScatterAnisotropy_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.SubsurfaceScatterAnisotropy*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_SubsurfaceScatterAnisotropy" data-uid="Mu3D.SceneGraph.OpenPbrSurface.SubsurfaceScatterAnisotropy">
+  SubsurfaceScatterAnisotropy
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>subsurface_scatter_anisotropy</code>. Subsurface phase-function bias, in [-1, 1]. Default: 0.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float SubsurfaceScatterAnisotropy { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_SubsurfaceWeight_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.SubsurfaceWeight*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_SubsurfaceWeight" data-uid="Mu3D.SceneGraph.OpenPbrSurface.SubsurfaceWeight">
+  SubsurfaceWeight
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>subsurface_weight</code>. Subsurface mixture weight, in [0, 1]. Default: 0.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float SubsurfaceWeight { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_ThinFilmIor_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.ThinFilmIor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_ThinFilmIor" data-uid="Mu3D.SceneGraph.OpenPbrSurface.ThinFilmIor">
+  ThinFilmIor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>thin_film_ior</code>. Nonnegative thin-film index of refraction. Default: 1.4.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float ThinFilmIor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_ThinFilmThickness_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.ThinFilmThickness*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_ThinFilmThickness" data-uid="Mu3D.SceneGraph.OpenPbrSurface.ThinFilmThickness">
+  ThinFilmThickness
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>thin_film_thickness</code>. Thin-film thickness in micrometres, independent of scene units. Default: 0.5.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float ThinFilmThickness { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_ThinFilmWeight_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.ThinFilmWeight*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_ThinFilmWeight" data-uid="Mu3D.SceneGraph.OpenPbrSurface.ThinFilmWeight">
+  ThinFilmWeight
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>thin_film_weight</code>. Thin-film coverage, in [0, 1]. Default: 0.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float ThinFilmWeight { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_TransmissionColor_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.TransmissionColor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_TransmissionColor" data-uid="Mu3D.SceneGraph.OpenPbrSurface.TransmissionColor">
+  TransmissionColor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>transmission_color</code> with explicit linear RGB identity and alpha one.
+The default is (1, 1, 1) in ACEScg; signed and HDR components are preserved.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgba TransmissionColor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_TransmissionDepth_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.TransmissionDepth*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_TransmissionDepth" data-uid="Mu3D.SceneGraph.OpenPbrSurface.TransmissionDepth">
+  TransmissionDepth
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>transmission_depth</code>. Absorption reference distance in scene units; zero selects surface tint semantics. Default: 0.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float TransmissionDepth { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_TransmissionDispersionAbbeNumber_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.TransmissionDispersionAbbeNumber*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_TransmissionDispersionAbbeNumber" data-uid="Mu3D.SceneGraph.OpenPbrSurface.TransmissionDispersionAbbeNumber">
+  TransmissionDispersionAbbeNumber
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>transmission_dispersion_abbe_number</code>. Nonnegative Abbe number of the dielectric medium. Default: 20.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float TransmissionDispersionAbbeNumber { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_TransmissionDispersionScale_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.TransmissionDispersionScale*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_TransmissionDispersionScale" data-uid="Mu3D.SceneGraph.OpenPbrSurface.TransmissionDispersionScale">
+  TransmissionDispersionScale
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>transmission_dispersion_scale</code>. Dispersion multiplier, in [0, 1]. Default: 0.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float TransmissionDispersionScale { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_TransmissionScatter_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.TransmissionScatter*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_TransmissionScatter" data-uid="Mu3D.SceneGraph.OpenPbrSurface.TransmissionScatter">
+  TransmissionScatter
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>transmission_scatter</code> with explicit linear RGB identity and alpha one.
+The default is (0, 0, 0) in ACEScg; signed and HDR components are preserved.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgba TransmissionScatter { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_TransmissionScatterAnisotropy_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.TransmissionScatterAnisotropy*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_TransmissionScatterAnisotropy" data-uid="Mu3D.SceneGraph.OpenPbrSurface.TransmissionScatterAnisotropy">
+  TransmissionScatterAnisotropy
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>transmission_scatter_anisotropy</code>. Scattering directional bias, in [-1, 1]. Default: 0.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float TransmissionScatterAnisotropy { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_TransmissionWeight_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.TransmissionWeight*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_TransmissionWeight" data-uid="Mu3D.SceneGraph.OpenPbrSurface.TransmissionWeight">
+  TransmissionWeight
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets <code>transmission_weight</code>. Transparent dielectric mixture weight, in [0, 1]. Default: 0.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float TransmissionWeight { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_ApplyToPbrPreview_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.ApplyToPbrPreview*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_ApplyToPbrPreview_Mu3D_SceneGraph_PbrMaterial_Mu3D_SceneGraph_OpenPbrPreviewOptions_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.ApplyToPbrPreview(Mu3D.SceneGraph.PbrMaterial,Mu3D.SceneGraph.OpenPbrPreviewOptions)">
+  ApplyToPbrPreview(PbrMaterial, OpenPbrPreviewOptions?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Updates a dedicated existing preview only after conversion fully succeeds, returning that
+material and diagnostics. Copies preview numeric values, name, alpha mode and sidedness;
+leaves the target's texture bindings, shader template and other renderer policies intact.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPbrPreviewResult ApplyToPbrPreview(PbrMaterial target, OpenPbrPreviewOptions? options = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>target</code> <a class="xref" href="Mu3D.SceneGraph.PbrMaterial.html">PbrMaterial</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="Mu3D.SceneGraph.OpenPbrPreviewOptions.html">OpenPbrPreviewOptions</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrPreviewResult.html">OpenPbrPreviewResult</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_Clone_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.Clone*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_Clone" data-uid="Mu3D.SceneGraph.OpenPbrSurface.Clone">
+  Clone()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates an independent mutable copy of every constant input, inherited-vector state, name
+and scene-unit scale. Immutable graph and color-space identities are retained without conversion.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPbrSurface Clone()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html">OpenPbrSurface</a></dt>
+    <dd><p>A new authoring surface unaffected by subsequent edits to this instance.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrSurface_ToPbrPreview_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.ToPbrPreview*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrSurface_ToPbrPreview_Mu3D_SceneGraph_OpenPbrPreviewOptions_" data-uid="Mu3D.SceneGraph.OpenPbrSurface.ToPbrPreview(Mu3D.SceneGraph.OpenPbrPreviewOptions)">
+  ToPbrPreview(OpenPbrPreviewOptions?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates an explicitly approximate metallic/roughness preview and conversion diagnostics.
+Unsupported active parameters fail unless loss is explicitly permitted by the options.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPbrPreviewResult ToPbrPreview(OpenPbrPreviewOptions? options = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>options</code> <a class="xref" href="Mu3D.SceneGraph.OpenPbrPreviewOptions.html">OpenPbrPreviewOptions</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrPreviewResult.html">OpenPbrPreviewResult</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

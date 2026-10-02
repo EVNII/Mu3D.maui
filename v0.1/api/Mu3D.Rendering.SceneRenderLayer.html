@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Enum SceneRenderLayer | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Enum SceneRenderLayer | Mu3D documentation ">
+      
+      <meta name="description" content="Selects the lighting contribution visualized by .">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Rendering.SceneRenderLayer">
+
+
+
+
+  <h1 id="Mu3D_Rendering_SceneRenderLayer" data-uid="Mu3D.Rendering.SceneRenderLayer" class="text-break">
+Enum SceneRenderLayer  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Rendering.html">Rendering</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Selects the lighting contribution visualized by <a class="xref" href="Mu3D.Rendering.SceneRenderer.html">SceneRenderer</a>.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public enum SceneRenderLayer</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+  <h2 id="fields">Fields
+</h2>
+  <dl class="parameters">
+    <dt id="Mu3D_Rendering_SceneRenderLayer_AmbientOcclusion"><code>AmbientOcclusion = 1</code></dt>
+  
+  <dd><p>Displays screen-space ambient visibility as grayscale.</p>
+</dd>
+    <dt id="Mu3D_Rendering_SceneRenderLayer_BaseColor"><code>BaseColor = 7</code></dt>
+  
+  <dd><p>Displays the working-space base color after material-image multiplication.</p>
+</dd>
+    <dt id="Mu3D_Rendering_SceneRenderLayer_Beauty"><code>Beauty = 0</code></dt>
+  
+  <dd><p>Composes direct lighting, indirect diffuse, indirect specular, and emissive output.</p>
+</dd>
+    <dt id="Mu3D_Rendering_SceneRenderLayer_BentNormal"><code>BentNormal = 6</code></dt>
+  
+  <dd><p>Displays the effective world-space bent normal after normal-map detail.</p>
+</dd>
+    <dt id="Mu3D_Rendering_SceneRenderLayer_DiffuseTransmission"><code>DiffuseTransmission = 16</code></dt>
+  
+  <dd><p>Displays only direct and image-based diffuse transmission.</p>
+</dd>
+    <dt id="Mu3D_Rendering_SceneRenderLayer_DirectLighting"><code>DirectLighting = 2</code></dt>
+  
+  <dd><p>Displays directional direct lighting only.</p>
+</dd>
+    <dt id="Mu3D_Rendering_SceneRenderLayer_DirectionalShadow"><code>DirectionalShadow = 5</code></dt>
+  
+  <dd><p>Displays directional-shadow visibility as grayscale.</p>
+</dd>
+    <dt id="Mu3D_Rendering_SceneRenderLayer_Emissive"><code>Emissive = 11</code></dt>
+  
+  <dd><p>Displays the working-space emissive texture multiplied by the emissive factor.</p>
+</dd>
+    <dt id="Mu3D_Rendering_SceneRenderLayer_ImageBasedLighting"><code>ImageBasedLighting = 3</code></dt>
+  
+  <dd><p>Displays diffuse and specular image-based lighting without direct lighting.</p>
+</dd>
+    <dt id="Mu3D_Rendering_SceneRenderLayer_OcclusionRoughnessMetallic"><code>OcclusionRoughnessMetallic = 10</code></dt>
+  
+  <dd><p>Displays packed occlusion, perceptual roughness and metallic data as RGB.</p>
+</dd>
+    <dt id="Mu3D_Rendering_SceneRenderLayer_Sheen"><code>Sheen = 12</code></dt>
+  
+  <dd><p>Displays the direct and approximate image-based sheen lobe without base or clearcoat lighting.</p>
+</dd>
+    <dt id="Mu3D_Rendering_SceneRenderLayer_Specular"><code>Specular = 15</code></dt>
+  
+  <dd><p>Displays the base PBR direct and image-based specular lobe without diffuse, sheen, or clearcoat.</p>
+</dd>
+    <dt id="Mu3D_Rendering_SceneRenderLayer_SurfaceNormal"><code>SurfaceNormal = 9</code></dt>
+  
+  <dd><p>Displays the final world-space shading normal after normal mapping.</p>
+</dd>
+    <dt id="Mu3D_Rendering_SceneRenderLayer_TextureCoordinates"><code>TextureCoordinates = 8</code></dt>
+  
+  <dd><p>Displays repeated U and V coordinates as red and green.</p>
+</dd>
+    <dt id="Mu3D_Rendering_SceneRenderLayer_Transmission"><code>Transmission = 13</code></dt>
+  
+  <dd><p>Displays the screen-space refracted background after finite-volume attenuation.</p>
+</dd>
+    <dt id="Mu3D_Rendering_SceneRenderLayer_ViewDepth"><code>ViewDepth = 4</code></dt>
+  
+  <dd><p>Displays normalized camera distance as grayscale.</p>
+</dd>
+    <dt id="Mu3D_Rendering_SceneRenderLayer_VolumeAttenuation"><code>VolumeAttenuation = 14</code></dt>
+  
+  <dd><p>Displays the finite-volume Beer-Lambert transmittance multiplier as linear RGB.</p>
+</dd>
+  </dl>
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Target-centered orbit controls | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Target-centered orbit controls | Mu3D documentation ">
+      
+      <meta name="description" content="Rotate around an explicit target, screen-pan, and dolly through a declarative OrbitTool.">
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="target-centered-orbit-controls">Target-centered orbit controls</h1>
+
+<p><a class="xref" href="../../api/Mu3D.Maui.Toolkit.Controls.OrbitTool.html">OrbitTool</a> is the general target-centered camera-navigation tool.
+It creates an attachment-owned <a class="xref" href="../../api/Mu3D.Toolkit.Controls.OrbitController.html">OrbitController</a> for one explicit
+perspective camera. Rotation moves the camera around a world-space target, screen-space pan moves
+the camera and target together, and dolly changes their distance without changing field of view.</p>
+<p>This is the ordinary model-viewer mode. <a class="xref" href="../../api/Mu3D.Maui.Toolkit.Controls.MapTool.html">MapTool</a> specializes it
+with world-up-plane pan and an upper-hemisphere constraint; Fly controls have no orbit target and
+change a free camera pose directly.</p>
+<h2 id="declare-the-tool">Declare the tool</h2>
+<p>Place <code>OrbitTool</code> in the same <code>ViewportTools</code> collection as the camera it borrows:</p>
+<pre><code class="lang-xaml">&lt;mu3d:Mu3DSceneView&gt;
+  &lt;mu3d:Mu3DSceneView.SceneContent&gt;
+    &lt;mu3d:Scene3D&gt;
+      &lt;mu3d:Scene3D.Camera&gt;
+        &lt;mu3d:PerspectiveCamera3D
+            x:Name=&quot;OrbitCamera&quot;
+            X=&quot;5.2&quot;
+            Y=&quot;3.8&quot;
+            Z=&quot;7.6&quot; /&gt;
+      &lt;/mu3d:Scene3D.Camera&gt;
+      &lt;!-- Scene objects... --&gt;
+    &lt;/mu3d:Scene3D&gt;
+  &lt;/mu3d:Mu3DSceneView.SceneContent&gt;
+
+  &lt;mu3d:Mu3DSceneView.Features&gt;
+    &lt;toolkit:ViewportTools&gt;
+      &lt;toolkit:OrbitTool
+          x:Name=&quot;OrbitNavigation&quot;
+          Camera=&quot;{x:Reference OrbitCamera}&quot;
+          TargetY=&quot;0.5&quot;
+          PinchDollyMultiplier=&quot;1.6&quot;
+          MinimumDistance=&quot;2.5&quot;
+          MaximumDistance=&quot;24&quot;
+          DampingEnabled=&quot;True&quot;
+          DampingTime=&quot;0.1&quot;&gt;
+        &lt;toolkit:OrbitTool.Input&gt;
+          &lt;toolkit:ViewportInput&gt;
+            &lt;toolkit:ViewportInput.Mouse&gt;
+              &lt;toolkit:MouseInput
+                  LeftButtonDragAction=&quot;Rotate&quot;
+                  RightButtonDragAction=&quot;Pan&quot; /&gt;
+            &lt;/toolkit:ViewportInput.Mouse&gt;
+            &lt;toolkit:ViewportInput.Trackpad&gt;
+              &lt;toolkit:TrackpadInput TwoFingerDragAction=&quot;Pan&quot; /&gt;
+            &lt;/toolkit:ViewportInput.Trackpad&gt;
+            &lt;toolkit:ViewportInput.Touchscreen&gt;
+              &lt;toolkit:TouchscreenInput
+                  OneFingerDragAction=&quot;Rotate&quot;
+                  TwoFingerDragAction=&quot;Pan&quot; /&gt;
+            &lt;/toolkit:ViewportInput.Touchscreen&gt;
+            &lt;toolkit:ViewportInput.Keyboard&gt;
+              &lt;toolkit:KeyboardInput IsEnabled=&quot;False&quot; /&gt;
+            &lt;/toolkit:ViewportInput.Keyboard&gt;
+          &lt;/toolkit:ViewportInput&gt;
+        &lt;/toolkit:OrbitTool.Input&gt;
+      &lt;/toolkit:OrbitTool&gt;
+    &lt;/toolkit:ViewportTools&gt;
+  &lt;/mu3d:Mu3DSceneView.Features&gt;
+&lt;/mu3d:Mu3DSceneView&gt;
+</code></pre>
+<p><code>TargetX</code>, <code>TargetY</code>, and <code>TargetZ</code> define the point that rotation and distance use. The camera and
+optional frame requester remain borrowed; detaching the tool disposes its controller and input
+adapters without taking ownership of the camera.</p>
+<h2 id="pointer-and-touch-mapping">Pointer and touch mapping</h2>
+<p>Input is divided by physical device rather than by ambiguous primary and secondary routes:</p>
+<ul>
+<li><code>MouseInput</code> names left, middle and right button drag actions plus the wheel action.</li>
+<li><code>TrackpadInput</code> controls native continuous two-finger translation and trackpad Pinch.</li>
+<li><code>TouchscreenInput</code> controls one-finger drag, two-finger centroid drag and direct Pinch.</li>
+<li><code>KeyboardInput</code> owns the optional focused-key adapter and portable Rotate/Pan/Dolly assignments.</li>
+</ul>
+<p>Each device object has its own bindable <code>IsEnabled</code> switch. A drag action may be <code>Rotate</code>, <code>Pan</code>,
+or <code>None</code>; wheel and Pinch use <code>Dolly</code> or <code>None</code>. The default Orbit profile is left mouse and
+one-finger Rotate, right mouse, direct two-finger and trackpad two-finger Pan, plus Pinch/wheel
+Dolly. Orbit, Map and Fly consume this same <code>ViewportInput</code> shape; only the attached controller's
+interpretation changes.</p>
+<p><code>IsEnabled</code> is a bindable gate for the whole device group. It can bind to a stable view-model
+property such as <code>IsAltOrOptionPressed</code>; XAML binding syntax does not evaluate a C# expression such
+as <code>IsAltPressed || IsOptionPressed</code>, so expose one computed property or converter when the host
+owns that state. This gate does not create process-global modifier tracking inside Mu3D. Input
+actions are captured when a drag begins, and changing a group ends the active route before the
+native recognizers are refreshed.</p>
+<p>Two-pointer pan and pinch share one camera-control lease, so adding a second finger does not cancel
+the navigation session. Android and Windows use MAUI Pinch. Apple uses an attachment-owned native
+<code>UIPinchGestureRecognizer</code> for direct iPad touch and Mac trackpad transform Pinch and allows it to
+overlap the two-pointer Pan. Apple applications that need indirect trackpad transform events declare
+<a href="https://developer.apple.com/documentation/bundleresources/information-property-list/uiapplicationsupportsindirectinputevents"><code>UIApplicationSupportsIndirectInputEvents</code></a>
+in Info.plist; Gallery declares it for iOS and Mac Catalyst.</p>
+<p>On Apple trackpads, continuous two-finger translation uses
+<code>TrackpadInput.TwoFingerDragAction</code>; it does not impersonate a right mouse button. A real mouse or a
+configured trackpad right click instead uses <code>MouseInput.RightButtonDragAction</code>.
+<code>TouchscreenInput.TwoFingerDragAction</code> remains independent and defaults to <code>Pan</code> for Orbit; MapTool
+changes it to <code>Rotate</code> while keeping direct one-finger drag as world-plane Pan.</p>
+<p>Apple system-navigation arbitration follows the configured device route. On iOS, direct touch
+inside the View suppresses interactive pop only when
+<code>TouchscreenInput.OneFingerDragAction</code> is not <code>None</code>; on Mac Catalyst, trackpad navigation is
+suppressed only while the cursor is over the View and <code>TrackpadInput.TwoFingerDragAction</code> is not
+<code>None</code>. Disabling the relevant route restores system navigation, and the normal Back control
+remains available. Android instead retains its reported system-edge inset and lets a back-edge
+gesture win without also moving the camera.</p>
+<p><code>RotationSensitivity</code>, <code>PanSensitivity</code>, and <code>DollySensitivity</code> scale the controller commands.
+<code>MinimumDistance</code>, <code>MaximumDistance</code>, <code>MinimumPolarAngle</code>, and <code>MaximumPolarAngle</code> constrain the
+pose at the UI-independent controller level. <code>PanMode</code> selects camera screen-plane or fixed
+world-up-plane translation. MapTool is only a named fixed combination of these Orbit parameters and
+input mappings; other DCC-style presets should reuse the same controller and provide different
+binding profiles rather than duplicating camera math. Damping consumes accepted residual motion
+only while it is active and uses the existing MAUI frame clock rather than creating an idle timer.</p>
+<h2 id="bind-commands-without-viewport-focus">Bind commands without viewport focus</h2>
+<p><code>NavigationCommand</code> accepts an
+<a class="xref" href="../../api/Mu3D.Maui.Toolkit.Controls.OrbitNavigationAction.html">OrbitNavigationAction</a>. Any normal MAUI button, menu item, gesture,
+or view model can issue the same discrete action:</p>
+<pre><code class="lang-xaml">&lt;Button
+    Text=&quot;Rotate left&quot;
+    Command=&quot;{Binding Source={x:Reference OrbitNavigation}, Path=NavigationCommand}&quot;
+    CommandParameter=&quot;{x:Static toolkit:OrbitNavigationAction.RotateLeft}&quot; /&gt;
+</code></pre>
+<p>Applications that already own held-key, gamepad, or other continuous state can call the atomic
+<code>TryNavigate(rotationRadians, panViewportDelta, dollyDelta)</code> boundary once per UI frame. Normalize
+simultaneous axes and scale them by elapsed time; do not depend on operating-system key repeat.</p>
+<p>The UI-independent controller acquires no mouse, touch, pen, key, focus, selection, undo state, or
+timer. Raw acquisition and application policy stay replaceable, while the MAUI tool supplies the
+declarative default adapter.</p>
+
+</article>
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

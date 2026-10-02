@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.SurfaceProbePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    Title="Surface Probe">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="surface-probe" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <mu3d:Mu3DView x:Name="SurfaceView" BackgroundColor="#202020"
+            WindowsMatchSdrWhite="{Binding Source={x:Reference WhiteSwitch}, Path=IsToggled}" />
+        <ScrollView Grid.Row="1" MaximumHeightRequest="300">
+            <VerticalStackLayout Padding="16" Spacing="12">
+                <HorizontalStackLayout Spacing="12" IsVisible="{OnPlatform Default=False, WinUI=True}">
+                    <Label Text="Match Windows SDR white" VerticalOptions="Center" />
+                    <Switch x:Name="WhiteSwitch" IsToggled="True" />
+                </HorizontalStackLayout>
+                <Label FontAttributes="Bold" FontSize="18" Text="Native Surface Probe" />
+                <Label
+                    x:Name="ProbeStatus"
+                    FontAttributes="Bold"
+                    Text="Waiting for a native surface…" />
+                <Button
+                    x:Name="ProbeButton"
+                    Clicked="OnProbeClicked"
+                    IsEnabled="False"
+                    Text="Probe surface capabilities" />
+                <Button
+                    x:Name="PresentButton"
+                    Clicked="OnPresentClicked"
+                    IsEnabled="False"
+                    Text="Present extended-linear sRGB reference pattern" />
+                <Label
+                    x:Name="ProbeDetails"
+                    FontFamily="OpenSansRegular"
+                    LineBreakMode="WordWrap" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

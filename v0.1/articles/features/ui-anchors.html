@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>UI anchors | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="UI anchors | Mu3D documentation ">
+      
+      <meta name="description" content="Position real MAUI UI from the exact camera and extent of successfully presented Mu3D frames.">
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="ui-anchors">UI anchors</h1>
+
+<p><a class="xref" href="../../api/Mu3D.Maui.Controls.Mu3DSceneView.html#Mu3D_Maui_Controls_Mu3DSceneView_LatestFrameSnapshot">LatestFrameSnapshot</a> exposes the exact view matrix,
+projection matrix, physical extent and logical extent associated with the most recently
+successfully presented scene frame. A timeout or failed frame does not publish coordinates for
+content the user never saw.</p>
+<p>The concise XAML path combines <a class="xref" href="../../api/Mu3D.Maui.Toolkit.Overlays.ViewportOverlay.html">ViewportOverlay</a> with a
+<a class="xref" href="../../api/Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.html">SceneNodeAnchor</a>. The shared per-viewport overlay manager batches
+all anchored content from one frame subscription and supplies the owning SceneView automatically:</p>
+<pre><code class="lang-xaml">&lt;mu3d:Mu3DSceneView&gt;
+  &lt;mu3d:Mu3DSceneView.Features&gt;
+    &lt;toolkit:ViewportTools&gt;
+      &lt;overlays:ViewportOverlay InputMode=&quot;PassThrough&quot;&gt;
+        &lt;overlays:ViewportOverlay.Anchor&gt;
+          &lt;overlays:SceneNodeAnchor
+              Target=&quot;{x:Reference ProductNode}&quot;
+              X=&quot;0&quot;
+              Y=&quot;1&quot;
+              Z=&quot;0&quot;
+              Offset=&quot;8,-28&quot; /&gt;
+        &lt;/overlays:ViewportOverlay.Anchor&gt;
+        &lt;Label Text=&quot;Selected product&quot; /&gt;
+      &lt;/overlays:ViewportOverlay&gt;
+    &lt;/toolkit:ViewportTools&gt;
+  &lt;/mu3d:Mu3DSceneView.Features&gt;
+&lt;/mu3d:Mu3DSceneView&gt;
+</code></pre>
+<p>Use <code>Target</code> for an explicitly referenced declarative <code>SceneNode3D</code>, or bind <code>Node</code> to a low-level
+Core <code>SceneNode</code>. The properties are mutually exclusive. <code>X</code>, <code>Y</code> and <code>Z</code> select a point in
+node-local space; <code>Offset</code> provides the final logical MAUI displacement after projection.</p>
+<p>The earlier <a class="xref" href="../../api/Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchorLayer.html">SceneNodeAnchorLayer</a> remains a compatible batched
+layout for application-owned child collections. It may still be placed as a sibling with an
+explicit <code>SceneView</code>, or declared directly inside <code>ViewportTools</code>; the latter path receives the
+SceneView and shared successful-frame updates from the common overlay manager.</p>
+<p>Both APIs hide null, hidden, detached, foreign-scene and camera-masked targets, retaining the node
+binding so content can return when the target becomes eligible. Hidden ordinary ancestors hide
+their children; ancestor layer masks do not hide children on independently visible layers.
+<code>HideWhenOutsideViewport=&quot;False&quot;</code> permits finite positions outside the camera frustum. It still
+hides behind-camera or otherwise unprojected targets. Replacing the SceneView's scene or camera
+waits for another successful frame before using its projection. A hidden interactive overlay
+releases its viewport-input lease, and a standalone anchor layer hides its children on unload.</p>
+<h2 id="fixed-viewport-content">Fixed viewport content</h2>
+<p>Without an <code>Anchor</code>, <code>ViewportOverlay</code> hosts arbitrary real MAUI content at one of nine fixed
+alignments. Normal MAUI binding, style, accessibility, animation, layout constraints, visibility
+and Z order remain available because content stays in the native visual tree:</p>
+<pre><code class="lang-xaml">&lt;overlays:ViewportOverlay
+    InputMode=&quot;Interactive&quot;
+    Margin=&quot;16&quot;
+    Placement=&quot;BottomCenter&quot;&gt;
+  &lt;Grid ColumnDefinitions=&quot;Auto,*,Auto&quot; WidthRequest=&quot;520&quot;&gt;
+    &lt;Button Text=&quot;Play&quot; /&gt;
+    &lt;Slider Grid.Column=&quot;1&quot; /&gt;
+    &lt;Label Grid.Column=&quot;2&quot; Text=&quot;01:24 / 03:40&quot; /&gt;
+  &lt;/Grid&gt;
+&lt;/overlays:ViewportOverlay&gt;
+</code></pre>
+<p><code>TopLeft</code>, <code>TopCenter</code>, <code>TopRight</code>, <code>CenterLeft</code>, <code>Center</code>, <code>CenterRight</code>, <code>BottomLeft</code>,
+<code>BottomCenter</code> and <code>BottomRight</code> use the shared
+<a class="xref" href="../../api/Mu3D.Toolkit.Helpers.ViewportOverlayPlacement.html">ViewportOverlayPlacement</a> contract. <code>InputMode=&quot;Interactive&quot;</code>
+temporarily takes the shared overlay-input priority so Orbit, selection and Gizmo controllers do
+not start from the same pointer interaction. <code>PassThrough</code> makes the complete subtree
+input-transparent for HUD-only content. Toolkit controls such as
+<a class="xref" href="../../api/Mu3D.Maui.Toolkit.Controls.RenderOutputToolbar.html">RenderOutputToolbar</a> use this same host.</p>
+<h2 id="snapshot-projection">Snapshot projection</h2>
+<p><a class="xref" href="../../api/Mu3D.Rendering.ViewportFrameSnapshot.html#Mu3D_Rendering_ViewportFrameSnapshot_TryProject_">TryProject</a> is UI-framework independent. It reports
+both physical-pixel and logical coordinates plus normalized depth. A successful projection means
+the point is finite and in front of the camera; inspect
+<a class="xref" href="../../api/Mu3D.Rendering.ViewportProjection.html#Mu3D_Rendering_ViewportProjection_IsInsideViewport">IsInsideViewport</a> separately for frustum clipping.</p>
+<p>The snapshot is viewport-specific. Do not store its screen position on a <code>SceneNode</code> or reuse one
+view's result in another view with a different camera, size or display scale.</p>
+<p>The anchor system provides camera-frustum visibility only. It does not read the depth buffer
+and therefore does not claim that an anchor is hidden behind another mesh. Depth-based occlusion is
+a separate optional render/readback feature.</p>
+<p>For moving scenes, update 3D state from the platform's VSync/suspend-aware animation service and
+invalidate the scene. The anchor layer updates only after the resulting frame is successfully
+presented. Do not create a generic timer merely to reposition UI.</p>
+
+</article>
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

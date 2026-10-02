@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.ColorLutPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    Title="GPU Color LUT">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="color-lut" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <mu3d:Mu3DView
+            x:Name="SurfaceView"
+            BackgroundColor="Black"
+            Draw="OnSurfaceDraw"
+            PresentationSessionChanged="OnPresentationSessionChanged"
+            SurfaceError="OnSurfaceError" />
+        <VerticalStackLayout Grid.Row="1" Padding="16" Spacing="8">
+            <Label Text="A 3D color table transforms an HDR linear-sRGB ramp and color patches." />
+            <HorizontalStackLayout Spacing="12">
+                <Label Text="Apply color LUT" VerticalOptions="Center" />
+                <Switch x:Name="LutEnabled" IsToggled="True" Toggled="OnLutToggled" />
+            </HorizontalStackLayout>
+            <Label x:Name="ExposureLabel" Text="LUT exposure: +0.0 stops" />
+            <Slider x:Name="ExposureSlider" Minimum="-2" Maximum="2" Value="0" ValueChanged="OnExposureChanged" />
+            <Label x:Name="StatusLabel" Text="Waiting for an extended-linear HDR surface…" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

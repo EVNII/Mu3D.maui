@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class SceneRenderer | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class SceneRenderer | Mu3D documentation ">
+      
+      <meta name="description" content="Renders visible unlit, directly lit and image-lit meshes through the backend-independent graphics API and caches immutable geometry, environments and per-mesh bindings. This renderer is not thread-safe.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Rendering.SceneRenderer">
+
+
+
+  <h1 id="Mu3D_Rendering_SceneRenderer" data-uid="Mu3D.Rendering.SceneRenderer" class="text-break">
+Class SceneRenderer  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Rendering.html">Rendering</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Renders visible unlit, directly lit and image-lit meshes through the backend-independent
+graphics API and caches immutable geometry, environments and per-mesh bindings. This renderer is
+not thread-safe.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class SceneRenderer : IDisposable</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">SceneRenderer</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_Rendering_SceneRenderer__ctor_" data-uid="Mu3D.Rendering.SceneRenderer.#ctor*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer__ctor_Mu3D_Graphics_GraphicsDevice_Mu3D_Graphics_GraphicsTextureFormat_" data-uid="Mu3D.Rendering.SceneRenderer.#ctor(Mu3D.Graphics.GraphicsDevice,Mu3D.Graphics.GraphicsTextureFormat)">
+  SceneRenderer(GraphicsDevice, GraphicsTextureFormat)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a scene renderer for one color-target format.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SceneRenderer(GraphicsDevice device, GraphicsTextureFormat colorFormat)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>device</code> <a class="xref" href="Mu3D.Graphics.GraphicsDevice.html">GraphicsDevice</a></dt>
+    <dd></dd>
+    <dt><code>colorFormat</code> <a class="xref" href="Mu3D.Graphics.GraphicsTextureFormat.html">GraphicsTextureFormat</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_AmbientOcclusionEnabled_" data-uid="Mu3D.Rendering.SceneRenderer.AmbientOcclusionEnabled*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_AmbientOcclusionEnabled" data-uid="Mu3D.Rendering.SceneRenderer.AmbientOcclusionEnabled">
+  AmbientOcclusionEnabled
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets whether the renderer performs a camera-depth prepass and applies screen-space
+ambient occlusion to indirect diffuse lighting. The default is false because this is an
+explicit additional render pass and sampling cost.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool AmbientOcclusionEnabled { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_AmbientOcclusionRadius_" data-uid="Mu3D.Rendering.SceneRenderer.AmbientOcclusionRadius*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_AmbientOcclusionRadius" data-uid="Mu3D.Rendering.SceneRenderer.AmbientOcclusionRadius">
+  AmbientOcclusionRadius
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the world-space SSAO search radius. The default is 0.65 world units.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float AmbientOcclusionRadius { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_AmbientOcclusionStrength_" data-uid="Mu3D.Rendering.SceneRenderer.AmbientOcclusionStrength*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_AmbientOcclusionStrength" data-uid="Mu3D.Rendering.SceneRenderer.AmbientOcclusionStrength">
+  AmbientOcclusionStrength
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the SSAO strength in the inclusive range zero to one. The default is one.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float AmbientOcclusionStrength { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_BloomCompositeMode_" data-uid="Mu3D.Rendering.SceneRenderer.BloomCompositeMode*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_BloomCompositeMode" data-uid="Mu3D.Rendering.SceneRenderer.BloomCompositeMode">
+  BloomCompositeMode
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets how the blurred HDR highlights are combined with Beauty. The default is
+<a class="xref" href="Mu3D.Rendering.BloomCompositeMode.html#Mu3D_Rendering_BloomCompositeMode_EnergyPreserving">EnergyPreserving</a>; additive brightening must be selected
+explicitly.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BloomCompositeMode BloomCompositeMode { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Rendering.BloomCompositeMode.html">BloomCompositeMode</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_BloomEnabled_" data-uid="Mu3D.Rendering.SceneRenderer.BloomEnabled*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_BloomEnabled" data-uid="Mu3D.Rendering.SceneRenderer.BloomEnabled">
+  BloomEnabled
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets whether the Beauty layer receives an HDR bloom post-process. The default is
+false, so enabling a scene renderer does not silently change authored pixel values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool BloomEnabled { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_BloomIntensity_" data-uid="Mu3D.Rendering.SceneRenderer.BloomIntensity*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_BloomIntensity" data-uid="Mu3D.Rendering.SceneRenderer.BloomIntensity">
+  BloomIntensity
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the nonnegative multiplier applied when the blurred highlight image is added
+to Beauty. The default is 0.15.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float BloomIntensity { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_BloomRadiusPixels_" data-uid="Mu3D.Rendering.SceneRenderer.BloomRadiusPixels*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_BloomRadiusPixels" data-uid="Mu3D.Rendering.SceneRenderer.BloomRadiusPixels">
+  BloomRadiusPixels
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the approximate Bloom blur radius in full-resolution output pixels. The default
+is 16 pixels. Larger values spread the halo farther without changing its intensity. The
+value must be finite and greater than zero.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float BloomRadiusPixels { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_BloomSoftKnee_" data-uid="Mu3D.Rendering.SceneRenderer.BloomSoftKnee*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_BloomSoftKnee" data-uid="Mu3D.Rendering.SceneRenderer.BloomSoftKnee">
+  BloomSoftKnee
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the nonnegative linear-width of the soft transition around
+<a class="xref" href="Mu3D.Rendering.SceneRenderer.html#Mu3D_Rendering_SceneRenderer_BloomThreshold">BloomThreshold</a>. The default is 0.5.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float BloomSoftKnee { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_BloomThreshold_" data-uid="Mu3D.Rendering.SceneRenderer.BloomThreshold*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_BloomThreshold" data-uid="Mu3D.Rendering.SceneRenderer.BloomThreshold">
+  BloomThreshold
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the linear working-space brightness at which bloom extraction begins. The
+default is one, corresponding to SDR reference white in the renderer's relative-linear
+convention.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float BloomThreshold { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_CachedEnvironmentCount_" data-uid="Mu3D.Rendering.SceneRenderer.CachedEnvironmentCount*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_CachedEnvironmentCount" data-uid="Mu3D.Rendering.SceneRenderer.CachedEnvironmentCount">
+  CachedEnvironmentCount
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the number of uploaded diffuse environment cubes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CachedEnvironmentCount { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_CachedGeometryCount_" data-uid="Mu3D.Rendering.SceneRenderer.CachedGeometryCount*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_CachedGeometryCount" data-uid="Mu3D.Rendering.SceneRenderer.CachedGeometryCount">
+  CachedGeometryCount
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the number of uploaded immutable geometry objects.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CachedGeometryCount { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_CachedMaterialDataTextureCount_" data-uid="Mu3D.Rendering.SceneRenderer.CachedMaterialDataTextureCount*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_CachedMaterialDataTextureCount" data-uid="Mu3D.Rendering.SceneRenderer.CachedMaterialDataTextureCount">
+  CachedMaterialDataTextureCount
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the number of uploaded authored non-color material data images.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CachedMaterialDataTextureCount { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_CachedMaterialShaderVariantCount_" data-uid="Mu3D.Rendering.SceneRenderer.CachedMaterialShaderVariantCount*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_CachedMaterialShaderVariantCount" data-uid="Mu3D.Rendering.SceneRenderer.CachedMaterialShaderVariantCount">
+  CachedMaterialShaderVariantCount
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the number of exact material variants prepared by this renderer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CachedMaterialShaderVariantCount { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_CachedMaterialTextureCount_" data-uid="Mu3D.Rendering.SceneRenderer.CachedMaterialTextureCount*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_CachedMaterialTextureCount" data-uid="Mu3D.Rendering.SceneRenderer.CachedMaterialTextureCount">
+  CachedMaterialTextureCount
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the number of uploaded authored two-dimensional material images.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CachedMaterialTextureCount { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_CachedMeshCount_" data-uid="Mu3D.Rendering.SceneRenderer.CachedMeshCount*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_CachedMeshCount" data-uid="Mu3D.Rendering.SceneRenderer.CachedMeshCount">
+  CachedMeshCount
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the number of per-mesh uniform bindings.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CachedMeshCount { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_ColorFormat_" data-uid="Mu3D.Rendering.SceneRenderer.ColorFormat*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_ColorFormat" data-uid="Mu3D.Rendering.SceneRenderer.ColorFormat">
+  ColorFormat
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the color-target format compiled into the renderer pipelines.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphicsTextureFormat ColorFormat { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsTextureFormat.html">GraphicsTextureFormat</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_Device_" data-uid="Mu3D.Rendering.SceneRenderer.Device*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_Device" data-uid="Mu3D.Rendering.SceneRenderer.Device">
+  Device
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the owning graphics device.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphicsDevice Device { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsDevice.html">GraphicsDevice</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_LastFrameTimings_" data-uid="Mu3D.Rendering.SceneRenderer.LastFrameTimings*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_LastFrameTimings" data-uid="Mu3D.Rendering.SceneRenderer.LastFrameTimings">
+  LastFrameTimings
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets CPU wall-clock timings for the most recent render invocation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SceneRendererFrameTimings LastFrameTimings { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Rendering.SceneRendererFrameTimings.html">SceneRendererFrameTimings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Mu3D_Rendering_SceneRenderer_LastFrameTimings_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Submit may include backend or GPU back-pressure. These values are diagnostic wall-clock
+intervals and are not GPU timestamp queries.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_MaterialShaderVariantCacheHits_" data-uid="Mu3D.Rendering.SceneRenderer.MaterialShaderVariantCacheHits*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_MaterialShaderVariantCacheHits" data-uid="Mu3D.Rendering.SceneRenderer.MaterialShaderVariantCacheHits">
+  MaterialShaderVariantCacheHits
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets successful lookups of an already prepared exact material variant.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long MaterialShaderVariantCacheHits { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_MaterialShaderVariantCacheMisses_" data-uid="Mu3D.Rendering.SceneRenderer.MaterialShaderVariantCacheMisses*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_MaterialShaderVariantCacheMisses" data-uid="Mu3D.Rendering.SceneRenderer.MaterialShaderVariantCacheMisses">
+  MaterialShaderVariantCacheMisses
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets first-time preparations of exact material variants.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long MaterialShaderVariantCacheMisses { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_MaximumObservedMaterialSampledTextureCount_" data-uid="Mu3D.Rendering.SceneRenderer.MaximumObservedMaterialSampledTextureCount*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_MaximumObservedMaterialSampledTextureCount" data-uid="Mu3D.Rendering.SceneRenderer.MaximumObservedMaterialSampledTextureCount">
+  MaximumObservedMaterialSampledTextureCount
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the largest material-texture count among observed normalized variants.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int MaximumObservedMaterialSampledTextureCount { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_ObservedMaterialShaderVariantCount_" data-uid="Mu3D.Rendering.SceneRenderer.ObservedMaterialShaderVariantCount*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_ObservedMaterialShaderVariantCount" data-uid="Mu3D.Rendering.SceneRenderer.ObservedMaterialShaderVariantCount">
+  ObservedMaterialShaderVariantCount
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the number of normalized material shader variants observed by this renderer. This is
+the input cardinality for the generated shader/pipeline cache; numeric uniform changes do not
+create another entry.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int ObservedMaterialShaderVariantCount { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_RenderLayer_" data-uid="Mu3D.Rendering.SceneRenderer.RenderLayer*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_RenderLayer" data-uid="Mu3D.Rendering.SceneRenderer.RenderLayer">
+  RenderLayer
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the lighting contribution shown by the renderer. The default composes the final
+beauty result; the other modes are diagnostic and do not alter scene or material data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SceneRenderLayer RenderLayer { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Rendering.SceneRenderLayer.html">SceneRenderLayer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_RenderOutput_" data-uid="Mu3D.Rendering.SceneRenderer.RenderOutput*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_RenderOutput" data-uid="Mu3D.Rendering.SceneRenderer.RenderOutput">
+  RenderOutput
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the stable built-in output used by the compatibility
+<a class="xref" href="Mu3D.Rendering.SceneRenderer.html#Mu3D_Rendering_SceneRenderer_Render_Mu3D_SceneGraph_Scene_Mu3D_SceneGraph_Camera_Mu3D_Graphics_GraphicsTexture_Mu3D_Graphics_GraphicsTexture_">Render(Scene, Camera, GraphicsTexture, GraphicsTexture)</a> and
+<a class="xref" href="Mu3D.Rendering.SceneRenderer.html#Mu3D_Rendering_SceneRenderer_RenderPass_Mu3D_SceneGraph_Scene_Mu3D_SceneGraph_Camera_Mu3D_Graphics_GraphicsTexture_Mu3D_Graphics_GraphicsTexture_Mu3D_Rendering_SceneRenderPassOptions_">RenderPass(Scene, Camera, GraphicsTexture, GraphicsTexture, SceneRenderPassOptions)</a>
+entry points.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RenderOutputId RenderOutput { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Rendering.RenderOutputId.html">RenderOutputId</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Mu3D_Rendering_SceneRenderer_RenderOutput_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Use <a class="xref" href="Mu3D.Rendering.SceneRenderOutputPass.html">SceneRenderOutputPass</a> or <a class="xref" href="Mu3D.Rendering.RenderOutputRegistry.html">RenderOutputRegistry</a> when output
+selection belongs to a specific pass. Third-party identifiers require their registered pass
+implementation and cannot be assigned directly to this built-in renderer.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_WorkingColorSpace_" data-uid="Mu3D.Rendering.SceneRenderer.WorkingColorSpace*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_WorkingColorSpace" data-uid="Mu3D.Rendering.SceneRenderer.WorkingColorSpace">
+  WorkingColorSpace
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the linear-light space used by the current presentation shader.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ColorSpaceReference WorkingColorSpace { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.ColorSpaceReference.html">ColorSpaceReference</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_Dispose_" data-uid="Mu3D.Rendering.SceneRenderer.Dispose*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_Dispose" data-uid="Mu3D.Rendering.SceneRenderer.Dispose">
+  Dispose()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_PrepareImageBasedLightingAsync_" data-uid="Mu3D.Rendering.SceneRenderer.PrepareImageBasedLightingAsync*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_PrepareImageBasedLightingAsync_Mu3D_SceneGraph_EquirectangularHdrEnvironment_System_Threading_CancellationToken_" data-uid="Mu3D.Rendering.SceneRenderer.PrepareImageBasedLightingAsync(Mu3D.SceneGraph.EquirectangularHdrEnvironment,System.Threading.CancellationToken)">
+  PrepareImageBasedLightingAsync(EquirectangularHdrEnvironment, CancellationToken)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Precomputes and process-caches the renderer's diffuse and specular image-based-lighting data
+without creating GPU resources. Applications may await this off the presentation path so the
+first rendered frame only uploads the immutable result. The cache is released when the source
+environment is no longer referenced.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task PrepareImageBasedLightingAsync(EquirectangularHdrEnvironment environment, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>environment</code> <a class="xref" href="Mu3D.SceneGraph.EquirectangularHdrEnvironment.html">EquirectangularHdrEnvironment</a></dt>
+    <dd><p>The immutable, explicitly color-tagged HDR environment.</p>
+</dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd><p>A token checked before and after preparation. An integration already executing for another
+caller remains available to that caller and may finish populating the shared cache.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_PrewarmMaterialVariants_" data-uid="Mu3D.Rendering.SceneRenderer.PrewarmMaterialVariants*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_PrewarmMaterialVariants_Mu3D_SceneGraph_MaterialVariantManifest_" data-uid="Mu3D.Rendering.SceneRenderer.PrewarmMaterialVariants(Mu3D.SceneGraph.MaterialVariantManifest)">
+  PrewarmMaterialVariants(MaterialVariantManifest)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Prepares every exact variant in a manifest before its first draw. This operation creates GPU
+shader modules and pipelines and must run on the graphics-device thread. It performs no
+reflection or dynamic managed-code generation and is safe for AOT callers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void PrewarmMaterialVariants(MaterialVariantManifest manifest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>manifest</code> <a class="xref" href="Mu3D.SceneGraph.MaterialVariantManifest.html">MaterialVariantManifest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_Render_" data-uid="Mu3D.Rendering.SceneRenderer.Render*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_Render_Mu3D_SceneGraph_Scene_Mu3D_SceneGraph_Camera_Mu3D_Graphics_GraphicsTexture_Mu3D_Graphics_GraphicsTexture_" data-uid="Mu3D.Rendering.SceneRenderer.Render(Mu3D.SceneGraph.Scene,Mu3D.SceneGraph.Camera,Mu3D.Graphics.GraphicsTexture,Mu3D.Graphics.GraphicsTexture)">
+  Render(Scene, Camera, GraphicsTexture, GraphicsTexture)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Clears to opaque linear-sRGB black and renders all visible meshes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Render(Scene scene, Camera camera, GraphicsTexture colorTarget, GraphicsTexture depthTarget)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>scene</code> <a class="xref" href="Mu3D.SceneGraph.Scene.html">Scene</a></dt>
+    <dd></dd>
+    <dt><code>camera</code> <a class="xref" href="Mu3D.SceneGraph.Camera.html">Camera</a></dt>
+    <dd></dd>
+    <dt><code>colorTarget</code> <a class="xref" href="Mu3D.Graphics.GraphicsTexture.html">GraphicsTexture</a></dt>
+    <dd></dd>
+    <dt><code>depthTarget</code> <a class="xref" href="Mu3D.Graphics.GraphicsTexture.html">GraphicsTexture</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_Render_" data-uid="Mu3D.Rendering.SceneRenderer.Render*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_Render_Mu3D_SceneGraph_Scene_Mu3D_SceneGraph_Camera_Mu3D_Graphics_GraphicsTexture_Mu3D_Graphics_GraphicsTexture_Mu3D_Color_LinearRgba_" data-uid="Mu3D.Rendering.SceneRenderer.Render(Mu3D.SceneGraph.Scene,Mu3D.SceneGraph.Camera,Mu3D.Graphics.GraphicsTexture,Mu3D.Graphics.GraphicsTexture,Mu3D.Color.LinearRgba)">
+  Render(Scene, Camera, GraphicsTexture, GraphicsTexture, LinearRgba)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Clears and renders all visible <a class="xref" href="Mu3D.SceneGraph.Mesh.html">Mesh</a> descendants using one camera and an
+explicitly tagged linear-light clear color. One directional light may cast the initial
+shadow map; up to sixteen additional directional, point, or spot lights contribute direct
+lighting, alongside one diffuse-plus-specular <a class="xref" href="Mu3D.SceneGraph.ImageBasedLight.html">ImageBasedLight</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Render(Scene scene, Camera camera, GraphicsTexture colorTarget, GraphicsTexture depthTarget, LinearRgba clearColor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>scene</code> <a class="xref" href="Mu3D.SceneGraph.Scene.html">Scene</a></dt>
+    <dd></dd>
+    <dt><code>camera</code> <a class="xref" href="Mu3D.SceneGraph.Camera.html">Camera</a></dt>
+    <dd></dd>
+    <dt><code>colorTarget</code> <a class="xref" href="Mu3D.Graphics.GraphicsTexture.html">GraphicsTexture</a></dt>
+    <dd></dd>
+    <dt><code>depthTarget</code> <a class="xref" href="Mu3D.Graphics.GraphicsTexture.html">GraphicsTexture</a></dt>
+    <dd></dd>
+    <dt><code>clearColor</code> <a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_RenderOutputPass_" data-uid="Mu3D.Rendering.SceneRenderer.RenderOutputPass*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_RenderOutputPass_Mu3D_SceneGraph_Scene_Mu3D_SceneGraph_Camera_Mu3D_Graphics_GraphicsTexture_Mu3D_Graphics_GraphicsTexture_Mu3D_Rendering_RenderOutputId_Mu3D_Rendering_SceneRenderPassOptions_" data-uid="Mu3D.Rendering.SceneRenderer.RenderOutputPass(Mu3D.SceneGraph.Scene,Mu3D.SceneGraph.Camera,Mu3D.Graphics.GraphicsTexture,Mu3D.Graphics.GraphicsTexture,Mu3D.Rendering.RenderOutputId,Mu3D.Rendering.SceneRenderPassOptions)">
+  RenderOutputPass(Scene, Camera, GraphicsTexture, GraphicsTexture, RenderOutputId, SceneRenderPassOptions)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Renders one explicit built-in output without changing <a class="xref" href="Mu3D.Rendering.SceneRenderer.html#Mu3D_Rendering_SceneRenderer_RenderOutput">RenderOutput</a> or
+<a class="xref" href="Mu3D.Rendering.SceneRenderer.html#Mu3D_Rendering_SceneRenderer_RenderLayer">RenderLayer</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RenderOutputPass(Scene scene, Camera camera, GraphicsTexture colorTarget, GraphicsTexture depthTarget, RenderOutputId output, SceneRenderPassOptions passOptions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>scene</code> <a class="xref" href="Mu3D.SceneGraph.Scene.html">Scene</a></dt>
+    <dd><p>The scene whose camera-visible nodes are rendered.</p>
+</dd>
+    <dt><code>camera</code> <a class="xref" href="Mu3D.SceneGraph.Camera.html">Camera</a></dt>
+    <dd><p>The camera and visibility mask used for this pass.</p>
+</dd>
+    <dt><code>colorTarget</code> <a class="xref" href="Mu3D.Graphics.GraphicsTexture.html">GraphicsTexture</a></dt>
+    <dd><p>The scene-linear color attachment.</p>
+</dd>
+    <dt><code>depthTarget</code> <a class="xref" href="Mu3D.Graphics.GraphicsTexture.html">GraphicsTexture</a></dt>
+    <dd><p>The matching Depth32Float attachment.</p>
+</dd>
+    <dt><code>output</code> <a class="xref" href="Mu3D.Rendering.RenderOutputId.html">RenderOutputId</a></dt>
+    <dd><p>A stable output identifier implemented by this renderer.</p>
+</dd>
+    <dt><code>passOptions</code> <a class="xref" href="Mu3D.Rendering.SceneRenderPassOptions.html">SceneRenderPassOptions</a></dt>
+    <dd><p>The color and depth attachment initialization policy.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_RenderPass_" data-uid="Mu3D.Rendering.SceneRenderer.RenderPass*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_RenderPass_Mu3D_SceneGraph_Scene_Mu3D_SceneGraph_Camera_Mu3D_Graphics_GraphicsTexture_Mu3D_Graphics_GraphicsTexture_Mu3D_Rendering_SceneRenderPassOptions_" data-uid="Mu3D.Rendering.SceneRenderer.RenderPass(Mu3D.SceneGraph.Scene,Mu3D.SceneGraph.Camera,Mu3D.Graphics.GraphicsTexture,Mu3D.Graphics.GraphicsTexture,Mu3D.Rendering.SceneRenderPassOptions)">
+  RenderPass(Scene, Camera, GraphicsTexture, GraphicsTexture, SceneRenderPassOptions)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Renders all camera-visible meshes with explicit scene-linear color and depth attachment
+initialization. Loading existing attachments permits ordered composition without inserting
+display encoding, gamut mapping, tone mapping, or clipping.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RenderPass(Scene scene, Camera camera, GraphicsTexture colorTarget, GraphicsTexture depthTarget, SceneRenderPassOptions passOptions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>scene</code> <a class="xref" href="Mu3D.SceneGraph.Scene.html">Scene</a></dt>
+    <dd></dd>
+    <dt><code>camera</code> <a class="xref" href="Mu3D.SceneGraph.Camera.html">Camera</a></dt>
+    <dd></dd>
+    <dt><code>colorTarget</code> <a class="xref" href="Mu3D.Graphics.GraphicsTexture.html">GraphicsTexture</a></dt>
+    <dd></dd>
+    <dt><code>depthTarget</code> <a class="xref" href="Mu3D.Graphics.GraphicsTexture.html">GraphicsTexture</a></dt>
+    <dd></dd>
+    <dt><code>passOptions</code> <a class="xref" href="Mu3D.Rendering.SceneRenderPassOptions.html">SceneRenderPassOptions</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_RenderViewports_" data-uid="Mu3D.Rendering.SceneRenderer.RenderViewports*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_RenderViewports_System_Collections_Generic_IReadOnlyList_Mu3D_Rendering_SceneRenderViewport__Mu3D_Graphics_GraphicsTexture_Mu3D_Graphics_GraphicsTexture_Mu3D_Color_LinearRgba_System_Collections_Generic_IEnumerable_Mu3D_SceneGraph_Scene__" data-uid="Mu3D.Rendering.SceneRenderer.RenderViewports(System.Collections.Generic.IReadOnlyList{Mu3D.Rendering.SceneRenderViewport},Mu3D.Graphics.GraphicsTexture,Mu3D.Graphics.GraphicsTexture,Mu3D.Color.LinearRgba,System.Collections.Generic.IEnumerable{Mu3D.SceneGraph.Scene})">
+  RenderViewports(IReadOnlyList&lt;SceneRenderViewport&gt;, GraphicsTexture, GraphicsTexture, LinearRgba, IEnumerable&lt;Scene&gt;?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Renders non-overlapping scene regions into one shared color/depth target while preserving a
+single renderer and its device-scoped caches.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RenderViewports(IReadOnlyList&lt;SceneRenderViewport&gt; viewports, GraphicsTexture colorTarget, GraphicsTexture depthTarget, LinearRgba clearColor, IEnumerable&lt;Scene&gt;? retainedScenes = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>viewports</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="Mu3D.Rendering.SceneRenderViewport.html">SceneRenderViewport</a>&gt;</dt>
+    <dd><p>The ordered scene regions to render.</p>
+</dd>
+    <dt><code>colorTarget</code> <a class="xref" href="Mu3D.Graphics.GraphicsTexture.html">GraphicsTexture</a></dt>
+    <dd><p>The shared scene-linear color attachment.</p>
+</dd>
+    <dt><code>depthTarget</code> <a class="xref" href="Mu3D.Graphics.GraphicsTexture.html">GraphicsTexture</a></dt>
+    <dd><p>The matching shared Depth32Float attachment.</p>
+</dd>
+    <dt><code>clearColor</code> <a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd><p>The explicitly tagged linear-light color used for the frame.</p>
+</dd>
+    <dt><code>retainedScenes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mu3D.SceneGraph.Scene.html">Scene</a>&gt;</dt>
+    <dd><p>Optional non-rendered warm scenes whose uploaded cache entries remain available.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section" id="Mu3D_Rendering_SceneRenderer_RenderViewports_System_Collections_Generic_IReadOnlyList_Mu3D_Rendering_SceneRenderViewport__Mu3D_Graphics_GraphicsTexture_Mu3D_Graphics_GraphicsTexture_Mu3D_Color_LinearRgba_System_Collections_Generic_IEnumerable_Mu3D_SceneGraph_Scene___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This first shared-target path deliberately excludes ambient occlusion, bloom, and
+screen-space transmission because those effects currently own full-frame intermediate
+targets. Empty input still clears both attachments. The regions must not overlap.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_TrimCaches_" data-uid="Mu3D.Rendering.SceneRenderer.TrimCaches*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_TrimCaches_Mu3D_SceneGraph_Scene_" data-uid="Mu3D.Rendering.SceneRenderer.TrimCaches(Mu3D.SceneGraph.Scene)">
+  TrimCaches(Scene)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Releases cache entries no longer referenced by any mesh in the supplied scene.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void TrimCaches(Scene scene)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>scene</code> <a class="xref" href="Mu3D.SceneGraph.Scene.html">Scene</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
+    <dd><p>Cache trimming is reentered during resource disposal.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Mu3D_Rendering_SceneRenderer_TrimCaches_" data-uid="Mu3D.Rendering.SceneRenderer.TrimCaches*"></a>
+
+  <h3 id="Mu3D_Rendering_SceneRenderer_TrimCaches_System_Collections_Generic_IEnumerable_Mu3D_SceneGraph_Scene__" data-uid="Mu3D.Rendering.SceneRenderer.TrimCaches(System.Collections.Generic.IEnumerable{Mu3D.SceneGraph.Scene})">
+  TrimCaches(IEnumerable&lt;Scene&gt;)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Releases cache entries absent from every supplied scene.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void TrimCaches(IEnumerable&lt;Scene&gt; scenes)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>scenes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mu3D.SceneGraph.Scene.html">Scene</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
+    <dd><p>Cache trimming is reentered during resource disposal.</p>
+</dd>
+  </dl>
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

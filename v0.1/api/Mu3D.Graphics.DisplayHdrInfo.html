@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class DisplayHdrInfo | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class DisplayHdrInfo | Mu3D documentation ">
+      
+      <meta name="description" content="Describes the current HDR characteristics of the display backing a presentation surface.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Graphics.DisplayHdrInfo">
+
+
+
+  <h1 id="Mu3D_Graphics_DisplayHdrInfo" data-uid="Mu3D.Graphics.DisplayHdrInfo" class="text-break">
+Class DisplayHdrInfo  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Graphics.html">Graphics</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Graphics.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Describes the current HDR characteristics of the display backing a presentation surface.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed record DisplayHdrInfo : IEquatable&lt;DisplayHdrInfo&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">DisplayHdrInfo</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="Mu3D.Graphics.DisplayHdrInfo.html">DisplayHdrInfo</a>&gt;</div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="Mu3D_Graphics_DisplayHdrInfo_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>This is display state, not surface capability and not a request to configure HDR. Every value
+is optional because platforms expose different subsets. Unknown data must remain unknown rather
+than being represented as zero or inferred to mean SDR.</p>
+</div>
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_Graphics_DisplayHdrInfo__ctor_" data-uid="Mu3D.Graphics.DisplayHdrInfo.#ctor*"></a>
+
+  <h3 id="Mu3D_Graphics_DisplayHdrInfo__ctor" data-uid="Mu3D.Graphics.DisplayHdrInfo.#ctor">
+  DisplayHdrInfo()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DisplayHdrInfo()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Graphics_DisplayHdrInfo_BitsPerColor_" data-uid="Mu3D.Graphics.DisplayHdrInfo.BitsPerColor*"></a>
+
+  <h3 id="Mu3D_Graphics_DisplayHdrInfo_BitsPerColor" data-uid="Mu3D.Graphics.DisplayHdrInfo.BitsPerColor">
+  BitsPerColor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the reported output bit depth per color channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte? BitsPerColor { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_DisplayHdrInfo_Chromaticity_" data-uid="Mu3D.Graphics.DisplayHdrInfo.Chromaticity*"></a>
+
+  <h3 id="Mu3D_Graphics_DisplayHdrInfo_Chromaticity" data-uid="Mu3D.Graphics.DisplayHdrInfo.Chromaticity">
+  Chromaticity
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets optional display primaries and white-point chromaticity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DisplayChromaticity? Chromaticity { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.DisplayChromaticity.html">DisplayChromaticity</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_DisplayHdrInfo_CoarseRange_" data-uid="Mu3D.Graphics.DisplayHdrInfo.CoarseRange*"></a>
+
+  <h3 id="Mu3D_Graphics_DisplayHdrInfo_CoarseRange" data-uid="Mu3D.Graphics.DisplayHdrInfo.CoarseRange">
+  CoarseRange
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets optional coarse dynamic-range and gamut classification.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DisplayCoarseRange? CoarseRange { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.DisplayCoarseRange.html">DisplayCoarseRange</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_DisplayHdrInfo_Headroom_" data-uid="Mu3D.Graphics.DisplayHdrInfo.Headroom*"></a>
+
+  <h3 id="Mu3D_Graphics_DisplayHdrInfo_Headroom" data-uid="Mu3D.Graphics.DisplayHdrInfo.Headroom">
+  Headroom
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets optional relative EDR headroom information.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DisplayHeadroom? Headroom { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.DisplayHeadroom.html">DisplayHeadroom</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_DisplayHdrInfo_IsUnknown_" data-uid="Mu3D.Graphics.DisplayHdrInfo.IsUnknown*"></a>
+
+  <h3 id="Mu3D_Graphics_DisplayHdrInfo_IsUnknown" data-uid="Mu3D.Graphics.DisplayHdrInfo.IsUnknown">
+  IsUnknown
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets whether every display characteristic is unknown.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsUnknown { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_DisplayHdrInfo_Luminance_" data-uid="Mu3D.Graphics.DisplayHdrInfo.Luminance*"></a>
+
+  <h3 id="Mu3D_Graphics_DisplayHdrInfo_Luminance" data-uid="Mu3D.Graphics.DisplayHdrInfo.Luminance">
+  Luminance
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets optional absolute luminance information.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DisplayLuminance? Luminance { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.DisplayLuminance.html">DisplayLuminance</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_DisplayHdrInfo_ToneMapHeadroom_" data-uid="Mu3D.Graphics.DisplayHdrInfo.ToneMapHeadroom*"></a>
+
+  <h3 id="Mu3D_Graphics_DisplayHdrInfo_ToneMapHeadroom" data-uid="Mu3D.Graphics.DisplayHdrInfo.ToneMapHeadroom">
+  ToneMapHeadroom
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the best available linear tone-mapping headroom multiplier over SDR white.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float? ToneMapHeadroom { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Mu3D_Graphics_DisplayHdrInfo_ToneMapHeadroom_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Current relative headroom wins. A display explicitly reported as SDR resolves to one.
+Otherwise Mu3D derives a value from finite peak and SDR-white luminance when both are known.
+The result remains <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> when no safe multiplier can be derived.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_Graphics_DisplayHdrInfo_Unknown_" data-uid="Mu3D.Graphics.DisplayHdrInfo.Unknown*"></a>
+
+  <h3 id="Mu3D_Graphics_DisplayHdrInfo_Unknown" data-uid="Mu3D.Graphics.DisplayHdrInfo.Unknown">
+  Unknown
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a snapshot in which every display characteristic is unknown.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static DisplayHdrInfo Unknown { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.DisplayHdrInfo.html">DisplayHdrInfo</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Graphics_DisplayHdrInfo_Equals_" data-uid="Mu3D.Graphics.DisplayHdrInfo.Equals*"></a>
+
+  <h3 id="Mu3D_Graphics_DisplayHdrInfo_Equals_Mu3D_Graphics_DisplayHdrInfo_" data-uid="Mu3D.Graphics.DisplayHdrInfo.Equals(Mu3D.Graphics.DisplayHdrInfo)">
+  Equals(DisplayHdrInfo?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(DisplayHdrInfo? other)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>other</code> <a class="xref" href="Mu3D.Graphics.DisplayHdrInfo.html">DisplayHdrInfo</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_DisplayHdrInfo_Equals_" data-uid="Mu3D.Graphics.DisplayHdrInfo.Equals*"></a>
+
+  <h3 id="Mu3D_Graphics_DisplayHdrInfo_Equals_System_Object_" data-uid="Mu3D.Graphics.DisplayHdrInfo.Equals(System.Object)">
+  Equals(object?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object? obj)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>obj</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_DisplayHdrInfo_GetHashCode_" data-uid="Mu3D.Graphics.DisplayHdrInfo.GetHashCode*"></a>
+
+  <h3 id="Mu3D_Graphics_DisplayHdrInfo_GetHashCode" data-uid="Mu3D.Graphics.DisplayHdrInfo.GetHashCode">
+  GetHashCode()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_DisplayHdrInfo_ToString_" data-uid="Mu3D.Graphics.DisplayHdrInfo.ToString*"></a>
+
+  <h3 id="Mu3D_Graphics_DisplayHdrInfo_ToString" data-uid="Mu3D.Graphics.DisplayHdrInfo.ToString">
+  ToString()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Mu3D_Graphics_DisplayHdrInfo_op_Equality_" data-uid="Mu3D.Graphics.DisplayHdrInfo.op_Equality*"></a>
+
+  <h3 id="Mu3D_Graphics_DisplayHdrInfo_op_Equality_Mu3D_Graphics_DisplayHdrInfo_Mu3D_Graphics_DisplayHdrInfo_" data-uid="Mu3D.Graphics.DisplayHdrInfo.op_Equality(Mu3D.Graphics.DisplayHdrInfo,Mu3D.Graphics.DisplayHdrInfo)">
+  operator ==(DisplayHdrInfo?, DisplayHdrInfo?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(DisplayHdrInfo? left, DisplayHdrInfo? right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Mu3D.Graphics.DisplayHdrInfo.html">DisplayHdrInfo</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Mu3D.Graphics.DisplayHdrInfo.html">DisplayHdrInfo</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_DisplayHdrInfo_op_Inequality_" data-uid="Mu3D.Graphics.DisplayHdrInfo.op_Inequality*"></a>
+
+  <h3 id="Mu3D_Graphics_DisplayHdrInfo_op_Inequality_Mu3D_Graphics_DisplayHdrInfo_Mu3D_Graphics_DisplayHdrInfo_" data-uid="Mu3D.Graphics.DisplayHdrInfo.op_Inequality(Mu3D.Graphics.DisplayHdrInfo,Mu3D.Graphics.DisplayHdrInfo)">
+  operator !=(DisplayHdrInfo?, DisplayHdrInfo?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(DisplayHdrInfo? left, DisplayHdrInfo? right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Mu3D.Graphics.DisplayHdrInfo.html">DisplayHdrInfo</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Mu3D.Graphics.DisplayHdrInfo.html">DisplayHdrInfo</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

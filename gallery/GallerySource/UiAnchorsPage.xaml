@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Name="Page"
+    x:Class="Mu3D.GalleryApp.Pages.UiAnchorsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    xmlns:overlays="clr-namespace:Mu3D.Maui.Toolkit.Overlays;assembly=Mu3D.Maui.Toolkit"
+    xmlns:pages="clr-namespace:Mu3D.GalleryApp.Pages"
+    xmlns:toolkit="clr-namespace:Mu3D.Maui.Toolkit.Controls;assembly=Mu3D.Maui.Toolkit"
+    x:DataType="pages:UiAnchorsPage"
+    Title="UI Anchors">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="ui-anchors" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <mu3d:Mu3DSceneView
+            x:Name="SceneView"
+            BackgroundColor="Black"
+            FeatureError="OnFeatureError"
+            FrameSnapshotChanged="OnFrameSnapshotChanged"
+            RendererChanged="OnRendererChanged"
+            SurfaceError="OnSurfaceError">
+            <mu3d:Mu3DSceneView.Features>
+                <toolkit:ViewportTools>
+                    <overlays:ViewportOverlay InputMode="PassThrough">
+                        <overlays:ViewportOverlay.Anchor>
+                            <overlays:SceneNodeAnchor
+                                Node="{Binding CyanNode, Source={x:Reference Page}}"
+                                Offset="8,-28"
+                                Y="0.5" />
+                        </overlays:ViewportOverlay.Anchor>
+                        <Label
+                            Padding="8,4"
+                            BackgroundColor="#D9142238"
+                            FontAttributes="Bold"
+                            Text="● Cyan object"
+                            TextColor="#6CEBFF" />
+                    </overlays:ViewportOverlay>
+                    <overlays:ViewportOverlay InputMode="PassThrough">
+                        <overlays:ViewportOverlay.Anchor>
+                            <overlays:SceneNodeAnchor
+                                Node="{Binding MagentaNode, Source={x:Reference Page}}"
+                                Offset="8,-28"
+                                Y="0.5" />
+                        </overlays:ViewportOverlay.Anchor>
+                        <Label
+                            Padding="8,4"
+                            BackgroundColor="#D9142238"
+                            FontAttributes="Bold"
+                            Text="● Magenta object"
+                            TextColor="#FF75DC" />
+                    </overlays:ViewportOverlay>
+                </toolkit:ViewportTools>
+            </mu3d:Mu3DSceneView.Features>
+        </mu3d:Mu3DSceneView>
+        <VerticalStackLayout Grid.Row="1" Padding="16" Spacing="8">
+            <Label
+                FontAttributes="Bold"
+                Text="Real MAUI labels follow two moving 3D nodes from the last successfully presented frame." />
+            <Button x:Name="PauseButton" Clicked="OnPauseClicked" Text="Pause motion" />
+            <Label x:Name="StatusLabel" FontSize="12" LineBreakMode="WordWrap" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

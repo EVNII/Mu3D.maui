@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class WgpuSurfaceSession | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class WgpuSurfaceSession | Mu3D documentation ">
+      
+      <meta name="description" content="Owns a configured wgpu presentation surface and either owns or borrows its device.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession">
+
+
+
+  <h1 id="Mu3D_Native_Wgpu_WgpuSurfaceSession" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession" class="text-break">
+Class WgpuSurfaceSession  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Native.html">Native</a>.<a class="xref" href="Mu3D.Native.Wgpu.html">Wgpu</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Native.Wgpu.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Owns a configured wgpu presentation surface and either owns or borrows its device.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class WgpuSurfaceSession : IPresentationSurfaceSession, IResizablePresentationSurface, IDisposable</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">WgpuSurfaceSession</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="Mu3D.Graphics.IPresentationSurfaceSession.html">IPresentationSurfaceSession</a></div>
+      <div><a class="xref" href="Mu3D.Graphics.IResizablePresentationSurface.html">IResizablePresentationSurface</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="Mu3D_Native_Wgpu_WgpuSurfaceSession_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>Dispose a session created for a Windows swap-chain panel on the panel's UI thread. The
+<code>Mu3DView</code> handler performs this automatically for control-owned sessions.</p>
+</div>
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuSurfaceSession_AlphaMode_" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.AlphaMode*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuSurfaceSession_AlphaMode" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.AlphaMode">
+  AlphaMode
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the alpha mode used by the configured native compositor surface.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SurfaceAlphaMode AlphaMode { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.SurfaceAlphaMode.html">SurfaceAlphaMode</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuSurfaceSession_Capabilities_" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.Capabilities*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuSurfaceSession_Capabilities" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.Capabilities">
+  Capabilities
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the capabilities used to configure this surface.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SurfaceCapabilities Capabilities { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.SurfaceCapabilities.html">SurfaceCapabilities</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuSurfaceSession_Device_" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.Device*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuSurfaceSession_Device" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.Device">
+  Device
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the backend-independent graphics device compatible with this surface.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphicsDevice Device { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsDevice.html">GraphicsDevice</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuSurfaceSession_Height_" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.Height*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuSurfaceSession_Height" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.Height">
+  Height
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the configured surface height in physical pixels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public uint Height { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuSurfaceSession_LastFrameTimings_" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.LastFrameTimings*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuSurfaceSession_LastFrameTimings" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.LastFrameTimings">
+  LastFrameTimings
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets native presentation timings for the most recently attempted frame.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PresentationSurfaceFrameTimings LastFrameTimings { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.PresentationSurfaceFrameTimings.html">PresentationSurfaceFrameTimings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Mu3D_Native_Wgpu_WgpuSurfaceSession_LastFrameTimings_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>These are CPU wall-clock intervals around the native calls. Render includes the caller's
+command encoding and queue submission; Present includes backend polling and may therefore
+expose GPU/driver back-pressure. They are diagnostics, not GPU timestamp queries.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuSurfaceSession_OutputPlan_" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.OutputPlan*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuSurfaceSession_OutputPlan" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.OutputPlan">
+  OutputPlan
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the selected format and explicit fallback state.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SurfaceOutputPlan OutputPlan { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.SurfaceOutputPlan.html">SurfaceOutputPlan</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuSurfaceSession_Width_" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.Width*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuSurfaceSession_Width" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.Width">
+  Width
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the configured surface width in physical pixels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public uint Width { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuSurfaceSession_ClearAndPresent_" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.ClearAndPresent*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuSurfaceSession_ClearAndPresent_System_Single_System_Single_System_Single_System_Single_" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.ClearAndPresent(System.Single,System.Single,System.Single,System.Single)">
+  ClearAndPresent(float, float, float, float)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Clears one acquired surface texture to an FP32 linear color and presents it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PresentationSurfaceFrameStatus ClearAndPresent(float red, float green, float blue, float alpha = 1)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>red</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The finite linear red component. Extended-range values are allowed.</p>
+</dd>
+    <dt><code>green</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The finite linear green component. Extended-range values are allowed.</p>
+</dd>
+    <dt><code>blue</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The finite linear blue component. Extended-range values are allowed.</p>
+</dd>
+    <dt><code>alpha</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The finite linear alpha component.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.PresentationSurfaceFrameStatus.html">PresentationSurfaceFrameStatus</a></dt>
+    <dd><p>The surface acquisition and presentation result.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Mu3D_Native_Wgpu_WgpuSurfaceSession_ClearAndPresent_System_Single_System_Single_System_Single_System_Single__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>A timeout, outdated surface, or lost surface is reported without submitting a frame. Call
+<a class="xref" href="Mu3D.Native.Wgpu.WgpuSurfaceSession.html#Mu3D_Native_Wgpu_WgpuSurfaceSession_Resize_System_UInt32_System_UInt32_">Resize(uint, uint)</a> before retrying an outdated or lost surface. This method
+reports successful GPU presentation, not independently measured physical HDR luminance.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuSurfaceSession_CreateAsync_" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.CreateAsync*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuSurfaceSession_CreateAsync_Mu3D_Graphics_NativeSurfaceSource_System_UInt32_System_UInt32_Mu3D_Graphics_OutputSettings_System_TimeSpan_System_Threading_CancellationToken_" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.CreateAsync(Mu3D.Graphics.NativeSurfaceSource,System.UInt32,System.UInt32,Mu3D.Graphics.OutputSettings,System.TimeSpan,System.Threading.CancellationToken)">
+  CreateAsync(NativeSurfaceSource, uint, uint, OutputSettings, TimeSpan, CancellationToken)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a compatible device and configures a platform surface.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;WgpuSurfaceSession&gt; CreateAsync(NativeSurfaceSource source, uint width, uint height, OutputSettings settings, TimeSpan timeout, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="Mu3D.Graphics.NativeSurfaceSource.html">NativeSurfaceSource</a></dt>
+    <dd></dd>
+    <dt><code>width</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+    <dt><code>height</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+    <dt><code>settings</code> <a class="xref" href="Mu3D.Graphics.OutputSettings.html">OutputSettings</a></dt>
+    <dd></dd>
+    <dt><code>timeout</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Mu3D.Native.Wgpu.WgpuSurfaceSession.html">WgpuSurfaceSession</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuSurfaceSession_CreateCompatible_" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.CreateCompatible*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuSurfaceSession_CreateCompatible_Mu3D_Graphics_NativeSurfaceSource_System_UInt32_System_UInt32_Mu3D_Graphics_OutputSettings_Mu3D_Native_Wgpu_WgpuGraphicsDevice_" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.CreateCompatible(Mu3D.Graphics.NativeSurfaceSource,System.UInt32,System.UInt32,Mu3D.Graphics.OutputSettings,Mu3D.Native.Wgpu.WgpuGraphicsDevice)">
+  CreateCompatible(NativeSurfaceSource, uint, uint, OutputSettings, WgpuGraphicsDevice)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates another presentation surface against an existing compatible wgpu device.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static WgpuSurfaceSession CreateCompatible(NativeSurfaceSource source, uint width, uint height, OutputSettings settings, WgpuGraphicsDevice sharedDevice)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="Mu3D.Graphics.NativeSurfaceSource.html">NativeSurfaceSource</a></dt>
+    <dd><p>Native platform presentation source owned by the visual host.</p>
+</dd>
+    <dt><code>width</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>Initial non-zero physical-pixel width.</p>
+</dd>
+    <dt><code>height</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd><p>Initial non-zero physical-pixel height.</p>
+</dd>
+    <dt><code>settings</code> <a class="xref" href="Mu3D.Graphics.OutputSettings.html">OutputSettings</a></dt>
+    <dd><p>HDR and compositor-alpha policy for this surface.</p>
+</dd>
+    <dt><code>sharedDevice</code> <a class="xref" href="Mu3D.Native.Wgpu.WgpuGraphicsDevice.html">WgpuGraphicsDevice</a></dt>
+    <dd><p>Existing device borrowed for the complete session lifetime.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Native.Wgpu.WgpuSurfaceSession.html">WgpuSurfaceSession</a></dt>
+    <dd><p>An independently disposable surface session that does not own the shared device.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Mu3D_Native_Wgpu_WgpuSurfaceSession_CreateCompatible_Mu3D_Graphics_NativeSurfaceSource_System_UInt32_System_UInt32_Mu3D_Graphics_OutputSettings_Mu3D_Native_Wgpu_WgpuGraphicsDevice__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Dispose every compatible session before disposing the original device-owning session. This
+avoids adapter/device creation per lightweight visual while retaining independent native
+Surface lifetime and presentation.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuSurfaceSession_Dispose_" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.Dispose*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuSurfaceSession_Dispose" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.Dispose">
+  Dispose()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuSurfaceSession_PresentBackendIndependentTriangle_" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.PresentBackendIndependentTriangle*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuSurfaceSession_PresentBackendIndependentTriangle" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.PresentBackendIndependentTriangle">
+  PresentBackendIndependentTriangle()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Presents one visible HDR-capable triangle through the backend-independent Mu3D graphics API.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PresentationSurfaceFrameStatus PresentBackendIndependentTriangle()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.PresentationSurfaceFrameStatus.html">PresentationSurfaceFrameStatus</a></dt>
+    <dd><p>The surface acquisition and presentation result.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Mu3D_Native_Wgpu_WgpuSurfaceSession_PresentBackendIndependentTriangle_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The triangle is authored in the configured presentation space with linear RGB
+<code>(0.05, 0.15, 2.0)</code>. A successful result proves the shared device/resource/command path
+reached the surface; physical HDR and color accuracy remain separate measurements.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuSurfaceSession_PresentExtendedLinearSrgbReferencePattern_" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.PresentExtendedLinearSrgbReferencePattern*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuSurfaceSession_PresentExtendedLinearSrgbReferencePattern" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.PresentExtendedLinearSrgbReferencePattern">
+  PresentExtendedLinearSrgbReferencePattern()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Presents an extended-linear sRGB diagnostic with a smooth 0–4 ramp and six reference bands.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PresentationSurfaceFrameStatus PresentExtendedLinearSrgbReferencePattern()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.PresentationSurfaceFrameStatus.html">PresentationSurfaceFrameStatus</a></dt>
+    <dd><p>The surface acquisition and presentation result.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Mu3D_Native_Wgpu_WgpuSurfaceSession_PresentExtendedLinearSrgbReferencePattern_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The upper half is a continuous neutral ramp from 0 to 4. The lower half contains equal-width
+neutral bands at 0, 0.18, 0.5, 1, 2 and 4. Values are authored directly in the configured
+extended-linear sRGB presentation space; this does not exercise document-profile conversion.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuSurfaceSession_QueryDisplayHdrInfo_" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.QueryDisplayHdrInfo*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuSurfaceSession_QueryDisplayHdrInfo" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.QueryDisplayHdrInfo">
+  QueryDisplayHdrInfo()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Queries the current backing display's HDR characteristics.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DisplayHdrInfo QueryDisplayHdrInfo()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.DisplayHdrInfo.html">DisplayHdrInfo</a></dt>
+    <dd><p>An unknown snapshot because the pinned wgpu-native v29 C ABI exposes no display HDR query.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Mu3D_Native_Wgpu_WgpuSurfaceSession_QueryDisplayHdrInfo_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The backend-neutral API is present now so a future wgpu-native version can map its live
+display query without changing application or renderer interfaces.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuSurfaceSession_RenderAndPresent_" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.RenderAndPresent*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuSurfaceSession_RenderAndPresent_System_Action_Mu3D_Graphics_GraphicsTexture__" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.RenderAndPresent(System.Action{Mu3D.Graphics.GraphicsTexture})">
+  RenderAndPresent(Action&lt;GraphicsTexture&gt;)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Acquires one surface texture, records caller-provided graphics work and presents it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PresentationSurfaceFrameStatus RenderAndPresent(Action&lt;GraphicsTexture&gt; render)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>render</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Mu3D.Graphics.GraphicsTexture.html">GraphicsTexture</a>&gt;</dt>
+    <dd><p>A synchronous callback that records and submits work targeting the supplied backend-independent
+texture. The texture is valid only for the callback duration and must not be disposed or retained.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.PresentationSurfaceFrameStatus.html">PresentationSurfaceFrameStatus</a></dt>
+    <dd><p>The surface acquisition and presentation result.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Mu3D_Native_Wgpu_WgpuSurfaceSession_RenderAndPresent_System_Action_Mu3D_Graphics_GraphicsTexture___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Timeout, outdated and lost acquisition states return without invoking the callback. The caller
+owns every non-surface resource and must finish queue submission before returning. Calling a
+presentation method on this session from inside the callback is rejected before native surface
+acquisition because a surface can have only one current presentation texture.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuSurfaceSession_Resize_" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.Resize*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuSurfaceSession_Resize_System_UInt32_System_UInt32_" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.Resize(System.UInt32,System.UInt32)">
+  Resize(uint, uint)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reconfigures the surface after a non-zero pixel-size change.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Resize(uint width, uint height)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>width</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+    <dt><code>height</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

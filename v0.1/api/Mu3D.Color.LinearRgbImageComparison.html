@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct LinearRgbImageComparison | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct LinearRgbImageComparison | Mu3D documentation ">
+      
+      <meta name="description" content="Reports deterministic RGB and perceptual errors between two linear-light images.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Color.LinearRgbImageComparison">
+
+
+
+  <h1 id="Mu3D_Color_LinearRgbImageComparison" data-uid="Mu3D.Color.LinearRgbImageComparison" class="text-break">
+Struct LinearRgbImageComparison  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Color.html">Color</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Color.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Reports deterministic RGB and perceptual errors between two linear-light images.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct LinearRgbImageComparison : IEquatable&lt;LinearRgbImageComparison&gt;</code></pre>
+  </div>
+
+
+
+
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="Mu3D.Color.LinearRgbImageComparison.html">LinearRgbImageComparison</a>&gt;</div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_Color_LinearRgbImageComparison__ctor_" data-uid="Mu3D.Color.LinearRgbImageComparison.#ctor*"></a>
+
+  <h3 id="Mu3D_Color_LinearRgbImageComparison__ctor_System_Int32_System_Double_System_Double_System_Double_System_Double_System_Double_System_Double_System_Double_System_Double_System_Double_" data-uid="Mu3D.Color.LinearRgbImageComparison.#ctor(System.Int32,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+  LinearRgbImageComparison(int, double, double, double, double, double, double, double, double, double)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reports deterministic RGB and perceptual errors between two linear-light images.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgbImageComparison(int PixelCount, double ReferencePeakMagnitude, double ActualPeakMagnitude, double MeanAbsoluteRgbError, double RootMeanSquareRgbError, double MaximumAbsoluteRgbError, double PeakRelativeRgbError, double PeakSignalToNoiseRatioDecibels, double MeanDeltaE2000, double MaximumDeltaE2000)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>PixelCount</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The number of compared pixels.</p>
+</dd>
+    <dt><code>ReferencePeakMagnitude</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The largest absolute reference RGB component.</p>
+</dd>
+    <dt><code>ActualPeakMagnitude</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The largest absolute actual RGB component after conversion.</p>
+</dd>
+    <dt><code>MeanAbsoluteRgbError</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The mean absolute error across all RGB components.</p>
+</dd>
+    <dt><code>RootMeanSquareRgbError</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The root-mean-square error across all RGB components.</p>
+</dd>
+    <dt><code>MaximumAbsoluteRgbError</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The largest absolute RGB component error.</p>
+</dd>
+    <dt><code>PeakRelativeRgbError</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The maximum absolute RGB error divided by the reference peak magnitude.</p>
+</dd>
+    <dt><code>PeakSignalToNoiseRatioDecibels</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>RGB PSNR using the reference peak magnitude. An exact match returns positive infinity.</p>
+</dd>
+    <dt><code>MeanDeltaE2000</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The mean per-pixel CIEDE2000 difference in D50 Lab.</p>
+</dd>
+    <dt><code>MaximumDeltaE2000</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The largest per-pixel CIEDE2000 difference in D50 Lab.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Color_LinearRgbImageComparison_ActualPeakMagnitude_" data-uid="Mu3D.Color.LinearRgbImageComparison.ActualPeakMagnitude*"></a>
+
+  <h3 id="Mu3D_Color_LinearRgbImageComparison_ActualPeakMagnitude" data-uid="Mu3D.Color.LinearRgbImageComparison.ActualPeakMagnitude">
+  ActualPeakMagnitude
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>The largest absolute actual RGB component after conversion.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double ActualPeakMagnitude { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_LinearRgbImageComparison_MaximumAbsoluteRgbError_" data-uid="Mu3D.Color.LinearRgbImageComparison.MaximumAbsoluteRgbError*"></a>
+
+  <h3 id="Mu3D_Color_LinearRgbImageComparison_MaximumAbsoluteRgbError" data-uid="Mu3D.Color.LinearRgbImageComparison.MaximumAbsoluteRgbError">
+  MaximumAbsoluteRgbError
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>The largest absolute RGB component error.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double MaximumAbsoluteRgbError { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_LinearRgbImageComparison_MaximumDeltaE2000_" data-uid="Mu3D.Color.LinearRgbImageComparison.MaximumDeltaE2000*"></a>
+
+  <h3 id="Mu3D_Color_LinearRgbImageComparison_MaximumDeltaE2000" data-uid="Mu3D.Color.LinearRgbImageComparison.MaximumDeltaE2000">
+  MaximumDeltaE2000
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>The largest per-pixel CIEDE2000 difference in D50 Lab.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double MaximumDeltaE2000 { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_LinearRgbImageComparison_MeanAbsoluteRgbError_" data-uid="Mu3D.Color.LinearRgbImageComparison.MeanAbsoluteRgbError*"></a>
+
+  <h3 id="Mu3D_Color_LinearRgbImageComparison_MeanAbsoluteRgbError" data-uid="Mu3D.Color.LinearRgbImageComparison.MeanAbsoluteRgbError">
+  MeanAbsoluteRgbError
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>The mean absolute error across all RGB components.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double MeanAbsoluteRgbError { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_LinearRgbImageComparison_MeanDeltaE2000_" data-uid="Mu3D.Color.LinearRgbImageComparison.MeanDeltaE2000*"></a>
+
+  <h3 id="Mu3D_Color_LinearRgbImageComparison_MeanDeltaE2000" data-uid="Mu3D.Color.LinearRgbImageComparison.MeanDeltaE2000">
+  MeanDeltaE2000
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>The mean per-pixel CIEDE2000 difference in D50 Lab.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double MeanDeltaE2000 { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_LinearRgbImageComparison_PeakRelativeRgbError_" data-uid="Mu3D.Color.LinearRgbImageComparison.PeakRelativeRgbError*"></a>
+
+  <h3 id="Mu3D_Color_LinearRgbImageComparison_PeakRelativeRgbError" data-uid="Mu3D.Color.LinearRgbImageComparison.PeakRelativeRgbError">
+  PeakRelativeRgbError
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>The maximum absolute RGB error divided by the reference peak magnitude.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double PeakRelativeRgbError { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_LinearRgbImageComparison_PeakSignalToNoiseRatioDecibels_" data-uid="Mu3D.Color.LinearRgbImageComparison.PeakSignalToNoiseRatioDecibels*"></a>
+
+  <h3 id="Mu3D_Color_LinearRgbImageComparison_PeakSignalToNoiseRatioDecibels" data-uid="Mu3D.Color.LinearRgbImageComparison.PeakSignalToNoiseRatioDecibels">
+  PeakSignalToNoiseRatioDecibels
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>RGB PSNR using the reference peak magnitude. An exact match returns positive infinity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double PeakSignalToNoiseRatioDecibels { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_LinearRgbImageComparison_PixelCount_" data-uid="Mu3D.Color.LinearRgbImageComparison.PixelCount*"></a>
+
+  <h3 id="Mu3D_Color_LinearRgbImageComparison_PixelCount" data-uid="Mu3D.Color.LinearRgbImageComparison.PixelCount">
+  PixelCount
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>The number of compared pixels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int PixelCount { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_LinearRgbImageComparison_ReferencePeakMagnitude_" data-uid="Mu3D.Color.LinearRgbImageComparison.ReferencePeakMagnitude*"></a>
+
+  <h3 id="Mu3D_Color_LinearRgbImageComparison_ReferencePeakMagnitude" data-uid="Mu3D.Color.LinearRgbImageComparison.ReferencePeakMagnitude">
+  ReferencePeakMagnitude
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>The largest absolute reference RGB component.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double ReferencePeakMagnitude { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_LinearRgbImageComparison_RootMeanSquareRgbError_" data-uid="Mu3D.Color.LinearRgbImageComparison.RootMeanSquareRgbError*"></a>
+
+  <h3 id="Mu3D_Color_LinearRgbImageComparison_RootMeanSquareRgbError" data-uid="Mu3D.Color.LinearRgbImageComparison.RootMeanSquareRgbError">
+  RootMeanSquareRgbError
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>The root-mean-square error across all RGB components.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double RootMeanSquareRgbError { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Color_LinearRgbImageComparison_Deconstruct_" data-uid="Mu3D.Color.LinearRgbImageComparison.Deconstruct*"></a>
+
+  <h3 id="Mu3D_Color_LinearRgbImageComparison_Deconstruct_System_Int32__System_Double__System_Double__System_Double__System_Double__System_Double__System_Double__System_Double__System_Double__System_Double__" data-uid="Mu3D.Color.LinearRgbImageComparison.Deconstruct(System.Int32@,System.Double@,System.Double@,System.Double@,System.Double@,System.Double@,System.Double@,System.Double@,System.Double@,System.Double@)">
+  Deconstruct(out int, out double, out double, out double, out double, out double, out double, out double, out double, out double)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Deconstruct(out int PixelCount, out double ReferencePeakMagnitude, out double ActualPeakMagnitude, out double MeanAbsoluteRgbError, out double RootMeanSquareRgbError, out double MaximumAbsoluteRgbError, out double PeakRelativeRgbError, out double PeakSignalToNoiseRatioDecibels, out double MeanDeltaE2000, out double MaximumDeltaE2000)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>PixelCount</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>ReferencePeakMagnitude</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>ActualPeakMagnitude</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>MeanAbsoluteRgbError</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>RootMeanSquareRgbError</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>MaximumAbsoluteRgbError</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>PeakRelativeRgbError</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>PeakSignalToNoiseRatioDecibels</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>MeanDeltaE2000</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>MaximumDeltaE2000</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_LinearRgbImageComparison_Equals_" data-uid="Mu3D.Color.LinearRgbImageComparison.Equals*"></a>
+
+  <h3 id="Mu3D_Color_LinearRgbImageComparison_Equals_Mu3D_Color_LinearRgbImageComparison_" data-uid="Mu3D.Color.LinearRgbImageComparison.Equals(Mu3D.Color.LinearRgbImageComparison)">
+  Equals(LinearRgbImageComparison)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(LinearRgbImageComparison other)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>other</code> <a class="xref" href="Mu3D.Color.LinearRgbImageComparison.html">LinearRgbImageComparison</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_LinearRgbImageComparison_Equals_" data-uid="Mu3D.Color.LinearRgbImageComparison.Equals*"></a>
+
+  <h3 id="Mu3D_Color_LinearRgbImageComparison_Equals_System_Object_" data-uid="Mu3D.Color.LinearRgbImageComparison.Equals(System.Object)">
+  Equals(object)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>obj</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_LinearRgbImageComparison_GetHashCode_" data-uid="Mu3D.Color.LinearRgbImageComparison.GetHashCode*"></a>
+
+  <h3 id="Mu3D_Color_LinearRgbImageComparison_GetHashCode" data-uid="Mu3D.Color.LinearRgbImageComparison.GetHashCode">
+  GetHashCode()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_LinearRgbImageComparison_ToString_" data-uid="Mu3D.Color.LinearRgbImageComparison.ToString*"></a>
+
+  <h3 id="Mu3D_Color_LinearRgbImageComparison_ToString" data-uid="Mu3D.Color.LinearRgbImageComparison.ToString">
+  ToString()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Mu3D_Color_LinearRgbImageComparison_op_Equality_" data-uid="Mu3D.Color.LinearRgbImageComparison.op_Equality*"></a>
+
+  <h3 id="Mu3D_Color_LinearRgbImageComparison_op_Equality_Mu3D_Color_LinearRgbImageComparison_Mu3D_Color_LinearRgbImageComparison_" data-uid="Mu3D.Color.LinearRgbImageComparison.op_Equality(Mu3D.Color.LinearRgbImageComparison,Mu3D.Color.LinearRgbImageComparison)">
+  operator ==(LinearRgbImageComparison, LinearRgbImageComparison)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(LinearRgbImageComparison left, LinearRgbImageComparison right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Mu3D.Color.LinearRgbImageComparison.html">LinearRgbImageComparison</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Mu3D.Color.LinearRgbImageComparison.html">LinearRgbImageComparison</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_LinearRgbImageComparison_op_Inequality_" data-uid="Mu3D.Color.LinearRgbImageComparison.op_Inequality*"></a>
+
+  <h3 id="Mu3D_Color_LinearRgbImageComparison_op_Inequality_Mu3D_Color_LinearRgbImageComparison_Mu3D_Color_LinearRgbImageComparison_" data-uid="Mu3D.Color.LinearRgbImageComparison.op_Inequality(Mu3D.Color.LinearRgbImageComparison,Mu3D.Color.LinearRgbImageComparison)">
+  operator !=(LinearRgbImageComparison, LinearRgbImageComparison)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(LinearRgbImageComparison left, LinearRgbImageComparison right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Mu3D.Color.LinearRgbImageComparison.html">LinearRgbImageComparison</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Mu3D.Color.LinearRgbImageComparison.html">LinearRgbImageComparison</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

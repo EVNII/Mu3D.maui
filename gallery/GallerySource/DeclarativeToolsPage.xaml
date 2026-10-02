@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.DeclarativeToolsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Mu3D.GalleryApp.Controls"
+    xmlns:diagnostics="clr-namespace:Mu3D.Maui.Toolkit.Diagnostics;assembly=Mu3D.Maui.Toolkit"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    xmlns:overlays="clr-namespace:Mu3D.Maui.Toolkit.Overlays;assembly=Mu3D.Maui.Toolkit"
+    xmlns:toolkit="clr-namespace:Mu3D.Maui.Toolkit.Controls;assembly=Mu3D.Maui.Toolkit"
+    Title="Declarative Tools">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="declarative-tools" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <mu3d:Mu3DSceneView
+            x:Name="SceneView"
+            BackgroundColor="Black"
+            FeatureError="OnFeatureError"
+            SurfaceError="OnSurfaceError">
+            <mu3d:Mu3DSceneView.SceneContent>
+                <mu3d:Scene3D Name="Declarative tools scene">
+                    <mu3d:Scene3D.Camera>
+                        <mu3d:PerspectiveCamera3D
+                            x:Name="SceneCamera"
+                            FieldOfView="52"
+                            Name="Orbit camera"
+                            X="3.2"
+                            Y="2.4"
+                            Z="6.2" />
+                    </mu3d:Scene3D.Camera>
+                    <mu3d:Cone3D
+                        x:Name="TargetCone"
+                        Height="1.8"
+                        Name="Blue cone"
+                        Radius="0.72"
+                        toolkit:SceneSelection.Mask="1"
+                        X="-1.1">
+                        <mu3d:PbrMaterial3D
+                            Color="#3296FF"
+                            Metallic="0.12"
+                            Roughness="0.28" />
+                    </mu3d:Cone3D>
+                    <mu3d:Sphere3D
+                        x:Name="TargetSphere"
+                        Name="Orange sphere"
+                        Radius="0.78"
+                        toolkit:SceneSelection.Mask="2"
+                        X="1.15"
+                        Y="-0.12">
+                        <mu3d:PbrMaterial3D
+                            Color="#FF8A38"
+                            Metallic="0.08"
+                            Roughness="0.32" />
+                    </mu3d:Sphere3D>
+                    <mu3d:Sphere3D
+                        Name="Ground marker"
+                        Radius="0.35"
+                        ScaleX="4.5"
+                        ScaleY="0.16"
+                        ScaleZ="4.5"
+                        toolkit:SceneSelection.IsSelectable="False"
+                        Y="-1.08">
+                        <mu3d:UnlitMaterial3D Color="#202B42" />
+                    </mu3d:Sphere3D>
+                    <mu3d:DirectionalLight3D
+                        Intensity="3.8"
+                        RotationX="-35"
+                        RotationY="-30" />
+                </mu3d:Scene3D>
+            </mu3d:Mu3DSceneView.SceneContent>
+            <mu3d:Mu3DSceneView.Features>
+                <toolkit:ViewportTools>
+                    <toolkit:SceneSelectionTool
+                        x:Name="SelectionTool"
+                        SelectedNode="{x:Reference TargetCone}"
+                        SelectionMask="3"
+                        SelectionFailed="OnSelectionFailed" />
+                    <toolkit:OrbitTool
+                        x:Name="SceneOrbit"
+                        Camera="{x:Reference SceneCamera}"
+                        DampingEnabled="True"
+                        DampingTime="0.1"
+                        MaximumDistance="15"
+                        MinimumDistance="2.5" />
+                    <toolkit:TransformGizmoTool
+                        x:Name="GizmoTool"
+                        IsRotateEnabled="True"
+                        IsScaleEnabled="True"
+                        RotationStep="15"
+                        ScaleStep="0.1"
+                        ScreenSize="110"
+                        Target="{Binding SelectedNode, Source={x:Reference SelectionTool}, x:DataType=toolkit:SceneSelectionTool}"
+                        TranslationStep="0.1" />
+                    <toolkit:GridHelper
+                        x:Name="ReferenceGrid"
+                        Divisions="20"
+                        MajorLineEvery="5"
+                        Plane="XZ"
+                        Size="10" />
+                    <toolkit:AxesHelper
+                        x:Name="SceneAxes"
+                        IsInteractive="True"
+                        Orbit="{x:Reference SceneOrbit}"
+                        Placement="TopRight" />
+                    <diagnostics:FrameStatisticsOverlay
+                        x:Name="SceneStatistics"
+                        IsDetailed="False"
+                        IsGraphVisible="True"
+                        IsVisible="False"
+                        Placement="TopLeft" />
+                    <overlays:ViewportOverlay
+                        InputMode="Interactive"
+                        Placement="BottomLeft">
+                        <controls:GalleryDebugSceneControls
+                            Axes="{x:Reference SceneAxes}"
+                            Gizmo="{x:Reference GizmoTool}"
+                            Orbit="{x:Reference SceneOrbit}"
+                            ReferenceGrid="{x:Reference ReferenceGrid}"
+                            Selection="{x:Reference SelectionTool}"
+                            Statistics="{x:Reference SceneStatistics}" />
+                    </overlays:ViewportOverlay>
+                </toolkit:ViewportTools>
+            </mu3d:Mu3DSceneView.Features>
+        </mu3d:Mu3DSceneView>
+        <VerticalStackLayout Grid.Row="1" Padding="16" Spacing="6">
+            <Label
+                FontAttributes="Bold"
+                Text="Tap the cone or sphere to retarget Gizmo; drag empty space to orbit." />
+            <Label
+                x:Name="StatusLabel"
+                FontSize="12"
+                Text="Selection, Orbit, and Gizmo share one attachment-scoped input boundary." />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

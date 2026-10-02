@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Shared-device HDR Surface product feeds | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Shared-device HDR Surface product feeds | Mu3D documentation ">
+      
+      <meta name="description" content="Let MAUI position native HDR Surfaces while Mu3D shares one device and renderer.">
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="shared-device-hdr-surface-product-feeds">Shared-device HDR Surface product feeds</h1>
+
+<p>A catalog should not initialize a complete graphics stack in every recycled item, but its 3D output
+also should not be converted into an SDR bitmap. Put the <code>CollectionView</code> inside one
+<a class="xref" href="../../api/Mu3D.Maui.Toolkit.Controls.SceneViewProxyHost.html">SceneViewProxyHost</a> and place a
+<a class="xref" href="../../api/Mu3D.Maui.Toolkit.Controls.SceneViewProxy.html">SceneViewProxy</a> in each preview region.</p>
+<p>Every proxy contains a GPU-native presentation carrier, making its last presented buffer part of
+the MAUI card's visual hierarchy. MAUI moves the Surface during native scrolling; application code
+does not reconstruct item rectangles or synchronize a sibling render layer. The host shares one
+graphics Device, Queue, renderer, pipelines and uploaded resources across those compatible Surfaces.
+No GPU readback, PNG encoding or image decode is involved.</p>
+<p>For uniform cards, set <code>ItemSizingStrategy=&quot;MeasureFirstItem&quot;</code>, use compiled bindings, and use the
+scrolling contract only to choose bounded loading and warm ranges. See the
+<a href="https://learn.microsoft.com/dotnet/maui/user-interface/controls/collectionview/layout">.NET MAUI CollectionView layout guidance</a>
+and <a href="https://learn.microsoft.com/dotnet/maui/user-interface/controls/collectionview/scrolling">scrolling contract</a>.</p>
+<h2 id="xaml">XAML</h2>
+<p>The default host policy is HDR-first. The following transparent background is a platform alpha
+diagnostic, not a portable promise that sibling MAUI content will appear through the model Surface:</p>
+<pre><code class="lang-xaml">&lt;toolkit:SceneViewProxyHost x:Name=&quot;SurfaceHost&quot;&gt;
+  &lt;CollectionView
+      ItemSizingStrategy=&quot;MeasureFirstItem&quot;
+      ItemsSource=&quot;{Binding Products}&quot;&gt;
+    &lt;CollectionView.ItemTemplate&gt;
+      &lt;DataTemplate x:DataType=&quot;local:ProductPreview&quot;&gt;
+        &lt;Grid RowDefinitions=&quot;190,Auto&quot;&gt;
+          &lt;toolkit:SceneViewProxy
+              Host=&quot;{x:Reference SurfaceHost}&quot;
+              Scene=&quot;{Binding Scene}&quot;
+              Camera=&quot;{Binding Camera}&quot;
+              IsRenderingEnabled=&quot;{Binding IsLive}&quot;
+              SceneBackgroundColor=&quot;{Binding SceneBackgroundColor}&quot;&gt;
+            &lt;toolkit:SceneViewProxy.Underlay&gt;
+              &lt;!-- Ordinary MAUI content kept behind the native presentation carrier. --&gt;
+              &lt;Grid&gt;
+                &lt;!-- Use an explicit child visual for the sampled backdrop on Windows. --&gt;
+                &lt;BoxView Color=&quot;#FFF4E6&quot; /&gt;
+                &lt;Label Text=&quot;ordinary MAUI underlay&quot; /&gt;
+              &lt;/Grid&gt;
+            &lt;/toolkit:SceneViewProxy.Underlay&gt;
+            &lt;toolkit:SceneViewProxy.Placeholder&gt;
+              &lt;Grid&gt;
+                &lt;!-- ordinary MAUI placeholder shown until first presentation --&gt;
+              &lt;/Grid&gt;
+            &lt;/toolkit:SceneViewProxy.Placeholder&gt;
+          &lt;/toolkit:SceneViewProxy&gt;
+          &lt;Label Grid.Row=&quot;1&quot; Text=&quot;{Binding Name}&quot; /&gt;
+        &lt;/Grid&gt;
+      &lt;/DataTemplate&gt;
+    &lt;/CollectionView.ItemTemplate&gt;
+  &lt;/CollectionView&gt;
+&lt;/toolkit:SceneViewProxyHost&gt;
+</code></pre>
+<p>The diagnostic accepts only an alpha-0 transparent or alpha-1 opaque <code>SceneBackgroundColor</code>.
+Fractional background composition remains deliberately deferred. Mu3D
+transfer-decodes opaque UI sRGB colors to linear light. Scene highlights remain in the HDR-first
+FP16 Surface and are not clipped to an image format. The host selects the concrete alpha mode that
+the target compositor advertises instead of assuming one alpha representation is portable.</p>
+<p>If mutable camera, material, animation or scene state changes without replacing the object
+reference, increment <code>RenderRevision</code> or call <code>InvalidateScene</code>. A successful frame sets
+<code>HasPresentedFrame</code> and hides the optional placeholder.</p>
+<h2 id="ownership-and-loading-policy">Ownership and loading policy</h2>
+<p><code>SceneViewProxyHost</code> owns a hidden one-pixel automatic <code>Mu3DView</code> solely to establish the normal
+MAUI Handler/window device lifecycle. Each proxy's manual <code>Mu3DView</code> supplies a native Surface or
+platform GPU-native presentation target, and its compatible session borrows the host Device. The host
+serializes carrier creation and one-frame presentation so a newly realized range does not initialize
+in one blocking batch. CPU/GPU renderer preparation, uploads, encoding and submit run on the host's
+single worker frame; MAUI retains carrier attachment, lifecycle changes and final state notification.</p>
+<p>Bound these independent working sets:</p>
+<ol>
+<li>Fetch, parse and instantiate glTF with bounded background concurrency. A fixed-capacity,
+reusable priority queue ranks visible items before preloads, then nominal distance and stable
+index; create no more real load tasks than the concurrency limit instead of parking a task and
+linked cancellation source for every nearby item.</li>
+<li>Keep reusable <a class="xref" href="../../api/Mu3D.Formats.Gltf.GltfSceneAsset.html">GltfSceneAsset</a> definitions in a bounded
+<a class="xref" href="../../api/Mu3D.Toolkit.Assets.AsyncAssetCache-2.html">AsyncAssetCache&lt;TKey, TAsset&gt;</a>.</li>
+<li>Start loading before a card enters the viewport. Treat the native CollectionView's reported
+first/last visible item indexes as viewport truth; use the known uniform row extent only to
+estimate signed distance beyond that anchored range. The Gallery uses a nominal 3 cm band,
+calculated from the platform's logical-unit standard; it is an interaction threshold, not
+calibrated physical-display metrology.</li>
+<li>Keep a recently departed Proxy live briefly to avoid churn. The Gallery suspends at 6 cm or 1.5
+seconds and releases managed scene content at 12 cm or 5 seconds. <code>IsRenderingEnabled=&quot;False&quot;</code>
+unconfigures that Proxy's compatible session and restores its XAML placeholder; recycled or
+unloaded proxies still leave the host completely. Crossing the release policy also cancels that
+item's unfinished linked asset request.</li>
+<li>Pass the bounded nearby scene set to <code>SetRetainedScenes</code> for shared renderer GPU-cache warmth.</li>
+<li>For a bounded catalog, materialize its lightweight product descriptors before the native list
+binds, then virtualize only the expensive scene content and HDR Surfaces. The Gallery fixes its
+60 descriptors at startup so native content extent, scrollbar thumb and item count do not change
+while scrolling. A genuinely unbounded consumer that must append should leave the native scroll
+callback first and publish each appended range atomically; UIKit validates section counts during
+smooth-scroll transactions.</li>
+</ol>
+<p>Do not run the whole retention policy on every native scroll notification. The Gallery records the
+latest native visible range, coalesces changed rows to at most one update per display interval and
+reuses fixed-capacity sets, distance arrays, ordering buffers and diagnostic builders. Asset loads
+and published UI strings still allocate by design; steady-state range calculation does not need to.
+Keep the native item extent and its preview extent exact. During active momentum scrolling the
+Gallery continues visible promotion/loading but defers Surface suspension, managed-content release
+and diagnostic text publication until 200 ms of scroll inactivity. This keeps placeholder
+visibility and native-session teardown out of UICollectionView's self-sizing transaction; the
+idle reconciliation then applies the same distance/time retention policy once.
+On Apple, confirm the native handler really honors that exact extent. The .NET 10 optimized
+CollectionView handler uses a compositional layout with estimated dimensions; resolving preferred
+sizes for cells realized above the current anchor can correct content offset and make upward scroll
+or its indicator jump even when the XAML root has a height request. This Gallery scopes the legacy
+flow-layout handler to its <code>ProductFeedCollectionView</code> only, where <code>MeasureFirstItem</code> supplies one
+uniform exact item size; unrelated CollectionViews retain the optimized handler.
+Android does not use that UIKit layout. For this fixed descriptor count and exact item extent, the
+Gallery instead marks only the Product Feed's native RecyclerView as fixed-size and removes its
+item animator, because Poster/Live state changes are non-structural and must not trigger parent-size
+work or change animations. The .NET 10 Windows handler has no equivalent UIKit estimated-section
+solver, so the shared exact XAML extent and stable item source remain the Windows policy; do not
+replace handlers there without target-specific evidence.</p>
+<p>The Gallery keeps diagnostics out of the reusable controls but shows a throttled row for every
+product: nominal signed distance from the viewport, MAUI Proxy realization, managed-content
+readiness, first-frame completion and current retention policy. This separates successful prefetch
+from CollectionView cell/Handler realization and from native session/first-frame work. Do not
+update a long diagnostic string on every scroll event in production UI.</p>
+<p>For a passive catalog preview, set the Proxy <code>InputTransparent=&quot;True&quot;</code> so the CollectionView remains
+the wheel/pan target. The Gallery also keeps its nested diagnostic scroller transparent on Windows,
+where the catalog's compositor experiment requires one wheel target; Mac Catalyst makes that
+diagnostic scroller interactive. Do not apply input transparency to an interactive preview that
+intentionally owns orbit, selection or gizmo input.</p>
+<p>Page disappearance may set the host's <code>IsRenderingEnabled=&quot;False&quot;</code> to unconfigure every compatible
+Proxy Surface at once. Final Proxy Surfaces are released before the host's owning session/device
+through normal Loaded/Unloaded, Handler and window teardown. Do not put a host, proxy, page, Handler or Surface in <code>AddSingleton</code>; DI is suitable
+for bounded immutable asset definitions or a future window-scoped coordinator, not visual ownership.</p>
+<h2 id="choosing-the-rendering-path">Choosing the rendering path</h2>
+<p>Use <a class="xref" href="../../api/Mu3D.Maui.Toolkit.Controls.SceneViewProxy.html">SceneViewProxy</a> for a virtualized collection that needs
+GPU-native previews and shared device resources. An opaque background selects direct HDR
+presentation; a transparent background selects the platform binary-mask carrier. Each active proxy
+still consumes a native presentation output, so the realized/live range must remain bounded.</p>
+<p>Use <a class="xref" href="../../api/Mu3D.Maui.Toolkit.Controls.VirtualizedSceneView.html">VirtualizedSceneView</a> for a few independent interactive views
+that do not need this shared-device host. Use
+<a class="xref" href="../../api/Mu3D.Maui.Toolkit.Controls.SceneViewportHost.html">SceneViewportHost</a> only when an application deliberately renders
+multiple logical regions into one Mu3D Surface and accepts separate coordination of that layer.</p>
+<p>Platform compositor details differ, so alpha transport uses platform-specific MAUI Handlers while
+the XAML above remains portable. Android requests a translucent native Surface and wgpu's inherited
+alpha mode. Apple marks its <code>UIView</code>/<code>CAMetalLayer</code> carrier non-opaque and requests Metal's
+straight-alpha mode. Because the scene renderer produces premultiplied RGBA, Apple renders once to a
+reusable FP16 intermediate and uses a full-screen texture-load pass to divide RGB by nonzero alpha
+before presentation. This preserves extended-range color and per-pixel alpha without CPU readback,
+image conversion or a second scene render. Opaque Windows output uses a direct <code>SwapChainPanel</code>.
+The accepted synchronized Windows HDR-mask topology also keeps FP16 scene color in that direct
+panel. Mu3D renders each frame once into one FP16 RGBA master texture. When the exact native Surface
+advertises <code>CopyDestination</code>, a GPU texture copy sends its color to the direct HDR Surface. The
+portable Surface baseline guarantees only <code>RenderAttachment</code>, so other devices use a full-screen
+FP16 texture-load pass to transfer the same master frame without rerendering the scene. WinUI reads
+the master texture's alpha, inverts it and replays the MAUI <code>Underlay</code> above the opaque HDR plane.
+Both planes are children of the same XAML card, so
+CollectionView scrolling, clipping and MAUI animation transforms remain synchronized and HDR color
+never crosses a WinUI drawing-surface color path. No path uses a second scene submission, CPU
+readback, image conversion or a codec.</p>
+<p>Physical testing confirms that this synchronized Windows path preserves HDR, masking, scrolling and
+frame-for-frame Alpha alignment during rotation. It remains guarded until Mu3D publishes the
+required patched Windows runtime assets; the ordinary packaged transparent Windows path continues
+to use the honest SDR compositor-owned mask carrier and respects <code>SdrFallbackMode</code>, while opaque
+output remains direct HDR. Carrier selection is Handler-owned and does not require platform-specific
+XAML.</p>
+<p>Because the direct HDR plane is necessarily opaque, the underlay must paint the complete backdrop
+that should appear outside the model silhouette. On Windows, make that backdrop an explicit child
+visual such as a fill-sized <code>BoxView</code>; a layout's own MAUI background can live outside the sampled
+child-visual content. An underlay containing only transparent pixels and text reveals the direct
+plane's black clear color between those glyphs. An ancestor background is deliberately not sampled
+or duplicated implicitly.</p>
+<p>Physical testing accepts the combined HDR highlight, complete MAUI backdrop, model mask and
+same-tree scrolling behavior. Repeating <code>Emissive row</code> cards now rotate continuously from their
+frame-presented callback. That completion-driven loop changes the transform only between frames and
+requests the next frame without a generic timer; it is the focused test that HDR color and mask
+alpha stay on the same animated frame. <code>InputTransparent</code> remains an application choice: passive
+catalog previews should let their CollectionView own input, while interactive previews may attach
+normal camera, selection or gizmo tools.</p>
+<p>For a like-for-like visual check, repeating <code>Emissive row</code> products alternate between transparent
+FP16-mask and opaque direct-HDR presentation. Their card titles state the selected carrier, so the
+same emissive glTF can be compared without inferring the path from its item number.</p>
+
+</article>
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <base href="/Mu3D.maui/gallery/">
+  <script>
+    const base = document.querySelector("base");
+    // Published static hosts supply their own base; retain local validation's automatic routes.
+    if (base.getAttribute("href") === "/")
+      base.href = location.pathname.match(/^\/(Gallery(?:Aot)?)\//)?.[0] ?? "/";
+    const current = new URL(location.href);
+    const route = current.searchParams.get("mu3d-route");
+    if (route !== null) {
+      current.searchParams.delete("mu3d-route");
+      let restored = current;
+      try {
+        const candidate = new URL(route, current);
+        const deployment = new URL(document.baseURI);
+        if (candidate.origin === current.origin && deployment.origin === current.origin &&
+            candidate.pathname.startsWith(deployment.pathname)) restored = candidate;
+      } catch { /* Invalid fallback routes remain at the deployment root. */ }
+      history.replaceState(null, "", restored.pathname + restored.search + restored.hash);
+    }
+    const style = document.createElement("link");
+    style.rel = "stylesheet"; style.href = new URL("gallery.css", document.baseURI);
+    document.head.append(style);
+  </script><title>Mu3D Web Gallery</title>
+</head>
+<body>
+  <div id="app">正在加载 Mu3D Gallery…</div>
+  <div id="blazor-error-ui" hidden>应用遇到错误。<a href="">重新加载</a></div>
+  <script>
+    const boot = document.createElement("script");
+    boot.src = new URL("_framework/blazor.webassembly.js", document.baseURI);
+    document.body.append(boot);
+  </script>
+</body>
+</html>

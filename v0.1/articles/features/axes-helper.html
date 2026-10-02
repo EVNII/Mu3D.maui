@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Orientation axes helper | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Orientation axes helper | Mu3D documentation ">
+      
+      <meta name="description" content="Add an HDR-linear orientation overlay with optional cardinal and 45-degree camera navigation.">
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="orientation-axes-helper">Orientation axes helper</h1>
+
+<p><code>AxesHelper</code> is a passive, fixed-physical-pixel orientation overlay by default. It is not scene
+geometry, is never selectable, does not affect bounds or exports, and always renders after scene
+color without a depth attachment. Red, green, and blue identify X, Y, and Z; every cardinal marker
+contains a high-contrast <code>+</code> or <code>-</code>, and negative endpoints are also dimmed. Optional neutral dots
+select two-axis 45-degree views. The signs are vector geometry rather than font glyphs, so they keep
+the same physical-pixel shape on every target platform. Sign color is contrast-aware: bright green
+markers use a dark sign while red, blue, and other dark markers use a light sign.</p>
+<h2 id="add-passive-axes">Add passive axes</h2>
+<p>Place the helper in the same explicit <code>ViewportTools</code> collection as other tools:</p>
+<pre><code class="lang-xaml">&lt;toolkit:ViewportTools&gt;
+  &lt;toolkit:AxesHelper
+      Placement=&quot;TopRight&quot;
+      ScreenSize=&quot;112&quot;
+      ShowNegativeAxes=&quot;True&quot;
+      ShowDiagonalViews=&quot;True&quot; /&gt;
+&lt;/toolkit:ViewportTools&gt;
+</code></pre>
+<p>The overlay uses physical pixels, so DPI changes do not make its hit targets too small. <code>Margin</code>,
+<code>Placement</code>, <code>ScreenSize</code>, visibility, negative axes, and diagonal handles are bindable. World axes
+are the default. Set <code>Space=&quot;TargetLocal&quot;</code> and assign <code>Target</code> to display a declarative node's world
+orientation instead.</p>
+<h2 id="enable-camera-navigation">Enable camera navigation</h2>
+<p>Interaction is opt-in. Explicitly reference the sibling Orbit tool so the controller updates its
+own azimuth, polar angle, target, distance, and pending damping state together:</p>
+<pre><code class="lang-xaml">&lt;toolkit:ViewportTools&gt;
+  &lt;toolkit:OrbitTool
+      x:Name=&quot;Orbit&quot;
+      Camera=&quot;{x:Reference Camera}&quot; /&gt;
+  &lt;toolkit:AxesHelper
+      IsInteractive=&quot;True&quot;
+      Orbit=&quot;{x:Reference Orbit}&quot;
+      ShowDiagonalViews=&quot;True&quot; /&gt;
+&lt;/toolkit:ViewportTools&gt;
+</code></pre>
+<p>Click a cardinal endpoint to move the camera onto positive or negative X, Y, or Z while preserving
+the current orbit target and distance. Click a neutral dot to choose one of the twelve normalized
+two-axis directions, producing an exact 45-degree relationship between those axes. Top and bottom
+views respect the Orbit controller's pole constraints.</p>
+<p>The adapter installs one MAUI tap recognizer only while attached and interactive. An accepted
+helper tap briefly claims the shared <code>ViewportControlArbiter</code>, preventing the same tap from becoming
+scene selection. It does not interfere with a transform drag that already owns control.</p>
+<h2 id="replace-the-camera-policy">Replace the camera policy</h2>
+<p><code>ViewRequested</code> fires before the default Orbit action. An application can replace
+<code>CameraDirection</code>, cancel the request, or set <code>Handled</code> after applying its own camera rig. This keeps
+camera transitions, projection changes, undo policy, and animation application-owned. The
+UI-independent <code>Mu3D.Toolkit.Helpers.AxesHelper</code> and <code>AxesHelperHitTester</code> can also be used by a
+non-MAUI host.</p>
+<p>The shared pass reuses bounded drawing data while evaluating current camera, target orientation,
+placement and physical viewport settings each frame. Equal-depth handles retain their authored
+drawing order. Failed submissions cannot carry old geometry into the next frame; disposal releases
+owned graphics resources and staging while retaining the borrowed helper and target. Target-local
+orientation explicitly queries the assigned node even if it is detached, hidden or camera-masked.</p>
+
+</article>
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

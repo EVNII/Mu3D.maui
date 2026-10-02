@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class GraphicsCommandEncoder | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class GraphicsCommandEncoder | Mu3D documentation ">
+      
+      <meta name="description" content="Records copy and render commands for one command buffer.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Graphics.GraphicsCommandEncoder">
+
+
+
+  <h1 id="Mu3D_Graphics_GraphicsCommandEncoder" data-uid="Mu3D.Graphics.GraphicsCommandEncoder" class="text-break">
+Class GraphicsCommandEncoder  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Graphics.html">Graphics</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Graphics.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Records copy and render commands for one command buffer.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class GraphicsCommandEncoder : GraphicsResource, IDisposable</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Mu3D.Graphics.GraphicsResource.html">GraphicsResource</a></div>
+      <div><span class="xref">GraphicsCommandEncoder</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Mu3D.Graphics.GraphicsResource.html#Mu3D_Graphics_GraphicsResource_Dispose">GraphicsResource.Dispose()</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Graphics.GraphicsResource.html#Mu3D_Graphics_GraphicsResource_DisposeCore">GraphicsResource.DisposeCore()</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Graphics.GraphicsResource.html#Mu3D_Graphics_GraphicsResource_Device">GraphicsResource.Device</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Graphics.GraphicsResource.html#Mu3D_Graphics_GraphicsResource_Label">GraphicsResource.Label</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Graphics.GraphicsResource.html#Mu3D_Graphics_GraphicsResource_IsDisposed">GraphicsResource.IsDisposed</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_Graphics_GraphicsCommandEncoder__ctor_" data-uid="Mu3D.Graphics.GraphicsCommandEncoder.#ctor*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsCommandEncoder__ctor_Mu3D_Graphics_GraphicsDevice_System_String_" data-uid="Mu3D.Graphics.GraphicsCommandEncoder.#ctor(Mu3D.Graphics.GraphicsDevice,System.String)">
+  GraphicsCommandEncoder(GraphicsDevice, string?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a backend command encoder.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected GraphicsCommandEncoder(GraphicsDevice device, string? label)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>device</code> <a class="xref" href="Mu3D.Graphics.GraphicsDevice.html">GraphicsDevice</a></dt>
+    <dd></dd>
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Graphics_GraphicsCommandEncoder_BeginRenderPass_" data-uid="Mu3D.Graphics.GraphicsCommandEncoder.BeginRenderPass*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsCommandEncoder_BeginRenderPass_Mu3D_Graphics_GraphicsRenderPassDescriptor_" data-uid="Mu3D.Graphics.GraphicsCommandEncoder.BeginRenderPass(Mu3D.Graphics.GraphicsRenderPassDescriptor)">
+  BeginRenderPass(GraphicsRenderPassDescriptor)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Begins a render pass targeting a color attachment, a depth attachment, or both.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphicsRenderPassEncoder BeginRenderPass(GraphicsRenderPassDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Mu3D.Graphics.GraphicsRenderPassDescriptor.html">GraphicsRenderPassDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsRenderPassEncoder.html">GraphicsRenderPassEncoder</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsCommandEncoder_BeginRenderPassCore_" data-uid="Mu3D.Graphics.GraphicsCommandEncoder.BeginRenderPassCore*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsCommandEncoder_BeginRenderPassCore_Mu3D_Graphics_GraphicsRenderPassDescriptor_" data-uid="Mu3D.Graphics.GraphicsCommandEncoder.BeginRenderPassCore(Mu3D.Graphics.GraphicsRenderPassDescriptor)">
+  BeginRenderPassCore(GraphicsRenderPassDescriptor)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Begins the backend render pass after common attachment validation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected abstract GraphicsRenderPassEncoder BeginRenderPassCore(GraphicsRenderPassDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Mu3D.Graphics.GraphicsRenderPassDescriptor.html">GraphicsRenderPassDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsRenderPassEncoder.html">GraphicsRenderPassEncoder</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsCommandEncoder_CopyBufferToBuffer_" data-uid="Mu3D.Graphics.GraphicsCommandEncoder.CopyBufferToBuffer*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsCommandEncoder_CopyBufferToBuffer_Mu3D_Graphics_GraphicsBuffer_System_UInt64_Mu3D_Graphics_GraphicsBuffer_System_UInt64_System_UInt64_" data-uid="Mu3D.Graphics.GraphicsCommandEncoder.CopyBufferToBuffer(Mu3D.Graphics.GraphicsBuffer,System.UInt64,Mu3D.Graphics.GraphicsBuffer,System.UInt64,System.UInt64)">
+  CopyBufferToBuffer(GraphicsBuffer, ulong, GraphicsBuffer, ulong, ulong)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Copies a four-byte-aligned range between two buffers owned by this device.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CopyBufferToBuffer(GraphicsBuffer source, ulong sourceOffset, GraphicsBuffer destination, ulong destinationOffset, ulong size)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="Mu3D.Graphics.GraphicsBuffer.html">GraphicsBuffer</a></dt>
+    <dd></dd>
+    <dt><code>sourceOffset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></dt>
+    <dd></dd>
+    <dt><code>destination</code> <a class="xref" href="Mu3D.Graphics.GraphicsBuffer.html">GraphicsBuffer</a></dt>
+    <dd></dd>
+    <dt><code>destinationOffset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></dt>
+    <dd></dd>
+    <dt><code>size</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsCommandEncoder_CopyBufferToBufferCore_" data-uid="Mu3D.Graphics.GraphicsCommandEncoder.CopyBufferToBufferCore*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsCommandEncoder_CopyBufferToBufferCore_Mu3D_Graphics_GraphicsBuffer_System_UInt64_Mu3D_Graphics_GraphicsBuffer_System_UInt64_System_UInt64_" data-uid="Mu3D.Graphics.GraphicsCommandEncoder.CopyBufferToBufferCore(Mu3D.Graphics.GraphicsBuffer,System.UInt64,Mu3D.Graphics.GraphicsBuffer,System.UInt64,System.UInt64)">
+  CopyBufferToBufferCore(GraphicsBuffer, ulong, GraphicsBuffer, ulong, ulong)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Records a validated buffer copy.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected abstract void CopyBufferToBufferCore(GraphicsBuffer source, ulong sourceOffset, GraphicsBuffer destination, ulong destinationOffset, ulong size)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="Mu3D.Graphics.GraphicsBuffer.html">GraphicsBuffer</a></dt>
+    <dd></dd>
+    <dt><code>sourceOffset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></dt>
+    <dd></dd>
+    <dt><code>destination</code> <a class="xref" href="Mu3D.Graphics.GraphicsBuffer.html">GraphicsBuffer</a></dt>
+    <dd></dd>
+    <dt><code>destinationOffset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></dt>
+    <dd></dd>
+    <dt><code>size</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsCommandEncoder_CopyTextureToBuffer_" data-uid="Mu3D.Graphics.GraphicsCommandEncoder.CopyTextureToBuffer*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsCommandEncoder_CopyTextureToBuffer_Mu3D_Graphics_GraphicsTexture_System_UInt32_Mu3D_Graphics_GraphicsOrigin3D_Mu3D_Graphics_GraphicsExtent3D_Mu3D_Graphics_GraphicsBuffer_System_UInt64_System_UInt32_System_UInt32_" data-uid="Mu3D.Graphics.GraphicsCommandEncoder.CopyTextureToBuffer(Mu3D.Graphics.GraphicsTexture,System.UInt32,Mu3D.Graphics.GraphicsOrigin3D,Mu3D.Graphics.GraphicsExtent3D,Mu3D.Graphics.GraphicsBuffer,System.UInt64,System.UInt32,System.UInt32)">
+  CopyTextureToBuffer(GraphicsTexture, uint, GraphicsOrigin3D, GraphicsExtent3D, GraphicsBuffer, ulong, uint, uint)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Copies one color-texture subresource region into a row-padded buffer. Buffer rows must be
+aligned to 256 bytes. For compressed formats, origins and physical copy extents are
+block-aligned and <code class="paramref">rowsPerImage</code> counts block rows.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CopyTextureToBuffer(GraphicsTexture source, uint mipLevel, GraphicsOrigin3D origin, GraphicsExtent3D copySize, GraphicsBuffer destination, ulong destinationOffset, uint bytesPerRow, uint rowsPerImage)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="Mu3D.Graphics.GraphicsTexture.html">GraphicsTexture</a></dt>
+    <dd></dd>
+    <dt><code>mipLevel</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+    <dt><code>origin</code> <a class="xref" href="Mu3D.Graphics.GraphicsOrigin3D.html">GraphicsOrigin3D</a></dt>
+    <dd></dd>
+    <dt><code>copySize</code> <a class="xref" href="Mu3D.Graphics.GraphicsExtent3D.html">GraphicsExtent3D</a></dt>
+    <dd></dd>
+    <dt><code>destination</code> <a class="xref" href="Mu3D.Graphics.GraphicsBuffer.html">GraphicsBuffer</a></dt>
+    <dd></dd>
+    <dt><code>destinationOffset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></dt>
+    <dd></dd>
+    <dt><code>bytesPerRow</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+    <dt><code>rowsPerImage</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsCommandEncoder_CopyTextureToBufferCore_" data-uid="Mu3D.Graphics.GraphicsCommandEncoder.CopyTextureToBufferCore*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsCommandEncoder_CopyTextureToBufferCore_Mu3D_Graphics_GraphicsTexture_System_UInt32_Mu3D_Graphics_GraphicsOrigin3D_Mu3D_Graphics_GraphicsExtent3D_Mu3D_Graphics_GraphicsBuffer_System_UInt64_System_UInt32_System_UInt32_" data-uid="Mu3D.Graphics.GraphicsCommandEncoder.CopyTextureToBufferCore(Mu3D.Graphics.GraphicsTexture,System.UInt32,Mu3D.Graphics.GraphicsOrigin3D,Mu3D.Graphics.GraphicsExtent3D,Mu3D.Graphics.GraphicsBuffer,System.UInt64,System.UInt32,System.UInt32)">
+  CopyTextureToBufferCore(GraphicsTexture, uint, GraphicsOrigin3D, GraphicsExtent3D, GraphicsBuffer, ulong, uint, uint)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Records one validated texture-to-buffer copy through the backend.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void CopyTextureToBufferCore(GraphicsTexture source, uint mipLevel, GraphicsOrigin3D origin, GraphicsExtent3D copySize, GraphicsBuffer destination, ulong destinationOffset, uint bytesPerRow, uint rowsPerImage)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="Mu3D.Graphics.GraphicsTexture.html">GraphicsTexture</a></dt>
+    <dd></dd>
+    <dt><code>mipLevel</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+    <dt><code>origin</code> <a class="xref" href="Mu3D.Graphics.GraphicsOrigin3D.html">GraphicsOrigin3D</a></dt>
+    <dd></dd>
+    <dt><code>copySize</code> <a class="xref" href="Mu3D.Graphics.GraphicsExtent3D.html">GraphicsExtent3D</a></dt>
+    <dd></dd>
+    <dt><code>destination</code> <a class="xref" href="Mu3D.Graphics.GraphicsBuffer.html">GraphicsBuffer</a></dt>
+    <dd></dd>
+    <dt><code>destinationOffset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></dt>
+    <dd></dd>
+    <dt><code>bytesPerRow</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+    <dt><code>rowsPerImage</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsCommandEncoder_CopyTextureToTexture_" data-uid="Mu3D.Graphics.GraphicsCommandEncoder.CopyTextureToTexture*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsCommandEncoder_CopyTextureToTexture_Mu3D_Graphics_GraphicsTexture_System_UInt32_Mu3D_Graphics_GraphicsOrigin3D_Mu3D_Graphics_GraphicsTexture_System_UInt32_Mu3D_Graphics_GraphicsOrigin3D_Mu3D_Graphics_GraphicsExtent3D_" data-uid="Mu3D.Graphics.GraphicsCommandEncoder.CopyTextureToTexture(Mu3D.Graphics.GraphicsTexture,System.UInt32,Mu3D.Graphics.GraphicsOrigin3D,Mu3D.Graphics.GraphicsTexture,System.UInt32,Mu3D.Graphics.GraphicsOrigin3D,Mu3D.Graphics.GraphicsExtent3D)">
+  CopyTextureToTexture(GraphicsTexture, uint, GraphicsOrigin3D, GraphicsTexture, uint, GraphicsOrigin3D, GraphicsExtent3D)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Copies one color-texture subresource region into another texture with the same format.
+Compressed-texture origins and physical copy extents must be block-aligned.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CopyTextureToTexture(GraphicsTexture source, uint sourceMipLevel, GraphicsOrigin3D sourceOrigin, GraphicsTexture destination, uint destinationMipLevel, GraphicsOrigin3D destinationOrigin, GraphicsExtent3D copySize)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="Mu3D.Graphics.GraphicsTexture.html">GraphicsTexture</a></dt>
+    <dd></dd>
+    <dt><code>sourceMipLevel</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+    <dt><code>sourceOrigin</code> <a class="xref" href="Mu3D.Graphics.GraphicsOrigin3D.html">GraphicsOrigin3D</a></dt>
+    <dd></dd>
+    <dt><code>destination</code> <a class="xref" href="Mu3D.Graphics.GraphicsTexture.html">GraphicsTexture</a></dt>
+    <dd></dd>
+    <dt><code>destinationMipLevel</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+    <dt><code>destinationOrigin</code> <a class="xref" href="Mu3D.Graphics.GraphicsOrigin3D.html">GraphicsOrigin3D</a></dt>
+    <dd></dd>
+    <dt><code>copySize</code> <a class="xref" href="Mu3D.Graphics.GraphicsExtent3D.html">GraphicsExtent3D</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsCommandEncoder_CopyTextureToTextureCore_" data-uid="Mu3D.Graphics.GraphicsCommandEncoder.CopyTextureToTextureCore*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsCommandEncoder_CopyTextureToTextureCore_Mu3D_Graphics_GraphicsTexture_System_UInt32_Mu3D_Graphics_GraphicsOrigin3D_Mu3D_Graphics_GraphicsTexture_System_UInt32_Mu3D_Graphics_GraphicsOrigin3D_Mu3D_Graphics_GraphicsExtent3D_" data-uid="Mu3D.Graphics.GraphicsCommandEncoder.CopyTextureToTextureCore(Mu3D.Graphics.GraphicsTexture,System.UInt32,Mu3D.Graphics.GraphicsOrigin3D,Mu3D.Graphics.GraphicsTexture,System.UInt32,Mu3D.Graphics.GraphicsOrigin3D,Mu3D.Graphics.GraphicsExtent3D)">
+  CopyTextureToTextureCore(GraphicsTexture, uint, GraphicsOrigin3D, GraphicsTexture, uint, GraphicsOrigin3D, GraphicsExtent3D)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Records one validated texture-to-texture copy through the backend.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void CopyTextureToTextureCore(GraphicsTexture source, uint sourceMipLevel, GraphicsOrigin3D sourceOrigin, GraphicsTexture destination, uint destinationMipLevel, GraphicsOrigin3D destinationOrigin, GraphicsExtent3D copySize)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="Mu3D.Graphics.GraphicsTexture.html">GraphicsTexture</a></dt>
+    <dd></dd>
+    <dt><code>sourceMipLevel</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+    <dt><code>sourceOrigin</code> <a class="xref" href="Mu3D.Graphics.GraphicsOrigin3D.html">GraphicsOrigin3D</a></dt>
+    <dd></dd>
+    <dt><code>destination</code> <a class="xref" href="Mu3D.Graphics.GraphicsTexture.html">GraphicsTexture</a></dt>
+    <dd></dd>
+    <dt><code>destinationMipLevel</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+    <dt><code>destinationOrigin</code> <a class="xref" href="Mu3D.Graphics.GraphicsOrigin3D.html">GraphicsOrigin3D</a></dt>
+    <dd></dd>
+    <dt><code>copySize</code> <a class="xref" href="Mu3D.Graphics.GraphicsExtent3D.html">GraphicsExtent3D</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsCommandEncoder_Finish_" data-uid="Mu3D.Graphics.GraphicsCommandEncoder.Finish*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsCommandEncoder_Finish_System_String_" data-uid="Mu3D.Graphics.GraphicsCommandEncoder.Finish(System.String)">
+  Finish(string?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Finishes recording and returns a command buffer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphicsCommandBuffer Finish(string? label = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsCommandBuffer.html">GraphicsCommandBuffer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsCommandEncoder_FinishCore_" data-uid="Mu3D.Graphics.GraphicsCommandEncoder.FinishCore*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsCommandEncoder_FinishCore_System_String_" data-uid="Mu3D.Graphics.GraphicsCommandEncoder.FinishCore(System.String)">
+  FinishCore(string?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Finishes the backend encoder.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected abstract GraphicsCommandBuffer FinishCore(string? label)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsCommandBuffer.html">GraphicsCommandBuffer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

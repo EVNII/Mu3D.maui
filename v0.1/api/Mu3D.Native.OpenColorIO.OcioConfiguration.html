@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class OcioConfiguration | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class OcioConfiguration | Mu3D documentation ">
+      
+      <meta name="description" content="An explicitly loaded OCIO v2 configuration with immutable, independently owned CPU processors.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration">
+
+
+
+  <h1 id="Mu3D_Native_OpenColorIO_OcioConfiguration" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration" class="text-break">
+Class OcioConfiguration  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Native.html">Native</a>.<a class="xref" href="Mu3D.Native.OpenColorIO.html">OpenColorIO</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Native.OpenColorIO.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>An explicitly loaded OCIO v2 configuration with immutable, independently owned CPU processors.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class OcioConfiguration : IDisposable</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">OcioConfiguration</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="Mu3D_Native_OpenColorIO_OcioConfiguration_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>No process-global OCIO configuration is selected or modified. Context variables use the configuration's
+declared defaults; process environment overrides and active display/view filters are not used by this API.
+Files and referenced LUTs remain application-owned. Loading a new configuration is an explicit operation.</p>
+</div>
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Native_OpenColorIO_OcioConfiguration_CacheId_" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.CacheId*"></a>
+
+  <h3 id="Mu3D_Native_OpenColorIO_OcioConfiguration_CacheId" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.CacheId">
+  CacheId
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets this configuration/context's OCIO cache identity when loaded.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string CacheId { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_OpenColorIO_OcioConfiguration_ColorSpaces_" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.ColorSpaces*"></a>
+
+  <h3 id="Mu3D_Native_OpenColorIO_OcioConfiguration_ColorSpaces" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.ColorSpaces">
+  ColorSpaces
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets all declared color-space names, including inactive spaces.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;string&gt; ColorSpaces { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_OpenColorIO_OcioConfiguration_Displays_" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.Displays*"></a>
+
+  <h3 id="Mu3D_Native_OpenColorIO_OcioConfiguration_Displays" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.Displays">
+  Displays
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets all declared displays, independent of environment/active-display filters.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;string&gt; Displays { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_OpenColorIO_OcioConfiguration_Looks_" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.Looks*"></a>
+
+  <h3 id="Mu3D_Native_OpenColorIO_OcioConfiguration_Looks" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.Looks">
+  Looks
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets all declared Look names.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;string&gt; Looks { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_OpenColorIO_OcioConfiguration_Version_" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.Version*"></a>
+
+  <h3 id="Mu3D_Native_OpenColorIO_OcioConfiguration_Version" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.Version">
+  Version
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the exact native OpenColorIO release required by this adapter.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string Version { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Native_OpenColorIO_OcioConfiguration_CreateColorSpaceProcessor_" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.CreateColorSpaceProcessor*"></a>
+
+  <h3 id="Mu3D_Native_OpenColorIO_OcioConfiguration_CreateColorSpaceProcessor_System_String_System_String_" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.CreateColorSpaceProcessor(System.String,System.String)">
+  CreateColorSpaceProcessor(string, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Compiles a CPU conversion between explicitly named OCIO color spaces.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OcioProcessor CreateColorSpaceProcessor(string source, string destination)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>destination</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Native.OpenColorIO.OcioProcessor.html">OcioProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_OpenColorIO_OcioConfiguration_CreateDisplayViewProcessor_" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.CreateDisplayViewProcessor*"></a>
+
+  <h3 id="Mu3D_Native_OpenColorIO_OcioConfiguration_CreateDisplayViewProcessor_System_String_System_String_System_String_System_String_" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.CreateDisplayViewProcessor(System.String,System.String,System.String,System.String)">
+  CreateDisplayViewProcessor(string, string, string, string?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Compiles an explicit display/view with optional Look override. Its RGB output may be encoded.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OcioProcessor CreateDisplayViewProcessor(string source, string display, string view, string? lookOverride = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Input OCIO color-space identifier.</p>
+</dd>
+    <dt><code>display</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Explicit display identifier.</p>
+</dd>
+    <dt><code>view</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Explicit view identifier.</p>
+</dd>
+    <dt><code>lookOverride</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Null retains configured Looks; empty bypasses them; otherwise an OCIO Look expression.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Native.OpenColorIO.OcioProcessor.html">OcioProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_OpenColorIO_OcioConfiguration_CreateDisplayViewToLinearProcessor_" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.CreateDisplayViewToLinearProcessor*"></a>
+
+  <h3 id="Mu3D_Native_OpenColorIO_OcioConfiguration_CreateDisplayViewToLinearProcessor_System_String_System_String_System_String_System_String_System_String_System_String_" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.CreateDisplayViewToLinearProcessor(System.String,System.String,System.String,System.String,System.String,System.String)">
+  CreateDisplayViewToLinearProcessor(string, string, string, string, string, string?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Compiles a display/view followed by an explicitly selected output-to-linear OCIO conversion.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OcioProcessor CreateDisplayViewToLinearProcessor(string source, string display, string view, string displayOutputColorSpace, string linearDestination, string? lookOverride = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>display</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>view</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>displayOutputColorSpace</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>linearDestination</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>lookOverride</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Native.OpenColorIO.OcioProcessor.html">OcioProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Mu3D_Native_OpenColorIO_OcioConfiguration_CreateDisplayViewToLinearProcessor_System_String_System_String_System_String_System_String_System_String_System_String__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The declared output must match the view and share the destination's OCIO reference-space type.
+This avoids silently applying an inverse view transform while decoding. The caller must ensure
+the chosen destination is linear; OCIO names/encoding metadata alone do not prove linearity.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_Native_OpenColorIO_OcioConfiguration_Dispose_" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.Dispose*"></a>
+
+  <h3 id="Mu3D_Native_OpenColorIO_OcioConfiguration_Dispose" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.Dispose">
+  Dispose()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Releases the configuration. Previously created processors remain independently usable.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_OpenColorIO_OcioConfiguration_GetBuiltinConfigurations_" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.GetBuiltinConfigurations*"></a>
+
+  <h3 id="Mu3D_Native_OpenColorIO_OcioConfiguration_GetBuiltinConfigurations" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.GetBuiltinConfigurations">
+  GetBuiltinConfigurations()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Lists exact built-in configuration identifiers from the pinned native release.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IReadOnlyList&lt;string&gt; GetBuiltinConfigurations()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_OpenColorIO_OcioConfiguration_GetDisplayViewOutputColorSpace_" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.GetDisplayViewOutputColorSpace*"></a>
+
+  <h3 id="Mu3D_Native_OpenColorIO_OcioConfiguration_GetDisplayViewOutputColorSpace_System_String_System_String_" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.GetDisplayViewOutputColorSpace(System.String,System.String)">
+  GetDisplayViewOutputColorSpace(string, string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the exact encoded output color space of a display/view pair.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetDisplayViewOutputColorSpace(string display, string view)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>display</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>view</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_OpenColorIO_OcioConfiguration_GetViews_" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.GetViews*"></a>
+
+  <h3 id="Mu3D_Native_OpenColorIO_OcioConfiguration_GetViews_System_String_" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.GetViews(System.String)">
+  GetViews(string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Lists display-defined and attached shared views, ignoring active-view filters.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;string&gt; GetViews(string display)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>display</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>An explicit display identifier.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_OpenColorIO_OcioConfiguration_LoadBuiltin_" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.LoadBuiltin*"></a>
+
+  <h3 id="Mu3D_Native_OpenColorIO_OcioConfiguration_LoadBuiltin_System_String_" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.LoadBuiltin(System.String)">
+  LoadBuiltin(string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Loads an explicitly named built-in configuration from the pinned OCIO release.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static OcioConfiguration LoadBuiltin(string name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>An exact name returned by <a class="xref" href="Mu3D.Native.OpenColorIO.OcioConfiguration.html#Mu3D_Native_OpenColorIO_OcioConfiguration_GetBuiltinConfigurations">GetBuiltinConfigurations()</a>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Native.OpenColorIO.OcioConfiguration.html">OcioConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_OpenColorIO_OcioConfiguration_LoadFile_" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.LoadFile*"></a>
+
+  <h3 id="Mu3D_Native_OpenColorIO_OcioConfiguration_LoadFile_System_String_" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.LoadFile(System.String)">
+  LoadFile(string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Loads an explicit config file, resolving its relative assets from the file's directory.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static OcioConfiguration LoadFile(string path)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>path</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The explicit path; it is resolved against the caller's current directory once.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Native.OpenColorIO.OcioConfiguration.html">OcioConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_OpenColorIO_OcioConfiguration_LoadString_" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.LoadString*"></a>
+
+  <h3 id="Mu3D_Native_OpenColorIO_OcioConfiguration_LoadString_System_String_System_String_" data-uid="Mu3D.Native.OpenColorIO.OcioConfiguration.LoadString(System.String,System.String)">
+  LoadString(string, string?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Loads explicit YAML text and optionally supplies its asset working directory.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static OcioConfiguration LoadString(string configuration, string? workingDirectory = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configuration</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>OCIO v2 configuration text.</p>
+</dd>
+    <dt><code>workingDirectory</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Required when relative external assets are used; null supplies no asset directory.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Native.OpenColorIO.OcioConfiguration.html">OcioConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

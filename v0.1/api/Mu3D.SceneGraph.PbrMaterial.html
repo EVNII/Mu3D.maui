@@ -1,0 +1,3344 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class PbrMaterial | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class PbrMaterial | Mu3D documentation ">
+      
+      <meta name="description" content="Represents a metallic/roughness material. Base color is explicitly tagged, unpremultiplied linear-light RGBA. Optional dielectric transmission and volume absorption remain scene-linear.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.SceneGraph.PbrMaterial">
+
+
+
+  <h1 id="Mu3D_SceneGraph_PbrMaterial" data-uid="Mu3D.SceneGraph.PbrMaterial" class="text-break">
+Class PbrMaterial  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.SceneGraph.html">SceneGraph</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Represents a metallic/roughness material. Base color is explicitly tagged, unpremultiplied
+linear-light RGBA. Optional dielectric transmission and volume absorption remain scene-linear.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class PbrMaterial : Material</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Mu3D.SceneGraph.Material.html">Material</a></div>
+      <div><span class="xref">PbrMaterial</span></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Derived</dt>
+    <dd>
+      <div><a class="xref" href="Mu3D.SceneGraph.MetallicRoughnessMaterial.html">MetallicRoughnessMaterial</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Mu3D.SceneGraph.Material.html#Mu3D_SceneGraph_Material_InvalidateTextureBindings">Material.InvalidateTextureBindings()</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.SceneGraph.Material.html#Mu3D_SceneGraph_Material_Name">Material.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.SceneGraph.Material.html#Mu3D_SceneGraph_Material_IsDoubleSided">Material.IsDoubleSided</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.SceneGraph.Material.html#Mu3D_SceneGraph_Material_AlphaMode">Material.AlphaMode</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.SceneGraph.Material.html#Mu3D_SceneGraph_Material_AlphaCutoff">Material.AlphaCutoff</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial__ctor_" data-uid="Mu3D.SceneGraph.PbrMaterial.#ctor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial__ctor_Mu3D_Color_LinearRgba_System_Single_System_Single_System_String_" data-uid="Mu3D.SceneGraph.PbrMaterial.#ctor(Mu3D.Color.LinearRgba,System.Single,System.Single,System.String)">
+  PbrMaterial(LinearRgba, float, float, string?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a metallic/roughness material.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PbrMaterial(LinearRgba baseColor, float metallic = 0, float roughness = 0.5, string? name = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>baseColor</code> <a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+    <dt><code>metallic</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+    <dt><code>roughness</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_Anisotropy_" data-uid="Mu3D.SceneGraph.PbrMaterial.Anisotropy*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_Anisotropy" data-uid="Mu3D.SceneGraph.PbrMaterial.Anisotropy">
+  Anisotropy
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the optional anisotropic base-specular block.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PbrAnisotropyBlock Anisotropy { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.PbrAnisotropyBlock.html">PbrAnisotropyBlock</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_AnisotropyRotation_" data-uid="Mu3D.SceneGraph.PbrMaterial.AnisotropyRotation*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_AnisotropyRotation" data-uid="Mu3D.SceneGraph.PbrMaterial.AnisotropyRotation">
+  AnisotropyRotation
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets finite counter-clockwise anisotropy rotation in tangent space.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float AnisotropyRotation { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_AnisotropyStrength_" data-uid="Mu3D.SceneGraph.PbrMaterial.AnisotropyStrength*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_AnisotropyStrength" data-uid="Mu3D.SceneGraph.PbrMaterial.AnisotropyStrength">
+  AnisotropyStrength
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets anisotropic specular strength in the inclusive zero-to-one range.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float AnisotropyStrength { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_AnisotropyTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.AnisotropyTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_AnisotropyTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.AnisotropyTexture">
+  AnisotropyTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets non-color anisotropy direction (RG) and strength (B) data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NormalizedRgbaDataImage? AnisotropyTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.NormalizedRgbaDataImage.html">NormalizedRgbaDataImage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_AnisotropyTextureMapping_" data-uid="Mu3D.SceneGraph.PbrMaterial.AnisotropyTextureMapping*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_AnisotropyTextureMapping" data-uid="Mu3D.SceneGraph.PbrMaterial.AnisotropyTextureMapping">
+  AnisotropyTextureMapping
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets sampler and UV mapping for anisotropy data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureMapping AnisotropyTextureMapping { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureMapping.html">MaterialTextureMapping</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_Base_" data-uid="Mu3D.SceneGraph.PbrMaterial.Base*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_Base" data-uid="Mu3D.SceneGraph.PbrMaterial.Base">
+  Base
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the metallic/roughness base closure block.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PbrBaseBlock Base { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.PbrBaseBlock.html">PbrBaseBlock</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_BaseColor_" data-uid="Mu3D.SceneGraph.PbrMaterial.BaseColor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_BaseColor" data-uid="Mu3D.SceneGraph.PbrMaterial.BaseColor">
+  BaseColor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the unpremultiplied, explicitly tagged linear base color.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgba BaseColor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_BaseColorTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.BaseColorTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_BaseColorTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.BaseColorTexture">
+  BaseColorTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets an optional unpremultiplied linear-light base-color image. Its RGB is converted
+to the renderer working space before upload and multiplied by <a class="xref" href="Mu3D.SceneGraph.PbrMaterial.html#Mu3D_SceneGraph_PbrMaterial_BaseColor">BaseColor</a>.
+Image alpha remains unpremultiplied and participates in <a class="xref" href="Mu3D.SceneGraph.Material.html#Mu3D_SceneGraph_Material_AlphaMode">AlphaMode</a>.
+Sampling follows <a class="xref" href="Mu3D.SceneGraph.PbrMaterial.html#Mu3D_SceneGraph_PbrMaterial_TextureSampling">TextureSampling</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgbaImage? BaseColorTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgbaImage.html">LinearRgbaImage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_BaseColorTextureMapping_" data-uid="Mu3D.SceneGraph.PbrMaterial.BaseColorTextureMapping*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_BaseColorTextureMapping" data-uid="Mu3D.SceneGraph.PbrMaterial.BaseColorTextureMapping">
+  BaseColorTextureMapping
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets sampler and UV mapping for the base-color texture slot.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureMapping BaseColorTextureMapping { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureMapping.html">MaterialTextureMapping</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_BaseModel_" data-uid="Mu3D.SceneGraph.PbrMaterial.BaseModel*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_BaseModel" data-uid="Mu3D.SceneGraph.PbrMaterial.BaseModel">
+  BaseModel
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the root lighting closure used by this material.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override MaterialBaseModel BaseModel { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialBaseModel.html">MaterialBaseModel</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_Clearcoat_" data-uid="Mu3D.SceneGraph.PbrMaterial.Clearcoat*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_Clearcoat" data-uid="Mu3D.SceneGraph.PbrMaterial.Clearcoat">
+  Clearcoat
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the optional outer clearcoat block.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PbrClearcoatBlock Clearcoat { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.PbrClearcoatBlock.html">PbrClearcoatBlock</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_ClearcoatFactor_" data-uid="Mu3D.SceneGraph.PbrMaterial.ClearcoatFactor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_ClearcoatFactor" data-uid="Mu3D.SceneGraph.PbrMaterial.ClearcoatFactor">
+  ClearcoatFactor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the dielectric clearcoat layer weight in the inclusive zero-to-one range. The
+default is zero, preserving the ordinary metallic/roughness material.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float ClearcoatFactor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_ClearcoatNormalScale_" data-uid="Mu3D.SceneGraph.PbrMaterial.ClearcoatNormalScale*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_ClearcoatNormalScale" data-uid="Mu3D.SceneGraph.PbrMaterial.ClearcoatNormalScale">
+  ClearcoatNormalScale
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the nonnegative tangent-space clearcoat normal-map X/Y scale.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float ClearcoatNormalScale { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_ClearcoatNormalTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.ClearcoatNormalTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_ClearcoatNormalTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.ClearcoatNormalTexture">
+  ClearcoatNormalTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets an optional non-color tangent-space clearcoat normal map.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NormalizedRgbaDataImage? ClearcoatNormalTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.NormalizedRgbaDataImage.html">NormalizedRgbaDataImage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_ClearcoatNormalTextureMapping_" data-uid="Mu3D.SceneGraph.PbrMaterial.ClearcoatNormalTextureMapping*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_ClearcoatNormalTextureMapping" data-uid="Mu3D.SceneGraph.PbrMaterial.ClearcoatNormalTextureMapping">
+  ClearcoatNormalTextureMapping
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets sampler and UV mapping for the clearcoat normal map.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureMapping ClearcoatNormalTextureMapping { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureMapping.html">MaterialTextureMapping</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_ClearcoatRoughness_" data-uid="Mu3D.SceneGraph.PbrMaterial.ClearcoatRoughness*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_ClearcoatRoughness" data-uid="Mu3D.SceneGraph.PbrMaterial.ClearcoatRoughness">
+  ClearcoatRoughness
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets clearcoat perceptual roughness in the inclusive zero-to-one range.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float ClearcoatRoughness { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_ClearcoatRoughnessTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.ClearcoatRoughnessTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_ClearcoatRoughnessTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.ClearcoatRoughnessTexture">
+  ClearcoatRoughnessTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets clearcoat roughness data sampled from the texture's green channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NormalizedRgbaDataImage? ClearcoatRoughnessTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.NormalizedRgbaDataImage.html">NormalizedRgbaDataImage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_ClearcoatRoughnessTextureMapping_" data-uid="Mu3D.SceneGraph.PbrMaterial.ClearcoatRoughnessTextureMapping*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_ClearcoatRoughnessTextureMapping" data-uid="Mu3D.SceneGraph.PbrMaterial.ClearcoatRoughnessTextureMapping">
+  ClearcoatRoughnessTextureMapping
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets sampler and UV mapping for clearcoat roughness.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureMapping ClearcoatRoughnessTextureMapping { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureMapping.html">MaterialTextureMapping</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_ClearcoatTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.ClearcoatTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_ClearcoatTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.ClearcoatTexture">
+  ClearcoatTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the non-color clearcoat weight texture sampled from its red channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NormalizedRgbaDataImage? ClearcoatTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.NormalizedRgbaDataImage.html">NormalizedRgbaDataImage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_ClearcoatTextureMapping_" data-uid="Mu3D.SceneGraph.PbrMaterial.ClearcoatTextureMapping*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_ClearcoatTextureMapping" data-uid="Mu3D.SceneGraph.PbrMaterial.ClearcoatTextureMapping">
+  ClearcoatTextureMapping
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets sampler and UV mapping for clearcoat weight.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureMapping ClearcoatTextureMapping { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureMapping.html">MaterialTextureMapping</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_CompressedAnisotropyTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedAnisotropyTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_CompressedAnisotropyTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedAnisotropyTexture">
+  CompressedAnisotropyTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets compressed non-color anisotropy direction and strength data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CompressedMaterialTexture? CompressedAnisotropyTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.CompressedMaterialTexture.html">CompressedMaterialTexture</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_CompressedBaseColorTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedBaseColorTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_CompressedBaseColorTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedBaseColorTexture">
+  CompressedBaseColorTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets an optional GPU-ready compressed base-color mip chain. Color identity remains
+explicit and this source is mutually exclusive with <a class="xref" href="Mu3D.SceneGraph.PbrMaterial.html#Mu3D_SceneGraph_PbrMaterial_BaseColorTexture">BaseColorTexture</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CompressedMaterialTexture? CompressedBaseColorTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.CompressedMaterialTexture.html">CompressedMaterialTexture</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_CompressedClearcoatNormalTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedClearcoatNormalTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_CompressedClearcoatNormalTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedClearcoatNormalTexture">
+  CompressedClearcoatNormalTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the compressed non-color clearcoat normal map.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CompressedMaterialTexture? CompressedClearcoatNormalTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.CompressedMaterialTexture.html">CompressedMaterialTexture</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_CompressedClearcoatRoughnessTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedClearcoatRoughnessTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_CompressedClearcoatRoughnessTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedClearcoatRoughnessTexture">
+  CompressedClearcoatRoughnessTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the compressed non-color clearcoat roughness texture.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CompressedMaterialTexture? CompressedClearcoatRoughnessTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.CompressedMaterialTexture.html">CompressedMaterialTexture</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_CompressedClearcoatTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedClearcoatTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_CompressedClearcoatTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedClearcoatTexture">
+  CompressedClearcoatTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the compressed non-color clearcoat weight texture.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CompressedMaterialTexture? CompressedClearcoatTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.CompressedMaterialTexture.html">CompressedMaterialTexture</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_CompressedDiffuseTransmissionColorTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedDiffuseTransmissionColorTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_CompressedDiffuseTransmissionColorTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedDiffuseTransmissionColorTexture">
+  CompressedDiffuseTransmissionColorTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the compressed sRGB diffuse-transmission color texture.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CompressedMaterialTexture? CompressedDiffuseTransmissionColorTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.CompressedMaterialTexture.html">CompressedMaterialTexture</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_CompressedDiffuseTransmissionTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedDiffuseTransmissionTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_CompressedDiffuseTransmissionTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedDiffuseTransmissionTexture">
+  CompressedDiffuseTransmissionTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets compressed non-color diffuse-transmission strength.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CompressedMaterialTexture? CompressedDiffuseTransmissionTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.CompressedMaterialTexture.html">CompressedMaterialTexture</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_CompressedEmissiveTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedEmissiveTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_CompressedEmissiveTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedEmissiveTexture">
+  CompressedEmissiveTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets an optional GPU-ready compressed emissive mip chain. It must be tagged as color
+data and is mutually exclusive with <a class="xref" href="Mu3D.SceneGraph.PbrMaterial.html#Mu3D_SceneGraph_PbrMaterial_EmissiveTexture">EmissiveTexture</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CompressedMaterialTexture? CompressedEmissiveTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.CompressedMaterialTexture.html">CompressedMaterialTexture</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_CompressedIridescenceTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedIridescenceTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_CompressedIridescenceTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedIridescenceTexture">
+  CompressedIridescenceTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets compressed non-color iridescence coverage data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CompressedMaterialTexture? CompressedIridescenceTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.CompressedMaterialTexture.html">CompressedMaterialTexture</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_CompressedIridescenceThicknessTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedIridescenceThicknessTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_CompressedIridescenceThicknessTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedIridescenceThicknessTexture">
+  CompressedIridescenceThicknessTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets compressed non-color iridescence thickness data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CompressedMaterialTexture? CompressedIridescenceThicknessTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.CompressedMaterialTexture.html">CompressedMaterialTexture</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_CompressedNormalTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedNormalTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_CompressedNormalTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedNormalTexture">
+  CompressedNormalTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets an optional GPU-ready compressed tangent-space normal-map mip chain. It must be
+tagged as non-color data and is mutually exclusive with <a class="xref" href="Mu3D.SceneGraph.PbrMaterial.html#Mu3D_SceneGraph_PbrMaterial_NormalTexture">NormalTexture</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CompressedMaterialTexture? CompressedNormalTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.CompressedMaterialTexture.html">CompressedMaterialTexture</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_CompressedOcclusionRoughnessMetallicTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedOcclusionRoughnessMetallicTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_CompressedOcclusionRoughnessMetallicTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedOcclusionRoughnessMetallicTexture">
+  CompressedOcclusionRoughnessMetallicTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets an optional GPU-ready compressed occlusion/roughness/metallic mip chain. It must
+be non-color data and is mutually exclusive with
+<a class="xref" href="Mu3D.SceneGraph.PbrMaterial.html#Mu3D_SceneGraph_PbrMaterial_OcclusionRoughnessMetallicTexture">OcclusionRoughnessMetallicTexture</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CompressedMaterialTexture? CompressedOcclusionRoughnessMetallicTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.CompressedMaterialTexture.html">CompressedMaterialTexture</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_CompressedSheenColorTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedSheenColorTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_CompressedSheenColorTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedSheenColorTexture">
+  CompressedSheenColorTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets an optional GPU-ready compressed sheen color image.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CompressedMaterialTexture? CompressedSheenColorTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.CompressedMaterialTexture.html">CompressedMaterialTexture</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_CompressedSheenRoughnessTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedSheenRoughnessTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_CompressedSheenRoughnessTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedSheenRoughnessTexture">
+  CompressedSheenRoughnessTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets compressed non-color sheen roughness data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CompressedMaterialTexture? CompressedSheenRoughnessTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.CompressedMaterialTexture.html">CompressedMaterialTexture</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_CompressedSpecularColorTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedSpecularColorTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_CompressedSpecularColorTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedSpecularColorTexture">
+  CompressedSpecularColorTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the compressed sRGB specular-color texture.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CompressedMaterialTexture? CompressedSpecularColorTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.CompressedMaterialTexture.html">CompressedMaterialTexture</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_CompressedSpecularTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedSpecularTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_CompressedSpecularTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedSpecularTexture">
+  CompressedSpecularTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the compressed non-color specular-strength texture.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CompressedMaterialTexture? CompressedSpecularTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.CompressedMaterialTexture.html">CompressedMaterialTexture</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_CompressedTransmissionTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedTransmissionTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_CompressedTransmissionTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedTransmissionTexture">
+  CompressedTransmissionTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets compressed non-color transmission weight data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CompressedMaterialTexture? CompressedTransmissionTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.CompressedMaterialTexture.html">CompressedMaterialTexture</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_CompressedVolumeThicknessTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedVolumeThicknessTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_CompressedVolumeThicknessTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.CompressedVolumeThicknessTexture">
+  CompressedVolumeThicknessTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets compressed non-color volume thickness data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CompressedMaterialTexture? CompressedVolumeThicknessTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.CompressedMaterialTexture.html">CompressedMaterialTexture</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_DiffuseTransmission_" data-uid="Mu3D.SceneGraph.PbrMaterial.DiffuseTransmission*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_DiffuseTransmission" data-uid="Mu3D.SceneGraph.PbrMaterial.DiffuseTransmission">
+  DiffuseTransmission
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the optional thin-surface diffuse-transmission block.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PbrDiffuseTransmissionBlock DiffuseTransmission { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.PbrDiffuseTransmissionBlock.html">PbrDiffuseTransmissionBlock</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_DiffuseTransmissionColor_" data-uid="Mu3D.SceneGraph.PbrMaterial.DiffuseTransmissionColor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_DiffuseTransmissionColor" data-uid="Mu3D.SceneGraph.PbrMaterial.DiffuseTransmissionColor">
+  DiffuseTransmissionColor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the explicitly tagged linear color modulating diffuse transmission.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgba DiffuseTransmissionColor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_DiffuseTransmissionColorTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.DiffuseTransmissionColorTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_DiffuseTransmissionColorTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.DiffuseTransmissionColorTexture">
+  DiffuseTransmissionColorTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets a linear image decoded from the sRGB diffuse-transmission color texture.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgbaImage? DiffuseTransmissionColorTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgbaImage.html">LinearRgbaImage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_DiffuseTransmissionColorTextureMapping_" data-uid="Mu3D.SceneGraph.PbrMaterial.DiffuseTransmissionColorTextureMapping*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_DiffuseTransmissionColorTextureMapping" data-uid="Mu3D.SceneGraph.PbrMaterial.DiffuseTransmissionColorTextureMapping">
+  DiffuseTransmissionColorTextureMapping
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets color-texture sampling and UV mapping for diffuse transmission.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureMapping DiffuseTransmissionColorTextureMapping { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureMapping.html">MaterialTextureMapping</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_DiffuseTransmissionFactor_" data-uid="Mu3D.SceneGraph.PbrMaterial.DiffuseTransmissionFactor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_DiffuseTransmissionFactor" data-uid="Mu3D.SceneGraph.PbrMaterial.DiffuseTransmissionFactor">
+  DiffuseTransmissionFactor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the fraction of non-specular light diffusely transmitted through the surface.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float DiffuseTransmissionFactor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_DiffuseTransmissionTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.DiffuseTransmissionTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_DiffuseTransmissionTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.DiffuseTransmissionTexture">
+  DiffuseTransmissionTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets non-color diffuse-transmission strength sampled from alpha.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NormalizedRgbaDataImage? DiffuseTransmissionTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.NormalizedRgbaDataImage.html">NormalizedRgbaDataImage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_DiffuseTransmissionTextureMapping_" data-uid="Mu3D.SceneGraph.PbrMaterial.DiffuseTransmissionTextureMapping*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_DiffuseTransmissionTextureMapping" data-uid="Mu3D.SceneGraph.PbrMaterial.DiffuseTransmissionTextureMapping">
+  DiffuseTransmissionTextureMapping
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets strength-texture sampling and UV mapping for diffuse transmission.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureMapping DiffuseTransmissionTextureMapping { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureMapping.html">MaterialTextureMapping</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_Dispersion_" data-uid="Mu3D.SceneGraph.PbrMaterial.Dispersion*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_Dispersion" data-uid="Mu3D.SceneGraph.PbrMaterial.Dispersion">
+  Dispersion
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the non-negative KHR_materials_dispersion strength applied to finite-volume
+transmission. Zero disables chromatic separation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Dispersion { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_Emissive_" data-uid="Mu3D.SceneGraph.PbrMaterial.Emissive*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_Emissive" data-uid="Mu3D.SceneGraph.PbrMaterial.Emissive">
+  Emissive
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the optional scene-linear emissive block.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PbrEmissiveBlock Emissive { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.PbrEmissiveBlock.html">PbrEmissiveBlock</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_EmissiveColor_" data-uid="Mu3D.SceneGraph.PbrMaterial.EmissiveColor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_EmissiveColor" data-uid="Mu3D.SceneGraph.PbrMaterial.EmissiveColor">
+  EmissiveColor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets explicitly tagged linear-light RGB emission added by the Beauty pass. Alpha is
+retained for color-value consistency but does not control material coverage. The default is
+zero emission in Linear sRGB.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgba EmissiveColor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_EmissiveStrength_" data-uid="Mu3D.SceneGraph.PbrMaterial.EmissiveStrength*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_EmissiveStrength" data-uid="Mu3D.SceneGraph.PbrMaterial.EmissiveStrength">
+  EmissiveStrength
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the finite non-negative unitless multiplier applied to
+<a class="xref" href="Mu3D.SceneGraph.PbrMaterial.html#Mu3D_SceneGraph_PbrMaterial_EmissiveColor">EmissiveColor</a> and the optional emissive texture. Values above one preserve HDR
+scene-referred emission. The default is one.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float EmissiveStrength { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_EmissiveTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.EmissiveTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_EmissiveTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.EmissiveTexture">
+  EmissiveTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets an optional unpremultiplied linear-light emissive image. Its RGB is converted
+to the renderer working space and multiplied by <a class="xref" href="Mu3D.SceneGraph.PbrMaterial.html#Mu3D_SceneGraph_PbrMaterial_EmissiveColor">EmissiveColor</a>. Alpha is
+retained in the image contract but does not affect material coverage.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgbaImage? EmissiveTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgbaImage.html">LinearRgbaImage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_EmissiveTextureMapping_" data-uid="Mu3D.SceneGraph.PbrMaterial.EmissiveTextureMapping*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_EmissiveTextureMapping" data-uid="Mu3D.SceneGraph.PbrMaterial.EmissiveTextureMapping">
+  EmissiveTextureMapping
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets sampler and UV mapping for the emissive texture slot.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureMapping EmissiveTextureMapping { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureMapping.html">MaterialTextureMapping</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_IndexOfRefraction_" data-uid="Mu3D.SceneGraph.PbrMaterial.IndexOfRefraction*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_IndexOfRefraction" data-uid="Mu3D.SceneGraph.PbrMaterial.IndexOfRefraction">
+  IndexOfRefraction
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the dielectric index of refraction. The glTF default is 1.5.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float IndexOfRefraction { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_IndirectOcclusion_" data-uid="Mu3D.SceneGraph.PbrMaterial.IndirectOcclusion*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_IndirectOcclusion" data-uid="Mu3D.SceneGraph.PbrMaterial.IndirectOcclusion">
+  IndirectOcclusion
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the authored visibility of image-based illumination in the inclusive zero-to-one
+range. One is fully visible. The renderer combines this value with dynamic screen-space
+visibility and applies a roughness-aware policy to specular IBL.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float IndirectOcclusion { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_Iridescence_" data-uid="Mu3D.SceneGraph.PbrMaterial.Iridescence*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_Iridescence" data-uid="Mu3D.SceneGraph.PbrMaterial.Iridescence">
+  Iridescence
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the optional wavelength-dependent thin-film iridescence block.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PbrIridescenceBlock Iridescence { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.PbrIridescenceBlock.html">PbrIridescenceBlock</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_IridescenceFactor_" data-uid="Mu3D.SceneGraph.PbrMaterial.IridescenceFactor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_IridescenceFactor" data-uid="Mu3D.SceneGraph.PbrMaterial.IridescenceFactor">
+  IridescenceFactor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets thin-film coverage in the inclusive zero-to-one range.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float IridescenceFactor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_IridescenceIndexOfRefraction_" data-uid="Mu3D.SceneGraph.PbrMaterial.IridescenceIndexOfRefraction*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_IridescenceIndexOfRefraction" data-uid="Mu3D.SceneGraph.PbrMaterial.IridescenceIndexOfRefraction">
+  IridescenceIndexOfRefraction
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the thin-film index of refraction. The glTF default is 1.3.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float IridescenceIndexOfRefraction { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_IridescenceTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.IridescenceTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_IridescenceTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.IridescenceTexture">
+  IridescenceTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets non-color iridescence coverage sampled from the red channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NormalizedRgbaDataImage? IridescenceTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.NormalizedRgbaDataImage.html">NormalizedRgbaDataImage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_IridescenceTextureMapping_" data-uid="Mu3D.SceneGraph.PbrMaterial.IridescenceTextureMapping*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_IridescenceTextureMapping" data-uid="Mu3D.SceneGraph.PbrMaterial.IridescenceTextureMapping">
+  IridescenceTextureMapping
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets sampler and UV mapping for iridescence coverage.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureMapping IridescenceTextureMapping { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureMapping.html">MaterialTextureMapping</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_IridescenceThicknessMaximum_" data-uid="Mu3D.SceneGraph.PbrMaterial.IridescenceThicknessMaximum*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_IridescenceThicknessMaximum" data-uid="Mu3D.SceneGraph.PbrMaterial.IridescenceThicknessMaximum">
+  IridescenceThicknessMaximum
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the non-negative maximum thin-film thickness in nanometres.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float IridescenceThicknessMaximum { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_IridescenceThicknessMinimum_" data-uid="Mu3D.SceneGraph.PbrMaterial.IridescenceThicknessMinimum*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_IridescenceThicknessMinimum" data-uid="Mu3D.SceneGraph.PbrMaterial.IridescenceThicknessMinimum">
+  IridescenceThicknessMinimum
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the non-negative minimum thin-film thickness in nanometres.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float IridescenceThicknessMinimum { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_IridescenceThicknessTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.IridescenceThicknessTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_IridescenceThicknessTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.IridescenceThicknessTexture">
+  IridescenceThicknessTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets normalized film thickness sampled from the green channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NormalizedRgbaDataImage? IridescenceThicknessTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.NormalizedRgbaDataImage.html">NormalizedRgbaDataImage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_IridescenceThicknessTextureMapping_" data-uid="Mu3D.SceneGraph.PbrMaterial.IridescenceThicknessTextureMapping*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_IridescenceThicknessTextureMapping" data-uid="Mu3D.SceneGraph.PbrMaterial.IridescenceThicknessTextureMapping">
+  IridescenceThicknessTextureMapping
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets sampler and UV mapping for thin-film thickness.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureMapping IridescenceThicknessTextureMapping { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureMapping.html">MaterialTextureMapping</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_Metallic_" data-uid="Mu3D.SceneGraph.PbrMaterial.Metallic*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_Metallic" data-uid="Mu3D.SceneGraph.PbrMaterial.Metallic">
+  Metallic
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the metallic factor from zero for dielectric to one for metal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Metallic { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_NormalScale_" data-uid="Mu3D.SceneGraph.PbrMaterial.NormalScale*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_NormalScale" data-uid="Mu3D.SceneGraph.PbrMaterial.NormalScale">
+  NormalScale
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the finite non-negative tangent-space normal-map X/Y scale.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float NormalScale { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_NormalTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.NormalTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_NormalTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.NormalTexture">
+  NormalTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets an optional tangent-space normal map encoded from minus-one/one into zero/one.
+It is non-color data and is never color transformed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NormalizedRgbaDataImage? NormalTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.NormalizedRgbaDataImage.html">NormalizedRgbaDataImage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_NormalTextureMapping_" data-uid="Mu3D.SceneGraph.PbrMaterial.NormalTextureMapping*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_NormalTextureMapping" data-uid="Mu3D.SceneGraph.PbrMaterial.NormalTextureMapping">
+  NormalTextureMapping
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets sampler and UV mapping for the tangent-space normal texture slot.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureMapping NormalTextureMapping { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureMapping.html">MaterialTextureMapping</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_OcclusionRoughnessMetallicTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.OcclusionRoughnessMetallicTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_OcclusionRoughnessMetallicTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.OcclusionRoughnessMetallicTexture">
+  OcclusionRoughnessMetallicTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets an optional packed non-color map using red for occlusion, green for perceptual
+roughness and blue for metallic, matching glTF channel convention.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NormalizedRgbaDataImage? OcclusionRoughnessMetallicTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.NormalizedRgbaDataImage.html">NormalizedRgbaDataImage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_OcclusionRoughnessMetallicTextureMapping_" data-uid="Mu3D.SceneGraph.PbrMaterial.OcclusionRoughnessMetallicTextureMapping*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_OcclusionRoughnessMetallicTextureMapping" data-uid="Mu3D.SceneGraph.PbrMaterial.OcclusionRoughnessMetallicTextureMapping">
+  OcclusionRoughnessMetallicTextureMapping
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets sampler and UV mapping for the packed ORM texture slot.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureMapping OcclusionRoughnessMetallicTextureMapping { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureMapping.html">MaterialTextureMapping</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_Roughness_" data-uid="Mu3D.SceneGraph.PbrMaterial.Roughness*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_Roughness" data-uid="Mu3D.SceneGraph.PbrMaterial.Roughness">
+  Roughness
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets perceptual roughness in the inclusive zero-to-one range. The renderer applies a
+small numerical floor only while evaluating the specular distribution.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Roughness { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_ShaderTemplate_" data-uid="Mu3D.SceneGraph.PbrMaterial.ShaderTemplate*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_ShaderTemplate" data-uid="Mu3D.SceneGraph.PbrMaterial.ShaderTemplate">
+  ShaderTemplate
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the immutable shader-generation policy. The default permits all supported PBR
+extensions and texture slots; the renderer specializes it from actual nonzero factors and
+present texture sources.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialShaderTemplate ShaderTemplate { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialShaderTemplate.html">MaterialShaderTemplate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_Sheen_" data-uid="Mu3D.SceneGraph.PbrMaterial.Sheen*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_Sheen" data-uid="Mu3D.SceneGraph.PbrMaterial.Sheen">
+  Sheen
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the optional cloth/fiber sheen block.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PbrSheenBlock Sheen { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.PbrSheenBlock.html">PbrSheenBlock</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_SheenColor_" data-uid="Mu3D.SceneGraph.PbrMaterial.SheenColor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_SheenColor" data-uid="Mu3D.SceneGraph.PbrMaterial.SheenColor">
+  SheenColor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets explicitly tagged linear-light sheen RGB; alpha is ignored.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgba SheenColor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_SheenColorTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.SheenColorTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_SheenColorTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.SheenColorTexture">
+  SheenColorTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets an optional linear-light sheen color image decoded from sRGB input.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgbaImage? SheenColorTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgbaImage.html">LinearRgbaImage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_SheenColorTextureMapping_" data-uid="Mu3D.SceneGraph.PbrMaterial.SheenColorTextureMapping*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_SheenColorTextureMapping" data-uid="Mu3D.SceneGraph.PbrMaterial.SheenColorTextureMapping">
+  SheenColorTextureMapping
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets sampler and UV mapping for sheen color.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureMapping SheenColorTextureMapping { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureMapping.html">MaterialTextureMapping</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_SheenRoughness_" data-uid="Mu3D.SceneGraph.PbrMaterial.SheenRoughness*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_SheenRoughness" data-uid="Mu3D.SceneGraph.PbrMaterial.SheenRoughness">
+  SheenRoughness
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets perceptual sheen roughness in the inclusive zero-to-one range.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float SheenRoughness { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_SheenRoughnessTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.SheenRoughnessTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_SheenRoughnessTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.SheenRoughnessTexture">
+  SheenRoughnessTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets non-color sheen roughness sampled from the alpha channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NormalizedRgbaDataImage? SheenRoughnessTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.NormalizedRgbaDataImage.html">NormalizedRgbaDataImage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_SheenRoughnessTextureMapping_" data-uid="Mu3D.SceneGraph.PbrMaterial.SheenRoughnessTextureMapping*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_SheenRoughnessTextureMapping" data-uid="Mu3D.SceneGraph.PbrMaterial.SheenRoughnessTextureMapping">
+  SheenRoughnessTextureMapping
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets sampler and UV mapping for sheen roughness.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureMapping SheenRoughnessTextureMapping { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureMapping.html">MaterialTextureMapping</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_Specular_" data-uid="Mu3D.SceneGraph.PbrMaterial.Specular*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_Specular" data-uid="Mu3D.SceneGraph.PbrMaterial.Specular">
+  Specular
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the optional dielectric specular-strength and F0-color block.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PbrSpecularBlock Specular { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.PbrSpecularBlock.html">PbrSpecularBlock</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_SpecularColor_" data-uid="Mu3D.SceneGraph.PbrMaterial.SpecularColor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_SpecularColor" data-uid="Mu3D.SceneGraph.PbrMaterial.SpecularColor">
+  SpecularColor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the non-negative, explicitly tagged linear RGB multiplier applied to dielectric
+F0. Components may exceed one; the final F0 is clamped to one as required by glTF.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgba SpecularColor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_SpecularColorTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.SpecularColorTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_SpecularColorTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.SpecularColorTexture">
+  SpecularColorTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets a linear image decoded from the sRGB specular-color texture.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgbaImage? SpecularColorTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgbaImage.html">LinearRgbaImage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_SpecularColorTextureMapping_" data-uid="Mu3D.SceneGraph.PbrMaterial.SpecularColorTextureMapping*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_SpecularColorTextureMapping" data-uid="Mu3D.SceneGraph.PbrMaterial.SpecularColorTextureMapping">
+  SpecularColorTextureMapping
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets sampler and UV mapping for specular color.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureMapping SpecularColorTextureMapping { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureMapping.html">MaterialTextureMapping</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_SpecularFactor_" data-uid="Mu3D.SceneGraph.PbrMaterial.SpecularFactor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_SpecularFactor" data-uid="Mu3D.SceneGraph.PbrMaterial.SpecularFactor">
+  SpecularFactor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets dielectric specular strength in the inclusive zero-to-one range.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float SpecularFactor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_SpecularTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.SpecularTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_SpecularTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.SpecularTexture">
+  SpecularTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets non-color specular strength sampled from the alpha channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NormalizedRgbaDataImage? SpecularTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.NormalizedRgbaDataImage.html">NormalizedRgbaDataImage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_SpecularTextureMapping_" data-uid="Mu3D.SceneGraph.PbrMaterial.SpecularTextureMapping*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_SpecularTextureMapping" data-uid="Mu3D.SceneGraph.PbrMaterial.SpecularTextureMapping">
+  SpecularTextureMapping
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets sampler and UV mapping for specular strength.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureMapping SpecularTextureMapping { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureMapping.html">MaterialTextureMapping</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_TextureCoordinateOffset_" data-uid="Mu3D.SceneGraph.PbrMaterial.TextureCoordinateOffset*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_TextureCoordinateOffset" data-uid="Mu3D.SceneGraph.PbrMaterial.TextureCoordinateOffset">
+  TextureCoordinateOffset
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets finite UV offset for all current texture slots. The getter returns the
+base-color slot value. Prefer the per-slot mapping properties when maps differ.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 TextureCoordinateOffset { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.vector2">Vector2</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_TextureCoordinateScale_" data-uid="Mu3D.SceneGraph.PbrMaterial.TextureCoordinateScale*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_TextureCoordinateScale" data-uid="Mu3D.SceneGraph.PbrMaterial.TextureCoordinateScale">
+  TextureCoordinateScale
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets finite UV scale for all current texture slots. The getter returns the base-color
+slot value. Prefer the per-slot mapping properties when maps differ.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 TextureCoordinateScale { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.vector2">Vector2</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_TextureSampling_" data-uid="Mu3D.SceneGraph.PbrMaterial.TextureSampling*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_TextureSampling" data-uid="Mu3D.SceneGraph.PbrMaterial.TextureSampling">
+  TextureSampling
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets addressing and filtering for all current texture slots. The getter returns the
+base-color slot value. Prefer the per-slot mapping properties when maps differ.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureSampling TextureSampling { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureSampling.html">MaterialTextureSampling</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_Transmission_" data-uid="Mu3D.SceneGraph.PbrMaterial.Transmission*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_Transmission" data-uid="Mu3D.SceneGraph.PbrMaterial.Transmission">
+  Transmission
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the optional transmission and finite-volume block.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PbrTransmissionBlock Transmission { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.PbrTransmissionBlock.html">PbrTransmissionBlock</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_TransmissionFactor_" data-uid="Mu3D.SceneGraph.PbrMaterial.TransmissionFactor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_TransmissionFactor" data-uid="Mu3D.SceneGraph.PbrMaterial.TransmissionFactor">
+  TransmissionFactor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets dielectric transmission in the inclusive zero-to-one range. Zero preserves the
+ordinary opaque metallic/roughness surface; one transmits all non-reflected dielectric light.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float TransmissionFactor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_TransmissionTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.TransmissionTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_TransmissionTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.TransmissionTexture">
+  TransmissionTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets non-color transmission weight data sampled from the red channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NormalizedRgbaDataImage? TransmissionTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.NormalizedRgbaDataImage.html">NormalizedRgbaDataImage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_TransmissionTextureMapping_" data-uid="Mu3D.SceneGraph.PbrMaterial.TransmissionTextureMapping*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_TransmissionTextureMapping" data-uid="Mu3D.SceneGraph.PbrMaterial.TransmissionTextureMapping">
+  TransmissionTextureMapping
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets sampler and UV mapping for transmission weight.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureMapping TransmissionTextureMapping { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureMapping.html">MaterialTextureMapping</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_VolumeAttenuationColor_" data-uid="Mu3D.SceneGraph.PbrMaterial.VolumeAttenuationColor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_VolumeAttenuationColor" data-uid="Mu3D.SceneGraph.PbrMaterial.VolumeAttenuationColor">
+  VolumeAttenuationColor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets explicitly tagged linear-sRGB volume attenuation RGB.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgba VolumeAttenuationColor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_VolumeAttenuationDistance_" data-uid="Mu3D.SceneGraph.PbrMaterial.VolumeAttenuationDistance*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_VolumeAttenuationDistance" data-uid="Mu3D.SceneGraph.PbrMaterial.VolumeAttenuationDistance">
+  VolumeAttenuationDistance
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the distance at which transmitted white light reaches
+<a class="xref" href="Mu3D.SceneGraph.PbrMaterial.html#Mu3D_SceneGraph_PbrMaterial_VolumeAttenuationColor">VolumeAttenuationColor</a>. Positive infinity disables absorption.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float VolumeAttenuationDistance { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_VolumeThicknessFactor_" data-uid="Mu3D.SceneGraph.PbrMaterial.VolumeThicknessFactor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_VolumeThicknessFactor" data-uid="Mu3D.SceneGraph.PbrMaterial.VolumeThicknessFactor">
+  VolumeThicknessFactor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the non-negative maximum volume thickness in scene units.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float VolumeThicknessFactor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_VolumeThicknessTexture_" data-uid="Mu3D.SceneGraph.PbrMaterial.VolumeThicknessTexture*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_VolumeThicknessTexture" data-uid="Mu3D.SceneGraph.PbrMaterial.VolumeThicknessTexture">
+  VolumeThicknessTexture
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets non-color volume thickness data sampled from the green channel.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NormalizedRgbaDataImage? VolumeThicknessTexture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.NormalizedRgbaDataImage.html">NormalizedRgbaDataImage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_PbrMaterial_VolumeThicknessTextureMapping_" data-uid="Mu3D.SceneGraph.PbrMaterial.VolumeThicknessTextureMapping*"></a>
+
+  <h3 id="Mu3D_SceneGraph_PbrMaterial_VolumeThicknessTextureMapping" data-uid="Mu3D.SceneGraph.PbrMaterial.VolumeThicknessTextureMapping">
+  VolumeThicknessTextureMapping
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets sampler and UV mapping for volume thickness.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureMapping VolumeThicknessTextureMapping { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureMapping.html">MaterialTextureMapping</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Enum PbrMaterialTextureBindings | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Enum PbrMaterialTextureBindings | Mu3D documentation ">
+      
+      <meta name="description" content="Identifies the exact material texture bindings used by one shader variant.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.SceneGraph.PbrMaterialTextureBindings">
+
+
+
+
+  <h1 id="Mu3D_SceneGraph_PbrMaterialTextureBindings" data-uid="Mu3D.SceneGraph.PbrMaterialTextureBindings" class="text-break">
+Enum PbrMaterialTextureBindings  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.SceneGraph.html">SceneGraph</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Identifies the exact material texture bindings used by one shader variant.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Flags]
+public enum PbrMaterialTextureBindings</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+  <h2 id="fields">Fields
+</h2>
+  <dl class="parameters">
+    <dt id="Mu3D_SceneGraph_PbrMaterialTextureBindings_All"><code>All = BaseColor | Normal | OcclusionRoughnessMetallic | Emissive | ClearcoatFactor | ClearcoatRoughness | ClearcoatNormal | Anisotropy | Transmission | VolumeThickness | SheenColor | SheenRoughness | IridescenceFactor | IridescenceThickness | SpecularFactor | SpecularColor | DiffuseTransmissionFactor | DiffuseTransmissionColor</code></dt>
+  
+  <dd><p>Uses every currently defined material texture binding.</p>
+</dd>
+    <dt id="Mu3D_SceneGraph_PbrMaterialTextureBindings_Anisotropy"><code>Anisotropy = 128</code></dt>
+  
+  <dd><p>Uses the anisotropy direction and strength texture.</p>
+</dd>
+    <dt id="Mu3D_SceneGraph_PbrMaterialTextureBindings_BaseColor"><code>BaseColor = 1</code></dt>
+  
+  <dd><p>Uses the base-color texture.</p>
+</dd>
+    <dt id="Mu3D_SceneGraph_PbrMaterialTextureBindings_ClearcoatFactor"><code>ClearcoatFactor = 16</code></dt>
+  
+  <dd><p>Uses the clearcoat-factor texture.</p>
+</dd>
+    <dt id="Mu3D_SceneGraph_PbrMaterialTextureBindings_ClearcoatNormal"><code>ClearcoatNormal = 64</code></dt>
+  
+  <dd><p>Uses the independent clearcoat normal texture.</p>
+</dd>
+    <dt id="Mu3D_SceneGraph_PbrMaterialTextureBindings_ClearcoatRoughness"><code>ClearcoatRoughness = 32</code></dt>
+  
+  <dd><p>Uses the clearcoat-roughness texture.</p>
+</dd>
+    <dt id="Mu3D_SceneGraph_PbrMaterialTextureBindings_DiffuseTransmissionColor"><code>DiffuseTransmissionColor = 131072</code></dt>
+  
+  <dd><p>Uses the sRGB diffuse-transmission color texture.</p>
+</dd>
+    <dt id="Mu3D_SceneGraph_PbrMaterialTextureBindings_DiffuseTransmissionFactor"><code>DiffuseTransmissionFactor = 65536</code></dt>
+  
+  <dd><p>Uses the diffuse-transmission factor texture alpha channel.</p>
+</dd>
+    <dt id="Mu3D_SceneGraph_PbrMaterialTextureBindings_Emissive"><code>Emissive = 8</code></dt>
+  
+  <dd><p>Uses the emissive color texture.</p>
+</dd>
+    <dt id="Mu3D_SceneGraph_PbrMaterialTextureBindings_IridescenceFactor"><code>IridescenceFactor = 4096</code></dt>
+  
+  <dd><p>Uses the iridescence-factor texture.</p>
+</dd>
+    <dt id="Mu3D_SceneGraph_PbrMaterialTextureBindings_IridescenceThickness"><code>IridescenceThickness = 8192</code></dt>
+  
+  <dd><p>Uses the iridescence thin-film-thickness texture.</p>
+</dd>
+    <dt id="Mu3D_SceneGraph_PbrMaterialTextureBindings_None"><code>None = 0</code></dt>
+  
+  <dd><p>Uses no sampled material texture.</p>
+</dd>
+    <dt id="Mu3D_SceneGraph_PbrMaterialTextureBindings_Normal"><code>Normal = 2</code></dt>
+  
+  <dd><p>Uses the base tangent-space normal texture.</p>
+</dd>
+    <dt id="Mu3D_SceneGraph_PbrMaterialTextureBindings_OcclusionRoughnessMetallic"><code>OcclusionRoughnessMetallic = 4</code></dt>
+  
+  <dd><p>Uses the packed occlusion/roughness/metallic texture.</p>
+</dd>
+    <dt id="Mu3D_SceneGraph_PbrMaterialTextureBindings_SheenColor"><code>SheenColor = 1024</code></dt>
+  
+  <dd><p>Uses the sheen-color texture.</p>
+</dd>
+    <dt id="Mu3D_SceneGraph_PbrMaterialTextureBindings_SheenRoughness"><code>SheenRoughness = 2048</code></dt>
+  
+  <dd><p>Uses the sheen-roughness texture.</p>
+</dd>
+    <dt id="Mu3D_SceneGraph_PbrMaterialTextureBindings_SpecularColor"><code>SpecularColor = 32768</code></dt>
+  
+  <dd><p>Uses the sRGB dielectric specular-color texture.</p>
+</dd>
+    <dt id="Mu3D_SceneGraph_PbrMaterialTextureBindings_SpecularFactor"><code>SpecularFactor = 16384</code></dt>
+  
+  <dd><p>Uses the dielectric specular-strength texture alpha channel.</p>
+</dd>
+    <dt id="Mu3D_SceneGraph_PbrMaterialTextureBindings_Transmission"><code>Transmission = 256</code></dt>
+  
+  <dd><p>Uses the transmission-factor texture.</p>
+</dd>
+    <dt id="Mu3D_SceneGraph_PbrMaterialTextureBindings_VolumeThickness"><code>VolumeThickness = 512</code></dt>
+  
+  <dd><p>Uses the volume-thickness texture.</p>
+</dd>
+  </dl>
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

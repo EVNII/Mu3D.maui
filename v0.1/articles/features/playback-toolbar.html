@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Playback toolbar and IPlayable | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Playback toolbar and IPlayable | Mu3D documentation ">
+      
+      <meta name="description" content="Connect one reusable MAUI viewport transport bar to a glTF clip, camera path, MAUI bridge, or custom timeline.">
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="playback-toolbar-and-iplayable">Playback toolbar and IPlayable</h1>
+
+<p><code>PlaybackToolbar</code> is a Toolkit-provided MAUI control built on the common <code>ViewportOverlay</code> host.
+It displays Start, Play/Pause, a seek timeline, current/total time and an optional Loop toggle. The
+bar stays in the MAUI visual tree for layout, input, accessibility and styling while the 3D image
+remains HDR-linear GPU output.</p>
+<p>The bar does not create a timer or assume a Mu3D animation type. It operates one application-owned
+<code>Mu3D.Toolkit.Animation.IPlayable</code>:</p>
+<pre><code class="lang-csharp">public sealed class ProductPlayer : IPlayable
+{
+    public event EventHandler? PlaybackChanged;
+
+    public PlaybackState State { get; private set; }
+    public TimeSpan Position { get; private set; }
+    public TimeSpan Duration { get; }
+    public bool CanSeek =&gt; true;
+    public bool IsLooping { get; set; }
+
+    public void Play() { /* start the application's clock */ }
+    public void Pause() { /* pause without changing Position */ }
+    public void Stop() { /* stop according to application policy */ }
+    public void Seek(TimeSpan position) { /* evaluate the source */ }
+}
+</code></pre>
+<p>Raise <code>PlaybackChanged</code> whenever state, time, capabilities or looping changes. Notifications may
+come from any thread; the MAUI adapter dispatches its visual refresh. The implementation retains
+ownership of scheduling, clip evaluation and disposal.</p>
+<h2 id="declare-the-transport-in-xaml">Declare the transport in XAML</h2>
+<p>Place the toolbar beside the feature that applies animation values. <code>Playable</code> can come from a page
+property or view model:</p>
+<pre><code class="lang-xaml">&lt;mu3d:Mu3DSceneView&gt;
+  &lt;mu3d:Mu3DSceneView.Features&gt;
+    &lt;toolkit:ViewportTools&gt;
+      &lt;toolkit:ProgressTool x:Name=&quot;SceneProgress&quot;&gt;
+        &lt;!-- Application-selected mappings --&gt;
+      &lt;/toolkit:ProgressTool&gt;
+      &lt;toolkit:PlaybackToolbar
+          Playable=&quot;{Binding Player}&quot;
+          Placement=&quot;BottomCenter&quot;
+          MaximumWidth=&quot;680&quot;
+          ShowLoop=&quot;True&quot;
+          ShowTime=&quot;True&quot; /&gt;
+    &lt;/toolkit:ViewportTools&gt;
+  &lt;/mu3d:Mu3DSceneView.Features&gt;
+&lt;/mu3d:Mu3DSceneView&gt;
+</code></pre>
+<p><code>IsVisible</code> controls mounting, while <code>IsEnabled</code> and <code>IsInteractive</code> control operation and pointer
+participation. A noninteractive bar becomes pass-through, so it cannot block Orbit, selection or
+Gizmo input beneath it. Narrow viewports horizontally scroll the transport content instead of
+stretching the overlay.</p>
+<h2 id="adapt-different-sources">Adapt different sources</h2>
+<ul>
+<li>A glTF player evaluates its selected <code>AnimationClip</code> from <code>Position</code> and advances with the
+viewport's suspend-aware frame clock.</li>
+<li>A camera-path player maps <code>Position / Duration</code> through <code>ProgressTool</code> or a custom
+<code>IViewportProgressMapping</code>.</li>
+<li>A MAUI animation adapter owns one <code>IAnimationManager</code> animation and publishes its current time.</li>
+<li>A downstream timeline can prepare or stream data, report <code>Buffering</code>, and temporarily disable
+seeking through <code>CanSeek</code>.</li>
+</ul>
+<p><code>IPlayable</code> is intentionally UI- and format-independent. It does not put MAUI into Core or make the
+toolbar the owner of glTF assets, page navigation, playback policy or native resources.</p>
+
+</article>
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

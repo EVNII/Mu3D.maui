@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class GltfSceneInstance | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class GltfSceneInstance | Mu3D documentation ">
+      
+      <meta name="description" content="Owns one mutable realization of a , including independent authored material-variant and animation state.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Formats.Gltf.GltfSceneInstance">
+
+
+
+  <h1 id="Mu3D_Formats_Gltf_GltfSceneInstance" data-uid="Mu3D.Formats.Gltf.GltfSceneInstance" class="text-break">
+Class GltfSceneInstance  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Formats.html">Formats</a>.<a class="xref" href="Mu3D.Formats.Gltf.html">Gltf</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Formats.Gltf.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Owns one mutable realization of a <a class="xref" href="Mu3D.Formats.Gltf.GltfSceneAsset.html">GltfSceneAsset</a>, including independent authored
+material-variant and animation state.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class GltfSceneInstance</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">GltfSceneInstance</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Formats_Gltf_GltfSceneInstance_ActiveMaterialVariantIndex_" data-uid="Mu3D.Formats.Gltf.GltfSceneInstance.ActiveMaterialVariantIndex*"></a>
+
+  <h3 id="Mu3D_Formats_Gltf_GltfSceneInstance_ActiveMaterialVariantIndex" data-uid="Mu3D.Formats.Gltf.GltfSceneInstance.ActiveMaterialVariantIndex">
+  ActiveMaterialVariantIndex
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the active authored material-variant index, or null for default materials.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? ActiveMaterialVariantIndex { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Formats_Gltf_GltfSceneInstance_Animations_" data-uid="Mu3D.Formats.Gltf.GltfSceneInstance.Animations*"></a>
+
+  <h3 id="Mu3D_Formats_Gltf_GltfSceneInstance_Animations" data-uid="Mu3D.Formats.Gltf.GltfSceneInstance.Animations">
+  Animations
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets animation clips rebound to this instance's nodes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;AnimationClip&gt; Animations { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="Mu3D.SceneGraph.AnimationClip.html">AnimationClip</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Formats_Gltf_GltfSceneInstance_Asset_" data-uid="Mu3D.Formats.Gltf.GltfSceneInstance.Asset*"></a>
+
+  <h3 id="Mu3D_Formats_Gltf_GltfSceneInstance_Asset" data-uid="Mu3D.Formats.Gltf.GltfSceneInstance.Asset">
+  Asset
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the reusable glTF definition from which this instance was created.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GltfSceneAsset Asset { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Formats.Gltf.GltfSceneAsset.html">GltfSceneAsset</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Formats_Gltf_GltfSceneInstance_Root_" data-uid="Mu3D.Formats.Gltf.GltfSceneInstance.Root*"></a>
+
+  <h3 id="Mu3D_Formats_Gltf_GltfSceneInstance_Root" data-uid="Mu3D.Formats.Gltf.GltfSceneInstance.Root">
+  Root
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the mutable container root whose transform moves the complete instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SceneNode Root { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.SceneNode.html">SceneNode</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Formats_Gltf_GltfSceneInstance_SceneInstance_" data-uid="Mu3D.Formats.Gltf.GltfSceneInstance.SceneInstance*"></a>
+
+  <h3 id="Mu3D_Formats_Gltf_GltfSceneInstance_SceneInstance" data-uid="Mu3D.Formats.Gltf.GltfSceneInstance.SceneInstance">
+  SceneInstance
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the underlying general-purpose Mu3D scene instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SceneInstance SceneInstance { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Assets.SceneInstance.html">SceneInstance</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Formats_Gltf_GltfSceneInstance_ApplyMaterialVariant_" data-uid="Mu3D.Formats.Gltf.GltfSceneInstance.ApplyMaterialVariant*"></a>
+
+  <h3 id="Mu3D_Formats_Gltf_GltfSceneInstance_ApplyMaterialVariant_System_Nullable_System_Int32__" data-uid="Mu3D.Formats.Gltf.GltfSceneInstance.ApplyMaterialVariant(System.Nullable{System.Int32})">
+  ApplyMaterialVariant(int?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Applies one authored material variant, or restores defaults when index is null.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ApplyMaterialVariant(int? index)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>index</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Formats_Gltf_GltfSceneInstance_ApplyMaterialVariant_" data-uid="Mu3D.Formats.Gltf.GltfSceneInstance.ApplyMaterialVariant*"></a>
+
+  <h3 id="Mu3D_Formats_Gltf_GltfSceneInstance_ApplyMaterialVariant_System_String_" data-uid="Mu3D.Formats.Gltf.GltfSceneInstance.ApplyMaterialVariant(System.String)">
+  ApplyMaterialVariant(string)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Applies the uniquely named authored material variant.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ApplyMaterialVariant(string name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Formats_Gltf_GltfSceneInstance_AttachTo_" data-uid="Mu3D.Formats.Gltf.GltfSceneInstance.AttachTo*"></a>
+
+  <h3 id="Mu3D_Formats_Gltf_GltfSceneInstance_AttachTo_Mu3D_SceneGraph_Scene_" data-uid="Mu3D.Formats.Gltf.GltfSceneInstance.AttachTo(Mu3D.SceneGraph.Scene)">
+  AttachTo(Scene)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Attaches or reparents this instance beneath a scene's permanent root.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AttachTo(Scene scene)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>scene</code> <a class="xref" href="Mu3D.SceneGraph.Scene.html">Scene</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Formats_Gltf_GltfSceneInstance_AttachTo_" data-uid="Mu3D.Formats.Gltf.GltfSceneInstance.AttachTo*"></a>
+
+  <h3 id="Mu3D_Formats_Gltf_GltfSceneInstance_AttachTo_Mu3D_SceneGraph_SceneNode_" data-uid="Mu3D.Formats.Gltf.GltfSceneInstance.AttachTo(Mu3D.SceneGraph.SceneNode)">
+  AttachTo(SceneNode)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Attaches or reparents this instance beneath an application-owned node.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AttachTo(SceneNode parent)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>parent</code> <a class="xref" href="Mu3D.SceneGraph.SceneNode.html">SceneNode</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Formats_Gltf_GltfSceneInstance_Detach_" data-uid="Mu3D.Formats.Gltf.GltfSceneInstance.Detach*"></a>
+
+  <h3 id="Mu3D_Formats_Gltf_GltfSceneInstance_Detach" data-uid="Mu3D.Formats.Gltf.GltfSceneInstance.Detach">
+  Detach()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Detaches this instance from its current scene hierarchy.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Detach()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

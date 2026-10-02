@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.FrameStatisticsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:diagnostics="clr-namespace:Mu3D.Maui.Toolkit.Diagnostics;assembly=Mu3D.Maui.Toolkit"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    xmlns:toolkit="clr-namespace:Mu3D.Maui.Toolkit.Controls;assembly=Mu3D.Maui.Toolkit"
+    Title="Frame Statistics">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="frame-statistics" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <mu3d:Mu3DSceneView
+            x:Name="SceneView"
+            BackgroundColor="Black"
+            RendererChanged="OnRendererChanged"
+            SurfaceError="OnSurfaceError"
+            SurfaceSizeChanged="OnSurfaceSizeChanged">
+            <mu3d:Mu3DSceneView.Features>
+                <toolkit:ViewportTools>
+                    <diagnostics:FrameStatisticsOverlay
+                        x:Name="StatisticsOverlay"
+                        BackgroundColor="#D9192438"
+                        GraphColor="#42E8FF"
+                        IsDetailed="False"
+                        IsGraphVisible="True"
+                        Margin="12"
+                        MaximumWidth="520"
+                        Placement="TopRight" />
+                </toolkit:ViewportTools>
+            </mu3d:Mu3DSceneView.Features>
+        </mu3d:Mu3DSceneView>
+
+        <ScrollView Grid.Row="1" MaximumHeightRequest="250">
+            <VerticalStackLayout Padding="16" Spacing="10">
+                <Label
+                    FontAttributes="Bold"
+                    Text="Continuously render while this page is visible and inspect rolling frame history." />
+                <Label
+                    FontSize="12"
+                    Text="MAUI VSync requests frames while visible. FrameStatisticsOverlay owns collection/view attachment but no render loop." />
+                <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,*,Auto" ColumnSpacing="10">
+                    <Label VerticalOptions="Center" Text="Continuous" />
+                    <Switch
+                        x:Name="ContinuousSwitch"
+                        Grid.Column="1"
+                        IsToggled="True" />
+                    <Label Grid.Column="2" VerticalOptions="Center" Text="Detailed" />
+                    <Switch x:Name="DetailedSwitch" Grid.Column="3" />
+                    <Label Grid.Column="4" VerticalOptions="Center" Text="Refresh" />
+                    <Stepper
+                        x:Name="IntervalStepper"
+                        Grid.Column="5"
+                        HorizontalOptions="Start"
+                        Increment="50"
+                        Maximum="1000"
+                        Minimum="50"
+                        Value="100" />
+                    <Label
+                        x:Name="IntervalLabel"
+                        Grid.Column="6"
+                        VerticalOptions="Center"
+                        Text="100 ms" />
+                </Grid>
+                <Button Clicked="OnResetClicked" Text="Reset statistics and graph" />
+                <Label x:Name="StatusLabel" Text="Preparing HDR scene…" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

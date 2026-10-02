@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class WgpuGraphicsDevice | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class WgpuGraphicsDevice | Mu3D documentation ">
+      
+      <meta name="description" content="Provides the backend-independent Mu3D graphics ABI through pinned wgpu-native.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice">
+
+
+
+  <h1 id="Mu3D_Native_Wgpu_WgpuGraphicsDevice" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice" class="text-break">
+Class WgpuGraphicsDevice  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Native.html">Native</a>.<a class="xref" href="Mu3D.Native.Wgpu.html">Wgpu</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Native.Wgpu.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Provides the backend-independent Mu3D graphics ABI through pinned wgpu-native.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class WgpuGraphicsDevice : GraphicsDevice, IDisposable</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Mu3D.Graphics.GraphicsDevice.html">GraphicsDevice</a></div>
+      <div><span class="xref">WgpuGraphicsDevice</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Mu3D.Graphics.GraphicsDevice.html#Mu3D_Graphics_GraphicsDevice_CreateBuffer_Mu3D_Graphics_GraphicsBufferDescriptor_">GraphicsDevice.CreateBuffer(GraphicsBufferDescriptor)</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Graphics.GraphicsDevice.html#Mu3D_Graphics_GraphicsDevice_CreateTexture_Mu3D_Graphics_GraphicsTextureDescriptor_">GraphicsDevice.CreateTexture(GraphicsTextureDescriptor)</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Graphics.GraphicsDevice.html#Mu3D_Graphics_GraphicsDevice_CreateTextureView_Mu3D_Graphics_GraphicsTextureViewDescriptor_">GraphicsDevice.CreateTextureView(GraphicsTextureViewDescriptor)</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Graphics.GraphicsDevice.html#Mu3D_Graphics_GraphicsDevice_CreateSampler_Mu3D_Graphics_GraphicsSamplerDescriptor_">GraphicsDevice.CreateSampler(GraphicsSamplerDescriptor)</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Graphics.GraphicsDevice.html#Mu3D_Graphics_GraphicsDevice_CreateBindGroupLayout_Mu3D_Graphics_GraphicsBindGroupLayoutDescriptor_">GraphicsDevice.CreateBindGroupLayout(GraphicsBindGroupLayoutDescriptor)</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Graphics.GraphicsDevice.html#Mu3D_Graphics_GraphicsDevice_CreatePipelineLayout_Mu3D_Graphics_GraphicsPipelineLayoutDescriptor_">GraphicsDevice.CreatePipelineLayout(GraphicsPipelineLayoutDescriptor)</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Graphics.GraphicsDevice.html#Mu3D_Graphics_GraphicsDevice_CreateBindGroup_Mu3D_Graphics_GraphicsBindGroupDescriptor_">GraphicsDevice.CreateBindGroup(GraphicsBindGroupDescriptor)</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Graphics.GraphicsDevice.html#Mu3D_Graphics_GraphicsDevice_CreateShaderModule_Mu3D_Graphics_GraphicsShaderModuleDescriptor_">GraphicsDevice.CreateShaderModule(GraphicsShaderModuleDescriptor)</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Graphics.GraphicsDevice.html#Mu3D_Graphics_GraphicsDevice_CreateRenderPipeline_Mu3D_Graphics_GraphicsRenderPipelineDescriptor_">GraphicsDevice.CreateRenderPipeline(GraphicsRenderPipelineDescriptor)</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Graphics.GraphicsDevice.html#Mu3D_Graphics_GraphicsDevice_CreateCommandEncoder_System_String_">GraphicsDevice.CreateCommandEncoder(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Graphics.GraphicsDevice.html#Mu3D_Graphics_GraphicsDevice_Dispose">GraphicsDevice.Dispose()</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Graphics.GraphicsDevice.html#Mu3D_Graphics_GraphicsDevice_Capabilities">GraphicsDevice.Capabilities</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Graphics.GraphicsDevice.html#Mu3D_Graphics_GraphicsDevice_State">GraphicsDevice.State</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Graphics.GraphicsDevice.html#Mu3D_Graphics_GraphicsDevice_LostReason">GraphicsDevice.LostReason</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Graphics.GraphicsDevice.html#Mu3D_Graphics_GraphicsDevice_DeviceLost">GraphicsDevice.DeviceLost</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_Queue_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.Queue*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_Queue" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.Queue">
+  Queue
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the queue associated with this device.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override GraphicsQueue Queue { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsQueue.html">GraphicsQueue</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_CreateAsync_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.CreateAsync*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_CreateAsync_System_TimeSpan_System_Threading_CancellationToken_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.CreateAsync(System.TimeSpan,System.Threading.CancellationToken)">
+  CreateAsync(TimeSpan, CancellationToken)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a real backend-independent device using the preferred native adapter.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;WgpuGraphicsDevice&gt; CreateAsync(TimeSpan timeout, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>timeout</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a></dt>
+    <dd><p>Maximum time allowed for each asynchronous native request.</p>
+</dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd><p>Cancels the managed wait.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Mu3D.Native.Wgpu.WgpuGraphicsDevice.html">WgpuGraphicsDevice</a>&gt;</dt>
+    <dd><p>A device that owns its native instance, adapter, device and queue.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_CreateBindGroupCore_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.CreateBindGroupCore*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_CreateBindGroupCore_Mu3D_Graphics_GraphicsBindGroupDescriptor_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.CreateBindGroupCore(Mu3D.Graphics.GraphicsBindGroupDescriptor)">
+  CreateBindGroupCore(GraphicsBindGroupDescriptor)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a backend bind group after common validation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override GraphicsBindGroup CreateBindGroupCore(GraphicsBindGroupDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Mu3D.Graphics.GraphicsBindGroupDescriptor.html">GraphicsBindGroupDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsBindGroup.html">GraphicsBindGroup</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_CreateBindGroupLayoutCore_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.CreateBindGroupLayoutCore*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_CreateBindGroupLayoutCore_Mu3D_Graphics_GraphicsBindGroupLayoutDescriptor_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.CreateBindGroupLayoutCore(Mu3D.Graphics.GraphicsBindGroupLayoutDescriptor)">
+  CreateBindGroupLayoutCore(GraphicsBindGroupLayoutDescriptor)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a backend bind-group layout after common validation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override GraphicsBindGroupLayout CreateBindGroupLayoutCore(GraphicsBindGroupLayoutDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Mu3D.Graphics.GraphicsBindGroupLayoutDescriptor.html">GraphicsBindGroupLayoutDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsBindGroupLayout.html">GraphicsBindGroupLayout</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_CreateBufferCore_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.CreateBufferCore*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_CreateBufferCore_Mu3D_Graphics_GraphicsBufferDescriptor_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.CreateBufferCore(Mu3D.Graphics.GraphicsBufferDescriptor)">
+  CreateBufferCore(GraphicsBufferDescriptor)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates the backend buffer after common lifecycle validation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override GraphicsBuffer CreateBufferCore(GraphicsBufferDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Mu3D.Graphics.GraphicsBufferDescriptor.html">GraphicsBufferDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsBuffer.html">GraphicsBuffer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_CreateCommandEncoderCore_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.CreateCommandEncoderCore*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_CreateCommandEncoderCore_System_String_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.CreateCommandEncoderCore(System.String)">
+  CreateCommandEncoderCore(string?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates the backend encoder after common lifecycle validation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override GraphicsCommandEncoder CreateCommandEncoderCore(string? label)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsCommandEncoder.html">GraphicsCommandEncoder</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_CreatePipelineLayoutCore_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.CreatePipelineLayoutCore*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_CreatePipelineLayoutCore_Mu3D_Graphics_GraphicsPipelineLayoutDescriptor_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.CreatePipelineLayoutCore(Mu3D.Graphics.GraphicsPipelineLayoutDescriptor)">
+  CreatePipelineLayoutCore(GraphicsPipelineLayoutDescriptor)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a backend pipeline layout after common validation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override GraphicsPipelineLayout CreatePipelineLayoutCore(GraphicsPipelineLayoutDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Mu3D.Graphics.GraphicsPipelineLayoutDescriptor.html">GraphicsPipelineLayoutDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsPipelineLayout.html">GraphicsPipelineLayout</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_CreateRenderPipelineCore_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.CreateRenderPipelineCore*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_CreateRenderPipelineCore_Mu3D_Graphics_GraphicsRenderPipelineDescriptor_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.CreateRenderPipelineCore(Mu3D.Graphics.GraphicsRenderPipelineDescriptor)">
+  CreateRenderPipelineCore(GraphicsRenderPipelineDescriptor)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates the backend render pipeline after common lifecycle validation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override GraphicsRenderPipeline CreateRenderPipelineCore(GraphicsRenderPipelineDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.html">GraphicsRenderPipelineDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsRenderPipeline.html">GraphicsRenderPipeline</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_CreateSamplerCore_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.CreateSamplerCore*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_CreateSamplerCore_Mu3D_Graphics_GraphicsSamplerDescriptor_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.CreateSamplerCore(Mu3D.Graphics.GraphicsSamplerDescriptor)">
+  CreateSamplerCore(GraphicsSamplerDescriptor)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates the backend sampler after common lifecycle validation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override GraphicsSampler CreateSamplerCore(GraphicsSamplerDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Mu3D.Graphics.GraphicsSamplerDescriptor.html">GraphicsSamplerDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsSampler.html">GraphicsSampler</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_CreateShaderModuleCore_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.CreateShaderModuleCore*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_CreateShaderModuleCore_Mu3D_Graphics_GraphicsShaderModuleDescriptor_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.CreateShaderModuleCore(Mu3D.Graphics.GraphicsShaderModuleDescriptor)">
+  CreateShaderModuleCore(GraphicsShaderModuleDescriptor)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates the backend shader module after common lifecycle validation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override GraphicsShaderModule CreateShaderModuleCore(GraphicsShaderModuleDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Mu3D.Graphics.GraphicsShaderModuleDescriptor.html">GraphicsShaderModuleDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsShaderModule.html">GraphicsShaderModule</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_CreateTextureCore_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.CreateTextureCore*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_CreateTextureCore_Mu3D_Graphics_GraphicsTextureDescriptor_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.CreateTextureCore(Mu3D.Graphics.GraphicsTextureDescriptor)">
+  CreateTextureCore(GraphicsTextureDescriptor)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates the backend texture after common lifecycle validation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override GraphicsTexture CreateTextureCore(GraphicsTextureDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Mu3D.Graphics.GraphicsTextureDescriptor.html">GraphicsTextureDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsTexture.html">GraphicsTexture</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_CreateTextureViewCore_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.CreateTextureViewCore*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_CreateTextureViewCore_Mu3D_Graphics_GraphicsTextureViewDescriptor_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.CreateTextureViewCore(Mu3D.Graphics.GraphicsTextureViewDescriptor)">
+  CreateTextureViewCore(GraphicsTextureViewDescriptor)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates the backend texture view after common validation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override GraphicsTextureView CreateTextureViewCore(GraphicsTextureViewDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Mu3D.Graphics.GraphicsTextureViewDescriptor.html">GraphicsTextureViewDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsTextureView.html">GraphicsTextureView</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_DisposeCore_" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.DisposeCore*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuGraphicsDevice_DisposeCore" data-uid="Mu3D.Native.Wgpu.WgpuGraphicsDevice.DisposeCore">
+  DisposeCore()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Releases backend device state. Implementations must tolerate one call.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void DisposeCore()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

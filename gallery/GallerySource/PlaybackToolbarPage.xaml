@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.PlaybackToolbarPage"
+    x:Name="Page"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    xmlns:pages="clr-namespace:Mu3D.GalleryApp.Pages"
+    xmlns:toolkit="clr-namespace:Mu3D.Maui.Toolkit.Controls;assembly=Mu3D.Maui.Toolkit"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Playback Toolbar">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="playback-toolbar" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <mu3d:Mu3DSceneView
+            x:Name="SceneView"
+            BackgroundColor="Black"
+            FeatureError="OnFeatureError"
+            SurfaceError="OnSurfaceError">
+            <mu3d:Mu3DSceneView.SceneContent>
+                <mu3d:Scene3D Name="Playback toolbar scene">
+                    <mu3d:Scene3D.Camera>
+                        <mu3d:PerspectiveCamera3D
+                            FieldOfView="52"
+                            Name="Playback camera"
+                            Z="5.8" />
+                    </mu3d:Scene3D.Camera>
+                    <mu3d:Cone3D
+                        x:Name="AnimatedCone"
+                        Height="2.4"
+                        Name="Playback target"
+                        Radius="0.9"
+                        X="-1.4"
+                        Y="-0.2">
+                        <mu3d:PbrMaterial3D
+                            Color="#2ED3B7"
+                            Metallic="0.45"
+                            Roughness="0.18" />
+                    </mu3d:Cone3D>
+                    <mu3d:Sphere3D
+                        Radius="0.3"
+                        ScaleX="6"
+                        ScaleY="0.12"
+                        ScaleZ="5"
+                        Y="-1.35">
+                        <mu3d:UnlitMaterial3D Color="#172338" />
+                    </mu3d:Sphere3D>
+                    <mu3d:DirectionalLight3D
+                        Intensity="5"
+                        RotationX="-38"
+                        RotationY="-28" />
+                </mu3d:Scene3D>
+            </mu3d:Mu3DSceneView.SceneContent>
+            <mu3d:Mu3DSceneView.Features>
+                <toolkit:ViewportTools>
+                    <toolkit:ProgressTool x:Name="SceneProgress">
+                        <toolkit:NodeTransformProgress
+                            From="-1.4"
+                            Property="X"
+                            Target="{x:Reference AnimatedCone}"
+                            To="1.4" />
+                        <toolkit:NodeTransformProgress
+                            From="0"
+                            Property="RotationY"
+                            Target="{x:Reference AnimatedCone}"
+                            To="360" />
+                    </toolkit:ProgressTool>
+                    <toolkit:PlaybackToolbar
+                        x:Name="PlayerBar"
+                        MaximumWidth="680"
+                        Playable="{Binding Player, Source={x:Reference Page}, x:DataType=pages:PlaybackToolbarPage}"
+                        Placement="BottomCenter"
+                        ShowLoop="True"
+                        ShowTime="True" />
+                </toolkit:ViewportTools>
+            </mu3d:Mu3DSceneView.Features>
+        </mu3d:Mu3DSceneView>
+        <VerticalStackLayout Grid.Row="1" Padding="16" Spacing="5">
+            <Label
+                FontAttributes="Bold"
+                Text="PlaybackToolbar controls an application-owned IPlayable." />
+            <Label
+                FontSize="12"
+                Text="Try Play/Pause, Start, scrubbing and Loop. The toolbar owns no clock or 3D animation object."
+                TextColor="#46556B" />
+            <Label
+                x:Name="StatusLabel"
+                FontSize="12"
+                Text="Ready"
+                TextColor="#46556B" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

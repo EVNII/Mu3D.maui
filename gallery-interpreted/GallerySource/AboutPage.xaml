@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.AboutPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="About">
+    <ScrollView>
+        <VerticalStackLayout
+            HorizontalOptions="Center"
+            MaximumWidthRequest="760"
+            Padding="24"
+            Spacing="18">
+            <VerticalStackLayout Spacing="10">
+                <Label FontAttributes="Bold" FontSize="32" Text="Mu3D Gallery" />
+                <Label FontSize="17" Text="HDR-first 3D graphics for .NET MAUI" />
+                <Label Text="GalleryApp is a non-packable diagnostic and conformance application. Public APIs remain backend-independent; the default renderer uses the pinned wgpu-native runtime." />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="10">
+                <Label FontAttributes="Bold" FontSize="18" Text="Runtime policy" />
+                <Label Text="wgpu-native 29.0.1.1 · KTX 4.4.2 · UltraHDR 2.0.1 · libjpeg-turbo 3.1.0" />
+                <Label Text="Apple uses RID-specific static archives. Android and Windows use dynamic libraries. The default UltraHDR package is built without HEIF." />
+            </VerticalStackLayout>
+
+            <Button Clicked="OnLicensesClicked" Text="Licenses and acknowledgements" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

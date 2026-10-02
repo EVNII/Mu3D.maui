@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class HdrCanvasOptions | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class HdrCanvasOptions | Mu3D documentation ">
+      
+      <meta name="description" content="Specifies immutable storage, compositing and allocation policy for an HDR canvas.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Creative.HdrCanvasOptions">
+
+
+
+  <h1 id="Mu3D_Creative_HdrCanvasOptions" data-uid="Mu3D.Creative.HdrCanvasOptions" class="text-break">
+Class HdrCanvasOptions  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Creative.html">Creative</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Creative.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Specifies immutable storage, compositing and allocation policy for an HDR canvas.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed record HdrCanvasOptions : IEquatable&lt;HdrCanvasOptions&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">HdrCanvasOptions</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="Mu3D.Creative.HdrCanvasOptions.html">HdrCanvasOptions</a>&gt;</div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_Creative_HdrCanvasOptions__ctor_" data-uid="Mu3D.Creative.HdrCanvasOptions.#ctor*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvasOptions__ctor" data-uid="Mu3D.Creative.HdrCanvasOptions.#ctor">
+  HdrCanvasOptions()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HdrCanvasOptions()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Creative_HdrCanvasOptions_CompositingSpace_" data-uid="Mu3D.Creative.HdrCanvasOptions.CompositingSpace*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvasOptions_CompositingSpace" data-uid="Mu3D.Creative.HdrCanvasOptions.CompositingSpace">
+  CompositingSpace
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the explicit linear compositing/storage space. Null selects the canvas working space.
+Reads and snapshots convert to the separately retained working space.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StandardRgbColorSpaceReference? CompositingSpace { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.StandardRgbColorSpaceReference.html">StandardRgbColorSpaceReference</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvasOptions_MaxOperationBytes_" data-uid="Mu3D.Creative.HdrCanvasOptions.MaxOperationBytes*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvasOptions_MaxOperationBytes" data-uid="Mu3D.Creative.HdrCanvasOptions.MaxOperationBytes">
+  MaxOperationBytes
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the maximum tile-pixel payload staged by one atomic mutation; defaults to 64 MiB.
+The complete tiles intersecting the mutation bounds must fit, including unchanged pixels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long MaxOperationBytes { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvasOptions_MaxSnapshotBytes_" data-uid="Mu3D.Creative.HdrCanvasOptions.MaxSnapshotBytes*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvasOptions_MaxSnapshotBytes" data-uid="Mu3D.Creative.HdrCanvasOptions.MaxSnapshotBytes">
+  MaxSnapshotBytes
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the combined FP32 pixel-buffer budget for creating a snapshot; defaults to 256 MiB.
+A snapshot requires two buffers, or 32 bytes per pixel, while its immutable image is copied.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long MaxSnapshotBytes { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvasOptions_MaxStorageBytes_" data-uid="Mu3D.Creative.HdrCanvasOptions.MaxStorageBytes*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvasOptions_MaxStorageBytes" data-uid="Mu3D.Creative.HdrCanvasOptions.MaxStorageBytes">
+  MaxStorageBytes
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the maximum retained tile-pixel payload in bytes; defaults to 256 MiB.
+Managed collection and object overhead is additional and bounded by <a class="xref" href="Mu3D.Creative.HdrCanvasOptions.html#Mu3D_Creative_HdrCanvasOptions_MaxTileCount">MaxTileCount</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long MaxStorageBytes { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvasOptions_MaxTileCount_" data-uid="Mu3D.Creative.HdrCanvasOptions.MaxTileCount*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvasOptions_MaxTileCount" data-uid="Mu3D.Creative.HdrCanvasOptions.MaxTileCount">
+  MaxTileCount
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the maximum retained, dirty, or operation-intersected tile count; defaults to 65536.
+This bounds metadata separately from tile-pixel payload, including after tiles are cleared.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int MaxTileCount { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvasOptions_Precision_" data-uid="Mu3D.Creative.HdrCanvasOptions.Precision*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvasOptions_Precision" data-uid="Mu3D.Creative.HdrCanvasOptions.Precision">
+  Precision
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the storage precision; defaults to IEEE binary16. Computation uses FP32.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PixelPrecision Precision { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.PixelPrecision.html">PixelPrecision</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvasOptions_TileSize_" data-uid="Mu3D.Creative.HdrCanvasOptions.TileSize*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvasOptions_TileSize" data-uid="Mu3D.Creative.HdrCanvasOptions.TileSize">
+  TileSize
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the tile edge length in pixels, from 1 through 1024; defaults to 64.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int TileSize { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Creative_HdrCanvasOptions_Equals_" data-uid="Mu3D.Creative.HdrCanvasOptions.Equals*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvasOptions_Equals_Mu3D_Creative_HdrCanvasOptions_" data-uid="Mu3D.Creative.HdrCanvasOptions.Equals(Mu3D.Creative.HdrCanvasOptions)">
+  Equals(HdrCanvasOptions?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(HdrCanvasOptions? other)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>other</code> <a class="xref" href="Mu3D.Creative.HdrCanvasOptions.html">HdrCanvasOptions</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvasOptions_Equals_" data-uid="Mu3D.Creative.HdrCanvasOptions.Equals*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvasOptions_Equals_System_Object_" data-uid="Mu3D.Creative.HdrCanvasOptions.Equals(System.Object)">
+  Equals(object?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object? obj)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>obj</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvasOptions_GetHashCode_" data-uid="Mu3D.Creative.HdrCanvasOptions.GetHashCode*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvasOptions_GetHashCode" data-uid="Mu3D.Creative.HdrCanvasOptions.GetHashCode">
+  GetHashCode()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvasOptions_ToString_" data-uid="Mu3D.Creative.HdrCanvasOptions.ToString*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvasOptions_ToString" data-uid="Mu3D.Creative.HdrCanvasOptions.ToString">
+  ToString()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Mu3D_Creative_HdrCanvasOptions_op_Equality_" data-uid="Mu3D.Creative.HdrCanvasOptions.op_Equality*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvasOptions_op_Equality_Mu3D_Creative_HdrCanvasOptions_Mu3D_Creative_HdrCanvasOptions_" data-uid="Mu3D.Creative.HdrCanvasOptions.op_Equality(Mu3D.Creative.HdrCanvasOptions,Mu3D.Creative.HdrCanvasOptions)">
+  operator ==(HdrCanvasOptions?, HdrCanvasOptions?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(HdrCanvasOptions? left, HdrCanvasOptions? right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Mu3D.Creative.HdrCanvasOptions.html">HdrCanvasOptions</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Mu3D.Creative.HdrCanvasOptions.html">HdrCanvasOptions</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvasOptions_op_Inequality_" data-uid="Mu3D.Creative.HdrCanvasOptions.op_Inequality*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvasOptions_op_Inequality_Mu3D_Creative_HdrCanvasOptions_Mu3D_Creative_HdrCanvasOptions_" data-uid="Mu3D.Creative.HdrCanvasOptions.op_Inequality(Mu3D.Creative.HdrCanvasOptions,Mu3D.Creative.HdrCanvasOptions)">
+  operator !=(HdrCanvasOptions?, HdrCanvasOptions?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(HdrCanvasOptions? left, HdrCanvasOptions? right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Mu3D.Creative.HdrCanvasOptions.html">HdrCanvasOptions</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Mu3D.Creative.HdrCanvasOptions.html">HdrCanvasOptions</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

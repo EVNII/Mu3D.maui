@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct SceneNodeAnchorPoint | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct SceneNodeAnchorPoint | Mu3D documentation ">
+      
+      <meta name="description" content="Stores the immutable projection of one registered node-local point.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint">
+
+
+
+  <h1 id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint" class="text-break">
+Struct SceneNodeAnchorPoint  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Toolkit.html">Toolkit</a>.<a class="xref" href="Mu3D.Toolkit.Overlays.html">Overlays</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Toolkit.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Stores the immutable projection of one registered node-local point.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct SceneNodeAnchorPoint : IEquatable&lt;SceneNodeAnchorPoint&gt;</code></pre>
+  </div>
+
+
+
+
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.html">SceneNodeAnchorPoint</a>&gt;</div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint__ctor_" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.#ctor*"></a>
+
+  <h3 id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint__ctor_System_String_System_Boolean_System_Boolean_System_Double_System_Double_System_Single_" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.#ctor(System.String,System.Boolean,System.Boolean,System.Double,System.Double,System.Single)">
+  SceneNodeAnchorPoint(string, bool, bool, double, double, float)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Stores the immutable projection of one registered node-local point.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SceneNodeAnchorPoint(string Id, bool Projected, bool InsideViewport, double X, double Y, float Depth)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>Id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The opaque registration identity within its anchor source.</p>
+</dd>
+    <dt><code>Projected</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Whether the target belongs to the visible scene and projects finitely in front of the camera.</p>
+</dd>
+    <dt><code>InsideViewport</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Whether a projected point lies inside the captured clip volume.</p>
+</dd>
+    <dt><code>X</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The top-left-origin horizontal coordinate in logical host units, or zero when unprojected.</p>
+</dd>
+    <dt><code>Y</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd><p>The top-left-origin vertical coordinate in logical host units, or zero when unprojected.</p>
+</dd>
+    <dt><code>Depth</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The normalized projected depth, or zero when unprojected.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_Depth_" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.Depth*"></a>
+
+  <h3 id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_Depth" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.Depth">
+  Depth
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>The normalized projected depth, or zero when unprojected.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Depth { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_Id_" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.Id*"></a>
+
+  <h3 id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_Id" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.Id">
+  Id
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>The opaque registration identity within its anchor source.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Id { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_InsideViewport_" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.InsideViewport*"></a>
+
+  <h3 id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_InsideViewport" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.InsideViewport">
+  InsideViewport
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Whether a projected point lies inside the captured clip volume.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool InsideViewport { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_Projected_" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.Projected*"></a>
+
+  <h3 id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_Projected" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.Projected">
+  Projected
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Whether the target belongs to the visible scene and projects finitely in front of the camera.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Projected { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_X_" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.X*"></a>
+
+  <h3 id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_X" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.X">
+  X
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>The top-left-origin horizontal coordinate in logical host units, or zero when unprojected.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double X { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_Y_" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.Y*"></a>
+
+  <h3 id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_Y" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.Y">
+  Y
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>The top-left-origin vertical coordinate in logical host units, or zero when unprojected.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double Y { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_Deconstruct_" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.Deconstruct*"></a>
+
+  <h3 id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_Deconstruct_System_String__System_Boolean__System_Boolean__System_Double__System_Double__System_Single__" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.Deconstruct(System.String@,System.Boolean@,System.Boolean@,System.Double@,System.Double@,System.Single@)">
+  Deconstruct(out string, out bool, out bool, out double, out double, out float)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Deconstruct(out string Id, out bool Projected, out bool InsideViewport, out double X, out double Y, out float Depth)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>Id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>Projected</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+    <dt><code>InsideViewport</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+    <dt><code>X</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>Y</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>Depth</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_Equals_" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.Equals*"></a>
+
+  <h3 id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_Equals_Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.Equals(Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint)">
+  Equals(SceneNodeAnchorPoint)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(SceneNodeAnchorPoint other)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>other</code> <a class="xref" href="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.html">SceneNodeAnchorPoint</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_Equals_" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.Equals*"></a>
+
+  <h3 id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_Equals_System_Object_" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.Equals(System.Object)">
+  Equals(object)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>obj</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_GetHashCode_" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.GetHashCode*"></a>
+
+  <h3 id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_GetHashCode" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.GetHashCode">
+  GetHashCode()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_ToString_" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.ToString*"></a>
+
+  <h3 id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_ToString" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.ToString">
+  ToString()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_op_Equality_" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.op_Equality*"></a>
+
+  <h3 id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_op_Equality_Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.op_Equality(Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint,Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint)">
+  operator ==(SceneNodeAnchorPoint, SceneNodeAnchorPoint)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(SceneNodeAnchorPoint left, SceneNodeAnchorPoint right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.html">SceneNodeAnchorPoint</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.html">SceneNodeAnchorPoint</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_op_Inequality_" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.op_Inequality*"></a>
+
+  <h3 id="Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_op_Inequality_Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_Mu3D_Toolkit_Overlays_SceneNodeAnchorPoint_" data-uid="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.op_Inequality(Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint,Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint)">
+  operator !=(SceneNodeAnchorPoint, SceneNodeAnchorPoint)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(SceneNodeAnchorPoint left, SceneNodeAnchorPoint right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.html">SceneNodeAnchorPoint</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Mu3D.Toolkit.Overlays.SceneNodeAnchorPoint.html">SceneNodeAnchorPoint</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

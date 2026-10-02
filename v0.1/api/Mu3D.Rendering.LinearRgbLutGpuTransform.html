@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class LinearRgbLutGpuTransform | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class LinearRgbLutGpuTransform | Mu3D documentation ">
+      
+      <meta name="description" content="Applies an explicitly tagged 3D linear RGB lookup table to straight-alpha HDR textures without CPU readback. The table and manual trilinear interpolation use FP32; output storage is explicit.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Rendering.LinearRgbLutGpuTransform">
+
+
+
+  <h1 id="Mu3D_Rendering_LinearRgbLutGpuTransform" data-uid="Mu3D.Rendering.LinearRgbLutGpuTransform" class="text-break">
+Class LinearRgbLutGpuTransform  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Rendering.html">Rendering</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Applies an explicitly tagged 3D linear RGB lookup table to straight-alpha HDR textures without
+CPU readback. The table and manual trilinear interpolation use FP32; output storage is explicit.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class LinearRgbLutGpuTransform : IDisposable</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">LinearRgbLutGpuTransform</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="Mu3D_Rendering_LinearRgbLutGpuTransform_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>The GPU path requires an explicitly authored <a class="xref" href="Mu3D.Color.ColorLutRangePolicy.html#Mu3D_Color_ColorLutRangePolicy_Clamp">Clamp</a> table:
+per-pixel range rejection cannot be reported synchronously without readback. The caller supplies
+finite, straight-alpha linear RGB and alpha in [0, 1]. RGB outside the authored input domain is
+clamped by that explicit policy; transformed output is neither tone mapped nor gamut clipped.
+Alpha is copied before output-storage rounding. Instances are not thread-safe and own only their
+internal resources, never the device or caller textures. No UI or presentation policy is selected.
+Domain endpoints must be zero or normal FP32 values and domain widths must be normal positive
+FP32 values: shaders may flush subnormals to zero, which would collapse a domain or its divisor.</p>
+</div>
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_Rendering_LinearRgbLutGpuTransform__ctor_" data-uid="Mu3D.Rendering.LinearRgbLutGpuTransform.#ctor*"></a>
+
+  <h3 id="Mu3D_Rendering_LinearRgbLutGpuTransform__ctor_Mu3D_Graphics_GraphicsDevice_Mu3D_Color_LinearRgbLut3D_Mu3D_Color_PixelPrecision_" data-uid="Mu3D.Rendering.LinearRgbLutGpuTransform.#ctor(Mu3D.Graphics.GraphicsDevice,Mu3D.Color.LinearRgbLut3D,Mu3D.Color.PixelPrecision)">
+  LinearRgbLutGpuTransform(GraphicsDevice, LinearRgbLut3D, PixelPrecision)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Uploads an immutable FP32 table and creates a reusable HDR color-transform pipeline.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgbLutGpuTransform(GraphicsDevice device, LinearRgbLut3D table, PixelPrecision outputPrecision)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>device</code> <a class="xref" href="Mu3D.Graphics.GraphicsDevice.html">GraphicsDevice</a></dt>
+    <dd><p>The caller-owned graphics device.</p>
+</dd>
+    <dt><code>table</code> <a class="xref" href="Mu3D.Color.LinearRgbLut3D.html">LinearRgbLut3D</a></dt>
+    <dd><p>A finite linear RGB table with an explicitly selected Clamp range policy.</p>
+</dd>
+    <dt><code>outputPrecision</code> <a class="xref" href="Mu3D.Color.PixelPrecision.html">PixelPrecision</a></dt>
+    <dd><p>Explicit Float16 or Float32 output storage.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a></dt>
+    <dd><p>The table uses Reject, or Float16 textures are unavailable.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p>Float16 output cannot contain the table's finite output range, or the domain requires subnormal FP32 values.</p>
+</dd>
+  </dl>
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Rendering_LinearRgbLutGpuTransform_DestinationSpace_" data-uid="Mu3D.Rendering.LinearRgbLutGpuTransform.DestinationSpace*"></a>
+
+  <h3 id="Mu3D_Rendering_LinearRgbLutGpuTransform_DestinationSpace" data-uid="Mu3D.Rendering.LinearRgbLutGpuTransform.DestinationSpace">
+  DestinationSpace
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the transformed destination linear-light color identity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ColorSpaceReference DestinationSpace { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.ColorSpaceReference.html">ColorSpaceReference</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_LinearRgbLutGpuTransform_OutputFormat_" data-uid="Mu3D.Rendering.LinearRgbLutGpuTransform.OutputFormat*"></a>
+
+  <h3 id="Mu3D_Rendering_LinearRgbLutGpuTransform_OutputFormat" data-uid="Mu3D.Rendering.LinearRgbLutGpuTransform.OutputFormat">
+  OutputFormat
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the required destination texture format.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphicsTextureFormat OutputFormat { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsTextureFormat.html">GraphicsTextureFormat</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_LinearRgbLutGpuTransform_OutputPrecision_" data-uid="Mu3D.Rendering.LinearRgbLutGpuTransform.OutputPrecision*"></a>
+
+  <h3 id="Mu3D_Rendering_LinearRgbLutGpuTransform_OutputPrecision" data-uid="Mu3D.Rendering.LinearRgbLutGpuTransform.OutputPrecision">
+  OutputPrecision
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the explicitly selected destination storage precision.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PixelPrecision OutputPrecision { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.PixelPrecision.html">PixelPrecision</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_LinearRgbLutGpuTransform_SourceSpace_" data-uid="Mu3D.Rendering.LinearRgbLutGpuTransform.SourceSpace*"></a>
+
+  <h3 id="Mu3D_Rendering_LinearRgbLutGpuTransform_SourceSpace" data-uid="Mu3D.Rendering.LinearRgbLutGpuTransform.SourceSpace">
+  SourceSpace
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the required source linear-light color identity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ColorSpaceReference SourceSpace { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.ColorSpaceReference.html">ColorSpaceReference</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_LinearRgbLutGpuTransform_Table_" data-uid="Mu3D.Rendering.LinearRgbLutGpuTransform.Table*"></a>
+
+  <h3 id="Mu3D_Rendering_LinearRgbLutGpuTransform_Table" data-uid="Mu3D.Rendering.LinearRgbLutGpuTransform.Table">
+  Table
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the immutable CPU reference table represented by the uploaded GPU data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgbLut3D Table { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgbLut3D.html">LinearRgbLut3D</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Rendering_LinearRgbLutGpuTransform_Apply_" data-uid="Mu3D.Rendering.LinearRgbLutGpuTransform.Apply*"></a>
+
+  <h3 id="Mu3D_Rendering_LinearRgbLutGpuTransform_Apply_Mu3D_Graphics_GraphicsTexture_Mu3D_Color_ColorSpaceReference_Mu3D_Graphics_GraphicsTexture_Mu3D_Color_ColorSpaceReference_" data-uid="Mu3D.Rendering.LinearRgbLutGpuTransform.Apply(Mu3D.Graphics.GraphicsTexture,Mu3D.Color.ColorSpaceReference,Mu3D.Graphics.GraphicsTexture,Mu3D.Color.ColorSpaceReference)">
+  Apply(GraphicsTexture, ColorSpaceReference, GraphicsTexture, ColorSpaceReference)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Submits a transform of the entire source into a separate same-sized destination texture.
+Both textures must be single-layer, single-mip, single-sample Float16/Float32 linear RGBA;
+source needs TextureBinding and destination needs RenderAttachment usage. The supplied
+color identities must equal the table identities. Caller textures remain caller-owned.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Apply(GraphicsTexture source, ColorSpaceReference sourceSpace, GraphicsTexture destination, ColorSpaceReference destinationSpace)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="Mu3D.Graphics.GraphicsTexture.html">GraphicsTexture</a></dt>
+    <dd></dd>
+    <dt><code>sourceSpace</code> <a class="xref" href="Mu3D.Color.ColorSpaceReference.html">ColorSpaceReference</a></dt>
+    <dd></dd>
+    <dt><code>destination</code> <a class="xref" href="Mu3D.Graphics.GraphicsTexture.html">GraphicsTexture</a></dt>
+    <dd></dd>
+    <dt><code>destinationSpace</code> <a class="xref" href="Mu3D.Color.ColorSpaceReference.html">ColorSpaceReference</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section" id="Mu3D_Rendering_LinearRgbLutGpuTransform_Apply_Mu3D_Graphics_GraphicsTexture_Mu3D_Color_ColorSpaceReference_Mu3D_Graphics_GraphicsTexture_Mu3D_Color_ColorSpaceReference__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The destination format must equal <a class="xref" href="Mu3D.Rendering.LinearRgbLutGpuTransform.html#Mu3D_Rendering_LinearRgbLutGpuTransform_OutputFormat">OutputFormat</a>. No CPU wait or readback occurs;
+later work on the device queue observes the transformed result in submission order.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_Rendering_LinearRgbLutGpuTransform_Dispose_" data-uid="Mu3D.Rendering.LinearRgbLutGpuTransform.Dispose*"></a>
+
+  <h3 id="Mu3D_Rendering_LinearRgbLutGpuTransform_Dispose" data-uid="Mu3D.Rendering.LinearRgbLutGpuTransform.Dispose">
+  Dispose()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Releases all internal GPU resources. Repeated disposal is harmless.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

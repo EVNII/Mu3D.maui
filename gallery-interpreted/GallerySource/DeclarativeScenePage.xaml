@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.DeclarativeScenePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    Title="Declarative Scene">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="declarative-scene" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <mu3d:Mu3DSceneView
+            x:Name="SceneView"
+            BackgroundColor="Black"
+            SurfaceError="OnSurfaceError">
+            <mu3d:Scene3D Name="XAML scene">
+                <mu3d:Scene3D.Camera>
+                    <mu3d:PerspectiveCamera3D
+                        FieldOfView="52"
+                        Name="Main camera"
+                        Z="5.5" />
+                </mu3d:Scene3D.Camera>
+                <mu3d:Sphere3D
+                    Name="Blue sphere"
+                    Radius="0.9"
+                    X="-1.2">
+                    <mu3d:PbrMaterial3D
+                        Color="#4A9DFF"
+                        Metallic="0.15"
+                        Name="Blue PBR"
+                        Roughness="0.22" />
+                </mu3d:Sphere3D>
+                <mu3d:Cone3D
+                    Height="1.8"
+                    Name="Orange cone"
+                    Radius="0.82"
+                    RotationZ="-8"
+                    X="1.2">
+                    <mu3d:UnlitMaterial3D
+                        Color="#FF7A28"
+                        Name="Orange unlit" />
+                </mu3d:Cone3D>
+                <mu3d:DirectionalLight3D
+                    Intensity="3.5"
+                    Name="Key light"
+                    RotationX="-35"
+                    RotationY="-30" />
+            </mu3d:Scene3D>
+        </mu3d:Mu3DSceneView>
+        <VerticalStackLayout Grid.Row="1" Padding="16" Spacing="6">
+            <Label
+                FontAttributes="Bold"
+                Text="The camera, light, geometry, transforms, and materials above are declared in XAML." />
+            <Label
+                x:Name="StatusLabel"
+                FontSize="12"
+                Text="Scene3D supplied Mu3DSceneView.Scene and Camera without renderer setup code." />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

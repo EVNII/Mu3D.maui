@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Application-owned pointer and pen input | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Application-owned pointer and pen input | Mu3D documentation ">
+      
+      <meta name="description" content="Feed native mouse, touch, and pen samples into Mu3D scene raycasting without moving editor policy into Core.">
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="application-owned-pointer-and-pen-input">Application-owned pointer and pen input</h1>
+
+<p>Mu3D deliberately does not define a second cross-platform raw pointer model. MAUI or the native
+platform owns device acquisition, capture, pressure, tilt, eraser state, coalescing, and lifecycle.
+The application converts only the position it wants to query into physical viewport pixels and
+passes that position to <a class="xref" href="../../api/Mu3D.Toolkit.Selection.SceneRaycaster.html">SceneRaycaster</a>.</p>
+<p>The Gallery keeps its <code>PointerInputBridge</code> inside the sample application. It is not part of
+<code>Mu3D.Maui.Toolkit</code>. The Behavior subscribes to the native view only while the MAUI view is loaded,
+captures one accepted primary contact, and removes every platform event on unload, handler change,
+or detach:</p>
+<pre><code class="lang-xaml">&lt;mu3d:Mu3DSceneView
+    x:Name=&quot;SceneView&quot;
+    SurfaceError=&quot;OnSurfaceError&quot;&gt;
+  &lt;mu3d:Mu3DSceneView.Behaviors&gt;
+    &lt;pages:PointerInputBridge Sampled=&quot;OnPointerSampled&quot; /&gt;
+  &lt;/mu3d:Mu3DSceneView.Behaviors&gt;
+
+  &lt;mu3d:Mu3DSceneView.SceneContent&gt;
+    &lt;mu3d:Scene3D&gt;
+      &lt;mu3d:Scene3D.Camera&gt;
+        &lt;mu3d:PerspectiveCamera3D Z=&quot;6.5&quot; /&gt;
+      &lt;/mu3d:Scene3D.Camera&gt;
+      &lt;mu3d:Cone3D x:Name=&quot;Target&quot; /&gt;
+    &lt;/mu3d:Scene3D&gt;
+  &lt;/mu3d:Mu3DSceneView.SceneContent&gt;
+&lt;/mu3d:Mu3DSceneView&gt;
+</code></pre>
+<p>The page chooses when a contact becomes an application stroke and performs one explicit geometric
+query. That separation is important: a raycast hit is evidence, not a selection or paint command.</p>
+<pre><code class="lang-csharp">private readonly SceneRaycaster raycaster = new();
+private static readonly Predicate&lt;Mesh&gt; RaycastFilter =
+    static mesh =&gt; mesh.Name != &quot;Application-owned hit marker&quot;;
+
+private void OnPointerSampled(
+    object? sender,
+    ApplicationPointerSample sample)
+{
+    if (sample.Phase is not ApplicationPointerPhase.Pressed and
+        not ApplicationPointerPhase.Moved)
+    {
+        return;
+    }
+
+    bool hasHit = raycaster.TryHitClosest(
+        SceneView.Scene!,
+        (PerspectiveCamera)SceneView.Camera!,
+        SceneView.PixelWidth,
+        SceneView.PixelHeight,
+        sample.PositionPixels,
+        out SceneRaycastIntersection proposed,
+        RaycastFilter);
+
+    // Application code decides whether hasHit means paint, select, annotate, or nothing.
+}
+</code></pre>
+<p><code>TryHitClosest</code> traverses the visible hierarchy directly and returns a value type. With a cached
+filter delegate it does not create a result list, per-mesh hit objects, or traversal iterators. The
+ordered <code>HitTest</code> API remains available when an application really needs every mesh candidate.</p>
+<h2 id="platform-mapping">Platform mapping</h2>
+<ul>
+<li>Windows reads WinUI <code>PointerRoutedEventArgs</code>, including pen pressure, X/Y tilt, eraser and barrel
+button state, and uses exact pointer capture for the accepted contact.</li>
+<li>Android reads the native <code>MotionEvent</code>, accepts finger, mouse, stylus and eraser tool types, and
+normalizes pressure plus orientation/tilt while preventing parent interception only for the
+active contact.</li>
+<li>iOS and Mac Catalyst use a zero-delay continuous UIKit contact recognizer plus a stylus-filtered
+<code>UIHoverGestureRecognizer</code>. <code>UITouch</code> supplies Apple Pencil pressure, altitude and azimuth during
+contact; the hover recognizer supplies the position and available orientation before contact.
+Apple Pencil hover requires supported Pencil/iPad hardware and iPadOS 16.1 or later. MAUI handler
+load/unload remains the lifetime owner on both Apple targets. The bound hover altitude/azimuth
+APIs require iOS/Mac Catalyst 16.4, so 15.0–16.3 retains the moving preview without hover-tilt
+rotation. On iPad, the sample also carries nullable <code>HoverDistanceNormalized</code> data from
+<code>ZOffset</code> (zero near the screen and one at maximum hover distance) from iPadOS 16.1, plus the
+nullable <code>IsHoverToolPreviewPreferred</code> system preference from iPadOS 17.5. Mac Catalyst and
+non-Apple providers leave those iPad-only values unavailable instead of advertising a false
+capability.</li>
+</ul>
+<p>The Gallery changes the hit marker's size from normalized pressure and maps pen tilt direction to
+its color. A same-tree MAUI vector cursor follows pen hover and rotates with the reported tilt, so
+cursor motion remains in the UI layer instead of becoming another render pass. On Windows its
+position and tilt are updated through the element's Composition visual, and a scoped window cursor
+hook suppresses WinUI's later cursor restoration while the pen remains over this viewport. The hook
+is removed and the arrow restored on exit, cancel, handler replacement, unload, or detach. Android
+uses the corresponding native pointer-icon lifetime. Apple uses a scoped <code>UIPointerInteraction</code>
+hidden style while stylus hover/contact owns the drawing cursor. It restores the default pointer on
+exit, cancel, handler replacement, unload, or detach. Mouse and trackpad hover never enters the
+stylus-filtered preview path. The first real distance-bearing sample enables the page's Apple
+Pencil physical-shadow switch and, when available, initializes it from the system tool-preview
+preference. The default application-owned <code>IPenTipShadowPreview</code> builds a complete 166 mm by
+8.9 mm Apple Pencil-style reference, including its nib, taper, full body, rounded rear cap and one
+flat side. That caster hierarchy is detached from the Scene and supplied only to the
+Gallery-owned display-normal render feature. It therefore never enters camera color/depth,
+raycasting, AO, transmission or the scene directional-shadow map. The Pencil model itself is never
+visible; this is explicit feature ownership, not a zero-alpha material trick.</p>
+<p>A capped closest raycast anchors the hidden caster to the visible world surface. The page converts
+its millimetre dimensions to world units from caster camera-space depth, field of view, physical
+viewport pixels and calibrated display points per inch. Camera dolly, field-of-view changes,
+application canvas zoom and Pencil hover distance therefore update the world-space scale while the
+complete Pencil remains the same physical size on the display. The sample defaults to a compatible
+iPad logical density and keeps that calibration an explicit constructor input for other devices.</p>
+<p>The sole <strong>Display-normal surface shadow</strong> path uses no light. It flattens the complete hidden Pencil
+at its anchored screen depth before rasterizing an FP16 mask, avoiding near-plane, model-depth and
+scene-occlusion clipping even when the virtual 166 mm body crosses scene geometry. Each mask vertex
+stores caster view depth, coverage and endpoint-normalized opacity derived from its physical
+distance above the device display. Caster preparation normalizes the hover range so the first
+detectable/maximum hover distance is exactly zero shadow and
+screen contact is exactly the selected shadow coefficient. An endpoint-preserving exponential
+coefficient changes the curve between those limits. Because distance is measured for every
+transformed vertex, Pencil tilt naturally makes the raised body and rear cap fainter than the nib
+rather than applying one alpha to the whole model.</p>
+<p>A private <code>SurfaceNormal</code> plus depth output reconstructs the visible receiver beneath each mask
+pixel. The absolute caster-to-receiver distance selects a local Gaussian sigma, so the nib remains
+sharp near its projection surface while raised or depth-separated parts of the body become
+progressively softer. A 7-by-7 Gaussian gather replaces the former fixed sparse blur. Its FP16 mask
+uses linear subpixel sampling, and normalized hover height is lightly low-pass filtered without
+allocating while snapping its two endpoints exactly. This avoids integer sample/radius and
+hover-to-exit jumps that could flash while lifting the Pencil. The
+page exposes live controls for overall shadow coefficient, Gaussian blur growth per millimetre and
+hover-shadow falloff per millimetre. Opacity exponentials are prepared once per caster vertex rather
+than repeated inside every 7-by-7 fragment gather. A Pencil-bounds scissor limits the expensive
+composite to the projected shadow area. Surface normals
+continue bending the result through sloped geometry. Every visible scene surface beneath the mask
+can receive it regardless of front/back ordering; only clear background is excluded. Pressed,
+moved and released samples retain a zero tip-to-display distance, so contact keeps the nib shadow
+instead of hiding it. Exit, cancellation, disabling the option or page teardown removes the pass.
+The platform-neutral circular UI cursor and all authored scene lights remain independent.</p>
+<p>UIKit uses separate contact and hover recognizers. A Pencil <code>Released</code> sample therefore remains the
+active preview state while UIKit hands ownership back to hover instead of emitting an intermediate
+<code>Exited</code>; only a real far-hover end, cancellation or failure terminates the preview. A hover end next
+to the display is classified as the reciprocal transition into contact. The mask also compensates
+the elevated caster's screen projection: its nib remains pinned to the current raycast landing point
+at every hover height, while height changes opacity/softness and tilt changes the body silhouette.
+Landing UV comes directly from normalized pen position and does not require a triangle beneath the
+nib. A hit refreshes only projection depth; on clear background the previous valid depth, or an
+initial scene-origin/safe camera fallback, keeps the mask defined. Visible geometry beneath another
+part of the long Pencil body can therefore receive shadow while the nib is over clear background.</p>
+<p><code>PointerInputBridge.SuppressDirectTouchPressWhilePenActive</code> is an opt-in application palm-rejection
+example. During pen hover/contact, a finger cannot enter this bridge's primary Press/Move/Release
+raycast stream on Apple, Android or Windows. The native touch stream remains unconsumed, so separate
+two-finger Pan/Pinch recognizers on the same SceneView stay available. Real pen exit/cancellation
+restores ordinary finger primary input.</p>
+<p>The normalized sample is a value type, tilt colors are precomputed, the contact raycast is capped at
+the viewport frame rate, and detailed status text changes only at input-phase boundaries. Continuous
+hover and movement therefore do not manufacture event-argument, color, hit-list, or status-string
+garbage on the application hot path.</p>
+<p>This remains application UI rather than a Toolkit drawing policy. The example intentionally does
+not create strokes, a canvas, smoothing, undo, or tool modes; those creative and editor policies
+remain application-owned.</p>
+<p>The CPU raycaster intersects current rigid/morph triangle positions without changing immutable base
+geometry or morph weights. Local hit positions belong to the current morphed surface, and queries
+read current scene state rather than a previously presented frame. Skin deformation and material
+alpha masks remain unsupported. An application can replace it with a BVH, physics query, or GPU
+object-ID path while retaining the same native-input boundary.</p>
+
+</article>
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

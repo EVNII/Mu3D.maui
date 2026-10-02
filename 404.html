@@ -1,0 +1,6 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<title>Mu3D — Page not found</title><script>
+const bases = ["/Mu3D.maui/gallery/", "/Mu3D.maui/gallery-interpreted/"];
+const base = bases.find(value => location.pathname.startsWith(value));
+if (base) location.replace(base + '?mu3d-route=' + encodeURIComponent(location.pathname + location.search + location.hash));
+</script></head><body><h1>Page not found</h1><a href="/Mu3D.maui/">Mu3D Gallery</a></body></html>

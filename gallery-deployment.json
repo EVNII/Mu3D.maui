@@ -1,0 +1,12 @@
+{
+  "galleries": [
+    {
+      "path": "/Mu3D.maui/gallery/",
+      "hashedResources": 58
+    },
+    {
+      "path": "/Mu3D.maui/gallery-interpreted/",
+      "hashedResources": 58
+    }
+  ]
+}

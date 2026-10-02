@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct FrameStatisticsSnapshot | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct FrameStatisticsSnapshot | Mu3D documentation ">
+      
+      <meta name="description" content="Stores one immutable rolling frame and render statistics snapshot.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot">
+
+
+
+  <h1 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot" class="text-break">
+Struct FrameStatisticsSnapshot  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Toolkit.html">Toolkit</a>.<a class="xref" href="Mu3D.Toolkit.Diagnostics.html">Diagnostics</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Toolkit.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Stores one immutable rolling frame and render statistics snapshot.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct FrameStatisticsSnapshot : IEquatable&lt;FrameStatisticsSnapshot&gt;</code></pre>
+  </div>
+
+
+
+
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.html">FrameStatisticsSnapshot</a>&gt;</div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AverageAcquireMilliseconds_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AverageAcquireMilliseconds*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AverageAcquireMilliseconds" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AverageAcquireMilliseconds">
+  AverageAcquireMilliseconds
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets average surface-acquire CPU time, or null when unavailable.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? AverageAcquireMilliseconds { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AverageDrawCallCount_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AverageDrawCallCount*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AverageDrawCallCount" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AverageDrawCallCount">
+  AverageDrawCallCount
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the average draw-call count over samples that supplied it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? AverageDrawCallCount { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AverageFrameMilliseconds_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AverageFrameMilliseconds*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AverageFrameMilliseconds" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AverageFrameMilliseconds">
+  AverageFrameMilliseconds
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the average host-observed frame interval in milliseconds.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double AverageFrameMilliseconds { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AveragePresentMilliseconds_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AveragePresentMilliseconds*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AveragePresentMilliseconds" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AveragePresentMilliseconds">
+  AveragePresentMilliseconds
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets average surface-present/error-poll CPU time, or null when unavailable.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? AveragePresentMilliseconds { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AveragePresentationRenderMilliseconds_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AveragePresentationRenderMilliseconds*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AveragePresentationRenderMilliseconds" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AveragePresentationRenderMilliseconds">
+  AveragePresentationRenderMilliseconds
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets average caller render/encode/submit CPU time inside presentation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? AveragePresentationRenderMilliseconds { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AveragePresentationTotalMilliseconds_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AveragePresentationTotalMilliseconds*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AveragePresentationTotalMilliseconds" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AveragePresentationTotalMilliseconds">
+  AveragePresentationTotalMilliseconds
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets average total presentation-operation CPU time, or null when unavailable.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? AveragePresentationTotalMilliseconds { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AveragePrimitiveCount_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AveragePrimitiveCount*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AveragePrimitiveCount" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AveragePrimitiveCount">
+  AveragePrimitiveCount
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the average primitive count over samples that supplied it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? AveragePrimitiveCount { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AverageRendererCacheTrimMilliseconds_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AverageRendererCacheTrimMilliseconds*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AverageRendererCacheTrimMilliseconds" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AverageRendererCacheTrimMilliseconds">
+  AverageRendererCacheTrimMilliseconds
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets average renderer cache-trimming CPU time, or null when unavailable.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? AverageRendererCacheTrimMilliseconds { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AverageRendererEncodeMilliseconds_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AverageRendererEncodeMilliseconds*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AverageRendererEncodeMilliseconds" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AverageRendererEncodeMilliseconds">
+  AverageRendererEncodeMilliseconds
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets average scene command-encoding CPU time, or null when unavailable.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? AverageRendererEncodeMilliseconds { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AverageRendererPrepareMilliseconds_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AverageRendererPrepareMilliseconds*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AverageRendererPrepareMilliseconds" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AverageRendererPrepareMilliseconds">
+  AverageRendererPrepareMilliseconds
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets average scene preparation CPU time, or null when unavailable.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? AverageRendererPrepareMilliseconds { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AverageRendererSubmitMilliseconds_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AverageRendererSubmitMilliseconds*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AverageRendererSubmitMilliseconds" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AverageRendererSubmitMilliseconds">
+  AverageRendererSubmitMilliseconds
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets average renderer queue-submission CPU time, or null when unavailable.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? AverageRendererSubmitMilliseconds { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AverageRendererTotalMilliseconds_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AverageRendererTotalMilliseconds*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_AverageRendererTotalMilliseconds" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.AverageRendererTotalMilliseconds">
+  AverageRendererTotalMilliseconds
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets average total renderer-invocation CPU time, or null when unavailable.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? AverageRendererTotalMilliseconds { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_DrawCallSampleCount_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.DrawCallSampleCount*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_DrawCallSampleCount" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.DrawCallSampleCount">
+  DrawCallSampleCount
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets how many retained samples supplied draw-call counts.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int DrawCallSampleCount { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_FramesPerSecond_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.FramesPerSecond*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_FramesPerSecond" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.FramesPerSecond">
+  FramesPerSecond
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets frames per second from retained frame count divided by window duration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double FramesPerSecond { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_MaximumFrameMilliseconds_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.MaximumFrameMilliseconds*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_MaximumFrameMilliseconds" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.MaximumFrameMilliseconds">
+  MaximumFrameMilliseconds
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the maximum retained frame interval in milliseconds.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double MaximumFrameMilliseconds { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_MinimumFrameMilliseconds_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.MinimumFrameMilliseconds*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_MinimumFrameMilliseconds" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.MinimumFrameMilliseconds">
+  MinimumFrameMilliseconds
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the minimum retained frame interval in milliseconds.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double MinimumFrameMilliseconds { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_PresentationSampleCount_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.PresentationSampleCount*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_PresentationSampleCount" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.PresentationSampleCount">
+  PresentationSampleCount
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets how many retained samples supplied presentation timings.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int PresentationSampleCount { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_PrimitiveSampleCount_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.PrimitiveSampleCount*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_PrimitiveSampleCount" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.PrimitiveSampleCount">
+  PrimitiveSampleCount
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets how many retained samples supplied rendered primitive counts.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int PrimitiveSampleCount { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_RendererSampleCount_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.RendererSampleCount*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_RendererSampleCount" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.RendererSampleCount">
+  RendererSampleCount
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets how many retained samples supplied scene-renderer timings.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int RendererSampleCount { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_ResourceCounts_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.ResourceCounts*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_ResourceCounts" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.ResourceCounts">
+  ResourceCounts
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the latest explicit resource-count snapshot, or null when unavailable.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RenderResourceCounts? ResourceCounts { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Toolkit.Diagnostics.RenderResourceCounts.html">RenderResourceCounts</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_SampleCount_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.SampleCount*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_SampleCount" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.SampleCount">
+  SampleCount
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the number of frames currently retained in the rolling window.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int SampleCount { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_WindowDurationMilliseconds_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.WindowDurationMilliseconds*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_WindowDurationMilliseconds" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.WindowDurationMilliseconds">
+  WindowDurationMilliseconds
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the sum of retained host-observed frame intervals in milliseconds.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double WindowDurationMilliseconds { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_Equals_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.Equals*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_Equals_Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.Equals(Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot)">
+  Equals(FrameStatisticsSnapshot)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(FrameStatisticsSnapshot other)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>other</code> <a class="xref" href="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.html">FrameStatisticsSnapshot</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_Equals_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.Equals*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_Equals_System_Object_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.Equals(System.Object)">
+  Equals(object)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>obj</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_GetHashCode_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.GetHashCode*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_GetHashCode" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.GetHashCode">
+  GetHashCode()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_ToString_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.ToString*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_ToString" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.ToString">
+  ToString()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_op_Equality_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.op_Equality*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_op_Equality_Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.op_Equality(Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot,Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot)">
+  operator ==(FrameStatisticsSnapshot, FrameStatisticsSnapshot)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(FrameStatisticsSnapshot left, FrameStatisticsSnapshot right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.html">FrameStatisticsSnapshot</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.html">FrameStatisticsSnapshot</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_op_Inequality_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.op_Inequality*"></a>
+
+  <h3 id="Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_op_Inequality_Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_Mu3D_Toolkit_Diagnostics_FrameStatisticsSnapshot_" data-uid="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.op_Inequality(Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot,Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot)">
+  operator !=(FrameStatisticsSnapshot, FrameStatisticsSnapshot)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(FrameStatisticsSnapshot left, FrameStatisticsSnapshot right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.html">FrameStatisticsSnapshot</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.html">FrameStatisticsSnapshot</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

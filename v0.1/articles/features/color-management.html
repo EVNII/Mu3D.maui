@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Color management | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Color management | Mu3D documentation ">
+      
+      <meta name="description" content="Explicit AgX, Filmic and ACES display views, OCIO processing and ICC proofing.">
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="color-management">Color management</h1>
+
+<p>Mu3D keeps scene lighting and reference accumulation in linear light. Select a display view explicitly
+to render that radiance for a display. The same view works with the ordinary scene renderer and the
+interactive/reference OpenPBR passes.</p>
+<h2 id="xaml">XAML</h2>
+<pre><code class="lang-xaml">&lt;mu3d:Mu3DSceneView&gt;
+    &lt;mu3d:Mu3DSceneView.DisplayTransform&gt;
+        &lt;mu3d:ColorView3D Preset=&quot;AgXHdr1000&quot;
+                          ExposureStops=&quot;0&quot; ReferenceWhiteNits=&quot;100&quot; /&gt;
+    &lt;/mu3d:Mu3DSceneView.DisplayTransform&gt;
+    &lt;!-- Declare Scene3D, a camera and scene content here. --&gt;
+&lt;/mu3d:Mu3DSceneView&gt;
+</code></pre>
+<p>The component is bindable. Exposure changes request a frame and reuse the GPU program; they do not
+reset OpenPBR's accumulated radiance. Leaving <code>DisplayTransform</code> null retains linear presentation.
+The control owns the floating-point intermediate and uses its existing automatic surface and
+scheduling. Custom render pipelines must produce premultiplied scene-linear RGB. Clear colors are
+associated with alpha before rendering; the view unassociates color for nonlinear processing and
+restores the negotiated presentation alpha association. A custom session must report its actual
+<code>AlphaMode</code>; unresolved Automatic, Inherit or Unknown association is rejected for display views.</p>
+<table>
+<thead>
+<tr>
+<th>Preset</th>
+<th>Rendering transform</th>
+<th>Peak / limiting gamut</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AgXSdr</code></td>
+<td>Blender 5.0 AgX Base</td>
+<td>100 nits / Rec.709</td>
+</tr>
+<tr>
+<td><code>AgXHdr1000</code></td>
+<td>Blender 5.0 AgX HDR</td>
+<td>1000 nits / P3 D65</td>
+</tr>
+<tr>
+<td><code>Aces2Sdr</code></td>
+<td>ACES 2.0</td>
+<td>100 nits / Rec.709</td>
+</tr>
+<tr>
+<td><code>Aces2Hdr1000</code></td>
+<td>ACES 2.0</td>
+<td>1000 nits / Rec.2020</td>
+</tr>
+<tr>
+<td><code>Aces2Hdr1000P3</code></td>
+<td>ACES 2.0</td>
+<td>1000 nits / P3 D65</td>
+</tr>
+<tr>
+<td><code>AgXSdrRec2020</code></td>
+<td>Blender 5.0 AgX Base</td>
+<td>100 nits / Rec.2020</td>
+</tr>
+<tr>
+<td><code>FilmicSdr</code></td>
+<td>Blender 5.0 Filmic base, no additional Look</td>
+<td>100 nits / Rec.709</td>
+</tr>
+</tbody>
+</table>
+<p>These are pinned official transforms: original AgX data with tetrahedral interpolation and analytic
+ACES 2 math with its original hue tables. The output is display-linear sRGB, including extended and
+negative components needed to represent wide gamut. Reference white specifies how many nits one
+output unit represents; it does not change the fixed mastering peak or measure the connected display.
+The default is 100 nits. Exposure is bounded to -32…+32 stops, reference white to 1…10000 nits.
+The native compositor still controls actual physical luminance.</p>
+<p>HDR presets require negotiated HDR extended-linear sRGB presentation and fail on SDR surfaces.
+Select an SDR preset explicitly when needed. Native P3, PQ and HLG presentation remain separate
+capability contracts; implementing their transfer equations does not enable a surface automatically.
+The portable views require no native OCIO installation.</p>
+<h2 id="cpu-and-custom-gpu-use">CPU and custom GPU use</h2>
+<pre><code class="lang-csharp">var view = new ColorViewTransform(ColorViewPreset.Aces2Hdr1000,
+    StandardColorSpaces.AcesCg, exposureStops: 0, referenceWhiteNits: 100);
+LinearRgba displayed = view.Transform(sceneColor);
+
+using var gpu = new ColorViewGpuTransform(device, view,
+    GraphicsTextureFormat.Rgba16Float,
+    inputPremultiplied: true, outputPremultiplied: true);
+gpu.Apply(sceneTexture, view.SourceSpace, outputTexture, view.DestinationSpace);
+</code></pre>
+<p>Namespaces are <code>Mu3D.Color</code>, <code>Mu3D.Graphics</code> and <code>Mu3D.Rendering</code>. Source space can be linear sRGB, Display P3, Adobe RGB (1998), ProPhoto RGB, Rec.2020
+or ACEScg. Additional wide-gamut inputs are converted to ACEScg before the official view, on both CPU and GPU. Exposed straight RGB must stay within ±1e30 per component; CPU processing rejects larger
+values and GPU callers must enforce this data contract. CPU colors are straight alpha. The GPU requires a distinct, same-sized floating-point
+sampled source and a renderable output; it preserves alpha, uses FP32 math, and does no CPU readback.
+<code>UpdateTransform</code> changes exposure/reference white while retaining the same preset and source space.
+SDR output can use an explicitly selected <code>ColorEncoding.Srgb</code> with an eight-bit sRGB or UNORM target;
+hardware encoding and explicit shader encoding are selected according to that format.</p>
+<h2 id="optional-opencolorio-configurations">Optional OpenColorIO configurations</h2>
+<p>The separate <code>Mu3D.Native.OpenColorIO</code> package reads actual <code>.ocio</code> configurations and creates CPU
+color-space or display/view processors. Configurations, context defaults and assets are explicit;
+it never replaces the global process configuration.</p>
+<pre><code class="lang-csharp">using Mu3D.Native.OpenColorIO;
+
+using var config = OcioConfiguration.LoadFile(&quot;/assets/color/config.ocio&quot;);
+using var processor = config.CreateColorSpaceProcessor(&quot;ACEScg&quot;, &quot;ACES2065-1&quot;);
+Vector3 converted = processor.ApplyRgb(rgb);
+</code></pre>
+<p>The adapter pins OCIO 2.5.2 and validates its private wrapper ABI. Native command-line processing is verified on macOS arm64 and on a genuine Mac Catalyst arm64
+build. The Catalyst archive uses the macabi target and passes its own C ABI/oracle checks; this is
+separate from linking and running a complete MAUI application. iOS, Android and Windows native
+runtimes remain pending; missing/unsupported runtimes fail explicitly. Consumer builds do not download or compile OCIO.
+This limitation does not affect portable AgX/ACES views.</p>
+<p>Arbitrary loaded configurations currently execute through native CPU processors; this is not a
+runtime GPU shader compiler for every OCIO config. The built-in AgX/Filmic/ACES programs have a
+separate, verified GPU path generated at maintainer time. Gallery does not currently offer a
+general <code>.ocio</code> file picker or dynamic Display/View/Look browser.</p>
+<p>A display processor normally returns encoded RGB. <code>CreateDisplayViewToLinearProcessor</code> requires
+explicit view-output and linear-destination OCIO identities in the same reference space, so decoding
+does not undo the rendering transform. <code>AsLinearTransform</code> asserts caller-verified linear endpoint
+metadata; it does not decode an arbitrary encoded transform. A processor can be baked into an
+explicitly bounded <code>LinearRgbLut3D</code>; this is an approximation whose off-grid error must be measured.</p>
+<h2 id="icc-proofing-transfer-functions-and-spectra">ICC proofing, transfer functions and spectra</h2>
+<p><code>IccSoftProofTransform</code> adds a proof-device round trip followed by absolute-colorimetric decoding to
+simulate media white. <code>IccSoftProofOptions</code> selects proof/display intents, optional explicit proof BPC and
+reject-or-clamp range policies. The result reports explicit clipping. RGB ICC profiles are supported;
+CMYK is available through the separate <a href="cmyk-printing.html">optional printing extension</a>; spectral printer models remain unsupported. Tone mapping into print-relative
+light is an application choice. Do not apply a monitor ICC profile a second time when the platform
+compositor owns that conversion.</p>
+<p><code>HdrTransferFunctions</code> supplies absolute-nit PQ and BT.2100 HLG functions. RGB HLG includes the
+luminance-coupled OOTF and requires reference white, peak luminance and system gamma explicitly.
+These are numerical conversions, independent of native display support.</p>
+<p>The spectral APIs include immutable power distributions, observer-tagged integration and measured
+RGB display-primary models. <code>Cie2015Observers</code> uses unchanged official 2° and 10° CIE 2015 tables
+with attribution and SHA-verified metadata. These are fixed standard observers. Arbitrary age or
+field-angle models are not inferred from them; applications may supply documented custom CMFs.</p>
+<p>The Gallery <strong>Color Management</strong> example compares high-saturation HDR bands side by side and
+also retains its XAML HDR-lit sphere scene. <strong>OpenPBR + MaterialX</strong> lets you select the same display stage in all four rendering modes; its initial
+selection retains scene-linear HDR.
+Numerical and headless GPU validation is separate from physical display appearance testing.</p>
+<h2 id="standard-rgb-input-and-interchange">Standard RGB input and interchange</h2>
+<p><code>StandardRgbEncodingConverter</code> decodes sRGB, Display P3, Adobe RGB (1998), ProPhoto RGB
+and Rec.2020 into tagged linear FP32 colors/images. Display P3 is D65, not cinema DCI-P3;
+Rec.2020 here means the continuous BT.2020 OETF, not PQ or HLG. ProPhoto uses D50 and
+its linear toe. Conversion includes white-point adaptation. Alpha is unchanged and input
+must be straight/unpremultiplied.</p>
+<pre><code class="lang-csharp">var input = new StandardEncodedRgba(0.8f, 0.2f, 0.1f, 1f, StandardRgbEncoding.DisplayP3);
+LinearRgba working = StandardRgbEncodingConverter.Decode(input, StandardColorSpaces.AcesCg);
+var output = StandardRgbEncodingConverter.Encode(working, StandardRgbEncoding.ProPhotoRgb);
+IccProfile profile = StandardRgbProfiles.Get(StandardRgbEncoding.ProPhotoRgb);
+</code></pre>
+<p>Extended negative and above-one RGB are preserved by default. <code>RgbEncodingRangePolicy.Reject</code>
+and <code>.Clip</code> are explicit alternatives; clipping is not perceptual gamut mapping or tone mapping.
+<code>DecodeImage</code>/<code>EncodeImage</code> support bulk pixels. Encoded arrays are not self-describing files:
+the selected encoding/profile must accompany the pixels. The supplied ICC v4 matrix/TRC profiles
+are deterministic mathematical standard profiles, not measured monitor profiles; ICC fixed-point
+quantization is approximate. They have no perceptual rendering tables.</p>
+<p>The renderer retains HDR floating-point presentation through extended-linear sRGB/scRGB.
+These document/input spaces do not select native P3, PQ or HLG swapchains. The OS compositor
+and display determine the final visible gamut. No implicit SDR view is added.
+Transfer-function definitions follow <a href="https://www.w3.org/TR/css-color-4/#color-conversion-code">CSS Color 4</a>;
+profile interchange follows <a href="https://www.color.org/v4spec/">ICC v4</a>.</p>
+<h2 id="high-saturation-comparison-scene">High-saturation comparison scene</h2>
+<p>The default Gallery chart generates identical <strong>scene-linear Rec.2020</strong> RGB/CMY/white rows
+in FP32 for raw output and both display views. The horizontal peak-component ramp is
+<code>0.18 × 2^stops</code>, with stops from -6 through +12; it is not a luminance-normalized chart.
+Exposure and input saturation are synchronized. Saturation zero turns all rows neutral.
+A second pattern sweeps hue continuously, making high-intensity hue discontinuities easier
+to inspect. No PNG, eight-bit image or sRGB clipping lies between the source and the HDR views.</p>
+<p>A <strong>Standard / no tone mapping</strong> column applies only shared exposure and the necessary
+linear Rec.2020-to-extended-sRGB conversion. It does not tone map, compress gamut or cap output
+at 1000 nits. Negative and above-one components survive into FP16; only values beyond its finite
+storage range (±65504, possible at the extreme +6 EV end) are clipped to avoid infinity.
+The platform compositor still performs monitor conversion and the screen limits visible output;
+this is not a switch that disables operating-system color management. In explicitly selected SDR
+mode, the raw column instead hard-clips linear channels to 0–1 before sRGB encoding. That contrast
+shows highlight clipping versus the AgX/ACES roll-off. This follows Blender Standard's intent;
+it is not Blender Raw, which is for inspecting numerical values without color-space conversion.</p>
+<p>Explicit SDR comparison also includes <strong>Filmic</strong>, using Blender's original Filmic sRGB base
+view without an extra Look. Filmic processes the same HDR source as the other views, but this
+particular output transform maps it to SDR. The pinned Blender config offers Filmic on the
+sRGB display, not as a dedicated PQ/HLG HDR output view. No HDR scene data is lost before the view.
+Four SDR charts form a 2x2 layout on wide windows; HDR retains three charts, and narrow windows
+stack them. See <a href="https://github.com/blender/blender/blob/a37564c4df7a9b604809e5192918400e46a0205f/release/datafiles/colormanagement/config.ocio">Blender's display/view configuration</a>.</p>
+<p>The HDR comparison uses <strong>AgX HDR 1000 nits / P3 D65</strong> versus
+<strong>ACES 2.0 HDR 1000 nits / P3 D65</strong>, both with 100-nit reference white. The existing
+ACES Rec.2020 preset remains available through the API; it is intentionally not used
+for this matched-gamut comparison. The SDR comparison uses 100-nit Rec.709 for both.
+SDR is explicitly selected; an unavailable HDR surface produces a clear status, not
+an implicit SDR transform. Physical brightness still depends on display headroom.</p>
+<p>ACES 2.0 reworks rendering in JMh appearance correlates, separating tone mapping from
+chroma/gamut compression to address hue behavior and consistency across outputs.
+It should not be judged as the older per-channel ACES rendering, nor does this chart
+establish one transform as universally better. See the
+<a href="https://docs.acescentral.com/system-components/output-transforms/">official ACES 2 rendering structure</a>.
+This sample uses the pinned OCIO 2.5.2 ACES 2.0 implementation, not a fitted “ACES filmic” curve.</p>
+
+</article>
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

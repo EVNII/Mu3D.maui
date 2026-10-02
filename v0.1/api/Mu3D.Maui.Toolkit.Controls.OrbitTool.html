@@ -1,0 +1,1834 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class OrbitTool | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class OrbitTool | Mu3D documentation ">
+      
+      <meta name="description" content="Creates and attaches an orbit controller for an explicit declarative camera.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool">
+
+
+
+  <h1 id="Mu3D_Maui_Toolkit_Controls_OrbitTool" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool" class="text-break">
+Class OrbitTool  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Maui.html">Maui</a>.<a class="xref" href="Mu3D.Maui.Toolkit.html">Toolkit</a>.<a class="xref" href="Mu3D.Maui.Toolkit.Controls.html">Controls</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Maui.Toolkit.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Creates and attaches an orbit controller for an explicit declarative camera.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class OrbitTool : BindableObject, INotifyPropertyChanged, IViewportTool</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject">BindableObject</a></div>
+      <div><span class="xref">OrbitTool</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a></div>
+      <div><a class="xref" href="Mu3D.Maui.Toolkit.Controls.IViewportTool.html">IViewportTool</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist derived">
+    <dt>Derived</dt>
+    <dd>
+      <div><a class="xref" href="Mu3D.Maui.Toolkit.Controls.MapTool.html">MapTool</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontextproperty">BindableObject.BindingContextProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.clearvalue#microsoft-maui-controls-bindableobject-clearvalue(microsoft-maui-controls-bindableproperty)">BindableObject.ClearValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.clearvalue#microsoft-maui-controls-bindableobject-clearvalue(microsoft-maui-controls-bindablepropertykey)">BindableObject.ClearValue(BindablePropertyKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.getvalue">BindableObject.GetValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.isset">BindableObject.IsSet(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.removebinding">BindableObject.RemoveBinding(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setbinding">BindableObject.SetBinding(BindableProperty, BindingBase)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.applybindings">BindableObject.ApplyBindings()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.onbindingcontextchanged">BindableObject.OnBindingContextChanged()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.onpropertychanged">BindableObject.OnPropertyChanged(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.onpropertychanging">BindableObject.OnPropertyChanging(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.unapplybindings">BindableObject.UnapplyBindings()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setvalue#microsoft-maui-controls-bindableobject-setvalue(microsoft-maui-controls-bindableproperty-system-object)">BindableObject.SetValue(BindableProperty, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setvalue#microsoft-maui-controls-bindableobject-setvalue(microsoft-maui-controls-bindablepropertykey-system-object)">BindableObject.SetValue(BindablePropertyKey, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.coercevalue#microsoft-maui-controls-bindableobject-coercevalue(microsoft-maui-controls-bindableproperty)">BindableObject.CoerceValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.coercevalue#microsoft-maui-controls-bindableobject-coercevalue(microsoft-maui-controls-bindablepropertykey)">BindableObject.CoerceValue(BindablePropertyKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.dispatcher">BindableObject.Dispatcher</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontext">BindableObject.BindingContext</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.propertychanged">BindableObject.PropertyChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.propertychanging">BindableObject.PropertyChanging</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontextchanged">BindableObject.BindingContextChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>The tool owns its controller only for the active <a class="xref" href="Mu3D.Maui.Toolkit.Controls.ViewportTools.html">ViewportTools</a> attachment. Camera
+state remains owned by the application, and no timer, selection, or navigation policy is added.</p>
+</div>
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool__ctor_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.#ctor*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool__ctor" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.#ctor">
+  OrbitTool()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a declarative orbit tool and its stable MAUI navigation command.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OrbitTool()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_CameraProperty" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.CameraProperty">
+  CameraProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_Camera">Camera</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty CameraProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_DampingEnabledProperty" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.DampingEnabledProperty">
+  DampingEnabledProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_DampingEnabled">DampingEnabled</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty DampingEnabledProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_DampingTimeProperty" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.DampingTimeProperty">
+  DampingTimeProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_DampingTime">DampingTime</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty DampingTimeProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_DollySensitivityProperty" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.DollySensitivityProperty">
+  DollySensitivityProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_DollySensitivity">DollySensitivity</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty DollySensitivityProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_InputProperty" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.InputProperty">
+  InputProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_Input">Input</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty InputProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_IsEnabledProperty" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.IsEnabledProperty">
+  IsEnabledProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_IsEnabled">IsEnabled</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty IsEnabledProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_MaximumDistanceProperty" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.MaximumDistanceProperty">
+  MaximumDistanceProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_MaximumDistance">MaximumDistance</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty MaximumDistanceProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_MaximumPolarAngleProperty" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.MaximumPolarAngleProperty">
+  MaximumPolarAngleProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_MaximumPolarAngle">MaximumPolarAngle</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty MaximumPolarAngleProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_MinimumDistanceProperty" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.MinimumDistanceProperty">
+  MinimumDistanceProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_MinimumDistance">MinimumDistance</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty MinimumDistanceProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_MinimumPolarAngleProperty" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.MinimumPolarAngleProperty">
+  MinimumPolarAngleProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_MinimumPolarAngle">MinimumPolarAngle</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty MinimumPolarAngleProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_NavigationDollyStepProperty" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.NavigationDollyStepProperty">
+  NavigationDollyStepProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_NavigationDollyStep">NavigationDollyStep</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty NavigationDollyStepProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_NavigationPanStepProperty" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.NavigationPanStepProperty">
+  NavigationPanStepProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_NavigationPanStep">NavigationPanStep</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty NavigationPanStepProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_NavigationRotationStepRadiansProperty" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.NavigationRotationStepRadiansProperty">
+  NavigationRotationStepRadiansProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_NavigationRotationStepRadians">NavigationRotationStepRadians</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty NavigationRotationStepRadiansProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_PanModeProperty" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.PanModeProperty">
+  PanModeProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_PanMode">PanMode</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty PanModeProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_PanSensitivityProperty" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.PanSensitivityProperty">
+  PanSensitivityProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_PanSensitivity">PanSensitivity</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty PanSensitivityProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_PinchDollyMultiplierProperty" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.PinchDollyMultiplierProperty">
+  PinchDollyMultiplierProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_PinchDollyMultiplier">PinchDollyMultiplier</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty PinchDollyMultiplierProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_RotationSensitivityProperty" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.RotationSensitivityProperty">
+  RotationSensitivityProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_RotationSensitivity">RotationSensitivity</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty RotationSensitivityProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_TargetXProperty" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.TargetXProperty">
+  TargetXProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_TargetX">TargetX</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty TargetXProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_TargetYProperty" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.TargetYProperty">
+  TargetYProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_TargetY">TargetY</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty TargetYProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_TargetZProperty" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.TargetZProperty">
+  TargetZProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_TargetZ">TargetZ</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty TargetZProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_Behavior_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.Behavior*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_Behavior" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.Behavior">
+  Behavior
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the reusable MAUI gesture behavior for advanced input settings and events.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ViewportNavigationBehavior Behavior { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Maui.Toolkit.Controls.ViewportNavigationBehavior.html">ViewportNavigationBehavior</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_Camera_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.Camera*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_Camera" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.Camera">
+  Camera
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the explicit declarative perspective camera to control.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PerspectiveCamera3D? Camera { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Maui.Controls.PerspectiveCamera3D.html">PerspectiveCamera3D</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_Controller_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.Controller*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_Controller" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.Controller">
+  Controller
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the attachment-owned controller, or null while detached.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OrbitController? Controller { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Toolkit.Controls.OrbitController.html">OrbitController</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Mu3D_Maui_Toolkit_Controls_OrbitTool_Controller_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Application code may subscribe to events but must not dispose or retain it.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_DampingEnabled_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.DampingEnabled*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_DampingEnabled" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.DampingEnabled">
+  DampingEnabled
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets whether accepted motion is consumed over VSync-driven frames.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool DampingEnabled { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_DampingTime_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.DampingTime*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_DampingTime" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.DampingTime">
+  DampingTime
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the positive exponential damping time in seconds.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float DampingTime { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_DollySensitivity_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.DollySensitivity*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_DollySensitivity" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.DollySensitivity">
+  DollySensitivity
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the non-negative dolly multiplier.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float DollySensitivity { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_Input_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.Input*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_Input" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.Input">
+  Input
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets all physical-device input routes for this viewport tool.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ViewportInput Input { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Maui.Toolkit.Controls.ViewportInput.html">ViewportInput</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_IsEnabled_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.IsEnabled*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_IsEnabled" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.IsEnabled">
+  IsEnabled
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets whether orbit input is accepted.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsEnabled { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_MaximumDistance_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.MaximumDistance*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_MaximumDistance" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.MaximumDistance">
+  MaximumDistance
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the finite maximum camera-to-target distance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float MaximumDistance { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_MaximumPolarAngle_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.MaximumPolarAngle*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_MaximumPolarAngle" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.MaximumPolarAngle">
+  MaximumPolarAngle
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the maximum polar angle below pi radians.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float MaximumPolarAngle { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_MinimumDistance_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.MinimumDistance*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_MinimumDistance" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.MinimumDistance">
+  MinimumDistance
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the positive minimum camera-to-target distance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float MinimumDistance { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_MinimumPolarAngle_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.MinimumPolarAngle*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_MinimumPolarAngle" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.MinimumPolarAngle">
+  MinimumPolarAngle
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the positive minimum polar angle in radians.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float MinimumPolarAngle { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_NavigationCommand_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.NavigationCommand*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_NavigationCommand" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.NavigationCommand">
+  NavigationCommand
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the stable MAUI command that accepts an <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitNavigationAction.html">OrbitNavigationAction</a> parameter.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand NavigationCommand { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.input.icommand">ICommand</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Mu3D_Maui_Toolkit_Controls_OrbitTool_NavigationCommand_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Bind this command to MAUI buttons, menu items, gestures or keyboard accelerators. It can
+execute only while the tool has an enabled attached controller.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_NavigationDollyStep_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.NavigationDollyStep*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_NavigationDollyStep" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.NavigationDollyStep">
+  NavigationDollyStep
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the positive logarithmic dolly amount used by navigation commands.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float NavigationDollyStep { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_NavigationPanStep_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.NavigationPanStep*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_NavigationPanStep" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.NavigationPanStep">
+  NavigationPanStep
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the positive viewport-span pan amount used by navigation commands.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float NavigationPanStep { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_NavigationRotationStepRadians_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.NavigationRotationStepRadians*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_NavigationRotationStepRadians" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.NavigationRotationStepRadians">
+  NavigationRotationStepRadians
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the positive rotation amount used by discrete navigation commands.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float NavigationRotationStepRadians { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_PanMode_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.PanMode*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_PanMode" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.PanMode">
+  PanMode
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the world-space basis used by pan commands.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OrbitPanMode PanMode { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Toolkit.Controls.OrbitPanMode.html">OrbitPanMode</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_PanSensitivity_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.PanSensitivity*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_PanSensitivity" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.PanSensitivity">
+  PanSensitivity
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the non-negative pan multiplier.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float PanSensitivity { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_PinchDollyMultiplier_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.PinchDollyMultiplier*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_PinchDollyMultiplier" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.PinchDollyMultiplier">
+  PinchDollyMultiplier
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the positive multiplier applied to logarithmic pinch dolly.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float PinchDollyMultiplier { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_RotationSensitivity_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.RotationSensitivity*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_RotationSensitivity" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.RotationSensitivity">
+  RotationSensitivity
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the non-negative rotation multiplier.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float RotationSensitivity { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_TargetX_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.TargetX*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_TargetX" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.TargetX">
+  TargetX
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the world-space orbit target X coordinate.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float TargetX { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_TargetY_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.TargetY*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_TargetY" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.TargetY">
+  TargetY
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the world-space orbit target Y coordinate.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float TargetY { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_TargetZ_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.TargetZ*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_TargetZ" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.TargetZ">
+  TargetZ
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the world-space orbit target Z coordinate.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float TargetZ { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_Attach_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.Attach*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_Attach_Mu3D_Maui_Toolkit_Controls_ViewportToolContext_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.Attach(Mu3D.Maui.Toolkit.Controls.ViewportToolContext)">
+  Attach(ViewportToolContext)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Attaches the tool and returns the lease that reverses its owned work.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDisposable Attach(ViewportToolContext context)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>context</code> <a class="xref" href="Mu3D.Maui.Toolkit.Controls.ViewportToolContext.html">ViewportToolContext</a></dt>
+    <dd><p>The active viewport-tool context.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></dt>
+    <dd><p>A non-null idempotent attachment lease.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_CreateController_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.CreateController*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_CreateController_Mu3D_SceneGraph_PerspectiveCamera_System_Numerics_Vector3_Mu3D_Toolkit_Viewports_IViewportFrameRequester_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.CreateController(Mu3D.SceneGraph.PerspectiveCamera,System.Numerics.Vector3,Mu3D.Toolkit.Viewports.IViewportFrameRequester)">
+  CreateController(PerspectiveCamera, Vector3, IViewportFrameRequester)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates the attachment-owned UI-independent controller.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual OrbitController CreateController(PerspectiveCamera camera, Vector3 target, IViewportFrameRequester frameRequester)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>camera</code> <a class="xref" href="Mu3D.SceneGraph.PerspectiveCamera.html">PerspectiveCamera</a></dt>
+    <dd><p>The borrowed scene camera.</p>
+</dd>
+    <dt><code>target</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.vector3">Vector3</a></dt>
+    <dd><p>The initial world-space target.</p>
+</dd>
+    <dt><code>frameRequester</code> <a class="xref" href="Mu3D.Toolkit.Viewports.IViewportFrameRequester.html">IViewportFrameRequester</a></dt>
+    <dd><p>The borrowed frame requester.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Toolkit.Controls.OrbitController.html">OrbitController</a></dt>
+    <dd><p>A controller owned by this tool's active attachment.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_TryNavigate_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.TryNavigate*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_TryNavigate_Mu3D_Maui_Toolkit_Controls_OrbitNavigationAction_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.TryNavigate(Mu3D.Maui.Toolkit.Controls.OrbitNavigationAction)">
+  TryNavigate(OrbitNavigationAction)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Attempts one discrete application-supplied navigation action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryNavigate(OrbitNavigationAction action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitNavigationAction.html">OrbitNavigationAction</a></dt>
+    <dd><p>The normalized action to submit.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True when the attached controller accepted or queued the command.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_OrbitTool_TryNavigate_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.TryNavigate*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_OrbitTool_TryNavigate_System_Numerics_Vector2_System_Numerics_Vector2_System_Single_" data-uid="Mu3D.Maui.Toolkit.Controls.OrbitTool.TryNavigate(System.Numerics.Vector2,System.Numerics.Vector2,System.Single)">
+  TryNavigate(Vector2, Vector2, float)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Attempts one atomic application-supplied composite navigation delta.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryNavigate(Vector2 rotationRadians, Vector2 panViewportDelta, float dollyDelta)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rotationRadians</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.vector2">Vector2</a></dt>
+    <dd><p>The signed yaw/pitch delta in radians. Positive X rotates right and positive Y rotates down.</p>
+</dd>
+    <dt><code>panViewportDelta</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.vector2">Vector2</a></dt>
+    <dd><p>The signed viewport-relative pan delta. Positive X pans right and positive Y pans up.</p>
+</dd>
+    <dt><code>dollyDelta</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd><p>The signed logarithmic dolly delta; positive moves inward.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True when the attached controller accepted at least one non-zero component.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Mu3D_Maui_Toolkit_Controls_OrbitTool_TryNavigate_System_Numerics_Vector2_System_Numerics_Vector2_System_Single__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Applications that own held-key or gamepad state can normalize simultaneous axes, multiply
+them by elapsed time and submit one delta per VSync frame. The complete delta uses one
+camera-priority arbitration lease, so diagonal input cannot be split by another tool.</p>
+</div>
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

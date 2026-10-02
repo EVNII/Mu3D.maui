@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class SceneNodeAnchor | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class SceneNodeAnchor | Mu3D documentation ">
+      
+      <meta name="description" content="Defines a scene-node point used to position one MAUI viewport overlay.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor">
+
+
+
+  <h1 id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor" class="text-break">
+Class SceneNodeAnchor  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Maui.html">Maui</a>.<a class="xref" href="Mu3D.Maui.Toolkit.html">Toolkit</a>.<a class="xref" href="Mu3D.Maui.Toolkit.Overlays.html">Overlays</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Maui.Toolkit.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Defines a scene-node point used to position one MAUI viewport overlay.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class SceneNodeAnchor : BindableObject, INotifyPropertyChanged</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject">BindableObject</a></div>
+      <div><span class="xref">SceneNodeAnchor</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontextproperty">BindableObject.BindingContextProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.clearvalue#microsoft-maui-controls-bindableobject-clearvalue(microsoft-maui-controls-bindableproperty)">BindableObject.ClearValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.clearvalue#microsoft-maui-controls-bindableobject-clearvalue(microsoft-maui-controls-bindablepropertykey)">BindableObject.ClearValue(BindablePropertyKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.getvalue">BindableObject.GetValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.isset">BindableObject.IsSet(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.removebinding">BindableObject.RemoveBinding(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setbinding">BindableObject.SetBinding(BindableProperty, BindingBase)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setvalue#microsoft-maui-controls-bindableobject-setvalue(microsoft-maui-controls-bindableproperty-system-object)">BindableObject.SetValue(BindableProperty, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setvalue#microsoft-maui-controls-bindableobject-setvalue(microsoft-maui-controls-bindablepropertykey-system-object)">BindableObject.SetValue(BindablePropertyKey, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.coercevalue#microsoft-maui-controls-bindableobject-coercevalue(microsoft-maui-controls-bindableproperty)">BindableObject.CoerceValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.coercevalue#microsoft-maui-controls-bindableobject-coercevalue(microsoft-maui-controls-bindablepropertykey)">BindableObject.CoerceValue(BindablePropertyKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.dispatcher">BindableObject.Dispatcher</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontext">BindableObject.BindingContext</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.propertychanged">BindableObject.PropertyChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.propertychanging">BindableObject.PropertyChanging</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontextchanged">BindableObject.BindingContextChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>Assign either <a class="xref" href="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.html#Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_Node">Node</a> for a Core scene or <a class="xref" href="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.html#Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_Target">Target</a> for declarative
+<a class="xref" href="Mu3D.Maui.Controls.Scene3D.html">Scene3D</a> content. The two target properties are mutually exclusive. Coordinates are
+node-local and the logical <a class="xref" href="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.html#Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_Offset">Offset</a> is applied after projection.</p>
+</div>
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor__ctor_" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.#ctor*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor__ctor" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.#ctor">
+  SceneNodeAnchor()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SceneNodeAnchor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_HideWhenOutsideViewportProperty" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.HideWhenOutsideViewportProperty">
+  HideWhenOutsideViewportProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.html#Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_HideWhenOutsideViewport">HideWhenOutsideViewport</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty HideWhenOutsideViewportProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_NodeProperty" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.NodeProperty">
+  NodeProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.html#Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_Node">Node</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty NodeProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_OffsetProperty" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.OffsetProperty">
+  OffsetProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.html#Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_Offset">Offset</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty OffsetProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_TargetProperty" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.TargetProperty">
+  TargetProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.html#Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_Target">Target</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty TargetProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_XProperty" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.XProperty">
+  XProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.html#Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_X">X</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty XProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_YProperty" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.YProperty">
+  YProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.html#Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_Y">Y</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty YProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_ZProperty" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.ZProperty">
+  ZProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.html#Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_Z">Z</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty ZProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_HideWhenOutsideViewport_" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.HideWhenOutsideViewport*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_HideWhenOutsideViewport" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.HideWhenOutsideViewport">
+  HideWhenOutsideViewport
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets whether the overlay is hidden outside the captured camera frustum.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HideWhenOutsideViewport { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_Node_" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.Node*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_Node" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.Node">
+  Node
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the optional low-level Core scene node.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SceneNode? Node { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.SceneNode.html">SceneNode</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_Offset_" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.Offset*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_Offset" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.Offset">
+  Offset
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the logical MAUI offset applied after projection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Point Offset { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.graphics.point">Point</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_Target_" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.Target*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_Target" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.Target">
+  Target
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the optional declarative scene-node facade.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SceneNode3D? Target { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html">SceneNode3D</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_X_" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.X*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_X" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.X">
+  X
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the node-local X coordinate.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float X { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_Y_" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.Y*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_Y" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.Y">
+  Y
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the node-local Y coordinate.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Y { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_Z_" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.Z*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Overlays_SceneNodeAnchor_Z" data-uid="Mu3D.Maui.Toolkit.Overlays.SceneNodeAnchor.Z">
+  Z
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the node-local Z coordinate.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Z { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

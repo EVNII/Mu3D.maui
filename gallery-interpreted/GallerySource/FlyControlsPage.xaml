@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.FlyControlsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    xmlns:toolkit="clr-namespace:Mu3D.Maui.Toolkit.Controls;assembly=Mu3D.Maui.Toolkit"
+    Title="Fly Controls">
+    <ContentPage.MenuBarItems>
+        <MenuBarItem Text="Fly navigation" x:DataType="toolkit:FlyTool">
+            <MenuFlyoutItem x:Name="MoveForwardMenuItem" Command="{Binding Source={x:Reference FlyNavigation}, Path=NavigationCommand}" CommandParameter="{x:Static toolkit:FlyNavigationAction.MoveForward}" Text="Move forward">
+                <MenuFlyoutItem.KeyboardAccelerators><KeyboardAccelerator Key="W" /></MenuFlyoutItem.KeyboardAccelerators>
+            </MenuFlyoutItem>
+            <MenuFlyoutItem x:Name="MoveBackwardMenuItem" Command="{Binding Source={x:Reference FlyNavigation}, Path=NavigationCommand}" CommandParameter="{x:Static toolkit:FlyNavigationAction.MoveBackward}" Text="Move backward">
+                <MenuFlyoutItem.KeyboardAccelerators><KeyboardAccelerator Key="S" /></MenuFlyoutItem.KeyboardAccelerators>
+            </MenuFlyoutItem>
+            <MenuFlyoutItem x:Name="MoveLeftMenuItem" Command="{Binding Source={x:Reference FlyNavigation}, Path=NavigationCommand}" CommandParameter="{x:Static toolkit:FlyNavigationAction.MoveLeft}" Text="Strafe left">
+                <MenuFlyoutItem.KeyboardAccelerators><KeyboardAccelerator Key="A" /></MenuFlyoutItem.KeyboardAccelerators>
+            </MenuFlyoutItem>
+            <MenuFlyoutItem x:Name="MoveRightMenuItem" Command="{Binding Source={x:Reference FlyNavigation}, Path=NavigationCommand}" CommandParameter="{x:Static toolkit:FlyNavigationAction.MoveRight}" Text="Strafe right">
+                <MenuFlyoutItem.KeyboardAccelerators><KeyboardAccelerator Key="D" /></MenuFlyoutItem.KeyboardAccelerators>
+            </MenuFlyoutItem>
+            <MenuFlyoutItem x:Name="MoveUpMenuItem" Command="{Binding Source={x:Reference FlyNavigation}, Path=NavigationCommand}" CommandParameter="{x:Static toolkit:FlyNavigationAction.MoveUp}" Text="Move up">
+                <MenuFlyoutItem.KeyboardAccelerators><KeyboardAccelerator Key="E" /></MenuFlyoutItem.KeyboardAccelerators>
+            </MenuFlyoutItem>
+            <MenuFlyoutItem x:Name="MoveDownMenuItem" Command="{Binding Source={x:Reference FlyNavigation}, Path=NavigationCommand}" CommandParameter="{x:Static toolkit:FlyNavigationAction.MoveDown}" Text="Move down">
+                <MenuFlyoutItem.KeyboardAccelerators><KeyboardAccelerator Key="Q" /></MenuFlyoutItem.KeyboardAccelerators>
+            </MenuFlyoutItem>
+            <MenuFlyoutItem x:Name="LookLeftMenuItem" Command="{Binding Source={x:Reference FlyNavigation}, Path=NavigationCommand}" CommandParameter="{x:Static toolkit:FlyNavigationAction.LookLeft}" Text="Look left">
+                <MenuFlyoutItem.KeyboardAccelerators><KeyboardAccelerator Key="Left" /></MenuFlyoutItem.KeyboardAccelerators>
+            </MenuFlyoutItem>
+            <MenuFlyoutItem x:Name="LookRightMenuItem" Command="{Binding Source={x:Reference FlyNavigation}, Path=NavigationCommand}" CommandParameter="{x:Static toolkit:FlyNavigationAction.LookRight}" Text="Look right">
+                <MenuFlyoutItem.KeyboardAccelerators><KeyboardAccelerator Key="Right" /></MenuFlyoutItem.KeyboardAccelerators>
+            </MenuFlyoutItem>
+            <MenuFlyoutItem x:Name="LookUpMenuItem" Command="{Binding Source={x:Reference FlyNavigation}, Path=NavigationCommand}" CommandParameter="{x:Static toolkit:FlyNavigationAction.LookUp}" Text="Look up">
+                <MenuFlyoutItem.KeyboardAccelerators><KeyboardAccelerator Key="Up" /></MenuFlyoutItem.KeyboardAccelerators>
+            </MenuFlyoutItem>
+            <MenuFlyoutItem x:Name="LookDownMenuItem" Command="{Binding Source={x:Reference FlyNavigation}, Path=NavigationCommand}" CommandParameter="{x:Static toolkit:FlyNavigationAction.LookDown}" Text="Look down">
+                <MenuFlyoutItem.KeyboardAccelerators><KeyboardAccelerator Key="Down" /></MenuFlyoutItem.KeyboardAccelerators>
+            </MenuFlyoutItem>
+        </MenuBarItem>
+    </ContentPage.MenuBarItems>
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="fly-controls" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto,Auto">
+        <mu3d:Mu3DSceneView
+            x:Name="SceneView"
+            BackgroundColor="#111827"
+            FeatureError="OnFeatureError"
+            SurfaceError="OnSurfaceError">
+            <mu3d:Mu3DSceneView.SceneContent>
+                <mu3d:Scene3D Name="Fly controls scene">
+                    <mu3d:Scene3D.Camera>
+                        <mu3d:PerspectiveCamera3D
+                            x:Name="FlyCamera"
+                            FarClip="100"
+                            FieldOfView="55"
+                            Name="Fly camera"
+                            X="0"
+                            Y="2"
+                            Z="8" />
+                    </mu3d:Scene3D.Camera>
+                    <mu3d:Cone3D Height="2.5" Name="Near marker" Radius="1" Y="1.25" Z="0">
+                        <mu3d:PbrMaterial3D Color="#FF7A28" Metallic="0.1" Roughness="0.28" />
+                    </mu3d:Cone3D>
+                    <mu3d:Sphere3D Name="Left marker" Radius="1.1" X="-3" Y="1.1" Z="-4">
+                        <mu3d:PbrMaterial3D Color="#3B9EFF" Metallic="0.18" Roughness="0.22" />
+                    </mu3d:Sphere3D>
+                    <mu3d:Sphere3D Name="Right marker" Radius="0.8" X="3" Y="2.2" Z="-8">
+                        <mu3d:UnlitMaterial3D Color="#50E3A4" />
+                    </mu3d:Sphere3D>
+                    <mu3d:DirectionalLight3D Intensity="4.5" RotationX="-38" RotationY="-28" />
+                </mu3d:Scene3D>
+            </mu3d:Mu3DSceneView.SceneContent>
+            <mu3d:Mu3DSceneView.Features>
+                <toolkit:ViewportTools>
+                    <toolkit:FlyTool
+                        x:Name="FlyNavigation"
+                        Camera="{x:Reference FlyCamera}"
+                        DampingEnabled="True"
+                        DampingTime="0.1"
+                        LookStepRadians="0.08726646"
+                        MovementStep="0.75"
+                        PanUnitsPerViewport="4"
+                        PinchDollyMultiplier="6"
+                        RotationRadiansPerViewport="3.1415927"
+                        WheelDollyStep="0.75">
+                        <toolkit:FlyTool.Input>
+                            <toolkit:ViewportInput>
+                                <toolkit:ViewportInput.Mouse>
+                                    <toolkit:MouseInput
+                                        LeftButtonDragAction="Rotate"
+                                        RightButtonDragAction="Pan"
+                                        WheelAction="Dolly" />
+                                </toolkit:ViewportInput.Mouse>
+                                <toolkit:ViewportInput.Trackpad>
+                                    <toolkit:TrackpadInput
+                                        PinchAction="Dolly"
+                                        TwoFingerDragAction="Pan" />
+                                </toolkit:ViewportInput.Trackpad>
+                                <toolkit:ViewportInput.Touchscreen>
+                                    <toolkit:TouchscreenInput
+                                        OneFingerDragAction="Rotate"
+                                        PinchAction="Dolly"
+                                        TwoFingerDragAction="Pan" />
+                                </toolkit:ViewportInput.Touchscreen>
+                                <toolkit:ViewportInput.Keyboard>
+                                    <toolkit:KeyboardInput
+                                        DollyInKey="W"
+                                        DollyOutKey="S"
+                                        IsEnabled="False"
+                                        PanDownKey="Q"
+                                        PanLeftKey="A"
+                                        PanRightKey="D"
+                                        PanUpKey="E"
+                                        RotateDownKey="DownArrow"
+                                        RotateLeftKey="LeftArrow"
+                                        RotateRightKey="RightArrow"
+                                        RotateUpKey="UpArrow" />
+                                </toolkit:ViewportInput.Keyboard>
+                            </toolkit:ViewportInput>
+                        </toolkit:FlyTool.Input>
+                    </toolkit:FlyTool>
+                    <toolkit:GridHelper Divisions="40" MajorLineEvery="5" Plane="XZ" Size="30" />
+                </toolkit:ViewportTools>
+            </mu3d:Mu3DSceneView.Features>
+        </mu3d:Mu3DSceneView>
+        <gallery:ControlsHelpOverlay
+            Grid.Row="0"
+            Margin="12"
+            Title="Fly controls"
+            ZIndex="10">
+            <gallery:ControlsHelpOverlay.Settings>
+                <gallery:ControlSensitivityItem
+                    Label="Rotation"
+                    Value="{Binding Source={x:Reference FlyNavigation}, Path=RotationSensitivity, Mode=TwoWay}" />
+                <gallery:ControlSensitivityItem
+                    Label="Pan"
+                    Value="{Binding Source={x:Reference FlyNavigation}, Path=PanSensitivity, Mode=TwoWay}" />
+                <gallery:ControlSensitivityItem
+                    Label="Dolly"
+                    Value="{Binding Source={x:Reference FlyNavigation}, Path=DollySensitivity, Mode=TwoWay}" />
+            </gallery:ControlsHelpOverlay.Settings>
+            <gallery:ControlHelpItem Icon="🖱" Text="Left drag · look around" />
+            <gallery:ControlHelpItem Icon="▱" Text="Trackpad two-finger drag · strafe and lift" />
+            <gallery:ControlHelpItem Icon="☝" Text="Touch: one finger looks · two fingers translate" />
+            <gallery:ControlHelpItem Icon="🤏" Text="Pinch or wheel · move forward and backward" />
+            <gallery:ControlHelpItem Icon="⌨" Text="W/A/S/D move · E/Q lift · arrows look" />
+        </gallery:ControlsHelpOverlay>
+        <ScrollView Grid.Row="1" HorizontalScrollBarVisibility="Always" Orientation="Horizontal">
+            <HorizontalStackLayout Padding="12,8" Spacing="6" x:DataType="toolkit:FlyTool">
+                <Button Command="{Binding Source={x:Reference FlyNavigation}, Path=NavigationCommand}" CommandParameter="{x:Static toolkit:FlyNavigationAction.MoveForward}" Text="Forward" />
+                <Button Command="{Binding Source={x:Reference FlyNavigation}, Path=NavigationCommand}" CommandParameter="{x:Static toolkit:FlyNavigationAction.MoveBackward}" Text="Back" />
+                <Button Command="{Binding Source={x:Reference FlyNavigation}, Path=NavigationCommand}" CommandParameter="{x:Static toolkit:FlyNavigationAction.MoveLeft}" Text="Left" />
+                <Button Command="{Binding Source={x:Reference FlyNavigation}, Path=NavigationCommand}" CommandParameter="{x:Static toolkit:FlyNavigationAction.MoveRight}" Text="Right" />
+                <Button Command="{Binding Source={x:Reference FlyNavigation}, Path=NavigationCommand}" CommandParameter="{x:Static toolkit:FlyNavigationAction.MoveUp}" Text="Up" />
+                <Button Command="{Binding Source={x:Reference FlyNavigation}, Path=NavigationCommand}" CommandParameter="{x:Static toolkit:FlyNavigationAction.MoveDown}" Text="Down" />
+                <Button Command="{Binding Source={x:Reference FlyNavigation}, Path=NavigationCommand}" CommandParameter="{x:Static toolkit:FlyNavigationAction.LookLeft}" Text="Look −" />
+                <Button Command="{Binding Source={x:Reference FlyNavigation}, Path=NavigationCommand}" CommandParameter="{x:Static toolkit:FlyNavigationAction.LookRight}" Text="Look +" />
+                <Button Command="{Binding Source={x:Reference FlyNavigation}, Path=NavigationCommand}" CommandParameter="{x:Static toolkit:FlyNavigationAction.LookUp}" Text="Pitch +" />
+                <Button Command="{Binding Source={x:Reference FlyNavigation}, Path=NavigationCommand}" CommandParameter="{x:Static toolkit:FlyNavigationAction.LookDown}" Text="Pitch −" />
+            </HorizontalStackLayout>
+        </ScrollView>
+        <Label
+            x:Name="StatusLabel"
+            Grid.Row="2"
+            Padding="16,8"
+            Text="One finger looks with isotropic speed; two fingers strafe/lift; pinch or wheel moves forward/back. Hold W/A/S/D/E/Q to move or arrows to look." />
+    </Grid>
+</ContentPage>

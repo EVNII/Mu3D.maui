@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class CmykTransform | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class CmykTransform | Mu3D documentation ">
+      
+      <meta name="description" content="Compiled managed ICC RGB/CMYK conversion through D50 PCS. Safe for concurrent reads.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Color.Printing.CmykTransform">
+
+
+
+  <h1 id="Mu3D_Color_Printing_CmykTransform" data-uid="Mu3D.Color.Printing.CmykTransform" class="text-break">
+Class CmykTransform  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Color.html">Color</a>.<a class="xref" href="Mu3D.Color.Printing.html">Printing</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Color.Printing.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Compiled managed ICC RGB/CMYK conversion through D50 PCS. Safe for concurrent reads.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class CmykTransform</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">CmykTransform</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="Mu3D_Color_Printing_CmykTransform_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>Supports lut8/lut16 and v4 mAB/mBA. Extended MPE, DeviceLink, spectral and spot-color
+profiles are not supported. Conversion uses the profile's supplied black generation, not an invented GCR.</p>
+</div>
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_Color_Printing_CmykTransform__ctor_" data-uid="Mu3D.Color.Printing.CmykTransform.#ctor*"></a>
+
+  <h3 id="Mu3D_Color_Printing_CmykTransform__ctor_Mu3D_Color_Printing_CmykProfile_Mu3D_Color_Printing_PrintTransformOptions_" data-uid="Mu3D.Color.Printing.CmykTransform.#ctor(Mu3D.Color.Printing.CmykProfile,Mu3D.Color.Printing.PrintTransformOptions)">
+  CmykTransform(CmykProfile, PrintTransformOptions?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Compiles both requested directions once, validating unsupported profile structures eagerly.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CmykTransform(CmykProfile profile, PrintTransformOptions? options = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>profile</code> <a class="xref" href="Mu3D.Color.Printing.CmykProfile.html">CmykProfile</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="Mu3D.Color.Printing.PrintTransformOptions.html">PrintTransformOptions</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Color_Printing_CmykTransform_Options_" data-uid="Mu3D.Color.Printing.CmykTransform.Options*"></a>
+
+  <h3 id="Mu3D_Color_Printing_CmykTransform_Options" data-uid="Mu3D.Color.Printing.CmykTransform.Options">
+  Options
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the immutable conversion policy.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PrintTransformOptions Options { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.Printing.PrintTransformOptions.html">PrintTransformOptions</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_Printing_CmykTransform_Profile_" data-uid="Mu3D.Color.Printing.CmykTransform.Profile*"></a>
+
+  <h3 id="Mu3D_Color_Printing_CmykTransform_Profile" data-uid="Mu3D.Color.Printing.CmykTransform.Profile">
+  Profile
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the immutable print profile.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CmykProfile Profile { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.Printing.CmykProfile.html">CmykProfile</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Color_Printing_CmykTransform_Decode_" data-uid="Mu3D.Color.Printing.CmykTransform.Decode*"></a>
+
+  <h3 id="Mu3D_Color_Printing_CmykTransform_Decode_Mu3D_Color_Printing_CmykColor_Mu3D_Color_StandardRgbColorSpaceReference_" data-uid="Mu3D.Color.Printing.CmykTransform.Decode(Mu3D.Color.Printing.CmykColor,Mu3D.Color.StandardRgbColorSpaceReference)">
+  Decode(CmykColor, StandardRgbColorSpaceReference)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Decodes existing CMYK without reseparating or applying separation BPC.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgba Decode(CmykColor color, StandardRgbColorSpaceReference destination)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>color</code> <a class="xref" href="Mu3D.Color.Printing.CmykColor.html">CmykColor</a></dt>
+    <dd></dd>
+    <dt><code>destination</code> <a class="xref" href="Mu3D.Color.StandardRgbColorSpaceReference.html">StandardRgbColorSpaceReference</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_Printing_CmykTransform_Decode_" data-uid="Mu3D.Color.Printing.CmykTransform.Decode*"></a>
+
+  <h3 id="Mu3D_Color_Printing_CmykTransform_Decode_Mu3D_Color_Printing_CmykImage_Mu3D_Color_StandardRgbColorSpaceReference_" data-uid="Mu3D.Color.Printing.CmykTransform.Decode(Mu3D.Color.Printing.CmykImage,Mu3D.Color.StandardRgbColorSpaceReference)">
+  Decode(CmykImage, StandardRgbColorSpaceReference)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Decodes an immutable CMYK image into a selected linear RGB space.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgbaImage Decode(CmykImage source, StandardRgbColorSpaceReference destination)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="Mu3D.Color.Printing.CmykImage.html">CmykImage</a></dt>
+    <dd></dd>
+    <dt><code>destination</code> <a class="xref" href="Mu3D.Color.StandardRgbColorSpaceReference.html">StandardRgbColorSpaceReference</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgbaImage.html">LinearRgbaImage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_Printing_CmykTransform_Proof_" data-uid="Mu3D.Color.Printing.CmykTransform.Proof*"></a>
+
+  <h3 id="Mu3D_Color_Printing_CmykTransform_Proof_Mu3D_Color_LinearRgba_Mu3D_Color_StandardRgbColorSpaceReference_System_Boolean_System_Single_" data-uid="Mu3D.Color.Printing.CmykTransform.Proof(Mu3D.Color.LinearRgba,Mu3D.Color.StandardRgbColorSpaceReference,System.Boolean,System.Single)">
+  Proof(LinearRgba, StandardRgbColorSpaceReference, bool, float)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Separates and soft-proofs RGB, reporting reproducibility and display-gamut diagnostics.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PrintProofResult Proof(LinearRgba source, StandardRgbColorSpaceReference displaySpace, bool simulatePaperWhite = true, float toleranceDeltaE76 = 2)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+    <dt><code>displaySpace</code> <a class="xref" href="Mu3D.Color.StandardRgbColorSpaceReference.html">StandardRgbColorSpaceReference</a></dt>
+    <dd></dd>
+    <dt><code>simulatePaperWhite</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+    <dt><code>toleranceDeltaE76</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.Printing.PrintProofResult.html">PrintProofResult</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Mu3D_Color_Printing_CmykTransform_Proof_Mu3D_Color_LinearRgba_Mu3D_Color_StandardRgbColorSpaceReference_System_Boolean_System_Single__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The Lab ΔE76 diagnostic is a round-trip error, not a certified gamut boundary or ΔE2000.
+Render the result through the calibrated display pipeline without an additional creative view.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_Color_Printing_CmykTransform_Proof_" data-uid="Mu3D.Color.Printing.CmykTransform.Proof*"></a>
+
+  <h3 id="Mu3D_Color_Printing_CmykTransform_Proof_Mu3D_Color_Printing_CmykColor_Mu3D_Color_StandardRgbColorSpaceReference_System_Boolean_" data-uid="Mu3D.Color.Printing.CmykTransform.Proof(Mu3D.Color.Printing.CmykColor,Mu3D.Color.StandardRgbColorSpaceReference,System.Boolean)">
+  Proof(CmykColor, StandardRgbColorSpaceReference, bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Previews existing separations, optionally simulating media white. Original CMYK is unchanged.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgba Proof(CmykColor color, StandardRgbColorSpaceReference displaySpace, bool simulatePaperWhite = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>color</code> <a class="xref" href="Mu3D.Color.Printing.CmykColor.html">CmykColor</a></dt>
+    <dd></dd>
+    <dt><code>displaySpace</code> <a class="xref" href="Mu3D.Color.StandardRgbColorSpaceReference.html">StandardRgbColorSpaceReference</a></dt>
+    <dd></dd>
+    <dt><code>simulatePaperWhite</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_Printing_CmykTransform_Separate_" data-uid="Mu3D.Color.Printing.CmykTransform.Separate*"></a>
+
+  <h3 id="Mu3D_Color_Printing_CmykTransform_Separate_Mu3D_Color_LinearRgba_" data-uid="Mu3D.Color.Printing.CmykTransform.Separate(Mu3D.Color.LinearRgba)">
+  Separate(LinearRgba)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Separates an opaque, print-relative RGB color. HDR mapping and compositing are caller-owned.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CmykColor Separate(LinearRgba source)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.Printing.CmykColor.html">CmykColor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_Printing_CmykTransform_Separate_" data-uid="Mu3D.Color.Printing.CmykTransform.Separate*"></a>
+
+  <h3 id="Mu3D_Color_Printing_CmykTransform_Separate_Mu3D_Color_LinearRgbaImage_" data-uid="Mu3D.Color.Printing.CmykTransform.Separate(Mu3D.Color.LinearRgbaImage)">
+  Separate(LinearRgbaImage)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Separates a complete opaque image, retaining the selected print profile.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CmykImage Separate(LinearRgbaImage source)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="Mu3D.Color.LinearRgbaImage.html">LinearRgbaImage</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.Printing.CmykImage.html">CmykImage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

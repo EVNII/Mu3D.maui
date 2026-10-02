@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.GltfInstancesPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    Title="glTF Instances">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="gltf-instances" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <mu3d:Mu3DSceneView
+            x:Name="SceneView"
+            BackgroundColor="Black"
+            SurfaceError="OnSurfaceError" />
+        <VerticalStackLayout Grid.Row="1" Padding="16" Spacing="8">
+            <Label
+                FontAttributes="Bold"
+                Text="One GLB import and reusable definition; two isolated mutable instances." />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Left instance" />
+                    <Picker
+                        x:Name="LeftVariantPicker"
+                        SelectedIndexChanged="OnLeftVariantChanged"
+                        Title="Material variant" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1" Spacing="4">
+                    <Label Text="Right instance" />
+                    <Picker
+                        x:Name="RightVariantPicker"
+                        SelectedIndexChanged="OnRightVariantChanged"
+                        Title="Material variant" />
+                </VerticalStackLayout>
+            </Grid>
+            <Label x:Name="StatusLabel" FontSize="12" Text="Loading MaterialsVariantsShoe.glb…" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

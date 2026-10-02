@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class FrameStatisticsBehavior | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class FrameStatisticsBehavior | Mu3D documentation ">
+      
+      <meta name="description" content="Collects successful scene-view frames and publishes throttled immutable snapshots.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior">
+
+
+
+  <h1 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior" class="text-break">
+Class FrameStatisticsBehavior  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Maui.html">Maui</a>.<a class="xref" href="Mu3D.Maui.Toolkit.html">Toolkit</a>.<a class="xref" href="Mu3D.Maui.Toolkit.Diagnostics.html">Diagnostics</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Maui.Toolkit.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Collects successful scene-view frames and publishes throttled immutable snapshots.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class FrameStatisticsBehavior : Behavior&lt;Mu3DSceneView&gt;, INotifyPropertyChanged, IDisposable</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject">BindableObject</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.behavior">Behavior</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.behavior-1">Behavior</a>&lt;<a class="xref" href="Mu3D.Maui.Controls.Mu3DSceneView.html">Mu3DSceneView</a>&gt;</div>
+      <div><span class="xref">FrameStatisticsBehavior</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontextproperty">BindableObject.BindingContextProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.clearvalue#microsoft-maui-controls-bindableobject-clearvalue(microsoft-maui-controls-bindableproperty)">BindableObject.ClearValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.clearvalue#microsoft-maui-controls-bindableobject-clearvalue(microsoft-maui-controls-bindablepropertykey)">BindableObject.ClearValue(BindablePropertyKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.getvalue">BindableObject.GetValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.isset">BindableObject.IsSet(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.removebinding">BindableObject.RemoveBinding(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setbinding">BindableObject.SetBinding(BindableProperty, BindingBase)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setvalue#microsoft-maui-controls-bindableobject-setvalue(microsoft-maui-controls-bindableproperty-system-object)">BindableObject.SetValue(BindableProperty, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setvalue#microsoft-maui-controls-bindableobject-setvalue(microsoft-maui-controls-bindablepropertykey-system-object)">BindableObject.SetValue(BindablePropertyKey, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.coercevalue#microsoft-maui-controls-bindableobject-coercevalue(microsoft-maui-controls-bindableproperty)">BindableObject.CoerceValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.coercevalue#microsoft-maui-controls-bindableobject-coercevalue(microsoft-maui-controls-bindablepropertykey)">BindableObject.CoerceValue(BindablePropertyKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.dispatcher">BindableObject.Dispatcher</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontext">BindableObject.BindingContext</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.propertychanged">BindableObject.PropertyChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.propertychanging">BindableObject.PropertyChanging</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontextchanged">BindableObject.BindingContextChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>The behavior owns only its default collector. An explicitly assigned collector is borrowed and
+is never reset automatically. It performs no layout or rendering and can feed application UI or
+telemetry through <a class="xref" href="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_SnapshotUpdated">SnapshotUpdated</a>.</p>
+</div>
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior__ctor_" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.#ctor*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior__ctor" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.#ctor">
+  FrameStatisticsBehavior()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FrameStatisticsBehavior()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_CollectorProperty" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.CollectorProperty">
+  CollectorProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_Collector">Collector</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty CollectorProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_DrawCallCountProperty" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.DrawCallCountProperty">
+  DrawCallCountProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_DrawCallCount">DrawCallCount</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty DrawCallCountProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_IsEnabledProperty" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.IsEnabledProperty">
+  IsEnabledProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_IsEnabled">IsEnabled</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty IsEnabledProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_PrimitiveCountProperty" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.PrimitiveCountProperty">
+  PrimitiveCountProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_PrimitiveCount">PrimitiveCount</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty PrimitiveCountProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_SnapshotIntervalProperty" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.SnapshotIntervalProperty">
+  SnapshotIntervalProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_SnapshotInterval">SnapshotInterval</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty SnapshotIntervalProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_Collector_" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.Collector*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_Collector" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.Collector">
+  Collector
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the non-null collector used by this behavior.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FrameStatisticsCollector Collector { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Toolkit.Diagnostics.FrameStatisticsCollector.html">FrameStatisticsCollector</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_DrawCallCount_" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.DrawCallCount*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_DrawCallCount" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.DrawCallCount">
+  DrawCallCount
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the optional application-known draw-call count recorded with each frame.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? DrawCallCount { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_IsEnabled_" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.IsEnabled*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_IsEnabled" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.IsEnabled">
+  IsEnabled
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets whether the behavior subscribes to scene-view frame events.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsEnabled { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_LatestSnapshot_" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.LatestSnapshot*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_LatestSnapshot" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.LatestSnapshot">
+  LatestSnapshot
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the most recently published snapshot.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FrameStatisticsSnapshot LatestSnapshot { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.html">FrameStatisticsSnapshot</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_PrimitiveCount_" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.PrimitiveCount*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_PrimitiveCount" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.PrimitiveCount">
+  PrimitiveCount
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the optional application-known rendered primitive count recorded with each frame.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? PrimitiveCount { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_SnapshotInterval_" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.SnapshotInterval*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_SnapshotInterval" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.SnapshotInterval">
+  SnapshotInterval
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the non-negative interval between snapshot events. Zero publishes every sample.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TimeSpan SnapshotInterval { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_Dispose_" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.Dispose*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_Dispose" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.Dispose">
+  Dispose()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Detaches events without disposing the scene view or assigned collector.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_OnAttachedTo_" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.OnAttachedTo*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_OnAttachedTo_Mu3D_Maui_Controls_Mu3DSceneView_" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.OnAttachedTo(Mu3D.Maui.Controls.Mu3DSceneView)">
+  OnAttachedTo(Mu3DSceneView)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnAttachedTo(Mu3DSceneView bindable)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>bindable</code> <a class="xref" href="Mu3D.Maui.Controls.Mu3DSceneView.html">Mu3DSceneView</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_OnDetachingFrom_" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.OnDetachingFrom*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_OnDetachingFrom_Mu3D_Maui_Controls_Mu3DSceneView_" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.OnDetachingFrom(Mu3D.Maui.Controls.Mu3DSceneView)">
+  OnDetachingFrom(Mu3DSceneView)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnDetachingFrom(Mu3DSceneView bindable)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>bindable</code> <a class="xref" href="Mu3D.Maui.Controls.Mu3DSceneView.html">Mu3DSceneView</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_PublishSnapshot_" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.PublishSnapshot*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_PublishSnapshot" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.PublishSnapshot">
+  PublishSnapshot()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Captures and publishes a snapshot immediately without recording another frame.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FrameStatisticsSnapshot PublishSnapshot()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.html">FrameStatisticsSnapshot</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_Reset_" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.Reset*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_Reset" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.Reset">
+  Reset()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Clears the active collector and published timing state.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Reset()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="events">Events
+</h2>
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsBehavior_SnapshotUpdated" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.SnapshotUpdated">
+  SnapshotUpdated
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Occurs when the configured publication interval produces a new snapshot.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;FrameStatisticsSnapshotEventArgs&gt;? SnapshotUpdated</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">Event Type</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsSnapshotEventArgs.html">FrameStatisticsSnapshotEventArgs</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

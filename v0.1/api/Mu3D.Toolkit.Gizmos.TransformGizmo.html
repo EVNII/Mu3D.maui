@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class TransformGizmo | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class TransformGizmo | Mu3D documentation ">
+      
+      <meta name="description" content="Applies host-normalized translate, rotate and scale interactions to an explicit scene node.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo">
+
+
+
+  <h1 id="Mu3D_Toolkit_Gizmos_TransformGizmo" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo" class="text-break">
+Class TransformGizmo  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Toolkit.html">Toolkit</a>.<a class="xref" href="Mu3D.Toolkit.Gizmos.html">Gizmos</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Toolkit.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Applies host-normalized translate, rotate and scale interactions to an explicit scene node.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class TransformGizmo : IDisposable</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">TransformGizmo</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="Mu3D_Toolkit_Gizmos_TransformGizmo_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>The host owns target selection, undo commands and rendering. Raw input, pointer capture and handle
+hit testing remain outside this controller and may be supplied by an optional adapter. Update
+values are cumulative from the beginning of the active interaction, allowing snapping without
+incremental drift. This controller is not thread-safe and never owns its target or optional frame
+requester.</p>
+</div>
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo__ctor_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.#ctor*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo__ctor_Mu3D_SceneGraph_SceneNode_Mu3D_Toolkit_Viewports_IViewportFrameRequester_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.#ctor(Mu3D.SceneGraph.SceneNode,Mu3D.Toolkit.Viewports.IViewportFrameRequester)">
+  TransformGizmo(SceneNode?, IViewportFrameRequester?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a transform gizmo over an optional application-owned target.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TransformGizmo(SceneNode? target = null, IViewportFrameRequester? frameRequester = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>target</code> <a class="xref" href="Mu3D.SceneGraph.SceneNode.html">SceneNode</a></dt>
+    <dd></dd>
+    <dt><code>frameRequester</code> <a class="xref" href="Mu3D.Toolkit.Viewports.IViewportFrameRequester.html">IViewportFrameRequester</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_ActiveAxis_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.ActiveAxis*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_ActiveAxis" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.ActiveAxis">
+  ActiveAxis
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the active axis or null while idle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TransformGizmoAxis? ActiveAxis { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Toolkit.Gizmos.TransformGizmoAxis.html">TransformGizmoAxis</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_ActiveMode_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.ActiveMode*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_ActiveMode" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.ActiveMode">
+  ActiveMode
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the active operation, or null while idle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TransformGizmoMode? ActiveMode { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Toolkit.Gizmos.TransformGizmoMode.html">TransformGizmoMode</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_FrameRequester_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.FrameRequester*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_FrameRequester" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.FrameRequester">
+  FrameRequester
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the optional borrowed one-shot frame requester.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IViewportFrameRequester? FrameRequester { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Toolkit.Viewports.IViewportFrameRequester.html">IViewportFrameRequester</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_IsInteracting_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.IsInteracting*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_IsInteracting" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.IsInteracting">
+  IsInteracting
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets whether an interaction currently owns the target transform.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsInteracting { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_IsRotateEnabled_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.IsRotateEnabled*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_IsRotateEnabled" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.IsRotateEnabled">
+  IsRotateEnabled
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets whether rotation handles are displayed and interactive.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsRotateEnabled { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_IsScaleEnabled_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.IsScaleEnabled*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_IsScaleEnabled" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.IsScaleEnabled">
+  IsScaleEnabled
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets whether axis and uniform scale handles are displayed and interactive.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsScaleEnabled { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_IsTranslateEnabled_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.IsTranslateEnabled*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_IsTranslateEnabled" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.IsTranslateEnabled">
+  IsTranslateEnabled
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets whether translation handles are displayed and interactive.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsTranslateEnabled { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_MaximumScaleFactor_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.MaximumScaleFactor*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_MaximumScaleFactor" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.MaximumScaleFactor">
+  MaximumScaleFactor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the finite maximum cumulative scale factor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float MaximumScaleFactor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_MinimumScaleFactor_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.MinimumScaleFactor*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_MinimumScaleFactor" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.MinimumScaleFactor">
+  MinimumScaleFactor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the positive minimum cumulative scale factor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float MinimumScaleFactor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_Mode_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.Mode*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_Mode" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.Mode">
+  Mode
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the primary operation used by <a class="xref" href="Mu3D.Toolkit.Gizmos.TransformGizmo.html#Mu3D_Toolkit_Gizmos_TransformGizmo_BeginInteraction_Mu3D_Toolkit_Gizmos_TransformGizmoAxis_">BeginInteraction(TransformGizmoAxis)</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TransformGizmoMode Mode { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Toolkit.Gizmos.TransformGizmoMode.html">TransformGizmoMode</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Mu3D_Toolkit_Gizmos_TransformGizmo_Mode_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Assigning this compatibility property enables only the selected operation. Use
+<a class="xref" href="Mu3D.Toolkit.Gizmos.TransformGizmo.html#Mu3D_Toolkit_Gizmos_TransformGizmo_IsTranslateEnabled">IsTranslateEnabled</a>, <a class="xref" href="Mu3D.Toolkit.Gizmos.TransformGizmo.html#Mu3D_Toolkit_Gizmos_TransformGizmo_IsRotateEnabled">IsRotateEnabled</a> and
+<a class="xref" href="Mu3D.Toolkit.Gizmos.TransformGizmo.html#Mu3D_Toolkit_Gizmos_TransformGizmo_IsScaleEnabled">IsScaleEnabled</a> to display and hit-test a mixed gizmo.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_RotationSnapRadians_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.RotationSnapRadians*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_RotationSnapRadians" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.RotationSnapRadians">
+  RotationSnapRadians
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the non-negative rotation snap in radians; zero disables snapping.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float RotationSnapRadians { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_ScaleSnap_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.ScaleSnap*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_ScaleSnap" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.ScaleSnap">
+  ScaleSnap
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the non-negative scale-factor snap interval around one; zero disables snapping.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float ScaleSnap { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_ScreenSizePixels_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.ScreenSizePixels*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_ScreenSizePixels" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.ScreenSizePixels">
+  ScreenSizePixels
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the positive desired on-screen handle size. The default is 96 pixels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float ScreenSizePixels { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_Space_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.Space*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_Space" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.Space">
+  Space
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the axis orientation used by translate and rotate interactions.
+Scale handles always follow the target-local axes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TransformGizmoSpace Space { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Toolkit.Gizmos.TransformGizmoSpace.html">TransformGizmoSpace</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_Target_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.Target*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_Target" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.Target">
+  Target
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the application-selected target while no interaction is active.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SceneNode? Target { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.SceneNode.html">SceneNode</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_TranslationSnap_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.TranslationSnap*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_TranslationSnap" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.TranslationSnap">
+  TranslationSnap
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the non-negative translation snap distance; zero disables snapping.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float TranslationSnap { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_BeginInteraction_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.BeginInteraction*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_BeginInteraction_Mu3D_Toolkit_Gizmos_TransformGizmoAxis_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.BeginInteraction(Mu3D.Toolkit.Gizmos.TransformGizmoAxis)">
+  BeginInteraction(TransformGizmoAxis)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Captures the target pose and begins one primary-mode axis interaction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void BeginInteraction(TransformGizmoAxis axis)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>axis</code> <a class="xref" href="Mu3D.Toolkit.Gizmos.TransformGizmoAxis.html">TransformGizmoAxis</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_BeginInteraction_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.BeginInteraction*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_BeginInteraction_Mu3D_Toolkit_Gizmos_TransformGizmoMode_Mu3D_Toolkit_Gizmos_TransformGizmoAxis_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.BeginInteraction(Mu3D.Toolkit.Gizmos.TransformGizmoMode,Mu3D.Toolkit.Gizmos.TransformGizmoAxis)">
+  BeginInteraction(TransformGizmoMode, TransformGizmoAxis)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Captures the target pose and begins one enabled operation and axis interaction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void BeginInteraction(TransformGizmoMode interactionMode, TransformGizmoAxis axis)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>interactionMode</code> <a class="xref" href="Mu3D.Toolkit.Gizmos.TransformGizmoMode.html">TransformGizmoMode</a></dt>
+    <dd><p>The enabled translate, rotate or scale operation.</p>
+</dd>
+    <dt><code>axis</code> <a class="xref" href="Mu3D.Toolkit.Gizmos.TransformGizmoAxis.html">TransformGizmoAxis</a></dt>
+    <dd><p>The selected axis, or uniform handle for scale.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_CalculateWorldSize_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.CalculateWorldSize*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_CalculateWorldSize_Mu3D_SceneGraph_PerspectiveCamera_System_UInt32_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.CalculateWorldSize(Mu3D.SceneGraph.PerspectiveCamera,System.UInt32)">
+  CalculateWorldSize(PerspectiveCamera, uint)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Calculates the world size required to keep handles at <a class="xref" href="Mu3D.Toolkit.Gizmos.TransformGizmo.html#Mu3D_Toolkit_Gizmos_TransformGizmo_ScreenSizePixels">ScreenSizePixels</a>.
+Returns zero when the target is not in front of the camera.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float CalculateWorldSize(PerspectiveCamera camera, uint viewportHeightPixels)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>camera</code> <a class="xref" href="Mu3D.SceneGraph.PerspectiveCamera.html">PerspectiveCamera</a></dt>
+    <dd></dd>
+    <dt><code>viewportHeightPixels</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_CancelInteraction_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.CancelInteraction*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_CancelInteraction" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.CancelInteraction">
+  CancelInteraction()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Restores the initial pose and cancels the active interaction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CancelInteraction()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_CompleteInteraction_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.CompleteInteraction*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_CompleteInteraction" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.CompleteInteraction">
+  CompleteInteraction()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Accepts the current pose and completes the active interaction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CompleteInteraction()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_Dispose_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.Dispose*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_Dispose" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.Dispose">
+  Dispose()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Cancels an active interaction when its hierarchy is unchanged, then releases subscribers.
+The target and frame requester remain application-owned.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_IsModeEnabled_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.IsModeEnabled*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_IsModeEnabled_Mu3D_Toolkit_Gizmos_TransformGizmoMode_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.IsModeEnabled(Mu3D.Toolkit.Gizmos.TransformGizmoMode)">
+  IsModeEnabled(TransformGizmoMode)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns whether the specified operation is currently displayed and interactive.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsModeEnabled(TransformGizmoMode value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Mu3D.Toolkit.Gizmos.TransformGizmoMode.html">TransformGizmoMode</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_UpdateRotation_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.UpdateRotation*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_UpdateRotation_System_Single_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.UpdateRotation(System.Single)">
+  UpdateRotation(float)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Updates a rotate interaction with total signed radians from its start.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool UpdateRotation(float totalRadians)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>totalRadians</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_UpdateScale_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.UpdateScale*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_UpdateScale_System_Single_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.UpdateScale(System.Single)">
+  UpdateScale(float)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Updates a scale interaction with a total positive factor from its start.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool UpdateScale(float totalFactor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>totalFactor</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Mu3D_Toolkit_Gizmos_TransformGizmo_UpdateScale_System_Single__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Scale handles always use the target-local axes, matching the scale components stored by
+<a class="xref" href="Mu3D.SceneGraph.Transform3D.html">Transform3D</a>. This keeps the visible handle, pointer direction and changed scale
+component aligned without introducing shear.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_Toolkit_Gizmos_TransformGizmo_UpdateTranslation_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.UpdateTranslation*"></a>
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_UpdateTranslation_System_Single_" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.UpdateTranslation(System.Single)">
+  UpdateTranslation(float)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Updates a translate interaction with total signed world distance from its start.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool UpdateTranslation(float totalDistance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>totalDistance</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="events">Events
+</h2>
+
+
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_InteractionCanceled" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.InteractionCanceled">
+  InteractionCanceled
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Occurs after cancellation restores the initial pose.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;TransformGizmoInteractionEventArgs&gt;? InteractionCanceled</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">Event Type</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Mu3D.Toolkit.Gizmos.TransformGizmoInteractionEventArgs.html">TransformGizmoInteractionEventArgs</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_InteractionChanged" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.InteractionChanged">
+  InteractionChanged
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Occurs after an update changes the target pose.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;TransformGizmoInteractionEventArgs&gt;? InteractionChanged</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">Event Type</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Mu3D.Toolkit.Gizmos.TransformGizmoInteractionEventArgs.html">TransformGizmoInteractionEventArgs</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_InteractionCompleted" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.InteractionCompleted">
+  InteractionCompleted
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Occurs when the current pose is accepted as a completed interaction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;TransformGizmoInteractionEventArgs&gt;? InteractionCompleted</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">Event Type</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Mu3D.Toolkit.Gizmos.TransformGizmoInteractionEventArgs.html">TransformGizmoInteractionEventArgs</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Toolkit_Gizmos_TransformGizmo_InteractionStarted" data-uid="Mu3D.Toolkit.Gizmos.TransformGizmo.InteractionStarted">
+  InteractionStarted
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Occurs after a valid interaction captures its initial pose.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;TransformGizmoInteractionEventArgs&gt;? InteractionStarted</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">Event Type</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Mu3D.Toolkit.Gizmos.TransformGizmoInteractionEventArgs.html">TransformGizmoInteractionEventArgs</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

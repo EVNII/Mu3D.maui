@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class FlyTool | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class FlyTool | Mu3D documentation ">
+      
+      <meta name="description" content="Provides declarative first-person camera navigation for an explicit XAML camera.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool">
+
+
+
+  <h1 id="Mu3D_Maui_Toolkit_Controls_FlyTool" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool" class="text-break">
+Class FlyTool  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Maui.html">Maui</a>.<a class="xref" href="Mu3D.Maui.Toolkit.html">Toolkit</a>.<a class="xref" href="Mu3D.Maui.Toolkit.Controls.html">Controls</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Maui.Toolkit.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Provides declarative first-person camera navigation for an explicit XAML camera.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class FlyTool : BindableObject, INotifyPropertyChanged, IViewportTool</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject">BindableObject</a></div>
+      <div><span class="xref">FlyTool</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a></div>
+      <div><a class="xref" href="Mu3D.Maui.Toolkit.Controls.IViewportTool.html">IViewportTool</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontextproperty">BindableObject.BindingContextProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.clearvalue#microsoft-maui-controls-bindableobject-clearvalue(microsoft-maui-controls-bindableproperty)">BindableObject.ClearValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.clearvalue#microsoft-maui-controls-bindableobject-clearvalue(microsoft-maui-controls-bindablepropertykey)">BindableObject.ClearValue(BindablePropertyKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.getvalue">BindableObject.GetValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.isset">BindableObject.IsSet(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.removebinding">BindableObject.RemoveBinding(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setbinding">BindableObject.SetBinding(BindableProperty, BindingBase)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setvalue#microsoft-maui-controls-bindableobject-setvalue(microsoft-maui-controls-bindableproperty-system-object)">BindableObject.SetValue(BindableProperty, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setvalue#microsoft-maui-controls-bindableobject-setvalue(microsoft-maui-controls-bindablepropertykey-system-object)">BindableObject.SetValue(BindablePropertyKey, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.coercevalue#microsoft-maui-controls-bindableobject-coercevalue(microsoft-maui-controls-bindableproperty)">BindableObject.CoerceValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.coercevalue#microsoft-maui-controls-bindableobject-coercevalue(microsoft-maui-controls-bindablepropertykey)">BindableObject.CoerceValue(BindablePropertyKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.dispatcher">BindableObject.Dispatcher</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontext">BindableObject.BindingContext</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.propertychanged">BindableObject.PropertyChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.propertychanging">BindableObject.PropertyChanging</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontextchanged">BindableObject.BindingContextChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="Mu3D_Maui_Toolkit_Controls_FlyTool_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>Fly uses the same physical-device <a class="xref" href="Mu3D.Maui.Toolkit.Controls.ViewportInput.html">ViewportInput</a> and normalized Rotate, Pan and
+Dolly routes as Orbit and Map. It interprets them as look, strafe/lift and forward/backward
+movement. The tool owns one <a class="xref" href="Mu3D.Toolkit.Controls.FlyController.html">FlyController</a> only while attached to
+<a class="xref" href="Mu3D.Maui.Toolkit.Controls.ViewportTools.html">ViewportTools</a>.</p>
+</div>
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_FlyTool__ctor_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.#ctor*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool__ctor" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.#ctor">
+  FlyTool()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a Fly tool with first-person device-route defaults.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FlyTool()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_CameraProperty" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.CameraProperty">
+  CameraProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.FlyTool.html#Mu3D_Maui_Toolkit_Controls_FlyTool_Camera">Camera</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty CameraProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_DampingEnabledProperty" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.DampingEnabledProperty">
+  DampingEnabledProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.FlyTool.html#Mu3D_Maui_Toolkit_Controls_FlyTool_DampingEnabled">DampingEnabled</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty DampingEnabledProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_DampingTimeProperty" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.DampingTimeProperty">
+  DampingTimeProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.FlyTool.html#Mu3D_Maui_Toolkit_Controls_FlyTool_DampingTime">DampingTime</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty DampingTimeProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_DollySensitivityProperty" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.DollySensitivityProperty">
+  DollySensitivityProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.FlyTool.html#Mu3D_Maui_Toolkit_Controls_FlyTool_DollySensitivity">DollySensitivity</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty DollySensitivityProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_InputProperty" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.InputProperty">
+  InputProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.FlyTool.html#Mu3D_Maui_Toolkit_Controls_FlyTool_Input">Input</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty InputProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_IsEnabledProperty" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.IsEnabledProperty">
+  IsEnabledProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.FlyTool.html#Mu3D_Maui_Toolkit_Controls_FlyTool_IsEnabled">IsEnabled</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty IsEnabledProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_LookStepRadiansProperty" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.LookStepRadiansProperty">
+  LookStepRadiansProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.FlyTool.html#Mu3D_Maui_Toolkit_Controls_FlyTool_LookStepRadians">LookStepRadians</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty LookStepRadiansProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_MovementStepProperty" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.MovementStepProperty">
+  MovementStepProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.FlyTool.html#Mu3D_Maui_Toolkit_Controls_FlyTool_MovementStep">MovementStep</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty MovementStepProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_PanSensitivityProperty" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.PanSensitivityProperty">
+  PanSensitivityProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.FlyTool.html#Mu3D_Maui_Toolkit_Controls_FlyTool_PanSensitivity">PanSensitivity</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty PanSensitivityProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_PanUnitsPerViewportProperty" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.PanUnitsPerViewportProperty">
+  PanUnitsPerViewportProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.FlyTool.html#Mu3D_Maui_Toolkit_Controls_FlyTool_PanUnitsPerViewport">PanUnitsPerViewport</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty PanUnitsPerViewportProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_PinchDollyMultiplierProperty" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.PinchDollyMultiplierProperty">
+  PinchDollyMultiplierProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.FlyTool.html#Mu3D_Maui_Toolkit_Controls_FlyTool_PinchDollyMultiplier">PinchDollyMultiplier</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty PinchDollyMultiplierProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_RotationRadiansPerViewportProperty" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.RotationRadiansPerViewportProperty">
+  RotationRadiansPerViewportProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.FlyTool.html#Mu3D_Maui_Toolkit_Controls_FlyTool_RotationRadiansPerViewport">RotationRadiansPerViewport</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty RotationRadiansPerViewportProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_RotationSensitivityProperty" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.RotationSensitivityProperty">
+  RotationSensitivityProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.FlyTool.html#Mu3D_Maui_Toolkit_Controls_FlyTool_RotationSensitivity">RotationSensitivity</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty RotationSensitivityProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_WheelDollyStepProperty" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.WheelDollyStepProperty">
+  WheelDollyStepProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Controls.FlyTool.html#Mu3D_Maui_Toolkit_Controls_FlyTool_WheelDollyStep">WheelDollyStep</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty WheelDollyStepProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_FlyTool_Behavior_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.Behavior*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_Behavior" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.Behavior">
+  Behavior
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the shared MAUI device-input navigation behavior.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ViewportNavigationBehavior Behavior { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Maui.Toolkit.Controls.ViewportNavigationBehavior.html">ViewportNavigationBehavior</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Mu3D_Maui_Toolkit_Controls_FlyTool_Behavior_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Do not add this behavior to another visual while the tool is attached.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_FlyTool_Camera_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.Camera*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_Camera" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.Camera">
+  Camera
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the explicit declarative camera to control.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PerspectiveCamera3D? Camera { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Maui.Controls.PerspectiveCamera3D.html">PerspectiveCamera3D</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_FlyTool_Controller_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.Controller*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_Controller" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.Controller">
+  Controller
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the attachment-owned controller, or null while detached.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FlyController? Controller { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Toolkit.Controls.FlyController.html">FlyController</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_FlyTool_DampingEnabled_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.DampingEnabled*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_DampingEnabled" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.DampingEnabled">
+  DampingEnabled
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets whether accepted movement and look commands are VSync-smoothed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool DampingEnabled { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_FlyTool_DampingTime_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.DampingTime*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_DampingTime" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.DampingTime">
+  DampingTime
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the positive exponential damping time in seconds.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float DampingTime { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_FlyTool_DollySensitivity_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.DollySensitivity*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_DollySensitivity" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.DollySensitivity">
+  DollySensitivity
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the non-negative Dolly multiplier.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float DollySensitivity { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_FlyTool_Input_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.Input*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_Input" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.Input">
+  Input
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets all physical-device input routes for this viewport tool.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ViewportInput Input { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Maui.Toolkit.Controls.ViewportInput.html">ViewportInput</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_FlyTool_IsEnabled_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.IsEnabled*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_IsEnabled" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.IsEnabled">
+  IsEnabled
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets whether commands are accepted.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsEnabled { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_FlyTool_LookStepRadians_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.LookStepRadians*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_LookStepRadians" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.LookStepRadians">
+  LookStepRadians
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the positive radian amount of one discrete look command.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float LookStepRadians { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_FlyTool_MovementStep_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.MovementStep*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_MovementStep" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.MovementStep">
+  MovementStep
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the positive world-unit distance of one discrete movement command.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float MovementStep { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_FlyTool_NavigationCommand_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.NavigationCommand*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_NavigationCommand" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.NavigationCommand">
+  NavigationCommand
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the stable command that accepts a <a class="xref" href="Mu3D.Maui.Toolkit.Controls.FlyNavigationAction.html">FlyNavigationAction</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand NavigationCommand { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.input.icommand">ICommand</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_FlyTool_PanSensitivity_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.PanSensitivity*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_PanSensitivity" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.PanSensitivity">
+  PanSensitivity
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the non-negative Pan/local-X-Y multiplier.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float PanSensitivity { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_FlyTool_PanUnitsPerViewport_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.PanUnitsPerViewport*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_PanUnitsPerViewport" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.PanUnitsPerViewport">
+  PanUnitsPerViewport
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets Pan world units represented by one short-side viewport drag.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float PanUnitsPerViewport { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_FlyTool_PinchDollyMultiplier_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.PinchDollyMultiplier*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_PinchDollyMultiplier" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.PinchDollyMultiplier">
+  PinchDollyMultiplier
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets forward units represented by one natural-log pinch scale.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float PinchDollyMultiplier { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_FlyTool_RotationRadiansPerViewport_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.RotationRadiansPerViewport*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_RotationRadiansPerViewport" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.RotationRadiansPerViewport">
+  RotationRadiansPerViewport
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets Rotate radians represented by one short-side viewport drag.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float RotationRadiansPerViewport { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_FlyTool_RotationSensitivity_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.RotationSensitivity*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_RotationSensitivity" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.RotationSensitivity">
+  RotationSensitivity
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the non-negative Rotate multiplier.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float RotationSensitivity { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_FlyTool_WheelDollyStep_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.WheelDollyStep*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_WheelDollyStep" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.WheelDollyStep">
+  WheelDollyStep
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets forward units represented by one wheel detent.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float WheelDollyStep { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_FlyTool_Attach_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.Attach*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_Attach_Mu3D_Maui_Toolkit_Controls_ViewportToolContext_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.Attach(Mu3D.Maui.Toolkit.Controls.ViewportToolContext)">
+  Attach(ViewportToolContext)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Attaches the tool and returns the lease that reverses its owned work.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDisposable Attach(ViewportToolContext context)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>context</code> <a class="xref" href="Mu3D.Maui.Toolkit.Controls.ViewportToolContext.html">ViewportToolContext</a></dt>
+    <dd><p>The active viewport-tool context.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></dt>
+    <dd><p>A non-null idempotent attachment lease.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_FlyTool_TryNavigate_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.TryNavigate*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_TryNavigate_Mu3D_Maui_Toolkit_Controls_FlyNavigationAction_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.TryNavigate(Mu3D.Maui.Toolkit.Controls.FlyNavigationAction)">
+  TryNavigate(FlyNavigationAction)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Attempts one discrete first-person command.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryNavigate(FlyNavigationAction action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="Mu3D.Maui.Toolkit.Controls.FlyNavigationAction.html">FlyNavigationAction</a></dt>
+    <dd><p>The normalized action to submit.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> when the attached controller accepted the command.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_FlyTool_TryNavigate_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.TryNavigate*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_FlyTool_TryNavigate_System_Numerics_Vector3_System_Numerics_Vector2_" data-uid="Mu3D.Maui.Toolkit.Controls.FlyTool.TryNavigate(System.Numerics.Vector3,System.Numerics.Vector2)">
+  TryNavigate(Vector3, Vector2)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Attempts one atomic application-supplied movement and look delta.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryNavigate(Vector3 localMovement, Vector2 lookDeltaRadians)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>localMovement</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.vector3">Vector3</a></dt>
+    <dd><p>Local world-unit movement: X right, Y up and Z forward.</p>
+</dd>
+    <dt><code>lookDeltaRadians</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.vector2">Vector2</a></dt>
+    <dd><p>Yaw/pitch radians: positive X right and positive Y up.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> when the attached controller accepted a component.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

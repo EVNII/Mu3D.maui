@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Namespace Mu3D.SceneGraph | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace Mu3D.SceneGraph | Mu3D documentation ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.SceneGraph">
+
+  <h1 id="Mu3D_SceneGraph" data-uid="Mu3D.SceneGraph" class="text-break">Namespace Mu3D.SceneGraph</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+
+    <h3 id="classes">
+Classes
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.AnimationClip.html">AnimationClip</a></dt>
+      <dd><p>Groups immutable transform tracks under one named timeline.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.AnimationLayer.html">AnimationLayer</a></dt>
+      <dd><p>Supplies one weighted clip to an <a class="xref" href="Mu3D.SceneGraph.AnimationMixer.html">AnimationMixer</a>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.AnimationMixer.html">AnimationMixer</a></dt>
+      <dd><p>Blends enabled override layers against captured local TRS base poses without accumulating drift.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.AnimationTrack.html">AnimationTrack</a></dt>
+      <dd><p>Base class for one immutable FP32 transform animation track.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.Camera.html">Camera</a></dt>
+      <dd><p>Base class for a transformable FP32 scene camera.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.CompressedMaterialTexture.html">CompressedMaterialTexture</a></dt>
+      <dd><p>Stores an immutable backend-independent compressed two-dimensional material texture and its
+contiguous mip prefix. Container metadata and transcoder handles are deliberately excluded.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.CompressedTextureMipLevel.html">CompressedTextureMipLevel</a></dt>
+      <dd><p>Stores one immutable, tightly packed mip level of a compressed material texture.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.DirectionalLight.html">DirectionalLight</a></dt>
+      <dd><p>Represents a transformable directional light. Its local negative Z axis is the direction in
+which light rays travel; translation does not affect directional lighting.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.EquirectangularHdrEnvironment.html">EquirectangularHdrEnvironment</a></dt>
+      <dd><p>Stores an immutable latitude-longitude HDR environment in an explicit linear-light RGB space.
+Pixel values are scene-referred RGB radiance samples in row-major order; negative and above-one
+components are preserved without tone mapping, gamut mapping or clipping.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.HdrEnvironmentConverter.html">HdrEnvironmentConverter</a></dt>
+      <dd><p>Converts explicitly tagged latitude-longitude HDR environments into deterministic cube maps.
+Filtering is performed in linear light. The horizontal longitude seam wraps and the poles clamp;
+the conversion performs no gamut mapping, tone mapping or clipping.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.HdrEnvironmentCube.html">HdrEnvironmentCube</a></dt>
+      <dd><p>Stores an immutable square, six-face HDR environment cube in an explicit linear-light RGB
+space. Pixels are face-major in <a class="xref" href="Mu3D.SceneGraph.EnvironmentCubeFace.html">EnvironmentCubeFace</a> order and row-major within
+each face. FP32 negative and above-one components are retained without clipping or tone mapping.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.ImageBasedLight.html">ImageBasedLight</a></dt>
+      <dd><p>Represents a transformable image-based light source. Rotation controls environment orientation;
+translation has no lighting effect. The current renderer provides diffuse irradiance and
+roughness-filtered split-sum GGX specular reflection.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.Material.html">Material</a></dt>
+      <dd><p>Base class for renderer materials. Concrete materials must give every color property an explicit
+working-space identity rather than treating untagged RGB values as display colors.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.MaterialVariantManifest.html">MaterialVariantManifest</a></dt>
+      <dd><p>Contains the de-duplicated material variants actually referenced by an asset or scene. It is a
+compile manifest, not the Cartesian product of every feature permitted by a template.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.Mesh.html">Mesh</a></dt>
+      <dd><p>Associates immutable geometry and a material with a transformable scene node.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.MeshGeometry.html">MeshGeometry</a></dt>
+      <dd><p>Stores immutable indexed triangle geometry in backend-independent FP32 form.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.MeshPrimitives.html">MeshPrimitives</a></dt>
+      <dd><p>Creates immutable backend-independent geometry for standard 3D primitives.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.MetallicRoughnessMaterial.html">MetallicRoughnessMaterial</a></dt>
+      <dd><p>Compatibility name for <a class="xref" href="Mu3D.SceneGraph.PbrMaterial.html">PbrMaterial</a>. New code should use <a class="xref" href="Mu3D.SceneGraph.PbrMaterial.html">PbrMaterial</a>
+to reflect that metallic/roughness is the base closure and clearcoat, sheen, transmission,
+volume, anisotropy and emission are composable extension blocks.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.MorphTarget.html">MorphTarget</a></dt>
+      <dd><p>Stores immutable FP32 local-space vertex deltas for one morph target.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.MorphWeightAnimationTrack.html">MorphWeightAnimationTrack</a></dt>
+      <dd><p>Animates all morph-target weights on one mesh with immutable FP32 keys.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.NormalizedRgbaDataImage.html">NormalizedRgbaDataImage</a></dt>
+      <dd><p>Stores immutable normalized RGBA data that must not undergo a color-space or transfer-function
+transform. Typical uses include normal and packed material-property maps.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrGraph.html">OpenPbrGraph</a></dt>
+      <dd><p>Owns immutable OpenPBR input connections and a bounded topological node inventory.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrGraphEvaluator.html">OpenPbrGraphEvaluator</a></dt>
+      <dd><p>Evaluates the portable material graph on the CPU for inspection and numerical comparison.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrInputInfo.html">OpenPbrInputInfo</a></dt>
+      <dd><p>Provides stable parameter names, types and physical rendering bounds.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrMaterial.html">OpenPbrMaterial</a></dt>
+      <dd><p>Associates versioned OpenPBR Surface authoring data with a scene mesh without converting it to
+the glTF metallic/roughness material model.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrNode.html">OpenPbrNode</a></dt>
+      <dd><p>An immutable typed expression used by OpenPBR input bindings.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrPreviewDiagnostic.html">OpenPbrPreviewDiagnostic</a></dt>
+      <dd><p>Describes one renderer approximation or active parameter that loses authoring semantics.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrPreviewException.html">OpenPbrPreviewException</a></dt>
+      <dd><p>Reports all unsupported active inputs when a preview conversion rejects parameter loss.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrPreviewOptions.html">OpenPbrPreviewOptions</a></dt>
+      <dd><p>Configures an explicitly approximate OpenPBR-to-metallic/roughness preview conversion.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrPreviewResult.html">OpenPbrPreviewResult</a></dt>
+      <dd><p>Contains the renderable preview and an immutable account of its approximations.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html">OpenPbrSurface</a></dt>
+      <dd><p>Stores constant and connected authoring inputs for OpenPBR Surface 1.1.1 independently of the renderer.
+This is not a <a class="xref" href="Mu3D.SceneGraph.Material.html">Material</a> and does not assert OpenPBR scattering conformance.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrTexture.html">OpenPbrTexture</a></dt>
+      <dd><p>Owns an immutable, bounded FP32 material texture; no file access or decoding is implicit.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.PbrAnisotropyBlock.html">PbrAnisotropyBlock</a></dt>
+      <dd><p>Provides the anisotropic base-specular extension block of a <a class="xref" href="Mu3D.SceneGraph.PbrMaterial.html">PbrMaterial</a>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.PbrBaseBlock.html">PbrBaseBlock</a></dt>
+      <dd><p>Provides the metallic/roughness base closure of a <a class="xref" href="Mu3D.SceneGraph.PbrMaterial.html">PbrMaterial</a>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.PbrClearcoatBlock.html">PbrClearcoatBlock</a></dt>
+      <dd><p>Provides the outer clearcoat extension block of a <a class="xref" href="Mu3D.SceneGraph.PbrMaterial.html">PbrMaterial</a>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.PbrDiffuseTransmissionBlock.html">PbrDiffuseTransmissionBlock</a></dt>
+      <dd><p>Provides thin-surface diffuse-transmission controls.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.PbrEmissiveBlock.html">PbrEmissiveBlock</a></dt>
+      <dd><p>Provides the emissive extension block of a <a class="xref" href="Mu3D.SceneGraph.PbrMaterial.html">PbrMaterial</a>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.PbrIridescenceBlock.html">PbrIridescenceBlock</a></dt>
+      <dd><p>Provides the thin-film iridescence extension block of a <a class="xref" href="Mu3D.SceneGraph.PbrMaterial.html">PbrMaterial</a>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.PbrMaterial.html">PbrMaterial</a></dt>
+      <dd><p>Represents a metallic/roughness material. Base color is explicitly tagged, unpremultiplied
+linear-light RGBA. Optional dielectric transmission and volume absorption remain scene-linear.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.PbrSheenBlock.html">PbrSheenBlock</a></dt>
+      <dd><p>Provides the cloth/fiber sheen extension block of a <a class="xref" href="Mu3D.SceneGraph.PbrMaterial.html">PbrMaterial</a>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.PbrSpecularBlock.html">PbrSpecularBlock</a></dt>
+      <dd><p>Provides dielectric specular strength and F0 tint controls.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.PbrTransmissionBlock.html">PbrTransmissionBlock</a></dt>
+      <dd><p>Provides transmission and its optional finite-volume block.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.PerspectiveCamera.html">PerspectiveCamera</a></dt>
+      <dd><p>Represents a right-handed perspective camera with a zero-to-one depth range.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.PointLight.html">PointLight</a></dt>
+      <dd><p>Represents an isotropic point light. Intensity is luminous intensity in candela and physical
+illumination follows inverse-square distance attenuation.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.PrefilteredEnvironmentCube.html">PrefilteredEnvironmentCube</a></dt>
+      <dd><p>Stores an immutable roughness-ordered mip chain of scene-linear specular environment cubes.
+Mip zero represents roughness zero and the final mip represents roughness one.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.PunctualLight.html">PunctualLight</a></dt>
+      <dd><p>Represents shared color, intensity, and transform state for a punctual light.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.QuaternionAnimationTrack.html">QuaternionAnimationTrack</a></dt>
+      <dd><p>Animates one node's local rotation with normalized FP32 quaternion keys.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.RadianceHdrEnvironmentAsset.html">RadianceHdrEnvironmentAsset</a></dt>
+      <dd><p>Owns one decoded FP32 Radiance environment and, when requested, an exact encoded-source copy.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.RadianceHdrEnvironmentLoadOptions.html">RadianceHdrEnvironmentLoadOptions</a></dt>
+      <dd><p>Configures one bounded Radiance HDR environment load.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.RadianceHdrEnvironmentLoader.html">RadianceHdrEnvironmentLoader</a></dt>
+      <dd><p>Loads bounded Radiance HDR environment assets from caller streams or keyed resolvers.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.RadianceHdrReader.html">RadianceHdrReader</a></dt>
+      <dd><p>Decodes a Radiance RGBE latitude-longitude image into explicitly tagged linear FP32 RGB.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.RadianceHdrSourceCache.html">RadianceHdrSourceCache</a></dt>
+      <dd><p>Stores bounded encoded Radiance HDR sources under exact application-defined keys. The cache is
+application owned; clearing or discarding it never invalidates already decoded environments.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.Scene.html">Scene</a></dt>
+      <dd><p>Owns the root of one backend-independent 3D scene hierarchy.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.SceneNode.html">SceneNode</a></dt>
+      <dd><p>Represents one transformable node in an acyclic scene hierarchy.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.Skin.html">Skin</a></dt>
+      <dd><p>Associates scene joints with FP32 inverse bind matrices in System.Numerics row-vector order.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.SplitSumBrdfLut.html">SplitSumBrdfLut</a></dt>
+      <dd><p>Stores immutable GGX split-sum and Charlie sheen integrations. X scales the base Fresnel
+reflectance, Y supplies its grazing-angle remainder, and the matching sheen value supplies the
+directional albedo of a unit-color Charlie lobe.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.SpotLight.html">SpotLight</a></dt>
+      <dd><p>Represents a point light constrained to a cone along its local negative Z axis.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.Transform3D.html">Transform3D</a></dt>
+      <dd><p>Stores one FP32 translation, rotation and scale transform.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.UnlitMaterial.html">UnlitMaterial</a></dt>
+      <dd><p>Represents an unlit material with an explicitly tagged linear-light color.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.Vector3AnimationTrack.html">Vector3AnimationTrack</a></dt>
+      <dd><p>Animates one node's local position or scale with immutable FP32 keys.</p>
+</dd>
+    </dl>
+    <h3 id="structs">
+Structs
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.JointIndices4.html">JointIndices4</a></dt>
+      <dd><p>Stores four unsigned joint indices affecting one vertex.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.MaterialShaderTemplate.html">MaterialShaderTemplate</a></dt>
+      <dd><p>Defines an immutable PBR shader-generation policy. Material values remain instance state; this
+template only controls which optional closure blocks and sampled slots may enter a shader key.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.MaterialShaderVariant.html">MaterialShaderVariant</a></dt>
+      <dd><p>Describes one exact backend-independent material shader and pipeline specialization. Scalar
+values, texture-coordinate transforms and sampler state are deliberately not variant axes.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureMapping.html">MaterialTextureMapping</a></dt>
+      <dd><p>Defines the sampling and affine texture-coordinate mapping for one material texture slot.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureSampling.html">MaterialTextureSampling</a></dt>
+      <dd><p>Defines backend-independent sampling shared by a material's two-dimensional maps.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.SceneVisibilityMask.html">SceneVisibilityMask</a></dt>
+      <dd><p>Identifies any combination of the thirty-two backend-independent scene visibility layers.</p>
+</dd>
+    </dl>
+    <h3 id="enums">
+Enums
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.AnimationInterpolation.html">AnimationInterpolation</a></dt>
+      <dd><p>Controls interpolation between adjacent transform animation keys.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.AnimationWrapMode.html">AnimationWrapMode</a></dt>
+      <dd><p>Controls how clip time outside its duration is resolved.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.CompressedMaterialTextureContent.html">CompressedMaterialTextureContent</a></dt>
+      <dd><p>Identifies whether compressed material texels represent color or numerical data.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.EnvironmentCubeFace.html">EnvironmentCubeFace</a></dt>
+      <dd><p>Identifies one cube-map face and its zero-based GPU array-layer order.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.MaterialAlphaMode.html">MaterialAlphaMode</a></dt>
+      <dd><p>Controls how a material's unpremultiplied alpha participates in rasterization.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.MaterialBaseModel.html">MaterialBaseModel</a></dt>
+      <dd><p>Identifies the root lighting closure from which a material is composed.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureAddressMode.html">MaterialTextureAddressMode</a></dt>
+      <dd><p>Controls how material texture coordinates outside zero-to-one are addressed.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureFilter.html">MaterialTextureFilter</a></dt>
+      <dd><p>Controls material texture minification, magnification and mip filtering.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.MeshShadowCastingMode.html">MeshShadowCastingMode</a></dt>
+      <dd><p>Controls whether a mesh participates in camera and directional-shadow passes.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrAddressMode.html">OpenPbrAddressMode</a></dt>
+      <dd><p>Specifies texture boundary handling independently for each UV axis.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrInput.html">OpenPbrInput</a></dt>
+      <dd><p>Identifies each connectable input of the pinned OpenPBR Surface definition.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrNodeOperation.html">OpenPbrNodeOperation</a></dt>
+      <dd><p>Identifies the bounded, portable material graph operations.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrNodeType.html">OpenPbrNodeType</a></dt>
+      <dd><p>Distinguishes physical color from untransformed material data.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrPreviewPolicy.html">OpenPbrPreviewPolicy</a></dt>
+      <dd><p>Controls treatment of OpenPBR parameters the metallic/roughness preview cannot reproduce.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrTextureFilter.html">OpenPbrTextureFilter</a></dt>
+      <dd><p>Specifies nearest-texel or bilinear level-zero sampling.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.PbrMaterialExtensions.html">PbrMaterialExtensions</a></dt>
+      <dd><p>Identifies optional physically based lighting blocks compiled for a material.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.PbrMaterialTextureBindings.html">PbrMaterialTextureBindings</a></dt>
+      <dd><p>Identifies the exact material texture bindings used by one shader variant.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.PbrMaterialTextureSlots.html">PbrMaterialTextureSlots</a></dt>
+      <dd><p>Identifies optional sampled texture slots compiled for a PBR material.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.Vector3AnimationTarget.html">Vector3AnimationTarget</a></dt>
+      <dd><p>Identifies a Vector3 transform property animated by a track.</p>
+</dd>
+    </dl>
+    <h3 id="delegates">
+Delegates
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Mu3D.SceneGraph.RadianceHdrSourceStreamResolver.html">RadianceHdrSourceStreamResolver</a></dt>
+      <dd><p>Opens a readable Radiance HDR source stream for one exact application-defined key.</p>
+</dd>
+    </dl>
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

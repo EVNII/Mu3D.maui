@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class MapTool | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class MapTool | Mu3D documentation ">
+      
+      <meta name="description" content="Provides a map/CAD preset for the configurable orbit navigation tool.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Maui.Toolkit.Controls.MapTool">
+
+
+
+  <h1 id="Mu3D_Maui_Toolkit_Controls_MapTool" data-uid="Mu3D.Maui.Toolkit.Controls.MapTool" class="text-break">
+Class MapTool  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Maui.html">Maui</a>.<a class="xref" href="Mu3D.Maui.Toolkit.html">Toolkit</a>.<a class="xref" href="Mu3D.Maui.Toolkit.Controls.html">Controls</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Maui.Toolkit.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Provides a map/CAD preset for the configurable orbit navigation tool.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class MapTool : OrbitTool, INotifyPropertyChanged, IViewportTool</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject">BindableObject</a></div>
+      <div><a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html">OrbitTool</a></div>
+      <div><span class="xref">MapTool</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a></div>
+      <div><a class="xref" href="Mu3D.Maui.Toolkit.Controls.IViewportTool.html">IViewportTool</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_CameraProperty">OrbitTool.CameraProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_TargetXProperty">OrbitTool.TargetXProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_TargetYProperty">OrbitTool.TargetYProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_TargetZProperty">OrbitTool.TargetZProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_IsEnabledProperty">OrbitTool.IsEnabledProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_InputProperty">OrbitTool.InputProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_DampingEnabledProperty">OrbitTool.DampingEnabledProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_DampingTimeProperty">OrbitTool.DampingTimeProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_MinimumDistanceProperty">OrbitTool.MinimumDistanceProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_MaximumDistanceProperty">OrbitTool.MaximumDistanceProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_PanModeProperty">OrbitTool.PanModeProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_MinimumPolarAngleProperty">OrbitTool.MinimumPolarAngleProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_MaximumPolarAngleProperty">OrbitTool.MaximumPolarAngleProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_RotationSensitivityProperty">OrbitTool.RotationSensitivityProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_PanSensitivityProperty">OrbitTool.PanSensitivityProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_DollySensitivityProperty">OrbitTool.DollySensitivityProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_NavigationRotationStepRadiansProperty">OrbitTool.NavigationRotationStepRadiansProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_NavigationPanStepProperty">OrbitTool.NavigationPanStepProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_NavigationDollyStepProperty">OrbitTool.NavigationDollyStepProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_PinchDollyMultiplierProperty">OrbitTool.PinchDollyMultiplierProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_TryNavigate_Mu3D_Maui_Toolkit_Controls_OrbitNavigationAction_">OrbitTool.TryNavigate(OrbitNavigationAction)</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_TryNavigate_System_Numerics_Vector2_System_Numerics_Vector2_System_Single_">OrbitTool.TryNavigate(Vector2, Vector2, float)</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_Attach_Mu3D_Maui_Toolkit_Controls_ViewportToolContext_">OrbitTool.Attach(ViewportToolContext)</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_Camera">OrbitTool.Camera</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_TargetX">OrbitTool.TargetX</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_TargetY">OrbitTool.TargetY</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_TargetZ">OrbitTool.TargetZ</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_IsEnabled">OrbitTool.IsEnabled</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_Input">OrbitTool.Input</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_DampingEnabled">OrbitTool.DampingEnabled</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_DampingTime">OrbitTool.DampingTime</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_MinimumDistance">OrbitTool.MinimumDistance</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_MaximumDistance">OrbitTool.MaximumDistance</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_PanMode">OrbitTool.PanMode</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_MinimumPolarAngle">OrbitTool.MinimumPolarAngle</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_MaximumPolarAngle">OrbitTool.MaximumPolarAngle</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_RotationSensitivity">OrbitTool.RotationSensitivity</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_PanSensitivity">OrbitTool.PanSensitivity</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_DollySensitivity">OrbitTool.DollySensitivity</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_NavigationRotationStepRadians">OrbitTool.NavigationRotationStepRadians</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_NavigationPanStep">OrbitTool.NavigationPanStep</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_NavigationDollyStep">OrbitTool.NavigationDollyStep</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_PinchDollyMultiplier">OrbitTool.PinchDollyMultiplier</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_Controller">OrbitTool.Controller</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_NavigationCommand">OrbitTool.NavigationCommand</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_Behavior">OrbitTool.Behavior</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontextproperty">BindableObject.BindingContextProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.clearvalue#microsoft-maui-controls-bindableobject-clearvalue(microsoft-maui-controls-bindableproperty)">BindableObject.ClearValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.clearvalue#microsoft-maui-controls-bindableobject-clearvalue(microsoft-maui-controls-bindablepropertykey)">BindableObject.ClearValue(BindablePropertyKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.getvalue">BindableObject.GetValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.isset">BindableObject.IsSet(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.removebinding">BindableObject.RemoveBinding(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setbinding">BindableObject.SetBinding(BindableProperty, BindingBase)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setvalue#microsoft-maui-controls-bindableobject-setvalue(microsoft-maui-controls-bindableproperty-system-object)">BindableObject.SetValue(BindableProperty, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setvalue#microsoft-maui-controls-bindableobject-setvalue(microsoft-maui-controls-bindablepropertykey-system-object)">BindableObject.SetValue(BindablePropertyKey, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.coercevalue#microsoft-maui-controls-bindableobject-coercevalue(microsoft-maui-controls-bindableproperty)">BindableObject.CoerceValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.coercevalue#microsoft-maui-controls-bindableobject-coercevalue(microsoft-maui-controls-bindablepropertykey)">BindableObject.CoerceValue(BindablePropertyKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.dispatcher">BindableObject.Dispatcher</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontext">BindableObject.BindingContext</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.propertychanged">BindableObject.PropertyChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.propertychanging">BindableObject.PropertyChanging</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontextchanged">BindableObject.BindingContextChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="Mu3D_Maui_Toolkit_Controls_MapTool_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>Left-button and direct one-finger drag pan across the world-up plane; right-button, native
+trackpad two-finger drag and direct two-finger drag rotate around the target; pinch and supported
+pointer wheels dolly. <a class="xref" href="Mu3D.Maui.Toolkit.Controls.OrbitTool.html#Mu3D_Maui_Toolkit_Controls_OrbitTool_NavigationCommand">NavigationCommand</a> provides focus-independent
+discrete navigation, while the optional focused hardware-key adapter can supply the same
+rotate/dolly actions. Map changes only declarative Orbit defaults; it does not introduce a
+separate input or controller implementation.</p>
+</div>
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_Maui_Toolkit_Controls_MapTool__ctor_" data-uid="Mu3D.Maui.Toolkit.Controls.MapTool.#ctor*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Controls_MapTool__ctor" data-uid="Mu3D.Maui.Toolkit.Controls.MapTool.#ctor">
+  MapTool()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes the default map input mapping.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MapTool()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>XAML component catalog | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="XAML component catalog | Mu3D documentation ">
+      
+      <meta name="description" content="Author and bind every public Mu3D MAUI component from compiled XAML.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="xaml-component-catalog">XAML component catalog</h1>
+
+<p><code>Mu3D.Maui</code> and <code>Mu3D.Maui.Toolkit</code> expose their MAUI-facing configuration through
+<code>BindableProperty</code>. Values can therefore come from literals, compiled bindings, styles, dynamic
+resources or control references. Collection properties such as <code>Scene3D.Children</code>,
+<code>Mu3DSceneView.Features</code> and <code>ViewportTools.Items</code> are XAML content collections rather than scalar
+bindable properties.</p>
+<p>The UI-independent <code>Mu3D.Core</code> and <code>Mu3D.Toolkit</code> objects remain ordinary .NET objects. Bind them to
+the MAUI wrappers when the application creates them in a view model; do not move renderer, cache,
+selection-ranking or undo policy into XAML merely to make it declarative.</p>
+<h2 id="namespaces-and-compiled-binding">Namespaces and compiled binding</h2>
+<pre><code class="lang-xaml">&lt;ContentPage
+    xmlns=&quot;http://schemas.microsoft.com/dotnet/2021/maui&quot;
+    xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+    xmlns:mu3d=&quot;clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui&quot;
+    xmlns:toolkit=&quot;clr-namespace:Mu3D.Maui.Toolkit.Controls;assembly=Mu3D.Maui.Toolkit&quot;
+    xmlns:diagnostics=&quot;clr-namespace:Mu3D.Maui.Toolkit.Diagnostics;assembly=Mu3D.Maui.Toolkit&quot;
+    xmlns:overlays=&quot;clr-namespace:Mu3D.Maui.Toolkit.Overlays;assembly=Mu3D.Maui.Toolkit&quot;
+    xmlns:viewModels=&quot;clr-namespace:MyApp.ViewModels&quot;
+    x:DataType=&quot;viewModels:SceneViewModel&quot;&gt;
+    &lt;mu3d:Mu3DSceneView
+        ClearColor=&quot;{Binding ClearColor}&quot;
+        IsRenderingEnabled=&quot;{Binding IsRenderingEnabled}&quot;
+        RenderOutput=&quot;{Binding SelectedOutput}&quot; /&gt;
+&lt;/ContentPage&gt;
+</code></pre>
+<p>Use <code>x:DataType</code> wherever a page or data template has a stable view-model type. The XAML compiler
+then validates binding paths instead of deferring misspellings until runtime.</p>
+<h2 id="low-level-and-declarative-scene-controls">Low-level and declarative scene controls</h2>
+<p><code>Mu3DView</code> is the low-level draw callback. <code>Mu3DSceneView</code> is the normal high-level host. A
+<code>Scene3D</code> can contain a <code>PerspectiveCamera3D</code>, <code>DirectionalLight3D</code>, <code>Sphere3D</code>, <code>Cone3D</code>,
+<code>PbrMaterial3D</code> and <code>UnlitMaterial3D</code> directly in compiled XAML.</p>
+<pre><code class="lang-xaml">&lt;Grid&gt;
+    &lt;mu3d:Mu3DView
+        x:Name=&quot;ManualSurface&quot;
+        IsVisible=&quot;False&quot;
+        OutputSettings=&quot;{Binding OutputSettings}&quot;
+        SurfaceManagement=&quot;Automatic&quot;
+        Draw=&quot;OnDraw&quot; /&gt;
+
+    &lt;mu3d:Mu3DSceneView
+        x:Name=&quot;SceneView&quot;
+        AutomaticallyUpdateCameraAspectRatio=&quot;True&quot;
+        ClearColor=&quot;{Binding ClearColor}&quot;&gt;
+        &lt;mu3d:Scene3D Name=&quot;Bound scene&quot;&gt;
+            &lt;mu3d:Scene3D.Camera&gt;
+                &lt;mu3d:PerspectiveCamera3D
+                    x:Name=&quot;Camera&quot;
+                    FarClip=&quot;100&quot;
+                    FieldOfView=&quot;52&quot;
+                    NearClip=&quot;0.1&quot;
+                    Z=&quot;6&quot; /&gt;
+            &lt;/mu3d:Scene3D.Camera&gt;
+            &lt;mu3d:Sphere3D Radius=&quot;0.9&quot; X=&quot;-1&quot;&gt;
+                &lt;mu3d:PbrMaterial3D
+                    Color=&quot;{Binding PrimaryObjectColor}&quot;
+                    Metallic=&quot;0.2&quot;
+                    Roughness=&quot;0.3&quot; /&gt;
+            &lt;/mu3d:Sphere3D&gt;
+            &lt;mu3d:Cone3D Height=&quot;1.8&quot; Radius=&quot;0.8&quot; X=&quot;1&quot;&gt;
+                &lt;mu3d:UnlitMaterial3D Color=&quot;#FF8A38&quot; /&gt;
+            &lt;/mu3d:Cone3D&gt;
+            &lt;mu3d:DirectionalLight3D
+                CastsShadows=&quot;True&quot;
+                Intensity=&quot;4&quot;
+                RotationX=&quot;-35&quot;
+                RotationY=&quot;-30&quot; /&gt;
+        &lt;/mu3d:Scene3D&gt;
+    &lt;/mu3d:Mu3DSceneView&gt;
+&lt;/Grid&gt;
+</code></pre>
+<p><code>SceneNode3D</code>, <code>Camera3D</code>, <code>Primitive3D</code> and <code>Material3D</code> are abstract XAML authoring bases. Use one
+of the concrete types above rather than instantiating the base type.</p>
+<h2 id="viewport-tools-and-physical-input">Viewport tools and physical input</h2>
+<p><code>ViewportTools</code> is the recommended feature collection. The following compact catalog shows every
+high-level tool and every replaceable physical-input group. In a real page, install only the tools
+needed by that viewport.</p>
+<pre><code class="lang-xaml">&lt;mu3d:Mu3DSceneView x:Name=&quot;ToolScene&quot;&gt;
+    &lt;mu3d:Mu3DSceneView.Features&gt;
+        &lt;toolkit:ViewportTools&gt;
+            &lt;toolkit:OrbitTool
+                Camera=&quot;{x:Reference Camera}&quot;
+                IsEnabled=&quot;{Binding IsOrbitEnabled}&quot;&gt;
+                &lt;toolkit:OrbitTool.Input&gt;
+                    &lt;toolkit:ViewportInput&gt;
+                        &lt;toolkit:ViewportInput.Mouse&gt;
+                            &lt;toolkit:MouseInput
+                                LeftButtonDragAction=&quot;Rotate&quot;
+                                RightButtonDragAction=&quot;Pan&quot; /&gt;
+                        &lt;/toolkit:ViewportInput.Mouse&gt;
+                        &lt;toolkit:ViewportInput.Trackpad&gt;
+                            &lt;toolkit:TrackpadInput TwoFingerDragAction=&quot;Pan&quot; /&gt;
+                        &lt;/toolkit:ViewportInput.Trackpad&gt;
+                        &lt;toolkit:ViewportInput.Touchscreen&gt;
+                            &lt;toolkit:TouchscreenInput
+                                OneFingerDragAction=&quot;Rotate&quot;
+                                TwoFingerDragAction=&quot;Pan&quot; /&gt;
+                        &lt;/toolkit:ViewportInput.Touchscreen&gt;
+                        &lt;toolkit:ViewportInput.Keyboard&gt;
+                            &lt;toolkit:KeyboardInput IsEnabled=&quot;{Binding IsKeyboardNavigationEnabled}&quot; /&gt;
+                        &lt;/toolkit:ViewportInput.Keyboard&gt;
+                    &lt;/toolkit:ViewportInput&gt;
+                &lt;/toolkit:OrbitTool.Input&gt;
+            &lt;/toolkit:OrbitTool&gt;
+            &lt;toolkit:MapTool Camera=&quot;{x:Reference Camera}&quot; IsEnabled=&quot;False&quot; /&gt;
+            &lt;toolkit:FlyTool Camera=&quot;{x:Reference Camera}&quot; IsEnabled=&quot;False&quot; /&gt;
+            &lt;toolkit:SceneSelectionTool
+                ClearSelectionOnMiss=&quot;True&quot;
+                SelectedNode=&quot;{Binding SelectedNode, Mode=TwoWay}&quot;
+                SelectionMask=&quot;3&quot; /&gt;
+            &lt;toolkit:TransformGizmoTool Target=&quot;{Binding SelectedNode}&quot; /&gt;
+            &lt;toolkit:ProgressTool Progress=&quot;{Binding Progress}&quot;&gt;
+                &lt;toolkit:NodeTransformProgress
+                    From=&quot;0&quot;
+                    Property=&quot;RotationY&quot;
+                    Target=&quot;{x:Reference AnimatedNode}&quot;
+                    To=&quot;360&quot; /&gt;
+            &lt;/toolkit:ProgressTool&gt;
+            &lt;toolkit:PlaybackToolbar Playable=&quot;{Binding Player}&quot; /&gt;
+            &lt;toolkit:AxesHelper Orbit=&quot;{Binding OrbitController}&quot; /&gt;
+            &lt;toolkit:GridHelper Divisions=&quot;24&quot; Plane=&quot;XZ&quot; Size=&quot;12&quot; /&gt;
+            &lt;toolkit:BoundsHelper Target=&quot;{Binding SelectedNode}&quot; /&gt;
+            &lt;toolkit:OutlineHelper Target=&quot;{Binding SelectedNode}&quot; /&gt;
+            &lt;toolkit:RenderOutputToolbar Output=&quot;{Binding SelectedOutput}&quot;&gt;
+                &lt;toolkit:RenderOutputOption Label=&quot;Custom&quot; Output=&quot;{Binding CustomOutput}&quot; /&gt;
+            &lt;/toolkit:RenderOutputToolbar&gt;
+            &lt;toolkit:RenderOutputTool IsVisible=&quot;False&quot; Output=&quot;{Binding SelectedOutput}&quot; /&gt;
+            &lt;diagnostics:FrameStatisticsOverlay IsDetailed=&quot;{Binding ShowDetailedStatistics}&quot; /&gt;
+        &lt;/toolkit:ViewportTools&gt;
+    &lt;/mu3d:Mu3DSceneView.Features&gt;
+&lt;/mu3d:Mu3DSceneView&gt;
+</code></pre>
+<p>Scene nodes can opt into the default selector without code-behind:</p>
+<pre><code class="lang-xaml">&lt;mu3d:Sphere3D
+    toolkit:SceneSelection.IsSelectable=&quot;True&quot;
+    toolkit:SceneSelection.Mask=&quot;2&quot; /&gt;
+</code></pre>
+<h2 id="lower-level-feature-and-behavior-forms">Lower-level feature and behavior forms</h2>
+<p>The high-level tools above are preferred. The feature and behavior forms remain public for hosts
+that compose controller ownership themselves. They are also bindable and XAML-constructible.</p>
+<pre><code class="lang-xaml">&lt;mu3d:Mu3DSceneView x:Name=&quot;AdvancedScene&quot;&gt;
+    &lt;mu3d:Mu3DSceneView.Features&gt;
+        &lt;toolkit:OrbitSceneViewFeature
+            Controller=&quot;{Binding OrbitController}&quot;
+            IsEnabled=&quot;{Binding IsOrbitEnabled}&quot; /&gt;
+        &lt;toolkit:TransformGizmoSceneViewFeature
+            Gizmo=&quot;{Binding Gizmo}&quot;
+            HitTester=&quot;{Binding GizmoHitTester}&quot;
+            IsEnabled=&quot;{Binding IsGizmoEnabled}&quot; /&gt;
+    &lt;/mu3d:Mu3DSceneView.Features&gt;
+    &lt;mu3d:Mu3DSceneView.Behaviors&gt;
+        &lt;toolkit:ViewportNavigationBehavior
+            Controller=&quot;{Binding OrbitController}&quot;
+            Input=&quot;{Binding ViewportInput}&quot; /&gt;
+        &lt;toolkit:TransformGizmoPointerBehavior
+            Gizmo=&quot;{Binding Gizmo}&quot;
+            HitTester=&quot;{Binding GizmoHitTester}&quot; /&gt;
+        &lt;diagnostics:FrameStatisticsBehavior
+            Collector=&quot;{Binding StatisticsCollector}&quot;
+            DrawCallCount=&quot;{Binding DrawCallCount}&quot;
+            PrimitiveCount=&quot;{Binding PrimitiveCount}&quot; /&gt;
+    &lt;/mu3d:Mu3DSceneView.Behaviors&gt;
+&lt;/mu3d:Mu3DSceneView&gt;
+</code></pre>
+<h2 id="maui-overlays-and-diagnostics">MAUI overlays and diagnostics</h2>
+<p><code>ViewportOverlay</code> and <code>SceneNodeAnchor</code> use the shared viewport overlay manager. The older
+<code>SceneNodeAnchorLayer</code> remains useful as a standalone layer. <code>FrameStatisticsView</code> can present a
+standalone <code>FrameStatisticsBehavior</code> outside the viewport.</p>
+<pre><code class="lang-xaml">&lt;Grid&gt;
+    &lt;mu3d:Mu3DSceneView x:Name=&quot;OverlayScene&quot;&gt;
+        &lt;mu3d:Mu3DSceneView.Features&gt;
+            &lt;toolkit:ViewportTools&gt;
+                &lt;overlays:ViewportOverlay Placement=&quot;TopRight&quot;&gt;
+                    &lt;overlays:ViewportOverlay.Anchor&gt;
+                        &lt;overlays:SceneNodeAnchor
+                            Node=&quot;{Binding SelectedCoreNode}&quot;
+                            Offset=&quot;8,-28&quot; /&gt;
+                    &lt;/overlays:ViewportOverlay.Anchor&gt;
+                    &lt;Label Text=&quot;{Binding SelectedName}&quot; /&gt;
+                &lt;/overlays:ViewportOverlay&gt;
+            &lt;/toolkit:ViewportTools&gt;
+        &lt;/mu3d:Mu3DSceneView.Features&gt;
+    &lt;/mu3d:Mu3DSceneView&gt;
+
+    &lt;overlays:SceneNodeAnchorLayer SceneView=&quot;{x:Reference OverlayScene}&quot;&gt;
+        &lt;Label
+            overlays:SceneNodeAnchorLayer.Node=&quot;{Binding SelectedCoreNode}&quot;
+            overlays:SceneNodeAnchorLayer.Offset=&quot;8,-28&quot;
+            Text=&quot;{Binding SelectedName}&quot; /&gt;
+    &lt;/overlays:SceneNodeAnchorLayer&gt;
+
+    &lt;diagnostics:FrameStatisticsView
+        HorizontalOptions=&quot;End&quot;
+        Source=&quot;{Binding StatisticsBehavior}&quot;
+        VerticalOptions=&quot;Start&quot; /&gt;
+&lt;/Grid&gt;
+</code></pre>
+<h2 id="virtualized-and-shared-device-hosts">Virtualized and shared-device hosts</h2>
+<p><code>VirtualizedSceneView</code>, <code>SceneViewProxyHost</code> and <code>SceneViewProxy</code> accept application-owned sources,
+scenes and cameras through bindings. <code>SceneViewportHost</code> is XAML-configurable, but its changing
+<code>SceneViewportSlot</code> snapshot is intentionally supplied by <code>SetViewports</code>; a slot contains borrowed
+Core objects and rectangle state rather than UI state.</p>
+<pre><code class="lang-xaml">&lt;Grid&gt;
+    &lt;toolkit:SceneViewProxyHost
+        x:Name=&quot;ProxyHost&quot;
+        IsRenderingEnabled=&quot;{Binding IsRenderingEnabled}&quot;&gt;
+        &lt;CollectionView ItemsSource=&quot;{Binding Products}&quot;&gt;
+            &lt;CollectionView.ItemTemplate&gt;
+                &lt;DataTemplate x:DataType=&quot;viewModels:ProductViewModel&quot;&gt;
+                    &lt;toolkit:SceneViewProxy
+                        Camera=&quot;{Binding Camera}&quot;
+                        RenderRevision=&quot;{Binding RenderRevision}&quot;
+                        Scene=&quot;{Binding Scene}&quot;&gt;
+                        &lt;ActivityIndicator IsRunning=&quot;True&quot; /&gt;
+                    &lt;/toolkit:SceneViewProxy&gt;
+                &lt;/DataTemplate&gt;
+            &lt;/CollectionView.ItemTemplate&gt;
+        &lt;/CollectionView&gt;
+    &lt;/toolkit:SceneViewProxyHost&gt;
+
+    &lt;toolkit:VirtualizedSceneView
+        Activity=&quot;{Binding Activity}&quot;
+        Budget=&quot;{Binding ViewportBudget}&quot;
+        IsActivationEnabled=&quot;{Binding IsActive}&quot;
+        Source=&quot;{Binding ViewportSource}&quot;&gt;
+        &lt;Label Text=&quot;Loading 3D preview…&quot; /&gt;
+    &lt;/toolkit:VirtualizedSceneView&gt;
+
+    &lt;toolkit:SceneViewportHost
+        x:Name=&quot;SharedSurfaceHost&quot;
+        ClearColor=&quot;{Binding ClearColor}&quot;
+        IsRenderingEnabled=&quot;{Binding IsRenderingEnabled}&quot; /&gt;
+&lt;/Grid&gt;
+</code></pre>
+<h2 id="openpbr-rendering-and-compatibility-preview">OpenPBR rendering and compatibility preview</h2>
+<p><code>OpenPbrSurface3D</code> preserves constant OpenPBR authoring values and optional immutable input graphs
+through its bindable <code>Graph</code> property. <code>OpenPbrMaterial3D</code> creates the distinct
+Core OpenPBR root and requires an explicitly installed <code>OpenPbrRenderPass</code> from the optional
+<code>Mu3D.Rendering.OpenPbr</code> package. It supports interactive and progressive reference modes. The
+separately named <code>OpenPbrPreviewMaterial3D</code> uses the existing metallic/roughness renderer and exposes
+conversion limitations. MaterialX <code>.mtlx</code> interchange belongs to <code>Mu3D.Formats.MaterialX</code>.</p>
+<pre><code class="lang-xaml">&lt;mu3d:Sphere3D&gt;
+    &lt;mu3d:OpenPbrMaterial3D NitsPerSceneUnit=&quot;100&quot;&gt;
+        &lt;mu3d:OpenPbrSurface3D
+            BaseColor=&quot;0.08,0.35,0.8;acescg&quot;
+            BaseMetalness=&quot;0.75&quot;
+            SpecularRoughness=&quot;0.22&quot; /&gt;
+    &lt;/mu3d:OpenPbrMaterial3D&gt;
+&lt;/mu3d:Sphere3D&gt;
+</code></pre>
+<p>The compatibility preview instead uses the default renderer. Its default policy rejects unsupported
+active inputs; selecting lossy conversion remains an explicit application choice:</p>
+<pre><code class="lang-xaml">&lt;mu3d:Sphere3D&gt;
+    &lt;mu3d:OpenPbrPreviewMaterial3D&gt;
+        &lt;mu3d:OpenPbrSurface3D BaseMetalness=&quot;0.75&quot; SpecularRoughness=&quot;0.22&quot; /&gt;
+    &lt;/mu3d:OpenPbrPreviewMaterial3D&gt;
+&lt;/mu3d:Sphere3D&gt;
+</code></pre>
+<p>See <a href="features/openpbr-materialx.html">OpenPBR and MaterialX</a> for render-pass setup, preview policy and import,
+or <a href="features/hdr-canvas.html">HDR canvas</a> for binding a floating-point snapshot to
+<code>UnlitMaterial3D.Texture</code> without an SDR image conversion.</p>
+<p>For complete, runnable pages, open the matching Gallery feature and its <strong>Docs</strong> action. Every
+feature article contains a XAML host excerpt in addition to the focused C# logic it teaches.</p>
+<h2 id="explicit-display-views">Explicit display views</h2>
+<p><code>ColorView3D</code> is an optional bindable final view, shared by the default scene renderer and custom
+OpenPBR pipelines. The default is no display transform. Scene and accumulated radiance stay linear.</p>
+<pre><code class="lang-xaml">&lt;mu3d:Mu3DSceneView&gt;
+    &lt;mu3d:Mu3DSceneView.DisplayTransform&gt;
+        &lt;mu3d:ColorView3D Preset=&quot;AgXHdr1000&quot; ExposureStops=&quot;0&quot; ReferenceWhiteNits=&quot;100&quot; /&gt;
+    &lt;/mu3d:Mu3DSceneView.DisplayTransform&gt;
+    &lt;!-- Scene3D content --&gt;
+&lt;/mu3d:Mu3DSceneView&gt;
+</code></pre>
+<p>Choose <code>AgXSdr</code>, <code>AgXHdr1000</code>, <code>Aces2Sdr</code> or <code>Aces2Hdr1000</code>. HDR presets require an HDR
+extended-linear sRGB surface and never silently become SDR. See <a href="features/color-management.html">Color management</a>.</p>
+<h2 id="explicit-encoded-wide-gamut-openpbr-colors">Explicit encoded wide-gamut OpenPBR colors</h2>
+<pre><code class="lang-xml">&lt;mu3d:OpenPbrSurface3D BaseColor=&quot;0.8,0.2,0.1;display-p3&quot; /&gt;
+</code></pre>
+<p><code>LinearRgbaTypeConverter</code> accepts <code>srgb</code>, <code>display-p3</code>, <code>a98-rgb</code> (Adobe RGB 1998),
+<code>prophoto-rgb</code> and <code>rec2020</code>, decoding their transfer functions before authoring/rendering.
+The existing <code>lin_rec709</code>, <code>lin_displayp3</code>, <code>lin_adobergb</code>, <code>lin_prophoto</code>, <code>lin_rec2020</code>
+and <code>acescg</code> tokens already represent linear values and are not decoded again.
+Use invariant decimal points and <code>r,g,b[,a];space</code>. OpenPBR color parameters require alpha 1;
+use <code>GeometryOpacity</code> for opacity. These tokens apply to typed Mu3D linear-color properties,
+not arbitrary MAUI <code>Color</code> properties, which retain their existing sRGB semantics.</p>
+
+</article>
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

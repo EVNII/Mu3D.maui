@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class ColorViewGpuTransform | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class ColorViewGpuTransform | Mu3D documentation ">
+      
+      <meta name="description" content="Applies an explicit AgX, Filmic or ACES display view after scene-linear rendering, without readback.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Rendering.ColorViewGpuTransform">
+
+
+
+  <h1 id="Mu3D_Rendering_ColorViewGpuTransform" data-uid="Mu3D.Rendering.ColorViewGpuTransform" class="text-break">
+Class ColorViewGpuTransform  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Rendering.html">Rendering</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Applies an explicit AgX, Filmic or ACES display view after scene-linear rendering, without readback.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class ColorViewGpuTransform : IDisposable</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">ColorViewGpuTransform</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="Mu3D_Rendering_ColorViewGpuTransform_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>Input textures contain scene-linear Float16/Float32 RGB in the transform's source space, with
+alpha in [0,1]. Straight RGB (after unassociation, if selected) multiplied by exposure must remain
+within <a class="xref" href="Mu3D.Color.ColorViewTransform.html#Mu3D_Color_ColorViewTransform_MaximumExposedComponentMagnitude">MaximumExposedComponentMagnitude</a> (1e30) in absolute value.
+As with other GPU transforms this caller data contract is not checked by readback. Output alpha
+association is applied in linear light, before either shader or hardware sRGB encoding.
+Output is display-linear extended sRGB or explicitly encoded SDR sRGB. HDR views require floating
+extended-linear output. Alpha association is explicit: nonlinear view math always acts on straight
+color. Instances own internal resources only and must be used serially with their device.</p>
+</div>
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_Rendering_ColorViewGpuTransform__ctor_" data-uid="Mu3D.Rendering.ColorViewGpuTransform.#ctor*"></a>
+
+  <h3 id="Mu3D_Rendering_ColorViewGpuTransform__ctor_Mu3D_Graphics_GraphicsDevice_Mu3D_Color_ColorViewTransform_Mu3D_Graphics_GraphicsTextureFormat_Mu3D_Color_ColorEncoding_System_Boolean_System_Boolean_" data-uid="Mu3D.Rendering.ColorViewGpuTransform.#ctor(Mu3D.Graphics.GraphicsDevice,Mu3D.Color.ColorViewTransform,Mu3D.Graphics.GraphicsTextureFormat,Mu3D.Color.ColorEncoding,System.Boolean,System.Boolean)">
+  ColorViewGpuTransform(GraphicsDevice, ColorViewTransform, GraphicsTextureFormat, ColorEncoding, bool, bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates and uploads one reusable official view program and its FP32 data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ColorViewGpuTransform(GraphicsDevice device, ColorViewTransform transform, GraphicsTextureFormat outputFormat, ColorEncoding outputEncoding = ColorEncoding.ExtendedSrgbLinear, bool inputPremultiplied = false, bool outputPremultiplied = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>device</code> <a class="xref" href="Mu3D.Graphics.GraphicsDevice.html">GraphicsDevice</a></dt>
+    <dd><p>Caller-owned graphics device.</p>
+</dd>
+    <dt><code>transform</code> <a class="xref" href="Mu3D.Color.ColorViewTransform.html">ColorViewTransform</a></dt>
+    <dd><p>Immutable CPU reference, including exposure and reference-white normalization.</p>
+</dd>
+    <dt><code>outputFormat</code> <a class="xref" href="Mu3D.Graphics.GraphicsTextureFormat.html">GraphicsTextureFormat</a></dt>
+    <dd><p>Float16/Float32 for HDR; Float or eight-bit RGBA/BGRA for SDR.</p>
+</dd>
+    <dt><code>outputEncoding</code> <a class="xref" href="Mu3D.Color.ColorEncoding.html">ColorEncoding</a></dt>
+    <dd><p>Extended-linear sRGB or explicit SDR sRGB.</p>
+</dd>
+    <dt><code>inputPremultiplied</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Whether scene texture RGB already includes alpha.</p>
+</dd>
+    <dt><code>outputPremultiplied</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Whether to associate transformed RGB with alpha.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Rendering_ColorViewGpuTransform_InputPremultiplied_" data-uid="Mu3D.Rendering.ColorViewGpuTransform.InputPremultiplied*"></a>
+
+  <h3 id="Mu3D_Rendering_ColorViewGpuTransform_InputPremultiplied" data-uid="Mu3D.Rendering.ColorViewGpuTransform.InputPremultiplied">
+  InputPremultiplied
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets whether source RGB is associated with alpha.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool InputPremultiplied { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_ColorViewGpuTransform_OutputEncoding_" data-uid="Mu3D.Rendering.ColorViewGpuTransform.OutputEncoding*"></a>
+
+  <h3 id="Mu3D_Rendering_ColorViewGpuTransform_OutputEncoding" data-uid="Mu3D.Rendering.ColorViewGpuTransform.OutputEncoding">
+  OutputEncoding
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the compositor/output encoding selected explicitly at construction.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ColorEncoding OutputEncoding { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.ColorEncoding.html">ColorEncoding</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_ColorViewGpuTransform_OutputFormat_" data-uid="Mu3D.Rendering.ColorViewGpuTransform.OutputFormat*"></a>
+
+  <h3 id="Mu3D_Rendering_ColorViewGpuTransform_OutputFormat" data-uid="Mu3D.Rendering.ColorViewGpuTransform.OutputFormat">
+  OutputFormat
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the required output texture format.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphicsTextureFormat OutputFormat { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsTextureFormat.html">GraphicsTextureFormat</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_ColorViewGpuTransform_OutputPremultiplied_" data-uid="Mu3D.Rendering.ColorViewGpuTransform.OutputPremultiplied*"></a>
+
+  <h3 id="Mu3D_Rendering_ColorViewGpuTransform_OutputPremultiplied" data-uid="Mu3D.Rendering.ColorViewGpuTransform.OutputPremultiplied">
+  OutputPremultiplied
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets whether output RGB is associated with alpha.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool OutputPremultiplied { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_ColorViewGpuTransform_Transform_" data-uid="Mu3D.Rendering.ColorViewGpuTransform.Transform*"></a>
+
+  <h3 id="Mu3D_Rendering_ColorViewGpuTransform_Transform" data-uid="Mu3D.Rendering.ColorViewGpuTransform.Transform">
+  Transform
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the currently selected CPU reference transform.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ColorViewTransform Transform { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.ColorViewTransform.html">ColorViewTransform</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Rendering_ColorViewGpuTransform_Apply_" data-uid="Mu3D.Rendering.ColorViewGpuTransform.Apply*"></a>
+
+  <h3 id="Mu3D_Rendering_ColorViewGpuTransform_Apply_Mu3D_Graphics_GraphicsTexture_Mu3D_Color_ColorSpaceReference_Mu3D_Graphics_GraphicsTexture_Mu3D_Color_ColorSpaceReference_" data-uid="Mu3D.Rendering.ColorViewGpuTransform.Apply(Mu3D.Graphics.GraphicsTexture,Mu3D.Color.ColorSpaceReference,Mu3D.Graphics.GraphicsTexture,Mu3D.Color.ColorSpaceReference)">
+  Apply(GraphicsTexture, ColorSpaceReference, GraphicsTexture, ColorSpaceReference)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Submits a complete display transform to a distinct, same-sized output texture.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Apply(GraphicsTexture source, ColorSpaceReference sourceSpace, GraphicsTexture destination, ColorSpaceReference destinationSpace)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="Mu3D.Graphics.GraphicsTexture.html">GraphicsTexture</a></dt>
+    <dd></dd>
+    <dt><code>sourceSpace</code> <a class="xref" href="Mu3D.Color.ColorSpaceReference.html">ColorSpaceReference</a></dt>
+    <dd></dd>
+    <dt><code>destination</code> <a class="xref" href="Mu3D.Graphics.GraphicsTexture.html">GraphicsTexture</a></dt>
+    <dd></dd>
+    <dt><code>destinationSpace</code> <a class="xref" href="Mu3D.Color.ColorSpaceReference.html">ColorSpaceReference</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section" id="Mu3D_Rendering_ColorViewGpuTransform_Apply_Mu3D_Graphics_GraphicsTexture_Mu3D_Color_ColorSpaceReference_Mu3D_Graphics_GraphicsTexture_Mu3D_Color_ColorSpaceReference__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Caller textures remain caller-owned. This does not present, schedule or wait for a frame.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_Rendering_ColorViewGpuTransform_Dispose_" data-uid="Mu3D.Rendering.ColorViewGpuTransform.Dispose*"></a>
+
+  <h3 id="Mu3D_Rendering_ColorViewGpuTransform_Dispose" data-uid="Mu3D.Rendering.ColorViewGpuTransform.Dispose">
+  Dispose()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Releases all owned GPU resources. Repeated disposal is harmless.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Rendering_ColorViewGpuTransform_UpdateTransform_" data-uid="Mu3D.Rendering.ColorViewGpuTransform.UpdateTransform*"></a>
+
+  <h3 id="Mu3D_Rendering_ColorViewGpuTransform_UpdateTransform_Mu3D_Color_ColorViewTransform_" data-uid="Mu3D.Rendering.ColorViewGpuTransform.UpdateTransform(Mu3D.Color.ColorViewTransform)">
+  UpdateTransform(ColorViewTransform)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Updates exposure and reference white without re-uploading data or recompiling a shader.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UpdateTransform(ColorViewTransform transform)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transform</code> <a class="xref" href="Mu3D.Color.ColorViewTransform.html">ColorViewTransform</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section" id="Mu3D_Rendering_ColorViewGpuTransform_UpdateTransform_Mu3D_Color_ColorViewTransform__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The preset and source identity must remain unchanged; otherwise create a new instance.</p>
+</div>
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

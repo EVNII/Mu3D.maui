@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.GridHelperPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    xmlns:toolkit="clr-namespace:Mu3D.Maui.Toolkit.Controls;assembly=Mu3D.Maui.Toolkit"
+    Title="Grid Helper">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="grid-helper" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <mu3d:Mu3DSceneView
+            x:Name="SceneView"
+            BackgroundColor="Black"
+            FeatureError="OnFeatureError"
+            SurfaceError="OnSurfaceError">
+            <mu3d:Mu3DSceneView.SceneContent>
+                <mu3d:Scene3D Name="Grid helper scene">
+                    <mu3d:Scene3D.Camera>
+                        <mu3d:PerspectiveCamera3D
+                            x:Name="SceneCamera"
+                            FieldOfView="50"
+                            Name="Grid camera"
+                            X="5.8"
+                            Y="4.8"
+                            Z="8.2" />
+                    </mu3d:Scene3D.Camera>
+                    <mu3d:Sphere3D
+                        Name="Blue sphere"
+                        Radius="0.82"
+                        X="-1.5"
+                        Y="0.82">
+                        <mu3d:PbrMaterial3D
+                            Color="#3B9EFF"
+                            Metallic="0.18"
+                            Roughness="0.24" />
+                    </mu3d:Sphere3D>
+                    <mu3d:Cone3D
+                        Height="2.1"
+                        Name="Orange cone"
+                        Radius="0.8"
+                        X="1.25"
+                        Y="1.05">
+                        <mu3d:PbrMaterial3D
+                            Color="#FF8534"
+                            Metallic="0.08"
+                            Roughness="0.3" />
+                    </mu3d:Cone3D>
+                    <mu3d:Sphere3D
+                        Name="Depth-test sphere"
+                        Radius="0.48"
+                        X="0.2"
+                        Y="0.48"
+                        Z="-2.2">
+                        <mu3d:UnlitMaterial3D Color="#E04CFF" />
+                    </mu3d:Sphere3D>
+                    <mu3d:DirectionalLight3D
+                        Intensity="4.2"
+                        RotationX="-38"
+                        RotationY="-28" />
+                </mu3d:Scene3D>
+            </mu3d:Mu3DSceneView.SceneContent>
+            <mu3d:Mu3DSceneView.Features>
+                <toolkit:ViewportTools>
+                    <toolkit:OrbitTool
+                        Camera="{x:Reference SceneCamera}"
+                        DampingEnabled="True"
+                        DampingTime="0.1"
+                        MaximumDistance="28"
+                        MinimumDistance="3" />
+                    <toolkit:GridHelper
+                        x:Name="ReferenceGrid"
+                        Divisions="24"
+                        MajorLineEvery="4"
+                        Plane="XZ"
+                        ShowCenterAxes="True"
+                        ShowMajorLines="True"
+                        ShowMinorLines="True"
+                        Size="12" />
+                </toolkit:ViewportTools>
+            </mu3d:Mu3DSceneView.Features>
+        </mu3d:Mu3DSceneView>
+        <VerticalStackLayout Grid.Row="1" Padding="16" Spacing="7">
+            <Label
+                FontAttributes="Bold"
+                Text="A finite XZ grid loads scene depth, so the objects occlude its lines." />
+            <HorizontalStackLayout Spacing="16">
+                <HorizontalStackLayout Spacing="6">
+                    <Label Text="Visible" VerticalTextAlignment="Center" />
+                    <Switch
+                        IsToggled="{Binding IsVisible, Mode=TwoWay, Source={x:Reference ReferenceGrid}, x:DataType=toolkit:GridHelper}" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="6">
+                    <Label Text="Minor" VerticalTextAlignment="Center" />
+                    <Switch
+                        IsToggled="{Binding ShowMinorLines, Mode=TwoWay, Source={x:Reference ReferenceGrid}, x:DataType=toolkit:GridHelper}" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="6">
+                    <Label Text="Major" VerticalTextAlignment="Center" />
+                    <Switch
+                        IsToggled="{Binding ShowMajorLines, Mode=TwoWay, Source={x:Reference ReferenceGrid}, x:DataType=toolkit:GridHelper}" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="6">
+                    <Label Text="Center axes" VerticalTextAlignment="Center" />
+                    <Switch
+                        IsToggled="{Binding ShowCenterAxes, Mode=TwoWay, Source={x:Reference ReferenceGrid}, x:DataType=toolkit:GridHelper}" />
+                </HorizontalStackLayout>
+            </HorizontalStackLayout>
+            <Label
+                x:Name="StatusLabel"
+                FontSize="12"
+                Text="GridHelper is a ViewportTool, not selectable scene geometry." />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

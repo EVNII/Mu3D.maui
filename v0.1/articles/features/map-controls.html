@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Map and CAD camera controls | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Map and CAD camera controls | Mu3D documentation ">
+      
+      <meta name="description" content="Add world-plane pan, zoom and device-separated rotation mappings through XAML.">
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="map-and-cad-camera-controls">Map and CAD camera controls</h1>
+
+<p><a class="xref" href="../../api/Mu3D.Maui.Toolkit.Controls.MapTool.html">MapTool</a> is the declarative navigation preset for maps, floor
+plans and CAD-like scenes. Its left-button or direct one-finger drag translates both the camera and target on
+the plane perpendicular to world up. With the default Y-up convention, the target therefore moves
+on XZ and never drifts vertically. Two-pointer centroid drag rotates around the retained target,
+while pinch dollies logarithmically. Supported discrete pointer wheels also dolly. Native
+Right-button drag uses the same rotation route on Windows, Apple and Android pointer devices.
+On a Mac trackpad, continuous two-finger translation has its own Map rotation route; a real mouse
+or configured right click uses the separate right-button route.
+MAUI commands supply focus-independent discrete navigation.</p>
+<h2 id="declare-the-tool">Declare the tool</h2>
+<p>Reference the same declarative camera used by the scene:</p>
+<pre><code class="lang-xaml">&lt;mu3d:Mu3DSceneView&gt;
+  &lt;mu3d:Mu3DSceneView.SceneContent&gt;
+    &lt;mu3d:Scene3D&gt;
+      &lt;mu3d:Scene3D.Camera&gt;
+        &lt;mu3d:PerspectiveCamera3D
+            x:Name=&quot;MapCamera&quot;
+            X=&quot;7&quot; Y=&quot;7&quot; Z=&quot;7&quot; /&gt;
+      &lt;/mu3d:Scene3D.Camera&gt;
+
+      &lt;!-- Scene objects... --&gt;
+    &lt;/mu3d:Scene3D&gt;
+  &lt;/mu3d:Mu3DSceneView.SceneContent&gt;
+
+  &lt;mu3d:Mu3DSceneView.Features&gt;
+    &lt;toolkit:ViewportTools&gt;
+      &lt;toolkit:MapTool
+          x:Name=&quot;MapNavigation&quot;
+          Camera=&quot;{x:Reference MapCamera}&quot;
+          MinimumDistance=&quot;2.5&quot;
+          MaximumDistance=&quot;40&quot;
+          DampingEnabled=&quot;True&quot;
+          DampingTime=&quot;0.1&quot;
+          PinchDollyMultiplier=&quot;1.6&quot;&gt;
+        &lt;toolkit:OrbitTool.Input&gt;
+          &lt;toolkit:ViewportInput&gt;
+            &lt;toolkit:ViewportInput.Mouse&gt;
+              &lt;toolkit:MouseInput
+                  LeftButtonDragAction=&quot;Pan&quot;
+                  RightButtonDragAction=&quot;Rotate&quot; /&gt;
+            &lt;/toolkit:ViewportInput.Mouse&gt;
+            &lt;toolkit:ViewportInput.Trackpad&gt;
+              &lt;toolkit:TrackpadInput TwoFingerDragAction=&quot;Rotate&quot; /&gt;
+            &lt;/toolkit:ViewportInput.Trackpad&gt;
+            &lt;toolkit:ViewportInput.Touchscreen&gt;
+              &lt;toolkit:TouchscreenInput
+                  OneFingerDragAction=&quot;Pan&quot;
+                  TwoFingerDragAction=&quot;Rotate&quot; /&gt;
+            &lt;/toolkit:ViewportInput.Touchscreen&gt;
+            &lt;toolkit:ViewportInput.Keyboard&gt;
+              &lt;toolkit:KeyboardInput
+                  IsEnabled=&quot;False&quot;
+                  RotateLeftKey=&quot;A&quot;
+                  RotateRightKey=&quot;D&quot;
+                  RotateUpKey=&quot;W&quot;
+                  RotateDownKey=&quot;S&quot;
+                  DollyInKey=&quot;E&quot;
+                  DollyOutKey=&quot;Q&quot;
+                  AlternateDollyInKey=&quot;PageUp&quot;
+                  AlternateDollyOutKey=&quot;PageDown&quot; /&gt;
+            &lt;/toolkit:ViewportInput.Keyboard&gt;
+          &lt;/toolkit:ViewportInput&gt;
+        &lt;/toolkit:OrbitTool.Input&gt;
+      &lt;/toolkit:MapTool&gt;
+    &lt;/toolkit:ViewportTools&gt;
+  &lt;/mu3d:Mu3DSceneView.Features&gt;
+&lt;/mu3d:Mu3DSceneView&gt;
+</code></pre>
+<p>The tool is a fixed declarative preset over <a class="xref" href="../../api/Mu3D.Maui.Toolkit.Controls.OrbitTool.html">OrbitTool</a>. It selects
+<a class="xref" href="../../api/Mu3D.Toolkit.Controls.OrbitPanMode.html#Mu3D_Toolkit_Controls_OrbitPanMode_WorldUpPlane">WorldUpPlane</a>, sets an upper-hemisphere maximum polar
+angle, and changes the mouse, trackpad and touchscreen mappings. It still creates and configures the
+same attachment-owned <a class="xref" href="../../api/Mu3D.Toolkit.Controls.OrbitController.html">OrbitController</a> as ordinary OrbitTool; there is
+no separate Map gesture or controller pipeline. Direct non-MAUI callers may still construct
+<a class="xref" href="../../api/Mu3D.Toolkit.Controls.MapController.html">MapController</a> as the equivalent low-level convenience preset.</p>
+<h2 id="bind-navigation-through-maui">Bind navigation through MAUI</h2>
+<p><code>NavigationCommand</code> is the preferred application-composition boundary. It accepts an
+<a class="xref" href="../../api/Mu3D.Maui.Toolkit.Controls.OrbitNavigationAction.html">OrbitNavigationAction</a> parameter, so ordinary MAUI buttons,
+menus and gestures can invoke map movement without transferring keyboard focus to the native 3D
+surface:</p>
+<pre><code class="lang-xaml">&lt;Button
+    Text=&quot;Pan left&quot;
+    Command=&quot;{Binding Source={x:Reference MapNavigation}, Path=NavigationCommand}&quot;
+    CommandParameter=&quot;{x:Static toolkit:OrbitNavigationAction.PanLeft}&quot; /&gt;
+</code></pre>
+<p>Desktop keyboard accelerators are appropriate for single discrete commands. A <code>MenuFlyoutItem</code>
+can invoke the same command as a click:</p>
+<pre><code class="lang-xaml">&lt;ContentPage.MenuBarItems&gt;
+  &lt;MenuBarItem Text=&quot;Map navigation&quot;&gt;
+    &lt;MenuFlyoutItem
+        Text=&quot;Pan left&quot;
+        Command=&quot;{Binding Source={x:Reference MapNavigation}, Path=NavigationCommand}&quot;
+        CommandParameter=&quot;{x:Static toolkit:OrbitNavigationAction.PanLeft}&quot;&gt;
+      &lt;MenuFlyoutItem.KeyboardAccelerators&gt;
+        &lt;KeyboardAccelerator Key=&quot;A&quot; /&gt;
+      &lt;/MenuFlyoutItem.KeyboardAccelerators&gt;
+    &lt;/MenuFlyoutItem&gt;
+  &lt;/MenuBarItem&gt;
+&lt;/ContentPage.MenuBarItems&gt;
+</code></pre>
+<p>This is normal MAUI commanding rather than a Mu3D-specific <code>OnKeyClick</code> event. It remains usable
+from MVVM and <code>TryNavigate(action)</code> exposes the same discrete boundary to imperative application
+code. Rotation, viewport-relative pan and dolly increments are independently configurable through
+<code>NavigationRotationStepRadians</code>, <code>NavigationPanStep</code> and <code>NavigationDollyStep</code>.</p>
+<h2 id="held-keys-and-composite-motion">Held keys and composite motion</h2>
+<p>A keyboard accelerator is an invocation, not a pressed-key state source. Do not use operating-
+system key repeat for continuous movement: it cannot represent A+W atomically and its initial
+repeat delay produces a visible pause. An application that needs held chords owns KeyDown/KeyUp
+state and advances it from its UI frame clock. Submit the normalized combined delta once per frame:</p>
+<pre><code class="lang-csharp">Vector2 rotationAxis = GetPressedRotationAxis();
+if (rotationAxis.LengthSquared() &gt; 1f)
+{
+    rotationAxis = Vector2.Normalize(rotationAxis);
+}
+
+mapTool.TryNavigate(
+    rotationAxis * radiansPerSecond * elapsedSeconds,
+    panAxis * viewportFractionPerSecond * elapsedSeconds,
+    dollyAxis * logarithmicDollyPerSecond * elapsedSeconds);
+</code></pre>
+<p>The three-argument <code>TryNavigate</code> overload validates finite input and applies rotate, pan and dolly
+under one camera-priority arbitration lease. Opposite keys cancel; diagonal input should be
+normalized so it is not faster than one-axis input. Clamp unusually large elapsed-time values to
+avoid a camera jump after a debugger pause or UI stall.</p>
+<p>The Gallery's Windows example installs routed KeyDown and KeyUp handlers only while the Map page is
+visible, applies the first press immediately, and then uses MAUI's VSync animation manager instead
+of OS repeat. It clears every held key on release, page departure and window deactivation. The
+Picker values remain live: changing a key updates both the held-key resolver and the menu hint.
+Other hosts may acquire equivalent state from their platform or input abstraction and call the
+same backend-neutral overload; raw input ownership does not move into Mu3D.</p>
+<p>Set <code>KeyboardInput.IsEnabled=&quot;False&quot;</code> when the application owns shortcut routing this way. The
+focused native-key adapter remains an optional convenience for a standalone viewport and does not
+affect <code>NavigationCommand</code>.</p>
+<p>See <a href="https://learn.microsoft.com/dotnet/maui/fundamentals/data-binding/commanding">.NET MAUI commanding</a>
+and <a href="https://learn.microsoft.com/dotnet/maui/user-interface/keyboard-accelerators">.NET MAUI keyboard accelerators</a>
+for the host UI contracts.</p>
+<h2 id="input-and-ownership">Input and ownership</h2>
+<p>Direct one-finger drag, configurable direct two-finger centroid drag and pinch are the portable
+touchscreen baseline across Android, iOS, Mac Catalyst and Windows. MapTool defaults the
+two-finger route to rotation while ordinary OrbitTool defaults it to screen-space pan. Drag and
+Pinch retain independent cumulative
+state under one camera-control lease, so rotation and dolly can overlap without canceling each
+other. Pointer wheel and an optional focused hardware-key adapter are also available on supported
+targets. Right-button drag accepts native mouse-compatible input on Windows, Apple and Android;
+query <code>MapTool.Behavior.IsMouseButtonInputAvailable</code> before advertising it in adaptive UI.</p>
+<p>Android and Windows use MAUI Pinch. Apple uses an attachment-owned native
+<code>UIPinchGestureRecognizer</code> for direct iPad touch and Mac trackpad transform Pinch, with a local
+delegate that permits overlap with the two-pointer Pan without mutating application-global gesture
+policy. Apple applications that need indirect trackpad transform events declare
+<a href="https://developer.apple.com/documentation/bundleresources/information-property-list/uiapplicationsupportsindirectinputevents"><code>UIApplicationSupportsIndirectInputEvents</code></a>
+in Info.plist; Gallery declares it for iOS and Mac Catalyst.</p>
+<p><code>MouseInput.LeftButtonDragAction</code>, <code>MiddleButtonDragAction</code> and <code>RightButtonDragAction</code> configure
+mouse-compatible button routes. <code>TrackpadInput.TwoFingerDragAction</code> configures native continuous
+trackpad translation, while <code>TouchscreenInput.OneFingerDragAction</code> and <code>TwoFingerDragAction</code>
+configure direct touch. Any drag route may select Pan, Rotate or <code>None</code>. Trackpad and touchscreen
+Pinch actions are independent; <code>PinchDollyMultiplier</code> scales their shared response, while
+<code>MouseInput.WheelAction</code> independently selects Dolly or <code>None</code>. <code>KeyboardInput</code> holds Rotate, Pan
+and Dolly properties using the portable <a class="xref" href="../../api/Mu3D.Maui.Toolkit.Controls.ViewportKey.html">ViewportKey</a> enum directly
+in XAML. Assigning <code>None</code> disables an individual key without introducing Windows, Android or Apple
+native key types into shared XAML.</p>
+<p>Because these are ordinary bindable properties, a MAUI menu can change them without rebuilding the
+tool or scene. For the optional focused-key adapter, bind the tool and a <code>Picker</code> to the same
+view-model property:</p>
+<pre><code class="lang-xaml">&lt;toolkit:MapTool Camera=&quot;{x:Reference MapCamera}&quot;&gt;
+  &lt;toolkit:OrbitTool.Input&gt;
+    &lt;toolkit:ViewportInput&gt;
+      &lt;toolkit:ViewportInput.Keyboard&gt;
+        &lt;toolkit:KeyboardInput RotateLeftKey=&quot;{Binding RotateLeftKey}&quot; /&gt;
+      &lt;/toolkit:ViewportInput.Keyboard&gt;
+    &lt;/toolkit:ViewportInput&gt;
+  &lt;/toolkit:OrbitTool.Input&gt;
+&lt;/toolkit:MapTool&gt;
+
+&lt;Picker
+    ItemsSource=&quot;{Binding AvailableOrbitKeys}&quot;
+    SelectedItem=&quot;{Binding RotateLeftKey, Mode=TwoWay}&quot; /&gt;
+</code></pre>
+<p>When MAUI keyboard accelerators are used for discrete actions, update the matching
+<code>MenuFlyoutItem.KeyboardAccelerators</code> collection from the same selected value. For continuous
+chords, update the application-owned pressed-key resolver instead and keep the menu item as a
+discrete click command. If an application enables the focused native adapter, the viewport must
+own focus; on Windows that adapter accepts both WinUI's mapped key and its original physical-key
+fallback for configured A-Z controls.</p>
+<p>Every gesture and navigation command participates in the attachment's
+<a class="xref" href="../../api/Mu3D.Toolkit.Controls.ViewportControlArbiter.html">ViewportControlArbiter</a>, and the damping tail runs only on the shared
+MAUI VSync ticker while motion is active. Detach, unload, disable and handler replacement remove
+the platform subscriptions and release any active control lease. The camera and scene remain
+application-owned, and MapTool does not select objects or create a process-wide input policy.</p>
+<p>Apple system-navigation arbitration follows the configured input route rather than the mere
+presence of a SceneView. On iOS, a direct touch inside the View suppresses interactive pop only
+while <code>TouchscreenInput.OneFingerDragAction</code> is not <code>None</code>. On Mac Catalyst, system trackpad
+navigation is suppressed only while the cursor is over the View and
+<code>TrackpadInput.TwoFingerDragAction</code> is not <code>None</code>. Setting the relevant route to <code>None</code> restores
+system navigation, and the normal Back control remains application UI.</p>
+<p>Applications that acquire input themselves can construct <code>MapController</code> directly and feed its
+normalized <code>Pan</code>, <code>Rotate</code>, <code>Dolly</code> and <code>Update</code> methods without referencing MAUI.</p>
+
+</article>
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

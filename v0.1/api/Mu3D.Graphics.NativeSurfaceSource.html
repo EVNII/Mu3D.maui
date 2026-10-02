@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct NativeSurfaceSource | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct NativeSurfaceSource | Mu3D documentation ">
+      
+      <meta name="description" content="Carries an ABI-neutral native presentation source from a platform host to a graphics backend. The host owns the referenced native objects and must keep them alive for the surface lifetime.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Graphics.NativeSurfaceSource">
+
+
+
+  <h1 id="Mu3D_Graphics_NativeSurfaceSource" data-uid="Mu3D.Graphics.NativeSurfaceSource" class="text-break">
+Struct NativeSurfaceSource  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Graphics.html">Graphics</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Graphics.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Carries an ABI-neutral native presentation source from a platform host to a graphics backend.
+The host owns the referenced native objects and must keep them alive for the surface lifetime.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct NativeSurfaceSource : IEquatable&lt;NativeSurfaceSource&gt;</code></pre>
+  </div>
+
+
+
+
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="Mu3D.Graphics.NativeSurfaceSource.html">NativeSurfaceSource</a>&gt;</div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_Graphics_NativeSurfaceSource__ctor_" data-uid="Mu3D.Graphics.NativeSurfaceSource.#ctor*"></a>
+
+  <h3 id="Mu3D_Graphics_NativeSurfaceSource__ctor_Mu3D_Graphics_NativeSurfaceKind_System_IntPtr_System_IntPtr_" data-uid="Mu3D.Graphics.NativeSurfaceSource.#ctor(Mu3D.Graphics.NativeSurfaceKind,System.IntPtr,System.IntPtr)">
+  NativeSurfaceSource(NativeSurfaceKind, nint, nint)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Carries an ABI-neutral native presentation source from a platform host to a graphics backend.
+The host owns the referenced native objects and must keep them alive for the surface lifetime.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NativeSurfaceSource(NativeSurfaceKind Kind, nint Handle, nint AuxiliaryHandle = 0)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>Kind</code> <a class="xref" href="Mu3D.Graphics.NativeSurfaceKind.html">NativeSurfaceKind</a></dt>
+    <dd><p>The kind of native platform object.</p>
+</dd>
+    <dt><code>Handle</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd><p>The CAMetalLayer, ANativeWindow, or HWND handle.</p>
+</dd>
+    <dt><code>AuxiliaryHandle</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd><p>The HINSTANCE for Windows; zero on other platforms.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Graphics_NativeSurfaceSource_AuxiliaryHandle_" data-uid="Mu3D.Graphics.NativeSurfaceSource.AuxiliaryHandle*"></a>
+
+  <h3 id="Mu3D_Graphics_NativeSurfaceSource_AuxiliaryHandle" data-uid="Mu3D.Graphics.NativeSurfaceSource.AuxiliaryHandle">
+  AuxiliaryHandle
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>The HINSTANCE for Windows; zero on other platforms.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public nint AuxiliaryHandle { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_NativeSurfaceSource_Handle_" data-uid="Mu3D.Graphics.NativeSurfaceSource.Handle*"></a>
+
+  <h3 id="Mu3D_Graphics_NativeSurfaceSource_Handle" data-uid="Mu3D.Graphics.NativeSurfaceSource.Handle">
+  Handle
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>The CAMetalLayer, ANativeWindow, or HWND handle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public nint Handle { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_NativeSurfaceSource_Kind_" data-uid="Mu3D.Graphics.NativeSurfaceSource.Kind*"></a>
+
+  <h3 id="Mu3D_Graphics_NativeSurfaceSource_Kind" data-uid="Mu3D.Graphics.NativeSurfaceSource.Kind">
+  Kind
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>The kind of native platform object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NativeSurfaceKind Kind { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.NativeSurfaceKind.html">NativeSurfaceKind</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Graphics_NativeSurfaceSource_Deconstruct_" data-uid="Mu3D.Graphics.NativeSurfaceSource.Deconstruct*"></a>
+
+  <h3 id="Mu3D_Graphics_NativeSurfaceSource_Deconstruct_Mu3D_Graphics_NativeSurfaceKind__System_IntPtr__System_IntPtr__" data-uid="Mu3D.Graphics.NativeSurfaceSource.Deconstruct(Mu3D.Graphics.NativeSurfaceKind@,System.IntPtr@,System.IntPtr@)">
+  Deconstruct(out NativeSurfaceKind, out nint, out nint)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Deconstruct(out NativeSurfaceKind Kind, out nint Handle, out nint AuxiliaryHandle)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>Kind</code> <a class="xref" href="Mu3D.Graphics.NativeSurfaceKind.html">NativeSurfaceKind</a></dt>
+    <dd></dd>
+    <dt><code>Handle</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd></dd>
+    <dt><code>AuxiliaryHandle</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_NativeSurfaceSource_Equals_" data-uid="Mu3D.Graphics.NativeSurfaceSource.Equals*"></a>
+
+  <h3 id="Mu3D_Graphics_NativeSurfaceSource_Equals_Mu3D_Graphics_NativeSurfaceSource_" data-uid="Mu3D.Graphics.NativeSurfaceSource.Equals(Mu3D.Graphics.NativeSurfaceSource)">
+  Equals(NativeSurfaceSource)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(NativeSurfaceSource other)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>other</code> <a class="xref" href="Mu3D.Graphics.NativeSurfaceSource.html">NativeSurfaceSource</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_NativeSurfaceSource_Equals_" data-uid="Mu3D.Graphics.NativeSurfaceSource.Equals*"></a>
+
+  <h3 id="Mu3D_Graphics_NativeSurfaceSource_Equals_System_Object_" data-uid="Mu3D.Graphics.NativeSurfaceSource.Equals(System.Object)">
+  Equals(object)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>obj</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_NativeSurfaceSource_FromAndroidNativeWindow_" data-uid="Mu3D.Graphics.NativeSurfaceSource.FromAndroidNativeWindow*"></a>
+
+  <h3 id="Mu3D_Graphics_NativeSurfaceSource_FromAndroidNativeWindow_System_IntPtr_" data-uid="Mu3D.Graphics.NativeSurfaceSource.FromAndroidNativeWindow(System.IntPtr)">
+  FromAndroidNativeWindow(nint)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a source backed by a retained Android ANativeWindow.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static NativeSurfaceSource FromAndroidNativeWindow(nint window)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>window</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.NativeSurfaceSource.html">NativeSurfaceSource</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_NativeSurfaceSource_FromMetalLayer_" data-uid="Mu3D.Graphics.NativeSurfaceSource.FromMetalLayer*"></a>
+
+  <h3 id="Mu3D_Graphics_NativeSurfaceSource_FromMetalLayer_System_IntPtr_" data-uid="Mu3D.Graphics.NativeSurfaceSource.FromMetalLayer(System.IntPtr)">
+  FromMetalLayer(nint)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a source backed by a Core Animation CAMetalLayer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static NativeSurfaceSource FromMetalLayer(nint layer)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>layer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.NativeSurfaceSource.html">NativeSurfaceSource</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_NativeSurfaceSource_FromWindowsHwnd_" data-uid="Mu3D.Graphics.NativeSurfaceSource.FromWindowsHwnd*"></a>
+
+  <h3 id="Mu3D_Graphics_NativeSurfaceSource_FromWindowsHwnd_System_IntPtr_System_IntPtr_" data-uid="Mu3D.Graphics.NativeSurfaceSource.FromWindowsHwnd(System.IntPtr,System.IntPtr)">
+  FromWindowsHwnd(nint, nint)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a source backed by a Win32 window and module handle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static NativeSurfaceSource FromWindowsHwnd(nint hwnd, nint hinstance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>hwnd</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd></dd>
+    <dt><code>hinstance</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.NativeSurfaceSource.html">NativeSurfaceSource</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_NativeSurfaceSource_FromWindowsSwapChainPanel_" data-uid="Mu3D.Graphics.NativeSurfaceSource.FromWindowsSwapChainPanel*"></a>
+
+  <h3 id="Mu3D_Graphics_NativeSurfaceSource_FromWindowsSwapChainPanel_System_IntPtr_" data-uid="Mu3D.Graphics.NativeSurfaceSource.FromWindowsSwapChainPanel(System.IntPtr)">
+  FromWindowsSwapChainPanel(nint)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a source backed by a retained WinUI 3 ISwapChainPanelNative interface.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static NativeSurfaceSource FromWindowsSwapChainPanel(nint panelNative)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>panelNative</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.NativeSurfaceSource.html">NativeSurfaceSource</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_NativeSurfaceSource_GetHashCode_" data-uid="Mu3D.Graphics.NativeSurfaceSource.GetHashCode*"></a>
+
+  <h3 id="Mu3D_Graphics_NativeSurfaceSource_GetHashCode" data-uid="Mu3D.Graphics.NativeSurfaceSource.GetHashCode">
+  GetHashCode()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_NativeSurfaceSource_ToString_" data-uid="Mu3D.Graphics.NativeSurfaceSource.ToString*"></a>
+
+  <h3 id="Mu3D_Graphics_NativeSurfaceSource_ToString" data-uid="Mu3D.Graphics.NativeSurfaceSource.ToString">
+  ToString()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Mu3D_Graphics_NativeSurfaceSource_op_Equality_" data-uid="Mu3D.Graphics.NativeSurfaceSource.op_Equality*"></a>
+
+  <h3 id="Mu3D_Graphics_NativeSurfaceSource_op_Equality_Mu3D_Graphics_NativeSurfaceSource_Mu3D_Graphics_NativeSurfaceSource_" data-uid="Mu3D.Graphics.NativeSurfaceSource.op_Equality(Mu3D.Graphics.NativeSurfaceSource,Mu3D.Graphics.NativeSurfaceSource)">
+  operator ==(NativeSurfaceSource, NativeSurfaceSource)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(NativeSurfaceSource left, NativeSurfaceSource right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Mu3D.Graphics.NativeSurfaceSource.html">NativeSurfaceSource</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Mu3D.Graphics.NativeSurfaceSource.html">NativeSurfaceSource</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_NativeSurfaceSource_op_Inequality_" data-uid="Mu3D.Graphics.NativeSurfaceSource.op_Inequality*"></a>
+
+  <h3 id="Mu3D_Graphics_NativeSurfaceSource_op_Inequality_Mu3D_Graphics_NativeSurfaceSource_Mu3D_Graphics_NativeSurfaceSource_" data-uid="Mu3D.Graphics.NativeSurfaceSource.op_Inequality(Mu3D.Graphics.NativeSurfaceSource,Mu3D.Graphics.NativeSurfaceSource)">
+  operator !=(NativeSurfaceSource, NativeSurfaceSource)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(NativeSurfaceSource left, NativeSurfaceSource right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Mu3D.Graphics.NativeSurfaceSource.html">NativeSurfaceSource</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Mu3D.Graphics.NativeSurfaceSource.html">NativeSurfaceSource</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

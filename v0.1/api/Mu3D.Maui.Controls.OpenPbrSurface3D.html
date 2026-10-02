@@ -1,0 +1,3123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class OpenPbrSurface3D | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class OpenPbrSurface3D | Mu3D documentation ">
+      
+      <meta name="description" content="Declares all constant OpenPBR 1.1.1 inputs in bindable MAUI XAML, independently of a renderer.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D">
+
+
+
+  <h1 id="Mu3D_Maui_Controls_OpenPbrSurface3D" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D" class="text-break">
+Class OpenPbrSurface3D  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Maui.html">Maui</a>.<a class="xref" href="Mu3D.Maui.Controls.html">Controls</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Maui.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Declares all constant OpenPBR 1.1.1 inputs in bindable MAUI XAML, independently of a renderer.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class OpenPbrSurface3D : BindableObject, INotifyPropertyChanged</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject">BindableObject</a></div>
+      <div><span class="xref">OpenPbrSurface3D</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontextproperty">BindableObject.BindingContextProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.clearvalue#microsoft-maui-controls-bindableobject-clearvalue(microsoft-maui-controls-bindableproperty)">BindableObject.ClearValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.clearvalue#microsoft-maui-controls-bindableobject-clearvalue(microsoft-maui-controls-bindablepropertykey)">BindableObject.ClearValue(BindablePropertyKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.getvalue">BindableObject.GetValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.isset">BindableObject.IsSet(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.removebinding">BindableObject.RemoveBinding(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setbinding">BindableObject.SetBinding(BindableProperty, BindingBase)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setvalue#microsoft-maui-controls-bindableobject-setvalue(microsoft-maui-controls-bindableproperty-system-object)">BindableObject.SetValue(BindableProperty, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setvalue#microsoft-maui-controls-bindableobject-setvalue(microsoft-maui-controls-bindablepropertykey-system-object)">BindableObject.SetValue(BindablePropertyKey, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.coercevalue#microsoft-maui-controls-bindableobject-coercevalue(microsoft-maui-controls-bindableproperty)">BindableObject.CoerceValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.coercevalue#microsoft-maui-controls-bindableobject-coercevalue(microsoft-maui-controls-bindablepropertykey)">BindableObject.CoerceValue(BindablePropertyKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.dispatcher">BindableObject.Dispatcher</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontext">BindableObject.BindingContext</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.propertychanged">BindableObject.PropertyChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.propertychanging">BindableObject.PropertyChanging</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontextchanged">BindableObject.BindingContextChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D__ctor_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.#ctor*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D__ctor" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.#ctor">
+  OpenPbrSurface3D()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes the pinned OpenPBR defaults.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPbrSurface3D()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_BaseColorProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.BaseColorProperty">
+  BaseColorProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_BaseColor">BaseColor</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty BaseColorProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_BaseDiffuseRoughnessProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.BaseDiffuseRoughnessProperty">
+  BaseDiffuseRoughnessProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_BaseDiffuseRoughness">BaseDiffuseRoughness</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty BaseDiffuseRoughnessProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_BaseMetalnessProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.BaseMetalnessProperty">
+  BaseMetalnessProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_BaseMetalness">BaseMetalness</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty BaseMetalnessProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_BaseWeightProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.BaseWeightProperty">
+  BaseWeightProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_BaseWeight">BaseWeight</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty BaseWeightProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_CoatColorProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.CoatColorProperty">
+  CoatColorProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_CoatColor">CoatColor</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty CoatColorProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_CoatDarkeningProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.CoatDarkeningProperty">
+  CoatDarkeningProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_CoatDarkening">CoatDarkening</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty CoatDarkeningProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_CoatIorProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.CoatIorProperty">
+  CoatIorProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_CoatIor">CoatIor</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty CoatIorProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_CoatRoughnessAnisotropyProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.CoatRoughnessAnisotropyProperty">
+  CoatRoughnessAnisotropyProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_CoatRoughnessAnisotropy">CoatRoughnessAnisotropy</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty CoatRoughnessAnisotropyProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_CoatRoughnessProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.CoatRoughnessProperty">
+  CoatRoughnessProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_CoatRoughness">CoatRoughness</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty CoatRoughnessProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_CoatWeightProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.CoatWeightProperty">
+  CoatWeightProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_CoatWeight">CoatWeight</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty CoatWeightProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_EmissionColorProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.EmissionColorProperty">
+  EmissionColorProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_EmissionColor">EmissionColor</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty EmissionColorProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_EmissionLuminanceProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.EmissionLuminanceProperty">
+  EmissionLuminanceProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_EmissionLuminance">EmissionLuminance</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty EmissionLuminanceProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_FuzzColorProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.FuzzColorProperty">
+  FuzzColorProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_FuzzColor">FuzzColor</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty FuzzColorProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_FuzzRoughnessProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.FuzzRoughnessProperty">
+  FuzzRoughnessProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_FuzzRoughness">FuzzRoughness</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty FuzzRoughnessProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_FuzzWeightProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.FuzzWeightProperty">
+  FuzzWeightProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_FuzzWeight">FuzzWeight</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty FuzzWeightProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryCoatNormalProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.GeometryCoatNormalProperty">
+  GeometryCoatNormalProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryCoatNormal">GeometryCoatNormal</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty GeometryCoatNormalProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryCoatTangentProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.GeometryCoatTangentProperty">
+  GeometryCoatTangentProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryCoatTangent">GeometryCoatTangent</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty GeometryCoatTangentProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryNormalProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.GeometryNormalProperty">
+  GeometryNormalProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryNormal">GeometryNormal</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty GeometryNormalProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryOpacityProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.GeometryOpacityProperty">
+  GeometryOpacityProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryOpacity">GeometryOpacity</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty GeometryOpacityProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryTangentProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.GeometryTangentProperty">
+  GeometryTangentProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryTangent">GeometryTangent</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty GeometryTangentProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryThinWalledProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.GeometryThinWalledProperty">
+  GeometryThinWalledProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryThinWalled">GeometryThinWalled</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty GeometryThinWalledProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_GraphProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.GraphProperty">
+  GraphProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies immutable input connections usable with XAML bindings or resources.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty GraphProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_MetersPerUnitProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.MetersPerUnitProperty">
+  MetersPerUnitProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_MetersPerUnit">MetersPerUnit</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty MetersPerUnitProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_NameProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.NameProperty">
+  NameProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_Name">Name</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty NameProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_SpecularColorProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SpecularColorProperty">
+  SpecularColorProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_SpecularColor">SpecularColor</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty SpecularColorProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_SpecularIorProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SpecularIorProperty">
+  SpecularIorProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_SpecularIor">SpecularIor</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty SpecularIorProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_SpecularRoughnessAnisotropyProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SpecularRoughnessAnisotropyProperty">
+  SpecularRoughnessAnisotropyProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_SpecularRoughnessAnisotropy">SpecularRoughnessAnisotropy</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty SpecularRoughnessAnisotropyProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_SpecularRoughnessProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SpecularRoughnessProperty">
+  SpecularRoughnessProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_SpecularRoughness">SpecularRoughness</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty SpecularRoughnessProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_SpecularWeightProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SpecularWeightProperty">
+  SpecularWeightProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_SpecularWeight">SpecularWeight</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty SpecularWeightProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_SubsurfaceColorProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SubsurfaceColorProperty">
+  SubsurfaceColorProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_SubsurfaceColor">SubsurfaceColor</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty SubsurfaceColorProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_SubsurfaceRadiusProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SubsurfaceRadiusProperty">
+  SubsurfaceRadiusProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_SubsurfaceRadius">SubsurfaceRadius</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty SubsurfaceRadiusProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_SubsurfaceRadiusScaleProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SubsurfaceRadiusScaleProperty">
+  SubsurfaceRadiusScaleProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_SubsurfaceRadiusScale">SubsurfaceRadiusScale</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty SubsurfaceRadiusScaleProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_SubsurfaceScatterAnisotropyProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SubsurfaceScatterAnisotropyProperty">
+  SubsurfaceScatterAnisotropyProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_SubsurfaceScatterAnisotropy">SubsurfaceScatterAnisotropy</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty SubsurfaceScatterAnisotropyProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_SubsurfaceWeightProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SubsurfaceWeightProperty">
+  SubsurfaceWeightProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_SubsurfaceWeight">SubsurfaceWeight</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty SubsurfaceWeightProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_ThinFilmIorProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.ThinFilmIorProperty">
+  ThinFilmIorProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_ThinFilmIor">ThinFilmIor</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty ThinFilmIorProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_ThinFilmThicknessProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.ThinFilmThicknessProperty">
+  ThinFilmThicknessProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_ThinFilmThickness">ThinFilmThickness</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty ThinFilmThicknessProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_ThinFilmWeightProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.ThinFilmWeightProperty">
+  ThinFilmWeightProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_ThinFilmWeight">ThinFilmWeight</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty ThinFilmWeightProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionColorProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.TransmissionColorProperty">
+  TransmissionColorProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionColor">TransmissionColor</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty TransmissionColorProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionDepthProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.TransmissionDepthProperty">
+  TransmissionDepthProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionDepth">TransmissionDepth</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty TransmissionDepthProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionDispersionAbbeNumberProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.TransmissionDispersionAbbeNumberProperty">
+  TransmissionDispersionAbbeNumberProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionDispersionAbbeNumber">TransmissionDispersionAbbeNumber</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty TransmissionDispersionAbbeNumberProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionDispersionScaleProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.TransmissionDispersionScaleProperty">
+  TransmissionDispersionScaleProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionDispersionScale">TransmissionDispersionScale</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty TransmissionDispersionScaleProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionScatterAnisotropyProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.TransmissionScatterAnisotropyProperty">
+  TransmissionScatterAnisotropyProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionScatterAnisotropy">TransmissionScatterAnisotropy</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty TransmissionScatterAnisotropyProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionScatterProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.TransmissionScatterProperty">
+  TransmissionScatterProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionScatter">TransmissionScatter</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty TransmissionScatterProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionWeightProperty" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.TransmissionWeightProperty">
+  TransmissionWeightProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.OpenPbrSurface3D.html#Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionWeight">TransmissionWeight</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty TransmissionWeightProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_BaseColor_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.BaseColor*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_BaseColor" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.BaseColor">
+  BaseColor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_BaseColor">BaseColor</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TypeConverter(typeof(LinearRgbaTypeConverter))]
+public LinearRgba BaseColor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_BaseDiffuseRoughness_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.BaseDiffuseRoughness*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_BaseDiffuseRoughness" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.BaseDiffuseRoughness">
+  BaseDiffuseRoughness
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_BaseDiffuseRoughness">BaseDiffuseRoughness</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float BaseDiffuseRoughness { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_BaseMetalness_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.BaseMetalness*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_BaseMetalness" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.BaseMetalness">
+  BaseMetalness
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_BaseMetalness">BaseMetalness</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float BaseMetalness { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_BaseWeight_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.BaseWeight*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_BaseWeight" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.BaseWeight">
+  BaseWeight
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_BaseWeight">BaseWeight</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float BaseWeight { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_CoatColor_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.CoatColor*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_CoatColor" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.CoatColor">
+  CoatColor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_CoatColor">CoatColor</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TypeConverter(typeof(LinearRgbaTypeConverter))]
+public LinearRgba CoatColor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_CoatDarkening_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.CoatDarkening*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_CoatDarkening" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.CoatDarkening">
+  CoatDarkening
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_CoatDarkening">CoatDarkening</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float CoatDarkening { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_CoatIor_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.CoatIor*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_CoatIor" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.CoatIor">
+  CoatIor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_CoatIor">CoatIor</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float CoatIor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_CoatRoughness_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.CoatRoughness*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_CoatRoughness" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.CoatRoughness">
+  CoatRoughness
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_CoatRoughness">CoatRoughness</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float CoatRoughness { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_CoatRoughnessAnisotropy_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.CoatRoughnessAnisotropy*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_CoatRoughnessAnisotropy" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.CoatRoughnessAnisotropy">
+  CoatRoughnessAnisotropy
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_CoatRoughnessAnisotropy">CoatRoughnessAnisotropy</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float CoatRoughnessAnisotropy { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_CoatWeight_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.CoatWeight*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_CoatWeight" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.CoatWeight">
+  CoatWeight
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_CoatWeight">CoatWeight</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float CoatWeight { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_EmissionColor_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.EmissionColor*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_EmissionColor" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.EmissionColor">
+  EmissionColor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_EmissionColor">EmissionColor</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TypeConverter(typeof(LinearRgbaTypeConverter))]
+public LinearRgba EmissionColor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_EmissionLuminance_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.EmissionLuminance*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_EmissionLuminance" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.EmissionLuminance">
+  EmissionLuminance
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_EmissionLuminance">EmissionLuminance</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float EmissionLuminance { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_FuzzColor_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.FuzzColor*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_FuzzColor" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.FuzzColor">
+  FuzzColor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_FuzzColor">FuzzColor</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TypeConverter(typeof(LinearRgbaTypeConverter))]
+public LinearRgba FuzzColor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_FuzzRoughness_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.FuzzRoughness*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_FuzzRoughness" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.FuzzRoughness">
+  FuzzRoughness
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_FuzzRoughness">FuzzRoughness</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float FuzzRoughness { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_FuzzWeight_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.FuzzWeight*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_FuzzWeight" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.FuzzWeight">
+  FuzzWeight
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_FuzzWeight">FuzzWeight</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float FuzzWeight { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryCoatNormal_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.GeometryCoatNormal*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryCoatNormal" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.GeometryCoatNormal">
+  GeometryCoatNormal
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_GeometryCoatNormal">GeometryCoatNormal</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TypeConverter(typeof(LinearVector3TypeConverter))]
+public Vector3? GeometryCoatNormal { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.vector3">Vector3</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryCoatTangent_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.GeometryCoatTangent*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryCoatTangent" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.GeometryCoatTangent">
+  GeometryCoatTangent
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_GeometryCoatTangent">GeometryCoatTangent</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TypeConverter(typeof(LinearVector3TypeConverter))]
+public Vector3? GeometryCoatTangent { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.vector3">Vector3</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryNormal_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.GeometryNormal*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryNormal" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.GeometryNormal">
+  GeometryNormal
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_GeometryNormal">GeometryNormal</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TypeConverter(typeof(LinearVector3TypeConverter))]
+public Vector3? GeometryNormal { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.vector3">Vector3</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryOpacity_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.GeometryOpacity*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryOpacity" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.GeometryOpacity">
+  GeometryOpacity
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_GeometryOpacity">GeometryOpacity</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float GeometryOpacity { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryTangent_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.GeometryTangent*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryTangent" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.GeometryTangent">
+  GeometryTangent
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_GeometryTangent">GeometryTangent</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TypeConverter(typeof(LinearVector3TypeConverter))]
+public Vector3? GeometryTangent { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.vector3">Vector3</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryThinWalled_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.GeometryThinWalled*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_GeometryThinWalled" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.GeometryThinWalled">
+  GeometryThinWalled
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_GeometryThinWalled">GeometryThinWalled</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool GeometryThinWalled { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_Graph_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.Graph*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_Graph" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.Graph">
+  Graph
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets texture and expression connections; replacing this value publishes one change.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPbrGraph? Graph { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrGraph.html">OpenPbrGraph</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_MetersPerUnit_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.MetersPerUnit*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_MetersPerUnit" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.MetersPerUnit">
+  MetersPerUnit
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_MetersPerUnit">MetersPerUnit</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float MetersPerUnit { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_Name_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.Name*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_Name" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.Name">
+  Name
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_Name">Name</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Name { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_SpecularColor_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SpecularColor*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_SpecularColor" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SpecularColor">
+  SpecularColor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_SpecularColor">SpecularColor</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TypeConverter(typeof(LinearRgbaTypeConverter))]
+public LinearRgba SpecularColor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_SpecularIor_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SpecularIor*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_SpecularIor" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SpecularIor">
+  SpecularIor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_SpecularIor">SpecularIor</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float SpecularIor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_SpecularRoughness_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SpecularRoughness*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_SpecularRoughness" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SpecularRoughness">
+  SpecularRoughness
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_SpecularRoughness">SpecularRoughness</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float SpecularRoughness { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_SpecularRoughnessAnisotropy_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SpecularRoughnessAnisotropy*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_SpecularRoughnessAnisotropy" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SpecularRoughnessAnisotropy">
+  SpecularRoughnessAnisotropy
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_SpecularRoughnessAnisotropy">SpecularRoughnessAnisotropy</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float SpecularRoughnessAnisotropy { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_SpecularWeight_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SpecularWeight*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_SpecularWeight" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SpecularWeight">
+  SpecularWeight
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_SpecularWeight">SpecularWeight</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float SpecularWeight { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_SubsurfaceColor_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SubsurfaceColor*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_SubsurfaceColor" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SubsurfaceColor">
+  SubsurfaceColor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_SubsurfaceColor">SubsurfaceColor</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TypeConverter(typeof(LinearRgbaTypeConverter))]
+public LinearRgba SubsurfaceColor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_SubsurfaceRadius_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SubsurfaceRadius*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_SubsurfaceRadius" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SubsurfaceRadius">
+  SubsurfaceRadius
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_SubsurfaceRadius">SubsurfaceRadius</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float SubsurfaceRadius { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_SubsurfaceRadiusScale_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SubsurfaceRadiusScale*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_SubsurfaceRadiusScale" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SubsurfaceRadiusScale">
+  SubsurfaceRadiusScale
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_SubsurfaceRadiusScale">SubsurfaceRadiusScale</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TypeConverter(typeof(LinearVector3TypeConverter))]
+public Vector3 SubsurfaceRadiusScale { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.vector3">Vector3</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_SubsurfaceScatterAnisotropy_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SubsurfaceScatterAnisotropy*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_SubsurfaceScatterAnisotropy" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SubsurfaceScatterAnisotropy">
+  SubsurfaceScatterAnisotropy
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_SubsurfaceScatterAnisotropy">SubsurfaceScatterAnisotropy</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float SubsurfaceScatterAnisotropy { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_SubsurfaceWeight_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SubsurfaceWeight*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_SubsurfaceWeight" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.SubsurfaceWeight">
+  SubsurfaceWeight
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_SubsurfaceWeight">SubsurfaceWeight</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float SubsurfaceWeight { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_ThinFilmIor_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.ThinFilmIor*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_ThinFilmIor" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.ThinFilmIor">
+  ThinFilmIor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_ThinFilmIor">ThinFilmIor</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float ThinFilmIor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_ThinFilmThickness_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.ThinFilmThickness*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_ThinFilmThickness" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.ThinFilmThickness">
+  ThinFilmThickness
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_ThinFilmThickness">ThinFilmThickness</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float ThinFilmThickness { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_ThinFilmWeight_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.ThinFilmWeight*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_ThinFilmWeight" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.ThinFilmWeight">
+  ThinFilmWeight
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_ThinFilmWeight">ThinFilmWeight</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float ThinFilmWeight { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionColor_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.TransmissionColor*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionColor" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.TransmissionColor">
+  TransmissionColor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_TransmissionColor">TransmissionColor</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TypeConverter(typeof(LinearRgbaTypeConverter))]
+public LinearRgba TransmissionColor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionDepth_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.TransmissionDepth*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionDepth" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.TransmissionDepth">
+  TransmissionDepth
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_TransmissionDepth">TransmissionDepth</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float TransmissionDepth { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionDispersionAbbeNumber_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.TransmissionDispersionAbbeNumber*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionDispersionAbbeNumber" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.TransmissionDispersionAbbeNumber">
+  TransmissionDispersionAbbeNumber
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_TransmissionDispersionAbbeNumber">TransmissionDispersionAbbeNumber</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float TransmissionDispersionAbbeNumber { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionDispersionScale_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.TransmissionDispersionScale*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionDispersionScale" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.TransmissionDispersionScale">
+  TransmissionDispersionScale
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_TransmissionDispersionScale">TransmissionDispersionScale</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float TransmissionDispersionScale { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionScatter_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.TransmissionScatter*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionScatter" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.TransmissionScatter">
+  TransmissionScatter
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_TransmissionScatter">TransmissionScatter</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[TypeConverter(typeof(LinearRgbaTypeConverter))]
+public LinearRgba TransmissionScatter { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionScatterAnisotropy_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.TransmissionScatterAnisotropy*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionScatterAnisotropy" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.TransmissionScatterAnisotropy">
+  TransmissionScatterAnisotropy
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_TransmissionScatterAnisotropy">TransmissionScatterAnisotropy</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float TransmissionScatterAnisotropy { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionWeight_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.TransmissionWeight*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_TransmissionWeight" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.TransmissionWeight">
+  TransmissionWeight
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html#Mu3D_SceneGraph_OpenPbrSurface_TransmissionWeight">TransmissionWeight</a> authoring value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float TransmissionWeight { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_LoadSurface_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.LoadSurface*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_LoadSurface_Mu3D_SceneGraph_OpenPbrSurface_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.LoadSurface(Mu3D.SceneGraph.OpenPbrSurface)">
+  LoadSurface(OpenPbrSurface)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Copies an imported or application-authored surface as local values and publishes one change notification.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void LoadSurface(OpenPbrSurface source)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html">OpenPbrSurface</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section" id="Mu3D_Maui_Controls_OpenPbrSurface3D_LoadSurface_Mu3D_SceneGraph_OpenPbrSurface__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>These explicit assignments take precedence over existing bindings. The application owns
+synchronization of editor controls or view models and must reestablish any bindings that
+should continue driving the imported parameters after loading.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_Maui_Controls_OpenPbrSurface3D_ToSurface_" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.ToSurface*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_OpenPbrSurface3D_ToSurface" data-uid="Mu3D.Maui.Controls.OpenPbrSurface3D.ToSurface">
+  ToSurface()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns an independent Core snapshot; subsequent XAML edits do not mutate it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPbrSurface ToSurface()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrSurface.html">OpenPbrSurface</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

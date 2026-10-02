@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.ModelLabPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    Title="Material Conformance">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="material-conformance" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <Grid BackgroundColor="Black">
+            <mu3d:Mu3DView x:Name="SurfaceView" />
+            <Grid
+                    x:Name="LoadingOverlay"
+                    BackgroundColor="#CC101010"
+                    IsVisible="False">
+                    <VerticalStackLayout
+                        HorizontalOptions="Center"
+                        Spacing="12"
+                        VerticalOptions="Center">
+                        <ActivityIndicator
+                            Color="#7C5CFC"
+                            IsRunning="True"
+                            WidthRequest="42" />
+                        <Label
+                            x:Name="LoadingLabel"
+                            HorizontalTextAlignment="Center"
+                            Text="Loading model…"
+                            TextColor="White" />
+                    </VerticalStackLayout>
+            </Grid>
+        </Grid>
+        <ScrollView Grid.Row="1" MaximumHeightRequest="420">
+            <VerticalStackLayout Padding="16" Spacing="12">
+                <Label FontAttributes="Bold" FontSize="26" Text="Khronos Material Conformance" />
+                <Label
+                    Text="Advanced validation for supported glTF material extensions, shader combinations and diagnostic layers." />
+                <Picker
+                    x:Name="ModelPicker"
+                    Title="Official Khronos model"
+                    SelectedIndexChanged="OnModelChanged" />
+                <Picker
+                    x:Name="MaterialVariantPicker"
+                    Title="Authored material variant"
+                    SelectedIndexChanged="OnMaterialVariantChanged" />
+                <Picker
+                    x:Name="AnimationPicker"
+                    Title="Animation clip"
+                    SelectedIndexChanged="OnAnimationChanged" />
+                <Grid ColumnDefinitions="Auto,Auto,*,Auto" ColumnSpacing="8">
+                    <Button
+                        x:Name="PlayPauseButton"
+                        Clicked="OnPlayPauseClicked"
+                        IsEnabled="False"
+                        Text="Play" />
+                    <Button
+                        x:Name="ReplayButton"
+                        Grid.Column="1"
+                        Clicked="OnReplayClicked"
+                        IsEnabled="False"
+                        Text="Replay" />
+                    <Label
+                        Grid.Column="2"
+                        HorizontalTextAlignment="End"
+                        Text="Loop"
+                        VerticalTextAlignment="Center" />
+                    <Switch
+                        x:Name="LoopSwitch"
+                        Grid.Column="3"
+                        IsEnabled="False"
+                        IsToggled="True"
+                        Toggled="OnLoopToggled" />
+                </Grid>
+                <Label x:Name="TimelineLabel" Text="Timeline: 0.00 / 0.00 s" />
+                <Slider
+                    x:Name="TimelineSlider"
+                    IsEnabled="False"
+                    Maximum="1"
+                    Minimum="0"
+                    ValueChanged="OnTimelineChanged" />
+                <Picker
+                    x:Name="LayerPicker"
+                    Title="Render layer"
+                    SelectedIndexChanged="OnLayerChanged" />
+                <Label
+                    x:Name="LayerHintLabel"
+                    FontSize="12"
+                    Text="Beauty: composed direct and indirect lighting." />
+                <Grid ColumnDefinitions="Auto,*,Auto,*" ColumnSpacing="8">
+                    <Label Text="Shadows" VerticalTextAlignment="Center" />
+                    <Switch
+                        x:Name="ShadowSwitch"
+                        Grid.Column="1"
+                        IsToggled="True"
+                        Toggled="OnShadowToggled" />
+                    <Label Grid.Column="2" Text="AO" VerticalTextAlignment="Center" />
+                    <Switch
+                        x:Name="AoSwitch"
+                        Grid.Column="3"
+                        IsToggled="True"
+                        Toggled="OnAoToggled" />
+                </Grid>
+                <Label x:Name="CameraDistanceLabel" Text="Camera distance: 1.00x" />
+                <Slider
+                    x:Name="CameraDistanceSlider"
+                    Maximum="1.4"
+                    Minimum="0.45"
+                    Value="1"
+                    ValueChanged="OnCameraDistanceChanged" />
+                <Label x:Name="CameraAzimuthLabel" Text="Camera orbit: 0°" />
+                <Slider
+                    x:Name="CameraAzimuthSlider"
+                    Maximum="180"
+                    Minimum="-180"
+                    Value="0"
+                    ValueChanged="OnCameraAzimuthChanged" />
+                <Label x:Name="CameraElevationLabel" Text="Camera elevation: 0°" />
+                <Slider
+                    x:Name="CameraElevationSlider"
+                    Maximum="80"
+                    Minimum="-80"
+                    Value="0"
+                    ValueChanged="OnCameraElevationChanged" />
+                <Label x:Name="AoRadiusLabel" Text="AO radius: 1.50" />
+                <Slider
+                    x:Name="AoRadiusSlider"
+                    Maximum="4"
+                    Minimum="0.1"
+                    Value="1.5"
+                    ValueChanged="OnAoRadiusChanged" />
+                <Label x:Name="AoStrengthLabel" Text="AO strength: 1.00" />
+                <Slider
+                    x:Name="AoStrengthSlider"
+                    Maximum="1"
+                    Minimum="0"
+                    Value="1"
+                    ValueChanged="OnAoStrengthChanged" />
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                    <Label Text="HDR Bloom (Beauty only)" VerticalTextAlignment="Center" />
+                    <Switch
+                        x:Name="BloomSwitch"
+                        Grid.Column="1"
+                        IsToggled="False"
+                        Toggled="OnBloomToggled" />
+                </Grid>
+                <Picker
+                    x:Name="BloomModePicker"
+                    Title="Bloom composition"
+                    SelectedIndexChanged="OnBloomModeChanged" />
+                <Label x:Name="BloomThresholdLabel" Text="Bloom threshold: 1.00" />
+                <Slider
+                    x:Name="BloomThresholdSlider"
+                    Maximum="8"
+                    Minimum="0"
+                    Value="1"
+                    ValueChanged="OnBloomThresholdChanged" />
+                <Label x:Name="BloomSoftKneeLabel" Text="Bloom soft knee: 0.50" />
+                <Slider
+                    x:Name="BloomSoftKneeSlider"
+                    Maximum="2"
+                    Minimum="0"
+                    Value="0.5"
+                    ValueChanged="OnBloomSoftKneeChanged" />
+                <Label x:Name="BloomIntensityLabel" Text="Bloom intensity: 0.15" />
+                <Slider
+                    x:Name="BloomIntensitySlider"
+                    Maximum="2"
+                    Minimum="0"
+                    Value="0.15"
+                    ValueChanged="OnBloomIntensityChanged" />
+                <Label x:Name="BloomRadiusLabel" Text="Bloom radius: 16 px" />
+                <Slider
+                    x:Name="BloomRadiusSlider"
+                    Maximum="96"
+                    Minimum="1"
+                    Value="16"
+                    ValueChanged="OnBloomRadiusChanged" />
+                <Label x:Name="ClearcoatLabel" Text="Clearcoat factor: 1.00× authored" />
+                <Slider
+                    x:Name="ClearcoatSlider"
+                    Maximum="2"
+                    Minimum="0"
+                    Value="1"
+                    ValueChanged="OnClearcoatChanged" />
+                <Label x:Name="AnisotropyLabel" Text="Anisotropy strength: 1.00× authored" />
+                <Slider
+                    x:Name="AnisotropySlider"
+                    Maximum="1"
+                    Minimum="0"
+                    Value="1"
+                    ValueChanged="OnAnisotropyChanged" />
+                <Label x:Name="AnisotropyRotationLabel" Text="Anisotropy rotation: +0°" />
+                <Slider
+                    x:Name="AnisotropyRotationSlider"
+                    Maximum="180"
+                    Minimum="-180"
+                    Value="0"
+                    ValueChanged="OnAnisotropyRotationChanged" />
+                <Label x:Name="TransmissionLabel" Text="Transmission: 1.00× authored" />
+                <Slider
+                    x:Name="TransmissionSlider"
+                    Maximum="1"
+                    Minimum="0"
+                    Value="1"
+                    ValueChanged="OnTransmissionChanged" />
+                <Label x:Name="IorLabel" Text="IOR offset: +0.00" />
+                <Slider
+                    x:Name="IorSlider"
+                    Maximum="1.5"
+                    Minimum="-0.5"
+                    Value="0"
+                    ValueChanged="OnIorChanged" />
+                <Label x:Name="ThicknessLabel" Text="Volume thickness: 1.00× authored" />
+                <Slider
+                    x:Name="ThicknessSlider"
+                    Maximum="8"
+                    Minimum="0"
+                    Value="1"
+                    ValueChanged="OnThicknessChanged" />
+                <Label x:Name="DispersionLabel" Text="Dispersion: 1.00× authored" />
+                <Slider
+                    x:Name="DispersionSlider"
+                    Maximum="2"
+                    Minimum="0"
+                    Value="1"
+                    ValueChanged="OnDispersionChanged" />
+                <Label x:Name="AbsorptionLabel" Text="Volume absorption: 1.00× authored" />
+                <Slider
+                    x:Name="AbsorptionSlider"
+                    Maximum="8"
+                    Minimum="0"
+                    Value="1"
+                    ValueChanged="OnAbsorptionChanged" />
+                <Label x:Name="IridescenceLabel" Text="Iridescence: 1.00× authored" />
+                <Slider
+                    x:Name="IridescenceSlider"
+                    Maximum="1"
+                    Minimum="0"
+                    Value="1"
+                    ValueChanged="OnIridescenceChanged" />
+                <Label x:Name="IridescenceIorLabel" Text="Iridescence IOR offset: +0.00" />
+                <Slider
+                    x:Name="IridescenceIorSlider"
+                    Maximum="1.5"
+                    Minimum="-0.3"
+                    Value="0"
+                    ValueChanged="OnIridescenceIorChanged" />
+                <Label x:Name="IridescenceThicknessLabel" Text="Film thickness: 1.00× authored" />
+                <Slider
+                    x:Name="IridescenceThicknessSlider"
+                    Maximum="4"
+                    Minimum="0"
+                    Value="1"
+                    ValueChanged="OnIridescenceThicknessChanged" />
+                <Label x:Name="SpecularFactorLabel" Text="Specular factor: 1.00× authored" />
+                <Slider
+                    x:Name="SpecularFactorSlider"
+                    Maximum="1"
+                    Minimum="0"
+                    Value="1"
+                    ValueChanged="OnSpecularFactorChanged" />
+                <Label x:Name="SpecularColorLabel" Text="Specular color: 1.00× authored" />
+                <Slider
+                    x:Name="SpecularColorSlider"
+                    Maximum="2"
+                    Minimum="0"
+                    Value="1"
+                    ValueChanged="OnSpecularColorChanged" />
+                <Label x:Name="LightAzimuthLabel" Text="Light azimuth: -150°" />
+                <Slider
+                    x:Name="LightAzimuthSlider"
+                    Maximum="180"
+                    Minimum="-180"
+                    Value="-150"
+                    ValueChanged="OnLightAzimuthChanged" />
+                <Label x:Name="LightElevationLabel" Text="Light elevation: 35°" />
+                <Slider
+                    x:Name="LightElevationSlider"
+                    Maximum="85"
+                    Minimum="5"
+                    Value="35"
+                    ValueChanged="OnLightElevationChanged" />
+                <Label x:Name="LightSizeLabel" Text="Light angular diameter: 0.080 rad" />
+                <Slider
+                    x:Name="LightSizeSlider"
+                    Maximum="0.4"
+                    Minimum="0"
+                    Value="0.08"
+                    ValueChanged="OnLightSizeChanged" />
+                <Label x:Name="StatusLabel" Text="Waiting for a native surface…" />
+                <Label FontAttributes="Bold" Text="Live performance and resources" />
+                <Label
+                    x:Name="PerformanceLabel"
+                    FontFamily="OpenSansRegular"
+                    FontSize="12"
+                    LineBreakMode="WordWrap"
+                    Text="FPS: waiting for frames…" />
+                <Label FontAttributes="Bold" Text="Selected model coverage" />
+                <Label
+                    x:Name="GateLabel"
+                    Text="BoxInterleaved: GLB + hierarchy + matrix + indexed interleaved POSITION/NORMAL + scalar PBR." />
+                <Label
+                    x:Name="DetailsLabel"
+                    FontFamily="OpenSansRegular"
+                    FontSize="12"
+                    LineBreakMode="WordWrap" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

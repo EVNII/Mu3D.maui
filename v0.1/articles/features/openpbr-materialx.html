@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>OpenPBR rendering and MaterialX XML | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="OpenPBR rendering and MaterialX XML | Mu3D documentation ">
+      
+      <meta name="description" content="Raster, hybrid, interactive and reference OpenPBR rendering, bindable MAUI XAML and MaterialX files.">
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="openpbr-rendering-and-materialx-xml">OpenPBR rendering and MaterialX XML</h1>
+
+<h2 id="optional-installation">Optional installation</h2>
+<p>Use <code>Mu3D.Maui</code> alone for the standard renderer. Add <code>Mu3D.Rendering.OpenPbr</code> explicitly when
+you need full OpenPBR, then assign an <code>OpenPbrRenderPass.Pipeline</code> to the scene view. The base
+package does not reference or initialize the optional renderer and carries none of its BSDF
+shaders, LUT or precompiled shader assets. <code>Mu3D.Formats.MaterialX</code> is independently optional
+for <code>.mtlx</code> files. Core/MAUI material authoring types remain available without activating OpenPBR.</p>
+<pre><code class="lang-xml">&lt;PackageReference Include=&quot;Mu3D.Maui&quot; Version=&quot;YOUR_MU3D_VERSION&quot; /&gt;
+&lt;PackageReference Include=&quot;Mu3D.Rendering.OpenPbr&quot; Version=&quot;YOUR_MU3D_VERSION&quot; /&gt;
+</code></pre>
+<p>Mu3D supports the <strong>constant and connected authoring parameters</strong> of OpenPBR Surface 1.1.1. The optional
+<code>Mu3D.Formats.MaterialX</code> package reads and writes that subset as MaterialX 1.39 <code>.mtlx</code> XML.
+MAUI XAML is a separate entry point: it creates bindable Mu3D objects and does not pass page XML
+through the MaterialX file parser.</p>
+<p>The optional <code>Mu3D.Rendering.OpenPbr</code> package evaluates the pinned Adobe OpenPBR 1.1.1 BSDF through
+<code>OpenPbrRenderPass</code>. Interactive, progressive Reference and Hybrid use the same transport closure, including
+coat, fuzz, anisotropy, thin film, RGB dispersion, transmission and subsurface/volume scattering.
+<code>OpenPbrPreviewMaterial3D</code> remains a separately named approximation for the existing PBR renderer.</p>
+<h2 id="rendering-modes">Rendering modes</h2>
+<h3 id="preparing-the-first-frame">Preparing the first frame</h3>
+<p>The optional package includes Windows precompiled shader bytecode. The matching native backend
+loads it before checking its per-user disk cache or compiling a missing variant. Applications need
+no registration, Rust/Slang tools or shader-generation step. Only Windows deployments receive this
+bytecode; Android and Apple retain their existing backends.</p>
+<p>An uncached variant or driver-specific compilation can still take seconds. The samples use the automatic host's
+<code>PrepareGraphicsAsync</code> callback to await <code>OpenPbrRenderPass.PrepareAsync</code> before publishing the
+presentation session. Compilation runs on a worker, with a preparation message visible in the page.
+The host retains the device while compilation finishes even when navigation cancels publication.</p>
+<pre><code class="lang-csharp">sceneView.PrepareGraphicsAsync = (device, format, cancellationToken) =&gt;
+    pass.PrepareAsync(device,
+        sceneView.DisplayTransform is null ? format : GraphicsTextureFormat.Rgba16Float,
+        cancellationToken);
+</code></pre>
+<p>Assign the callback before the control loads, using the same pass assigned to its render pipeline.
+Do not call Execute, change preparation settings or prepare the same pass again before completion.
+Standalone callers must keep the device alive until the returned task completes. Cancellation
+does not forcibly interrupt a native compiler; it discards the result safely after completion.
+Pass disposal may abandon preparation. Samples disable mode selection while preparing.</p>
+<p>Raster now has a separate generated entry using the same full BSDF, without unreachable ray
+transport code. Resize replaces image attachments and bindings while keeping compiled pipelines.
+Missing precompiled variants and cold mode switches can still compile. The Windows persistent
+cache stores DXIL bytecode; GPU/driver pipeline compilation is a separate step. Consequently,
+precompiled assets do not guarantee an instant first image on every new GPU or driver.</p>
+<h3 id="mode-behavior">Mode behavior</h3>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Visibility and lighting</th>
+<th>Limits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Raster</td>
+<td>Full-resolution depth-tested triangles; pinned BSDF direct lights, optional directional shadow map and fixed environment quadrature</td>
+<td>No indirect transport; transmission, subsurface and partial opacity are rejected</td>
+</tr>
+<tr>
+<td>Hybrid</td>
+<td>Raster primary hits plus bounded ray shadows/secondary transport; progressive FP32 mean</td>
+<td>Default four events; sampling noise; conservative primary-ray fallback for media/near clipping</td>
+</tr>
+<tr>
+<td>Interactive</td>
+<td>Independent path sample each frame; half-resolution default</td>
+<td>Default four events; no history or denoiser</td>
+</tr>
+<tr>
+<td>Reference</td>
+<td>Full-resolution jittered paths; progressive FP32 mean</td>
+<td>Default 32 events; finite RGB transport</td>
+</tr>
+</tbody>
+</table>
+<p>Set <code>Mode = OpenPbrRenderMode.Raster</code> or <code>Mode = OpenPbrRenderMode.Hybrid</code> on the same pass.
+<code>RasterEnvironmentSamples</code> controls fixed environment quadrature (1–64, default 16); it can miss
+small bright HDR features. Finite suns use their central direction in Raster. <code>HybridMaxBounces</code>
+controls Hybrid's event budget (1–128). <code>AccumulatedSamples</code> reports Hybrid/Reference history;
+<code>UsesPrimaryRayFallback</code> exposes Hybrid's conservative camera-medium/near-boundary fallback.
+Raster/Hybrid sample primary visibility at pixel centers without MSAA, so silhouettes may alias.
+Neither path promises a particular frame rate; both use ordinary WGSL and depth attachments.</p>
+<h3 id="directional-shadow-maps">Directional shadow maps</h3>
+<p>Opt one directional light into shadow mapping:</p>
+<pre><code class="lang-xaml">&lt;mu3d:DirectionalLight3D Intensity=&quot;4&quot; RotationX=&quot;-25&quot; RotationY=&quot;-30&quot;
+    CastsShadows=&quot;True&quot; ShadowOpacity=&quot;1&quot; /&gt;
+</code></pre>
+<p>The pass enables maps by default when a light opts in. Set <code>DirectionalShadowsEnabled</code> to false
+to compare unshadowed lighting. <code>DirectionalShadowMapSize</code> defaults to 1024 and accepts powers
+of two from 64 to 4096. <code>DirectionalShadowPcfRadius</code> selects hard (0), 3×3 (1, default) or 5×5 (2)
+filtering. <code>DirectionalShadowDepthBias</code> defaults to 0.001 in normalized depth;
+<code>DirectionalShadowNormalBias</code> defaults to 0.002 scene units, scaled by surface slope. Increase
+bias cautiously: excessive offsets detach shadows from their casters. These controls are also
+available on the sample page.</p>
+<p>The single map covers complete scene bounds, including offscreen casters, and affects only the
+marked light's direct contribution. Environment light and emission remain unaffected. Mesh
+<code>ShadowCastingMode</code> selects <code>On</code>, <code>Off</code> or <code>ShadowsOnly</code>. No cascades, point/spot shadow maps or
+transparent shadow transmission are provided. Multiple marked directional lights are rejected.
+PCF softens map edges; physically sized penumbrae require the ray-transport modes. Those modes
+keep their ray visibility independently of these map controls.</p>
+<h2 id="maui-xaml">MAUI XAML</h2>
+<p>Declare <code>xmlns:mu3d=&quot;clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui&quot;</code> on the page. Inside a
+<code>Scene3D</code>, use an ordinary primitive and a nested authoring component:</p>
+<pre><code class="lang-xaml">&lt;mu3d:Sphere3D Radius=&quot;1&quot;&gt;
+  &lt;mu3d:OpenPbrMaterial3D NitsPerSceneUnit=&quot;100&quot;&gt;
+    &lt;mu3d:OpenPbrSurface3D x:Name=&quot;AuthoredSurface&quot;
+        BaseColor=&quot;0.08,0.35,0.8;acescg&quot;
+        BaseMetalness=&quot;0.75&quot; SpecularRoughness=&quot;0.22&quot; /&gt;
+  &lt;/mu3d:OpenPbrMaterial3D&gt;
+&lt;/mu3d:Sphere3D&gt;
+</code></pre>
+<p><code>OpenPbrSurface3D</code> exposes all 41 constant inputs plus name and scene scale as bindable properties.
+It inherits the material wrapper's binding context unless explicitly assigned its own. Changes
+update the same Core material identity and invalidate attached viewports. Configure the optional
+pass on the enclosing scene view:</p>
+<pre><code class="lang-csharp">using Mu3D.Rendering.OpenPbr;
+
+var openPbrPass = new OpenPbrRenderPass {
+    Mode = OpenPbrRenderMode.Reference,
+    ReferenceMaxBounces = 32,
+};
+SceneView.RenderPipeline = openPbrPass.Pipeline;
+</code></pre>
+<p>The application schedules additional frames for progressive refinement and disposes the pass after
+detaching it from the view. <code>ReferenceSamples</code> reports accumulated samples per pixel. Scene, camera,
+material, environment and light changes reset history. <code>ResetAccumulation()</code> also resets it explicitly.
+No surface session is created or owned by application rendering code. The default renderer rejects
+the distinct OpenPBR material until this pass is selected.</p>
+<p>The pass and mode can also be declared in XAML. Add
+<code>xmlns:pbr=&quot;clr-namespace:Mu3D.Rendering.OpenPbr;assembly=Mu3D.Rendering.OpenPbr&quot;</code>:</p>
+<pre><code class="lang-xaml">&lt;ContentPage.Resources&gt;
+  &lt;pbr:OpenPbrRenderPass x:Key=&quot;OpenPbrPass&quot; Mode=&quot;Reference&quot; ReferenceMaxBounces=&quot;32&quot; /&gt;
+&lt;/ContentPage.Resources&gt;
+</code></pre>
+<p>Set <code>RenderPipeline=&quot;{Binding Pipeline, Source={StaticResource OpenPbrPass}}&quot;</code> on <code>Mu3DSceneView</code>.
+The page still owns scheduling and disposal; resource declaration does not create an autonomous loop.</p>
+<p>Interactive mode starts a fresh estimate each frame, with configurable path-event budget and
+<code>InteractiveResolutionScale</code> (default 0.5). Reference mode retains a full-resolution FP32 mean.
+Both preserve linear HDR, with no implicit tone mapping. Noise and speed depend on the scene and
+hardware; interactive mode does not promise a fixed frame rate or include a denoiser.</p>
+<p>Colors use <code>r,g,b[,a];space</code> with invariant decimal points and a mandatory linear-space identifier:
+<code>acescg</code>, <code>lin_rec709</code>, <code>lin_displayp3</code>, <code>lin_adobergb</code>, <code>lin_prophoto</code>, or <code>lin_rec2020</code>.
+OpenPBR color3 requires alpha one. Geometry opacity is separate. These are linear components, not
+encoded UI hex colors. Vector inputs use <code>x,y,z</code> and receive no color conversion. Null geometry
+normal/tangent values inherit mesh geometry.</p>
+<p>For the optional compatibility preview, <code>PreviewPolicy</code> defaults to <code>RejectUnsupported</code>. Unsupported active inputs hide the preview and
+populate the bindable <code>PreviewError</code>; the authoring values remain intact. Applications may explicitly
+choose <code>AllowLossyApproximation</code> and inspect <code>PreviewResult.Diagnostics</code>. Even a baseline preview
+reports the shader-model approximation. <code>NitsPerSceneUnit</code> is required for active emission because
+OpenPBR luminance is in nits and the renderer consumes scene-linear emission. It does not configure
+display luminance or tone mapping.</p>
+<h2 id="materialx-files">MaterialX files</h2>
+<pre><code class="lang-xml">&lt;materialx version=&quot;1.39&quot; colorspace=&quot;acescg&quot;&gt;
+  &lt;open_pbr_surface name=&quot;blue&quot; type=&quot;surfaceshader&quot; version=&quot;1.1.1&quot;&gt;
+    &lt;input name=&quot;base_color&quot; type=&quot;color3&quot; value=&quot;0.08, 0.35, 0.8&quot; /&gt;
+    &lt;input name=&quot;base_metalness&quot; type=&quot;float&quot; value=&quot;0.75&quot; /&gt;
+  &lt;/open_pbr_surface&gt;
+  &lt;surfacematerial name=&quot;material&quot; type=&quot;material&quot;&gt;
+    &lt;input name=&quot;surfaceshader&quot; type=&quot;surfaceshader&quot; nodename=&quot;blue&quot; /&gt;
+  &lt;/surfacematerial&gt;
+&lt;/materialx&gt;
+</code></pre>
+<p>The file importer returns backend-independent <a class="xref" href="../../api/Mu3D.SceneGraph.OpenPbrSurface.html">OpenPbrSurface</a> values:</p>
+<pre><code class="lang-csharp">using Mu3D.Formats.MaterialX;
+
+using Stream input = await FileSystem.OpenAppPackageFileAsync(&quot;MaterialX/blue-metal.mtlx&quot;);
+MaterialXOpenPbrDocument document = await MaterialXOpenPbrSerializer.ImportAsync(input);
+AuthoredSurface.LoadSurface(document.Surfaces[0].Surface);
+
+using MemoryStream output = new();
+MaterialXOpenPbrSerializer.Export(output, new MaterialXOpenPbrDocument(
+    [new MaterialXOpenPbrSurface(&quot;surface&quot;, AuthoredSurface.ToSurface())],
+    [new MaterialXSurfaceMaterial(&quot;material&quot;, &quot;surface&quot;)]));
+</code></pre>
+<p><code>LoadSurface</code> assigns local values and can override bindings on those properties. Applications
+synchronize their controls/model and restore any bindings that should continue to drive the loaded
+values; the Gallery sample demonstrates this for its roughness slider.</p>
+<p>Application code selects the file or stream. The serializer leaves caller streams open and uses no
+file/network resolver, native runtime or global material registry. It rejects DTDs, includes,
+entities, unsupported connections/graphs, ambiguous names and unsupported versions/types. Import
+limits bound bytes and node counts. Untagged authored colors require an explicit import assignment;
+export emits explicit supported color identities. Scene lengths currently require metre units;
+thin-film thickness remains in micrometres. Non-metre interchange fails explicitly.</p>
+<p>The Gallery <strong>OpenPBR + MaterialX</strong> page compares rendering modes on a sphere and pedestal,
+with visible approximation notes. It includes XAML, a packaged <code>.mtlx</code> example and an export/import
+round trip. Tests validate the 41-input schema and exported XML against
+the pinned upstream definition. File validation is separate from OpenPBR rendering conformance.</p>
+<p>Open <strong>Show material parameters</strong> to edit all 41 inputs, grouped by Base, Specular, Coat,
+Transmission, Subsurface, Fuzz, ThinFilm, Emission and Geometry. Authoring also exposes the
+material name and metres per scene unit. Enter numbers with decimal points, colors with an
+explicit space (<code>0.2,0.4,0.8;acescg</code>), and directions as <code>x,y,z</code>; an empty direction inherits
+the mesh. <strong>Apply this group</strong> validates all of its edits before updating the surface. Changing
+groups or loading a preset discards unapplied edits. Applied edits also redraw when Run is off.</p>
+<p>Connected inputs show <strong>Use texture / graph</strong> and disable the inactive constant field. Turn
+that switch off and apply to disconnect only that input; the other connections remain intact.
+The texture preset's specular roughness is a map multiplied by 0.3 (range 0.21–0.3), while its
+coat has weight 0.4 and independent roughness 0.2. To examine a uniformly rough, uncoated
+surface, disconnect <code>specular_roughness</code>, set it to 1, and set <code>coat_weight</code> to 0 in the Coat
+group. Reloading <strong>Texture material</strong> restores the preset and its connections.</p>
+<p>Mode-incompatible transmission, opacity or subsurface settings are reported before applying.
+Select Hybrid, Interactive or Reference to explore those transport effects and ray shadows.</p>
+<p>The separate <a href="openpbr-white-furnace.html">OpenPBR White Furnace</a> page checks uniform-environment
+energy ratios with explicit scene-linear measurements and error visualization.</p>
+<h2 id="texture-and-node-connections">Texture and node connections</h2>
+<p>All 41 inputs can connect through <code>OpenPbrSurface.Graph</code>. Graphs are immutable; replacing a graph
+resets accumulation. <code>OpenPbrSurface3D.Graph</code> supports normal XAML bindings and resources. Gallery
+includes a color/roughness/normal texture preset and its XML export/import round trip.</p>
+<pre><code class="lang-csharp">var texture = OpenPbrTexture.FromColor(decodedLinearImage, &quot;paint.exr&quot;);
+var surface = new OpenPbrSurface
+{
+    Graph = new OpenPbrGraph(new Dictionary&lt;OpenPbrInput, OpenPbrNode&gt;
+    {
+        [OpenPbrInput.BaseColor] = OpenPbrNode.Image(texture, OpenPbrNodeType.Color3),
+        [OpenPbrInput.SpecularRoughness] = OpenPbrNode.Float(0.35f),
+    }),
+};
+</code></pre>
+<p>Use <code>OpenPbrTexture.FromData</code> for normal, roughness and packed numeric channels. Colors are converted
+to ACEScg; data is never color transformed. MaterialX uses bottom-left UVs, while supplied pixel rows
+run top-to-bottom. UV0/UV1, closest/bilinear sampling and repeat/clamp/mirror addressing are supported.
+Graphs also support add, multiply, mix, explicit clamp, channel extract and tangent normal maps.
+Each surface is limited to 64 distinct nodes; textures and total GPU graph data have explicit budgets.
+There is no implicit mip generation/filtering. Geometry must contain the referenced UV sets.</p>
+<p>MaterialX import supports root connections and named nodegraph outputs. Set
+<code>MaterialXImportOptions.TextureResolver</code> to resolve only resources your application permits. The
+callback receives filename, original color-space assignment and requested value type. Decode color
+to linear light before <code>FromColor</code>, preserve the filename and <code>SourceColorSpace</code>, and use <code>FromData</code>
+for raw channels. Export writes resource references; the application writes the resource files.
+No XML-specified file or URL is opened automatically. Unsupported nodes/attributes fail explicitly.</p>
+<p>Mu3D uses a managed XML adapter, not the official native MaterialX runtime. Official <strong>1.39.4</strong> is
+used independently to validate exported constants and graphs against its standard node definitions.
+Its WebGPU shader generator is not the renderer used here: Mu3D uses pinned Adobe OpenPBR through
+Slang-generated WGSL. These are separate integration paths.</p>
+<h2 id="rendering-boundary">Rendering boundary</h2>
+<p>The ray-transport modes support constant and connected OpenPBR inputs, perspective cameras, triangle geometry with
+morph/skinning, punctual lights and one HDR environment. Mesh-emitter and environment paths are
+sampled through the BSDF; small bright emitters can converge slowly. Transparent primary backgrounds
+retain lighting in reflection and refraction. Output alpha is premultiplied coverage.</p>
+<p>Interior transport requires consistently outward-oriented closed surfaces, with up to eight nested
+media. Camera-inside initialization validates closed concave or convex containing volumes and explicitly rejects
+ambiguous, overlapping or unsupported configurations. The near plane controls projection; transport
+starts at the camera origin so it cannot skip a volume boundary. <code>MetersPerSceneUnit</code> sets geometry
+scale, while authored distances retain <code>MetersPerUnit</code>.</p>
+<p>Reference rendering uses fixed RGB wavelengths and a finite path-event budget. It preserves the
+pinned implementation's documented interior-coat and thin-film/dispersion approximations. It is not
+full spectral rendering. Arbitrary MaterialX nodes, intersecting media, spatial volume fields, external-renderer
+image conformance and target-device performance acceptance remain separate work. GPU/C++ numerical comparisons cover the
+closure independently of XAML construction and file validation.</p>
+<h2 id="reference">Reference</h2>
+<p>Parameter identity follows the <a href="https://github.com/AcademySoftwareFoundation/OpenPBR/tree/v1.1.1">OpenPBR v1.1.1 reference</a>.
+The XML container follows <a href="https://materialx.org/Specification.html">MaterialX 1.39</a>.
+The renderer uses the <a href="https://github.com/adobe/openpbr-bsdf/tree/c91aad1d1ce1693e803f039d7c92c2965c4eb013">pinned Adobe OpenPBR implementation</a>.</p>
+
+</article>
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

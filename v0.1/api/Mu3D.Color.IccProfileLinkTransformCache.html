@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class IccProfileLinkTransformCache | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class IccProfileLinkTransformCache | Mu3D documentation ">
+      
+      <meta name="description" content="Stores a bounded least-recently-used set of compiled ICC profile-link transforms.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Color.IccProfileLinkTransformCache">
+
+
+
+  <h1 id="Mu3D_Color_IccProfileLinkTransformCache" data-uid="Mu3D.Color.IccProfileLinkTransformCache" class="text-break">
+Class IccProfileLinkTransformCache  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Color.html">Color</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Color.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Stores a bounded least-recently-used set of compiled ICC profile-link transforms.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class IccProfileLinkTransformCache</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">IccProfileLinkTransformCache</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="Mu3D_Color_IccProfileLinkTransformCache_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>Cache identity includes the exact immutable source and destination profile instances, their
+fingerprints, rendering intent, and disabled, explicit, or automatic black-point-compensation
+policy. Using instance identity preserves the profile objects exposed by cached transforms and
+returned encoded colors. ICC PCS D50 handling and chromatic adaptation are defined by the full
+profile payload represented by each fingerprint. The cache is thread-safe and caller-owned; it
+does not retain profiles in a process-wide static cache.</p>
+</div>
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_Color_IccProfileLinkTransformCache__ctor_" data-uid="Mu3D.Color.IccProfileLinkTransformCache.#ctor*"></a>
+
+  <h3 id="Mu3D_Color_IccProfileLinkTransformCache__ctor_System_Int32_" data-uid="Mu3D.Color.IccProfileLinkTransformCache.#ctor(System.Int32)">
+  IccProfileLinkTransformCache(int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes an empty bounded transform cache.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IccProfileLinkTransformCache(int capacity = 64)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>capacity</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The maximum number of compiled links retained, which must be positive.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Color_IccProfileLinkTransformCache_Capacity_" data-uid="Mu3D.Color.IccProfileLinkTransformCache.Capacity*"></a>
+
+  <h3 id="Mu3D_Color_IccProfileLinkTransformCache_Capacity" data-uid="Mu3D.Color.IccProfileLinkTransformCache.Capacity">
+  Capacity
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the maximum number of compiled profile links retained by this cache.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Capacity { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_IccProfileLinkTransformCache_Count_" data-uid="Mu3D.Color.IccProfileLinkTransformCache.Count*"></a>
+
+  <h3 id="Mu3D_Color_IccProfileLinkTransformCache_Count" data-uid="Mu3D.Color.IccProfileLinkTransformCache.Count">
+  Count
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the current number of retained compiled profile links.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Count { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Color_IccProfileLinkTransformCache_Clear_" data-uid="Mu3D.Color.IccProfileLinkTransformCache.Clear*"></a>
+
+  <h3 id="Mu3D_Color_IccProfileLinkTransformCache_Clear" data-uid="Mu3D.Color.IccProfileLinkTransformCache.Clear">
+  Clear()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Removes all retained links without changing the cache capacity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Clear()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_IccProfileLinkTransformCache_GetOrCreate_" data-uid="Mu3D.Color.IccProfileLinkTransformCache.GetOrCreate*"></a>
+
+  <h3 id="Mu3D_Color_IccProfileLinkTransformCache_GetOrCreate_Mu3D_Color_IccProfile_Mu3D_Color_IccProfile_Mu3D_Color_IccRenderingIntent_System_Nullable_Mu3D_Color_IccBlackPointCompensation__" data-uid="Mu3D.Color.IccProfileLinkTransformCache.GetOrCreate(Mu3D.Color.IccProfile,Mu3D.Color.IccProfile,Mu3D.Color.IccRenderingIntent,System.Nullable{Mu3D.Color.IccBlackPointCompensation})">
+  GetOrCreate(IccProfile, IccProfile, IccRenderingIntent, IccBlackPointCompensation?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or creates a profile link with disabled or explicitly supplied BPC.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IccProfileLinkTransform GetOrCreate(IccProfile sourceProfile, IccProfile destinationProfile, IccRenderingIntent renderingIntent = IccRenderingIntent.MediaRelativeColorimetric, IccBlackPointCompensation? blackPointCompensation = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sourceProfile</code> <a class="xref" href="Mu3D.Color.IccProfile.html">IccProfile</a></dt>
+    <dd><p>The exact immutable source RGB profile instance.</p>
+</dd>
+    <dt><code>destinationProfile</code> <a class="xref" href="Mu3D.Color.IccProfile.html">IccProfile</a></dt>
+    <dd><p>The exact immutable destination RGB profile instance.</p>
+</dd>
+    <dt><code>renderingIntent</code> <a class="xref" href="Mu3D.Color.IccRenderingIntent.html">IccRenderingIntent</a></dt>
+    <dd><p>The rendering intent applied on both profile sides.</p>
+</dd>
+    <dt><code>blackPointCompensation</code> <a class="xref" href="Mu3D.Color.IccBlackPointCompensation.html">IccBlackPointCompensation</a>?</dt>
+    <dd><p>Explicit black points, or null to disable BPC.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.IccProfileLinkTransform.html">IccProfileLinkTransform</a></dt>
+    <dd><p>The cached or newly compiled profile link.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_IccProfileLinkTransformCache_GetOrCreateWithAutomaticBlackPointCompensation_" data-uid="Mu3D.Color.IccProfileLinkTransformCache.GetOrCreateWithAutomaticBlackPointCompensation*"></a>
+
+  <h3 id="Mu3D_Color_IccProfileLinkTransformCache_GetOrCreateWithAutomaticBlackPointCompensation_Mu3D_Color_IccProfile_Mu3D_Color_IccProfile_Mu3D_Color_IccRenderingIntent_" data-uid="Mu3D.Color.IccProfileLinkTransformCache.GetOrCreateWithAutomaticBlackPointCompensation(Mu3D.Color.IccProfile,Mu3D.Color.IccProfile,Mu3D.Color.IccRenderingIntent)">
+  GetOrCreateWithAutomaticBlackPointCompensation(IccProfile, IccProfile, IccRenderingIntent)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or creates a profile link with automatically estimated ISO 18619 RGB BPC.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IccProfileLinkTransform GetOrCreateWithAutomaticBlackPointCompensation(IccProfile sourceProfile, IccProfile destinationProfile, IccRenderingIntent renderingIntent = IccRenderingIntent.MediaRelativeColorimetric)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sourceProfile</code> <a class="xref" href="Mu3D.Color.IccProfile.html">IccProfile</a></dt>
+    <dd><p>The exact immutable source RGB profile instance.</p>
+</dd>
+    <dt><code>destinationProfile</code> <a class="xref" href="Mu3D.Color.IccProfile.html">IccProfile</a></dt>
+    <dd><p>The exact immutable destination RGB profile instance.</p>
+</dd>
+    <dt><code>renderingIntent</code> <a class="xref" href="Mu3D.Color.IccRenderingIntent.html">IccRenderingIntent</a></dt>
+    <dd><p>Perceptual, media-relative colorimetric or saturation intent.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.IccProfileLinkTransform.html">IccProfileLinkTransform</a></dt>
+    <dd><p>The cached or newly estimated and compiled profile link.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

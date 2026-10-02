@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>glTF material variants | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="glTF material variants | Mu3D documentation ">
+      
+      <meta name="description" content="Apply authored KHR_materials_variants choices without duplicating geometry.">
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="gltf-material-variants">glTF material variants</h1>
+
+<p><a class="xref" href="../../api/Mu3D.Formats.Gltf.GltfAsset.html">GltfAsset</a> exposes authored
+<a class="xref" href="../../api/Mu3D.Formats.Gltf.GltfMaterialVariant.html">GltfMaterialVariant</a> choices imported from <code>KHR_materials_variants</code>.
+Variant selection swaps material references on affected primitives while preserving scene nodes,
+geometry and renderer geometry caches.</p>
+<h2 id="xaml-host">XAML host</h2>
+<pre><code class="lang-xaml">&lt;Grid RowDefinitions=&quot;*,Auto&quot;&gt;
+    &lt;mu3d:Mu3DView
+        x:Name=&quot;SurfaceView&quot;
+        BackgroundColor=&quot;Black&quot;
+        Draw=&quot;OnSurfaceDraw&quot; /&gt;
+    &lt;Picker
+        Grid.Row=&quot;1&quot;
+        ItemsSource=&quot;{Binding MaterialVariants}&quot;
+        SelectedItem=&quot;{Binding SelectedVariant, Mode=TwoWay}&quot;
+        Title=&quot;Authored material variant&quot; /&gt;
+&lt;/Grid&gt;
+</code></pre>
+<p>The binding changes application selection state; the view model or code-behind calls the asset API
+and invalidates the existing scene.</p>
+<pre><code class="lang-csharp">foreach (GltfMaterialVariant variant in asset.MaterialVariants)
+{
+    Console.WriteLine(variant.Name);
+}
+
+asset.ApplyMaterialVariant(selectedIndex);
+sceneView.InvalidateScene();
+
+// Null restores every primitive's authored default material.
+asset.ApplyMaterialVariant(index: null);
+</code></pre>
+<p>Authored variants are different from shader variants. <code>GltfAsset.MaterialVariants</code> contains named
+asset choices for application UI. <code>GltfAsset.MaterialShaderVariants</code> is a structural
+<a class="xref" href="../../api/Mu3D.SceneGraph.MaterialVariantManifest.html">MaterialVariantManifest</a> used for exact AOT-safe pipeline prewarming.</p>
+<p>The application owns selection UI and decides whether variant changes participate in undo/history.
+The asset does not clone textures or GPU geometry per choice.</p>
+
+</article>
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

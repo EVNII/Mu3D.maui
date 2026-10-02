@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Material conformance | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Material conformance | Mu3D documentation ">
+      
+      <meta name="description" content="Validate supported glTF PBR extensions with official focused assets and exact variants.">
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="material-conformance">Material conformance</h1>
+
+<p>Material Conformance is the Gallery's advanced validation harness. It exercises core
+metallic/roughness, emissive strength, clearcoat, anisotropy, sheen, iridescence, specular, IOR,
+transmission/volume/dispersion, diffuse transmission, unlit and authored material variants with
+focused official Khronos assets.</p>
+<h2 id="xaml-harness-shell">XAML harness shell</h2>
+<p>The advanced harness keeps its model matrix and renderer policy in C#, but its complete control
+surface is ordinary XAML. The minimal structural pattern is:</p>
+<pre><code class="lang-xaml">&lt;Grid RowDefinitions=&quot;*,Auto&quot;&gt;
+    &lt;mu3d:Mu3DView x:Name=&quot;SurfaceView&quot; BackgroundColor=&quot;Black&quot; /&gt;
+    &lt;ScrollView Grid.Row=&quot;1&quot; MaximumHeightRequest=&quot;420&quot;&gt;
+        &lt;VerticalStackLayout Padding=&quot;16&quot; Spacing=&quot;12&quot;&gt;
+            &lt;Picker ItemsSource=&quot;{Binding Models}&quot; SelectedItem=&quot;{Binding SelectedModel}&quot; /&gt;
+            &lt;Picker ItemsSource=&quot;{Binding RenderOutputs}&quot; SelectedItem=&quot;{Binding SelectedOutput}&quot; /&gt;
+            &lt;Switch IsToggled=&quot;{Binding ShadowsEnabled}&quot; /&gt;
+            &lt;Switch IsToggled=&quot;{Binding AmbientOcclusionEnabled}&quot; /&gt;
+        &lt;/VerticalStackLayout&gt;
+    &lt;/ScrollView&gt;
+&lt;/Grid&gt;
+</code></pre>
+<p><a class="xref" href="../../api/Mu3D.SceneGraph.PbrMaterial.html">PbrMaterial</a> retains compositional extension blocks and texture sources.
+<a class="xref" href="../../api/Mu3D.SceneGraph.MaterialShaderTemplate.html">MaterialShaderTemplate</a> is an allowed-feature policy, not a Cartesian product
+of possible shaders. <a class="xref" href="../../api/Mu3D.SceneGraph.MaterialVariantManifest.html">MaterialVariantManifest</a> records only exact structures
+observed in the imported asset, and <a class="xref" href="../../api/Mu3D.Rendering.SceneRenderer.html">SceneRenderer</a> can prewarm those variants
+through its AOT-safe API.</p>
+<h2 id="portable-resource-budget">Portable resource budget</h2>
+<p>The compact binding plan supports at most ten material sampled textures plus six shared renderer
+textures at the WebGPU portable default of sixteen fragment-stage sampled textures. Unsupported
+combinations fail closed; the renderer does not silently drop an authored map.</p>
+<h2 id="use-this-page-correctly">Use this page correctly</h2>
+<ul>
+<li>Use focused pages for ordinary integration and copyable code.</li>
+<li>Use this harness for extension isolation, official asset comparison and compound-variant stress.</li>
+<li>Treat physical appearance as platform/device evidence only for the exact build and display tested.</li>
+<li>Keep official asset licenses and hashes adjacent to the bundled files.</li>
+</ul>
+<p>The harness intentionally remains larger than the Gallery's 500-line focused-example limit and is
+isolated under <strong>Advanced</strong>.</p>
+
+</article>
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

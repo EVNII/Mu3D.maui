@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class OpenPbrGraph | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class OpenPbrGraph | Mu3D documentation ">
+      
+      <meta name="description" content="Owns immutable OpenPBR input connections and a bounded topological node inventory.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.SceneGraph.OpenPbrGraph">
+
+
+
+  <h1 id="Mu3D_SceneGraph_OpenPbrGraph" data-uid="Mu3D.SceneGraph.OpenPbrGraph" class="text-break">
+Class OpenPbrGraph  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.SceneGraph.html">SceneGraph</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Owns immutable OpenPBR input connections and a bounded topological node inventory.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class OpenPbrGraph</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">OpenPbrGraph</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="Mu3D_SceneGraph_OpenPbrGraph_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>Unconnected inputs retain the surface's constants. Graphs are shared safely by cloned
+surfaces; replacing a graph resets render accumulation. A graph contains at most 64 unique nodes.
+Physical bounds are conservative: add an explicit Clamp when an expression may leave a parameter's domain.</p>
+</div>
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrGraph__ctor_" data-uid="Mu3D.SceneGraph.OpenPbrGraph.#ctor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrGraph__ctor_System_Collections_Generic_IEnumerable_System_Collections_Generic_KeyValuePair_Mu3D_SceneGraph_OpenPbrInput_Mu3D_SceneGraph_OpenPbrNode___" data-uid="Mu3D.SceneGraph.OpenPbrGraph.#ctor(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{Mu3D.SceneGraph.OpenPbrInput,Mu3D.SceneGraph.OpenPbrNode}})">
+  OpenPbrGraph(IEnumerable&lt;KeyValuePair&lt;OpenPbrInput, OpenPbrNode&gt;&gt;)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates validated, immutable connections; duplicate input keys are rejected.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPbrGraph(IEnumerable&lt;KeyValuePair&lt;OpenPbrInput, OpenPbrNode&gt;&gt; bindings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>bindings</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;<a class="xref" href="Mu3D.SceneGraph.OpenPbrInput.html">OpenPbrInput</a>, <a class="xref" href="Mu3D.SceneGraph.OpenPbrNode.html">OpenPbrNode</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrGraph_MaximumNodes" data-uid="Mu3D.SceneGraph.OpenPbrGraph.MaximumNodes">
+  MaximumNodes
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Maximum distinct operations evaluated at one surface hit.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int MaximumNodes = 64</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrGraph_Bindings_" data-uid="Mu3D.SceneGraph.OpenPbrGraph.Bindings*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrGraph_Bindings" data-uid="Mu3D.SceneGraph.OpenPbrGraph.Bindings">
+  Bindings
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets parameter-to-expression connections.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyDictionary&lt;OpenPbrInput, OpenPbrNode&gt; Bindings { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2">IReadOnlyDictionary</a>&lt;<a class="xref" href="Mu3D.SceneGraph.OpenPbrInput.html">OpenPbrInput</a>, <a class="xref" href="Mu3D.SceneGraph.OpenPbrNode.html">OpenPbrNode</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrGraph_Nodes_" data-uid="Mu3D.SceneGraph.OpenPbrGraph.Nodes*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrGraph_Nodes" data-uid="Mu3D.SceneGraph.OpenPbrGraph.Nodes">
+  Nodes
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets unique nodes in dependency-first order.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;OpenPbrNode&gt; Nodes { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="Mu3D.SceneGraph.OpenPbrNode.html">OpenPbrNode</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrGraph_Maximum_" data-uid="Mu3D.SceneGraph.OpenPbrGraph.Maximum*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrGraph_Maximum_Mu3D_SceneGraph_OpenPbrInput_System_Single_" data-uid="Mu3D.SceneGraph.OpenPbrGraph.Maximum(Mu3D.SceneGraph.OpenPbrInput,System.Single)">
+  Maximum(OpenPbrInput, float)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets an input's conservative upper bound, or the supplied constant fallback.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Maximum(OpenPbrInput input, float fallback)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>input</code> <a class="xref" href="Mu3D.SceneGraph.OpenPbrInput.html">OpenPbrInput</a></dt>
+    <dd></dd>
+    <dt><code>fallback</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrGraph_Minimum_" data-uid="Mu3D.SceneGraph.OpenPbrGraph.Minimum*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrGraph_Minimum_Mu3D_SceneGraph_OpenPbrInput_System_Single_" data-uid="Mu3D.SceneGraph.OpenPbrGraph.Minimum(Mu3D.SceneGraph.OpenPbrInput,System.Single)">
+  Minimum(OpenPbrInput, float)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets an input's conservative lower bound, or the supplied constant fallback.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Minimum(OpenPbrInput input, float fallback)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>input</code> <a class="xref" href="Mu3D.SceneGraph.OpenPbrInput.html">OpenPbrInput</a></dt>
+    <dd></dd>
+    <dt><code>fallback</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

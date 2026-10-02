@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class OpenPbrTexture | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class OpenPbrTexture | Mu3D documentation ">
+      
+      <meta name="description" content="Owns an immutable, bounded FP32 material texture; no file access or decoding is implicit.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.SceneGraph.OpenPbrTexture">
+
+
+
+  <h1 id="Mu3D_SceneGraph_OpenPbrTexture" data-uid="Mu3D.SceneGraph.OpenPbrTexture" class="text-break">
+Class OpenPbrTexture  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.SceneGraph.html">SceneGraph</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Owns an immutable, bounded FP32 material texture; no file access or decoding is implicit.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class OpenPbrTexture</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">OpenPbrTexture</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="Mu3D_SceneGraph_OpenPbrTexture_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>UV (0,0) addresses the bottom-left corner, as in MaterialX. Supplied pixels run
+top-to-bottom. Color textures are converted once to ACEScg; data textures retain their numbers.
+Sampling is level zero, without automatic mip filtering. Replace the texture to edit it.</p>
+</div>
+
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrTexture_MaximumPixels" data-uid="Mu3D.SceneGraph.OpenPbrTexture.MaximumPixels">
+  MaximumPixels
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Maximum texels per texture, limiting copied storage to 64 MiB.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const int MaximumPixels = 4194304</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrTexture_Height_" data-uid="Mu3D.SceneGraph.OpenPbrTexture.Height*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrTexture_Height" data-uid="Mu3D.SceneGraph.OpenPbrTexture.Height">
+  Height
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the texture height.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Height { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrTexture_IsColor_" data-uid="Mu3D.SceneGraph.OpenPbrTexture.IsColor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrTexture_IsColor" data-uid="Mu3D.SceneGraph.OpenPbrTexture.IsColor">
+  IsColor
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets whether RGB contains ACEScg color rather than raw data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsColor { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrTexture_Maximum_" data-uid="Mu3D.SceneGraph.OpenPbrTexture.Maximum*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrTexture_Maximum" data-uid="Mu3D.SceneGraph.OpenPbrTexture.Maximum">
+  Maximum
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets conservative per-component maximum values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector4 Maximum { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.vector4">Vector4</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrTexture_Minimum_" data-uid="Mu3D.SceneGraph.OpenPbrTexture.Minimum*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrTexture_Minimum" data-uid="Mu3D.SceneGraph.OpenPbrTexture.Minimum">
+  Minimum
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets conservative per-component minimum values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector4 Minimum { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.vector4">Vector4</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrTexture_Pixels_" data-uid="Mu3D.SceneGraph.OpenPbrTexture.Pixels*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrTexture_Pixels" data-uid="Mu3D.SceneGraph.OpenPbrTexture.Pixels">
+  Pixels
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets immutable top-to-bottom RGBA texels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;Vector4&gt; Pixels { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.vector4">Vector4</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrTexture_Source_" data-uid="Mu3D.SceneGraph.OpenPbrTexture.Source*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrTexture_Source" data-uid="Mu3D.SceneGraph.OpenPbrTexture.Source">
+  Source
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the optional external resource identity for interchange.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Source { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrTexture_SourceColorSpace_" data-uid="Mu3D.SceneGraph.OpenPbrTexture.SourceColorSpace*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrTexture_SourceColorSpace" data-uid="Mu3D.SceneGraph.OpenPbrTexture.SourceColorSpace">
+  SourceColorSpace
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the original resource color assignment retained for interchange; it does not alter decoded pixels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string SourceColorSpace { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrTexture_Width_" data-uid="Mu3D.SceneGraph.OpenPbrTexture.Width*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrTexture_Width" data-uid="Mu3D.SceneGraph.OpenPbrTexture.Width">
+  Width
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the texture width.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Width { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrTexture_FromColor_" data-uid="Mu3D.SceneGraph.OpenPbrTexture.FromColor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrTexture_FromColor_Mu3D_Color_LinearRgbaImage_System_String_System_String_" data-uid="Mu3D.SceneGraph.OpenPbrTexture.FromColor(Mu3D.Color.LinearRgbaImage,System.String,System.String)">
+  FromColor(LinearRgbaImage, string?, string?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Copies linear color pixels and converts RGB to ACEScg, preserving alpha.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static OpenPbrTexture FromColor(LinearRgbaImage image, string? source = null, string? sourceColorSpace = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>image</code> <a class="xref" href="Mu3D.Color.LinearRgbaImage.html">LinearRgbaImage</a></dt>
+    <dd><p>Explicitly tagged, decoded linear pixels.</p>
+</dd>
+    <dt><code>source</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Optional MaterialX filename identity; never automatically opened.</p>
+</dd>
+    <dt><code>sourceColorSpace</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Optional original resource color assignment retained for MaterialX export; pixels are already decoded linear.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrTexture.html">OpenPbrTexture</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrTexture_FromData_" data-uid="Mu3D.SceneGraph.OpenPbrTexture.FromData*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrTexture_FromData_System_UInt32_System_UInt32_System_Collections_Generic_IEnumerable_System_Numerics_Vector4__System_String_" data-uid="Mu3D.SceneGraph.OpenPbrTexture.FromData(System.UInt32,System.UInt32,System.Collections.Generic.IEnumerable{System.Numerics.Vector4},System.String)">
+  FromData(uint, uint, IEnumerable&lt;Vector4&gt;, string?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Copies raw channels for roughness, normals, opacity or other numeric inputs.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static OpenPbrTexture FromData(uint width, uint height, IEnumerable&lt;Vector4&gt; pixels, string? source = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>width</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+    <dt><code>height</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+    <dt><code>pixels</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.numerics.vector4">Vector4</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>source</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrTexture.html">OpenPbrTexture</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

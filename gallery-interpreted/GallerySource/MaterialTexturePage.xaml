@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.MaterialTexturePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    Title="PBR Material and Textures">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="pbr-material-textures" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <mu3d:Mu3DView
+            x:Name="SurfaceView"
+            BackgroundColor="Black"
+            Draw="OnSurfaceDraw" />
+        <ScrollView Grid.Row="1" MaximumHeightRequest="380">
+            <VerticalStackLayout Padding="16" Spacing="10">
+                <Label x:Name="StatusLabel" Text="Preparing material…" />
+                <Label x:Name="MetallicLabel" Text="Metallic: 0.00" />
+                <Slider
+                    x:Name="MetallicSlider"
+                    Maximum="1"
+                    ValueChanged="OnControlChanged" />
+                <Label x:Name="RoughnessLabel" Text="Roughness: 0.55" />
+                <Slider
+                    x:Name="RoughnessSlider"
+                    Maximum="1"
+                    Minimum="0.04"
+                    Value="0.55"
+                    ValueChanged="OnControlChanged" />
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label VerticalOptions="Center" Text="Base-color texture" />
+                    <Switch
+                        x:Name="ColorTextureSwitch"
+                        Grid.Column="1"
+                        Toggled="OnControlChanged" />
+                </Grid>
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label VerticalOptions="Center" Text="Normal texture" />
+                    <Switch
+                        x:Name="NormalTextureSwitch"
+                        Grid.Column="1"
+                        Toggled="OnControlChanged" />
+                </Grid>
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label VerticalOptions="Center" Text="Occlusion/roughness/metallic texture" />
+                    <Switch
+                        x:Name="OrmTextureSwitch"
+                        Grid.Column="1"
+                        Toggled="OnControlChanged" />
+                </Grid>
+                <Label Text="Texture addressing" />
+                <Picker
+                    x:Name="AddressPicker"
+                    SelectedIndexChanged="OnControlChanged" />
+                <Label Text="Texture filtering" />
+                <Picker
+                    x:Name="FilterPicker"
+                    SelectedIndexChanged="OnControlChanged" />
+                <Label x:Name="TilingLabel" Text="Texture tiling: 1.00x" />
+                <Slider
+                    x:Name="TilingSlider"
+                    Maximum="4"
+                    Minimum="0.25"
+                    Value="1"
+                    ValueChanged="OnControlChanged" />
+                <Label x:Name="DetailsLabel" FontSize="12" LineBreakMode="WordWrap" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

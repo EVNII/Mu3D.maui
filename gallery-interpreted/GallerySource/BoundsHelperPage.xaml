@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.BoundsHelperPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    xmlns:toolkit="clr-namespace:Mu3D.Maui.Toolkit.Controls;assembly=Mu3D.Maui.Toolkit"
+    Title="Bounds + Outline Helpers">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="bounds-helper" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <mu3d:Mu3DSceneView
+            x:Name="SceneView"
+            BackgroundColor="Black"
+            FeatureError="OnFeatureError"
+            SurfaceError="OnSurfaceError">
+            <mu3d:Mu3DSceneView.SceneContent>
+                <mu3d:Scene3D Name="Bounds helper scene">
+                    <mu3d:Scene3D.Camera>
+                        <mu3d:PerspectiveCamera3D
+                            x:Name="SceneCamera"
+                            FieldOfView="48"
+                            Name="Bounds camera"
+                            X="5.2"
+                            Y="3.5"
+                            Z="7.4" />
+                    </mu3d:Scene3D.Camera>
+                    <mu3d:Cone3D
+                        x:Name="BoundedCone"
+                        Height="2.5"
+                        Name="Bounded cone"
+                        Radius="0.95"
+                        RotationX="18"
+                        RotationY="-32"
+                        RotationZ="12"
+                        ScaleX="1.35"
+                        ScaleY="0.8"
+                        ScaleZ="0.65"
+                        X="-0.35"
+                        Y="0.2">
+                        <mu3d:PbrMaterial3D Color="#3B9EFF" Metallic="0.28" Roughness="0.22" />
+                    </mu3d:Cone3D>
+                    <mu3d:Sphere3D
+                        Name="Foreground occluder"
+                        Radius="0.72"
+                        X="0.72"
+                        Y="0.52"
+                        Z="1.1">
+                        <mu3d:PbrMaterial3D Color="#E657C4" Metallic="0.05" Roughness="0.3" />
+                    </mu3d:Sphere3D>
+                    <mu3d:DirectionalLight3D Intensity="4.5" RotationX="-42" RotationY="-30" />
+                </mu3d:Scene3D>
+            </mu3d:Mu3DSceneView.SceneContent>
+            <mu3d:Mu3DSceneView.Features>
+                <toolkit:ViewportTools>
+                    <toolkit:OrbitTool
+                        Camera="{x:Reference SceneCamera}"
+                        DampingEnabled="True"
+                        DampingTime="0.1"
+                        MaximumDistance="24"
+                        MinimumDistance="3" />
+                    <toolkit:BoundsHelper
+                        x:Name="TargetBounds"
+                        Color="#FFFF9D24"
+                        DepthMode="SceneDepthTested"
+                        IncludeDescendants="True"
+                        IncludeInvisible="False"
+                        LineWidth="3"
+                        Padding="0.08"
+                        Precise="True"
+                        Target="{x:Reference BoundedCone}" />
+                    <toolkit:OutlineHelper
+                        x:Name="TargetOutline"
+                        Color="#FF38E8FF"
+                        DepthMode="SceneDepthTested"
+                        IncludeDescendants="True"
+                        IncludeInvisible="False"
+                        IsVisible="True"
+                        LineWidth="4"
+                        Target="{x:Reference BoundedCone}" />
+                </toolkit:ViewportTools>
+            </mu3d:Mu3DSceneView.Features>
+        </mu3d:Mu3DSceneView>
+        <VerticalStackLayout Grid.Row="1" Padding="16" Spacing="7">
+            <Label
+                FontAttributes="Bold"
+                Text="Orange is the world AABB; cyan is the actual model silhouette. Both target only the blue cone." />
+            <FlexLayout
+                AlignItems="Center"
+                Direction="Row"
+                JustifyContent="Start"
+                Wrap="Wrap">
+                <HorizontalStackLayout Spacing="6">
+                    <Label Text="Bounds" VerticalTextAlignment="Center" />
+                    <Switch
+                        IsToggled="{Binding IsVisible, Mode=TwoWay, Source={x:Reference TargetBounds}, x:DataType=toolkit:BoundsHelper}" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Margin="18,0,0,0" Spacing="6">
+                    <Label Text="Outline" VerticalTextAlignment="Center" />
+                    <Switch
+                        IsToggled="{Binding IsVisible, Mode=TwoWay, Source={x:Reference TargetOutline}, x:DataType=toolkit:OutlineHelper}" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Margin="18,0,0,0" Spacing="6">
+                    <Label Text="Overlay" VerticalTextAlignment="Center" />
+                    <Switch Toggled="OnOverlayToggled" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Margin="18,0,0,0" Spacing="6">
+                    <Label Text="Target" VerticalTextAlignment="Center" />
+                    <Switch
+                        IsToggled="{Binding IsVisible, Mode=TwoWay, Source={x:Reference BoundedCone}, x:DataType=mu3d:Cone3D}" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Margin="18,0,0,0" Spacing="6">
+                    <Label Text="Include invisible" VerticalTextAlignment="Center" />
+                    <Switch Toggled="OnIncludeInvisibleToggled" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Margin="18,0,0,0" Spacing="6">
+                    <Label Text="Precise" VerticalTextAlignment="Center" />
+                    <Switch
+                        IsToggled="{Binding Precise, Mode=TwoWay, Source={x:Reference TargetBounds}, x:DataType=toolkit:BoundsHelper}" />
+                </HorizontalStackLayout>
+            </FlexLayout>
+            <Label
+                x:Name="StatusLabel"
+                FontSize="12"
+                Text="Scene-depth-tested mode lets the foreground sphere occlude both helpers; enable Overlay to draw through it." />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

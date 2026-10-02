@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class HdrCanvas | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class HdrCanvas | Mu3D documentation ">
+      
+      <meta name="description" content="Stores a sparse HDR canvas with FP32 compositing and explicit working, compositing and storage policy. Public pixels are straight-alpha linear colors; tiles store premultiplied linear color.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Creative.HdrCanvas">
+
+
+
+  <h1 id="Mu3D_Creative_HdrCanvas" data-uid="Mu3D.Creative.HdrCanvas" class="text-break">
+Class HdrCanvas  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Creative.html">Creative</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Creative.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Stores a sparse HDR canvas with FP32 compositing and explicit working, compositing and storage
+policy. Public pixels are straight-alpha linear colors; tiles store premultiplied linear color.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class HdrCanvas</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">HdrCanvas</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="Mu3D_Creative_HdrCanvas_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>Instances are not thread-safe. Mutations validate and stage changes before committing; invalid
+colors, numeric overflow and configured allocation-budget failures leave pixels, revision and
+dirty regions unchanged. Fully transparent pixels are canonical transparent black. No display,
+gamut, tone-map, input, undo, gesture or stroke-spacing policy is applied.</p>
+</div>
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_Creative_HdrCanvas__ctor_" data-uid="Mu3D.Creative.HdrCanvas.#ctor*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvas__ctor_System_Int32_System_Int32_Mu3D_Color_StandardRgbColorSpaceReference_Mu3D_Creative_HdrCanvasOptions_" data-uid="Mu3D.Creative.HdrCanvas.#ctor(System.Int32,System.Int32,Mu3D.Color.StandardRgbColorSpaceReference,Mu3D.Creative.HdrCanvasOptions)">
+  HdrCanvas(int, int, StandardRgbColorSpaceReference, HdrCanvasOptions?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a transparent sparse canvas without allocating pixel tiles.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HdrCanvas(int width, int height, StandardRgbColorSpaceReference workingSpace, HdrCanvasOptions? options = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>width</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Canvas width from 1 through 1048576 pixels.</p>
+</dd>
+    <dt><code>height</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Canvas height from 1 through 1048576 pixels.</p>
+</dd>
+    <dt><code>workingSpace</code> <a class="xref" href="Mu3D.Color.StandardRgbColorSpaceReference.html">StandardRgbColorSpaceReference</a></dt>
+    <dd><p>The standard linear working-space identity for reads and snapshots.</p>
+</dd>
+    <dt><code>options</code> <a class="xref" href="Mu3D.Creative.HdrCanvasOptions.html">HdrCanvasOptions</a></dt>
+    <dd><p>Optional storage, compositing and resource limits.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Creative_HdrCanvas_AllocatedStorageBytes_" data-uid="Mu3D.Creative.HdrCanvas.AllocatedStorageBytes*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvas_AllocatedStorageBytes" data-uid="Mu3D.Creative.HdrCanvas.AllocatedStorageBytes">
+  AllocatedStorageBytes
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets retained tile-pixel payload bytes, excluding collection and object overhead.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long AllocatedStorageBytes { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvas_CompositingSpace_" data-uid="Mu3D.Creative.HdrCanvas.CompositingSpace*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvas_CompositingSpace" data-uid="Mu3D.Creative.HdrCanvas.CompositingSpace">
+  CompositingSpace
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the separately selected linear space used by premultiplied storage and blending.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StandardRgbColorSpaceReference CompositingSpace { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.StandardRgbColorSpaceReference.html">StandardRgbColorSpaceReference</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvas_Height_" data-uid="Mu3D.Creative.HdrCanvas.Height*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvas_Height" data-uid="Mu3D.Creative.HdrCanvas.Height">
+  Height
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the canvas height in pixels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Height { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvas_Precision_" data-uid="Mu3D.Creative.HdrCanvas.Precision*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvas_Precision" data-uid="Mu3D.Creative.HdrCanvas.Precision">
+  Precision
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the actual tile storage precision.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PixelPrecision Precision { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.PixelPrecision.html">PixelPrecision</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvas_Revision_" data-uid="Mu3D.Creative.HdrCanvas.Revision*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvas_Revision" data-uid="Mu3D.Creative.HdrCanvas.Revision">
+  Revision
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the version, incremented once per operation that changes stored pixels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ulong Revision { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint64">ulong</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvas_TileCount_" data-uid="Mu3D.Creative.HdrCanvas.TileCount*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvas_TileCount" data-uid="Mu3D.Creative.HdrCanvas.TileCount">
+  TileCount
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the number of currently allocated nontransparent tiles.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int TileCount { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvas_TileSize_" data-uid="Mu3D.Creative.HdrCanvas.TileSize*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvas_TileSize" data-uid="Mu3D.Creative.HdrCanvas.TileSize">
+  TileSize
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the tile edge length; right and bottom edge tiles allocate only their actual extent.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int TileSize { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvas_Width_" data-uid="Mu3D.Creative.HdrCanvas.Width*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvas_Width" data-uid="Mu3D.Creative.HdrCanvas.Width">
+  Width
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the canvas width in pixels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Width { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvas_WorkingSpace_" data-uid="Mu3D.Creative.HdrCanvas.WorkingSpace*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvas_WorkingSpace" data-uid="Mu3D.Creative.HdrCanvas.WorkingSpace">
+  WorkingSpace
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the explicit linear working space used by reads and snapshots.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StandardRgbColorSpaceReference WorkingSpace { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.StandardRgbColorSpaceReference.html">StandardRgbColorSpaceReference</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Creative_HdrCanvas_ApplyDab_" data-uid="Mu3D.Creative.HdrCanvas.ApplyDab*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvas_ApplyDab_Mu3D_Creative_BrushDab_" data-uid="Mu3D.Creative.HdrCanvas.ApplyDab(Mu3D.Creative.BrushDab)">
+  ApplyDab(BrushDab)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Composites one circular application-supplied dab, clipped to the canvas. Coverage is evaluated
+at pixel centers, with a linear fade outside the hardness radius and zero at the outer radius.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ApplyDab(BrushDab dab)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>dab</code> <a class="xref" href="Mu3D.Creative.BrushDab.html">BrushDab</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvas_Clear_" data-uid="Mu3D.Creative.HdrCanvas.Clear*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvas_Clear" data-uid="Mu3D.Creative.HdrCanvas.Clear">
+  Clear()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Clears the complete canvas to transparent black and releases all tile-pixel storage.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Clear()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvas_ClearDirtyRegions_" data-uid="Mu3D.Creative.HdrCanvas.ClearDirtyRegions*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvas_ClearDirtyRegions" data-uid="Mu3D.Creative.HdrCanvas.ClearDirtyRegions">
+  ClearDirtyRegions()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Clears dirty bookkeeping after the application has consumed updates; pixels and revision are unchanged.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearDirtyRegions()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvas_Composite_" data-uid="Mu3D.Creative.HdrCanvas.Composite*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvas_Composite_Mu3D_Creative_CanvasRegion_Mu3D_Color_LinearRgba_Mu3D_Creative_CanvasBlendMode_System_Single_" data-uid="Mu3D.Creative.HdrCanvas.Composite(Mu3D.Creative.CanvasRegion,Mu3D.Color.LinearRgba,Mu3D.Creative.CanvasBlendMode,System.Single)">
+  Composite(CanvasRegion, LinearRgba, CanvasBlendMode, float)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Blends and source-over composites a constant tagged color over an in-bounds rectangle.
+Opacity is an additional multiplier in [0, 1]; RGB is neither clipped nor tone mapped.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Composite(CanvasRegion region, LinearRgba color, CanvasBlendMode blendMode = CanvasBlendMode.Normal, float opacity = 1)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>region</code> <a class="xref" href="Mu3D.Creative.CanvasRegion.html">CanvasRegion</a></dt>
+    <dd></dd>
+    <dt><code>color</code> <a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+    <dt><code>blendMode</code> <a class="xref" href="Mu3D.Creative.CanvasBlendMode.html">CanvasBlendMode</a></dt>
+    <dd></dd>
+    <dt><code>opacity</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvas_CompositeImage_" data-uid="Mu3D.Creative.HdrCanvas.CompositeImage*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvas_CompositeImage_Mu3D_Color_LinearRgbaImage_System_Int32_System_Int32_Mu3D_Creative_CanvasBlendMode_System_Single_" data-uid="Mu3D.Creative.HdrCanvas.CompositeImage(Mu3D.Color.LinearRgbaImage,System.Int32,System.Int32,Mu3D.Creative.CanvasBlendMode,System.Single)">
+  CompositeImage(LinearRgbaImage, int, int, CanvasBlendMode, float)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts, blends and source-over composites a tagged immutable image at an in-bounds integer
+origin. The complete image must fit; no scaling, resampling or implicit clipping is performed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CompositeImage(LinearRgbaImage image, int x = 0, int y = 0, CanvasBlendMode blendMode = CanvasBlendMode.Normal, float opacity = 1)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>image</code> <a class="xref" href="Mu3D.Color.LinearRgbaImage.html">LinearRgbaImage</a></dt>
+    <dd></dd>
+    <dt><code>x</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>y</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>blendMode</code> <a class="xref" href="Mu3D.Creative.CanvasBlendMode.html">CanvasBlendMode</a></dt>
+    <dd></dd>
+    <dt><code>opacity</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvas_Fill_" data-uid="Mu3D.Creative.HdrCanvas.Fill*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvas_Fill_Mu3D_Creative_CanvasRegion_Mu3D_Color_LinearRgba_" data-uid="Mu3D.Creative.HdrCanvas.Fill(Mu3D.Creative.CanvasRegion,Mu3D.Color.LinearRgba)">
+  Fill(CanvasRegion, LinearRgba)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Replaces all pixels in an in-bounds rectangle with the converted straight-alpha color.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Fill(CanvasRegion region, LinearRgba color)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>region</code> <a class="xref" href="Mu3D.Creative.CanvasRegion.html">CanvasRegion</a></dt>
+    <dd></dd>
+    <dt><code>color</code> <a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvas_GetDirtyRegions_" data-uid="Mu3D.Creative.HdrCanvas.GetDirtyRegions*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvas_GetDirtyRegions" data-uid="Mu3D.Creative.HdrCanvas.GetDirtyRegions">
+  GetDirtyRegions()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a detached, row-major list of dirty pixel bounds, at most one rectangle per tile.
+Results include cleared tiles and remain dirty until <a class="xref" href="Mu3D.Creative.HdrCanvas.html#Mu3D_Creative_HdrCanvas_ClearDirtyRegions">ClearDirtyRegions()</a> is called.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;CanvasRegion&gt; GetDirtyRegions()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="Mu3D.Creative.CanvasRegion.html">CanvasRegion</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvas_GetPixel_" data-uid="Mu3D.Creative.HdrCanvas.GetPixel*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvas_GetPixel_System_Int32_System_Int32_" data-uid="Mu3D.Creative.HdrCanvas.GetPixel(System.Int32,System.Int32)">
+  GetPixel(int, int)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads a straight-alpha FP32 pixel in the canvas working space.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgba GetPixel(int x, int y)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>x</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>y</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvas_SetPixel_" data-uid="Mu3D.Creative.HdrCanvas.SetPixel*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvas_SetPixel_System_Int32_System_Int32_Mu3D_Color_LinearRgba_" data-uid="Mu3D.Creative.HdrCanvas.SetPixel(System.Int32,System.Int32,Mu3D.Color.LinearRgba)">
+  SetPixel(int, int, LinearRgba)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Replaces one pixel after converting the explicitly tagged color to the compositing space.
+A fully transparent input discards hidden RGB.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetPixel(int x, int y, LinearRgba color)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>x</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>y</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>color</code> <a class="xref" href="Mu3D.Color.LinearRgba.html">LinearRgba</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Creative_HdrCanvas_Snapshot_" data-uid="Mu3D.Creative.HdrCanvas.Snapshot*"></a>
+
+  <h3 id="Mu3D_Creative_HdrCanvas_Snapshot_System_Nullable_Mu3D_Creative_CanvasRegion__System_String_" data-uid="Mu3D.Creative.HdrCanvas.Snapshot(System.Nullable{Mu3D.Creative.CanvasRegion},System.String)">
+  Snapshot(CanvasRegion?, string?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates an immutable straight-alpha FP32 image in the working space, suitable for material
+presentation. A region snapshots only that crop; null selects the full canvas. Dirty state is retained.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LinearRgbaImage Snapshot(CanvasRegion? region = null, string? name = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>region</code> <a class="xref" href="Mu3D.Creative.CanvasRegion.html">CanvasRegion</a>?</dt>
+    <dd></dd>
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LinearRgbaImage.html">LinearRgbaImage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
+    <dd><p>The snapshot exceeds its pixel-buffer budget or managed array limit.</p>
+</dd>
+  </dl>
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

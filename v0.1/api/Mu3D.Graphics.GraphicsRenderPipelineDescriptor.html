@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct GraphicsRenderPipelineDescriptor | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct GraphicsRenderPipelineDescriptor | Mu3D documentation ">
+      
+      <meta name="description" content="Describes a render pipeline with an optional color target and optional depth state.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor">
+
+
+
+  <h1 id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor" class="text-break">
+Struct GraphicsRenderPipelineDescriptor  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Graphics.html">Graphics</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Graphics.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Describes a render pipeline with an optional color target and optional depth state.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct GraphicsRenderPipelineDescriptor : IEquatable&lt;GraphicsRenderPipelineDescriptor&gt;</code></pre>
+  </div>
+
+
+
+
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.html">GraphicsRenderPipelineDescriptor</a>&gt;</div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor__ctor_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.#ctor*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor__ctor_Mu3D_Graphics_GraphicsShaderModule_System_String_Mu3D_Graphics_GraphicsDepthStencilState_Mu3D_Graphics_GraphicsPrimitiveTopology_System_String_System_Collections_Generic_IReadOnlyList_Mu3D_Graphics_GraphicsVertexBufferLayout__Mu3D_Graphics_GraphicsPipelineLayout_Mu3D_Graphics_GraphicsCullMode_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.#ctor(Mu3D.Graphics.GraphicsShaderModule,System.String,Mu3D.Graphics.GraphicsDepthStencilState,Mu3D.Graphics.GraphicsPrimitiveTopology,System.String,System.Collections.Generic.IReadOnlyList{Mu3D.Graphics.GraphicsVertexBufferLayout},Mu3D.Graphics.GraphicsPipelineLayout,Mu3D.Graphics.GraphicsCullMode)">
+  GraphicsRenderPipelineDescriptor(GraphicsShaderModule, string, GraphicsDepthStencilState, GraphicsPrimitiveTopology, string?, IReadOnlyList&lt;GraphicsVertexBufferLayout&gt;?, GraphicsPipelineLayout?, GraphicsCullMode)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a depth-only render pipeline with no fragment stage or color target.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphicsRenderPipelineDescriptor(GraphicsShaderModule vertexShader, string vertexEntryPoint, GraphicsDepthStencilState depthStencil, GraphicsPrimitiveTopology topology = GraphicsPrimitiveTopology.TriangleList, string? label = null, IReadOnlyList&lt;GraphicsVertexBufferLayout&gt;? vertexBuffers = null, GraphicsPipelineLayout? layout = null, GraphicsCullMode cullMode = GraphicsCullMode.None)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>vertexShader</code> <a class="xref" href="Mu3D.Graphics.GraphicsShaderModule.html">GraphicsShaderModule</a></dt>
+    <dd></dd>
+    <dt><code>vertexEntryPoint</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>depthStencil</code> <a class="xref" href="Mu3D.Graphics.GraphicsDepthStencilState.html">GraphicsDepthStencilState</a></dt>
+    <dd></dd>
+    <dt><code>topology</code> <a class="xref" href="Mu3D.Graphics.GraphicsPrimitiveTopology.html">GraphicsPrimitiveTopology</a></dt>
+    <dd></dd>
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>vertexBuffers</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="Mu3D.Graphics.GraphicsVertexBufferLayout.html">GraphicsVertexBufferLayout</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>layout</code> <a class="xref" href="Mu3D.Graphics.GraphicsPipelineLayout.html">GraphicsPipelineLayout</a></dt>
+    <dd></dd>
+    <dt><code>cullMode</code> <a class="xref" href="Mu3D.Graphics.GraphicsCullMode.html">GraphicsCullMode</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor__ctor_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.#ctor*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor__ctor_Mu3D_Graphics_GraphicsShaderModule_System_String_Mu3D_Graphics_GraphicsShaderModule_System_String_Mu3D_Graphics_GraphicsDepthStencilState_Mu3D_Graphics_GraphicsPrimitiveTopology_System_String_System_Collections_Generic_IReadOnlyList_Mu3D_Graphics_GraphicsVertexBufferLayout__Mu3D_Graphics_GraphicsPipelineLayout_Mu3D_Graphics_GraphicsCullMode_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.#ctor(Mu3D.Graphics.GraphicsShaderModule,System.String,Mu3D.Graphics.GraphicsShaderModule,System.String,Mu3D.Graphics.GraphicsDepthStencilState,Mu3D.Graphics.GraphicsPrimitiveTopology,System.String,System.Collections.Generic.IReadOnlyList{Mu3D.Graphics.GraphicsVertexBufferLayout},Mu3D.Graphics.GraphicsPipelineLayout,Mu3D.Graphics.GraphicsCullMode)">
+  GraphicsRenderPipelineDescriptor(GraphicsShaderModule, string, GraphicsShaderModule, string, GraphicsDepthStencilState, GraphicsPrimitiveTopology, string?, IReadOnlyList&lt;GraphicsVertexBufferLayout&gt;?, GraphicsPipelineLayout?, GraphicsCullMode)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a depth-only render pipeline whose fragment stage may discard fragments but
+writes no color target.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphicsRenderPipelineDescriptor(GraphicsShaderModule vertexShader, string vertexEntryPoint, GraphicsShaderModule fragmentShader, string fragmentEntryPoint, GraphicsDepthStencilState depthStencil, GraphicsPrimitiveTopology topology = GraphicsPrimitiveTopology.TriangleList, string? label = null, IReadOnlyList&lt;GraphicsVertexBufferLayout&gt;? vertexBuffers = null, GraphicsPipelineLayout? layout = null, GraphicsCullMode cullMode = GraphicsCullMode.None)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>vertexShader</code> <a class="xref" href="Mu3D.Graphics.GraphicsShaderModule.html">GraphicsShaderModule</a></dt>
+    <dd></dd>
+    <dt><code>vertexEntryPoint</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>fragmentShader</code> <a class="xref" href="Mu3D.Graphics.GraphicsShaderModule.html">GraphicsShaderModule</a></dt>
+    <dd></dd>
+    <dt><code>fragmentEntryPoint</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>depthStencil</code> <a class="xref" href="Mu3D.Graphics.GraphicsDepthStencilState.html">GraphicsDepthStencilState</a></dt>
+    <dd></dd>
+    <dt><code>topology</code> <a class="xref" href="Mu3D.Graphics.GraphicsPrimitiveTopology.html">GraphicsPrimitiveTopology</a></dt>
+    <dd></dd>
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>vertexBuffers</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="Mu3D.Graphics.GraphicsVertexBufferLayout.html">GraphicsVertexBufferLayout</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>layout</code> <a class="xref" href="Mu3D.Graphics.GraphicsPipelineLayout.html">GraphicsPipelineLayout</a></dt>
+    <dd></dd>
+    <dt><code>cullMode</code> <a class="xref" href="Mu3D.Graphics.GraphicsCullMode.html">GraphicsCullMode</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor__ctor_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.#ctor*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor__ctor_Mu3D_Graphics_GraphicsShaderModule_System_String_Mu3D_Graphics_GraphicsShaderModule_System_String_Mu3D_Graphics_GraphicsTextureFormat_Mu3D_Graphics_GraphicsPrimitiveTopology_System_String_System_Collections_Generic_IReadOnlyList_Mu3D_Graphics_GraphicsVertexBufferLayout__System_Nullable_Mu3D_Graphics_GraphicsDepthStencilState__Mu3D_Graphics_GraphicsPipelineLayout_Mu3D_Graphics_GraphicsCullMode_System_Nullable_Mu3D_Graphics_GraphicsBlendState__" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.#ctor(Mu3D.Graphics.GraphicsShaderModule,System.String,Mu3D.Graphics.GraphicsShaderModule,System.String,Mu3D.Graphics.GraphicsTextureFormat,Mu3D.Graphics.GraphicsPrimitiveTopology,System.String,System.Collections.Generic.IReadOnlyList{Mu3D.Graphics.GraphicsVertexBufferLayout},System.Nullable{Mu3D.Graphics.GraphicsDepthStencilState},Mu3D.Graphics.GraphicsPipelineLayout,Mu3D.Graphics.GraphicsCullMode,System.Nullable{Mu3D.Graphics.GraphicsBlendState})">
+  GraphicsRenderPipelineDescriptor(GraphicsShaderModule, string, GraphicsShaderModule, string, GraphicsTextureFormat, GraphicsPrimitiveTopology, string?, IReadOnlyList&lt;GraphicsVertexBufferLayout&gt;?, GraphicsDepthStencilState?, GraphicsPipelineLayout?, GraphicsCullMode, GraphicsBlendState?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a render pipeline.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphicsRenderPipelineDescriptor(GraphicsShaderModule vertexShader, string vertexEntryPoint, GraphicsShaderModule fragmentShader, string fragmentEntryPoint, GraphicsTextureFormat colorFormat, GraphicsPrimitiveTopology topology = GraphicsPrimitiveTopology.TriangleList, string? label = null, IReadOnlyList&lt;GraphicsVertexBufferLayout&gt;? vertexBuffers = null, GraphicsDepthStencilState? depthStencil = null, GraphicsPipelineLayout? layout = null, GraphicsCullMode cullMode = GraphicsCullMode.None, GraphicsBlendState? blend = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>vertexShader</code> <a class="xref" href="Mu3D.Graphics.GraphicsShaderModule.html">GraphicsShaderModule</a></dt>
+    <dd></dd>
+    <dt><code>vertexEntryPoint</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>fragmentShader</code> <a class="xref" href="Mu3D.Graphics.GraphicsShaderModule.html">GraphicsShaderModule</a></dt>
+    <dd></dd>
+    <dt><code>fragmentEntryPoint</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>colorFormat</code> <a class="xref" href="Mu3D.Graphics.GraphicsTextureFormat.html">GraphicsTextureFormat</a></dt>
+    <dd></dd>
+    <dt><code>topology</code> <a class="xref" href="Mu3D.Graphics.GraphicsPrimitiveTopology.html">GraphicsPrimitiveTopology</a></dt>
+    <dd></dd>
+    <dt><code>label</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>vertexBuffers</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="Mu3D.Graphics.GraphicsVertexBufferLayout.html">GraphicsVertexBufferLayout</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>depthStencil</code> <a class="xref" href="Mu3D.Graphics.GraphicsDepthStencilState.html">GraphicsDepthStencilState</a>?</dt>
+    <dd></dd>
+    <dt><code>layout</code> <a class="xref" href="Mu3D.Graphics.GraphicsPipelineLayout.html">GraphicsPipelineLayout</a></dt>
+    <dd></dd>
+    <dt><code>cullMode</code> <a class="xref" href="Mu3D.Graphics.GraphicsCullMode.html">GraphicsCullMode</a></dt>
+    <dd></dd>
+    <dt><code>blend</code> <a class="xref" href="Mu3D.Graphics.GraphicsBlendState.html">GraphicsBlendState</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_Blend_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.Blend*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_Blend" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.Blend">
+  Blend
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the optional fixed-function color-target blend state.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphicsBlendState? Blend { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsBlendState.html">GraphicsBlendState</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_ColorFormat_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.ColorFormat*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_ColorFormat" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.ColorFormat">
+  ColorFormat
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the optional color-attachment format.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphicsTextureFormat? ColorFormat { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsTextureFormat.html">GraphicsTextureFormat</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_CullMode_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.CullMode*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_CullMode" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.CullMode">
+  CullMode
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the fixed-function face-culling mode.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphicsCullMode CullMode { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsCullMode.html">GraphicsCullMode</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_DepthStencil_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.DepthStencil*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_DepthStencil" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.DepthStencil">
+  DepthStencil
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the optional fixed-function depth state.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphicsDepthStencilState? DepthStencil { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsDepthStencilState.html">GraphicsDepthStencilState</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_FragmentEntryPoint_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.FragmentEntryPoint*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_FragmentEntryPoint" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.FragmentEntryPoint">
+  FragmentEntryPoint
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the fragment entry-point name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? FragmentEntryPoint { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_FragmentShader_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.FragmentShader*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_FragmentShader" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.FragmentShader">
+  FragmentShader
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the optional fragment shader module, including depth-only discard stages.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphicsShaderModule? FragmentShader { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsShaderModule.html">GraphicsShaderModule</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_Label_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.Label*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_Label" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.Label">
+  Label
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the optional diagnostic label.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Label { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_Layout_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.Layout*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_Layout" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.Layout">
+  Layout
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the explicit bind-group layout, or null when the pipeline has no public bindings.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphicsPipelineLayout? Layout { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsPipelineLayout.html">GraphicsPipelineLayout</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_Topology_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.Topology*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_Topology" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.Topology">
+  Topology
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the primitive topology.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphicsPrimitiveTopology Topology { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsPrimitiveTopology.html">GraphicsPrimitiveTopology</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_VertexBuffers_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.VertexBuffers*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_VertexBuffers" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.VertexBuffers">
+  VertexBuffers
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the immutable vertex-buffer layouts indexed by binding slot.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;GraphicsVertexBufferLayout&gt; VertexBuffers { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="Mu3D.Graphics.GraphicsVertexBufferLayout.html">GraphicsVertexBufferLayout</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_VertexEntryPoint_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.VertexEntryPoint*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_VertexEntryPoint" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.VertexEntryPoint">
+  VertexEntryPoint
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the vertex entry-point name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string VertexEntryPoint { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_VertexShader_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.VertexShader*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_VertexShader" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.VertexShader">
+  VertexShader
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the vertex shader module.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphicsShaderModule VertexShader { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Graphics.GraphicsShaderModule.html">GraphicsShaderModule</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_Equals_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.Equals*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_Equals_Mu3D_Graphics_GraphicsRenderPipelineDescriptor_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.Equals(Mu3D.Graphics.GraphicsRenderPipelineDescriptor)">
+  Equals(GraphicsRenderPipelineDescriptor)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(GraphicsRenderPipelineDescriptor other)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>other</code> <a class="xref" href="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.html">GraphicsRenderPipelineDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_Equals_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.Equals*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_Equals_System_Object_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.Equals(System.Object)">
+  Equals(object)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>obj</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_GetHashCode_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.GetHashCode*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_GetHashCode" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.GetHashCode">
+  GetHashCode()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_ToString_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.ToString*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_ToString" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.ToString">
+  ToString()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_op_Equality_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.op_Equality*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_op_Equality_Mu3D_Graphics_GraphicsRenderPipelineDescriptor_Mu3D_Graphics_GraphicsRenderPipelineDescriptor_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.op_Equality(Mu3D.Graphics.GraphicsRenderPipelineDescriptor,Mu3D.Graphics.GraphicsRenderPipelineDescriptor)">
+  operator ==(GraphicsRenderPipelineDescriptor, GraphicsRenderPipelineDescriptor)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(GraphicsRenderPipelineDescriptor left, GraphicsRenderPipelineDescriptor right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.html">GraphicsRenderPipelineDescriptor</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.html">GraphicsRenderPipelineDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_op_Inequality_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.op_Inequality*"></a>
+
+  <h3 id="Mu3D_Graphics_GraphicsRenderPipelineDescriptor_op_Inequality_Mu3D_Graphics_GraphicsRenderPipelineDescriptor_Mu3D_Graphics_GraphicsRenderPipelineDescriptor_" data-uid="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.op_Inequality(Mu3D.Graphics.GraphicsRenderPipelineDescriptor,Mu3D.Graphics.GraphicsRenderPipelineDescriptor)">
+  operator !=(GraphicsRenderPipelineDescriptor, GraphicsRenderPipelineDescriptor)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(GraphicsRenderPipelineDescriptor left, GraphicsRenderPipelineDescriptor right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.html">GraphicsRenderPipelineDescriptor</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Mu3D.Graphics.GraphicsRenderPipelineDescriptor.html">GraphicsRenderPipelineDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

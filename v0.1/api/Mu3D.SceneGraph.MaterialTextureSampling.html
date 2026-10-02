@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct MaterialTextureSampling | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct MaterialTextureSampling | Mu3D documentation ">
+      
+      <meta name="description" content="Defines backend-independent sampling shared by a material&#39;s two-dimensional maps.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.SceneGraph.MaterialTextureSampling">
+
+
+
+  <h1 id="Mu3D_SceneGraph_MaterialTextureSampling" data-uid="Mu3D.SceneGraph.MaterialTextureSampling" class="text-break">
+Struct MaterialTextureSampling  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.SceneGraph.html">SceneGraph</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Core.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Defines backend-independent sampling shared by a material's two-dimensional maps.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct MaterialTextureSampling : IEquatable&lt;MaterialTextureSampling&gt;</code></pre>
+  </div>
+
+
+
+
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="Mu3D.SceneGraph.MaterialTextureSampling.html">MaterialTextureSampling</a>&gt;</div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_SceneGraph_MaterialTextureSampling__ctor_" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.#ctor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_MaterialTextureSampling__ctor_Mu3D_SceneGraph_MaterialTextureAddressMode_Mu3D_SceneGraph_MaterialTextureAddressMode_Mu3D_SceneGraph_MaterialTextureFilter_" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.#ctor(Mu3D.SceneGraph.MaterialTextureAddressMode,Mu3D.SceneGraph.MaterialTextureAddressMode,Mu3D.SceneGraph.MaterialTextureFilter)">
+  MaterialTextureSampling(MaterialTextureAddressMode, MaterialTextureAddressMode, MaterialTextureFilter)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes material texture sampling.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureSampling(MaterialTextureAddressMode addressModeU, MaterialTextureAddressMode addressModeV, MaterialTextureFilter filter)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>addressModeU</code> <a class="xref" href="Mu3D.SceneGraph.MaterialTextureAddressMode.html">MaterialTextureAddressMode</a></dt>
+    <dd></dd>
+    <dt><code>addressModeV</code> <a class="xref" href="Mu3D.SceneGraph.MaterialTextureAddressMode.html">MaterialTextureAddressMode</a></dt>
+    <dd></dd>
+    <dt><code>filter</code> <a class="xref" href="Mu3D.SceneGraph.MaterialTextureFilter.html">MaterialTextureFilter</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_MaterialTextureSampling__ctor_" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.#ctor*"></a>
+
+  <h3 id="Mu3D_SceneGraph_MaterialTextureSampling__ctor_Mu3D_SceneGraph_MaterialTextureAddressMode_Mu3D_SceneGraph_MaterialTextureAddressMode_Mu3D_SceneGraph_MaterialTextureFilter_Mu3D_SceneGraph_MaterialTextureFilter_Mu3D_SceneGraph_MaterialTextureFilter_System_Boolean_" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.#ctor(Mu3D.SceneGraph.MaterialTextureAddressMode,Mu3D.SceneGraph.MaterialTextureAddressMode,Mu3D.SceneGraph.MaterialTextureFilter,Mu3D.SceneGraph.MaterialTextureFilter,Mu3D.SceneGraph.MaterialTextureFilter,System.Boolean)">
+  MaterialTextureSampling(MaterialTextureAddressMode, MaterialTextureAddressMode, MaterialTextureFilter, MaterialTextureFilter, MaterialTextureFilter, bool)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes independently filtered material texture sampling.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureSampling(MaterialTextureAddressMode addressModeU, MaterialTextureAddressMode addressModeV, MaterialTextureFilter magnificationFilter, MaterialTextureFilter minificationFilter, MaterialTextureFilter mipFilter, bool useMipmaps)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>addressModeU</code> <a class="xref" href="Mu3D.SceneGraph.MaterialTextureAddressMode.html">MaterialTextureAddressMode</a></dt>
+    <dd></dd>
+    <dt><code>addressModeV</code> <a class="xref" href="Mu3D.SceneGraph.MaterialTextureAddressMode.html">MaterialTextureAddressMode</a></dt>
+    <dd></dd>
+    <dt><code>magnificationFilter</code> <a class="xref" href="Mu3D.SceneGraph.MaterialTextureFilter.html">MaterialTextureFilter</a></dt>
+    <dd></dd>
+    <dt><code>minificationFilter</code> <a class="xref" href="Mu3D.SceneGraph.MaterialTextureFilter.html">MaterialTextureFilter</a></dt>
+    <dd></dd>
+    <dt><code>mipFilter</code> <a class="xref" href="Mu3D.SceneGraph.MaterialTextureFilter.html">MaterialTextureFilter</a></dt>
+    <dd></dd>
+    <dt><code>useMipmaps</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_SceneGraph_MaterialTextureSampling_AddressModeU_" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.AddressModeU*"></a>
+
+  <h3 id="Mu3D_SceneGraph_MaterialTextureSampling_AddressModeU" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.AddressModeU">
+  AddressModeU
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets horizontal texture addressing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureAddressMode AddressModeU { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureAddressMode.html">MaterialTextureAddressMode</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_MaterialTextureSampling_AddressModeV_" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.AddressModeV*"></a>
+
+  <h3 id="Mu3D_SceneGraph_MaterialTextureSampling_AddressModeV" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.AddressModeV">
+  AddressModeV
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets vertical texture addressing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureAddressMode AddressModeV { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureAddressMode.html">MaterialTextureAddressMode</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_MaterialTextureSampling_Filter_" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.Filter*"></a>
+
+  <h3 id="Mu3D_SceneGraph_MaterialTextureSampling_Filter" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.Filter">
+  Filter
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the legacy common filter view. For independently filtered sampling this returns the
+minification filter.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureFilter Filter { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureFilter.html">MaterialTextureFilter</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_MaterialTextureSampling_MagnificationFilter_" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.MagnificationFilter*"></a>
+
+  <h3 id="Mu3D_SceneGraph_MaterialTextureSampling_MagnificationFilter" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.MagnificationFilter">
+  MagnificationFilter
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the magnification filter.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureFilter MagnificationFilter { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureFilter.html">MaterialTextureFilter</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_MaterialTextureSampling_MinificationFilter_" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.MinificationFilter*"></a>
+
+  <h3 id="Mu3D_SceneGraph_MaterialTextureSampling_MinificationFilter" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.MinificationFilter">
+  MinificationFilter
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the minification filter within one mip level.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureFilter MinificationFilter { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureFilter.html">MaterialTextureFilter</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_MaterialTextureSampling_MipFilter_" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.MipFilter*"></a>
+
+  <h3 id="Mu3D_SceneGraph_MaterialTextureSampling_MipFilter" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.MipFilter">
+  MipFilter
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the filter between mip levels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaterialTextureFilter MipFilter { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureFilter.html">MaterialTextureFilter</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_MaterialTextureSampling_RepeatingLinear_" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.RepeatingLinear*"></a>
+
+  <h3 id="Mu3D_SceneGraph_MaterialTextureSampling_RepeatingLinear" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.RepeatingLinear">
+  RepeatingLinear
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets repeating, trilinear sampling used by default for PBR material maps.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static MaterialTextureSampling RepeatingLinear { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.MaterialTextureSampling.html">MaterialTextureSampling</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_MaterialTextureSampling_UseMipmaps_" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.UseMipmaps*"></a>
+
+  <h3 id="Mu3D_SceneGraph_MaterialTextureSampling_UseMipmaps" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.UseMipmaps">
+  UseMipmaps
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets whether sampling may select mip levels above zero.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool UseMipmaps { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_SceneGraph_MaterialTextureSampling_Equals_" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.Equals*"></a>
+
+  <h3 id="Mu3D_SceneGraph_MaterialTextureSampling_Equals_Mu3D_SceneGraph_MaterialTextureSampling_" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.Equals(Mu3D.SceneGraph.MaterialTextureSampling)">
+  Equals(MaterialTextureSampling)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(MaterialTextureSampling other)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>other</code> <a class="xref" href="Mu3D.SceneGraph.MaterialTextureSampling.html">MaterialTextureSampling</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_MaterialTextureSampling_Equals_" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.Equals*"></a>
+
+  <h3 id="Mu3D_SceneGraph_MaterialTextureSampling_Equals_System_Object_" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.Equals(System.Object)">
+  Equals(object)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>obj</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_MaterialTextureSampling_GetHashCode_" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.GetHashCode*"></a>
+
+  <h3 id="Mu3D_SceneGraph_MaterialTextureSampling_GetHashCode" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.GetHashCode">
+  GetHashCode()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_MaterialTextureSampling_ToString_" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.ToString*"></a>
+
+  <h3 id="Mu3D_SceneGraph_MaterialTextureSampling_ToString" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.ToString">
+  ToString()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Mu3D_SceneGraph_MaterialTextureSampling_op_Equality_" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.op_Equality*"></a>
+
+  <h3 id="Mu3D_SceneGraph_MaterialTextureSampling_op_Equality_Mu3D_SceneGraph_MaterialTextureSampling_Mu3D_SceneGraph_MaterialTextureSampling_" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.op_Equality(Mu3D.SceneGraph.MaterialTextureSampling,Mu3D.SceneGraph.MaterialTextureSampling)">
+  operator ==(MaterialTextureSampling, MaterialTextureSampling)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(MaterialTextureSampling left, MaterialTextureSampling right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Mu3D.SceneGraph.MaterialTextureSampling.html">MaterialTextureSampling</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Mu3D.SceneGraph.MaterialTextureSampling.html">MaterialTextureSampling</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_SceneGraph_MaterialTextureSampling_op_Inequality_" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.op_Inequality*"></a>
+
+  <h3 id="Mu3D_SceneGraph_MaterialTextureSampling_op_Inequality_Mu3D_SceneGraph_MaterialTextureSampling_Mu3D_SceneGraph_MaterialTextureSampling_" data-uid="Mu3D.SceneGraph.MaterialTextureSampling.op_Inequality(Mu3D.SceneGraph.MaterialTextureSampling,Mu3D.SceneGraph.MaterialTextureSampling)">
+  operator !=(MaterialTextureSampling, MaterialTextureSampling)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(MaterialTextureSampling left, MaterialTextureSampling right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Mu3D.SceneGraph.MaterialTextureSampling.html">MaterialTextureSampling</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Mu3D.SceneGraph.MaterialTextureSampling.html">MaterialTextureSampling</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

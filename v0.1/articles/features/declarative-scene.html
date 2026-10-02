@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Declarative scenes | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Declarative scenes | Mu3D documentation ">
+      
+      <meta name="description" content="Declare a Mu3D camera, primitives, transforms, lights, and materials directly in MAUI XAML.">
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="declarative-scenes">Declarative scenes</h1>
+
+<p><a class="xref" href="../../api/Mu3D.Maui.Controls.Mu3DSceneView.html">Mu3DSceneView</a> accepts one nested
+<a class="xref" href="../../api/Mu3D.Maui.Controls.Scene3D.html">Scene3D</a>. The facade supplies the lower-level Core scene and camera, then
+requests a coalesced frame whenever a bindable node or material changes. Renderer, device, surface,
+resize, and native-resource ownership stay with the view.</p>
+<pre><code class="lang-xaml">&lt;mu3d:Mu3DSceneView SurfaceError=&quot;OnSurfaceError&quot;&gt;
+  &lt;mu3d:Scene3D Name=&quot;Product preview&quot;&gt;
+    &lt;mu3d:Scene3D.Camera&gt;
+      &lt;mu3d:PerspectiveCamera3D FieldOfView=&quot;52&quot; Z=&quot;5.5&quot; /&gt;
+    &lt;/mu3d:Scene3D.Camera&gt;
+
+    &lt;mu3d:Sphere3D Radius=&quot;0.9&quot; X=&quot;-1.2&quot;&gt;
+      &lt;mu3d:PbrMaterial3D Color=&quot;#4A9DFF&quot; Metallic=&quot;0.15&quot; Roughness=&quot;0.22&quot; /&gt;
+    &lt;/mu3d:Sphere3D&gt;
+
+    &lt;mu3d:Cone3D Height=&quot;1.8&quot; Radius=&quot;0.82&quot; X=&quot;1.2&quot;&gt;
+      &lt;mu3d:UnlitMaterial3D Color=&quot;#FF7A28&quot; /&gt;
+    &lt;/mu3d:Cone3D&gt;
+
+    &lt;mu3d:DirectionalLight3D Intensity=&quot;3.5&quot; RotationX=&quot;-35&quot; RotationY=&quot;-30&quot; /&gt;
+  &lt;/mu3d:Scene3D&gt;
+&lt;/mu3d:Mu3DSceneView&gt;
+</code></pre>
+<p>The facade uses individual FP32 translation, degree rotation, and scale properties so MAUI XAML,
+bindings, and styles can address them without a custom vector converter. MAUI colors are interpreted
+as encoded sRGB UI colors and decoded to explicitly tagged linear sRGB before reaching Core. This
+does not introduce implicit tone mapping or display encoding.</p>
+<h2 id="imperative-interoperation">Imperative interoperation</h2>
+<p>The declarative wrappers do not hide Core. <code>Scene3D.Scene</code>, <code>SceneNode3D.CoreNode</code>,
+<code>Primitive3D.Mesh</code>, and <code>Material3D.CoreMaterial</code> expose the corresponding backend-independent
+objects for selection, controllers, imported assets, or advanced properties. After a direct Core
+mutation, call <code>Mu3DSceneView.InvalidateScene()</code> because Mu3D cannot observe arbitrary imperative
+property changes.</p>
+<p><code>Scene3D</code> holds only managed scene state and may be observed by more than one SceneView. It does not
+transfer or share presentation sessions or native GPU resources. For reusable furniture, product,
+or glTF data, keep using <a class="xref" href="../../api/Mu3D.Assets.SceneAsset.html">SceneAsset</a> and independent instances; declarative
+primitives are the concise authoring path, not an infinite-catalog cache policy.</p>
+<p>Input, selection ranking, undo/redo, and editor state remain application policy. Optional statically
+composed SceneView Features can be declared beside <code>Scene3D</code> without changing scene ownership.</p>
+
+</article>
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

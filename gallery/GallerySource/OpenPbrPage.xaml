@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Mu3D.GalleryApp.Pages.OpenPbrPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:Mu3D.GalleryApp.Pages"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    Title="OpenPBR + MaterialX">
+    <ContentPage.Resources>
+        <pages:OpenPbrTextureExample x:Key="TextureExample" />
+        <mu3d:ColorView3D x:Key="DisplayView" Preset="AgXHdr1000" ReferenceWhiteNits="100" />
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="openpbr-materialx" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <mu3d:Mu3DSceneView x:Name="SceneView" BackgroundColor="Black" SurfaceError="OnSurfaceError"
+            RendererChanged="OnRendererChanged" PresentationSessionChanged="OnPresentationSessionChanged"
+            FramePresented="OnFramePresented">
+            <mu3d:Scene3D x:Name="DeclaredScene">
+                <mu3d:Scene3D.Camera>
+                    <mu3d:PerspectiveCamera3D Z="5" FieldOfView="50" />
+                </mu3d:Scene3D.Camera>
+                <mu3d:Sphere3D Radius="1">
+                    <mu3d:OpenPbrMaterial3D x:Name="Material" NitsPerSceneUnit="100">
+                        <mu3d:OpenPbrSurface3D x:Name="Surface"
+                            Graph="{Binding Graph, Source={StaticResource TextureExample}, x:DataType=pages:OpenPbrTextureExample}"
+                            BaseColor="0.08,0.35,0.8;acescg"
+                            BaseMetalness="0.25"
+                            CoatWeight="0.4" CoatRoughness="0.2"
+                            SpecularRoughness="0.3" />
+                    </mu3d:OpenPbrMaterial3D>
+                </mu3d:Sphere3D>
+                <mu3d:Sphere3D Radius="1" Y="-1.12" ScaleX="1.8" ScaleY="0.12" ScaleZ="1.4">
+                    <mu3d:OpenPbrMaterial3D>
+                        <mu3d:OpenPbrSurface3D BaseColor="0.5,0.5,0.5;acescg" SpecularRoughness="0.55" />
+                    </mu3d:OpenPbrMaterial3D>
+                </mu3d:Sphere3D>
+                <mu3d:DirectionalLight3D CastsShadows="True" Intensity="4" RotationX="-25" RotationY="-30" />
+            </mu3d:Scene3D>
+        </mu3d:Mu3DSceneView>
+        <ScrollView Grid.Row="1" MaximumHeightRequest="340">
+        <VerticalStackLayout Padding="16" Spacing="6">
+            <Label Text="OpenPBR · raster / hybrid / path tracing" FontAttributes="Bold" />
+            <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+                <Picker x:Name="ModePicker" Title="Rendering mode" SelectedIndex="2" SelectedIndexChanged="OnModeChanged">
+                    <Picker.Items>
+                        <x:String>Interactive · path tracing</x:String><x:String>Reference · path tracing</x:String>
+                        <x:String>Raster · direct + environment</x:String><x:String>Hybrid · raster + ray transport</x:String>
+                        <x:String>Fast · split-sum IBL</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label Grid.Column="1" Text="Run" VerticalOptions="Center" />
+                <Switch x:Name="RunSwitch" Grid.Column="2" IsToggled="True" Toggled="OnRunChanged" />
+            </Grid>
+            <Picker x:Name="DisplayPicker" Title="Display view" SelectedIndex="0" SelectedIndexChanged="OnDisplayChanged">
+                <Picker.Items>
+                    <x:String>Scene linear · HDR</x:String><x:String>AgX · HDR 1000 nits</x:String>
+                    <x:String>ACES 2 · HDR 1000 nits</x:String><x:String>AgX · SDR</x:String><x:String>ACES 2 · SDR</x:String>
+                </Picker.Items>
+            </Picker>
+            <Label x:Name="SamplesLabel" FontSize="12" Text="Raster: direct light + environment with directional shadow maps. No indirect transport." />
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                <Label Text="Directional shadows · Raster / Fast" VerticalOptions="Center" />
+                <Switch x:Name="ShadowSwitch" Grid.Column="1" IsToggled="True" Toggled="OnShadowSettingsChanged" />
+            </Grid>
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <Picker x:Name="ShadowSizePicker" Title="Shadow map size" SelectedIndex="1" SelectedIndexChanged="OnShadowSettingsChanged">
+                    <Picker.Items><x:String>512 px</x:String><x:String>1024 px</x:String><x:String>2048 px</x:String><x:String>4096 px</x:String></Picker.Items>
+                </Picker>
+                <Picker x:Name="ShadowFilterPicker" Grid.Column="1" Title="Shadow filter" SelectedIndex="1" SelectedIndexChanged="OnShadowSettingsChanged">
+                    <Picker.Items><x:String>Hard</x:String><x:String>PCF 3×3</x:String><x:String>PCF 5×5</x:String></Picker.Items>
+                </Picker>
+            </Grid>
+            <Label Text="{Binding Value, Source={x:Reference ShadowBiasSlider}, x:DataType=Slider, StringFormat='Depth bias: {0:F4}'}" FontSize="12" />
+            <Slider x:Name="ShadowBiasSlider" Minimum="0" Maximum="0.02" Value="0.001" ValueChanged="OnShadowSettingsChanged" />
+            <Label Text="{Binding Value, Source={x:Reference ShadowNormalBiasSlider}, x:DataType=Slider, StringFormat='Normal bias (scene units): {0:F4}'}" FontSize="12" />
+            <Slider x:Name="ShadowNormalBiasSlider" Minimum="0" Maximum="0.05" Value="0.002" ValueChanged="OnShadowSettingsChanged" />
+            <ContentView x:Name="ParameterHost" />
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                <Button Grid.Column="2" Text="Texture material" Clicked="OnTextureClicked" />
+                <Button Text="Load .mtlx sample" Clicked="OnLoadClicked" />
+                <Button Grid.Column="1" Text="XML round trip" Clicked="OnRoundTripClicked" />
+            </Grid>
+            <Label x:Name="StatusLabel" FontSize="12" Text="XAML declares the surface. MaterialX stores the same parameters." />
+        </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

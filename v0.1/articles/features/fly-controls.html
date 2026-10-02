@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>First-person fly controls | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="First-person fly controls | Mu3D documentation ">
+      
+      <meta name="description" content="Use the shared device input model to move and look through a first-person camera.">
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="first-person-fly-controls">First-person fly controls</h1>
+
+<p><a class="xref" href="../../api/Mu3D.Toolkit.Controls.FlyController.html">FlyController</a> controls one borrowed perspective camera without an
+orbit target. Movement uses world units: local X strafes, local Y follows world up, and local Z
+moves along the current forward direction. Look commands change yaw around world up and clamp pitch
+away from the poles.</p>
+<p>The UI-independent controller implements
+<a class="xref" href="../../api/Mu3D.Toolkit.Controls.IViewportNavigationController.html">IViewportNavigationController</a>. The shared actions are interpreted as:</p>
+<ul>
+<li><code>Rotate</code> changes yaw and pitch.</li>
+<li><code>Pan</code> strafes and lifts.</li>
+<li><code>Dolly</code> moves forward and backward without changing field of view.</li>
+</ul>
+<p>The controller acquires no keys, pointers, focus or timer. A host can still call <code>Move</code>, <code>Look</code>,
+atomic <code>Navigate</code> and <code>SynchronizeFromCamera</code> directly.</p>
+<h2 id="declare-the-maui-tool">Declare the MAUI tool</h2>
+<p><a class="xref" href="../../api/Mu3D.Maui.Toolkit.Controls.FlyTool.html">FlyTool</a> uses the same
+<a class="xref" href="../../api/Mu3D.Maui.Toolkit.Controls.ViewportInput.html">ViewportInput</a> object as Orbit and Map. The object is divided by
+physical device; it is not divided by camera-controller type:</p>
+<pre><code class="lang-xaml">&lt;mu3d:Mu3DSceneView&gt;
+  &lt;mu3d:Mu3DSceneView.SceneContent&gt;
+    &lt;mu3d:Scene3D&gt;
+      &lt;mu3d:Scene3D.Camera&gt;
+        &lt;mu3d:PerspectiveCamera3D x:Name=&quot;FlyCamera&quot; Y=&quot;2&quot; Z=&quot;8&quot; /&gt;
+      &lt;/mu3d:Scene3D.Camera&gt;
+      &lt;!-- Scene objects... --&gt;
+    &lt;/mu3d:Scene3D&gt;
+  &lt;/mu3d:Mu3DSceneView.SceneContent&gt;
+
+  &lt;mu3d:Mu3DSceneView.Features&gt;
+    &lt;toolkit:ViewportTools&gt;
+      &lt;toolkit:FlyTool
+          x:Name=&quot;FlyNavigation&quot;
+          Camera=&quot;{x:Reference FlyCamera}&quot;
+          DampingEnabled=&quot;True&quot;
+          DampingTime=&quot;0.1&quot;
+          RotationRadiansPerViewport=&quot;3.1415927&quot;
+          PanUnitsPerViewport=&quot;4&quot;
+          PinchDollyMultiplier=&quot;6&quot;
+          WheelDollyStep=&quot;0.75&quot;
+          MovementStep=&quot;0.75&quot;
+          LookStepRadians=&quot;0.08726646&quot;&gt;
+        &lt;toolkit:FlyTool.Input&gt;
+          &lt;toolkit:ViewportInput&gt;
+            &lt;toolkit:ViewportInput.Mouse&gt;
+              &lt;toolkit:MouseInput
+                  LeftButtonDragAction=&quot;Rotate&quot;
+                  RightButtonDragAction=&quot;Pan&quot;
+                  WheelAction=&quot;Dolly&quot; /&gt;
+            &lt;/toolkit:ViewportInput.Mouse&gt;
+            &lt;toolkit:ViewportInput.Trackpad&gt;
+              &lt;toolkit:TrackpadInput
+                  TwoFingerDragAction=&quot;Pan&quot;
+                  PinchAction=&quot;Dolly&quot; /&gt;
+            &lt;/toolkit:ViewportInput.Trackpad&gt;
+            &lt;toolkit:ViewportInput.Touchscreen&gt;
+              &lt;toolkit:TouchscreenInput
+                  OneFingerDragAction=&quot;Rotate&quot;
+                  TwoFingerDragAction=&quot;Pan&quot;
+                  PinchAction=&quot;Dolly&quot; /&gt;
+            &lt;/toolkit:ViewportInput.Touchscreen&gt;
+            &lt;toolkit:ViewportInput.Keyboard&gt;
+              &lt;toolkit:KeyboardInput
+                  RotateLeftKey=&quot;LeftArrow&quot;
+                  RotateRightKey=&quot;RightArrow&quot;
+                  RotateUpKey=&quot;UpArrow&quot;
+                  RotateDownKey=&quot;DownArrow&quot;
+                  PanLeftKey=&quot;A&quot;
+                  PanRightKey=&quot;D&quot;
+                  PanUpKey=&quot;E&quot;
+                  PanDownKey=&quot;Q&quot;
+                  DollyInKey=&quot;W&quot;
+                  DollyOutKey=&quot;S&quot; /&gt;
+            &lt;/toolkit:ViewportInput.Keyboard&gt;
+          &lt;/toolkit:ViewportInput&gt;
+        &lt;/toolkit:FlyTool.Input&gt;
+      &lt;/toolkit:FlyTool&gt;
+    &lt;/toolkit:ViewportTools&gt;
+  &lt;/mu3d:Mu3DSceneView.Features&gt;
+&lt;/mu3d:Mu3DSceneView&gt;
+</code></pre>
+<p>The nested input is optional because <code>FlyTool</code> constructs this first-person profile by default.
+Declare it when bindings come from a view model or when a host needs a different route. Every
+device group has <code>IsEnabled</code>; every drag or scalar route can be set to <code>None</code>. A disabled route is
+not consumed, so platform navigation arbitration also leaves that gesture available to the host.</p>
+<p>Look and translation use the viewport's shorter side as a common normalization length.
+<code>RotationRadiansPerViewport</code>, <code>PanUnitsPerViewport</code>, <code>PinchDollyMultiplier</code> and <code>WheelDollyStep</code>
+control acquisition scale. <code>RotationSensitivity</code>, <code>PanSensitivity</code> and <code>DollySensitivity</code> are the
+controller-level multipliers for the same three normalized actions. Fly applies Pan sensitivity to
+local X/Y strafe and lift, Dolly sensitivity to local Z forward/back movement, and Rotation
+sensitivity to yaw/pitch. The split also applies to direct <code>Move</code>, <code>Navigate</code> and
+<code>FlyNavigationAction</code> commands. <code>MovementStep</code> and <code>LookStepRadians</code> control discrete commands and
+the optional focused-key adapter.</p>
+<p>Android and Windows use MAUI Pinch. Apple uses an attachment-owned native
+<code>UIPinchGestureRecognizer</code> for direct iPad touch and Mac trackpad transform Pinch, while continuous
+trackpad two-finger translation uses <code>TrackpadInput.TwoFingerDragAction</code>. Applications that need
+indirect Apple trackpad events declare
+<a href="https://developer.apple.com/documentation/bundleresources/information-property-list/uiapplicationsupportsindirectinputevents"><code>UIApplicationSupportsIndirectInputEvents</code></a>
+in Info.plist.</p>
+<p>Apple system-navigation arbitration follows the configured route. Direct iOS navigation is
+suppressed only when <code>TouchscreenInput.OneFingerDragAction</code> is not <code>None</code>; Mac trackpad navigation
+is suppressed only while the pointer is over the view and <code>TrackpadInput.TwoFingerDragAction</code> is
+not <code>None</code>. Android retains its platform-reported system back-edge inset.</p>
+<h2 id="bind-application-input">Bind application input</h2>
+<p><code>NavigationCommand</code> accepts a
+<a class="xref" href="../../api/Mu3D.Maui.Toolkit.Controls.FlyNavigationAction.html">FlyNavigationAction</a> for ordinary MAUI buttons and menu items:</p>
+<pre><code class="lang-xaml">&lt;Button
+    Text=&quot;Forward&quot;
+    Command=&quot;{Binding Source={x:Reference FlyNavigation}, Path=NavigationCommand}&quot;
+    CommandParameter=&quot;{x:Static toolkit:FlyNavigationAction.MoveForward}&quot; /&gt;
+</code></pre>
+<p>Do not use OS keyboard repeat for continuous motion. An application that owns held KeyDown/KeyUp
+state should read its assignments from <code>FlyTool.Input.Keyboard</code>, normalize simultaneous axes,
+scale by elapsed time and call
+<code>TryNavigate(Vector3 localMovement, Vector2 lookDeltaRadians)</code> once per UI frame. Set
+<code>Input.Keyboard.IsEnabled=&quot;False&quot;</code> when that host-owned session is active so the optional focused
+adapter does not submit the same key twice.</p>
+<p>With damping disabled, <code>FlyController.Navigate</code> applies orientation and movement atomically. With
+damping enabled, the shared MAUI navigation behavior consumes pending motion on its active-only
+VSync chain and owns no idle timer.</p>
+<p>Fly and Map remain different camera modes even though input acquisition is shared. Map retains an
+orbit target and fixed pan plane; Fly changes a free camera pose directly.</p>
+
+</article>
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

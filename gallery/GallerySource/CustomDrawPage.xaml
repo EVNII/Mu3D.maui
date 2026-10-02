@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.CustomDrawPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    Title="Custom Draw">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="custom-draw" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <mu3d:Mu3DView
+            x:Name="SurfaceView"
+            BackgroundColor="Black"
+            Draw="OnSurfaceDraw"
+            FramePresented="OnFramePresented"
+            PresentationSessionChanged="OnPresentationSessionChanged"
+            SurfaceError="OnSurfaceError" />
+        <VerticalStackLayout Grid.Row="1" Padding="16" Spacing="8">
+            <Label Text="A backend-independent HDR triangle drawn with Mu3D.Graphics." />
+            <Button Clicked="OnRedrawClicked" Text="Draw again" />
+            <Label x:Name="StatusLabel" Text="Waiting for the first frame…" />
+            <Label x:Name="DetailsLabel" FontSize="12" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

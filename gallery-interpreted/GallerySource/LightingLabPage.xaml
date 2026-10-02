@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.LightingLabPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    Title="Direct and Image-Based Lighting">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="lighting-direct-ibl" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <mu3d:Mu3DView
+            x:Name="SurfaceView"
+            BackgroundColor="Black"
+            Draw="OnSurfaceDraw" />
+        <ScrollView Grid.Row="1" MaximumHeightRequest="360">
+            <VerticalStackLayout Padding="16" Spacing="10">
+                <Label x:Name="StatusLabel" Text="Preparing lighting…" />
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label VerticalOptions="Center" Text="Retain encoded HDR in asset" />
+                    <Switch
+                        x:Name="RetainEncodedSwitch"
+                        Grid.Column="1"
+                        Toggled="OnRetainEncodedChanged" />
+                </Grid>
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                    <Button
+                        x:Name="ReloadButton"
+                        Clicked="OnReloadClicked"
+                        Text="Reload HDR" />
+                    <Button
+                        x:Name="CancelButton"
+                        Grid.Column="1"
+                        Clicked="OnCancelClicked"
+                        IsEnabled="False"
+                        Text="Cancel" />
+                    <Button
+                        Grid.Column="2"
+                        Clicked="OnClearSourceCacheClicked"
+                        Text="Clear cache" />
+                </Grid>
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label VerticalOptions="Center" Text="Direct light" />
+                    <Switch
+                        x:Name="DirectLightSwitch"
+                        Grid.Column="1"
+                        IsToggled="True"
+                        Toggled="OnLightingChanged" />
+                </Grid>
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label VerticalOptions="Center" Text="HDR environment" />
+                    <Switch
+                        x:Name="EnvironmentSwitch"
+                        Grid.Column="1"
+                        IsToggled="True"
+                        Toggled="OnLightingChanged" />
+                </Grid>
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label VerticalOptions="Center" Text="Animate direct light" />
+                    <Switch
+                        x:Name="AnimateSwitch"
+                        Grid.Column="1"
+                        Toggled="OnAnimationChanged" />
+                </Grid>
+                <Label x:Name="DetailsLabel" FontSize="12" LineBreakMode="WordWrap" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

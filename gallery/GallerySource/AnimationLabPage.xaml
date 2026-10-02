@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.AnimationLabPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    Title="Animation Lab">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="skinning-animation" />
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="*,Auto">
+        <mu3d:Mu3DView x:Name="SurfaceView" BackgroundColor="Black" />
+        <ScrollView Grid.Row="1" MaximumHeightRequest="320">
+            <VerticalStackLayout Padding="16" Spacing="12">
+                <Label FontAttributes="Bold" FontSize="26" Text="Skinning + Animation" />
+                <Label
+                    Text="A two-joint FP32 skin with two blended clips and a pre-skin morph target. Visible, shadow and AO depth paths share the deformation." />
+                <Label x:Name="StatusLabel" Text="Waiting for a native surface…" />
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label VerticalOptions="Center" Text="Play loop" />
+                    <Switch x:Name="PlaySwitch" Grid.Column="1" IsToggled="True" />
+                </Grid>
+                <Label x:Name="TimeLabel" Text="Time: 0.00 s" />
+                <Slider
+                    x:Name="TimeSlider"
+                    Maximum="2"
+                    Minimum="0"
+                    ValueChanged="OnTimeChanged" />
+                <Label x:Name="SpeedLabel" Text="Speed: 1.00x" />
+                <Slider
+                    x:Name="SpeedSlider"
+                    Maximum="2"
+                    Minimum="0.1"
+                    Value="1"
+                    ValueChanged="OnSpeedChanged" />
+                <Label x:Name="BlendLabel" Text="Clip B blend: 0.00" />
+                <Slider
+                    x:Name="BlendSlider"
+                    Maximum="1"
+                    Minimum="0"
+                    ValueChanged="OnBlendChanged" />
+                <Label x:Name="MorphLabel" Text="Morph weight: 0.00" />
+                <Slider
+                    x:Name="MorphSlider"
+                    Maximum="1.5"
+                    Minimum="-0.5"
+                    ValueChanged="OnMorphChanged" />
+                <Button Clicked="OnResetClicked" Text="Reset animation" />
+                <Label
+                    x:Name="DetailsLabel"
+                    FontFamily="OpenSansRegular"
+                    FontSize="12"
+                    LineBreakMode="WordWrap" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

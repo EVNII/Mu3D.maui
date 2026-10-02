@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class SurfaceCapabilities | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class SurfaceCapabilities | Mu3D documentation ">
+      
+      <meta name="description" content="Reports formats and modes advertised for a concrete native surface.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Graphics.SurfaceCapabilities">
+
+
+
+  <h1 id="Mu3D_Graphics_SurfaceCapabilities" data-uid="Mu3D.Graphics.SurfaceCapabilities" class="text-break">
+Class SurfaceCapabilities  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Graphics.html">Graphics</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Graphics.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Reports formats and modes advertised for a concrete native surface.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed record SurfaceCapabilities : IEquatable&lt;SurfaceCapabilities&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">SurfaceCapabilities</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="Mu3D.Graphics.SurfaceCapabilities.html">SurfaceCapabilities</a>&gt;</div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_Graphics_SurfaceCapabilities__ctor_" data-uid="Mu3D.Graphics.SurfaceCapabilities.#ctor*"></a>
+
+  <h3 id="Mu3D_Graphics_SurfaceCapabilities__ctor_System_Collections_Generic_IReadOnlyList_Mu3D_Graphics_PresentationFormat__System_Collections_Generic_IReadOnlyList_Mu3D_Graphics_SurfacePresentMode__System_Collections_Generic_IReadOnlyList_Mu3D_Graphics_SurfaceAlphaMode__System_Boolean_System_Collections_Generic_IReadOnlyList_System_String__" data-uid="Mu3D.Graphics.SurfaceCapabilities.#ctor(System.Collections.Generic.IReadOnlyList{Mu3D.Graphics.PresentationFormat},System.Collections.Generic.IReadOnlyList{Mu3D.Graphics.SurfacePresentMode},System.Collections.Generic.IReadOnlyList{Mu3D.Graphics.SurfaceAlphaMode},System.Boolean,System.Collections.Generic.IReadOnlyList{System.String})">
+  SurfaceCapabilities(IReadOnlyList&lt;PresentationFormat&gt;, IReadOnlyList&lt;SurfacePresentMode&gt;, IReadOnlyList&lt;SurfaceAlphaMode&gt;, bool, IReadOnlyList&lt;string&gt;)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reports formats and modes advertised for a concrete native surface.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SurfaceCapabilities(IReadOnlyList&lt;PresentationFormat&gt; Formats, IReadOnlyList&lt;SurfacePresentMode&gt; PresentModes, IReadOnlyList&lt;SurfaceAlphaMode&gt; AlphaModes, bool SupportsRgba16Float, IReadOnlyList&lt;string&gt; UnmappedBackendFormats)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>Formats</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="Mu3D.Graphics.PresentationFormat.html">PresentationFormat</a>&gt;</dt>
+    <dd><p>Presentation formats known to Mu3D.</p>
+</dd>
+    <dt><code>PresentModes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="Mu3D.Graphics.SurfacePresentMode.html">SurfacePresentMode</a>&gt;</dt>
+    <dd><p>Available presentation scheduling modes.</p>
+</dd>
+    <dt><code>AlphaModes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="Mu3D.Graphics.SurfaceAlphaMode.html">SurfaceAlphaMode</a>&gt;</dt>
+    <dd><p>Available compositor alpha modes.</p>
+</dd>
+    <dt><code>SupportsRgba16Float</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Whether the surface directly advertises RGBA16Float.</p>
+</dd>
+    <dt><code>UnmappedBackendFormats</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd><p>Backend format names not yet mapped by Mu3D.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Graphics_SurfaceCapabilities_AlphaModes_" data-uid="Mu3D.Graphics.SurfaceCapabilities.AlphaModes*"></a>
+
+  <h3 id="Mu3D_Graphics_SurfaceCapabilities_AlphaModes" data-uid="Mu3D.Graphics.SurfaceCapabilities.AlphaModes">
+  AlphaModes
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Available compositor alpha modes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;SurfaceAlphaMode&gt; AlphaModes { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="Mu3D.Graphics.SurfaceAlphaMode.html">SurfaceAlphaMode</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_SurfaceCapabilities_FormatCapabilities_" data-uid="Mu3D.Graphics.SurfaceCapabilities.FormatCapabilities*"></a>
+
+  <h3 id="Mu3D_Graphics_SurfaceCapabilities_FormatCapabilities" data-uid="Mu3D.Graphics.SurfaceCapabilities.FormatCapabilities">
+  FormatCapabilities
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets explicit format/color-space capability pairs reported by the backend.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;SurfaceFormatCapability&gt; FormatCapabilities { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="Mu3D.Graphics.SurfaceFormatCapability.html">SurfaceFormatCapability</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Mu3D_Graphics_SurfaceCapabilities_FormatCapabilities_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>An empty list means that the backend exposes only format capabilities. It does not mean
+that every format supports every color encoding. Mu3D's pinned wgpu-native v29 backend uses
+this legacy form; a future backend with paired capability reporting populates this list.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_Graphics_SurfaceCapabilities_Formats_" data-uid="Mu3D.Graphics.SurfaceCapabilities.Formats*"></a>
+
+  <h3 id="Mu3D_Graphics_SurfaceCapabilities_Formats" data-uid="Mu3D.Graphics.SurfaceCapabilities.Formats">
+  Formats
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Presentation formats known to Mu3D.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;PresentationFormat&gt; Formats { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="Mu3D.Graphics.PresentationFormat.html">PresentationFormat</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_SurfaceCapabilities_PresentModes_" data-uid="Mu3D.Graphics.SurfaceCapabilities.PresentModes*"></a>
+
+  <h3 id="Mu3D_Graphics_SurfaceCapabilities_PresentModes" data-uid="Mu3D.Graphics.SurfaceCapabilities.PresentModes">
+  PresentModes
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Available presentation scheduling modes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;SurfacePresentMode&gt; PresentModes { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="Mu3D.Graphics.SurfacePresentMode.html">SurfacePresentMode</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_SurfaceCapabilities_SupportsRgba16Float_" data-uid="Mu3D.Graphics.SurfaceCapabilities.SupportsRgba16Float*"></a>
+
+  <h3 id="Mu3D_Graphics_SurfaceCapabilities_SupportsRgba16Float" data-uid="Mu3D.Graphics.SurfaceCapabilities.SupportsRgba16Float">
+  SupportsRgba16Float
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Whether the surface directly advertises RGBA16Float.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool SupportsRgba16Float { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_SurfaceCapabilities_UnmappedBackendFormats_" data-uid="Mu3D.Graphics.SurfaceCapabilities.UnmappedBackendFormats*"></a>
+
+  <h3 id="Mu3D_Graphics_SurfaceCapabilities_UnmappedBackendFormats" data-uid="Mu3D.Graphics.SurfaceCapabilities.UnmappedBackendFormats">
+  UnmappedBackendFormats
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Backend format names not yet mapped by Mu3D.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;string&gt; UnmappedBackendFormats { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Graphics_SurfaceCapabilities_Deconstruct_" data-uid="Mu3D.Graphics.SurfaceCapabilities.Deconstruct*"></a>
+
+  <h3 id="Mu3D_Graphics_SurfaceCapabilities_Deconstruct_System_Collections_Generic_IReadOnlyList_Mu3D_Graphics_PresentationFormat___System_Collections_Generic_IReadOnlyList_Mu3D_Graphics_SurfacePresentMode___System_Collections_Generic_IReadOnlyList_Mu3D_Graphics_SurfaceAlphaMode___System_Boolean__System_Collections_Generic_IReadOnlyList_System_String___" data-uid="Mu3D.Graphics.SurfaceCapabilities.Deconstruct(System.Collections.Generic.IReadOnlyList{Mu3D.Graphics.PresentationFormat}@,System.Collections.Generic.IReadOnlyList{Mu3D.Graphics.SurfacePresentMode}@,System.Collections.Generic.IReadOnlyList{Mu3D.Graphics.SurfaceAlphaMode}@,System.Boolean@,System.Collections.Generic.IReadOnlyList{System.String}@)">
+  Deconstruct(out IReadOnlyList&lt;PresentationFormat&gt;, out IReadOnlyList&lt;SurfacePresentMode&gt;, out IReadOnlyList&lt;SurfaceAlphaMode&gt;, out bool, out IReadOnlyList&lt;string&gt;)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Deconstruct(out IReadOnlyList&lt;PresentationFormat&gt; Formats, out IReadOnlyList&lt;SurfacePresentMode&gt; PresentModes, out IReadOnlyList&lt;SurfaceAlphaMode&gt; AlphaModes, out bool SupportsRgba16Float, out IReadOnlyList&lt;string&gt; UnmappedBackendFormats)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>Formats</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="Mu3D.Graphics.PresentationFormat.html">PresentationFormat</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>PresentModes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="Mu3D.Graphics.SurfacePresentMode.html">SurfacePresentMode</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>AlphaModes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="Mu3D.Graphics.SurfaceAlphaMode.html">SurfaceAlphaMode</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>SupportsRgba16Float</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+    <dt><code>UnmappedBackendFormats</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_SurfaceCapabilities_Equals_" data-uid="Mu3D.Graphics.SurfaceCapabilities.Equals*"></a>
+
+  <h3 id="Mu3D_Graphics_SurfaceCapabilities_Equals_Mu3D_Graphics_SurfaceCapabilities_" data-uid="Mu3D.Graphics.SurfaceCapabilities.Equals(Mu3D.Graphics.SurfaceCapabilities)">
+  Equals(SurfaceCapabilities?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(SurfaceCapabilities? other)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>other</code> <a class="xref" href="Mu3D.Graphics.SurfaceCapabilities.html">SurfaceCapabilities</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_SurfaceCapabilities_Equals_" data-uid="Mu3D.Graphics.SurfaceCapabilities.Equals*"></a>
+
+  <h3 id="Mu3D_Graphics_SurfaceCapabilities_Equals_System_Object_" data-uid="Mu3D.Graphics.SurfaceCapabilities.Equals(System.Object)">
+  Equals(object?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object? obj)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>obj</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_SurfaceCapabilities_GetColorEncodings_" data-uid="Mu3D.Graphics.SurfaceCapabilities.GetColorEncodings*"></a>
+
+  <h3 id="Mu3D_Graphics_SurfaceCapabilities_GetColorEncodings_Mu3D_Graphics_PresentationFormat_" data-uid="Mu3D.Graphics.SurfaceCapabilities.GetColorEncodings(Mu3D.Graphics.PresentationFormat)">
+  GetColorEncodings(PresentationFormat)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the explicit color encodings advertised for a presentation format.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;ColorEncoding&gt; GetColorEncodings(PresentationFormat format)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>format</code> <a class="xref" href="Mu3D.Graphics.PresentationFormat.html">PresentationFormat</a></dt>
+    <dd><p>The format to inspect.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="Mu3D.Color.ColorEncoding.html">ColorEncoding</a>&gt;</dt>
+    <dd><p>A de-duplicated snapshot of advertised encodings. The result is empty when the backend did
+not report explicit format/color-space pairs or did not advertise the format.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_SurfaceCapabilities_GetHashCode_" data-uid="Mu3D.Graphics.SurfaceCapabilities.GetHashCode*"></a>
+
+  <h3 id="Mu3D_Graphics_SurfaceCapabilities_GetHashCode" data-uid="Mu3D.Graphics.SurfaceCapabilities.GetHashCode">
+  GetHashCode()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_SurfaceCapabilities_ToString_" data-uid="Mu3D.Graphics.SurfaceCapabilities.ToString*"></a>
+
+  <h3 id="Mu3D_Graphics_SurfaceCapabilities_ToString" data-uid="Mu3D.Graphics.SurfaceCapabilities.ToString">
+  ToString()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Mu3D_Graphics_SurfaceCapabilities_op_Equality_" data-uid="Mu3D.Graphics.SurfaceCapabilities.op_Equality*"></a>
+
+  <h3 id="Mu3D_Graphics_SurfaceCapabilities_op_Equality_Mu3D_Graphics_SurfaceCapabilities_Mu3D_Graphics_SurfaceCapabilities_" data-uid="Mu3D.Graphics.SurfaceCapabilities.op_Equality(Mu3D.Graphics.SurfaceCapabilities,Mu3D.Graphics.SurfaceCapabilities)">
+  operator ==(SurfaceCapabilities?, SurfaceCapabilities?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(SurfaceCapabilities? left, SurfaceCapabilities? right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Mu3D.Graphics.SurfaceCapabilities.html">SurfaceCapabilities</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Mu3D.Graphics.SurfaceCapabilities.html">SurfaceCapabilities</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Graphics_SurfaceCapabilities_op_Inequality_" data-uid="Mu3D.Graphics.SurfaceCapabilities.op_Inequality*"></a>
+
+  <h3 id="Mu3D_Graphics_SurfaceCapabilities_op_Inequality_Mu3D_Graphics_SurfaceCapabilities_Mu3D_Graphics_SurfaceCapabilities_" data-uid="Mu3D.Graphics.SurfaceCapabilities.op_Inequality(Mu3D.Graphics.SurfaceCapabilities,Mu3D.Graphics.SurfaceCapabilities)">
+  operator !=(SurfaceCapabilities?, SurfaceCapabilities?)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(SurfaceCapabilities? left, SurfaceCapabilities? right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Mu3D.Graphics.SurfaceCapabilities.html">SurfaceCapabilities</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Mu3D.Graphics.SurfaceCapabilities.html">SurfaceCapabilities</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

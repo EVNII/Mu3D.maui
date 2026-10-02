@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class DirectionalLight3D | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class DirectionalLight3D | Mu3D documentation ">
+      
+      <meta name="description" content="Declares a transformable directional light whose local negative Z axis emits rays.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Maui.Controls.DirectionalLight3D">
+
+
+
+  <h1 id="Mu3D_Maui_Controls_DirectionalLight3D" data-uid="Mu3D.Maui.Controls.DirectionalLight3D" class="text-break">
+Class DirectionalLight3D  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Maui.html">Maui</a>.<a class="xref" href="Mu3D.Maui.Controls.html">Controls</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Maui.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Declares a transformable directional light whose local negative Z axis emits rays.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class DirectionalLight3D : SceneNode3D, INotifyPropertyChanged</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject">BindableObject</a></div>
+      <div><a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html">SceneNode3D</a></div>
+      <div><span class="xref">DirectionalLight3D</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html#Mu3D_Maui_Controls_SceneNode3D_NameProperty">SceneNode3D.NameProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html#Mu3D_Maui_Controls_SceneNode3D_IsVisibleProperty">SceneNode3D.IsVisibleProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html#Mu3D_Maui_Controls_SceneNode3D_XProperty">SceneNode3D.XProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html#Mu3D_Maui_Controls_SceneNode3D_YProperty">SceneNode3D.YProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html#Mu3D_Maui_Controls_SceneNode3D_ZProperty">SceneNode3D.ZProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html#Mu3D_Maui_Controls_SceneNode3D_RotationXProperty">SceneNode3D.RotationXProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html#Mu3D_Maui_Controls_SceneNode3D_RotationYProperty">SceneNode3D.RotationYProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html#Mu3D_Maui_Controls_SceneNode3D_RotationZProperty">SceneNode3D.RotationZProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html#Mu3D_Maui_Controls_SceneNode3D_ScaleXProperty">SceneNode3D.ScaleXProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html#Mu3D_Maui_Controls_SceneNode3D_ScaleYProperty">SceneNode3D.ScaleYProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html#Mu3D_Maui_Controls_SceneNode3D_ScaleZProperty">SceneNode3D.ScaleZProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html#Mu3D_Maui_Controls_SceneNode3D_Name">SceneNode3D.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html#Mu3D_Maui_Controls_SceneNode3D_IsVisible">SceneNode3D.IsVisible</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html#Mu3D_Maui_Controls_SceneNode3D_X">SceneNode3D.X</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html#Mu3D_Maui_Controls_SceneNode3D_Y">SceneNode3D.Y</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html#Mu3D_Maui_Controls_SceneNode3D_Z">SceneNode3D.Z</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html#Mu3D_Maui_Controls_SceneNode3D_RotationX">SceneNode3D.RotationX</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html#Mu3D_Maui_Controls_SceneNode3D_RotationY">SceneNode3D.RotationY</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html#Mu3D_Maui_Controls_SceneNode3D_RotationZ">SceneNode3D.RotationZ</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html#Mu3D_Maui_Controls_SceneNode3D_ScaleX">SceneNode3D.ScaleX</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html#Mu3D_Maui_Controls_SceneNode3D_ScaleY">SceneNode3D.ScaleY</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html#Mu3D_Maui_Controls_SceneNode3D_ScaleZ">SceneNode3D.ScaleZ</a>
+    </div>
+    <div>
+      <a class="xref" href="Mu3D.Maui.Controls.SceneNode3D.html#Mu3D_Maui_Controls_SceneNode3D_CoreNode">SceneNode3D.CoreNode</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontextproperty">BindableObject.BindingContextProperty</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.clearvalue#microsoft-maui-controls-bindableobject-clearvalue(microsoft-maui-controls-bindableproperty)">BindableObject.ClearValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.clearvalue#microsoft-maui-controls-bindableobject-clearvalue(microsoft-maui-controls-bindablepropertykey)">BindableObject.ClearValue(BindablePropertyKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.getvalue">BindableObject.GetValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.isset">BindableObject.IsSet(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.removebinding">BindableObject.RemoveBinding(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setbinding">BindableObject.SetBinding(BindableProperty, BindingBase)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setvalue#microsoft-maui-controls-bindableobject-setvalue(microsoft-maui-controls-bindableproperty-system-object)">BindableObject.SetValue(BindableProperty, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.setvalue#microsoft-maui-controls-bindableobject-setvalue(microsoft-maui-controls-bindablepropertykey-system-object)">BindableObject.SetValue(BindablePropertyKey, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.coercevalue#microsoft-maui-controls-bindableobject-coercevalue(microsoft-maui-controls-bindableproperty)">BindableObject.CoerceValue(BindableProperty)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.coercevalue#microsoft-maui-controls-bindableobject-coercevalue(microsoft-maui-controls-bindablepropertykey)">BindableObject.CoerceValue(BindablePropertyKey)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.dispatcher">BindableObject.Dispatcher</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontext">BindableObject.BindingContext</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.propertychanged">BindableObject.PropertyChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.propertychanging">BindableObject.PropertyChanging</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableobject.bindingcontextchanged">BindableObject.BindingContextChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_Maui_Controls_DirectionalLight3D__ctor_" data-uid="Mu3D.Maui.Controls.DirectionalLight3D.#ctor*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_DirectionalLight3D__ctor" data-uid="Mu3D.Maui.Controls.DirectionalLight3D.#ctor">
+  DirectionalLight3D()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a white directional light with unit intensity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DirectionalLight3D()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+
+
+  <h3 id="Mu3D_Maui_Controls_DirectionalLight3D_AngularDiameterDegreesProperty" data-uid="Mu3D.Maui.Controls.DirectionalLight3D.AngularDiameterDegreesProperty">
+  AngularDiameterDegreesProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.DirectionalLight3D.html#Mu3D_Maui_Controls_DirectionalLight3D_AngularDiameterDegrees">AngularDiameterDegrees</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty AngularDiameterDegreesProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_DirectionalLight3D_CastsShadowsProperty" data-uid="Mu3D.Maui.Controls.DirectionalLight3D.CastsShadowsProperty">
+  CastsShadowsProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.DirectionalLight3D.html#Mu3D_Maui_Controls_DirectionalLight3D_CastsShadows">CastsShadows</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty CastsShadowsProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_DirectionalLight3D_ColorProperty" data-uid="Mu3D.Maui.Controls.DirectionalLight3D.ColorProperty">
+  ColorProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.DirectionalLight3D.html#Mu3D_Maui_Controls_DirectionalLight3D_Color">Color</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty ColorProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_DirectionalLight3D_IntensityProperty" data-uid="Mu3D.Maui.Controls.DirectionalLight3D.IntensityProperty">
+  IntensityProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.DirectionalLight3D.html#Mu3D_Maui_Controls_DirectionalLight3D_Intensity">Intensity</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty IntensityProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Controls_DirectionalLight3D_ShadowOpacityProperty" data-uid="Mu3D.Maui.Controls.DirectionalLight3D.ShadowOpacityProperty">
+  ShadowOpacityProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.DirectionalLight3D.html#Mu3D_Maui_Controls_DirectionalLight3D_ShadowOpacity">ShadowOpacity</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty ShadowOpacityProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Maui_Controls_DirectionalLight3D_AngularDiameterDegrees_" data-uid="Mu3D.Maui.Controls.DirectionalLight3D.AngularDiameterDegrees*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_DirectionalLight3D_AngularDiameterDegrees" data-uid="Mu3D.Maui.Controls.DirectionalLight3D.AngularDiameterDegrees">
+  AngularDiameterDegrees
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the apparent angular diameter of the directional emitter in degrees. Larger
+emitters produce wider distance-dependent penumbrae.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float AngularDiameterDegrees { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_DirectionalLight3D_CastsShadows_" data-uid="Mu3D.Maui.Controls.DirectionalLight3D.CastsShadows*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_DirectionalLight3D_CastsShadows" data-uid="Mu3D.Maui.Controls.DirectionalLight3D.CastsShadows">
+  CastsShadows
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets whether the light requests the renderer's directional shadow map.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool CastsShadows { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_DirectionalLight3D_Color_" data-uid="Mu3D.Maui.Controls.DirectionalLight3D.Color*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_DirectionalLight3D_Color" data-uid="Mu3D.Maui.Controls.DirectionalLight3D.Color">
+  Color
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the sRGB UI color decoded to an opaque linear-light multiplier.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color Color { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.graphics.color">Color</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_DirectionalLight3D_DirectionalLight_" data-uid="Mu3D.Maui.Controls.DirectionalLight3D.DirectionalLight*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_DirectionalLight3D_DirectionalLight" data-uid="Mu3D.Maui.Controls.DirectionalLight3D.DirectionalLight">
+  DirectionalLight
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the underlying Core directional light.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DirectionalLight DirectionalLight { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.DirectionalLight.html">DirectionalLight</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_DirectionalLight3D_Intensity_" data-uid="Mu3D.Maui.Controls.DirectionalLight3D.Intensity*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_DirectionalLight3D_Intensity" data-uid="Mu3D.Maui.Controls.DirectionalLight3D.Intensity">
+  Intensity
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the non-negative finite light intensity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Intensity { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Maui_Controls_DirectionalLight3D_ShadowOpacity_" data-uid="Mu3D.Maui.Controls.DirectionalLight3D.ShadowOpacity*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_DirectionalLight3D_ShadowOpacity" data-uid="Mu3D.Maui.Controls.DirectionalLight3D.ShadowOpacity">
+  ShadowOpacity
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets shadow opacity in the inclusive range zero to one.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float ShadowOpacity { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

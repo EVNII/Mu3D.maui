@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Frame statistics | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Frame statistics | Mu3D documentation ">
+      
+      <meta name="description" content="Collect immutable frame samples and show a throttled rolling diagnostics overlay.">
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="frame-statistics">Frame statistics</h1>
+
+<p><a class="xref" href="../../api/Mu3D.Toolkit.Diagnostics.FrameStatisticsCollector.html">FrameStatisticsCollector</a> is UI-independent. It accepts completed
+frame timing/resource data and publishes immutable
+<a class="xref" href="../../api/Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.html">FrameStatisticsSnapshot</a> values at a caller-selected cadence.</p>
+<p><a class="xref" href="../../api/Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.html">FrameStatisticsOverlay</a> is the concise XAML path. It creates an
+attachment-owned <a class="xref" href="../../api/Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.html">FrameStatisticsBehavior</a> and
+<a class="xref" href="../../api/Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.html">FrameStatisticsView</a>, then mounts the pass-through panel through
+the viewport's common overlay manager:</p>
+<pre><code class="lang-xaml">&lt;mu3d:Mu3DSceneView&gt;
+  &lt;mu3d:Mu3DSceneView.Features&gt;
+    &lt;toolkit:ViewportTools&gt;
+      &lt;diagnostics:FrameStatisticsOverlay
+          x:Name=&quot;Statistics&quot;
+          Placement=&quot;TopRight&quot;
+          SnapshotInterval=&quot;0:0:0.1&quot;
+          IsDetailed=&quot;False&quot;
+          IsGraphVisible=&quot;True&quot; /&gt;
+    &lt;/toolkit:ViewportTools&gt;
+  &lt;/mu3d:Mu3DSceneView.Features&gt;
+&lt;/mu3d:Mu3DSceneView&gt;
+</code></pre>
+<p>The overlay exposes its application-visible <code>Collector</code>, latest snapshot, reset/immediate-publish
+methods and optional application-known draw/primitive counts. Visibility controls only the panel;
+<code>IsEnabled</code> independently controls collection. Its pass-through MAUI content cannot block camera,
+selection or Gizmo input.</p>
+<p>Applications that place diagnostics outside the viewport may still attach
+<a class="xref" href="../../api/Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.html">FrameStatisticsBehavior</a> directly and let a standalone
+<a class="xref" href="../../api/Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.html">FrameStatisticsView</a> borrow it.</p>
+<h2 id="scheduling">Scheduling</h2>
+<p>The Gallery's continuous mode uses MAUI's shared platform VSync animation service only while the
+page is visible and the renderer has a non-placeholder physical extent. Presentation and diagnostic
+snapshot cadence are separate: a 100 ms text/graph refresh does not cap rendering at 10 FPS.</p>
+<p>The overlay, behavior and view do not create a generic timer-based render mode and do not own the
+scene or renderer. Stop/remove the application-owned host animation on hide or renderer loss. The
+overlay's normal <code>ViewportTools</code> attachment removes its behavior/view subscriptions on feature
+detachment; standalone behavior/view instances remain the application's disposal responsibility.</p>
+<p>The displayed acquire/render/present intervals are host wall-clock diagnostics. They are not GPU
+timestamp queries; use a platform GPU profiler when command execution timing matters.</p>
+
+</article>
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
