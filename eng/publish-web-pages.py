@@ -187,7 +187,15 @@ def deploy(args, site):
                 git("branch", "-D", temporary_branch)
     if existing is None:
         configuration = {"build_type": "legacy", "source": {"branch": "gh-pages", "path": "/"}}
-        run(["gh", "api", "--method", "POST", endpoint, "--input", "-"], input=json.dumps(configuration))
+        created = subprocess.run(["gh", "api", "--method", "POST", endpoint, "--input", "-"],
+                                 input=json.dumps(configuration), text=True, capture_output=True)
+        if created.returncode:
+            # An interrupted/empty response can still have created Pages. Recover
+            # only after a fresh read confirms exactly the requested configuration.
+            confirmed = subprocess.run(["gh", "api", endpoint], text=True, capture_output=True)
+            if confirmed.returncode or any(json.loads(confirmed.stdout).get(key) != value
+                                           for key, value in configuration.items()):
+                raise RuntimeError(created.stderr or created.stdout)
     # GITHUB_TOKEN pushes do not automatically start a Pages build; request it explicitly.
     run(["gh", "api", "--method", "POST", endpoint + "/builds"])
 
