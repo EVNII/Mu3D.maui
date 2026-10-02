@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.Gallery.Pages.TranslucentCanvasPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Mu3D.Gallery.Controls"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    Title="Translucent Canvas">
+    <Grid RowDefinitions="*,Auto">
+        <controls:SceneHostView
+            x:Name="Host"
+            Camera="{x:Reference MainCamera}"
+            SceneBackground="Transparent"
+            SurfaceError="OnSurfaceError">
+            <mu3d:Scene3D Name="Translucent canvas example">
+                <mu3d:Scene3D.Camera>
+                    <mu3d:PerspectiveCamera3D
+                        x:Name="MainCamera"
+                        FieldOfView="50"
+                        Z="4" />
+                </mu3d:Scene3D.Camera>
+                <mu3d:Sphere3D Radius="1.1">
+                    <mu3d:UnlitMaterial3D x:Name="CanvasMaterial" />
+                </mu3d:Sphere3D>
+            </mu3d:Scene3D>
+        </controls:SceneHostView>
+        <VerticalStackLayout Grid.Row="1" Padding="16" Spacing="6">
+            <Label FontAttributes="Bold" Text="Translucent linear HDR canvas → scene texture" />
+            <HorizontalStackLayout Spacing="10">
+                <Button Clicked="OnDabClicked" Text="Add translucent dab" />
+                <Button Clicked="OnResetClicked" Text="Reset" />
+            </HorizontalStackLayout>
+            <Label
+                FontSize="12"
+                LineBreakMode="WordWrap"
+                Text="The composited transparency depends on the platform compositor: Apple converts premultiplied frames to its straight-alpha Metal carrier, while Android inherits the native-window compositor alpha mode." />
+            <Label x:Name="StatusLabel" FontSize="12" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

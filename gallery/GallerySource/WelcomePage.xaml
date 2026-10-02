@@ -10,7 +10,7 @@
     </ContentPage.ToolbarItems>
     <ScrollView>
         <VerticalStackLayout HorizontalOptions="Center" MaximumWidthRequest="860" Padding="32" Spacing="18">
-            <Label FontAttributes="Bold" FontSize="32" Text="GalleryApp" />
+            <Label FontAttributes="Bold" FontSize="32" Text="Mu3D Gallery" />
             <Label
                 FontSize="18"
                 Text="HDR-first 3D graphics for .NET MAUI." />

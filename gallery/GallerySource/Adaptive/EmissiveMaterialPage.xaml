@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.Gallery.Pages.EmissiveMaterialPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Mu3D.Gallery.Controls"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    Title="Emissive">
+    <Grid RowDefinitions="*,Auto">
+        <controls:SceneHostView
+            x:Name="Host"
+            Camera="{x:Reference MainCamera}"
+            SurfaceError="OnSurfaceError">
+            <mu3d:Scene3D x:Name="DeclaredScene">
+                <mu3d:Scene3D.Camera>
+                    <mu3d:PerspectiveCamera3D x:Name="MainCamera" Z="7" />
+                </mu3d:Scene3D.Camera>
+                <mu3d:Sphere3D X="-3.6" Radius="0.9">
+                    <mu3d:PbrMaterial3D x:Name="MaterialOff" Roughness="0.4" />
+                </mu3d:Sphere3D>
+                <mu3d:Sphere3D X="-1.2" Radius="0.9">
+                    <mu3d:PbrMaterial3D x:Name="MaterialOne" Roughness="0.4" />
+                </mu3d:Sphere3D>
+                <mu3d:Sphere3D X="1.2" Radius="0.9">
+                    <mu3d:PbrMaterial3D x:Name="MaterialFour" Roughness="0.4" />
+                </mu3d:Sphere3D>
+                <mu3d:Sphere3D X="3.6" Radius="0.9">
+                    <mu3d:PbrMaterial3D x:Name="MaterialSixteen" Roughness="0.4" />
+                </mu3d:Sphere3D>
+                <mu3d:DirectionalLight3D Intensity="0.5" RotationX="-25" RotationY="-30" />
+            </mu3d:Scene3D>
+        </controls:SceneHostView>
+        <Label
+            x:Name="StatusLabel"
+            Grid.Row="1"
+            Padding="16,10"
+            FontSize="12"
+            LineBreakMode="WordWrap"
+            Text="Emissive strength 0 / 1 / 4 / 16 (left to right) with a warm linear-sRGB emission color. On an HDR output the right-hand spheres blow out past SDR white; drag the chrome EV slider down to recover them and compare the View and Output pickers." />
+    </Grid>
+</ContentPage>

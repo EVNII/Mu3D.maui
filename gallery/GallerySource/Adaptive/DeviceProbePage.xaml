@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.Gallery.Pages.DeviceProbePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Device Probe">
+    <ScrollView>
+        <VerticalStackLayout HorizontalOptions="Center" MaximumWidthRequest="820" Padding="24" Spacing="14">
+            <Label FontAttributes="Bold" FontSize="32" Text="Native Device Probe" />
+            <Label
+                Text="Creates a short-lived wgpu-native adapter and device, checks ShaderF16, and creates a real RGBA16Float texture. This does not claim that an HDR surface was presented."
+                VerticalOptions="Center" />
+            <Button
+                x:Name="RunProbeButton"
+                Clicked="OnRunProbeClicked"
+                Text="Run device probe" />
+            <ActivityIndicator
+                x:Name="ProbeProgress"
+                IsRunning="False"
+                IsVisible="False" />
+            <Label
+                x:Name="ProbeStatus"
+                FontAttributes="Bold"
+                Text="Not run" />
+            <Label
+                x:Name="ProbeDetails"
+                FontFamily="OpenSansRegular"
+                LineBreakMode="WordWrap" />
+            <BoxView HeightRequest="1" Margin="0,10" Opacity="0.2" />
+            <Label
+                FontAttributes="Bold"
+                FontSize="18"
+                Text="M2 Offscreen Triangle Probe" />
+            <Label
+                Text="Creates an RGBA16Float target and submits a real WGSL triangle through the backend-independent Mu3D graphics API. This validates GPU command execution, not surface presentation, HDR output, or color accuracy."
+                VerticalOptions="Center" />
+            <Button
+                x:Name="RunTriangleProbeButton"
+                Clicked="OnRunTriangleProbeClicked"
+                Text="Run offscreen triangle probe" />
+            <ActivityIndicator
+                x:Name="TriangleProbeProgress"
+                IsRunning="False"
+                IsVisible="False" />
+            <Label
+                x:Name="TriangleProbeStatus"
+                FontAttributes="Bold"
+                Text="Not run" />
+            <Label
+                x:Name="TriangleProbeDetails"
+                FontFamily="OpenSansRegular"
+                LineBreakMode="WordWrap" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

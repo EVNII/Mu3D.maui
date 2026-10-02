@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.Gallery.Pages.ExampleCatalogPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:gallery="clr-namespace:Mu3D.Gallery"
+    Title="Examples"
+    AutomationId="gallery-catalog">
+    <Grid RowDefinitions="Auto,Auto,Auto,*" Padding="16" RowSpacing="10">
+        <VerticalStackLayout Spacing="6">
+            <Label x:Name="Heading" FontAttributes="Bold" FontSize="26" />
+            <Label x:Name="Description" LineBreakMode="WordWrap" />
+        </VerticalStackLayout>
+        <SearchBar x:Name="Search" Grid.Row="1" Placeholder="Search examples, features or APIs"
+                   AutomationId="gallery-search" TextChanged="OnSearchChanged" />
+        <Label x:Name="ResultCount" Grid.Row="2" FontSize="12" />
+        <CollectionView x:Name="Examples" Grid.Row="3" SelectionMode="Single"
+                        AutomationId="gallery-example-list" SelectionChanged="OnExampleSelected">
+            <CollectionView.EmptyView>
+                <Label Text="No examples match. Try a feature such as HDR, glTF or camera."
+                       Margin="0,16" LineBreakMode="WordWrap" />
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="gallery:GalleryEntry">
+                    <Grid Padding="8,12" RowDefinitions="Auto,Auto,Auto" RowSpacing="4"
+                          AutomationId="{Binding Id}">
+                        <Label FontAttributes="Bold" FontSize="18" Text="{Binding Title}" />
+                        <Label Grid.Row="1" Text="{Binding Description}" LineBreakMode="WordWrap" />
+                        <Label Grid.Row="2" Text="{Binding SectionTitle}" FontSize="12" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

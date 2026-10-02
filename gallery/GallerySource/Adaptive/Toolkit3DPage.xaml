@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.Gallery.Pages.Toolkit3DPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Mu3D.Gallery.Controls"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    Title="Toolkit 3D">
+    <Grid RowDefinitions="*,Auto">
+        <controls:SceneHostView
+            x:Name="Host"
+            Camera="{x:Reference MainCamera}"
+            SceneBackground="#FF0C1220"
+            SurfaceError="OnSurfaceError">
+            <mu3d:Scene3D Name="Toolkit 3D example">
+                <mu3d:Scene3D.Camera>
+                    <mu3d:PerspectiveCamera3D
+                        x:Name="MainCamera"
+                        X="3.2"
+                        Y="2.4"
+                        Z="6.2" />
+                </mu3d:Scene3D.Camera>
+                <mu3d:Cone3D
+                    x:Name="TargetCone"
+                    Name="Transform target"
+                    Height="1.8"
+                    RadialSegments="48"
+                    Radius="0.72">
+                    <mu3d:UnlitMaterial3D x:Name="TargetMaterial" Name="HDR blue target" />
+                </mu3d:Cone3D>
+            </mu3d:Scene3D>
+        </controls:SceneHostView>
+        <ScrollView Grid.Row="1" MaximumHeightRequest="390">
+            <VerticalStackLayout Padding="16" Spacing="10">
+                <Label
+                    FontAttributes="Bold"
+                    Text="Drag an enabled overlay handle to transform the centered cone." />
+                <Label
+                    FontSize="12"
+                    Text="Drag empty space to orbit; the host's orbit tool and the gizmo share one control arbiter. Wheel or pinch zooms." />
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                    <Label VerticalOptions="Center" Text="Orbit and Gizmo attached" />
+                    <Switch
+                        x:Name="FeaturesEnabledSwitch"
+                        Grid.Column="1"
+                        IsToggled="True" />
+                </Grid>
+                <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnSpacing="6">
+                    <Label VerticalOptions="Center" Text="Handles" />
+                    <Label Grid.Column="1" VerticalOptions="Center" Text="Move" />
+                    <Switch x:Name="TranslateSwitch" Grid.Column="2" IsToggled="True" />
+                    <Label Grid.Column="3" VerticalOptions="Center" Text="Rotate" />
+                    <Switch x:Name="RotateSwitch" Grid.Column="4" IsToggled="True" />
+                    <HorizontalStackLayout Grid.Column="5" Spacing="4">
+                        <Label VerticalOptions="Center" Text="Scale" />
+                        <Switch x:Name="ScaleSwitch" IsToggled="True" />
+                    </HorizontalStackLayout>
+                </Grid>
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                    <Label VerticalOptions="Center" Text="Axes" />
+                    <Label
+                        Grid.Column="1"
+                        VerticalOptions="Center"
+                        Text="Move/rotate use target-local orientation" />
+                    <Switch x:Name="LocalAxesSwitch" Grid.Column="2" />
+                </Grid>
+                <Label
+                    FontSize="12"
+                    Text="Scale diamonds always follow the target-local axes, matching the scale components." />
+                <Grid
+                    ColumnDefinitions="Auto,*,Auto"
+                    ColumnSpacing="10"
+                    RowDefinitions="Auto,Auto,Auto,Auto"
+                    RowSpacing="4">
+                    <Label VerticalOptions="Center" Text="Handle size" />
+                    <Slider
+                        x:Name="HandleSizeSlider"
+                        Grid.Column="1"
+                        Maximum="180"
+                        Minimum="64"
+                        Value="110" />
+                    <Label x:Name="HandleSizeValueLabel" Grid.Column="2" VerticalOptions="Center" />
+
+                    <Label Grid.Row="1" VerticalOptions="Center" Text="Move step" />
+                    <Stepper
+                        x:Name="TranslationSnapStepper"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        HorizontalOptions="Start"
+                        Increment="0.05"
+                        Maximum="2"
+                        Minimum="0"
+                        Value="0.1" />
+                    <Label x:Name="TranslationSnapValueLabel" Grid.Row="1" Grid.Column="2" VerticalOptions="Center" />
+
+                    <Label Grid.Row="2" VerticalOptions="Center" Text="Rotate step" />
+                    <Stepper
+                        x:Name="RotationSnapStepper"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        HorizontalOptions="Start"
+                        Increment="5"
+                        Maximum="90"
+                        Minimum="0"
+                        Value="15" />
+                    <Label x:Name="RotationSnapValueLabel" Grid.Row="2" Grid.Column="2" VerticalOptions="Center" />
+
+                    <Label Grid.Row="3" VerticalOptions="Center" Text="Scale step" />
+                    <Stepper
+                        x:Name="ScaleSnapStepper"
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        HorizontalOptions="Start"
+                        Increment="0.05"
+                        Maximum="1"
+                        Minimum="0"
+                        Value="0.1" />
+                    <Label x:Name="ScaleSnapValueLabel" Grid.Row="3" Grid.Column="2" VerticalOptions="Center" />
+                </Grid>
+                <Button x:Name="ResetButton" Clicked="OnResetClicked" Text="Reset transform" />
+                <Label x:Name="StatusLabel" Text="Preparing scene…" />
+                <Label
+                    x:Name="PoseLabel"
+                    FontSize="12"
+                    LineBreakMode="WordWrap" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
