@@ -45,6 +45,9 @@ jobs:
       - name: Check browser host contracts
         run: node --test tests/Mu3D.Web.Viewer.Tests/*.test.mjs
 
+      - name: Check Pages boot dependency staging
+        run: python3 eng/test_web_pages.py
+
       - name: Build the actual Gallery in both modes
         run: python3 eng/build-web-gallery.py --dotnet "$(command -v dotnet)" --prepare --mode both
 

@@ -39,6 +39,9 @@ def verify_tree(root):
 
 def verify_gallery(web):
     verify_tree(web)
+    for name in ("dotnet.js", "blazor.webassembly.js"):
+        if not (web / "_framework" / name).is_file():
+            raise ValueError(f"Missing Gallery loader: {name}")
     script = (web / "_framework/dotnet.js").read_text()
     match = re.search(r"/\*json-start\*/(.*?)/\*json-end\*/", script, re.S)
     if not match:
@@ -50,7 +53,7 @@ def verify_gallery(web):
 
     def walk(value):
         if isinstance(value, dict):
-            if "name" in value and "hash" in value:
+            if "name" in value:
                 resources.append(value)
             for child in value.values():
                 walk(child)
@@ -59,18 +62,27 @@ def verify_gallery(web):
                 walk(child)
 
     walk(boot["resources"])
+    framework = (web / "_framework").resolve()
     for item in resources:
-        file = (web / "_framework" / item["name"]).resolve()
-        if not file.is_relative_to(web.resolve()):
+        name = item["name"]
+        if not isinstance(name, str) or not name:
+            raise ValueError("Boot resources must have a nonempty file name")
+        file = (framework / name).resolve()
+        if not file.is_relative_to(framework):
             raise ValueError("Boot resource is outside its publication")
-        actual = "sha256-" + base64.b64encode(hashlib.sha256(file.read_bytes()).digest()).decode()
-        if actual != item["hash"]:
-            raise ValueError(f"Boot resource mismatch: {item['name']}")
+        if not file.is_file():
+            raise ValueError(f"Missing boot resource: {name}")
+        # .NET 10's imported JS modules have names without integrity hashes.
+        # They are still required boot resources and must survive staging.
+        if "hash" in item:
+            actual = "sha256-" + base64.b64encode(hashlib.sha256(file.read_bytes()).digest()).decode()
+            if actual != item["hash"]:
+                raise ValueError(f"Boot resource mismatch: {name}")
     raw = ROOT / "samples/GalleryApp/Resources/Raw"
     for original in raw.rglob("*"):
         if original.is_file() and original.read_bytes() != (web / "assets" / original.relative_to(raw)).read_bytes():
             raise ValueError(f"Gallery asset differs from the actual sample: {original.name}")
-    return {item["name"] for item in resources}
+    return {item["name"] for item in resources}, sum("hash" in item for item in resources)
 
 
 def stage(args):
@@ -102,7 +114,7 @@ def stage(args):
         if publication is None:
             continue
         web = publication.resolve() / "wwwroot"
-        resources = verify_gallery(web)
+        resources, hashed_count = verify_gallery(web)
         destination = site / name
         shutil.copytree(web, destination)
         # Incremental publishes retain obsolete fingerprinted files. The validated
@@ -112,6 +124,7 @@ def stage(args):
         for file in framework.iterdir():
             if file.is_file() and file.name not in retained:
                 file.unlink()
+        verify_gallery(destination)
         base = args.base_path + name + "/"
         host = destination / "index.html"
         content = host.read_text()
@@ -119,7 +132,7 @@ def stage(args):
             raise ValueError("Publish the current Gallery host with its static-route bootstrap first")
         host.write_text(content.replace('<base href="/">', f'<base href="{html.escape(base, quote=True)}">'))
         bases.append(base)
-        reports.append({"path": base, "hashedResources": len(resources)})
+        reports.append({"path": base, "bootResources": len(resources), "hashedResources": hashed_count})
     if not bases:
         raise ValueError("Specify at least one complete Gallery publication")
     # The root 404 document is the one GitHub Pages uses for unmatched deep routes.
