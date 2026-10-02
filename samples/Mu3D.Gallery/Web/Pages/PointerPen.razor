@@ -1,0 +1,29 @@
+@page "/examples/pointer-pen-input"
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+
+<main>
+
+    <h1>Pointer + Pen Input</h1>
+    <p>悬停或拖过同一原生场景；真实三角形命中控制标记位置，笔压改变大小，倾斜改变同一调色板颜色和预览。</p>
+    <div class="viewport">
+        <canvas id="mu3d-canvas" @ref="canvas" tabindex="0" aria-label="Pointer and pen scene"></canvas>
+        <div @ref="cursor" hidden style="position:absolute;left:0;top:0;width:42px;height:42px;pointer-events:none;color:#35F2D0">
+            <svg width="42" height="42" viewBox="0 0 42 42" aria-hidden="true">
+                <circle cx="21" cy="21" r="20" stroke="currentColor" stroke-width="2" fill="currentColor" fill-opacity="0.14" />
+                <line @ref="tiltLine" x1="21" y1="6.5" x2="21" y2="35.5" stroke="currentColor" stroke-width="2" style="transform-origin:21px 29.12px" />
+                <circle cx="21" cy="21" r="3" fill="white" />
+            </svg>
+        </div>
+    </div>
+    <div class="controls">
+        <button @onclick="Clear">Clear marker</button>
+        <label><input type="checkbox" @bind="shadowEnabled" @bind:after="SettingsChanged" /> Pen contact shadow</label>
+        <label>Shadow coefficient @shadowCoefficient.ToString("0.00") <input type="range" min="0" max="1" step="0.01" @bind="shadowCoefficient" @bind:event="oninput" @bind:after="SettingsChanged" /></label>
+        <label>Blur falloff @blurDecay.ToString("0.00") px/mm <input type="range" min="0" max="1.5" step="0.01" @bind="blurDecay" @bind:event="oninput" @bind:after="SettingsChanged" /></label>
+        <label>Shadow falloff @shadowDecay.ToString("0.000") /mm <input type="range" min="0" max="0.15" step="0.001" @bind="shadowDecay" @bind:event="oninput" @bind:after="SettingsChanged" /></label>
+        <label>预览校准 <input type="number" min="50" max="300" step="1" @bind="pointsPerInch" @bind:event="oninput" @bind:after="CalibrationChanged" /> CSS px/in</label>
+    </div>
+    <p>复用原生的真实 Pencil 几何、SurfaceNormal/depth 和 Gaussian 阴影通道。浏览器未提供 Apple Pencil 悬停距离及用户预览偏好，均为未知；只有笔接触时绘制阴影。96 CSS px/in 是可调整的预览参考，不代表屏幕物理密度。</p>
+    <p class="status" role="status">@status</p>
+</main>

@@ -1,0 +1,54 @@
+@page "/examples/translucent-canvas"
+@implements IAsyncDisposable
+@using Mu3D.Color
+@using Mu3D.SceneGraph
+@using Mu3D.GalleryApp.Examples
+@using Mu3D.GalleryApp.Web.Infrastructure
+
+<main>
+<h1>Translucent HDR Canvas</h1>
+<GalleryCanvas @ref="viewport" Title="Translucent HDR Canvas" Transparent="true" Draw="scene.Draw"
+               HasPendingMotion="@(() => scene.HasPendingMotion)"
+               Input="scene.ApplyInput" Hdr="@(output == "hdr")" Disconnected="scene.ReleaseGraphics" />
+<div class="controls">
+    <button @onclick="AddDab">Add translucent dab</button><button @onclick="Reset">Reset</button>
+    <label>View <select @bind="view" @bind:after="UpdateView">
+        <option value="">Scene linear · HDR</option>
+        @foreach (ColorViewPreset preset in Enum.GetValues<ColorViewPreset>())
+        { <option value="@preset.ToString()">@preset</option> }
+    </select></label>
+    <label>Output <select @bind="output" @bind:after="UpdateView"><option value="hdr">HDR</option><option value="sdr">SDR preview</option></select></label>
+    <label>EV @exposure.ToString("+0.00;-0.00;0.00") <input type="range" min="-4" max="4" step="0.25"
+        disabled="@(view.Length == 0)" @bind="exposure" @bind:event="oninput" @bind:after="UpdateView" /></label>
+</div>
+<p role="status">@status</p>
+<p>The native example's 256 × 256 ACEScg canvas uses alpha 0.2 for its background and 0.5 for HDR dabs.
+    Its sphere and Canvas surface retain premultiplied transparency so the page shows through.</p>
+
+</main>
+
+@code {
+    private readonly HdrCanvasExample example = new(translucent: true);
+    private readonly FocusedGalleryScene scene = new("TranslucentCanvasPage", transparent: true);
+    private GalleryCanvas? viewport;
+    private string view = "", output = "hdr", status = "";
+    private float exposure;
+    protected override void OnInitialized()
+    {
+        scene.Definition.NamedMaterials["CanvasMaterial"].AlphaMode = MaterialAlphaMode.Blend;
+        example.Reset(); Publish();
+    }
+    private async Task AddDab() { example.AddDab(); Publish(); await Invalidate(); }
+    private async Task Reset() { example.Reset(); Publish(); await Invalidate(); }
+    private void Publish() => ((UnlitMaterial)scene.Definition.NamedMaterials["CanvasMaterial"]).BaseColorTexture = example.Publish(out status);
+    private Task Invalidate() => viewport?.InvalidateAsync() ?? Task.CompletedTask;
+    private async Task UpdateView()
+    {
+        scene.View = view.Length == 0 ? null : Enum.Parse<ColorViewPreset>(view);
+        scene.Exposure = exposure;
+        scene.Hdr = output == "hdr";
+        await Invalidate();
+    }
+    public async ValueTask DisposeAsync()
+    { if (viewport is not null) await viewport.DisposeAsync(); scene.Dispose(); }
+}

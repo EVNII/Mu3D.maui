@@ -9,7 +9,8 @@ Blazor WebAssembly with the same renderer, Toolkit and example logic through thi
 CPU colors and transforms retain FP32 semantics, while normal HDR attachments use FP16.
 
 See [developer documentation](https://evnii.github.io/Mu3D.maui/v0.1/) and the
-[Web Gallery build guide](samples/GalleryApp/Web/README.md).
+[native Gallery guide](samples/Mu3D.Gallery/README.md), alongside the
+[Web Gallery build guide](samples/Mu3D.Gallery/Web/README.md).
 
 This is a preview source release. NuGet package publication is not enabled yet. The public
 repository is [EVNII/Mu3D.maui](https://github.com/EVNII/Mu3D.maui); its source snapshots exclude
@@ -68,7 +69,7 @@ whereas this workload set installs 10.0.12.
 `rollForward: latestPatch` accepts newer 10.0.4xx servicing releases but deliberately does not jump
 to another feature band. `global.json` searches an optional isolated SDK installation at
 `artifacts/toolchain/dotnet` before the system installation. When using that local installation,
-run `artifacts/toolchain/dotnet/dotnet workload restore samples/GalleryApp/GalleryApp.csproj` once
+run `artifacts/toolchain/dotnet/dotnet workload restore samples/Mu3D.Gallery/Mu3D.Gallery.csproj` once
 to install workloads for that SDK root.
 
 Gallery's Mac Catalyst target explicitly selects platform SDK 27.0 from that workload set for
@@ -86,7 +87,7 @@ dotnet run --project tests/Mu3D.Toolkit.Tests --configuration Release
 dotnet run --project tests/Mu3D.Maui.Toolkit.Tests --configuration Release
 dotnet build src/Mu3D.Maui/Mu3D.Maui.csproj -f net10.0-android --no-restore
 dotnet build src/Mu3D.Maui.Toolkit/Mu3D.Maui.Toolkit.csproj -f net10.0-android --no-restore
-dotnet build samples/GalleryApp/GalleryApp.csproj -f net10.0-android --no-restore
+dotnet build samples/Mu3D.Gallery/Mu3D.Gallery.csproj -f net10.0-android --no-restore
 ```
 
 Use the corresponding `net10.0-ios`, `net10.0-maccatalyst`, or Windows target framework
@@ -201,7 +202,7 @@ which can be overridden with `Mu3DDocumentationBaseUrl`. The public Pages site i
 `EVNII/Mu3D.maui`, with versioned documentation under `/Mu3D.maui/v0.1/` and both Gallery modes.
 
 The actual Gallery also has an experimental Blazor WebAssembly host, with shared native example
-logic and assets. Its [build and Pages guide](samples/GalleryApp/Web/README.md) uses the same local
+logic and assets. Its [build and Pages guide](samples/Mu3D.Gallery/Web/README.md) uses the same local
 scripts as the manual **Web Gallery Pages** Action. Local publication avoids hosted AOT builds;
 the Action remains ready for later use, without running on ordinary pushes.
 
@@ -299,12 +300,12 @@ when CI must use a target-specific `llvm-nm`, such as the Android NDK tool.
 
 The optional KTX workflow publishes both a complete NuGet package and a single verified 12-RID
 runtime artifact. After that workflow succeeds, authenticate GitHub CLI and stage its native files
-for GalleryApp with:
+for Mu3D Gallery with:
 
 ```shell
 gh auth login -h github.com
 ./eng/download-ktx-runtimes.sh
-dotnet run --project samples/GalleryApp/GalleryApp.csproj \
+dotnet run --project samples/Mu3D.Gallery/Mu3D.Gallery.csproj \
   -f net10.0-maccatalyst -r maccatalyst-arm64
 ```
 
@@ -339,7 +340,7 @@ No GitHub Actions run or consumer-side CMake step is involved.
 On a Windows x64 development machine, the staged binaries are discovered automatically by Gallery:
 
 ```powershell
-dotnet build samples/GalleryApp/GalleryApp.csproj `
+dotnet build samples/Mu3D.Gallery/Mu3D.Gallery.csproj `
   -f net10.0-windows10.0.19041.0 -c Release
 ```
 
@@ -427,17 +428,17 @@ dotnet run --project tools/Mu3D.WgpuGen -- \
 
 Accepted platform groups are `android`, `ios` (device and simulators), `maccatalyst`, and `windows`.
 
-To deploy GalleryApp's explicit native device probe, first stage the pinned Release runtimes:
+To deploy Mu3D Gallery's explicit native device probe, first stage the pinned Release runtimes:
 
 ```shell
 dotnet run --project tools/Mu3D.WgpuGen -- \
   prepare-platform-runtimes eng/wgpu-native-assets.json \
   eng/Mu3D.WgpuNativeVersion.props android release artifacts/downloads artifacts/wgpu-native
-dotnet build samples/GalleryApp/GalleryApp.csproj -f net10.0-android
+dotnet build samples/Mu3D.Gallery/Mu3D.Gallery.csproj -f net10.0-android
 ```
 
 Use platform `ios`, `maccatalyst`, or `windows` and an explicit runtime identifier when appropriate.
-GalleryApp links the staged pinned Release runtime by default on every supported platform. Android
+Mu3D Gallery links the staged pinned Release runtime by default on every supported platform. Android
 provides all four upstream ABI inputs and packages those selected by the build's runtime identifiers;
 Windows selects one of `win-x64`, `win-x86`, or `win-arm64` and copies it to the output as
 `wgpu_native.dll`. Its MAUI handler bridges WinUI 3's `SwapChainPanel` through
@@ -447,7 +448,7 @@ It deliberately reports that surface/HDR presentation was not probed; that requi
 physical-display validation stage.
 
 Mac Catalyst development builds enable the Release native harness by default, including when
-running `dotnet run` from `samples/GalleryApp`. Prepare its pinned assets once before the first run:
+running `dotnet run` from `samples/Mu3D.Gallery`. Prepare its pinned assets once before the first run:
 
 ```shell
 dotnet run --project tools/Mu3D.WgpuGen -- \
@@ -458,7 +459,7 @@ dotnet run --project tools/Mu3D.WgpuGen -- \
 The build selects `maccatalyst-arm64` or `maccatalyst-x64` from `$(RuntimeIdentifier)` and fails
 before launch if the exact ABI-pinned static library is unavailable.
 
-GalleryApp also contains a Surface Probe page. Call `.UseMu3D()` while constructing the MAUI app
+Mu3D Gallery also contains a Surface Probe page. Call `.UseMu3D()` while constructing the MAUI app
 to register its platform handler. Android supplies a retained `ANativeWindow`; iOS and Mac Catalyst
 use a `UIView` whose backing layer is a real `CAMetalLayer`. The page queries surface capabilities,
 applies the explicit HDR/SDR fallback policy, and configures an `RGBA16Float` extended-range surface

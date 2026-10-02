@@ -1,0 +1,49 @@
+@page "/examples/emissive-material"
+@implements IAsyncDisposable
+@using Mu3D.Color
+@using Mu3D.SceneGraph
+@using Mu3D.GalleryApp.Examples
+@using Mu3D.GalleryApp.Web.Infrastructure
+
+<main>
+<h1>Emissive Material</h1>
+<GalleryCanvas @ref="viewport" Title="Emissive Material" Draw="example.Draw" Input="example.ApplyInput"
+               HasPendingMotion="@(() => example.HasPendingMotion)"
+               Hdr="@(output == "hdr")" Disconnected="example.ReleaseGraphics" />
+<div class="controls">
+    <label>View <select @bind="view" @bind:after="UpdateView">
+        <option value="">Scene linear · HDR</option>
+        @foreach (ColorViewPreset preset in Enum.GetValues<ColorViewPreset>())
+        { <option value="@preset.ToString()">@preset</option> }
+    </select></label>
+    <label>Output <select @bind="output" @bind:after="UpdateView"><option value="hdr">HDR</option><option value="sdr">SDR preview</option></select></label>
+    <label>EV @exposure.ToString("+0.00;-0.00;0.00") <input type="range" min="-4" max="4" step="0.25"
+        disabled="@(view.Length == 0)" @bind="exposure" @bind:event="oninput" @bind:after="UpdateView" /></label>
+</div>
+<p>Four native Gallery spheres retain the same warm linear-sRGB emission and strengths 0 / 1 / 4 / 16.
+    Drag to orbit, wheel or pinch to zoom. Scene linear preserves HDR; choosing a display view enables its EV control.</p>
+
+</main>
+
+@code {
+    private readonly FocusedGalleryScene example = new("EmissiveMaterialPage");
+    private GalleryCanvas? viewport;
+    private string view = "", output = "hdr";
+    private float exposure;
+    protected override void OnInitialized()
+    {
+        string[] names = ["MaterialOff", "MaterialOne", "MaterialFour", "MaterialSixteen"];
+        float[] strengths = [0, 1, 4, 16];
+        for (int index = 0; index < names.Length; index++)
+            EmissiveMaterialExample.Apply((PbrMaterial)example.Definition.NamedMaterials[names[index]], strengths[index]);
+    }
+    private async Task UpdateView()
+    {
+        example.View = view.Length == 0 ? null : Enum.Parse<ColorViewPreset>(view);
+        example.Exposure = exposure;
+        example.Hdr = output == "hdr";
+        if (viewport is not null) await viewport.InvalidateAsync();
+    }
+    public async ValueTask DisposeAsync()
+    { if (viewport is not null) await viewport.DisposeAsync(); example.Dispose(); }
+}

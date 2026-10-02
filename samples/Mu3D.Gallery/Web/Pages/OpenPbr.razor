@@ -1,0 +1,294 @@
+@page "/examples/openpbr-materialx"
+@page "/examples/openpbr-white-furnace"
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+@using Mu3D.Color
+@using Mu3D.Graphics
+@using Mu3D.Rendering.OpenPbr
+@using Mu3D.SceneGraph
+@using Mu3D.GalleryApp.Examples
+@using Mu3D.GalleryApp.Web.Shared
+@using Mu3D.GalleryApp.Web.Infrastructure
+@using FurnaceRenderer = Mu3D.GalleryApp.Pages.OpenPbrFurnaceRenderer
+@using FurnacePresets = Mu3D.GalleryApp.Pages.FurnaceMaterials
+
+<main>
+<h1>@(isFurnace ? "OpenPBR White Furnace" : "OpenPBR + MaterialX")</h1>
+    <div class="viewport"><canvas id="mu3d-canvas" @ref="canvas" tabindex="0" aria-label="OpenPBR 场景"></canvas></div>
+    <div class="controls">
+        <fieldset disabled="@preparing" style="border:0;padding:0;margin:0;display:contents">
+        @if (isFurnace)
+        {
+            <p>均匀白色环境，无直接灯光、无色调映射。无吸收材质充分收敛后应融入背景；默认白漫反射看不到球是预期结果。</p>
+            <label>材质 <select @bind="preset" @bind:after="FurnaceSettingsChanged">
+                <option value="0">白漫反射</option><option value="1">白金属</option><option value="2">白色涂层</option><option value="3">白色绒毛</option>
+                <option value="4">无吸收玻璃</option><option value="5">白色次表面</option><option value="6">50% 灰色吸收对照</option>
+            </select></label>
+            <label>渲染模式 <select @bind="furnaceMode" @bind:after="FurnaceSettingsChanged">
+                <option value="0">Reference</option><option value="1">Hybrid</option><option value="2">Interactive</option>
+                <option value="3">Raster（近似）</option><option value="4">Fast（近似）</option>
+            </select></label>
+            <label>显示 <select @bind="furnaceView" @bind:after="Invalidate">
+                <option value="0">原始线性 HDR</option><option value="1">Lout / Lenv 比值</option><option value="2">目标差值 ×10 · 红偏高 / 蓝偏低 / 灰为零</option>
+            </select></label>
+            <label>粗糙度 <input type="range" min="0" max="1" step="0.01" @bind="furnaceRoughness" @bind:event="oninput" @bind:after="FurnaceSettingsChanged" /> @furnaceRoughness.ToString("F2")</label>
+            <label>高光各向异性 <input type="range" min="0" max="0.9" step="0.01" @bind="anisotropy" @bind:event="oninput" @bind:after="FurnaceSettingsChanged" /> @anisotropy.ToString("F2")</label>
+            <label>环境 EV <input type="range" min="-4" max="4" step="0.1" @bind="environmentEv" @bind:event="oninput" @bind:after="FurnaceSettingsChanged" /> @environmentEv.ToString("F1")</label>
+            <label>路径事件上限 <select @bind="events" @bind:after="FurnaceSettingsChanged">
+                <option value="4">4 次事件</option><option value="8">8 次事件</option><option value="32">32 次事件</option><option value="64">64 次事件</option><option value="128">128 次事件</option>
+            </select></label>
+            <button @onclick="ResetFurnace">重置</button>
+            <p>Lenv = @MathF.Pow(2, environmentEv).ToString("F3")；目标 Lout / Lenv ≈ @(preset == 6 ? "0.50" : "1.00")。@(preset == 6 ? "灰色对照固定为 50% Lambert 吸收。" : "玻璃/次表面需要更多事件与采样才能收敛。")</p>
+            <button disabled="@(measuring || session is null)" @onclick="Measure">测量当前线性结果（一次 GPU 回读）</button>
+            <p>@measurement</p>
+        }
+        else
+        {
+            <label>渲染模式 <select @bind="mode" @bind:after="MaterialSettingsChanged">
+                <option value="0">Interactive · path tracing</option><option value="1">Reference · path tracing</option>
+                <option value="2">Raster · direct + environment</option><option value="3">Hybrid · raster + ray transport</option><option value="4">Fast · split-sum IBL</option>
+            </select></label>
+            <label>显示视图 <select @bind="view" @bind:after="Invalidate">
+                <option value="0">Scene linear · HDR</option><option value="1">AgX · HDR 1000 nits</option><option value="2">ACES 2 · HDR 1000 nits</option><option value="3">AgX · SDR</option><option value="4">ACES 2 · SDR</option>
+            </select></label>
+            <label><input type="checkbox" @bind="shadows" @bind:after="ShadowSettingsChanged" />Directional shadows · Raster / Fast</label>
+            <label>Shadow map size <select @bind="shadowSize" @bind:after="ShadowSettingsChanged">
+                <option value="512">512 px</option><option value="1024">1024 px</option><option value="2048">2048 px</option><option value="4096">4096 px</option>
+            </select></label>
+            <label>Shadow filter <select @bind="shadowFilter" @bind:after="ShadowSettingsChanged">
+                <option value="0">Hard</option><option value="1">PCF 3×3</option><option value="2">PCF 5×5</option>
+            </select></label>
+            <label>Depth bias: @shadowBias.ToString("F4") <input type="range" min="0" max="0.02" step="0.0001" @bind="shadowBias" @bind:event="oninput" @bind:after="ShadowSettingsChanged" /></label>
+            <label>Normal bias (scene units): @shadowNormalBias.ToString("F4") <input type="range" min="0" max="0.05" step="0.0001" @bind="shadowNormalBias" @bind:event="oninput" @bind:after="ShadowSettingsChanged" /></label>
+            @if (example is not null) { <OpenPbrParameters Surface="example.Surface" Applied="ApplySurface" /> }
+            <button @onclick="LoadMaterialX">Load .mtlx sample</button><button @onclick="RoundTrip">XML round trip</button><button @onclick="TextureMaterial">Texture material</button>
+        }
+        <label><input type="checkbox" @bind="run" @bind:after="Invalidate" />@(isFurnace ? "继续采样" : "Run")</label>
+        <label>输出 <select @bind="OutputMode" @bind:after="Invalidate"><option value="hdr">HDR</option><option value="sdr">SDR 预览</option></select></label>
+        </fieldset>
+    </div>
+    <p>@sampling</p><p role="status">@status</p>
+</main>
+
+@code {
+    private OpenPbrGalleryExample? example;
+    private FurnaceRenderer? furnace;
+    private (Scene Scene, PerspectiveCamera Camera, OpenPbrMaterial Material) furnaceScene;
+    private RenderSession? session;
+    private IJSObjectReference? module, host;
+    private DotNetObjectReference<OpenPbr>? reference;
+    private ElementReference canvas;
+    private Task? startup;
+    private readonly CancellationTokenSource lifetime = new();
+    private bool isFurnace, run = true, hdr = true, disposed, measuring, preparing = true, shadows = true;
+    private string OutputMode { get => hdr ? "hdr" : "sdr"; set => hdr = value switch { "hdr" => true, "sdr" => false, _ => hdr }; }
+    private int mode = 2, view = 0, preset = 0, furnaceMode = 0, furnaceView = 0, events = 32, revision, frames;
+    private float furnaceRoughness = .3f, anisotropy = 0, environmentEv = 0, shadowBias = .001f, shadowNormalBias = .002f;
+    private uint shadowSize = 1024;
+    private int shadowFilter = 1;
+    private string sampling = "", status = "正在连接 GPU…";
+    private string measurement = "尚未测量。数值取自色彩显示前的球体内部区域，避开背景与轮廓。";
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (disposed) return;
+        bool next = Navigation.ToBaseRelativePath(Navigation.Uri).Split('?', '#')[0].EndsWith("openpbr-white-furnace", StringComparison.Ordinal);
+        if (next != isFurnace && startup is { IsCompleted: false })
+        {
+            // A reused route cannot dispose the pass while startup is publishing prepared GPU resources.
+            await startup;
+            if (disposed) return;
+            // A second navigation may have arrived while preparation completed.
+            next = Navigation.ToBaseRelativePath(Navigation.Uri).Split('?', '#')[0].EndsWith("openpbr-white-furnace", StringComparison.Ordinal);
+        }
+        if (example is null && furnace is null || next != isFurnace)
+        {
+            revision++; example?.Dispose(); example = null; furnace?.Dispose(); furnace = null;
+            isFurnace = next; run = true;
+            if (isFurnace)
+            {
+                preset = furnaceMode = furnaceView = 0; events = 32;
+                furnaceRoughness = .3f; anisotropy = environmentEv = 0;
+                var material = new OpenPbrMaterial(FurnacePresets.Create(0, .3f, 0));
+                var scene = new Scene(); scene.Add(new Mesh(MeshPrimitives.CreateUvSphere(), material));
+                furnaceScene = (scene, new(40 * MathF.PI / 180) { Transform = { Position = new(0, 0, 4) } }, material);
+                furnace = new(); ApplyFurnaceSettings();
+            }
+            else
+            {
+                mode = 2; view = 0; example = new();
+                shadows = true; shadowSize = 1024; shadowFilter = 1; shadowBias = .001f; shadowNormalBias = .002f;
+                status = "复用原生 Gallery 的 OpenPBR 示例状态；.mtlx 保留同一组输入。";
+            }
+        }
+        await Invalidate();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender) { startup = StartAsync(); await startup; }
+    }
+
+    private async Task StartAsync()
+    {
+        try
+        {
+            module = await JS.InvokeAsync<IJSObjectReference>("import", "./gallery-viewport.mjs");
+            if (disposed) return;
+            session = await RenderSession.OpenAsync();
+            if (disposed) return;
+            status = "Preparing OpenPBR shaders… You can leave this page while preparation runs.";
+            await InvokeAsync(StateHasChanged);
+            OpenPbrRenderPass pass = isFurnace ? furnace!.Transport : example!.Transport;
+            await pass.PrepareAsync(session.PresentationSurface.Device, GraphicsTextureFormat.Rgba16Float, lifetime.Token);
+            if (disposed) return;
+            status = "OpenPBR ready.";
+            reference = DotNetObjectReference.Create(this);
+            host = await module.InvokeAsync<IJSObjectReference>("create", canvas, reference, session.MaximumDimension);
+            await Invalidate();
+        }
+        catch (Exception error) { if (!disposed) { status = error.Message; await InvokeAsync(StateHasChanged); } }
+        finally { preparing = false; if (!disposed) await InvokeAsync(StateHasChanged); }
+    }
+
+    private async Task Invalidate()
+    {
+        if (host is not null && !disposed)
+            await host.InvokeVoidAsync("configure", false, false, hdr, run && (!isFurnace || furnaceMode is not (3 or 4)));
+    }
+    private async Task MaterialSettingsChanged()
+    {
+        if (example is not null)
+        {
+            if (OpenPbrGalleryExample.ModeError(example.Surface, (OpenPbrRenderMode)mode) is { } error)
+            { mode = (int)example.Transport.Mode; status = error; return; }
+            example.Transport.Mode = (OpenPbrRenderMode)mode; example.Transport.ResetAccumulation();
+        }
+        await Invalidate();
+    }
+    private async Task ApplySurface(OpenPbrSurface surface)
+    {
+        example?.ApplySurface(surface);
+        status = "Material updated. XAML and .mtlx retain the same OpenPBR inputs.";
+        await Invalidate();
+    }
+    private async Task ShadowSettingsChanged()
+    {
+        if (example is null) return;
+        var pass = example.Transport;
+        pass.DirectionalShadowsEnabled = shadows; pass.DirectionalShadowMapSize = shadowSize;
+        pass.DirectionalShadowPcfRadius = shadowFilter; pass.DirectionalShadowDepthBias = shadowBias;
+        pass.DirectionalShadowNormalBias = shadowNormalBias;
+        await Invalidate();
+    }
+    private async Task TextureMaterial()
+    {
+        example?.UseTextureMaterial(.3f); status = "Color, roughness and tangent-normal textures loaded. XAML and .mtlx retain the same OpenPBR inputs.";
+        await Invalidate();
+    }
+    private async Task LoadMaterialX()
+    {
+        if (example is null) return;
+        var active = example;
+        try
+        {
+            using var client = new HttpClient { BaseAddress = new Uri(Navigation.BaseUri) };
+            using Stream stream = await client.GetStreamAsync("assets/MaterialX/blue-metal.mtlx");
+            await active.LoadAsync(stream);
+            if (disposed || active != example) return;
+            status = "Loaded blue-metal.mtlx. XAML and .mtlx retain the same OpenPBR inputs.";
+            await Invalidate();
+        }
+        catch (Exception error) { if (!disposed && active == example) status = error.Message; }
+    }
+    private async Task RoundTrip()
+    {
+        try { if (example is not null) { long bytes = example.RoundTrip(); status = $"Exported and reimported {bytes:N0} XML bytes."; await Invalidate(); } }
+        catch (Exception error) { status = error.Message; }
+    }
+
+    private async Task FurnaceSettingsChanged() { ApplyFurnaceSettings(); await Invalidate(); }
+    private void ApplyFurnaceSettings()
+    {
+        if (furnace is null) return;
+        int selected = furnaceMode;
+        if (selected == 3 && preset is 4 or 5 || selected == 4 && preset == 4)
+        {
+            furnaceMode = 0;
+            status = selected == 4 ? "Fast 模式与光栅一样拒绝透射（玻璃），已选择 Reference。" : "光栅模式不支持玻璃/次表面，已选择 Reference。";
+        }
+        else status = selected == 4 && preset == 5
+            ? "Fast 丢弃次表面 lobe 并计入近似报告；扩散/高光项仍参与。数值不自动判定通过或失败。"
+            : "有限采样、反弹截断和光栅近似都会影响结果；数值不自动判定通过或失败。";
+        var pass = furnace.Transport;
+        pass.Mode = furnaceMode switch { 1 => OpenPbrRenderMode.Hybrid, 2 => OpenPbrRenderMode.Interactive, 3 => OpenPbrRenderMode.Raster, 4 => OpenPbrRenderMode.Fast, _ => OpenPbrRenderMode.Reference };
+        pass.ReferenceMaxBounces = pass.HybridMaxBounces = pass.InteractiveMaxBounces = events;
+        furnace.EnvironmentLevel = MathF.Pow(2, environmentEv); furnace.ExpectedRatio = preset == 6 ? .5f : 1;
+        furnace.DisplayMode = furnaceView;
+        furnaceScene.Material.Surface = FurnacePresets.Create(preset, furnaceRoughness, anisotropy);
+        revision++; pass.ResetAccumulation(); measurement = "结果已更新，请重新测量。";
+    }
+    private async Task ResetFurnace() { revision++; furnace?.Transport.ResetAccumulation(); measurement = "结果已更新，请重新测量。"; await Invalidate(); }
+    private async Task Measure()
+    {
+        if (furnace is null || session is null) return;
+        var active = furnace; int version = revision; measuring = true;
+        try
+        {
+            var pending = active.MeasureNextFrameAsync(); await Invalidate();
+            var result = await pending;
+            if (disposed || active != furnace || version != revision) return;
+            measurement = $"{result.Mode} · {(result.Samples > 0 ? $"{result.Samples:N0} spp" : "单帧")} · {result.Pixels:N0} 个球内像素\n" +
+                $"平均 RGB 比值 {result.Mean.X:F4} / {result.Mean.Y:F4} / {result.Mean.Z:F4}；范围 {result.Minimum:F4}–{result.Maximum:F4}；目标 RMS 误差 {result.Rms:P2}";
+        }
+        catch (OperationCanceledException) { }
+        catch (Exception error) { if (!disposed && active == furnace && version == revision) measurement = error.Message; }
+        finally { if (!disposed) measuring = false; }
+    }
+
+    /// <summary>Submits the original Gallery OpenPBR scene or white furnace through the Canvas handler.</summary>
+    [JSInvokable]
+    public async Task DrawFrame(int width, int height, double delta, double interval, double pixelRatio,
+        double logicalWidth, double logicalHeight, float rotateX, float rotateY, float dolly, bool outputHdr, bool refresh)
+    {
+        if (disposed || session is null) return;
+        await session.DrawExampleAsync(width, height, 0, outputHdr, refresh, (device, target, depth) =>
+        {
+            if (isFurnace && furnace is not null)
+            {
+                furnaceScene.Camera.AspectRatio = (float)width / height; furnace.DisplayMode = furnaceView;
+                furnace.Execute(new(furnaceScene.Scene, furnaceScene.Camera, target, depth, StandardColorSpaces.LinearSrgb));
+            }
+            else example?.Draw(device, target, depth, view);
+        });
+        if (disposed) return;
+        if (frames++ % (isFurnace ? 8 : 16) == 0 || !run || isFurnace && furnaceMode is 3 or 4)
+        {
+            sampling = isFurnace ? FurnaceSummary() : example is null ? "" : OpenPbrGalleryExample.SamplingSummary(example.Transport);
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+    private string FurnaceSummary() => furnace?.Transport.Mode switch
+    {
+        OpenPbrRenderMode.Raster => "Raster：64 个固定环境样本，不累积；存在积分近似误差。",
+        OpenPbrRenderMode.Fast => "Fast：split-sum 环境与烘焙纹理，单帧确定结果，不累积；近似项见 OpenPBR 页报告。",
+        OpenPbrRenderMode.Interactive => "Interactive：每帧独立采样，不累积。",
+        _ => furnace is null ? "" : $"{furnace.Transport.Mode}：已累积 {furnace.Transport.AccumulatedSamples:N0} spp；" + (furnace.Transport.UsesPrimaryRayFallback ? "主光线求交回退。" : "修改材质/环境会重置。"),
+    };
+    /// <summary>Reports a stopped render loop without changing its HDR output policy.</summary>
+    [JSInvokable] public Task RenderFailed(string message)
+    { if (disposed) return Task.CompletedTask; run = false; status = message; return InvokeAsync(StateHasChanged); }
+    /// <summary>Releases owned passes and the borrowed-device host after pending callbacks have settled.</summary>
+    [JSInvokable] public void Disconnect() { revision++; example?.Dispose(); example = null; furnace?.Dispose(); furnace = null; session?.Dispose(); session = null; }
+    /// <inheritdoc />
+    public async ValueTask DisposeAsync()
+    {
+        disposed = true; revision++; lifetime.Cancel();
+        if (startup is not null) await startup;
+        if (host is not null) { await host.InvokeVoidAsync("dispose"); await host.DisposeAsync(); }
+        Disconnect(); reference?.Dispose();
+        if (module is not null) await module.DisposeAsync();
+        lifetime.Dispose();
+    }
+}

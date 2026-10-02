@@ -1,4 +1,5 @@
 using Mu3D.Color;
+using Mu3D.GalleryApp.Pages;
 using Mu3D.Samples;
 using Mu3D.Formats.MaterialX;
 using Mu3D.Gallery.Controls;
@@ -11,7 +12,7 @@ using Mu3D.SceneGraph;
 namespace Mu3D.Gallery.Pages;
 
 /// <summary>Compares one XAML OpenPBR scene in raster, hybrid and two path-tracing modes.</summary>
-public partial class OpenPbrPage : ContentPage
+public partial class OpenPbrPage : ContentPage, IGalleryPageActivation
 {
     private OpenPbrRenderPass? renderPass;
     private VsyncFrameSource? vsyncLoop;
@@ -29,10 +30,13 @@ public partial class OpenPbrPage : ContentPage
         Host.SceneView.PresentationSessionChanged += OnPresentationSessionChanged;
         Host.SceneView.FramePresented += OnFramePresented;
         EnsureRenderPass();
-        // AdaptiveShell.Maui 0.1.x hosts content pages without raising Appearing/Disappearing;
-        // Loaded/Unloaded fire as the hosted page enters and leaves the window's visual tree.
-        Loaded += OnPageLoaded;
-        Unloaded += OnPageUnloaded;
+    }
+
+    void IGalleryPageActivation.SetNavigationActive(bool active)
+    {
+        if (isPageVisible == active) return;
+        if (active) OnPageLoaded(this, EventArgs.Empty);
+        else OnPageUnloaded(this, EventArgs.Empty);
     }
 
     private void OnPageLoaded(object? sender, EventArgs e)

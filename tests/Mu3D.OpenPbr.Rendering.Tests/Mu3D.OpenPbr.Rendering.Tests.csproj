@@ -7,8 +7,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="../../src/Mu3D.Maui/Controls/PresentationWhite.cs" Link="Presentation/PresentationWhite.cs" />
-    <Compile Include="../../samples/GalleryApp/Pages/SurfaceReferencePattern.cs" Link="Gallery/SurfaceReferencePattern.cs" />
-    <Compile Include="../../samples/GalleryApp/Pages/OpenPbrFurnaceRenderer.cs" Link="Gallery/OpenPbrFurnaceRenderer.cs" />
+    <Compile Include="../../samples/Mu3D.Gallery/Legacy/Pages/SurfaceReferencePattern.cs" Link="Gallery/SurfaceReferencePattern.cs" />
+    <Compile Include="../../samples/Mu3D.Gallery/Legacy/Pages/OpenPbrFurnaceRenderer.cs" Link="Gallery/OpenPbrFurnaceRenderer.cs" />
     <ProjectReference Include="../../src/Mu3D.Rendering.OpenPbr/Mu3D.Rendering.OpenPbr.csproj" />
     <ProjectReference Include="../../src/Mu3D.Native.Wgpu/Mu3D.Native.Wgpu.csproj" />
     <None Include="Shaders/reference.wgsl" CopyToOutputDirectory="PreserveNewest" />

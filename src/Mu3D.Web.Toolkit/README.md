@@ -7,7 +7,7 @@ policy, gesture arbitration, undo, accessible controls and the explicit WASM bri
 Modules publish to `wwwroot/mu3d`. All adapters must support trimmed Release AOT and interpreted
 execution; applications choose whether to enable AOT. Native and browser hosts share Core/Toolkit
 behavior while using their own input and UI controls. See the [Web validation guide](../../tests/Mu3D.Web.Validation/README.md)
-and [Gallery host](../../samples/GalleryApp/Web/README.md) for build and verification instructions.
+and [Gallery host](../../samples/Mu3D.Gallery/Web/README.md) for build and verification instructions.
 
 ## Orbit and raw pointer input
 

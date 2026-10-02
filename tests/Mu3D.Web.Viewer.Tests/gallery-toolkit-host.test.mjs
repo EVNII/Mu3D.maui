@@ -7,7 +7,7 @@ import {createTestDocument} from './support/dom-fixture.mjs';
 import {sendEvent, primaryPointer} from './support/pointer-fixture.mjs';
 setMaxListeners(0);
 async function hostModule(name) {
-  let source = await readFile(new URL(`../../samples/GalleryApp/Web/wwwroot/${name}.mjs`, import.meta.url), 'utf8');
+  let source = await readFile(new URL(`../../samples/Mu3D.Gallery/Web/wwwroot/${name}.mjs`, import.meta.url), 'utf8');
   for (const [module, folder] of [['viewport-handler','Mu3D.Web'], ['frame-statistics','Mu3D.Web.Toolkit'],
     ['scene-node-overlay','Mu3D.Web.Toolkit'], ['pointer-input','Mu3D.Web.Toolkit']])
     source = source.replace(`'./mu3d/${module}.mjs'`, JSON.stringify(new URL(`../../src/${folder}/wwwroot/${module}.mjs`, import.meta.url).href));

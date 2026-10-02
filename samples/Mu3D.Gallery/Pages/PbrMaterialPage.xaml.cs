@@ -1,13 +1,16 @@
+using Mu3D.Gallery.Controls;
 using Mu3D.Maui.Controls;
 using Mu3D.SceneGraph;
 
 namespace Mu3D.Gallery.Pages;
 
 /// <summary>Demonstrates metallic/roughness material values and texture sampling.</summary>
-public partial class PbrMaterialPage : ContentPage
+public partial class PbrMaterialPage : ContentPage, IGalleryPageActivation
 {
     private MaterialTexturePresenter? presenter;
     private CancellationTokenSource lifetime = new();
+    private Task? configurationTask;
+    private bool navigationActive;
 
     /// <summary>Initializes the material and texture example.</summary>
     public PbrMaterialPage()
@@ -17,10 +20,14 @@ public partial class PbrMaterialPage : ContentPage
         AddressPicker.SelectedIndex = (int)MaterialTextureAddressMode.Repeat;
         FilterPicker.ItemsSource = Enum.GetNames<MaterialTextureFilter>();
         FilterPicker.SelectedIndex = (int)MaterialTextureFilter.Linear;
-        // AdaptiveShell.Maui 0.1.x hosts content pages without raising Appearing/Disappearing;
-        // Loaded/Unloaded fire as the hosted page enters and leaves the window's visual tree.
-        Loaded += OnPageLoaded;
-        Unloaded += OnPageUnloaded;
+    }
+
+    void IGalleryPageActivation.SetNavigationActive(bool active)
+    {
+        if (navigationActive == active) return;
+        navigationActive = active;
+        if (active) OnPageLoaded(this, EventArgs.Empty);
+        else OnPageUnloaded(this, EventArgs.Empty);
     }
 
     private async Task ConfigureAsync(CancellationToken cancellationToken)
@@ -28,6 +35,7 @@ public partial class PbrMaterialPage : ContentPage
         try
         {
             var environment = await SampleEnvironment.LoadStudioAsync(cancellationToken);
+            cancellationToken.ThrowIfCancellationRequested();
             presenter = new MaterialTexturePresenter(DeclaredScene.Scene, environment);
             ApplyControls();
             StatusLabel.Text = "Material ready";
@@ -43,6 +51,15 @@ public partial class PbrMaterialPage : ContentPage
             StatusLabel.Text = "Material setup failed";
             DetailsLabel.Text = exception.ToString();
         }
+    }
+
+    private async Task EnsureConfiguredAsync(CancellationToken cancellationToken)
+    {
+        // A quick leave/re-enter must not start a second setup while the cancelled one retires.
+        if (configurationTask is { IsCompleted: false } previous) await previous;
+        if (!navigationActive || cancellationToken.IsCancellationRequested || presenter is not null) return;
+        configurationTask = ConfigureAsync(cancellationToken);
+        await configurationTask;
     }
 
     private void OnControlChanged(object? sender, EventArgs e)
@@ -92,7 +109,7 @@ public partial class PbrMaterialPage : ContentPage
         }
         if (presenter is null)
         {
-            _ = ConfigureAsync(lifetime.Token);
+            _ = EnsureConfiguredAsync(lifetime.Token);
         }
     }
 

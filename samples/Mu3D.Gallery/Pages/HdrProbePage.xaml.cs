@@ -1,3 +1,4 @@
+using Mu3D.Gallery.Controls;
 using System.Text;
 using Mu3D.Samples;
 using Mu3D.Graphics;
@@ -7,11 +8,12 @@ using Mu3D.Native.Wgpu;
 namespace Mu3D.Gallery.Pages;
 
 /// <summary>Reports capabilities of the concrete MAUI presentation surface.</summary>
-public partial class HdrProbePage : ContentPage
+public partial class HdrProbePage : ContentPage, IGalleryPageActivation
 {
     private WgpuSurfaceSession? session;
     private bool referencePatternPresented;
     private SurfaceReferencePattern? pattern;
+    private bool navigationActive;
 
     /// <summary>Initializes the surface probe page.</summary>
     public HdrProbePage()
@@ -21,10 +23,14 @@ public partial class HdrProbePage : ContentPage
         SurfaceView.Draw += OnDraw;
         SurfaceView.FramePresented += OnFramePresented;
         SurfaceView.SurfaceError += OnSurfaceError;
-        // AdaptiveShell.Maui 0.1.x hosts content pages without raising Appearing/Disappearing;
-        // Loaded/Unloaded fire as the hosted page enters and leaves the window's visual tree.
-        Loaded += OnPageLoaded;
-        Unloaded += OnPageUnloaded;
+    }
+
+    void IGalleryPageActivation.SetNavigationActive(bool active)
+    {
+        if (navigationActive == active) return;
+        navigationActive = active;
+        if (active) OnPageLoaded(this, EventArgs.Empty);
+        else OnPageUnloaded(this, EventArgs.Empty);
     }
 
     private void OnPresentationSessionChanged(
@@ -75,6 +81,7 @@ public partial class HdrProbePage : ContentPage
 
     private void OnDraw(object? sender, SurfaceDrawEventArgs e)
     {
+        if (!navigationActive) return;
         if (!referencePatternPresented)
         {
             using var encoder = e.Device.CreateCommandEncoder();

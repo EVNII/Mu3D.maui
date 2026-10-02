@@ -7,8 +7,8 @@
   <ItemGroup>
     <ProjectReference Include="../../src/Mu3D.Core/Mu3D.Core.csproj" />
     <ProjectReference Include="../../src/Mu3D.Native.Wgpu/Mu3D.Native.Wgpu.csproj" />
-    <Compile Include="../../samples/GalleryApp/Pages/ColorComparisonRenderer.cs" Link="ColorComparisonRenderer.cs" />
-    <Compile Include="../../samples/GalleryApp/Pages/CmykPrintingPattern.cs" Link="CmykPrintingPattern.cs" />
+    <Compile Include="../../samples/Mu3D.Gallery/Legacy/Pages/ColorComparisonRenderer.cs" Link="ColorComparisonRenderer.cs" />
+    <Compile Include="../../samples/Mu3D.Gallery/Legacy/Pages/CmykPrintingPattern.cs" Link="CmykPrintingPattern.cs" />
     <Compile Include="../Mu3D.Core.Tests/RecordingGraphicsBackend.cs" Link="RecordingGraphicsBackend.cs" />
   </ItemGroup>
 </Project>

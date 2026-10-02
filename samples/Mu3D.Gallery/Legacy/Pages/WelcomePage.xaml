@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mu3D.GalleryApp.Pages.WelcomePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:gallery="clr-namespace:Mu3D.GalleryApp"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Welcome">
+    <ContentPage.ToolbarItems>
+        <gallery:GalleryDocumentationToolbarItem FeatureId="gallery-overview" />
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <VerticalStackLayout HorizontalOptions="Center" MaximumWidthRequest="860" Padding="32" Spacing="18">
+            <Label FontAttributes="Bold" FontSize="32" Text="Mu3D Gallery" />
+            <Label
+                FontSize="18"
+                Text="HDR-first 3D graphics for .NET MAUI." />
+            <VerticalStackLayout Padding="0,12" Spacing="8">
+                <Label FontAttributes="Bold" FontSize="18" Text="Physical rendering labs" />
+                <Label Text="Use the navigation to validate RGBA16Float presentation, HDR lighting, glTF materials, animation, KTX2 textures and gain-map JPEG images." />
+                <Label Text="Rendering remains extended-linear and HDR-first. Gallery never applies SDR tone mapping silently." />
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

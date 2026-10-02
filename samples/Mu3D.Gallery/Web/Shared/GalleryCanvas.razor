@@ -1,0 +1,87 @@
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+@using Mu3D.Graphics
+@using Mu3D.GalleryApp.Web.Infrastructure
+
+<div class="viewport"><canvas id="mu3d-canvas" @ref="canvas" tabindex="0" aria-label="@Title" style="@(Transparent ? "background:transparent" : null)"></canvas></div>
+<p class="status" role="status">@status</p>
+
+@code {
+    [Parameter] public string Title { get; set; } = "Mu3D";
+    [Parameter] public bool Hdr { get; set; } = true;
+    [Parameter] public bool Continuous { get; set; }
+    [Parameter] public bool Transparent { get; set; }
+    [Parameter] public Action<float, float, float>? Input { get; set; }
+    [Parameter] public Func<bool>? HasPendingMotion { get; set; }
+    [Parameter] public Action<GraphicsDevice, GraphicsTexture, GraphicsTexture?, double>? Draw { get; set; }
+    [Parameter] public Action? Disconnected { get; set; }
+    [Parameter] public EventCallback<IPresentationSurfaceSession> Connected { get; set; }
+    private RenderSession? session;
+    private IJSObjectReference? module, host;
+    private DotNetObjectReference<GalleryCanvas>? reference;
+    private ElementReference canvas;
+    private Task? startup, disposal;
+    private bool disposed, disconnected;
+    private (bool Hdr, bool Continuous, bool Input)? configured;
+    private string status = "正在连接 GPU…";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender) { startup = StartAsync(); await startup; }
+    }
+    protected override Task OnParametersSetAsync() => ConfigureAsync();
+    public Task InvalidateAsync() => ConfigureAsync(force: true);
+    private async Task ConfigureAsync(bool force = false)
+    {
+        var settings = (Hdr, Continuous: Continuous || (HasPendingMotion?.Invoke() ?? false), Input: Input is not null);
+        if (host is null || disposed || (!force && configured == settings)) return;
+        configured = settings;
+        await host.InvokeVoidAsync("configure", settings.Input, false, settings.Hdr, settings.Continuous);
+    }
+    private async Task StartAsync()
+    {
+        try
+        {
+            module = await JS.InvokeAsync<IJSObjectReference>("import", "./gallery-viewport.mjs");
+            if (disposed) return;
+            session = await RenderSession.OpenAsync(transparent: Transparent);
+            if (disposed) return;
+            await Connected.InvokeAsync(session.PresentationSurface);
+            if (disposed) return;
+            reference = DotNetObjectReference.Create(this);
+            host = await module.InvokeAsync<IJSObjectReference>("create", canvas, reference, session.MaximumDimension,
+                Transparent ? "premultiplied" : "opaque");
+            await ConfigureAsync(force: true);
+        }
+        catch (Exception error) { if (!disposed) { status = error.Message; await InvokeAsync(StateHasChanged); } }
+    }
+    [JSInvokable]
+    public async Task DrawFrame(int width, int height, double delta, double interval, double ratio,
+        double logicalWidth, double logicalHeight, float rotateX, float rotateY, float dolly, bool hdr, bool refresh)
+    {
+        if (disposed || session is null) return;
+        Input?.Invoke(rotateX, rotateY, dolly);
+        RenderFrameReport report = await session.DrawExampleAsync(width, height, 0, hdr, refresh,
+            (device, target, depth) => Draw!(device, target, depth, delta));
+        if (disposed) return;
+        await ConfigureAsync();
+        status = $"{report.Width} × {report.Height} · {(hdr ? "FP16 HDR" : "SDR 预览")} · frame {report.Frame}";
+        await InvokeAsync(StateHasChanged);
+    }
+    [JSInvokable] public void Disconnect()
+    { if (disconnected) return; disconnected = true; Disconnected?.Invoke(); session?.Dispose(); session = null; }
+    [JSInvokable] public Task RenderFailed(string message)
+    { if (disposed) return Task.CompletedTask; status = message; return InvokeAsync(StateHasChanged); }
+    public ValueTask DisposeAsync() => new(disposal ??= DisposeCoreAsync());
+    private async Task DisposeCoreAsync()
+    {
+        disposed = true;
+        if (startup is not null) await startup;
+        try { if (host is not null) { await host.InvokeVoidAsync("dispose"); await host.DisposeAsync(); } }
+        finally
+        {
+            Disconnect(); reference?.Dispose();
+            if (module is not null) await module.DisposeAsync();
+        }
+    }
+}

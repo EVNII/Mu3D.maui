@@ -16,10 +16,10 @@
     <ProjectReference Include="../../src/Mu3D.Formats.Gltf/Mu3D.Formats.Gltf.csproj" />
     <ProjectReference Include="../../src/Mu3D.Native.Wgpu/Mu3D.Native.Wgpu.csproj" />
     <ProjectReference Include="../../src/Mu3D.Toolkit/Mu3D.Toolkit.csproj" />
-    <None Include="../../samples/GalleryApp/Resources/Raw/GltfSamples/TextureTransformTest/*"
+    <None Include="../../samples/Mu3D.Gallery/Resources/Raw/GltfSamples/TextureTransformTest/*"
           Link="Assets/TextureTransformTest/%(Filename)%(Extension)"
           CopyToOutputDirectory="PreserveNewest" />
-    <None Include="../../samples/GalleryApp/Resources/Raw/Hdri/studio_small_02_1k.hdr"
+    <None Include="../../samples/Mu3D.Gallery/Resources/Raw/Hdri/studio_small_02_1k.hdr"
           Link="Assets/studio_small_02_1k.hdr"
           CopyToOutputDirectory="PreserveNewest" />
     <Content Include="$(_Mu3DWindowsNativeTestRuntime)"

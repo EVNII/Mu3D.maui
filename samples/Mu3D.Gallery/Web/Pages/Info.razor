@@ -1,0 +1,16 @@
+@page "/about"
+@page "/licenses"
+@inject NavigationManager Navigation
+@using Mu3D.GalleryApp.Web.Infrastructure
+
+<main>
+    @foreach (string text in GalleryWebCatalog.PageText(IsLicenses ? "LicensePage" : "AboutPage")) { <p>@text</p> }
+    @if (!IsLicenses) { <a href="licenses">Licenses and acknowledgements</a> }
+    else
+    {
+        <p><a href="assets/AboutAssets.txt">Gallery asset notices</a> ·
+            <a href="assets/GltfSamples/README.md">glTF notices</a> ·
+            <a href="assets/Hdri/README.md">HDRI notices</a></p>
+    }
+</main>
+@code { private bool IsLicenses => Navigation.ToBaseRelativePath(Navigation.Uri).Split('?', '#')[0].Trim('/') == "licenses"; }

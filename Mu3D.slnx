@@ -25,11 +25,10 @@
     <Project Path="src/Mu3D.Native.Wgpu.DebugRuntime.Windows/Mu3D.Native.Wgpu.DebugRuntime.Windows.csproj" />
   </Folder>
   <Folder Name="/samples/">
-    <Project Path="samples/GalleryApp/GalleryApp.csproj">
+    <Project Path="samples/Mu3D.Gallery/Mu3D.Gallery.csproj">
       <Deploy Solution="Release|*" />
     </Project>
-    <Project Path="samples/Mu3D.Gallery/Mu3D.Gallery.csproj" />
-    <Project Path="samples/GalleryApp/Web/Mu3D.GalleryApp.Web.csproj" />
+    <Project Path="samples/Mu3D.Gallery/Web/Mu3D.GalleryApp.Web.csproj" />
   </Folder>
   <Folder Name="/tools/">
     <Project Path="tools/Mu3D.WgpuGen/Mu3D.WgpuGen.csproj" />

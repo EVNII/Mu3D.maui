@@ -1,0 +1,29 @@
+@page "/examples/custom-draw"
+@page "/examples/pbr-material"
+@implements IAsyncDisposable
+@inject NavigationManager Navigation
+@using Mu3D.GalleryApp.Examples
+
+<main>
+
+    <h1>Custom Draw</h1>
+    <p>与原生 Gallery 共用同一个 HDR 三角形。</p>
+    <label>输出 <select @bind="OutputMode"><option value="hdr">HDR</option><option value="sdr">SDR 预览</option></select></label>
+    <GalleryCanvas @ref="viewport" Title="Custom Draw" Hdr="hdr" Draw="Draw" Disconnected="triangle.Dispose" />
+</main>
+
+@code {
+    private readonly HdrTriangleExample triangle = new();
+    private GalleryCanvas? viewport;
+    private bool hdr = true;
+    private string OutputMode { get => hdr ? "hdr" : "sdr"; set => hdr = value switch { "hdr" => true, "sdr" => false, _ => hdr }; }
+    protected override void OnInitialized()
+    {
+        if (Navigation.Uri.EndsWith("/examples/pbr-material", StringComparison.Ordinal))
+            Navigation.NavigateTo("examples/pbr-material-textures", replace: true);
+    }
+    private void Draw(Mu3D.Graphics.GraphicsDevice device, Mu3D.Graphics.GraphicsTexture target,
+        Mu3D.Graphics.GraphicsTexture? depth, double delta) => triangle.Render(device, target);
+    public async ValueTask DisposeAsync()
+    { if (viewport is not null) await viewport.DisposeAsync(); triangle.Dispose(); }
+}

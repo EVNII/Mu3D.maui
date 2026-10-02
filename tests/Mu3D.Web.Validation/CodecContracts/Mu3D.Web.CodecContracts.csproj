@@ -12,14 +12,14 @@
     <IntermediateOutputPath>obj/$(Configuration)/$(Mu3DWebBuildFlavor)/</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="../../../samples/GalleryApp/Pages/HdrJpegRoundTrip.cs" Link="HdrJpegRoundTrip.cs" />
-    <Compile Include="../../../samples/GalleryApp/Pages/ModelLabCatalog.cs;../../../samples/GalleryApp/Pages/ModelLabAssets.cs;../../../samples/GalleryApp/Pages/GltfInstancesExample.cs" Link="Examples/%(Filename)%(Extension)" />
+    <Compile Include="../../../samples/Mu3D.Gallery/Legacy/Pages/HdrJpegRoundTrip.cs" Link="HdrJpegRoundTrip.cs" />
+    <Compile Include="../../../samples/Mu3D.Gallery/Legacy/Pages/ModelLabCatalog.cs;../../../samples/Mu3D.Gallery/Legacy/Pages/ModelLabAssets.cs;../../../samples/Mu3D.Gallery/Legacy/Pages/GltfInstancesExample.cs" Link="Examples/%(Filename)%(Extension)" />
     <ProjectReference Include="../../../src/Mu3D.Formats.Gltf/Mu3D.Formats.Gltf.csproj" />
-    <EmbeddedResource Include="../../../samples/GalleryApp/Resources/Raw/KtxSamples/color_grid_basis.ktx2" LogicalName="Color.ktx2" />
-    <EmbeddedResource Include="../../../samples/GalleryApp/Resources/Raw/KtxSamples/StainedGlassLamp_grill_normal.ktx2" LogicalName="Normal.ktx2" />
-    <EmbeddedResource Include="../../../samples/GalleryApp/Resources/Raw/GltfSamples/**/*.glb;../../../samples/GalleryApp/Resources/Raw/GltfSamples/**/*.gltf;../../../samples/GalleryApp/Resources/Raw/GltfSamples/**/*.bin;../../../samples/GalleryApp/Resources/Raw/GltfSamples/**/*.png;../../../samples/GalleryApp/Resources/Raw/GltfSamples/**/*.ktx2"
+    <EmbeddedResource Include="../../../samples/Mu3D.Gallery/Resources/Raw/KtxSamples/color_grid_basis.ktx2" LogicalName="Color.ktx2" />
+    <EmbeddedResource Include="../../../samples/Mu3D.Gallery/Resources/Raw/KtxSamples/StainedGlassLamp_grill_normal.ktx2" LogicalName="Normal.ktx2" />
+    <EmbeddedResource Include="../../../samples/Mu3D.Gallery/Resources/Raw/GltfSamples/**/*.glb;../../../samples/Mu3D.Gallery/Resources/Raw/GltfSamples/**/*.gltf;../../../samples/Mu3D.Gallery/Resources/Raw/GltfSamples/**/*.bin;../../../samples/Mu3D.Gallery/Resources/Raw/GltfSamples/**/*.png;../../../samples/Mu3D.Gallery/Resources/Raw/GltfSamples/**/*.ktx2"
                       LogicalName="GltfSamples/%(RecursiveDir)%(Filename)%(Extension)" />
-    <EmbeddedResource Include="../../../samples/GalleryApp/Resources/Raw/Hdri/*.hdr" LogicalName="Hdri/%(Filename)%(Extension)" />
+    <EmbeddedResource Include="../../../samples/Mu3D.Gallery/Resources/Raw/Hdri/*.hdr" LogicalName="Hdri/%(Filename)%(Extension)" />
   </ItemGroup>
-  <Import Project="../../../samples/GalleryApp/Web/Infrastructure/BrowserCodecs.targets" />
+  <Import Project="../../../samples/Mu3D.Gallery/Web/Infrastructure/BrowserCodecs.targets" />
 </Project>

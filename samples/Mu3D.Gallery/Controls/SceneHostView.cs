@@ -12,10 +12,10 @@ namespace Mu3D.Gallery.Controls;
 
 /// <summary>
 /// Uniform chrome for every Mu3D 3D page in this sample: one <see cref="Mu3DSceneView"/> with a
-/// shared orbit camera controller, an in-viewport FPS overlay, a display color-space picker, an
+/// shared orbit camera controller, an in-viewport FPS overlay, an explicit display-view picker, an
 /// output dynamic-range picker, an EV (exposure stops) slider and a read-only negotiated-output
 /// line. Pages supply a <see cref="Scene3D"/> as content and bind their declarative camera to
-/// <see cref="Camera"/>; everything else is identical across pages.
+/// <see cref="Camera"/>; the default view preserves scene-linear HDR without a display transform.
 /// </summary>
 [ContentProperty(nameof(Scene))]
 public partial class SceneHostView : Grid
@@ -65,7 +65,6 @@ public partial class SceneHostView : Grid
         sceneView = new Mu3DSceneView
         {
             BackgroundColor = Colors.Black,
-            DisplayTransform = displayTransform,
         };
         sceneView.Features.Add(viewportTools);
         sceneView.SurfaceError += OnSceneSurfaceError;
@@ -73,11 +72,12 @@ public partial class SceneHostView : Grid
         Add(sceneView);
 
         presetPicker = new Picker { Title = "View" };
+        presetPicker.Items.Add("Scene linear · HDR");
         foreach (ColorViewPreset preset in ViewPresets)
         {
             presetPicker.Items.Add(preset.ToString());
         }
-        presetPicker.SelectedIndex = Array.IndexOf(ViewPresets, displayTransform.Preset);
+        presetPicker.SelectedIndex = 0;
         presetPicker.SelectedIndexChanged += OnPresetChanged;
 
         dynamicRangePicker = new Picker { Title = "Output" };
@@ -88,9 +88,9 @@ public partial class SceneHostView : Grid
         dynamicRangePicker.SelectedIndex = 0;
         dynamicRangePicker.SelectedIndexChanged += OnDynamicRangeChanged;
 
-        evSlider = new Slider(-4, 4, 0) { MinimumWidthRequest = 140 };
+        evSlider = new Slider(-4, 4, 0) { MinimumWidthRequest = 140, IsEnabled = false };
         evSlider.ValueChanged += OnExposureChanged;
-        evLabel = new Label { Text = "EV +0.00", VerticalTextAlignment = TextAlignment.Center };
+        evLabel = new Label { Text = "Select a view for EV", VerticalTextAlignment = TextAlignment.Center };
 
         outputLabel = new Label { FontSize = 11, Text = "Waiting for surface…" };
         errorLabel = new Label { FontSize = 11, TextColor = Colors.OrangeRed };
@@ -219,8 +219,8 @@ public partial class SceneHostView : Grid
     /// </summary>
     public OrbitTool OrbitTool => orbitTool;
 
-    /// <summary>Gets the shared display transform driven by the color-space picker and EV slider.</summary>
-    public ColorView3D DisplayTransform => displayTransform;
+    /// <summary>Gets the selected display transform, or null for the default scene-linear HDR view.</summary>
+    public ColorView3D? DisplayTransform => sceneView.DisplayTransform;
 
     /// <summary>Forwards the hosted view's presentation failure event.</summary>
     public event EventHandler<SurfaceErrorEventArgs>? SurfaceError;
@@ -265,7 +265,18 @@ public partial class SceneHostView : Grid
             return;
         }
 
-        displayTransform.Preset = ViewPresets[presetPicker.SelectedIndex];
+        if (presetPicker.SelectedIndex == 0)
+        {
+            sceneView.DisplayTransform = null;
+            evSlider.IsEnabled = false;
+            evLabel.Text = "Select a view for EV";
+            return;
+        }
+
+        displayTransform.Preset = ViewPresets[presetPicker.SelectedIndex - 1];
+        sceneView.DisplayTransform = displayTransform;
+        evSlider.IsEnabled = true;
+        evLabel.Text = $"EV {displayTransform.ExposureStops:+0.00;-0.00;+0.00}";
     }
 
     private void OnDynamicRangeChanged(object? sender, EventArgs e)
@@ -289,6 +300,10 @@ public partial class SceneHostView : Grid
     private void OnExposureChanged(object? sender, ValueChangedEventArgs e)
     {
         _ = sender;
+        if (sceneView.DisplayTransform is null)
+        {
+            return;
+        }
         float stops = (float)Math.Round(e.NewValue * 4, MidpointRounding.ToEven) / 4f;
         displayTransform.ExposureStops = stops;
         evLabel.Text = $"EV {stops:+0.00;-0.00;+0.00}";

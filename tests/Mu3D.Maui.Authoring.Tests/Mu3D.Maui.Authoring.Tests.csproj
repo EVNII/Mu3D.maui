@@ -11,9 +11,9 @@
     <ProjectReference Include="../../src/Mu3D.Rendering.OpenPbr/Mu3D.Rendering.OpenPbr.csproj" />
     <Using Include="Microsoft.Maui.Controls" />
     <Using Include="Microsoft.Maui.Graphics" />
-    <Compile Include="../../samples/GalleryApp/Pages/FurnaceSettingsQueue.cs" Link="FurnaceSettingsQueue.cs" />
-    <Compile Include="../../samples/GalleryApp/Pages/OpenPbrParameterEditor.cs" Link="OpenPbrParameterEditor.cs" />
-    <Compile Include="../../samples/GalleryApp/Examples/OpenPbrParameterFields.cs" Link="OpenPbrParameterFields.cs" />
+    <Compile Include="../../samples/Mu3D.Gallery/Legacy/Pages/FurnaceSettingsQueue.cs" Link="FurnaceSettingsQueue.cs" />
+    <Compile Include="../../samples/Mu3D.Gallery/Legacy/Pages/OpenPbrParameterEditor.cs" Link="OpenPbrParameterEditor.cs" />
+    <Compile Include="../../samples/Mu3D.Gallery/Legacy/Examples/OpenPbrParameterFields.cs" Link="OpenPbrParameterFields.cs" />
     <Compile Include="../../src/Mu3D.Maui.Toolkit/Controls/VsyncFrameSource.cs" Link="VsyncFrameSource.cs" />
     <Compile Include="../../src/Mu3D.Maui/Controls/ColorView3D.cs" Link="ColorView3D.cs" />
     <Compile Include="../../src/Mu3D.Maui/Controls/DeclarativeMaterials.cs" Link="DeclarativeMaterials.cs" />

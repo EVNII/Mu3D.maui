@@ -28,7 +28,7 @@ The existing `Action<GraphicsTexture>` boundary preserves custom drawing and sha
 
 All Web features must support trimmed Release AOT and interpreted execution with equivalent
 behavior; applications choose whether to enable AOT. See the [Web validation guide](../../tests/Mu3D.Web.Validation/README.md)
-for build commands and browser checks, and the [Gallery host](../../samples/GalleryApp/Web/README.md)
+for build commands and browser checks, and the [Gallery host](../../samples/Mu3D.Gallery/Web/README.md)
 for a complete application using these handlers.
 
 The normal JS entry point is `createManagedViewportHandler` in `wwwroot/mu3d/viewport-handler.mjs`:

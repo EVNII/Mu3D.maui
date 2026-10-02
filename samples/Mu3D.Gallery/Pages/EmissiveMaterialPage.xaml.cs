@@ -1,4 +1,5 @@
-using Mu3D.Color;
+using Mu3D.Gallery.Controls;
+using Mu3D.GalleryApp.Examples;
 using Mu3D.Maui.Controls;
 
 namespace Mu3D.Gallery.Pages;
@@ -8,20 +9,19 @@ namespace Mu3D.Gallery.Pages;
 /// 0, 1, 4 and 16, so the shared chrome's EV slider and color-space/output pickers show how
 /// high-dynamic-range emission survives (or clips through) the selected display view.
 /// </summary>
-public partial class EmissiveMaterialPage : ContentPage
+public partial class EmissiveMaterialPage : ContentPage, IGalleryPageActivation
 {
-    private static readonly LinearRgba EmissionColor =
-        new(4f, 1.2f, 0.5f, 1f, StandardColorSpaces.LinearSrgb);
-
     private bool emissionApplied;
 
     /// <summary>Initializes the emissive material example.</summary>
     public EmissiveMaterialPage()
     {
         InitializeComponent();
-        // AdaptiveShell.Maui 0.1.x hosts content pages without raising Appearing; Loaded fires
-        // once the hosted page enters the window's visual tree.
-        Loaded += OnLoadedOnce;
+    }
+
+    void IGalleryPageActivation.SetNavigationActive(bool active)
+    {
+        if (active) OnLoadedOnce(this, EventArgs.Empty);
     }
 
     private void OnLoadedOnce(object? sender, EventArgs e)
@@ -43,8 +43,7 @@ public partial class EmissiveMaterialPage : ContentPage
 
     private static void ApplyEmission(PbrMaterial3D material, float strength)
     {
-        material.PbrMaterial.EmissiveColor = EmissionColor;
-        material.PbrMaterial.EmissiveStrength = strength;
+        EmissiveMaterialExample.Apply(material.PbrMaterial, strength);
     }
 
     private void OnSurfaceError(object? sender, SurfaceErrorEventArgs e)

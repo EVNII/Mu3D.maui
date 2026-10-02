@@ -6,7 +6,7 @@ import {runInNewContext} from 'node:vm';
 import {createViewportEnvironment} from './support/viewport-fixture.mjs';
 import {sendEvent, primaryPointer} from './support/pointer-fixture.mjs';
 setMaxListeners(0);
-let source = await readFile(new URL('../../samples/GalleryApp/Web/wwwroot/gallery-viewport.mjs', import.meta.url), 'utf8');
+let source = await readFile(new URL('../../samples/Mu3D.Gallery/Web/wwwroot/gallery-viewport.mjs', import.meta.url), 'utf8');
 for (const [name, folder] of [['viewport-handler','Mu3D.Web'],['orbit-input','Mu3D.Web.Toolkit'],['pointer-input','Mu3D.Web.Toolkit']])
   source = source.replace(`'./mu3d/${name}.mjs'`, JSON.stringify(new URL(`../../src/${folder}/wwwroot/${name}.mjs`, import.meta.url).href));
 const {create} = await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
@@ -93,7 +93,7 @@ test('A requested premultiplied HDR Canvas retains its alpha mode', async () => 
   finally { await env.host.dispose(); }
 });
 
-const galleryHtml = await readFile(new URL('../../samples/GalleryApp/Web/wwwroot/index.html', import.meta.url), 'utf8');
+const galleryHtml = await readFile(new URL('../../samples/Mu3D.Gallery/Web/wwwroot/index.html', import.meta.url), 'utf8');
 function bootstrap(path, baseHref = '/') {
   let pageUrl = new URL(path, 'http://127.0.0.1:8765');
   const requests = [], replacements = [], events = [];

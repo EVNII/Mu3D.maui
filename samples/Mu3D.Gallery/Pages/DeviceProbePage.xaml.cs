@@ -1,20 +1,40 @@
+using Mu3D.Gallery.Controls;
 using System.Text;
 using Mu3D.Native.Wgpu;
 
 namespace Mu3D.Gallery.Pages;
 
 /// <summary>Runs the opt-in native device capability harness on a deployed device.</summary>
-public partial class DeviceProbePage : ContentPage
+public partial class DeviceProbePage : ContentPage, IGalleryPageActivation
 {
+    private CancellationTokenSource lifetime = new();
+    private bool navigationActive;
+    private bool probeInProgress;
     /// <summary>Initializes the native device probe page.</summary>
     public DeviceProbePage()
     {
         InitializeComponent();
     }
 
+    void IGalleryPageActivation.SetNavigationActive(bool active)
+    {
+        if (navigationActive == active) return;
+        navigationActive = active;
+        if (!active) lifetime.Cancel();
+        else if (lifetime.IsCancellationRequested)
+        {
+            lifetime.Dispose();
+            lifetime = new CancellationTokenSource();
+        }
+        SetProbeButtonsEnabled(active && !probeInProgress);
+    }
+
     private async void OnRunProbeClicked(object? sender, EventArgs e)
     {
         _ = sender;
+        if (!navigationActive || probeInProgress) return;
+        probeInProgress = true;
+        CancellationToken cancellationToken = lifetime.Token;
         SetProbeButtonsEnabled(false);
         ProbeProgress.IsVisible = true;
         ProbeProgress.IsRunning = true;
@@ -24,9 +44,12 @@ public partial class DeviceProbePage : ContentPage
         try
         {
             WgpuDeviceProbeResult result = await WgpuDeviceProbe.ProbeAsync(
-                TimeSpan.FromSeconds(30));
+                TimeSpan.FromSeconds(30), cancellationToken);
             ProbeStatus.Text = "Native device probe completed";
             ProbeDetails.Text = Format(result);
+        }
+        catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+        {
         }
         catch (Exception exception)
         {
@@ -37,13 +60,17 @@ public partial class DeviceProbePage : ContentPage
         {
             ProbeProgress.IsRunning = false;
             ProbeProgress.IsVisible = false;
-            SetProbeButtonsEnabled(true);
+            probeInProgress = false;
+            SetProbeButtonsEnabled(navigationActive);
         }
     }
 
     private async void OnRunTriangleProbeClicked(object? sender, EventArgs e)
     {
         _ = sender;
+        if (!navigationActive || probeInProgress) return;
+        probeInProgress = true;
+        CancellationToken cancellationToken = lifetime.Token;
         SetProbeButtonsEnabled(false);
         TriangleProbeProgress.IsVisible = true;
         TriangleProbeProgress.IsRunning = true;
@@ -53,9 +80,12 @@ public partial class DeviceProbePage : ContentPage
         try
         {
             WgpuOffscreenTriangleProbeResult result = await WgpuOffscreenTriangleProbe.ProbeAsync(
-                TimeSpan.FromSeconds(30));
+                TimeSpan.FromSeconds(30), cancellationToken);
             TriangleProbeStatus.Text = "Native offscreen triangle completed";
             TriangleProbeDetails.Text = Format(result);
+        }
+        catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+        {
         }
         catch (Exception exception)
         {
@@ -66,7 +96,8 @@ public partial class DeviceProbePage : ContentPage
         {
             TriangleProbeProgress.IsRunning = false;
             TriangleProbeProgress.IsVisible = false;
-            SetProbeButtonsEnabled(true);
+            probeInProgress = false;
+            SetProbeButtonsEnabled(navigationActive);
         }
     }
 

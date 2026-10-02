@@ -78,7 +78,7 @@ def verify_gallery(web):
             actual = "sha256-" + base64.b64encode(hashlib.sha256(file.read_bytes()).digest()).decode()
             if actual != item["hash"]:
                 raise ValueError(f"Boot resource mismatch: {name}")
-    raw = ROOT / "samples/GalleryApp/Resources/Raw"
+    raw = ROOT / "samples/Mu3D.Gallery/Resources/Raw"
     for original in raw.rglob("*"):
         if original.is_file() and original.read_bytes() != (web / "assets" / original.relative_to(raw)).read_bytes():
             raise ValueError(f"Gallery asset differs from the actual sample: {original.name}")
@@ -117,6 +117,11 @@ def stage(args):
         resources, hashed_count = verify_gallery(web)
         destination = site / name
         shutil.copytree(web, destination)
+        # Supplied ICCs are optional local validation inputs, not public Gallery assets.
+        # Remove only their documented external-input location from the staged copy.
+        profiles = destination / "assets/PrintProfiles"
+        if profiles.is_dir():
+            shutil.rmtree(profiles)
         # Incremental publishes retain obsolete fingerprinted files. The validated
         # boot configuration selects this release; prune only the staged copy.
         framework = destination / "_framework"

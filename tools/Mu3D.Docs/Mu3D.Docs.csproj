@@ -5,5 +5,11 @@
     <RootNamespace>Mu3D.Docs</RootNamespace>
     <AssemblyName>Mu3D.Docs</AssemblyName>
     <IsPackable>false</IsPackable>
+    <!-- Public documentation covers the optional printing feature without loading MAUI or codecs. -->
+    <DefineConstants>$(DefineConstants);MU3D_PRINTING</DefineConstants>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../samples/Mu3D.Gallery/GalleryCatalog.cs;../../samples/Mu3D.Gallery/Legacy/GalleryNavigationCatalog.cs" Link="Gallery/%(Filename)%(Extension)" />
+    <Compile Include="../../samples/Mu3D.Gallery/Legacy/GalleryRoutes.cs;../../samples/Mu3D.Gallery/Legacy/GallerySourceCatalog.cs;../../samples/Mu3D.Gallery/Legacy/GalleryFeatureCatalog.cs" Link="Gallery/%(Filename)%(Extension)" />
+  </ItemGroup>
 </Project>

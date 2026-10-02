@@ -1,3 +1,5 @@
+using Mu3D.Gallery.Controls;
+using Mu3D.GalleryApp.Pages;
 using Mu3D.Color;
 using Mu3D.Graphics;
 using Mu3D.Maui.Controls;
@@ -5,7 +7,7 @@ using Mu3D.Maui.Controls;
 namespace Mu3D.Gallery.Pages;
 
 /// <summary>Compares Standard, AgX, ACES 2.0 and SDR Filmic using saturated color ramps.</summary>
-public partial class ColorRampsPage : ContentPage
+public partial class ColorRampsPage : ContentPage, IGalleryPageActivation
 {
     private readonly Dictionary<Mu3DView, (GraphicsDevice Device, ColorComparisonRenderer Renderer)> renderers = [];
     private bool initialized, active;
@@ -16,10 +18,13 @@ public partial class ColorRampsPage : ContentPage
         InitializeComponent();
         initialized = true;
         UpdateSettings();
-        // AdaptiveShell.Maui 0.1.x hosts content pages without raising Appearing/Disappearing;
-        // Loaded/Unloaded fire as the hosted page enters and leaves the window's visual tree.
-        Loaded += OnPageLoaded;
-        Unloaded += OnPageUnloaded;
+    }
+
+    void IGalleryPageActivation.SetNavigationActive(bool active)
+    {
+        if (this.active == active) return;
+        if (active) OnPageLoaded(this, EventArgs.Empty);
+        else OnPageUnloaded(this, EventArgs.Empty);
     }
 
     private ColorViewPreset SelectedPreset(bool aces) => RangePicker.SelectedIndex == 0

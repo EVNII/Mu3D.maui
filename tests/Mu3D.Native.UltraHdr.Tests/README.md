@@ -10,7 +10,7 @@ Run from the repository root after building Gallery:
 
 ```sh
 python3 eng/verify-ultrahdr-apple-symbols.py
-python3 eng/verify-ultrahdr-apple-symbols.py --binary samples/GalleryApp/bin/Debug/net10.0-maccatalyst/maccatalyst-arm64/GalleryApp.app/Contents/MacOS/Mu3D.GalleryApp
+python3 eng/verify-ultrahdr-apple-symbols.py --binary "samples/Mu3D.Gallery/bin/Debug/net10.0-maccatalyst/maccatalyst-arm64/Mu3D Gallery.app/Contents/MacOS/Mu3D.Gallery"
 ```
 
 The guard compares all LibraryImport declarations against the shared symbol roots.

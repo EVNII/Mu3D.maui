@@ -24,9 +24,19 @@
                 <Label Text="The runtime package also carries the reviewed license report for the exact pinned Cargo dependency graph." />
             </VerticalStackLayout>
             <VerticalStackLayout Padding="0,12" Spacing="6">
+                <Label FontAttributes="Bold" FontSize="18" Text="KTX-Software 4.4.2" />
+                <Label Text="Apache-2.0, with bundled component notices" />
+                <Label Text="The specially licensed ETC-unpack component is disabled and is not distributed by Mu3D." />
+            </VerticalStackLayout>
+            <VerticalStackLayout Padding="0,12" Spacing="6">
+                <Label FontAttributes="Bold" FontSize="18" Text="UltraHDR 2.0.1 and libjpeg-turbo 3.1.0" />
+                <Label Text="MIT / Apache-2.0; IJG / BSD-3-Clause" />
+                <Label Text="The default JPEG runtime has UHDR_ENABLE_HEIF=OFF and does not include libheif." />
+            </VerticalStackLayout>
+            <VerticalStackLayout Padding="0,12" Spacing="6">
                 <Label FontAttributes="Bold" FontSize="18" Text="Sample assets" />
-                <Label Text="Poly Haven HDRIs (CC0) · Khronos glTF sample assets" />
-                <Label Text="Per-asset attribution files are bundled beside the corresponding resources." />
+                <Label Text="Khronos glTF sample assets · Poly Haven HDRIs · KTX fixtures" />
+                <Label Text="Per-asset attribution files are bundled beside the corresponding resources. The included models use their stated CC0 or CC BY 4.0 terms; the HDRIs are CC0." />
             </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>

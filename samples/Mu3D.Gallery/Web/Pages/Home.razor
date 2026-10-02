@@ -1,0 +1,46 @@
+@page "/"
+@page "/examples"
+@page "/examples/gallery-overview"
+@page "/sections/{SectionId}"
+@using Mu3D.GalleryApp
+@using Mu3D.Gallery
+@using Mu3D.GalleryApp.Web.Infrastructure
+
+<main>
+    <h1>@(section?.Title ?? "All Examples")</h1>
+    <p class="description">@(section?.Description ?? "Explore Mu3D scenes, HDR surfaces, materials and viewport tools.")</p>
+    @if (overview)
+    {
+        @foreach (string text in GalleryWebCatalog.PageText("WelcomePage")) { <p>@text</p> }
+    }
+    <p class="gallery-result-count" role="status">@results.Length examples</p>
+    @if (results.Length == 0)
+    {
+        <p>No examples match. Try HDR, glTF, camera or material.</p>
+    }
+    <ul class="gallery-case-list">
+        @foreach (GalleryEntry entry in results)
+        {
+            <li>
+                <a class="gallery-case-title" href="@GalleryWebCatalog.Href(entry)">@entry.Title</a>
+                <p>@entry.Description</p><span class="gallery-case-section">@entry.SectionTitle</span>
+            </li>
+        }
+    </ul>
+</main>
+
+@code {
+    [Parameter] public string? SectionId { get; set; }
+    [SupplyParameterFromQuery(Name = "search")] public string? Search { get; set; }
+    [Inject] private NavigationManager Navigation { get; set; } = null!;
+    private GallerySection? section;
+    private GalleryEntry[] results = [];
+    private bool overview;
+
+    protected override void OnParametersSet()
+    {
+        section = GalleryCatalog.Sections.FirstOrDefault(item => item.Id == SectionId);
+        results = GalleryCatalog.Search(Search, SectionId).ToArray();
+        overview = Navigation.ToBaseRelativePath(Navigation.Uri).Split('?', '#')[0] == "examples/gallery-overview";
+    }
+}

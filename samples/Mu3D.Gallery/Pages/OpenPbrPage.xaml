@@ -2,7 +2,7 @@
 <ContentPage x:Class="Mu3D.Gallery.Pages.OpenPbrPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:pages="clr-namespace:Mu3D.Gallery.Pages"
+    xmlns:pages="clr-namespace:Mu3D.GalleryApp.Pages"
     xmlns:controls="clr-namespace:Mu3D.Gallery.Controls"
     xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
     Title="OpenPBR">

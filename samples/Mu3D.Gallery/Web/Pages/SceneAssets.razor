@@ -1,0 +1,35 @@
+@page "/examples/scene-assets"
+@implements IAsyncDisposable
+@using Mu3D.GalleryApp.Examples
+@using Mu3D.Graphics
+@using Mu3D.Rendering
+
+<main><h1>Scene Assets</h1>
+<p>One asset, two isolated instances, two independent SceneViews.</p>
+<GalleryCanvasGroup @ref="canvases" Panels="panels" StackNarrow="false" Disconnected="Release" />
+<div class="controls"><button @onclick="Move">Move blue lamp</button><button @onclick="Rotate">Rotate blue lamp</button><button @onclick="Reset">Reset</button></div>
+<p>@example.Status()</p></main>
+
+@code {
+    private readonly SceneAssetExample example = new();
+    private readonly SceneRenderer?[] renderers = new SceneRenderer?[2];
+    private IReadOnlyList<GalleryCanvasPanel> panels = [];
+    private GalleryCanvasGroup? canvases;
+    protected override void OnInitialized() => panels = [
+        new("Room A", (device, target, depth, delta) => Draw(0, device, target, depth)),
+        new("Room B", (device, target, depth, delta) => Draw(1, device, target, depth))];
+    private void Draw(int index, GraphicsDevice device, GraphicsTexture target, GraphicsTexture? depth)
+    {
+        var renderer = renderers[index] ??= new(device, target.Descriptor.Format);
+        var camera = index == 0 ? example.LeftCamera : example.RightCamera;
+        camera.AspectRatio = (float)target.Descriptor.Size.Width / target.Descriptor.Size.Height;
+        renderer.Render(index == 0 ? example.LeftScene : example.RightScene, camera, target, depth!, SceneAssetExample.ClearColor);
+    }
+    private async Task Move() { example.Move(); await Invalidate(); }
+    private async Task Rotate() { example.Rotate(); await Invalidate(); }
+    private async Task Reset() { example.Reset(); await Invalidate(); }
+    private Task Invalidate() => canvases?.InvalidateAsync() ?? Task.CompletedTask;
+    private void Release() { for (int index = 0; index < renderers.Length; index++) { renderers[index]?.Dispose(); renderers[index] = null; } }
+    /// <inheritdoc />
+    public async ValueTask DisposeAsync() { if (canvases is not null) await canvases.DisposeAsync(); Release(); }
+}

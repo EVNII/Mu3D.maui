@@ -1,0 +1,275 @@
+@page "/examples/lighting-direct-ibl"
+@page "/examples/shadows-ao"
+@page "/examples/pbr-material-textures"
+@page "/examples/render-outputs"
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+@using System.Diagnostics
+@using Mu3D.Color
+@using Mu3D.Graphics
+@using Mu3D.Rendering
+@using Mu3D.SceneGraph
+@using Mu3D.GalleryApp.Examples
+@using Mu3D.GalleryApp.Pages
+@using Mu3D.GalleryApp.Web.Infrastructure
+
+<main>
+    <h1>@Title</h1>
+    <div class="viewport">
+        <canvas id="mu3d-canvas" @ref="canvas" tabindex="0" aria-label="@Title"></canvas>
+        @if (page == "render-outputs")
+        {
+            <div style="position:absolute;top:14px;left:14px;display:flex;flex-wrap:wrap;gap:4px;max-width:720px" role="toolbar" aria-label="Render outputs">
+                @foreach (var choice in OutputChoices)
+                {
+                    <button title="@choice.Description" aria-pressed="@(output == choice.Id)" @onclick="() => SelectOutput(choice.Id)">@choice.Label</button>
+                }
+            </div>
+            <div style="position:absolute;bottom:14px;right:14px;pointer-events:none;background:#e6111827;color:white;padding:10px 7px;border:1px solid #53647d">
+                <strong>Custom HTML overlay</strong><br /><small>Arbitrary layout · input pass-through</small>
+            </div>
+        }
+    </div>
+    <div class="controls">
+        @if (page == "lighting-direct-ibl")
+        {
+            <label><input type="checkbox" disabled="@loading" @bind="retainEncoded" @bind:after="RetentionChanged" />Retain encoded HDR in asset</label>
+            <button disabled="@(loading || session is null)" @onclick="Reload">Reload HDR</button><button disabled="@(!loading)" @onclick="CancelLoad">Cancel</button><button @onclick="ClearCache">Clear cache</button>
+            <label><input type="checkbox" @bind="directLight" @bind:after="ControlsChanged" />Direct light</label>
+            <label><input type="checkbox" @bind="environmentLight" @bind:after="ControlsChanged" />HDR environment</label>
+            <label><input type="checkbox" @bind="animate" @bind:after="ControlsChanged" />Animate direct light</label>
+        }
+        else if (page == "shadows-ao")
+        {
+            <label><input type="checkbox" @bind="shadows" @bind:after="ControlsChanged" />Directional shadows</label>
+            <label><input type="checkbox" @bind="ao" @bind:after="ControlsChanged" />Ambient occlusion</label>
+            <label>AO radius: @aoRadius.ToString("0.00") <input type="range" min="0.05" max="2" step="0.01" @bind="aoRadius" @bind:event="oninput" @bind:after="ControlsChanged" /></label>
+            <label>AO strength: @aoStrength.ToString("0.00") <input type="range" min="0" max="1" step="0.01" @bind="aoStrength" @bind:event="oninput" @bind:after="ControlsChanged" /></label>
+        }
+        else if (page == "pbr-material-textures")
+        {
+            <label>Metallic: @metallic.ToString("0.00") <input type="range" min="0" max="1" step="0.01" @bind="metallic" @bind:event="oninput" @bind:after="ControlsChanged" /></label>
+            <label>Roughness: @roughness.ToString("0.00") <input type="range" min="0.04" max="1" step="0.01" @bind="roughness" @bind:event="oninput" @bind:after="ControlsChanged" /></label>
+            <label><input type="checkbox" @bind="colorTexture" @bind:after="ControlsChanged" />Base-color texture</label>
+            <label><input type="checkbox" @bind="normalTexture" @bind:after="ControlsChanged" />Normal texture</label>
+            <label><input type="checkbox" @bind="ormTexture" @bind:after="ControlsChanged" />Occlusion/roughness/metallic texture</label>
+            <label>Texture addressing <select @bind="address" @bind:after="ControlsChanged">
+                @foreach (var value in Enum.GetValues<MaterialTextureAddressMode>()) { <option value="@value">@value</option> }
+            </select></label>
+            <label>Texture filtering <select @bind="filter" @bind:after="ControlsChanged">
+                @foreach (var value in Enum.GetValues<MaterialTextureFilter>()) { <option value="@value">@value</option> }
+            </select></label>
+            <label>Texture tiling: @tiling.ToString("0.00")x <input type="range" min="0.25" max="4" step="0.01" @bind="tiling" @bind:event="oninput" @bind:after="ControlsChanged" /></label>
+        }
+        else
+        {
+            <p>Use the toolbar inside the viewport; it changes output without changing visibility or pass order.</p>
+            <p>Selected output: @output.Value</p>
+        }
+        <label>输出 <select @bind="OutputMode" @bind:after="Invalidate"><option value="hdr">HDR</option><option value="sdr">SDR 预览</option></select></label>
+    </div>
+    <p class="status" role="status">@status</p><p style="overflow-wrap:anywhere;white-space:pre-wrap">@details</p>
+</main>
+
+@code {
+    private sealed record OutputChoice(string Label, RenderOutputId Id, string Description);
+    private static readonly OutputChoice[] OutputChoices = [
+        new("Final", RenderOutputIds.Beauty, "Final composed scene-linear image"), new("AO", RenderOutputIds.AmbientOcclusion, "Ambient occlusion"),
+        new("Direct", RenderOutputIds.DirectLighting, "Direct lighting"), new("IBL", RenderOutputIds.ImageBasedLighting, "Image-based lighting"),
+        new("Refl", RenderOutputIds.Specular, "Specular reflection"), new("Normal", RenderOutputIds.SurfaceNormal, "Surface normal"),
+        new("Depth", RenderOutputIds.ViewDepth, "View depth"), new("Base", RenderOutputIds.BaseColor, "Material base color"),
+        new("Alias", RenderOutputsExample.NormalAlias, "Gallery-owned ID resolved by an explicit pass factory")];
+    private string page = "", status = "Preparing lighting…", details = "", readyStatus = "", presentationError = "";
+    private string Title => page switch { "lighting-direct-ibl" => "Direct and Image-Based Lighting", "shadows-ao" => "Shadows and Ambient Occlusion", "pbr-material-textures" => "PBR Material and Textures", _ => "Render Outputs" };
+    private LightingLabPresenter? lighting;
+    private OcclusionLabPresenter? occlusion;
+    private MaterialTexturePresenter? material;
+    private RenderOutputsExample? outputs;
+    private readonly Stopwatch clock = Stopwatch.StartNew();
+    private readonly RadianceHdrSourceCache sourceCache = new(2 * 1024 * 1024);
+    private RadianceHdrEnvironmentAsset? environmentAsset;
+    private RenderSession? session;
+    private IJSObjectReference? module, host;
+    private DotNetObjectReference<RenderingLabs>? reference;
+    private ElementReference canvas;
+    private Task? startup, configuration;
+    private CancellationTokenSource lifetime = new();
+    private CancellationTokenSource? loadCancellation;
+    private int configurationVersion, resolverOpens, verifiedVersion = -1;
+    private bool presentationFailed;
+    private bool disposed, loading, lastUsedCache, retainEncoded = false, hdr = true;
+    private string OutputMode { get => hdr ? "hdr" : "sdr"; set => hdr = value switch { "hdr" => true, "sdr" => false, _ => hdr }; }
+    private bool directLight = true, environmentLight = true, animate = false, shadows = true, ao = true;
+    private bool colorTexture = false, normalTexture = false, ormTexture = false;
+    private float aoRadius = .7f, aoStrength = 1, metallic = 0, roughness = .55f, tiling = 1;
+    private MaterialTextureAddressMode address = MaterialTextureAddressMode.Repeat;
+    private MaterialTextureFilter filter = MaterialTextureFilter.Linear;
+    private RenderOutputId output = RenderOutputIds.Beauty;
+    private TimeSpan lastLoadDuration, lastPreparationDuration;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        string next = Navigation.ToBaseRelativePath(Navigation.Uri).Split('?', '#')[0].TrimEnd('/').Split('/').Last();
+        if (next != page)
+        {
+            configurationVersion++; loadCancellation?.Cancel(); DisposePresenters(); page = next;
+            directLight = environmentLight = shadows = ao = true; animate = retainEncoded = colorTexture = normalTexture = ormTexture = false;
+            aoRadius = .7f; aoStrength = tiling = 1; metallic = 0; roughness = .55f;
+            address = MaterialTextureAddressMode.Repeat; filter = MaterialTextureFilter.Linear; output = RenderOutputIds.Beauty;
+            if (session is not null) await Reload();
+        }
+        await Invalidate();
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    { if (firstRender) { startup = StartAsync(); await startup; } }
+    private async Task StartAsync()
+    {
+        try
+        {
+            GalleryAssets.Configure(new Uri(Navigation.BaseUri));
+            module = await JS.InvokeAsync<IJSObjectReference>("import", "./gallery-viewport.mjs");
+            if (disposed) return;
+            session = await RenderSession.OpenAsync();
+            if (disposed) return;
+            reference = DotNetObjectReference.Create(this);
+            host = await module.InvokeAsync<IJSObjectReference>("create", canvas, reference, session.MaximumDimension);
+            await Reload();
+        }
+        catch (Exception error) { if (!disposed) { status = "Presentation setup failed"; details = error.ToString(); await InvokeAsync(StateHasChanged); } }
+    }
+
+    private async Task Reload()
+    {
+        if (session is null || disposed) return;
+        loadCancellation?.Cancel(); loadCancellation?.Dispose();
+        loadCancellation = CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token);
+        int version = ++configurationVersion; DisposePresenters(); loading = true; presentationFailed = false;
+        status = page == "lighting-direct-ibl" ? "Loading the Studio Small 02 HDR environment…" : "Loading the shared HDR environment…";
+        await InvokeAsync(StateHasChanged);
+        await Invalidate();
+        configuration = ConfigureAsync(session, page, version, retainEncoded, loadCancellation.Token);
+        await configuration;
+    }
+    private async Task ConfigureAsync(RenderSession active, string targetPage, int version, bool retain, CancellationToken token)
+    {
+        try
+        {
+            EquirectangularHdrEnvironment environment;
+            RadianceHdrEnvironmentAsset? loadedAsset = null;
+            bool usedCache = sourceCache.Count != 0;
+            var loadClock = Stopwatch.StartNew();
+            if (targetPage == "lighting-direct-ibl")
+            {
+                loadedAsset = await RadianceHdrEnvironmentLoader.LoadAsync("app://Hdri/studio_small_02_1k.hdr", OpenSourceAsync,
+                    sourceCache, new(StandardColorSpaces.LinearSrgb) { Name = "Studio Small 02 (Poly Haven, CC0, 1K HDR)",
+                        MaximumSourceByteCount = 2 * 1024 * 1024, MaximumOutputByteCount = 8L * 1024 * 1024, RetainEncodedSource = retain }, token);
+                environment = loadedAsset.Environment;
+            }
+            else
+            {
+                using Stream stream = new MemoryStream(await GalleryAssets.ReadBytesAsync("Hdri/studio_small_02_1k.hdr", token), writable: false);
+                token.ThrowIfCancellationRequested();
+                environment = RadianceHdrReader.Read(stream, StandardColorSpaces.LinearSrgb, "Studio Small 02 (Poly Haven, CC0, 1K HDR)");
+            }
+            loadClock.Stop(); var preparationClock = Stopwatch.StartNew();
+            await SceneRenderer.PrepareImageBasedLightingAsync(environment, token); preparationClock.Stop();
+            if (disposed || token.IsCancellationRequested || version != configurationVersion || active != session || targetPage != page) return;
+            switch (targetPage)
+            {
+                case "lighting-direct-ibl": lighting = new(active.PresentationSurface.Device, environment); environmentAsset = loadedAsset;
+                    lastUsedCache = usedCache; lastLoadDuration = loadClock.Elapsed; lastPreparationDuration = preparationClock.Elapsed;
+                    readyStatus = "Lighting ready"; UpdateCacheDetails(); break;
+                case "shadows-ao": occlusion = new(active.PresentationSurface.Device, environment); readyStatus = "Occlusion scene ready";
+                    details = "A shadowed key light plus camera-depth SSAO on indirect diffuse."; break;
+                case "pbr-material-textures": material = new(active.PresentationSurface.Device, environment); readyStatus = "Material ready";
+                    details = "All maps are assigned through backend-independent PbrMaterial properties."; break;
+                case "render-outputs": outputs = new(active.PresentationSurface.Device, environment); readyStatus = "Ready. Output selection is available inside the viewport."; details = ""; break;
+            }
+            if (presentationFailed) details = presentationError;
+            else status = "Waiting for the first rendered frame…";
+            ApplyControls(); loading = false; await Invalidate(); await InvokeAsync(StateHasChanged);
+        }
+        catch (OperationCanceledException) when (token.IsCancellationRequested)
+        { if (!disposed && version == configurationVersion) { status = "HDR environment load cancelled"; loading = false; await InvokeAsync(StateHasChanged); } }
+        catch (Exception error)
+        { if (!disposed && version == configurationVersion) { status = "Rendering setup failed"; details = error.ToString(); loading = false; await InvokeAsync(StateHasChanged); } }
+    }
+    private async ValueTask<Stream> OpenSourceAsync(CancellationToken token)
+    {
+        byte[] source = await GalleryAssets.ReadBytesAsync("Hdri/studio_small_02_1k.hdr", token);
+        token.ThrowIfCancellationRequested(); resolverOpens++;
+        return new MemoryStream(source, writable: false);
+    }
+    private void CancelLoad() => loadCancellation?.Cancel();
+    private void RetentionChanged() { if (!loading) status = "Encoded-source retention applies on the next HDR reload"; }
+    private void ClearCache()
+    {
+        sourceCache.Clear(); status = environmentAsset is null ? "Encoded HDR source cache cleared" : "Source cache cleared; the decoded environment remains valid";
+        UpdateCacheDetails();
+    }
+    private void UpdateCacheDetails() => details =
+        $"Source: {(lastUsedCache ? "cache" : "resolver")} | resolver opens: {resolverOpens} | " +
+        $"cache: {Bytes(sourceCache.TotalByteCount)} / {Bytes(sourceCache.MaximumByteCount)} | FP32 output: {Bytes(environmentAsset?.OutputByteCount ?? 0)} | " +
+        $"asset-retained source: {Bytes(environmentAsset?.RetainedEncodedSource.Length ?? 0)} | load: {lastLoadDuration.TotalMilliseconds:F0} ms | IBL prepare: {lastPreparationDuration.TotalMilliseconds:F0} ms";
+    private static string Bytes(long count) => count >= 1024 * 1024 ? $"{count / (1024d * 1024d):F2} MiB" : $"{count / 1024d:F1} KiB";
+    private async Task ControlsChanged() { ApplyControls(); await Invalidate(); }
+    private void ApplyControls()
+    {
+        if (lighting is not null) { lighting.DirectLightEnabled = directLight; lighting.EnvironmentEnabled = environmentLight; lighting.AnimateLight = animate; }
+        if (occlusion is not null) { occlusion.ShadowsEnabled = shadows; occlusion.AmbientOcclusionEnabled = ao; occlusion.AmbientOcclusionRadius = aoRadius; occlusion.AmbientOcclusionStrength = aoStrength; }
+        if (material is not null)
+        {
+            material.Metallic = metallic; material.Roughness = roughness; material.UseColorTexture = colorTexture;
+            material.UseNormalTexture = normalTexture; material.UseOrmTexture = ormTexture; material.TextureScale = tiling;
+            material.TextureSampling = new(address, address, filter);
+        }
+    }
+    private async Task SelectOutput(RenderOutputId selected) { output = selected; await Invalidate(); }
+    private async Task Invalidate()
+    { if (host is not null && !disposed) await host.InvokeVoidAsync("configure", false, false, hdr, page == "lighting-direct-ibl" && animate && lighting is not null); }
+
+    /// <summary>Draws unchanged native example presenters into the shared linear Canvas intermediate.</summary>
+    [JSInvokable]
+    public async Task DrawFrame(int width, int height, double delta, double interval, double pixelRatio,
+        double logicalWidth, double logicalHeight, float rotateX, float rotateY, float dolly, bool outputHdr, bool refresh)
+    {
+        if (disposed || session is null) return;
+        int version = configurationVersion;
+        bool verify = verifiedVersion != version && (lighting is not null || occlusion is not null || material is not null || outputs is not null);
+        await session.DrawExampleAsync(width, height, 0, outputHdr, refresh, (device, target, depth) =>
+        {
+            if (lighting is not null) lighting.Render(target, (uint)width, (uint)height, (float)clock.Elapsed.TotalSeconds);
+            else if (occlusion is not null) occlusion.Render(target, (uint)width, (uint)height);
+            else if (material is not null) material.Render(target, (uint)width, (uint)height);
+            else if (outputs is not null) outputs.Draw(target, depth, output);
+            else
+            {
+                using var encoder = device.CreateCommandEncoder("Gallery environment loading");
+                using (encoder.BeginRenderPass(new(new GraphicsRenderPassColorAttachment(target, clearColor: new(0, 0, 0, 1))))) { }
+                using var commands = encoder.Finish(); device.Queue.Submit(commands);
+            }
+        }, verifySubmission: verify);
+        if (verify && !disposed && version == configurationVersion)
+        {
+            verifiedVersion = version; presentationFailed = false; status = readyStatus;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+    /// <summary>Reports presentation failure without selecting another renderer or output policy.</summary>
+    [JSInvokable] public Task RenderFailed(string message) { presentationFailed = true; animate = false; status = "Presentation failed"; details = presentationError = message; return InvokeAsync(StateHasChanged); }
+    private void DisposePresenters()
+    { lighting?.Dispose(); lighting = null; occlusion?.Dispose(); occlusion = null; material?.Dispose(); material = null; outputs?.Dispose(); outputs = null; environmentAsset = null; }
+    /// <summary>Releases page-owned presenters after browser draw callbacks have settled.</summary>
+    [JSInvokable] public void Disconnect() { configurationVersion++; loadCancellation?.Cancel(); DisposePresenters(); session?.Dispose(); session = null; }
+    /// <inheritdoc />
+    public async ValueTask DisposeAsync()
+    {
+        disposed = true; configurationVersion++; lifetime.Cancel(); loadCancellation?.Cancel();
+        if (startup is not null) await startup;
+        if (configuration is not null) await configuration;
+        if (host is not null) { await host.InvokeVoidAsync("dispose"); await host.DisposeAsync(); }
+        Disconnect(); reference?.Dispose(); loadCancellation?.Dispose(); lifetime.Dispose();
+        if (module is not null) await module.DisposeAsync();
+    }
+}

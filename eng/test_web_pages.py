@@ -24,7 +24,7 @@ class BootDependencyChecks(unittest.TestCase):
         root_patch = patch.object(pages, "ROOT", self.root)
         root_patch.start()
         self.addCleanup(root_patch.stop)
-        asset = self.root / "samples/GalleryApp/Resources/Raw/model.glb"
+        asset = self.root / "samples/Mu3D.Gallery/Resources/Raw/model.glb"
         asset.parent.mkdir(parents=True)
         asset.write_bytes(b"original Gallery asset")
         self.args = argparse.Namespace(aot=self.publication("Aot"), interpreted=self.publication("Interpreted"),
@@ -53,15 +53,23 @@ class BootDependencyChecks(unittest.TestCase):
         return publish
 
     def test_staging_keeps_every_boot_import_and_prunes_only_obsolete_files(self):
+        for publication in (self.args.aot, self.args.interpreted):
+            profile = publication / "wwwroot/assets/PrintProfiles/local.icc"
+            profile.parent.mkdir()
+            profile.write_bytes(b"supplied local profile")
         with redirect_stdout(io.StringIO()):
             site = pages.stage(self.args)
-        for mode in ("gallery", "gallery-interpreted"):
+        for mode, publication in (("gallery", self.args.aot), ("gallery-interpreted", self.args.interpreted)):
             framework = site / mode / "_framework"
             self.assertEqual({file.name for file in framework.iterdir()}, {
                 "dotnet.js", "blazor.webassembly.js", "dotnet.native.current.js",
                 "dotnet.runtime.current.js", "dotnet.native.current.wasm"})
             self.assertEqual((framework / "dotnet.runtime.current.js").read_bytes(),
                              (self.args.aot / "wwwroot/_framework/dotnet.runtime.current.js").read_bytes())
+            self.assertEqual((publication / "wwwroot/assets/PrintProfiles/local.icc").read_bytes(),
+                             b"supplied local profile")
+            self.assertFalse((site / mode / "assets/PrintProfiles").exists())
+            self.assertEqual((site / mode / "assets/model.glb").read_bytes(), b"original Gallery asset")
         report = json.loads((site / "gallery-deployment.json").read_text())
         self.assertTrue(all(item["bootResources"] == 3 and item["hashedResources"] == 1
                             for item in report["galleries"]))

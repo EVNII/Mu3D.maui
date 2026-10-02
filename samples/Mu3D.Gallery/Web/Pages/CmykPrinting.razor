@@ -1,0 +1,179 @@
+@page "/examples/cmyk-printing"
+@implements IAsyncDisposable
+@using Microsoft.AspNetCore.Components.Forms
+@using System.Globalization
+@using System.Net
+@using Mu3D.Color
+@using Mu3D.Color.Printing
+@using Mu3D.Graphics
+@using Mu3D.GalleryApp.Pages
+@using Mu3D.GalleryApp.Examples
+
+<main class="cmyk-printing">
+<h1>CMYK 印刷与软打样</h1>
+<p class="description">同一份颜色依次经过三个步骤。曝光影响整个流程；ICC 和渲染意图只影响第 3 步。</p>
+<div class="print-workflow">
+    <section class="print-step print-source" aria-labelledby="print-source-title">
+        <div class="print-step-heading">
+            <h2 id="print-source-title">1 · 原始 HDR</h2>
+            <p class="description">线性 Adobe RGB 色带，保留原始高光。</p>
+        </div>
+        <GalleryCanvas @ref="canvas" Title="原始 HDR 色带（无色调映射）" Draw="DrawHdr" Disconnected="ReleaseHdr" />
+        <div class="print-options">
+            <label>曝光 @exposure.ToString("+0.0;-0.0;0.0") EV（影响三个步骤）
+                <input type="range" min="-4" max="4" step="0.1" @bind="exposure" @bind:event="oninput" @bind:after="Refresh" />
+            </label>
+        </div>
+        <p class="description">0 EV 保留原值，无色调映射。实际高光亮度取决于屏幕 HDR 余量。</p>
+    </section>
+    <section class="print-step" aria-labelledby="print-mapped-title">
+        <div class="print-step-heading">
+            <h2 id="print-mapped-title">2 · 打印 RGB</h2>
+            <p class="description">映射到 @TargetName 后的 sRGB 屏幕预览。</p>
+        </div>
+        <PrintChart Title="映射后的 RGB" Colors="mappedColors" />
+        <div class="print-options">
+            <label>打印映射 <select @bind="mapping" @bind:after="Refresh"><option value="0">AgX Rec.2020 + 目标色域映射</option><option value="1">简单亮度压缩 + 目标色域映射</option></select></label>
+            <label>目标 RGB <select @bind="targetSpace" @bind:after="Refresh"><option value="0">Adobe RGB</option><option value="1">ProPhoto RGB</option></select></label>
+        </div>
+        <details><summary>打印映射与灰阶说明</summary>
+            <p>AgX 使用 Blender Rec.2020 原版视图，再收缩到目标色域；不是原生 Adobe / ProPhoto AgX。ProPhoto 不恢复此前压缩的颜色。亮度较高的颜色会在 AgX 中逐渐变淡。</p>
+            <p>@grayValues</p>
+        </details>
+    </section>
+    <section class="print-step" aria-labelledby="print-proof-title">
+        <div class="print-step-heading">
+            <h2 id="print-proof-title">3 · CMYK 软打样</h2>
+            <p class="description">切换下方 ICC、渲染意图和纸白，观察这张图。</p>
+        </div>
+        <PrintChart Title="CMYK 软打样" Colors="proofColors" Excess="excessInk" />
+        <div class="print-options">
+            <label>印刷 ICC <select @bind="profileIndex" @bind:after="Refresh"><option value="-1">选择印刷 ICC</option>@for (int index = 0; index < names.Count; index++) { <option value="@index">@names[index]</option> }</select></label>
+            <label>加载 ICC… <InputFile OnChange="LoadProfile" accept=".icc,.icm" /></label>
+            <label>渲染意图 <select @bind="intent" @bind:after="Refresh"><option value="0">相对色度</option><option value="1">感知</option><option value="2">饱和度</option></select></label>
+            <label class="print-toggle"><input type="checkbox" @bind="paper" @bind:after="Refresh" />模拟纸白</label>
+            <label class="print-toggle"><input type="checkbox" @bind="mark" @bind:after="Refresh" />标记 ΔE76 &gt; 2 的色块</label>
+        </div>
+        <p class="status" role="status">@status</p>
+        <div class="print-options">
+            <label>总墨量警戒值 @inkThreshold.ToString("F0")%
+                <input type="range" min="0" max="400" step="1" @bind="inkThreshold" @bind:event="oninput" @bind:after="UpdateInk" />
+            </label>
+        </div>
+        <p class="description">@inkStatus</p>
+    </section>
+</div>
+<details class="print-notes"><summary>色带与预览说明</summary>
+    <p>色带：横向为色相，纵向由暗到亮；通道峰值 0.0028–11.52。下方灰阶依次为 0、0.018、0.18（中灰）、0.5、1、2、4、8。</p>
+    <p>两张打印预览显式映射 HDR 后使用 sRGB 显示，显示超色域时显式裁切。它不是校准后的合同打样；原始颜色与 CMYK 黑版数据保持不变。</p>
+</details>
+</main>
+
+@code {
+    private const long MaximumProfileBytes = 128L * 1024 * 1024;
+    private readonly List<CmykProfile> profiles = [];
+    private readonly List<string> names = [];
+    private readonly LinearRgba[] source = CmykPrintingPattern.Create();
+    private readonly CancellationTokenSource lifetime = new();
+    private GalleryCanvas? canvas;
+    private CmykPrintingHdrRenderer? hdrRenderer;
+    private CmykImage? separation;
+    private string[] mappedColors = [], proofColors = [];
+    private bool[]? excessInk;
+    private int profileIndex = -1, intent, mapping, targetSpace, revision;
+    private bool paper = true, mark, disposed;
+    private float exposure, inkThreshold = 300;
+    private string grayValues = "", inkStatus = "等待分色";
+    private string status = "请选择 ICC。未内置第三方配置文件，可加载印厂提供的 .icc / .icm。";
+    private string TargetName => targetSpace == 1 ? "ProPhoto RGB" : "Adobe RGB";
+    protected override async Task OnInitializedAsync()
+    {
+        await Refresh();
+        foreach (string name in new[] { "JapanColor2011Coated.icc", "GRACoL2013_CRPC6.icc", "SWOP2013C3_CRPC5.icc", "PSOcoated_v3.icc", "PSOuncoated_v3_FOGRA52.icc" })
+        {
+            try
+            {
+                byte[] bytes = await GalleryAssets.ReadBytesAsync("PrintProfiles/" + name, lifetime.Token);
+                if (disposed) return;
+                profiles.Add(new(bytes)); names.Add(name);
+            }
+            catch (HttpRequestException error) when (error.StatusCode == HttpStatusCode.NotFound) { }
+            catch (OperationCanceledException) when (lifetime.IsCancellationRequested) { return; }
+            catch (Exception error) { if (!disposed) status = error.Message; }
+        }
+        if (!disposed && profiles.Count > 0 && profileIndex < 0) { profileIndex = 0; await Refresh(); }
+    }
+    private async Task LoadProfile(InputFileChangeEventArgs args)
+    {
+        try
+        {
+            IBrowserFile file = args.File;
+            await using Stream input = file.OpenReadStream(MaximumProfileBytes, lifetime.Token);
+            using var memory = new MemoryStream(); byte[] buffer = new byte[65536]; int count;
+            while ((count = await input.ReadAsync(buffer, lifetime.Token)) > 0)
+            {
+                if (memory.Length + count > MaximumProfileBytes) throw new InvalidDataException("ICC 文件过大。");
+                await memory.WriteAsync(buffer.AsMemory(0, count), lifetime.Token);
+            }
+            if (disposed) return;
+            profiles.Add(new(memory.ToArray())); names.Add(file.Name); profileIndex = profiles.Count - 1;
+            await Refresh();
+        }
+        catch (OperationCanceledException) when (lifetime.IsCancellationRequested) { }
+        catch (Exception error) { if (!disposed) status = error.Message; }
+    }
+    private async Task Refresh()
+    {
+        if (disposed) return;
+        int version = ++revision, intentSnapshot = intent, index = profileIndex;
+        bool paperSnapshot = paper, markSnapshot = mark;
+        var transform = CmykPrintingExample.CreateTransform(targetSpace, mapping, exposure);
+        var mapped = source.Select(transform.Transform).ToArray();
+        mappedColors = mapped.Select(DisplayColor).ToArray(); grayValues = CmykPrintingExample.GrayValues(transform);
+        if (canvas is not null) await canvas.InvalidateAsync();
+        if (disposed || version != revision) return;
+        if (index < 0)
+        {
+            separation = null; proofColors = []; excessInk = null; UpdateInk();
+            status = "请选择 ICC。未内置第三方配置文件，可加载印厂提供的 .icc / .icm。"; return;
+        }
+        var profile = profiles[index]; string profileName = names[index];
+        status = "正在分色并计算软打样…"; await InvokeAsync(StateHasChanged);
+        try
+        {
+            var result = await CmykPrintingExample.SeparateAsync(mapped, profile, intentSnapshot, paperSnapshot, markSnapshot,
+                () => !disposed && version == revision, yieldToHost: true);
+            if (disposed || version != revision || result is null) return;
+            separation = result.Image; proofColors = result.Preview.Select(DisplayColor).ToArray();
+            status = $"{profileName} · 平均 ΔE76 {result.TotalDeltaE / source.Length:F2} · ΔE76 > 2：{result.Changed}/{source.Length} · 最大总墨量 {result.MaximumInk:F1}% · 显示裁切 {result.Clipped} 色块";
+            UpdateInk();
+        }
+        catch (Exception error)
+        {
+            if (!disposed && version == revision)
+            { separation = null; proofColors = []; excessInk = null; UpdateInk(); status = error.Message; }
+        }
+    }
+    private void UpdateInk()
+    {
+        if (separation is null || proofColors.Length == 0) { inkStatus = "等待分色"; return; }
+        var indices = separation.FindExcessInk(inkThreshold); excessInk = new bool[source.Length];
+        foreach (int index in indices) excessInk[index] = true;
+        inkStatus = $"警戒值 {inkThreshold:F0}% · 超限 {indices.Count} / {source.Length} 色块（黑白斜线）" +
+            (indices.Count == 0 ? " · 当前没有超限，可降低阈值观察" : "") + " · 仅诊断，不修改墨量或黑版";
+    }
+    private static string DisplayColor(LinearRgba color)
+    {
+        var encoded = StandardRgbEncodingConverter.Encode(color, StandardRgbEncoding.Srgb, RgbEncodingRangePolicy.Clip);
+        return string.Create(CultureInfo.InvariantCulture, $"rgb({encoded.Red * 100:F4}% {encoded.Green * 100:F4}% {encoded.Blue * 100:F4}%)");
+    }
+    private void DrawHdr(GraphicsDevice device, GraphicsTexture target, GraphicsTexture? depth, double delta)
+    { hdrRenderer ??= new(device); hdrRenderer.Draw(target, source, exposure); }
+    private void ReleaseHdr() { hdrRenderer?.Dispose(); hdrRenderer = null; }
+    /// <inheritdoc />
+    public async ValueTask DisposeAsync()
+    {
+        if (disposed) return; disposed = true; revision++; lifetime.Cancel();
+        if (canvas is not null) await canvas.DisposeAsync(); ReleaseHdr(); lifetime.Dispose();
+    }
+}

@@ -10,10 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="../../samples/GalleryApp/Resources/Raw/KtxSamples/color_grid_basis.ktx2"
+    <None Include="../../samples/Mu3D.Gallery/Resources/Raw/KtxSamples/color_grid_basis.ktx2"
           Link="Assets/color_grid_basis.ktx2"
           CopyToOutputDirectory="PreserveNewest" />
-    <None Include="../../samples/GalleryApp/Resources/Raw/GltfSamples/AnisotropyBarnLampKtx/AnisotropyBarnLamp_normalbump.ktx2"
+    <None Include="../../samples/Mu3D.Gallery/Resources/Raw/GltfSamples/AnisotropyBarnLampKtx/AnisotropyBarnLamp_normalbump.ktx2"
           Link="Assets/AnisotropyBarnLamp_normalbump.ktx2"
           CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>

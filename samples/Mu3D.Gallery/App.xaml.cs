@@ -14,13 +14,17 @@ public partial class App : Application
     /// <inheritdoc />
     protected override Window CreateWindow(IActivationState? activationState)
     {
-        Window window = new(new AppShell())
+        AppShell shell = new();
+        Window window = new(shell)
         {
             Title = "Mu3D Gallery",
         };
+        window.Stopped += (_, _) => shell.SuspendGallery();
+        window.Resumed += (_, _) => shell.ResumeGallery();
+        window.Destroying += (_, _) => shell.CloseGallery();
 #if MACCATALYST
-        window.MinimumWidth = 900;
-        window.MinimumHeight = 600;
+        window.MinimumWidth = 420;
+        window.MinimumHeight = 480;
 #endif
         return window;
     }

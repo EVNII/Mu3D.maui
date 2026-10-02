@@ -26,7 +26,7 @@
                     Height="1.8"
                     RadialSegments="48"
                     Radius="0.72">
-                    <mu3d:UnlitMaterial3D Color="#2E8CFF" />
+                    <mu3d:UnlitMaterial3D x:Name="TargetMaterial" Name="HDR blue target" />
                 </mu3d:Cone3D>
             </mu3d:Scene3D>
         </controls:SceneHostView>
@@ -39,9 +39,9 @@
                     FontSize="12"
                     Text="Drag empty space to orbit; the host's orbit tool and the gizmo share one control arbiter. Wheel or pinch zooms." />
                 <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
-                    <Label VerticalOptions="Center" Text="Gizmo tool attached" />
+                    <Label VerticalOptions="Center" Text="Orbit and Gizmo attached" />
                     <Switch
-                        x:Name="GizmoEnabledSwitch"
+                        x:Name="FeaturesEnabledSwitch"
                         Grid.Column="1"
                         IsToggled="True" />
                 </Grid>

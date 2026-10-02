@@ -1,4 +1,6 @@
+using Mu3D.Gallery.Controls;
 using System.Numerics;
+using Mu3D.Color;
 using Mu3D.Maui.Controls;
 using Mu3D.Maui.Toolkit.Controls;
 using Mu3D.Toolkit.Gizmos;
@@ -8,10 +10,10 @@ namespace Mu3D.Gallery.Pages;
 /// <summary>Demonstrates opt-in transform-gizmo rendering and pointer interaction.</summary>
 /// <remarks>
 /// The shared <see cref="Controls.SceneHostView"/> owns the only orbit controller. This page
-/// attaches just its <see cref="TransformGizmoTool"/> to the host's viewport tool container, so
-/// orbit and gizmo share the container's single control arbiter instead of a hand-wired one.
+/// toggles that orbit tool together with its <see cref="TransformGizmoTool"/> in the host's
+/// viewport tool container, so both share the container's single control arbiter.
 /// </remarks>
-public partial class Toolkit3DPage : ContentPage
+public partial class Toolkit3DPage : ContentPage, IGalleryPageActivation
 {
     private readonly TransformGizmoTool gizmoTool;
     private TransformGizmo? subscribedGizmo;
@@ -20,6 +22,11 @@ public partial class Toolkit3DPage : ContentPage
     public Toolkit3DPage()
     {
         InitializeComponent();
+
+        // The wrapper's Color property accepts an sRGB UI color. Preserve the original example's
+        // explicitly tagged linear HDR value through its owned Core material.
+        TargetMaterial.UnlitMaterial.Color = new LinearRgba(
+            .18f, .55f, 1.35f, 1f, StandardColorSpaces.LinearSrgb);
 
         gizmoTool = new TransformGizmoTool
         {
@@ -35,7 +42,7 @@ public partial class Toolkit3DPage : ContentPage
         gizmoTool.Behavior.InteractionFailed += OnGizmoPointerFailed;
         Host.OrbitTool.Behavior.InteractionFailed += OnOrbitInteractionFailed;
         Host.SceneView.FeatureError += OnFeatureError;
-        GizmoEnabledSwitch.Toggled += OnGizmoEnabledChanged;
+        FeaturesEnabledSwitch.Toggled += OnFeaturesEnabledChanged;
         TranslateSwitch.Toggled += OnEnabledModesChanged;
         RotateSwitch.Toggled += OnEnabledModesChanged;
         ScaleSwitch.Toggled += OnEnabledModesChanged;
@@ -47,21 +54,32 @@ public partial class Toolkit3DPage : ContentPage
 
         UpdateConfigurationLabels();
         UpdatePose();
-
-        // AdaptiveShell.Maui 0.1.x hosts content pages without raising Appearing/Disappearing;
-        // Loaded/Unloaded fire as the hosted page enters and leaves the window's visual tree.
-        Loaded += OnPageLoaded;
+        DetachTools();
     }
 
-    private void OnPageLoaded(object? sender, EventArgs e)
+    private bool navigationActive;
+
+    void IGalleryPageActivation.SetNavigationActive(bool active)
     {
-        _ = sender;
-        AttachGizmoTool();
-        Host.SceneView.InvalidateScene();
+        if (navigationActive == active) return;
+        navigationActive = active;
+        if (active && FeaturesEnabledSwitch.IsToggled)
+        {
+            AttachTools();
+            Host.SceneView.InvalidateScene();
+        }
+        else
+        {
+            DetachTools();
+        }
     }
 
-    private void AttachGizmoTool()
+    private void AttachTools()
     {
+        if (!Host.Tools.Items.Contains(Host.OrbitTool))
+        {
+            Host.Tools.Items.Add(Host.OrbitTool);
+        }
         if (!Host.Tools.Items.Contains(gizmoTool))
         {
             Host.Tools.Items.Add(gizmoTool);
@@ -70,6 +88,15 @@ public partial class Toolkit3DPage : ContentPage
         StatusLabel.Text = gizmoTool.IsPointerInputAvailable
             ? "Ready — the host's orbit tool and the page's gizmo tool share one control arbiter"
             : "Scene ready, but native pointer input is unavailable on this target";
+    }
+
+    private void DetachTools()
+    {
+        if (gizmoTool.Gizmo?.IsInteracting == true) gizmoTool.Gizmo.CancelInteraction();
+        Host.Tools.Items.Remove(gizmoTool);
+        Host.Tools.Items.Remove(Host.OrbitTool);
+        UnsubscribeGizmo();
+        SetControlsEnabled(true);
     }
 
     private void SubscribeGizmo()
@@ -119,24 +146,18 @@ public partial class Toolkit3DPage : ContentPage
         Host.SceneView.InvalidateScene();
     }
 
-    private void OnGizmoEnabledChanged(object? sender, ToggledEventArgs e)
+    private void OnFeaturesEnabledChanged(object? sender, ToggledEventArgs e)
     {
         _ = sender;
-        if (gizmoTool.Gizmo?.IsInteracting == true)
+        if (e.Value && navigationActive)
         {
-            gizmoTool.Gizmo.CancelInteraction();
-        }
-
-        if (e.Value)
-        {
-            AttachGizmoTool();
-            StatusLabel.Text = "Gizmo tool reattached beside the host's orbit tool";
+            AttachTools();
+            StatusLabel.Text = "Tools reattached in order: Orbit, then Gizmo";
         }
         else
         {
-            _ = Host.Tools.Items.Remove(gizmoTool);
-            UnsubscribeGizmo();
-            StatusLabel.Text = "Gizmo tool detached; the host's orbit controller remains active";
+            DetachTools();
+            StatusLabel.Text = "Orbit and Gizmo detached; the scene and target remain owned by the page";
         }
         Host.SceneView.InvalidateScene();
     }

@@ -1,0 +1,100 @@
+@implements IDisposable
+@inject NavigationManager Navigation
+@using Mu3D.Gallery
+@using Mu3D.GalleryApp.Web.Infrastructure
+
+<div class="gallery-shell">
+    <header class="gallery-header">
+        <button class="gallery-menu" aria-label="Browse examples" aria-controls="gallery-navigation"
+                aria-expanded="@(menuOpen ? "true" : "false")" @onclick="() => menuOpen = !menuOpen">☰</button>
+        <NavLink class="gallery-brand" href="" Match="NavLinkMatch.All">Mu3D Gallery</NavLink>
+        <input class="gallery-search" type="search" aria-label="Search examples" placeholder="Search examples"
+               @bind="query" @bind:event="oninput" @bind:after="Search" />
+        <div class="gallery-actions">
+            @if (current?.FeatureId is not null)
+            {
+                <a href="@GalleryWebCatalog.DocsHref(current)" target="_blank" rel="noopener">Docs</a>
+                @if (isSource) { <a href="@GalleryWebCatalog.Href(current)">Open example</a> }
+                else { <a href="@($"source/{current.Id}")">Source</a> }
+            }
+        </div>
+    </header>
+    <aside id="gallery-navigation" class="gallery-sidebar @(menuOpen ? "is-open" : "")">
+        <nav class="gallery-navigation" aria-label="Gallery examples">
+            <a class="gallery-all @(allExamples ? "active" : "")" href="examples"
+               aria-current="@(allExamples ? "page" : null)">All Examples <span>@GalleryCatalog.Examples.Count</span></a>
+            @foreach (GallerySection section in GalleryCatalog.Sections)
+            {
+                GalleryEntry[] entries = GalleryCatalog.Search(query, section.Id).ToArray();
+                <details class="gallery-section" open="@(section.Id == activeSection || !string.IsNullOrEmpty(query))">
+                    <summary><img src="@($"navigation/{section.Icon}")" alt="" /><a href="@($"sections/{section.Id}")">@section.Title</a><span>@entries.Length</span></summary>
+                    @foreach (GalleryEntry entry in entries)
+                    {
+                        <a class="gallery-destination @(current?.Id == entry.Id ? "active" : "")" href="@GalleryWebCatalog.Href(entry)"
+                           aria-current="@(current?.Id == entry.Id ? "page" : null)">@entry.Title</a>
+                    }
+                </details>
+            }
+        </nav>
+    </aside>
+    <section id="gallery-content" class="gallery-content" aria-label="Gallery content">
+        @ChildContent
+    </section>
+    <nav class="gallery-compact" aria-label="Gallery categories">
+        @foreach (GallerySection section in GalleryCatalog.Sections)
+        {
+            <a class="@(section.Id == activeSection ? "active" : "")" href="@($"sections/{section.Id}")"
+               aria-current="@(section.Id == activeSection ? "page" : null)">
+                <img src="@($"navigation/{section.Icon}")" alt="" />@section.Title
+            </a>
+        }
+    </nav>
+</div>
+
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    private GalleryEntry? current;
+    private string query = "", activeSection = "basics";
+    private bool menuOpen, isSource, allExamples, disposed;
+
+    protected override void OnInitialized()
+    {
+        ReadLocation();
+        Navigation.LocationChanged += OnLocationChanged;
+    }
+
+    private void ReadLocation()
+    {
+        string relative = Navigation.ToBaseRelativePath(Navigation.Uri);
+        current = GalleryWebCatalog.RouteEntry(relative);
+        query = GalleryWebCatalog.SearchQuery(relative);
+        string path = relative.Split('?', '#')[0];
+        allExamples = path is "" or "examples";
+        activeSection = path.StartsWith("sections/", StringComparison.Ordinal) ? path[9..] : current?.SectionId ?? "basics";
+        isSource = path.StartsWith("source/", StringComparison.Ordinal);
+    }
+
+    private void Search()
+    {
+        string relative = Navigation.ToBaseRelativePath(Navigation.Uri).Split('?', '#')[0];
+        string target = relative.StartsWith("sections/", StringComparison.Ordinal) ? relative : "examples";
+        Navigation.NavigateTo(string.IsNullOrWhiteSpace(query) ? target : $"{target}?search={Uri.EscapeDataString(query)}", replace: true);
+    }
+
+    private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        _ = InvokeAsync(() =>
+        {
+            if (disposed) return;
+            ReadLocation();
+            menuOpen = false;
+            StateHasChanged();
+        });
+    }
+
+    public void Dispose()
+    {
+        disposed = true;
+        Navigation.LocationChanged -= OnLocationChanged;
+    }
+}

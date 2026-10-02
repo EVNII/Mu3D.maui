@@ -12,7 +12,7 @@ import tempfile
 import xml.etree.ElementTree as ET
 
 REPO = Path(__file__).resolve().parent.parent
-PROJECT = REPO / "samples/GalleryApp/Web/Mu3D.GalleryApp.Web.csproj"
+PROJECT = REPO / "samples/Mu3D.Gallery/Web/Mu3D.GalleryApp.Web.csproj"
 WEB_ROOT = REPO / "artifacts/web-wasm"
 
 
@@ -82,10 +82,15 @@ def main():
     parser.add_argument("--prepare", action="store_true", help="Download pinned official sources and build the existing WASM dependencies")
     parser.add_argument("--mode", choices=("both", "aot", "interpreted"), default="both")
     parser.add_argument("--output-root", type=Path, default=WEB_ROOT)
+    parser.add_argument("--print-profile-directory", type=Path,
+                        help="Bundle supplied local .icc files for Gallery verification; no profiles are downloaded")
     parser.add_argument("--jobs", type=int, default=2, help="Parallel codec compilation jobs (default: 2)")
     args = parser.parse_args()
     if args.jobs < 1:
         parser.error("--jobs must be positive")
+    profiles = args.print_profile_directory.resolve() if args.print_profile_directory else None
+    if profiles is not None and (not profiles.is_dir() or not any(path.is_file() for path in profiles.glob("*.icc"))):
+        parser.error("--print-profile-directory must contain supplied .icc files")
     dotnet = resolve_dotnet(args.dotnet)
     output = args.output_root.resolve()
     codecs = output / "codecs"
@@ -110,6 +115,8 @@ def main():
     common = ["-p:NuGetAudit=false", "-p:PublishTrimmed=true", "-p:UseSharedCompilation=false",
               f"-p:WasmCachePath={output / 'emdawn-cache'}", f"-p:EmdawnWebGpuRoot={port}",
               f"-p:Mu3DBrowserCodecRoot={codecs / 'lib'}"]
+    if profiles is not None:
+        common.append(f"-p:Mu3DPrintProfileDirectory={profiles}")
     modes = ("interpreted", "aot") if args.mode == "both" else (args.mode,)
     published = {}
     for mode in modes:

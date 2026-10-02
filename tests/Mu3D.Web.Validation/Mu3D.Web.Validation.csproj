@@ -50,26 +50,28 @@
     <Compile Include="../Mu3D.Web.Viewer.Tests/*.cs" Link="HostContracts/%(Filename)%(Extension)" />
     <Compile Include="../Mu3D.Core.Tests/RecordingGraphicsBackend.cs" Link="RecordingGraphicsBackend.cs" />
     <Compile Include="../Mu3D.Toolkit.Tests/SceneNodeAnchorSourceChecks.cs" Link="SceneNodeAnchorSourceChecks.cs" />
-    <Compile Include="../../samples/GalleryApp/Web/Infrastructure/NativeGalleryScene.cs;../../samples/GalleryApp/Web/Infrastructure/ProgressGalleryExample.cs;../../samples/GalleryApp/Web/Infrastructure/GalleryPlayable.cs;../../samples/GalleryApp/Examples/SceneAssetExample.cs" Link="Gallery/%(Filename)%(Extension)" />
-    <EmbeddedResource Include="../../samples/GalleryApp/Pages/*Page.xaml" LogicalName="Mu3D.GalleryApp.NativePages.%(Filename).xaml" />
-    <Compile Include="../../samples/GalleryApp/GallerySourceCatalog.cs;../../samples/GalleryApp/GalleryNavigationCatalog.cs;../../samples/GalleryApp/GalleryRoutes.cs;../../samples/GalleryApp/Web/Infrastructure/GalleryWebCatalog.cs" Link="Gallery/%(Filename)%(Extension)" />
-    <EmbeddedResource Include="../../samples/GalleryApp/Pages/*.cs;../../samples/GalleryApp/Examples/*.cs" Exclude="../../samples/GalleryApp/Pages/CmykPrinting*;../../samples/GalleryApp/Examples/CmykPrintingExample.cs" LogicalName="Mu3D.GalleryApp.Sources.%(Filename)%(Extension)" />
-    <EmbeddedResource Include="../../samples/GalleryApp/Pages/CmykPrinting*.cs;../../samples/GalleryApp/Examples/CmykPrintingExample.cs" Condition="'$(EnableMu3DPrinting)' == 'true'" LogicalName="Mu3D.GalleryApp.Sources.%(Filename)%(Extension)" />
+    <Compile Include="../../samples/Mu3D.Gallery/Web/Infrastructure/NativeGalleryScene.cs;../../samples/Mu3D.Gallery/Web/Infrastructure/ProgressGalleryExample.cs;../../samples/Mu3D.Gallery/Web/Infrastructure/GalleryPlayable.cs;../../samples/Mu3D.Gallery/Legacy/Examples/SceneAssetExample.cs" Link="Gallery/%(Filename)%(Extension)" />
+    <Compile Include="../../samples/Mu3D.Gallery/Legacy/Examples/EmissiveMaterialExample.cs;../../samples/Mu3D.Gallery/Legacy/Examples/HdrCanvasExample.cs;../../samples/Mu3D.Gallery/Legacy/Examples/ProceduralFeedExample.cs" Link="Gallery/%(Filename)%(Extension)" />
+    <EmbeddedResource Include="../../samples/Mu3D.Gallery/Legacy/Pages/*Page.xaml" LogicalName="Mu3D.GalleryApp.NativePages.%(Filename).xaml" />
+    <EmbeddedResource Include="../../samples/Mu3D.Gallery/Pages/EmissiveMaterialPage.xaml;../../samples/Mu3D.Gallery/Pages/TranslucentCanvasPage.xaml" LogicalName="Mu3D.GalleryApp.NativePages.%(Filename).xaml" />
+    <Compile Include="../../samples/Mu3D.Gallery/GalleryCatalog.cs;../../samples/Mu3D.Gallery/Legacy/GallerySourceCatalog.cs;../../samples/Mu3D.Gallery/Legacy/GalleryNavigationCatalog.cs;../../samples/Mu3D.Gallery/Legacy/GalleryFeatureCatalog.cs;../../samples/Mu3D.Gallery/Legacy/GalleryRoutes.cs;../../samples/Mu3D.Gallery/Web/Infrastructure/GalleryWebCatalog.cs" Link="Gallery/%(Filename)%(Extension)" />
+    <EmbeddedResource Include="../../samples/Mu3D.Gallery/Legacy/Pages/*.cs;../../samples/Mu3D.Gallery/Legacy/Examples/*.cs" Exclude="../../samples/Mu3D.Gallery/Legacy/Pages/CmykPrinting*;../../samples/Mu3D.Gallery/Legacy/Examples/CmykPrintingExample.cs" LogicalName="Mu3D.GalleryApp.Sources.%(Filename)%(Extension)" />
+    <EmbeddedResource Include="../../samples/Mu3D.Gallery/Legacy/Pages/CmykPrinting*.cs;../../samples/Mu3D.Gallery/Legacy/Examples/CmykPrintingExample.cs" Condition="'$(EnableMu3DPrinting)' == 'true'" LogicalName="Mu3D.GalleryApp.Sources.%(Filename)%(Extension)" />
   </ItemGroup>
   <ItemGroup Condition="'$(Mu3DWebSuite)' == 'Render' or '$(Mu3DWebSuite)' == 'HostContracts'">
     <ProjectReference Include="../../src/Mu3D.Web.Toolkit/Mu3D.Web.Toolkit.csproj" />
-    <Compile Include="../../samples/GalleryApp/Web/Infrastructure/ViewerScene*.cs;../../samples/GalleryApp/Web/Infrastructure/ViewerBenchmark.cs;../../samples/GalleryApp/Web/Infrastructure/SharedValidationScene.cs" />
+    <Compile Include="../../samples/Mu3D.Gallery/Web/Infrastructure/ViewerScene*.cs;../../samples/Mu3D.Gallery/Web/Infrastructure/ViewerBenchmark.cs;../../samples/Mu3D.Gallery/Web/Infrastructure/SharedValidationScene.cs" />
   </ItemGroup>
   <!-- Source-link the shared adapter; only platform bootstrap and readback differ. -->
   <ItemGroup Condition="'$(Mu3DWebSuite)' == 'Render'">
     <ProjectReference Include="../../src/Mu3D.Rendering.OpenPbr/Mu3D.Rendering.OpenPbr.csproj" />
     <ProjectReference Include="../../src/Mu3D.Formats.MaterialX/Mu3D.Formats.MaterialX.csproj" />
     <Compile Include="RenderProbe.cs;RenderProbe.Benchmark.cs;RenderProbe.Gallery.cs" />
-    <Compile Include="../../samples/GalleryApp/Examples/OpenPbrGalleryExample.cs;../../samples/GalleryApp/Pages/OpenPbrTextureExample.cs" Link="Gallery/%(Filename)%(Extension)" />
-    <Compile Include="../../samples/GalleryApp/Pages/LightingLabPresenter.cs;../../samples/GalleryApp/Pages/OcclusionLabPresenter.cs" Link="Gallery/%(Filename)%(Extension)" />
-    <Compile Include="../../samples/GalleryApp/Web/Infrastructure/BrowserGpu.cs;../../samples/GalleryApp/Web/Infrastructure/RenderSession.cs;../../samples/GalleryApp/Web/Infrastructure/WgpuGraphicsDevice.Browser.cs;../../samples/GalleryApp/Web/Infrastructure/WgpuGraphicsBuffer.Browser.cs" />
+    <Compile Include="../../samples/Mu3D.Gallery/Legacy/Examples/OpenPbrGalleryExample.cs;../../samples/Mu3D.Gallery/Legacy/Pages/OpenPbrTextureExample.cs" Link="Gallery/%(Filename)%(Extension)" />
+    <Compile Include="../../samples/Mu3D.Gallery/Legacy/Pages/LightingLabPresenter.cs;../../samples/Mu3D.Gallery/Legacy/Pages/OcclusionLabPresenter.cs" Link="Gallery/%(Filename)%(Extension)" />
+    <Compile Include="../../samples/Mu3D.Gallery/Web/Infrastructure/BrowserGpu.cs;../../samples/Mu3D.Gallery/Web/Infrastructure/RenderSession.cs;../../samples/Mu3D.Gallery/Web/Infrastructure/WgpuGraphicsDevice.Browser.cs;../../samples/Mu3D.Gallery/Web/Infrastructure/WgpuGraphicsBuffer.Browser.cs" />
   </ItemGroup>
-  <Import Project="../../samples/GalleryApp/Web/Infrastructure/BrowserBackend.targets" Condition="'$(Mu3DIncludeBrowserBackend)' == 'true'" />
+  <Import Project="../../samples/Mu3D.Gallery/Web/Infrastructure/BrowserBackend.targets" Condition="'$(Mu3DIncludeBrowserBackend)' == 'true'" />
   <Target Name="ValidateWebSuite" BeforeTargets="PrepareForBuild">
     <Error Condition="'$(Mu3DWebSuite)' != 'Smoke' and '$(Mu3DWebSuite)' != 'Creative' and '$(Mu3DWebSuite)' != 'Graphics' and '$(Mu3DWebSuite)' != 'WgpuAbi' and '$(Mu3DWebSuite)' != 'Emdawn' and '$(Mu3DWebSuite)' != 'Render' and '$(Mu3DWebSuite)' != 'HostContracts'"
            Text="Mu3DWebSuite must be Smoke, Creative, Graphics, HostContracts, WgpuAbi, Emdawn or Render." />

@@ -66,7 +66,7 @@ node artifacts/web-wasm/HostContractsAot/wwwroot/main.mjs
 SmokeAot is Smoke with RunAOTCompilation=true and Mu3DWebRootCore=true. Rooting all Core methods
 checks renderer compilation; it does not execute GPU rendering or represent a trimmed consumer size.
 The GPU-independent suites do not execute OpenPBR/MAUI/printing rendering. The complete
-[Gallery host](../../samples/GalleryApp/Web/README.md) runs the actual OpenPBR and other shared presenters; its browser rendering checks remain
+[Gallery host](../../samples/Mu3D.Gallery/Web/README.md) runs the actual OpenPBR and other shared presenters; its browser rendering checks remain
 separate from the codec and host contracts.
 
 Build and execute the real codec/importer boundary in both WASM modes after

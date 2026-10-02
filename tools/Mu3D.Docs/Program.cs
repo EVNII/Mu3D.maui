@@ -494,78 +494,54 @@ internal static partial class Program
             throw new InvalidDataException("The public feature TOC and Gallery article catalog differ.");
         }
 
-        string routeSource = File.ReadAllText(Path.Combine(root, "samples", "GalleryApp", "GalleryRoutes.cs"));
-        Dictionary<string, string> declaredRoutes = GalleryRouteRegex().Matches(routeSource)
-            .ToDictionary(
-                match => match.Groups[1].Value,
-                match => match.Groups[2].Value,
-                StringComparer.Ordinal);
-        Dictionary<string, Feature> featuresById = catalog.Features.ToDictionary(
-            feature => feature.Id,
-            StringComparer.Ordinal);
+        string legacyRoot = Path.Combine(root, "samples", "Mu3D.Gallery", "Legacy");
+        Mu3D.Gallery.GalleryEntry[] adaptiveCases = Mu3D.Gallery.GalleryCatalog.Examples.ToArray();
+        if (adaptiveCases.Select(entry => entry.Id).Distinct(StringComparer.Ordinal).Count() != adaptiveCases.Length ||
+            !adaptiveCases.Where(entry => entry.FeatureId is not null).Select(entry => entry.FeatureId!)
+                .ToHashSet(StringComparer.Ordinal).SetEquals(ids))
+        {
+            throw new InvalidDataException("Adaptive Gallery cases must have unique IDs and valid public feature articles.");
+        }
+        string routeSource = File.ReadAllText(Path.Combine(legacyRoot, "GalleryRoutes.cs"));
+        HashSet<string> declaredRoutes = GalleryRouteRegex().Matches(routeSource)
+            .Select(match => match.Groups[2].Value)
+            .ToHashSet(StringComparer.Ordinal);
         HashSet<string> toolbarIds = new(StringComparer.Ordinal);
-        string registrationsSource = File.ReadAllText(Path.Combine(
-            root,
-            "samples",
-            "GalleryApp",
-            "AppShell.xaml.cs"));
-        Match[] registrations = GalleryRouteRegistrationRegex().Matches(registrationsSource)
-            .Where(match => match.Groups[1].Value != "Licenses")
-            .ToArray();
-        foreach (Match registration in registrations)
+        foreach (Feature feature in catalog.Features)
         {
-            string routeName = registration.Groups[1].Value;
-            string pageName = registration.Groups[2].Value;
-            if (!declaredRoutes.TryGetValue(routeName, out string? route))
+            if (!declaredRoutes.Contains(feature.Route) ||
+                Mu3D.GalleryApp.GalleryFeatureCatalog.FeatureId(feature.Route) != feature.Id)
             {
-                throw new InvalidDataException($"Gallery page '{pageName}' uses an unknown route constant.");
+                throw new InvalidDataException($"Gallery feature '{feature.Id}' has an invalid route mapping.");
             }
-            string pageSource = File.ReadAllText(Path.Combine(
-                root,
-                "samples",
-                "GalleryApp",
-                "Pages",
-                pageName + ".xaml"));
+            string pageName = Mu3D.GalleryApp.GallerySourceCatalog.PageName(feature.Route);
+            string pageSource = File.ReadAllText(Path.Combine(legacyRoot, "Pages", pageName + ".xaml"));
             Match[] toolbarMatches = GalleryToolbarFeatureRegex().Matches(pageSource).ToArray();
-            if (toolbarMatches.Length != 1)
+            if (toolbarMatches.Length != 1 ||
+                toolbarMatches[0].Groups[1].Value != feature.Id ||
+                !toolbarIds.Add(feature.Id))
             {
                 throw new InvalidDataException(
-                    $"Gallery page '{pageName}' must declare exactly one documentation toolbar item.");
-            }
-            string featureId = toolbarMatches[0].Groups[1].Value;
-            if (!toolbarIds.Add(featureId) ||
-                !featuresById.TryGetValue(featureId, out Feature? feature) ||
-                feature.Route != route)
-            {
-                throw new InvalidDataException(
-                    $"Gallery page '{pageName}' has an invalid feature ID or route mapping.");
+                    $"Gallery page '{pageName}' must declare exactly one matching Docs action.");
             }
         }
-        if (registrations.Length != ids.Count ||
-            !toolbarIds.SetEquals(ids) ||
-            !routes.SetEquals(registrations.Select(
-                registration => declaredRoutes[registration.Groups[1].Value])))
-        {
-            throw new InvalidDataException(
-                "Every registered Gallery feature page must have exactly one cataloged Docs action.");
-        }
-        string[] allToolbarIds = Directory.EnumerateFiles(
-                Path.Combine(root, "samples", "GalleryApp", "Pages"),
-                "*.xaml")
+        string[] allToolbarIds = Directory.EnumerateFiles(Path.Combine(legacyRoot, "Pages"), "*.xaml")
             .SelectMany(path => GalleryToolbarFeatureRegex().Matches(File.ReadAllText(path)))
             .Select(match => match.Groups[1].Value)
             .ToArray();
         if (allToolbarIds.Length != ids.Count ||
+            !toolbarIds.SetEquals(ids) ||
             !allToolbarIds.ToHashSet(StringComparer.Ordinal).SetEquals(ids))
         {
             throw new InvalidDataException(
-                "Only registered Gallery feature pages may declare a Docs toolbar action.");
+                "Every Gallery feature must have exactly one cataloged Docs action.");
         }
 
         string galleryMappings = File.ReadAllText(Path.Combine(
             root,
             "samples",
-            "GalleryApp",
+            "Mu3D.Gallery",
+            "Legacy",
             "GalleryDocumentation.cs"));
         Match[] galleryMappingMatches = GalleryFeatureMappingRegex().Matches(galleryMappings).ToArray();
         Dictionary<string, string> galleryFeatures = galleryMappingMatches.ToDictionary(
@@ -874,9 +850,6 @@ internal static partial class Program
 
     [GeneratedRegex("public const string (\\w+) = \\\"([^\\\"]+)\\\";", RegexOptions.CultureInvariant)]
     private static partial Regex GalleryRouteRegex();
-
-    [GeneratedRegex("Routing\\.RegisterRoute\\(GalleryRoutes\\.(\\w+), typeof\\(Pages\\.(\\w+)\\)\\);", RegexOptions.CultureInvariant)]
-    private static partial Regex GalleryRouteRegistrationRegex();
 
     [GeneratedRegex("GalleryDocumentationToolbarItem FeatureId=\\\"([^\\\"]+)\\\"", RegexOptions.CultureInvariant)]
     private static partial Regex GalleryToolbarFeatureRegex();
