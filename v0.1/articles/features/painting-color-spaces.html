@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Painting color coordinates and batch transforms | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Painting color coordinates and batch transforms | Mu3D documentation ">
+      
+      <meta name="description" content="Use standard color conversions and application-owned editing rules with reusable typed CPU buffers and explicit GPU lookup tables.">
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="painting-color-coordinates-and-batch-transforms">Painting color coordinates and batch transforms</h1>
+
+<p>Mu3D supplies coordinate types, standard conversion math and a typed batch execution contract.
+The painting application selects its working space, editing model, slider ranges, hue interpolation,
+mixing behavior, gamut mapping and display view. The Gallery menu is an example of those application
+choices, not a required Mu3D editor or a fixed list of models.</p>
+<h2 id="standard-coordinates">Standard coordinates</h2>
+<table>
+<thead>
+<tr>
+<th>Coordinates</th>
+<th>Mu3D representation</th>
+<th>Required interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CIE Lab / LCh</td>
+<td><code>CieLabColor</code> / <code>CieLchColor</code></td>
+<td>D50 relative white; ordinary L* spans 0–100.</td>
+</tr>
+<tr>
+<td>Oklab / Oklch</td>
+<td><code>OklabColor</code> / <code>OklchColor</code></td>
+<td>D65 relative white; ordinary lightness spans 0–1.</td>
+</tr>
+<tr>
+<td>Y′UV / Y′CbCr</td>
+<td><code>LumaChromaColor</code></td>
+<td>Explicit RGB encoding plus the selected matrix and zero-centered chroma scaling.</td>
+</tr>
+<tr>
+<td>HSL / HSV</td>
+<td><code>HslColor</code> / <code>HsvColor</code></td>
+<td>Explicit nonlinear RGB encoding; bounded SDR saturation and lightness/value.</td>
+</tr>
+</tbody>
+</table>
+<p><a class="xref" href="../../api/Mu3D.Color.PerceptualColorConverter.html">PerceptualColorConverter</a> converts tagged linear RGB to and from Lab and Oklab,
+including white-point adaptation. LCh and Oklch retain the same lightness in cylindrical form.
+Hue is stored in degrees and normalized to <code>[0,360)</code>; an application still chooses how to interpolate
+across the wrap. These are relative coordinates, not an absolute HDR luminance or viewing-condition
+model. The conversion conventions follow <a href="https://www.w3.org/TR/css-color-4/#color-conversion-code">CSS Color 4's conversion reference</a>
+and <a href="https://bottosson.github.io/posts/oklab/">Oklab's published matrices</a>.</p>
+<p><a class="xref" href="../../api/Mu3D.Color.LumaChromaConverter.html">LumaChromaConverter</a> operates on encoded RGB. Its Y′ is nonlinear luma, distinct
+from linear-light luminance. Selecting BT.601, BT.709 or BT.2020 matrix coefficients does not change
+the source's tagged primaries or transfer encoding. These floating-point coordinates include no
+video quantization, limited-range coding or chroma subsampling. Convert RGB encoding explicitly
+before applying the selected matrix when those RGB identities must change.</p>
+<p>FP32 Lab/Oklab and luma/chroma conversion preserves negative and above-one values and straight
+alpha. It does not silently clip, gamut map or tone map. HSL/HSV conversion deliberately requires
+encoded RGB in <code>[0,1]</code>; the application must explicitly map HDR or out-of-gamut colors before
+using that bounded representation. Finite coordinates whose results overflow FP32 fail explicitly.</p>
+<h2 id="typed-cpu-batches">Typed CPU batches</h2>
+<p><a class="xref" href="../../api/Mu3D.Color.ColorBatch.html">ColorBatch</a> writes into caller-owned spans. The generic transform is selected
+statically; a value-type implementation uses constrained calls without boxing or a per-color
+delegate. Implementing <code>IColorTransform&lt;TSource, TDestination&gt;</code> supplies a CPU operation, not a GPU
+program. Coordinate types and transform parameters carry the color identity and any selected policy.</p>
+<p>This example converts linear sRGB into Lab, applies an application-defined chroma adjustment,
+and returns tagged linear sRGB. Keep these arrays for subsequent edits rather than allocating them
+on every slider update:</p>
+<pre><code class="lang-csharp">using Mu3D.Color;
+
+LinearRgba[] source =
+[
+    new(0.1f, 0.3f, 0.8f, 1, StandardColorSpaces.LinearSrgb),
+    new(2, 0.5f, -0.05f, 0.4f, StandardColorSpaces.LinearSrgb),
+];
+CieLabColor[] coordinates = new CieLabColor[source.Length];
+LinearRgba[] result = new LinearRgba[source.Length];
+
+ColorBatch.Transform&lt;LinearRgba, CieLabColor, LinearRgbToLabTransform&gt;(
+    source, coordinates, default);
+ColorBatch.Transform&lt;CieLabColor, CieLabColor, LabChromaAdjustment&gt;(
+    coordinates, coordinates, new(0.8f));
+ColorBatch.Transform&lt;CieLabColor, LinearRgba, LabToLinearRgbTransform&gt;(
+    coordinates, result, new(StandardColorSpaces.LinearSrgb));
+
+readonly struct LabChromaAdjustment(float scale) : IColorTransform&lt;CieLabColor, CieLabColor&gt;
+{
+    public CieLabColor Transform(CieLabColor source) =&gt; new(
+        source.Lightness, source.A * scale, source.B * scale, source.Alpha);
+}
+</code></pre>
+<p>The built-in adapters preserve alpha; the general batch interface does not impose that policy on
+custom operations. It allocates no output storage, while allocations inside a custom transform
+remain the application's responsibility. The transform is passed by value, so a struct is copied
+once per batch. Empty input is allowed, destination tails remain unchanged, and exact in-place
+conversion is supported only for identical source/destination types and starting locations.
+Other overlap is rejected before conversion. If a transform throws, earlier destination elements
+remain written; this is not a transactional conversion.</p>
+<h2 id="reuse-the-existing-gpu-lut-path">Reuse the existing GPU LUT path</h2>
+<p>An RGB-only editing operation can be composed as <code>RGB → Lab → edit → RGB</code>, then baked into a
+bounded <a class="xref" href="../../api/Mu3D.Color.LinearRgbLut3D.html">LinearRgbLut3D</a>. It must depend only on RGB and fixed editing parameters,
+preserve alpha, and return the declared RGB identity. Neighborhood, alpha-dependent and evolving
+state rules cannot be represented by an ordinary RGB cube.</p>
+<pre><code class="lang-csharp">using System.Numerics;
+using Mu3D.Color;
+using Mu3D.Rendering;
+
+static LinearRgba AdjustLabChroma(LinearRgba source)
+{
+    CieLabColor lab = PerceptualColorConverter.ToLab(source);
+    return PerceptualColorConverter.FromLab(
+        new(lab.Lightness, lab.A * 0.8f, lab.B * 0.8f, source.Alpha),
+        StandardColorSpaces.LinearSrgb);
+}
+
+LinearRgbLut3D table = LinearRgbLut3D.Bake(33,
+    new Vector3(-0.25f), new Vector3(4),
+    StandardColorSpaces.LinearSrgb, StandardColorSpaces.LinearSrgb,
+    AdjustLabChroma, ColorLutRangePolicy.Clamp);
+using LinearRgbLutGpuTransform gpu = new(device, table, PixelPrecision.Float16);
+gpu.Apply(sourceTexture, StandardColorSpaces.LinearSrgb,
+    destinationTexture, StandardColorSpaces.LinearSrgb);
+</code></pre>
+<p>The chosen <code>[-0.25,4]</code> domain and 33-point edge are application choices, not general accuracy
+guarantees. GPU evaluation requires explicit domain clamping: RGB outside this domain is clamped
+before lookup; output RGB remains unclipped and alpha is copied unchanged. The table and trilinear
+interpolation are FP32; output storage is explicitly Float16 or Float32. Float16 tables must remain
+within finite half range. Input is straight alpha; premultiplied data needs an explicit
+unpremultiply/transform/premultiply sequence.</p>
+<p>Validate two separate errors: CPU LUT versus the direct mathematical operation at off-grid points,
+then actual GPU output versus that CPU LUT. Also cover domain boundaries, negative channels, HDR
+and alpha. Changing editing parameters requires rebaking; the immutable CPU table can be shared,
+while each GPU instance belongs to one device and must be disposed by its owner. GPU application
+reuses the table and pipeline without CPU pixel readback, but is not a zero-allocation promise.</p>
+<p>This path does not turn arbitrary C# into GPU code and does not make a Lab image a <code>LinearRgba</code>
+texture. A GPU operation that exposes non-RGB intermediate images needs a distinct coordinate
+contract. See <a href="color-lut.html">GPU color lookup tables</a> for texture requirements and
+<a href="../color-lookup-tables.html">linear RGB lookup tables</a> for domain and approximation policy.</p>
+<h2 id="gallery-host">Gallery host</h2>
+<p>The native <strong>Painting Color Spaces</strong> case uses the actual automatic draw boundary:</p>
+<pre><code class="lang-xaml">&lt;mu3d:Mu3DView
+    x:Name=&quot;SurfaceView&quot;
+    HeightRequest=&quot;520&quot;
+    Draw=&quot;OnDraw&quot;
+    PresentationSessionChanged=&quot;OnSessionChanged&quot;
+    SurfaceError=&quot;OnSurfaceError&quot; /&gt;
+</code></pre>
+<p>Its sample-owned adapters batch a two-dimensional coordinate plane and three 64-step channel
+gradients into reused buffers. Each gradient previews the final RGB obtained by varying its own
+coordinate while holding the other two at their current values. The Gallery chooses a/b or chroma
+planes, hue/chroma disks, an HSL triangle or HSV square; these UI policies are not Mu3D library
+defaults. Native and Web share the same state, hit layout, selection policy and Graphics-only HDR
+renderer. One presentation surface draws the plane, gradients and swatches; native overlays use
+ordinary Slider thumbs and focus, while Web retains ordinary range inputs for keyboard adjustment.
+Pointer, numeric and slider input update the same current color. Only atlas sections whose fixed
+coordinates changed are reuploaded. The right swatch shows the selected color. The twelve-color row
+explores hue at fixed OKLCh lightness/chroma, without claiming equal physical luminance.</p>
+<p>The Gallery selection policy requires nonnegative final linear sRGB components. Gray regions mark
+unavailable results. A valid requested endpoint is accepted directly, even when the path from the
+current color crosses an unavailable region. Only an invalid target invokes the boundary search.
+HDR components above one remain valid in the unbounded models. Negative model coordinates such as
+Lab a/b or YUV chroma can still be valid when their resulting RGB is nonnegative. Fixed selector ranges do
+not clamp numeric coordinates; HSL/HSV remain bounded SDR representations. This policy belongs
+only to the example: the standard converters and <code>ColorBatch</code> above still preserve negative RGB
+and do not acquire an implicit clamp.</p>
+<p>For an invalid requested endpoint, the sample scans 128 intervals toward the requested coordinates,
+stops at the first detected invalid interval, and refines its preceding boundary with
+up to 24 bisection iterations. This is a finite-resolution search, not an exact gamut boundary or
+proof that no narrow invalid interval exists between scan points. Preview texture interpolation is
+also separate from FP32 selection validation. Applications copying the example should choose and
+validate their own boundary policy.</p>
+<p>HDR FP16 output retains extended linear sRGB without gamut or tone mapping. Native drawing passes
+the control's negotiated encoding into the helper; negotiated SDR with explicit <code>ColorEncoding.Srgb</code>
+hard clips and encodes once, using hardware sRGB encoding when the attachment provides it. The Web
+page requests the Canvas handler's default HDR output and does not expose an HDR/SDR selector.
+The reference white is relative, not a fixed nit value, and physical display brightness depends
+on the presentation environment. The control owns its surface session; the sample retires only
+its renderer resources on session replacement/navigation.</p>
+
+</article>
+
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

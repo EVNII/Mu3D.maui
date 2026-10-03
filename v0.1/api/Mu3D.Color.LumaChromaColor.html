@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct LumaChromaColor | Mu3D documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct LumaChromaColor | Mu3D documentation ">
+      
+      <meta name="description" content="A finite, straight-alpha luma/chroma coordinate with explicit RGB encoding and model.">
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Mu3D">
+            Mu3D
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Mu3D.Color.LumaChromaColor">
+
+
+
+  <h1 id="Mu3D_Color_LumaChromaColor" data-uid="Mu3D.Color.LumaChromaColor" class="text-break">
+Struct LumaChromaColor  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Mu3D.html">Mu3D</a>.<a class="xref" href="Mu3D.Color.html">Color</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Mu3D.Color.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>A finite, straight-alpha luma/chroma coordinate with explicit RGB encoding and model.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct LumaChromaColor : IEquatable&lt;LumaChromaColor&gt;</code></pre>
+  </div>
+
+
+
+
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="Mu3D.Color.LumaChromaColor.html">LumaChromaColor</a>&gt;</div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+
+
+
+  <h2 id="Mu3D_Color_LumaChromaColor_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>Luma is Y′, not linear-light luminance. For RGB in [0,1], YCbCr differences
+occupy [-0.5,0.5]; YUV uses distinct U/V scaling. Extended values are preserved.
+These are floating-point coordinates, without video quantization, limited range or subsampling.</p>
+</div>
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Mu3D_Color_LumaChromaColor__ctor_" data-uid="Mu3D.Color.LumaChromaColor.#ctor*"></a>
+
+  <h3 id="Mu3D_Color_LumaChromaColor__ctor_System_Single_System_Single_System_Single_System_Single_Mu3D_Color_StandardRgbEncoding_Mu3D_Color_LumaChromaModel_" data-uid="Mu3D.Color.LumaChromaColor.#ctor(System.Single,System.Single,System.Single,System.Single,Mu3D.Color.StandardRgbEncoding,Mu3D.Color.LumaChromaModel)">
+  LumaChromaColor(float, float, float, float, StandardRgbEncoding, LumaChromaModel)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Constructs coordinates without clipping, requiring finite values and alpha in [0,1].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LumaChromaColor(float luma, float chromaBlue, float chromaRed, float alpha, StandardRgbEncoding encoding, LumaChromaModel model)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>luma</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+    <dt><code>chromaBlue</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+    <dt><code>chromaRed</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+    <dt><code>alpha</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+    <dt><code>encoding</code> <a class="xref" href="Mu3D.Color.StandardRgbEncoding.html">StandardRgbEncoding</a></dt>
+    <dd></dd>
+    <dt><code>model</code> <a class="xref" href="Mu3D.Color.LumaChromaModel.html">LumaChromaModel</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Mu3D_Color_LumaChromaColor_Alpha_" data-uid="Mu3D.Color.LumaChromaColor.Alpha*"></a>
+
+  <h3 id="Mu3D_Color_LumaChromaColor_Alpha" data-uid="Mu3D.Color.LumaChromaColor.Alpha">
+  Alpha
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets unpremultiplied alpha, which is not color transformed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Alpha { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_LumaChromaColor_ChromaBlue_" data-uid="Mu3D.Color.LumaChromaColor.ChromaBlue*"></a>
+
+  <h3 id="Mu3D_Color_LumaChromaColor_ChromaBlue" data-uid="Mu3D.Color.LumaChromaColor.ChromaBlue">
+  ChromaBlue
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets zero-centered U or Cb, according to <a class="xref" href="Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_Model">Model</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float ChromaBlue { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_LumaChromaColor_ChromaRed_" data-uid="Mu3D.Color.LumaChromaColor.ChromaRed*"></a>
+
+  <h3 id="Mu3D_Color_LumaChromaColor_ChromaRed" data-uid="Mu3D.Color.LumaChromaColor.ChromaRed">
+  ChromaRed
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets zero-centered V or Cr, according to <a class="xref" href="Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_Model">Model</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float ChromaRed { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_LumaChromaColor_Encoding_" data-uid="Mu3D.Color.LumaChromaColor.Encoding*"></a>
+
+  <h3 id="Mu3D_Color_LumaChromaColor_Encoding" data-uid="Mu3D.Color.LumaChromaColor.Encoding">
+  Encoding
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the RGB primaries, white point and transfer encoding used by these coordinates.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StandardRgbEncoding Encoding { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.StandardRgbEncoding.html">StandardRgbEncoding</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_LumaChromaColor_Luma_" data-uid="Mu3D.Color.LumaChromaColor.Luma*"></a>
+
+  <h3 id="Mu3D_Color_LumaChromaColor_Luma" data-uid="Mu3D.Color.LumaChromaColor.Luma">
+  Luma
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets nonlinear luma Y′.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Luma { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_LumaChromaColor_Model_" data-uid="Mu3D.Color.LumaChromaColor.Model*"></a>
+
+  <h3 id="Mu3D_Color_LumaChromaColor_Model" data-uid="Mu3D.Color.LumaChromaColor.Model">
+  Model
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the luma and color-difference matrix identity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LumaChromaModel Model { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Color.LumaChromaModel.html">LumaChromaModel</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Mu3D_Color_LumaChromaColor_Equals_" data-uid="Mu3D.Color.LumaChromaColor.Equals*"></a>
+
+  <h3 id="Mu3D_Color_LumaChromaColor_Equals_Mu3D_Color_LumaChromaColor_" data-uid="Mu3D.Color.LumaChromaColor.Equals(Mu3D.Color.LumaChromaColor)">
+  Equals(LumaChromaColor)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(LumaChromaColor other)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>other</code> <a class="xref" href="Mu3D.Color.LumaChromaColor.html">LumaChromaColor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_LumaChromaColor_Equals_" data-uid="Mu3D.Color.LumaChromaColor.Equals*"></a>
+
+  <h3 id="Mu3D_Color_LumaChromaColor_Equals_System_Object_" data-uid="Mu3D.Color.LumaChromaColor.Equals(System.Object)">
+  Equals(object)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>obj</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_LumaChromaColor_GetHashCode_" data-uid="Mu3D.Color.LumaChromaColor.GetHashCode*"></a>
+
+  <h3 id="Mu3D_Color_LumaChromaColor_GetHashCode" data-uid="Mu3D.Color.LumaChromaColor.GetHashCode">
+  GetHashCode()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_LumaChromaColor_ToString_" data-uid="Mu3D.Color.LumaChromaColor.ToString*"></a>
+
+  <h3 id="Mu3D_Color_LumaChromaColor_ToString" data-uid="Mu3D.Color.LumaChromaColor.ToString">
+  ToString()
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Mu3D_Color_LumaChromaColor_op_Equality_" data-uid="Mu3D.Color.LumaChromaColor.op_Equality*"></a>
+
+  <h3 id="Mu3D_Color_LumaChromaColor_op_Equality_Mu3D_Color_LumaChromaColor_Mu3D_Color_LumaChromaColor_" data-uid="Mu3D.Color.LumaChromaColor.op_Equality(Mu3D.Color.LumaChromaColor,Mu3D.Color.LumaChromaColor)">
+  operator ==(LumaChromaColor, LumaChromaColor)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(LumaChromaColor left, LumaChromaColor right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Mu3D.Color.LumaChromaColor.html">LumaChromaColor</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Mu3D.Color.LumaChromaColor.html">LumaChromaColor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Mu3D_Color_LumaChromaColor_op_Inequality_" data-uid="Mu3D.Color.LumaChromaColor.op_Inequality*"></a>
+
+  <h3 id="Mu3D_Color_LumaChromaColor_op_Inequality_Mu3D_Color_LumaChromaColor_Mu3D_Color_LumaChromaColor_" data-uid="Mu3D.Color.LumaChromaColor.op_Inequality(Mu3D.Color.LumaChromaColor,Mu3D.Color.LumaChromaColor)">
+  operator !=(LumaChromaColor, LumaChromaColor)
+  
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(LumaChromaColor left, LumaChromaColor right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Mu3D.Color.LumaChromaColor.html">LumaChromaColor</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Mu3D.Color.LumaChromaColor.html">LumaChromaColor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

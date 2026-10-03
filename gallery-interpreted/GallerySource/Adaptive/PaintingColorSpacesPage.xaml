@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Mu3D.Gallery.Pages.PaintingColorSpacesPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mu3d="clr-namespace:Mu3D.Maui.Controls;assembly=Mu3D.Maui"
+    Title="Painting Color Spaces">
+    <ScrollView><VerticalStackLayout Padding="16" Spacing="8">
+        <Label Text="绘画选色 · 应用示例" FontSize="24" FontAttributes="Bold" />
+        <Label Text="左侧二维选色，右侧显示当前色；下方三条渐变杆分别预览改变一个通道、保持另外两个通道时的最终颜色。12 色探索保持当前 OKLCh 的 L/C，仅改变色相。" />
+        <Picker x:Name="ModelPicker" Title="示例编辑模型" SelectedIndexChanged="OnModelChanged" />
+        <Button Text="重置 sRGB 测试色" Clicked="OnReset" HorizontalOptions="Start" />
+        <Label x:Name="NotesLabel" />
+        <Label x:Name="PlaneLabel" />
+        <AbsoluteLayout x:Name="PickerHost" HeightRequest="520" SizeChanged="OnPickerSizeChanged">
+            <mu3d:Mu3DView x:Name="SurfaceView" HeightRequest="520" BackgroundColor="Black" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
+                Draw="OnDraw" PresentationSessionChanged="OnSessionChanged" SurfaceError="OnSurfaceError">
+                <mu3d:Mu3DView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTapped" />
+                    <PointerGestureRecognizer PointerPressed="OnPointerPressed" PointerMoved="OnPointerMoved" PointerReleased="OnPointerReleased" PointerExited="OnPointerExited" />
+                    <PanGestureRecognizer PanUpdated="OnPanUpdated" />
+                </mu3d:Mu3DView.GestureRecognizers>
+            </mu3d:Mu3DView>
+            <Label x:Name="FirstTrackLabel" TextColor="White" FontSize="12" InputTransparent="True" />
+            <Label x:Name="SecondTrackLabel" TextColor="White" FontSize="12" InputTransparent="True" />
+            <Label x:Name="ThirdTrackLabel" TextColor="White" FontSize="12" InputTransparent="True" />
+            <Slider x:Name="FirstSlider" MinimumTrackColor="Transparent" MaximumTrackColor="Transparent" BackgroundColor="Transparent" ValueChanged="OnValueChanged" />
+            <Slider x:Name="SecondSlider" MinimumTrackColor="Transparent" MaximumTrackColor="Transparent" BackgroundColor="Transparent" ValueChanged="OnValueChanged" />
+            <Slider x:Name="ThirdSlider" MinimumTrackColor="Transparent" MaximumTrackColor="Transparent" BackgroundColor="Transparent" ValueChanged="OnValueChanged" />
+        </AbsoluteLayout>
+        <Label Text="二维区点选定位，鼠标按住拖动；触摸从当前标记微调。渐变杆支持原生滑块拖动和键盘调整。" FontSize="12" />
+        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+            <VerticalStackLayout><Label x:Name="FirstLabel" /><Entry x:Name="FirstEntry" Keyboard="Numeric" Completed="OnEntryCompleted" /></VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="1"><Label x:Name="SecondLabel" /><Entry x:Name="SecondEntry" Keyboard="Numeric" Completed="OnEntryCompleted" /></VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="2"><Label x:Name="ThirdLabel" /><Entry x:Name="ThirdEntry" Keyboard="Numeric" Completed="OnEntryCompleted" /></VerticalStackLayout>
+        </Grid>
+        <Label Text="灰区不可选：最终 RGB 的负分量不接收，HDR 分量大于 1 仍保留；Lab a/b、YUV 等模型里的负坐标仍可合法。数值可超出选区范围；HSL / HSV 限定为 SDR sRGB。" FontSize="12" />
+        <Label x:Name="ReadoutLabel" />
+        <Label Text="RGB 数据带有明确的线性 sRGB 标记；FP32 批量转换后绘制到 HDR FP16 表面，拖动通道实时更新。参考白是相对值，未固定为某个 nit；实际亮度受屏幕余量限制。SDR 回退只做硬裁切与 sRGB 编码。" FontSize="12" />
+        <Label x:Name="StatusLabel" FontSize="12" />
+    </VerticalStackLayout></ScrollView>
+</ContentPage>

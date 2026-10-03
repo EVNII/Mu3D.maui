@@ -277,6 +277,333 @@ references:
   commentId: Overload:Mu3D.Color.Cie2015Observers.TwoDegree
   fullName: Mu3D.Color.Cie2015Observers.TwoDegree
   nameWithType: Cie2015Observers.TwoDegree
+- uid: Mu3D.Color.CieLabColor
+  name: CieLabColor
+  href: v0.1/api/Mu3D.Color.CieLabColor.html
+  commentId: T:Mu3D.Color.CieLabColor
+  fullName: Mu3D.Color.CieLabColor
+  nameWithType: CieLabColor
+- uid: Mu3D.Color.CieLabColor.#ctor(System.Single,System.Single,System.Single,System.Single)
+  name: CieLabColor(float, float, float, float)
+  href: v0.1/api/Mu3D.Color.CieLabColor.html#Mu3D_Color_CieLabColor__ctor_System_Single_System_Single_System_Single_System_Single_
+  commentId: M:Mu3D.Color.CieLabColor.#ctor(System.Single,System.Single,System.Single,System.Single)
+  name.vb: New(Single, Single, Single, Single)
+  fullName: Mu3D.Color.CieLabColor.CieLabColor(float, float, float, float)
+  fullName.vb: Mu3D.Color.CieLabColor.New(Single, Single, Single, Single)
+  nameWithType: CieLabColor.CieLabColor(float, float, float, float)
+  nameWithType.vb: CieLabColor.New(Single, Single, Single, Single)
+- uid: Mu3D.Color.CieLabColor.#ctor*
+  name: CieLabColor
+  href: v0.1/api/Mu3D.Color.CieLabColor.html#Mu3D_Color_CieLabColor__ctor_
+  commentId: Overload:Mu3D.Color.CieLabColor.#ctor
+  name.vb: New
+  fullName: Mu3D.Color.CieLabColor.CieLabColor
+  fullName.vb: Mu3D.Color.CieLabColor.New
+  nameWithType: CieLabColor.CieLabColor
+  nameWithType.vb: CieLabColor.New
+- uid: Mu3D.Color.CieLabColor.A
+  name: A
+  href: v0.1/api/Mu3D.Color.CieLabColor.html#Mu3D_Color_CieLabColor_A
+  commentId: P:Mu3D.Color.CieLabColor.A
+  fullName: Mu3D.Color.CieLabColor.A
+  nameWithType: CieLabColor.A
+- uid: Mu3D.Color.CieLabColor.A*
+  name: A
+  href: v0.1/api/Mu3D.Color.CieLabColor.html#Mu3D_Color_CieLabColor_A_
+  commentId: Overload:Mu3D.Color.CieLabColor.A
+  fullName: Mu3D.Color.CieLabColor.A
+  nameWithType: CieLabColor.A
+- uid: Mu3D.Color.CieLabColor.Alpha
+  name: Alpha
+  href: v0.1/api/Mu3D.Color.CieLabColor.html#Mu3D_Color_CieLabColor_Alpha
+  commentId: P:Mu3D.Color.CieLabColor.Alpha
+  fullName: Mu3D.Color.CieLabColor.Alpha
+  nameWithType: CieLabColor.Alpha
+- uid: Mu3D.Color.CieLabColor.Alpha*
+  name: Alpha
+  href: v0.1/api/Mu3D.Color.CieLabColor.html#Mu3D_Color_CieLabColor_Alpha_
+  commentId: Overload:Mu3D.Color.CieLabColor.Alpha
+  fullName: Mu3D.Color.CieLabColor.Alpha
+  nameWithType: CieLabColor.Alpha
+- uid: Mu3D.Color.CieLabColor.B
+  name: B
+  href: v0.1/api/Mu3D.Color.CieLabColor.html#Mu3D_Color_CieLabColor_B
+  commentId: P:Mu3D.Color.CieLabColor.B
+  fullName: Mu3D.Color.CieLabColor.B
+  nameWithType: CieLabColor.B
+- uid: Mu3D.Color.CieLabColor.B*
+  name: B
+  href: v0.1/api/Mu3D.Color.CieLabColor.html#Mu3D_Color_CieLabColor_B_
+  commentId: Overload:Mu3D.Color.CieLabColor.B
+  fullName: Mu3D.Color.CieLabColor.B
+  nameWithType: CieLabColor.B
+- uid: Mu3D.Color.CieLabColor.Equals(Mu3D.Color.CieLabColor)
+  name: Equals(CieLabColor)
+  href: v0.1/api/Mu3D.Color.CieLabColor.html#Mu3D_Color_CieLabColor_Equals_Mu3D_Color_CieLabColor_
+  commentId: M:Mu3D.Color.CieLabColor.Equals(Mu3D.Color.CieLabColor)
+  fullName: Mu3D.Color.CieLabColor.Equals(Mu3D.Color.CieLabColor)
+  nameWithType: CieLabColor.Equals(CieLabColor)
+- uid: Mu3D.Color.CieLabColor.Equals(System.Object)
+  name: Equals(object)
+  href: v0.1/api/Mu3D.Color.CieLabColor.html#Mu3D_Color_CieLabColor_Equals_System_Object_
+  commentId: M:Mu3D.Color.CieLabColor.Equals(System.Object)
+  name.vb: Equals(Object)
+  fullName: Mu3D.Color.CieLabColor.Equals(object)
+  fullName.vb: Mu3D.Color.CieLabColor.Equals(Object)
+  nameWithType: CieLabColor.Equals(object)
+  nameWithType.vb: CieLabColor.Equals(Object)
+- uid: Mu3D.Color.CieLabColor.Equals*
+  name: Equals
+  href: v0.1/api/Mu3D.Color.CieLabColor.html#Mu3D_Color_CieLabColor_Equals_
+  commentId: Overload:Mu3D.Color.CieLabColor.Equals
+  fullName: Mu3D.Color.CieLabColor.Equals
+  nameWithType: CieLabColor.Equals
+- uid: Mu3D.Color.CieLabColor.GetHashCode
+  name: GetHashCode()
+  href: v0.1/api/Mu3D.Color.CieLabColor.html#Mu3D_Color_CieLabColor_GetHashCode
+  commentId: M:Mu3D.Color.CieLabColor.GetHashCode
+  fullName: Mu3D.Color.CieLabColor.GetHashCode()
+  nameWithType: CieLabColor.GetHashCode()
+- uid: Mu3D.Color.CieLabColor.GetHashCode*
+  name: GetHashCode
+  href: v0.1/api/Mu3D.Color.CieLabColor.html#Mu3D_Color_CieLabColor_GetHashCode_
+  commentId: Overload:Mu3D.Color.CieLabColor.GetHashCode
+  fullName: Mu3D.Color.CieLabColor.GetHashCode
+  nameWithType: CieLabColor.GetHashCode
+- uid: Mu3D.Color.CieLabColor.Lightness
+  name: Lightness
+  href: v0.1/api/Mu3D.Color.CieLabColor.html#Mu3D_Color_CieLabColor_Lightness
+  commentId: P:Mu3D.Color.CieLabColor.Lightness
+  fullName: Mu3D.Color.CieLabColor.Lightness
+  nameWithType: CieLabColor.Lightness
+- uid: Mu3D.Color.CieLabColor.Lightness*
+  name: Lightness
+  href: v0.1/api/Mu3D.Color.CieLabColor.html#Mu3D_Color_CieLabColor_Lightness_
+  commentId: Overload:Mu3D.Color.CieLabColor.Lightness
+  fullName: Mu3D.Color.CieLabColor.Lightness
+  nameWithType: CieLabColor.Lightness
+- uid: Mu3D.Color.CieLabColor.ToString
+  name: ToString()
+  href: v0.1/api/Mu3D.Color.CieLabColor.html#Mu3D_Color_CieLabColor_ToString
+  commentId: M:Mu3D.Color.CieLabColor.ToString
+  fullName: Mu3D.Color.CieLabColor.ToString()
+  nameWithType: CieLabColor.ToString()
+- uid: Mu3D.Color.CieLabColor.ToString*
+  name: ToString
+  href: v0.1/api/Mu3D.Color.CieLabColor.html#Mu3D_Color_CieLabColor_ToString_
+  commentId: Overload:Mu3D.Color.CieLabColor.ToString
+  fullName: Mu3D.Color.CieLabColor.ToString
+  nameWithType: CieLabColor.ToString
+- uid: Mu3D.Color.CieLabColor.op_Equality(Mu3D.Color.CieLabColor,Mu3D.Color.CieLabColor)
+  name: operator ==(CieLabColor, CieLabColor)
+  href: v0.1/api/Mu3D.Color.CieLabColor.html#Mu3D_Color_CieLabColor_op_Equality_Mu3D_Color_CieLabColor_Mu3D_Color_CieLabColor_
+  commentId: M:Mu3D.Color.CieLabColor.op_Equality(Mu3D.Color.CieLabColor,Mu3D.Color.CieLabColor)
+  name.vb: =(CieLabColor, CieLabColor)
+  fullName: Mu3D.Color.CieLabColor.operator ==(Mu3D.Color.CieLabColor, Mu3D.Color.CieLabColor)
+  fullName.vb: Mu3D.Color.CieLabColor.=(Mu3D.Color.CieLabColor, Mu3D.Color.CieLabColor)
+  nameWithType: CieLabColor.operator ==(CieLabColor, CieLabColor)
+  nameWithType.vb: CieLabColor.=(CieLabColor, CieLabColor)
+- uid: Mu3D.Color.CieLabColor.op_Equality*
+  name: operator ==
+  href: v0.1/api/Mu3D.Color.CieLabColor.html#Mu3D_Color_CieLabColor_op_Equality_
+  commentId: Overload:Mu3D.Color.CieLabColor.op_Equality
+  name.vb: =
+  fullName: Mu3D.Color.CieLabColor.operator ==
+  fullName.vb: Mu3D.Color.CieLabColor.=
+  nameWithType: CieLabColor.operator ==
+  nameWithType.vb: CieLabColor.=
+- uid: Mu3D.Color.CieLabColor.op_Inequality(Mu3D.Color.CieLabColor,Mu3D.Color.CieLabColor)
+  name: operator !=(CieLabColor, CieLabColor)
+  href: v0.1/api/Mu3D.Color.CieLabColor.html#Mu3D_Color_CieLabColor_op_Inequality_Mu3D_Color_CieLabColor_Mu3D_Color_CieLabColor_
+  commentId: M:Mu3D.Color.CieLabColor.op_Inequality(Mu3D.Color.CieLabColor,Mu3D.Color.CieLabColor)
+  name.vb: <>(CieLabColor, CieLabColor)
+  fullName: Mu3D.Color.CieLabColor.operator !=(Mu3D.Color.CieLabColor, Mu3D.Color.CieLabColor)
+  fullName.vb: Mu3D.Color.CieLabColor.<>(Mu3D.Color.CieLabColor, Mu3D.Color.CieLabColor)
+  nameWithType: CieLabColor.operator !=(CieLabColor, CieLabColor)
+  nameWithType.vb: CieLabColor.<>(CieLabColor, CieLabColor)
+- uid: Mu3D.Color.CieLabColor.op_Inequality*
+  name: operator !=
+  href: v0.1/api/Mu3D.Color.CieLabColor.html#Mu3D_Color_CieLabColor_op_Inequality_
+  commentId: Overload:Mu3D.Color.CieLabColor.op_Inequality
+  name.vb: <>
+  fullName: Mu3D.Color.CieLabColor.operator !=
+  fullName.vb: Mu3D.Color.CieLabColor.<>
+  nameWithType: CieLabColor.operator !=
+  nameWithType.vb: CieLabColor.<>
+- uid: Mu3D.Color.CieLchColor
+  name: CieLchColor
+  href: v0.1/api/Mu3D.Color.CieLchColor.html
+  commentId: T:Mu3D.Color.CieLchColor
+  fullName: Mu3D.Color.CieLchColor
+  nameWithType: CieLchColor
+- uid: Mu3D.Color.CieLchColor.#ctor(System.Single,System.Single,System.Single,System.Single)
+  name: CieLchColor(float, float, float, float)
+  href: v0.1/api/Mu3D.Color.CieLchColor.html#Mu3D_Color_CieLchColor__ctor_System_Single_System_Single_System_Single_System_Single_
+  commentId: M:Mu3D.Color.CieLchColor.#ctor(System.Single,System.Single,System.Single,System.Single)
+  name.vb: New(Single, Single, Single, Single)
+  fullName: Mu3D.Color.CieLchColor.CieLchColor(float, float, float, float)
+  fullName.vb: Mu3D.Color.CieLchColor.New(Single, Single, Single, Single)
+  nameWithType: CieLchColor.CieLchColor(float, float, float, float)
+  nameWithType.vb: CieLchColor.New(Single, Single, Single, Single)
+- uid: Mu3D.Color.CieLchColor.#ctor*
+  name: CieLchColor
+  href: v0.1/api/Mu3D.Color.CieLchColor.html#Mu3D_Color_CieLchColor__ctor_
+  commentId: Overload:Mu3D.Color.CieLchColor.#ctor
+  name.vb: New
+  fullName: Mu3D.Color.CieLchColor.CieLchColor
+  fullName.vb: Mu3D.Color.CieLchColor.New
+  nameWithType: CieLchColor.CieLchColor
+  nameWithType.vb: CieLchColor.New
+- uid: Mu3D.Color.CieLchColor.Alpha
+  name: Alpha
+  href: v0.1/api/Mu3D.Color.CieLchColor.html#Mu3D_Color_CieLchColor_Alpha
+  commentId: P:Mu3D.Color.CieLchColor.Alpha
+  fullName: Mu3D.Color.CieLchColor.Alpha
+  nameWithType: CieLchColor.Alpha
+- uid: Mu3D.Color.CieLchColor.Alpha*
+  name: Alpha
+  href: v0.1/api/Mu3D.Color.CieLchColor.html#Mu3D_Color_CieLchColor_Alpha_
+  commentId: Overload:Mu3D.Color.CieLchColor.Alpha
+  fullName: Mu3D.Color.CieLchColor.Alpha
+  nameWithType: CieLchColor.Alpha
+- uid: Mu3D.Color.CieLchColor.Chroma
+  name: Chroma
+  href: v0.1/api/Mu3D.Color.CieLchColor.html#Mu3D_Color_CieLchColor_Chroma
+  commentId: P:Mu3D.Color.CieLchColor.Chroma
+  fullName: Mu3D.Color.CieLchColor.Chroma
+  nameWithType: CieLchColor.Chroma
+- uid: Mu3D.Color.CieLchColor.Chroma*
+  name: Chroma
+  href: v0.1/api/Mu3D.Color.CieLchColor.html#Mu3D_Color_CieLchColor_Chroma_
+  commentId: Overload:Mu3D.Color.CieLchColor.Chroma
+  fullName: Mu3D.Color.CieLchColor.Chroma
+  nameWithType: CieLchColor.Chroma
+- uid: Mu3D.Color.CieLchColor.Equals(Mu3D.Color.CieLchColor)
+  name: Equals(CieLchColor)
+  href: v0.1/api/Mu3D.Color.CieLchColor.html#Mu3D_Color_CieLchColor_Equals_Mu3D_Color_CieLchColor_
+  commentId: M:Mu3D.Color.CieLchColor.Equals(Mu3D.Color.CieLchColor)
+  fullName: Mu3D.Color.CieLchColor.Equals(Mu3D.Color.CieLchColor)
+  nameWithType: CieLchColor.Equals(CieLchColor)
+- uid: Mu3D.Color.CieLchColor.Equals(System.Object)
+  name: Equals(object)
+  href: v0.1/api/Mu3D.Color.CieLchColor.html#Mu3D_Color_CieLchColor_Equals_System_Object_
+  commentId: M:Mu3D.Color.CieLchColor.Equals(System.Object)
+  name.vb: Equals(Object)
+  fullName: Mu3D.Color.CieLchColor.Equals(object)
+  fullName.vb: Mu3D.Color.CieLchColor.Equals(Object)
+  nameWithType: CieLchColor.Equals(object)
+  nameWithType.vb: CieLchColor.Equals(Object)
+- uid: Mu3D.Color.CieLchColor.Equals*
+  name: Equals
+  href: v0.1/api/Mu3D.Color.CieLchColor.html#Mu3D_Color_CieLchColor_Equals_
+  commentId: Overload:Mu3D.Color.CieLchColor.Equals
+  fullName: Mu3D.Color.CieLchColor.Equals
+  nameWithType: CieLchColor.Equals
+- uid: Mu3D.Color.CieLchColor.GetHashCode
+  name: GetHashCode()
+  href: v0.1/api/Mu3D.Color.CieLchColor.html#Mu3D_Color_CieLchColor_GetHashCode
+  commentId: M:Mu3D.Color.CieLchColor.GetHashCode
+  fullName: Mu3D.Color.CieLchColor.GetHashCode()
+  nameWithType: CieLchColor.GetHashCode()
+- uid: Mu3D.Color.CieLchColor.GetHashCode*
+  name: GetHashCode
+  href: v0.1/api/Mu3D.Color.CieLchColor.html#Mu3D_Color_CieLchColor_GetHashCode_
+  commentId: Overload:Mu3D.Color.CieLchColor.GetHashCode
+  fullName: Mu3D.Color.CieLchColor.GetHashCode
+  nameWithType: CieLchColor.GetHashCode
+- uid: Mu3D.Color.CieLchColor.HueDegrees
+  name: HueDegrees
+  href: v0.1/api/Mu3D.Color.CieLchColor.html#Mu3D_Color_CieLchColor_HueDegrees
+  commentId: P:Mu3D.Color.CieLchColor.HueDegrees
+  fullName: Mu3D.Color.CieLchColor.HueDegrees
+  nameWithType: CieLchColor.HueDegrees
+- uid: Mu3D.Color.CieLchColor.HueDegrees*
+  name: HueDegrees
+  href: v0.1/api/Mu3D.Color.CieLchColor.html#Mu3D_Color_CieLchColor_HueDegrees_
+  commentId: Overload:Mu3D.Color.CieLchColor.HueDegrees
+  fullName: Mu3D.Color.CieLchColor.HueDegrees
+  nameWithType: CieLchColor.HueDegrees
+- uid: Mu3D.Color.CieLchColor.Lightness
+  name: Lightness
+  href: v0.1/api/Mu3D.Color.CieLchColor.html#Mu3D_Color_CieLchColor_Lightness
+  commentId: P:Mu3D.Color.CieLchColor.Lightness
+  fullName: Mu3D.Color.CieLchColor.Lightness
+  nameWithType: CieLchColor.Lightness
+- uid: Mu3D.Color.CieLchColor.Lightness*
+  name: Lightness
+  href: v0.1/api/Mu3D.Color.CieLchColor.html#Mu3D_Color_CieLchColor_Lightness_
+  commentId: Overload:Mu3D.Color.CieLchColor.Lightness
+  fullName: Mu3D.Color.CieLchColor.Lightness
+  nameWithType: CieLchColor.Lightness
+- uid: Mu3D.Color.CieLchColor.ToString
+  name: ToString()
+  href: v0.1/api/Mu3D.Color.CieLchColor.html#Mu3D_Color_CieLchColor_ToString
+  commentId: M:Mu3D.Color.CieLchColor.ToString
+  fullName: Mu3D.Color.CieLchColor.ToString()
+  nameWithType: CieLchColor.ToString()
+- uid: Mu3D.Color.CieLchColor.ToString*
+  name: ToString
+  href: v0.1/api/Mu3D.Color.CieLchColor.html#Mu3D_Color_CieLchColor_ToString_
+  commentId: Overload:Mu3D.Color.CieLchColor.ToString
+  fullName: Mu3D.Color.CieLchColor.ToString
+  nameWithType: CieLchColor.ToString
+- uid: Mu3D.Color.CieLchColor.op_Equality(Mu3D.Color.CieLchColor,Mu3D.Color.CieLchColor)
+  name: operator ==(CieLchColor, CieLchColor)
+  href: v0.1/api/Mu3D.Color.CieLchColor.html#Mu3D_Color_CieLchColor_op_Equality_Mu3D_Color_CieLchColor_Mu3D_Color_CieLchColor_
+  commentId: M:Mu3D.Color.CieLchColor.op_Equality(Mu3D.Color.CieLchColor,Mu3D.Color.CieLchColor)
+  name.vb: =(CieLchColor, CieLchColor)
+  fullName: Mu3D.Color.CieLchColor.operator ==(Mu3D.Color.CieLchColor, Mu3D.Color.CieLchColor)
+  fullName.vb: Mu3D.Color.CieLchColor.=(Mu3D.Color.CieLchColor, Mu3D.Color.CieLchColor)
+  nameWithType: CieLchColor.operator ==(CieLchColor, CieLchColor)
+  nameWithType.vb: CieLchColor.=(CieLchColor, CieLchColor)
+- uid: Mu3D.Color.CieLchColor.op_Equality*
+  name: operator ==
+  href: v0.1/api/Mu3D.Color.CieLchColor.html#Mu3D_Color_CieLchColor_op_Equality_
+  commentId: Overload:Mu3D.Color.CieLchColor.op_Equality
+  name.vb: =
+  fullName: Mu3D.Color.CieLchColor.operator ==
+  fullName.vb: Mu3D.Color.CieLchColor.=
+  nameWithType: CieLchColor.operator ==
+  nameWithType.vb: CieLchColor.=
+- uid: Mu3D.Color.CieLchColor.op_Inequality(Mu3D.Color.CieLchColor,Mu3D.Color.CieLchColor)
+  name: operator !=(CieLchColor, CieLchColor)
+  href: v0.1/api/Mu3D.Color.CieLchColor.html#Mu3D_Color_CieLchColor_op_Inequality_Mu3D_Color_CieLchColor_Mu3D_Color_CieLchColor_
+  commentId: M:Mu3D.Color.CieLchColor.op_Inequality(Mu3D.Color.CieLchColor,Mu3D.Color.CieLchColor)
+  name.vb: <>(CieLchColor, CieLchColor)
+  fullName: Mu3D.Color.CieLchColor.operator !=(Mu3D.Color.CieLchColor, Mu3D.Color.CieLchColor)
+  fullName.vb: Mu3D.Color.CieLchColor.<>(Mu3D.Color.CieLchColor, Mu3D.Color.CieLchColor)
+  nameWithType: CieLchColor.operator !=(CieLchColor, CieLchColor)
+  nameWithType.vb: CieLchColor.<>(CieLchColor, CieLchColor)
+- uid: Mu3D.Color.CieLchColor.op_Inequality*
+  name: operator !=
+  href: v0.1/api/Mu3D.Color.CieLchColor.html#Mu3D_Color_CieLchColor_op_Inequality_
+  commentId: Overload:Mu3D.Color.CieLchColor.op_Inequality
+  name.vb: <>
+  fullName: Mu3D.Color.CieLchColor.operator !=
+  fullName.vb: Mu3D.Color.CieLchColor.<>
+  nameWithType: CieLchColor.operator !=
+  nameWithType.vb: CieLchColor.<>
+- uid: Mu3D.Color.ColorBatch
+  name: ColorBatch
+  href: v0.1/api/Mu3D.Color.ColorBatch.html
+  commentId: T:Mu3D.Color.ColorBatch
+  fullName: Mu3D.Color.ColorBatch
+  nameWithType: ColorBatch
+- uid: Mu3D.Color.ColorBatch.Transform*
+  name: Transform
+  href: v0.1/api/Mu3D.Color.ColorBatch.html#Mu3D_Color_ColorBatch_Transform_
+  commentId: Overload:Mu3D.Color.ColorBatch.Transform
+  fullName: Mu3D.Color.ColorBatch.Transform
+  nameWithType: ColorBatch.Transform
+- uid: Mu3D.Color.ColorBatch.Transform``3(System.ReadOnlySpan{``0},System.Span{``1},``2)
+  name: Transform<TSource, TDestination, TTransform>(ReadOnlySpan<TSource>, Span<TDestination>, TTransform)
+  href: v0.1/api/Mu3D.Color.ColorBatch.html#Mu3D_Color_ColorBatch_Transform__3_System_ReadOnlySpan___0__System_Span___1____2_
+  commentId: M:Mu3D.Color.ColorBatch.Transform``3(System.ReadOnlySpan{``0},System.Span{``1},``2)
+  name.vb: Transform(Of TSource, TDestination, TTransform)(ReadOnlySpan(Of TSource), Span(Of TDestination), TTransform)
+  fullName: Mu3D.Color.ColorBatch.Transform<TSource, TDestination, TTransform>(System.ReadOnlySpan<TSource>, System.Span<TDestination>, TTransform)
+  fullName.vb: Mu3D.Color.ColorBatch.Transform(Of TSource, TDestination, TTransform)(System.ReadOnlySpan(Of TSource), System.Span(Of TDestination), TTransform)
+  nameWithType: ColorBatch.Transform<TSource, TDestination, TTransform>(ReadOnlySpan<TSource>, Span<TDestination>, TTransform)
+  nameWithType.vb: ColorBatch.Transform(Of TSource, TDestination, TTransform)(ReadOnlySpan(Of TSource), Span(Of TDestination), TTransform)
 - uid: Mu3D.Color.ColorEncoding
   name: ColorEncoding
   href: v0.1/api/Mu3D.Color.ColorEncoding.html
@@ -730,6 +1057,108 @@ references:
   commentId: Overload:Mu3D.Color.ColorViewTransform.Transform
   fullName: Mu3D.Color.ColorViewTransform.Transform
   nameWithType: ColorViewTransform.Transform
+- uid: Mu3D.Color.CylindricalRgbConverter
+  name: CylindricalRgbConverter
+  href: v0.1/api/Mu3D.Color.CylindricalRgbConverter.html
+  commentId: T:Mu3D.Color.CylindricalRgbConverter
+  fullName: Mu3D.Color.CylindricalRgbConverter
+  nameWithType: CylindricalRgbConverter
+- uid: Mu3D.Color.CylindricalRgbConverter.FromHsl(Mu3D.Color.HslColor)
+  name: FromHsl(HslColor)
+  href: v0.1/api/Mu3D.Color.CylindricalRgbConverter.html#Mu3D_Color_CylindricalRgbConverter_FromHsl_Mu3D_Color_HslColor_
+  commentId: M:Mu3D.Color.CylindricalRgbConverter.FromHsl(Mu3D.Color.HslColor)
+  fullName: Mu3D.Color.CylindricalRgbConverter.FromHsl(Mu3D.Color.HslColor)
+  nameWithType: CylindricalRgbConverter.FromHsl(HslColor)
+- uid: Mu3D.Color.CylindricalRgbConverter.FromHsl*
+  name: FromHsl
+  href: v0.1/api/Mu3D.Color.CylindricalRgbConverter.html#Mu3D_Color_CylindricalRgbConverter_FromHsl_
+  commentId: Overload:Mu3D.Color.CylindricalRgbConverter.FromHsl
+  fullName: Mu3D.Color.CylindricalRgbConverter.FromHsl
+  nameWithType: CylindricalRgbConverter.FromHsl
+- uid: Mu3D.Color.CylindricalRgbConverter.FromHsv(Mu3D.Color.HsvColor)
+  name: FromHsv(HsvColor)
+  href: v0.1/api/Mu3D.Color.CylindricalRgbConverter.html#Mu3D_Color_CylindricalRgbConverter_FromHsv_Mu3D_Color_HsvColor_
+  commentId: M:Mu3D.Color.CylindricalRgbConverter.FromHsv(Mu3D.Color.HsvColor)
+  fullName: Mu3D.Color.CylindricalRgbConverter.FromHsv(Mu3D.Color.HsvColor)
+  nameWithType: CylindricalRgbConverter.FromHsv(HsvColor)
+- uid: Mu3D.Color.CylindricalRgbConverter.FromHsv*
+  name: FromHsv
+  href: v0.1/api/Mu3D.Color.CylindricalRgbConverter.html#Mu3D_Color_CylindricalRgbConverter_FromHsv_
+  commentId: Overload:Mu3D.Color.CylindricalRgbConverter.FromHsv
+  fullName: Mu3D.Color.CylindricalRgbConverter.FromHsv
+  nameWithType: CylindricalRgbConverter.FromHsv
+- uid: Mu3D.Color.CylindricalRgbConverter.ToHsl(Mu3D.Color.StandardEncodedRgba)
+  name: ToHsl(StandardEncodedRgba)
+  href: v0.1/api/Mu3D.Color.CylindricalRgbConverter.html#Mu3D_Color_CylindricalRgbConverter_ToHsl_Mu3D_Color_StandardEncodedRgba_
+  commentId: M:Mu3D.Color.CylindricalRgbConverter.ToHsl(Mu3D.Color.StandardEncodedRgba)
+  fullName: Mu3D.Color.CylindricalRgbConverter.ToHsl(Mu3D.Color.StandardEncodedRgba)
+  nameWithType: CylindricalRgbConverter.ToHsl(StandardEncodedRgba)
+- uid: Mu3D.Color.CylindricalRgbConverter.ToHsl*
+  name: ToHsl
+  href: v0.1/api/Mu3D.Color.CylindricalRgbConverter.html#Mu3D_Color_CylindricalRgbConverter_ToHsl_
+  commentId: Overload:Mu3D.Color.CylindricalRgbConverter.ToHsl
+  fullName: Mu3D.Color.CylindricalRgbConverter.ToHsl
+  nameWithType: CylindricalRgbConverter.ToHsl
+- uid: Mu3D.Color.CylindricalRgbConverter.ToHsv(Mu3D.Color.StandardEncodedRgba)
+  name: ToHsv(StandardEncodedRgba)
+  href: v0.1/api/Mu3D.Color.CylindricalRgbConverter.html#Mu3D_Color_CylindricalRgbConverter_ToHsv_Mu3D_Color_StandardEncodedRgba_
+  commentId: M:Mu3D.Color.CylindricalRgbConverter.ToHsv(Mu3D.Color.StandardEncodedRgba)
+  fullName: Mu3D.Color.CylindricalRgbConverter.ToHsv(Mu3D.Color.StandardEncodedRgba)
+  nameWithType: CylindricalRgbConverter.ToHsv(StandardEncodedRgba)
+- uid: Mu3D.Color.CylindricalRgbConverter.ToHsv*
+  name: ToHsv
+  href: v0.1/api/Mu3D.Color.CylindricalRgbConverter.html#Mu3D_Color_CylindricalRgbConverter_ToHsv_
+  commentId: Overload:Mu3D.Color.CylindricalRgbConverter.ToHsv
+  fullName: Mu3D.Color.CylindricalRgbConverter.ToHsv
+  nameWithType: CylindricalRgbConverter.ToHsv
+- uid: Mu3D.Color.EncodedRgbToLumaChromaTransform
+  name: EncodedRgbToLumaChromaTransform
+  href: v0.1/api/Mu3D.Color.EncodedRgbToLumaChromaTransform.html
+  commentId: T:Mu3D.Color.EncodedRgbToLumaChromaTransform
+  fullName: Mu3D.Color.EncodedRgbToLumaChromaTransform
+  nameWithType: EncodedRgbToLumaChromaTransform
+- uid: Mu3D.Color.EncodedRgbToLumaChromaTransform.#ctor(Mu3D.Color.LumaChromaModel)
+  name: EncodedRgbToLumaChromaTransform(LumaChromaModel)
+  href: v0.1/api/Mu3D.Color.EncodedRgbToLumaChromaTransform.html#Mu3D_Color_EncodedRgbToLumaChromaTransform__ctor_Mu3D_Color_LumaChromaModel_
+  commentId: M:Mu3D.Color.EncodedRgbToLumaChromaTransform.#ctor(Mu3D.Color.LumaChromaModel)
+  name.vb: New(LumaChromaModel)
+  fullName: Mu3D.Color.EncodedRgbToLumaChromaTransform.EncodedRgbToLumaChromaTransform(Mu3D.Color.LumaChromaModel)
+  fullName.vb: Mu3D.Color.EncodedRgbToLumaChromaTransform.New(Mu3D.Color.LumaChromaModel)
+  nameWithType: EncodedRgbToLumaChromaTransform.EncodedRgbToLumaChromaTransform(LumaChromaModel)
+  nameWithType.vb: EncodedRgbToLumaChromaTransform.New(LumaChromaModel)
+- uid: Mu3D.Color.EncodedRgbToLumaChromaTransform.#ctor*
+  name: EncodedRgbToLumaChromaTransform
+  href: v0.1/api/Mu3D.Color.EncodedRgbToLumaChromaTransform.html#Mu3D_Color_EncodedRgbToLumaChromaTransform__ctor_
+  commentId: Overload:Mu3D.Color.EncodedRgbToLumaChromaTransform.#ctor
+  name.vb: New
+  fullName: Mu3D.Color.EncodedRgbToLumaChromaTransform.EncodedRgbToLumaChromaTransform
+  fullName.vb: Mu3D.Color.EncodedRgbToLumaChromaTransform.New
+  nameWithType: EncodedRgbToLumaChromaTransform.EncodedRgbToLumaChromaTransform
+  nameWithType.vb: EncodedRgbToLumaChromaTransform.New
+- uid: Mu3D.Color.EncodedRgbToLumaChromaTransform.Model
+  name: Model
+  href: v0.1/api/Mu3D.Color.EncodedRgbToLumaChromaTransform.html#Mu3D_Color_EncodedRgbToLumaChromaTransform_Model
+  commentId: P:Mu3D.Color.EncodedRgbToLumaChromaTransform.Model
+  fullName: Mu3D.Color.EncodedRgbToLumaChromaTransform.Model
+  nameWithType: EncodedRgbToLumaChromaTransform.Model
+- uid: Mu3D.Color.EncodedRgbToLumaChromaTransform.Model*
+  name: Model
+  href: v0.1/api/Mu3D.Color.EncodedRgbToLumaChromaTransform.html#Mu3D_Color_EncodedRgbToLumaChromaTransform_Model_
+  commentId: Overload:Mu3D.Color.EncodedRgbToLumaChromaTransform.Model
+  fullName: Mu3D.Color.EncodedRgbToLumaChromaTransform.Model
+  nameWithType: EncodedRgbToLumaChromaTransform.Model
+- uid: Mu3D.Color.EncodedRgbToLumaChromaTransform.Transform(Mu3D.Color.StandardEncodedRgba)
+  name: Transform(StandardEncodedRgba)
+  href: v0.1/api/Mu3D.Color.EncodedRgbToLumaChromaTransform.html#Mu3D_Color_EncodedRgbToLumaChromaTransform_Transform_Mu3D_Color_StandardEncodedRgba_
+  commentId: M:Mu3D.Color.EncodedRgbToLumaChromaTransform.Transform(Mu3D.Color.StandardEncodedRgba)
+  fullName: Mu3D.Color.EncodedRgbToLumaChromaTransform.Transform(Mu3D.Color.StandardEncodedRgba)
+  nameWithType: EncodedRgbToLumaChromaTransform.Transform(StandardEncodedRgba)
+- uid: Mu3D.Color.EncodedRgbToLumaChromaTransform.Transform*
+  name: Transform
+  href: v0.1/api/Mu3D.Color.EncodedRgbToLumaChromaTransform.html#Mu3D_Color_EncodedRgbToLumaChromaTransform_Transform_
+  commentId: Overload:Mu3D.Color.EncodedRgbToLumaChromaTransform.Transform
+  fullName: Mu3D.Color.EncodedRgbToLumaChromaTransform.Transform
+  nameWithType: EncodedRgbToLumaChromaTransform.Transform
 - uid: Mu3D.Color.HdrTransferFunctions
   name: HdrTransferFunctions
   href: v0.1/api/Mu3D.Color.HdrTransferFunctions.html
@@ -826,6 +1255,361 @@ references:
   commentId: Overload:Mu3D.Color.HdrTransferFunctions.EncodePqNits
   fullName: Mu3D.Color.HdrTransferFunctions.EncodePqNits
   nameWithType: HdrTransferFunctions.EncodePqNits
+- uid: Mu3D.Color.HslColor
+  name: HslColor
+  href: v0.1/api/Mu3D.Color.HslColor.html
+  commentId: T:Mu3D.Color.HslColor
+  fullName: Mu3D.Color.HslColor
+  nameWithType: HslColor
+- uid: Mu3D.Color.HslColor.#ctor(System.Single,System.Single,System.Single,System.Single,Mu3D.Color.StandardRgbEncoding)
+  name: HslColor(float, float, float, float, StandardRgbEncoding)
+  href: v0.1/api/Mu3D.Color.HslColor.html#Mu3D_Color_HslColor__ctor_System_Single_System_Single_System_Single_System_Single_Mu3D_Color_StandardRgbEncoding_
+  commentId: M:Mu3D.Color.HslColor.#ctor(System.Single,System.Single,System.Single,System.Single,Mu3D.Color.StandardRgbEncoding)
+  name.vb: New(Single, Single, Single, Single, StandardRgbEncoding)
+  fullName: Mu3D.Color.HslColor.HslColor(float, float, float, float, Mu3D.Color.StandardRgbEncoding)
+  fullName.vb: Mu3D.Color.HslColor.New(Single, Single, Single, Single, Mu3D.Color.StandardRgbEncoding)
+  nameWithType: HslColor.HslColor(float, float, float, float, StandardRgbEncoding)
+  nameWithType.vb: HslColor.New(Single, Single, Single, Single, StandardRgbEncoding)
+- uid: Mu3D.Color.HslColor.#ctor*
+  name: HslColor
+  href: v0.1/api/Mu3D.Color.HslColor.html#Mu3D_Color_HslColor__ctor_
+  commentId: Overload:Mu3D.Color.HslColor.#ctor
+  name.vb: New
+  fullName: Mu3D.Color.HslColor.HslColor
+  fullName.vb: Mu3D.Color.HslColor.New
+  nameWithType: HslColor.HslColor
+  nameWithType.vb: HslColor.New
+- uid: Mu3D.Color.HslColor.Alpha
+  name: Alpha
+  href: v0.1/api/Mu3D.Color.HslColor.html#Mu3D_Color_HslColor_Alpha
+  commentId: P:Mu3D.Color.HslColor.Alpha
+  fullName: Mu3D.Color.HslColor.Alpha
+  nameWithType: HslColor.Alpha
+- uid: Mu3D.Color.HslColor.Alpha*
+  name: Alpha
+  href: v0.1/api/Mu3D.Color.HslColor.html#Mu3D_Color_HslColor_Alpha_
+  commentId: Overload:Mu3D.Color.HslColor.Alpha
+  fullName: Mu3D.Color.HslColor.Alpha
+  nameWithType: HslColor.Alpha
+- uid: Mu3D.Color.HslColor.Encoding
+  name: Encoding
+  href: v0.1/api/Mu3D.Color.HslColor.html#Mu3D_Color_HslColor_Encoding
+  commentId: P:Mu3D.Color.HslColor.Encoding
+  fullName: Mu3D.Color.HslColor.Encoding
+  nameWithType: HslColor.Encoding
+- uid: Mu3D.Color.HslColor.Encoding*
+  name: Encoding
+  href: v0.1/api/Mu3D.Color.HslColor.html#Mu3D_Color_HslColor_Encoding_
+  commentId: Overload:Mu3D.Color.HslColor.Encoding
+  fullName: Mu3D.Color.HslColor.Encoding
+  nameWithType: HslColor.Encoding
+- uid: Mu3D.Color.HslColor.Equals(Mu3D.Color.HslColor)
+  name: Equals(HslColor)
+  href: v0.1/api/Mu3D.Color.HslColor.html#Mu3D_Color_HslColor_Equals_Mu3D_Color_HslColor_
+  commentId: M:Mu3D.Color.HslColor.Equals(Mu3D.Color.HslColor)
+  fullName: Mu3D.Color.HslColor.Equals(Mu3D.Color.HslColor)
+  nameWithType: HslColor.Equals(HslColor)
+- uid: Mu3D.Color.HslColor.Equals(System.Object)
+  name: Equals(object)
+  href: v0.1/api/Mu3D.Color.HslColor.html#Mu3D_Color_HslColor_Equals_System_Object_
+  commentId: M:Mu3D.Color.HslColor.Equals(System.Object)
+  name.vb: Equals(Object)
+  fullName: Mu3D.Color.HslColor.Equals(object)
+  fullName.vb: Mu3D.Color.HslColor.Equals(Object)
+  nameWithType: HslColor.Equals(object)
+  nameWithType.vb: HslColor.Equals(Object)
+- uid: Mu3D.Color.HslColor.Equals*
+  name: Equals
+  href: v0.1/api/Mu3D.Color.HslColor.html#Mu3D_Color_HslColor_Equals_
+  commentId: Overload:Mu3D.Color.HslColor.Equals
+  fullName: Mu3D.Color.HslColor.Equals
+  nameWithType: HslColor.Equals
+- uid: Mu3D.Color.HslColor.GetHashCode
+  name: GetHashCode()
+  href: v0.1/api/Mu3D.Color.HslColor.html#Mu3D_Color_HslColor_GetHashCode
+  commentId: M:Mu3D.Color.HslColor.GetHashCode
+  fullName: Mu3D.Color.HslColor.GetHashCode()
+  nameWithType: HslColor.GetHashCode()
+- uid: Mu3D.Color.HslColor.GetHashCode*
+  name: GetHashCode
+  href: v0.1/api/Mu3D.Color.HslColor.html#Mu3D_Color_HslColor_GetHashCode_
+  commentId: Overload:Mu3D.Color.HslColor.GetHashCode
+  fullName: Mu3D.Color.HslColor.GetHashCode
+  nameWithType: HslColor.GetHashCode
+- uid: Mu3D.Color.HslColor.HueDegrees
+  name: HueDegrees
+  href: v0.1/api/Mu3D.Color.HslColor.html#Mu3D_Color_HslColor_HueDegrees
+  commentId: P:Mu3D.Color.HslColor.HueDegrees
+  fullName: Mu3D.Color.HslColor.HueDegrees
+  nameWithType: HslColor.HueDegrees
+- uid: Mu3D.Color.HslColor.HueDegrees*
+  name: HueDegrees
+  href: v0.1/api/Mu3D.Color.HslColor.html#Mu3D_Color_HslColor_HueDegrees_
+  commentId: Overload:Mu3D.Color.HslColor.HueDegrees
+  fullName: Mu3D.Color.HslColor.HueDegrees
+  nameWithType: HslColor.HueDegrees
+- uid: Mu3D.Color.HslColor.Lightness
+  name: Lightness
+  href: v0.1/api/Mu3D.Color.HslColor.html#Mu3D_Color_HslColor_Lightness
+  commentId: P:Mu3D.Color.HslColor.Lightness
+  fullName: Mu3D.Color.HslColor.Lightness
+  nameWithType: HslColor.Lightness
+- uid: Mu3D.Color.HslColor.Lightness*
+  name: Lightness
+  href: v0.1/api/Mu3D.Color.HslColor.html#Mu3D_Color_HslColor_Lightness_
+  commentId: Overload:Mu3D.Color.HslColor.Lightness
+  fullName: Mu3D.Color.HslColor.Lightness
+  nameWithType: HslColor.Lightness
+- uid: Mu3D.Color.HslColor.Saturation
+  name: Saturation
+  href: v0.1/api/Mu3D.Color.HslColor.html#Mu3D_Color_HslColor_Saturation
+  commentId: P:Mu3D.Color.HslColor.Saturation
+  fullName: Mu3D.Color.HslColor.Saturation
+  nameWithType: HslColor.Saturation
+- uid: Mu3D.Color.HslColor.Saturation*
+  name: Saturation
+  href: v0.1/api/Mu3D.Color.HslColor.html#Mu3D_Color_HslColor_Saturation_
+  commentId: Overload:Mu3D.Color.HslColor.Saturation
+  fullName: Mu3D.Color.HslColor.Saturation
+  nameWithType: HslColor.Saturation
+- uid: Mu3D.Color.HslColor.ToString
+  name: ToString()
+  href: v0.1/api/Mu3D.Color.HslColor.html#Mu3D_Color_HslColor_ToString
+  commentId: M:Mu3D.Color.HslColor.ToString
+  fullName: Mu3D.Color.HslColor.ToString()
+  nameWithType: HslColor.ToString()
+- uid: Mu3D.Color.HslColor.ToString*
+  name: ToString
+  href: v0.1/api/Mu3D.Color.HslColor.html#Mu3D_Color_HslColor_ToString_
+  commentId: Overload:Mu3D.Color.HslColor.ToString
+  fullName: Mu3D.Color.HslColor.ToString
+  nameWithType: HslColor.ToString
+- uid: Mu3D.Color.HslColor.op_Equality(Mu3D.Color.HslColor,Mu3D.Color.HslColor)
+  name: operator ==(HslColor, HslColor)
+  href: v0.1/api/Mu3D.Color.HslColor.html#Mu3D_Color_HslColor_op_Equality_Mu3D_Color_HslColor_Mu3D_Color_HslColor_
+  commentId: M:Mu3D.Color.HslColor.op_Equality(Mu3D.Color.HslColor,Mu3D.Color.HslColor)
+  name.vb: =(HslColor, HslColor)
+  fullName: Mu3D.Color.HslColor.operator ==(Mu3D.Color.HslColor, Mu3D.Color.HslColor)
+  fullName.vb: Mu3D.Color.HslColor.=(Mu3D.Color.HslColor, Mu3D.Color.HslColor)
+  nameWithType: HslColor.operator ==(HslColor, HslColor)
+  nameWithType.vb: HslColor.=(HslColor, HslColor)
+- uid: Mu3D.Color.HslColor.op_Equality*
+  name: operator ==
+  href: v0.1/api/Mu3D.Color.HslColor.html#Mu3D_Color_HslColor_op_Equality_
+  commentId: Overload:Mu3D.Color.HslColor.op_Equality
+  name.vb: =
+  fullName: Mu3D.Color.HslColor.operator ==
+  fullName.vb: Mu3D.Color.HslColor.=
+  nameWithType: HslColor.operator ==
+  nameWithType.vb: HslColor.=
+- uid: Mu3D.Color.HslColor.op_Inequality(Mu3D.Color.HslColor,Mu3D.Color.HslColor)
+  name: operator !=(HslColor, HslColor)
+  href: v0.1/api/Mu3D.Color.HslColor.html#Mu3D_Color_HslColor_op_Inequality_Mu3D_Color_HslColor_Mu3D_Color_HslColor_
+  commentId: M:Mu3D.Color.HslColor.op_Inequality(Mu3D.Color.HslColor,Mu3D.Color.HslColor)
+  name.vb: <>(HslColor, HslColor)
+  fullName: Mu3D.Color.HslColor.operator !=(Mu3D.Color.HslColor, Mu3D.Color.HslColor)
+  fullName.vb: Mu3D.Color.HslColor.<>(Mu3D.Color.HslColor, Mu3D.Color.HslColor)
+  nameWithType: HslColor.operator !=(HslColor, HslColor)
+  nameWithType.vb: HslColor.<>(HslColor, HslColor)
+- uid: Mu3D.Color.HslColor.op_Inequality*
+  name: operator !=
+  href: v0.1/api/Mu3D.Color.HslColor.html#Mu3D_Color_HslColor_op_Inequality_
+  commentId: Overload:Mu3D.Color.HslColor.op_Inequality
+  name.vb: <>
+  fullName: Mu3D.Color.HslColor.operator !=
+  fullName.vb: Mu3D.Color.HslColor.<>
+  nameWithType: HslColor.operator !=
+  nameWithType.vb: HslColor.<>
+- uid: Mu3D.Color.HsvColor
+  name: HsvColor
+  href: v0.1/api/Mu3D.Color.HsvColor.html
+  commentId: T:Mu3D.Color.HsvColor
+  fullName: Mu3D.Color.HsvColor
+  nameWithType: HsvColor
+- uid: Mu3D.Color.HsvColor.#ctor(System.Single,System.Single,System.Single,System.Single,Mu3D.Color.StandardRgbEncoding)
+  name: HsvColor(float, float, float, float, StandardRgbEncoding)
+  href: v0.1/api/Mu3D.Color.HsvColor.html#Mu3D_Color_HsvColor__ctor_System_Single_System_Single_System_Single_System_Single_Mu3D_Color_StandardRgbEncoding_
+  commentId: M:Mu3D.Color.HsvColor.#ctor(System.Single,System.Single,System.Single,System.Single,Mu3D.Color.StandardRgbEncoding)
+  name.vb: New(Single, Single, Single, Single, StandardRgbEncoding)
+  fullName: Mu3D.Color.HsvColor.HsvColor(float, float, float, float, Mu3D.Color.StandardRgbEncoding)
+  fullName.vb: Mu3D.Color.HsvColor.New(Single, Single, Single, Single, Mu3D.Color.StandardRgbEncoding)
+  nameWithType: HsvColor.HsvColor(float, float, float, float, StandardRgbEncoding)
+  nameWithType.vb: HsvColor.New(Single, Single, Single, Single, StandardRgbEncoding)
+- uid: Mu3D.Color.HsvColor.#ctor*
+  name: HsvColor
+  href: v0.1/api/Mu3D.Color.HsvColor.html#Mu3D_Color_HsvColor__ctor_
+  commentId: Overload:Mu3D.Color.HsvColor.#ctor
+  name.vb: New
+  fullName: Mu3D.Color.HsvColor.HsvColor
+  fullName.vb: Mu3D.Color.HsvColor.New
+  nameWithType: HsvColor.HsvColor
+  nameWithType.vb: HsvColor.New
+- uid: Mu3D.Color.HsvColor.Alpha
+  name: Alpha
+  href: v0.1/api/Mu3D.Color.HsvColor.html#Mu3D_Color_HsvColor_Alpha
+  commentId: P:Mu3D.Color.HsvColor.Alpha
+  fullName: Mu3D.Color.HsvColor.Alpha
+  nameWithType: HsvColor.Alpha
+- uid: Mu3D.Color.HsvColor.Alpha*
+  name: Alpha
+  href: v0.1/api/Mu3D.Color.HsvColor.html#Mu3D_Color_HsvColor_Alpha_
+  commentId: Overload:Mu3D.Color.HsvColor.Alpha
+  fullName: Mu3D.Color.HsvColor.Alpha
+  nameWithType: HsvColor.Alpha
+- uid: Mu3D.Color.HsvColor.Encoding
+  name: Encoding
+  href: v0.1/api/Mu3D.Color.HsvColor.html#Mu3D_Color_HsvColor_Encoding
+  commentId: P:Mu3D.Color.HsvColor.Encoding
+  fullName: Mu3D.Color.HsvColor.Encoding
+  nameWithType: HsvColor.Encoding
+- uid: Mu3D.Color.HsvColor.Encoding*
+  name: Encoding
+  href: v0.1/api/Mu3D.Color.HsvColor.html#Mu3D_Color_HsvColor_Encoding_
+  commentId: Overload:Mu3D.Color.HsvColor.Encoding
+  fullName: Mu3D.Color.HsvColor.Encoding
+  nameWithType: HsvColor.Encoding
+- uid: Mu3D.Color.HsvColor.Equals(Mu3D.Color.HsvColor)
+  name: Equals(HsvColor)
+  href: v0.1/api/Mu3D.Color.HsvColor.html#Mu3D_Color_HsvColor_Equals_Mu3D_Color_HsvColor_
+  commentId: M:Mu3D.Color.HsvColor.Equals(Mu3D.Color.HsvColor)
+  fullName: Mu3D.Color.HsvColor.Equals(Mu3D.Color.HsvColor)
+  nameWithType: HsvColor.Equals(HsvColor)
+- uid: Mu3D.Color.HsvColor.Equals(System.Object)
+  name: Equals(object)
+  href: v0.1/api/Mu3D.Color.HsvColor.html#Mu3D_Color_HsvColor_Equals_System_Object_
+  commentId: M:Mu3D.Color.HsvColor.Equals(System.Object)
+  name.vb: Equals(Object)
+  fullName: Mu3D.Color.HsvColor.Equals(object)
+  fullName.vb: Mu3D.Color.HsvColor.Equals(Object)
+  nameWithType: HsvColor.Equals(object)
+  nameWithType.vb: HsvColor.Equals(Object)
+- uid: Mu3D.Color.HsvColor.Equals*
+  name: Equals
+  href: v0.1/api/Mu3D.Color.HsvColor.html#Mu3D_Color_HsvColor_Equals_
+  commentId: Overload:Mu3D.Color.HsvColor.Equals
+  fullName: Mu3D.Color.HsvColor.Equals
+  nameWithType: HsvColor.Equals
+- uid: Mu3D.Color.HsvColor.GetHashCode
+  name: GetHashCode()
+  href: v0.1/api/Mu3D.Color.HsvColor.html#Mu3D_Color_HsvColor_GetHashCode
+  commentId: M:Mu3D.Color.HsvColor.GetHashCode
+  fullName: Mu3D.Color.HsvColor.GetHashCode()
+  nameWithType: HsvColor.GetHashCode()
+- uid: Mu3D.Color.HsvColor.GetHashCode*
+  name: GetHashCode
+  href: v0.1/api/Mu3D.Color.HsvColor.html#Mu3D_Color_HsvColor_GetHashCode_
+  commentId: Overload:Mu3D.Color.HsvColor.GetHashCode
+  fullName: Mu3D.Color.HsvColor.GetHashCode
+  nameWithType: HsvColor.GetHashCode
+- uid: Mu3D.Color.HsvColor.HueDegrees
+  name: HueDegrees
+  href: v0.1/api/Mu3D.Color.HsvColor.html#Mu3D_Color_HsvColor_HueDegrees
+  commentId: P:Mu3D.Color.HsvColor.HueDegrees
+  fullName: Mu3D.Color.HsvColor.HueDegrees
+  nameWithType: HsvColor.HueDegrees
+- uid: Mu3D.Color.HsvColor.HueDegrees*
+  name: HueDegrees
+  href: v0.1/api/Mu3D.Color.HsvColor.html#Mu3D_Color_HsvColor_HueDegrees_
+  commentId: Overload:Mu3D.Color.HsvColor.HueDegrees
+  fullName: Mu3D.Color.HsvColor.HueDegrees
+  nameWithType: HsvColor.HueDegrees
+- uid: Mu3D.Color.HsvColor.Saturation
+  name: Saturation
+  href: v0.1/api/Mu3D.Color.HsvColor.html#Mu3D_Color_HsvColor_Saturation
+  commentId: P:Mu3D.Color.HsvColor.Saturation
+  fullName: Mu3D.Color.HsvColor.Saturation
+  nameWithType: HsvColor.Saturation
+- uid: Mu3D.Color.HsvColor.Saturation*
+  name: Saturation
+  href: v0.1/api/Mu3D.Color.HsvColor.html#Mu3D_Color_HsvColor_Saturation_
+  commentId: Overload:Mu3D.Color.HsvColor.Saturation
+  fullName: Mu3D.Color.HsvColor.Saturation
+  nameWithType: HsvColor.Saturation
+- uid: Mu3D.Color.HsvColor.ToString
+  name: ToString()
+  href: v0.1/api/Mu3D.Color.HsvColor.html#Mu3D_Color_HsvColor_ToString
+  commentId: M:Mu3D.Color.HsvColor.ToString
+  fullName: Mu3D.Color.HsvColor.ToString()
+  nameWithType: HsvColor.ToString()
+- uid: Mu3D.Color.HsvColor.ToString*
+  name: ToString
+  href: v0.1/api/Mu3D.Color.HsvColor.html#Mu3D_Color_HsvColor_ToString_
+  commentId: Overload:Mu3D.Color.HsvColor.ToString
+  fullName: Mu3D.Color.HsvColor.ToString
+  nameWithType: HsvColor.ToString
+- uid: Mu3D.Color.HsvColor.Value
+  name: Value
+  href: v0.1/api/Mu3D.Color.HsvColor.html#Mu3D_Color_HsvColor_Value
+  commentId: P:Mu3D.Color.HsvColor.Value
+  fullName: Mu3D.Color.HsvColor.Value
+  nameWithType: HsvColor.Value
+- uid: Mu3D.Color.HsvColor.Value*
+  name: Value
+  href: v0.1/api/Mu3D.Color.HsvColor.html#Mu3D_Color_HsvColor_Value_
+  commentId: Overload:Mu3D.Color.HsvColor.Value
+  fullName: Mu3D.Color.HsvColor.Value
+  nameWithType: HsvColor.Value
+- uid: Mu3D.Color.HsvColor.op_Equality(Mu3D.Color.HsvColor,Mu3D.Color.HsvColor)
+  name: operator ==(HsvColor, HsvColor)
+  href: v0.1/api/Mu3D.Color.HsvColor.html#Mu3D_Color_HsvColor_op_Equality_Mu3D_Color_HsvColor_Mu3D_Color_HsvColor_
+  commentId: M:Mu3D.Color.HsvColor.op_Equality(Mu3D.Color.HsvColor,Mu3D.Color.HsvColor)
+  name.vb: =(HsvColor, HsvColor)
+  fullName: Mu3D.Color.HsvColor.operator ==(Mu3D.Color.HsvColor, Mu3D.Color.HsvColor)
+  fullName.vb: Mu3D.Color.HsvColor.=(Mu3D.Color.HsvColor, Mu3D.Color.HsvColor)
+  nameWithType: HsvColor.operator ==(HsvColor, HsvColor)
+  nameWithType.vb: HsvColor.=(HsvColor, HsvColor)
+- uid: Mu3D.Color.HsvColor.op_Equality*
+  name: operator ==
+  href: v0.1/api/Mu3D.Color.HsvColor.html#Mu3D_Color_HsvColor_op_Equality_
+  commentId: Overload:Mu3D.Color.HsvColor.op_Equality
+  name.vb: =
+  fullName: Mu3D.Color.HsvColor.operator ==
+  fullName.vb: Mu3D.Color.HsvColor.=
+  nameWithType: HsvColor.operator ==
+  nameWithType.vb: HsvColor.=
+- uid: Mu3D.Color.HsvColor.op_Inequality(Mu3D.Color.HsvColor,Mu3D.Color.HsvColor)
+  name: operator !=(HsvColor, HsvColor)
+  href: v0.1/api/Mu3D.Color.HsvColor.html#Mu3D_Color_HsvColor_op_Inequality_Mu3D_Color_HsvColor_Mu3D_Color_HsvColor_
+  commentId: M:Mu3D.Color.HsvColor.op_Inequality(Mu3D.Color.HsvColor,Mu3D.Color.HsvColor)
+  name.vb: <>(HsvColor, HsvColor)
+  fullName: Mu3D.Color.HsvColor.operator !=(Mu3D.Color.HsvColor, Mu3D.Color.HsvColor)
+  fullName.vb: Mu3D.Color.HsvColor.<>(Mu3D.Color.HsvColor, Mu3D.Color.HsvColor)
+  nameWithType: HsvColor.operator !=(HsvColor, HsvColor)
+  nameWithType.vb: HsvColor.<>(HsvColor, HsvColor)
+- uid: Mu3D.Color.HsvColor.op_Inequality*
+  name: operator !=
+  href: v0.1/api/Mu3D.Color.HsvColor.html#Mu3D_Color_HsvColor_op_Inequality_
+  commentId: Overload:Mu3D.Color.HsvColor.op_Inequality
+  name.vb: <>
+  fullName: Mu3D.Color.HsvColor.operator !=
+  fullName.vb: Mu3D.Color.HsvColor.<>
+  nameWithType: HsvColor.operator !=
+  nameWithType.vb: HsvColor.<>
+- uid: Mu3D.Color.IColorTransform`2
+  name: IColorTransform<TSource, TDestination>
+  href: v0.1/api/Mu3D.Color.IColorTransform-2.html
+  commentId: T:Mu3D.Color.IColorTransform`2
+  name.vb: IColorTransform(Of TSource, TDestination)
+  fullName: Mu3D.Color.IColorTransform<TSource, TDestination>
+  fullName.vb: Mu3D.Color.IColorTransform(Of TSource, TDestination)
+  nameWithType: IColorTransform<TSource, TDestination>
+  nameWithType.vb: IColorTransform(Of TSource, TDestination)
+- uid: Mu3D.Color.IColorTransform`2.Transform(`0)
+  name: Transform(TSource)
+  href: v0.1/api/Mu3D.Color.IColorTransform-2.html#Mu3D_Color_IColorTransform_2_Transform__0_
+  commentId: M:Mu3D.Color.IColorTransform`2.Transform(`0)
+  fullName: Mu3D.Color.IColorTransform<TSource, TDestination>.Transform(TSource)
+  fullName.vb: Mu3D.Color.IColorTransform(Of TSource, TDestination).Transform(TSource)
+  nameWithType: IColorTransform<TSource, TDestination>.Transform(TSource)
+  nameWithType.vb: IColorTransform(Of TSource, TDestination).Transform(TSource)
+- uid: Mu3D.Color.IColorTransform`2.Transform*
+  name: Transform
+  href: v0.1/api/Mu3D.Color.IColorTransform-2.html#Mu3D_Color_IColorTransform_2_Transform_
+  commentId: Overload:Mu3D.Color.IColorTransform`2.Transform
+  fullName: Mu3D.Color.IColorTransform<TSource, TDestination>.Transform
+  fullName.vb: Mu3D.Color.IColorTransform(Of TSource, TDestination).Transform
+  nameWithType: IColorTransform<TSource, TDestination>.Transform
+  nameWithType.vb: IColorTransform(Of TSource, TDestination).Transform
 - uid: Mu3D.Color.ILinearRgbTransform
   name: ILinearRgbTransform
   href: v0.1/api/Mu3D.Color.ILinearRgbTransform.html
@@ -2335,6 +3119,54 @@ references:
   commentId: Overload:Mu3D.Color.IccSoftProofTransform.TransformToLinear
   fullName: Mu3D.Color.IccSoftProofTransform.TransformToLinear
   nameWithType: IccSoftProofTransform.TransformToLinear
+- uid: Mu3D.Color.LabToLinearRgbTransform
+  name: LabToLinearRgbTransform
+  href: v0.1/api/Mu3D.Color.LabToLinearRgbTransform.html
+  commentId: T:Mu3D.Color.LabToLinearRgbTransform
+  fullName: Mu3D.Color.LabToLinearRgbTransform
+  nameWithType: LabToLinearRgbTransform
+- uid: Mu3D.Color.LabToLinearRgbTransform.#ctor(Mu3D.Color.StandardRgbColorSpaceReference)
+  name: LabToLinearRgbTransform(StandardRgbColorSpaceReference)
+  href: v0.1/api/Mu3D.Color.LabToLinearRgbTransform.html#Mu3D_Color_LabToLinearRgbTransform__ctor_Mu3D_Color_StandardRgbColorSpaceReference_
+  commentId: M:Mu3D.Color.LabToLinearRgbTransform.#ctor(Mu3D.Color.StandardRgbColorSpaceReference)
+  name.vb: New(StandardRgbColorSpaceReference)
+  fullName: Mu3D.Color.LabToLinearRgbTransform.LabToLinearRgbTransform(Mu3D.Color.StandardRgbColorSpaceReference)
+  fullName.vb: Mu3D.Color.LabToLinearRgbTransform.New(Mu3D.Color.StandardRgbColorSpaceReference)
+  nameWithType: LabToLinearRgbTransform.LabToLinearRgbTransform(StandardRgbColorSpaceReference)
+  nameWithType.vb: LabToLinearRgbTransform.New(StandardRgbColorSpaceReference)
+- uid: Mu3D.Color.LabToLinearRgbTransform.#ctor*
+  name: LabToLinearRgbTransform
+  href: v0.1/api/Mu3D.Color.LabToLinearRgbTransform.html#Mu3D_Color_LabToLinearRgbTransform__ctor_
+  commentId: Overload:Mu3D.Color.LabToLinearRgbTransform.#ctor
+  name.vb: New
+  fullName: Mu3D.Color.LabToLinearRgbTransform.LabToLinearRgbTransform
+  fullName.vb: Mu3D.Color.LabToLinearRgbTransform.New
+  nameWithType: LabToLinearRgbTransform.LabToLinearRgbTransform
+  nameWithType.vb: LabToLinearRgbTransform.New
+- uid: Mu3D.Color.LabToLinearRgbTransform.Destination
+  name: Destination
+  href: v0.1/api/Mu3D.Color.LabToLinearRgbTransform.html#Mu3D_Color_LabToLinearRgbTransform_Destination
+  commentId: P:Mu3D.Color.LabToLinearRgbTransform.Destination
+  fullName: Mu3D.Color.LabToLinearRgbTransform.Destination
+  nameWithType: LabToLinearRgbTransform.Destination
+- uid: Mu3D.Color.LabToLinearRgbTransform.Destination*
+  name: Destination
+  href: v0.1/api/Mu3D.Color.LabToLinearRgbTransform.html#Mu3D_Color_LabToLinearRgbTransform_Destination_
+  commentId: Overload:Mu3D.Color.LabToLinearRgbTransform.Destination
+  fullName: Mu3D.Color.LabToLinearRgbTransform.Destination
+  nameWithType: LabToLinearRgbTransform.Destination
+- uid: Mu3D.Color.LabToLinearRgbTransform.Transform(Mu3D.Color.CieLabColor)
+  name: Transform(CieLabColor)
+  href: v0.1/api/Mu3D.Color.LabToLinearRgbTransform.html#Mu3D_Color_LabToLinearRgbTransform_Transform_Mu3D_Color_CieLabColor_
+  commentId: M:Mu3D.Color.LabToLinearRgbTransform.Transform(Mu3D.Color.CieLabColor)
+  fullName: Mu3D.Color.LabToLinearRgbTransform.Transform(Mu3D.Color.CieLabColor)
+  nameWithType: LabToLinearRgbTransform.Transform(CieLabColor)
+- uid: Mu3D.Color.LabToLinearRgbTransform.Transform*
+  name: Transform
+  href: v0.1/api/Mu3D.Color.LabToLinearRgbTransform.html#Mu3D_Color_LabToLinearRgbTransform_Transform_
+  commentId: Overload:Mu3D.Color.LabToLinearRgbTransform.Transform
+  fullName: Mu3D.Color.LabToLinearRgbTransform.Transform
+  nameWithType: LabToLinearRgbTransform.Transform
 - uid: Mu3D.Color.LinearRgbImageComparer
   name: LinearRgbImageComparer
   href: v0.1/api/Mu3D.Color.LinearRgbImageComparer.html
@@ -2836,6 +3668,42 @@ references:
   commentId: Overload:Mu3D.Color.LinearRgbLut3D.Transform
   fullName: Mu3D.Color.LinearRgbLut3D.Transform
   nameWithType: LinearRgbLut3D.Transform
+- uid: Mu3D.Color.LinearRgbToLabTransform
+  name: LinearRgbToLabTransform
+  href: v0.1/api/Mu3D.Color.LinearRgbToLabTransform.html
+  commentId: T:Mu3D.Color.LinearRgbToLabTransform
+  fullName: Mu3D.Color.LinearRgbToLabTransform
+  nameWithType: LinearRgbToLabTransform
+- uid: Mu3D.Color.LinearRgbToLabTransform.Transform(Mu3D.Color.LinearRgba)
+  name: Transform(LinearRgba)
+  href: v0.1/api/Mu3D.Color.LinearRgbToLabTransform.html#Mu3D_Color_LinearRgbToLabTransform_Transform_Mu3D_Color_LinearRgba_
+  commentId: M:Mu3D.Color.LinearRgbToLabTransform.Transform(Mu3D.Color.LinearRgba)
+  fullName: Mu3D.Color.LinearRgbToLabTransform.Transform(Mu3D.Color.LinearRgba)
+  nameWithType: LinearRgbToLabTransform.Transform(LinearRgba)
+- uid: Mu3D.Color.LinearRgbToLabTransform.Transform*
+  name: Transform
+  href: v0.1/api/Mu3D.Color.LinearRgbToLabTransform.html#Mu3D_Color_LinearRgbToLabTransform_Transform_
+  commentId: Overload:Mu3D.Color.LinearRgbToLabTransform.Transform
+  fullName: Mu3D.Color.LinearRgbToLabTransform.Transform
+  nameWithType: LinearRgbToLabTransform.Transform
+- uid: Mu3D.Color.LinearRgbToOklabTransform
+  name: LinearRgbToOklabTransform
+  href: v0.1/api/Mu3D.Color.LinearRgbToOklabTransform.html
+  commentId: T:Mu3D.Color.LinearRgbToOklabTransform
+  fullName: Mu3D.Color.LinearRgbToOklabTransform
+  nameWithType: LinearRgbToOklabTransform
+- uid: Mu3D.Color.LinearRgbToOklabTransform.Transform(Mu3D.Color.LinearRgba)
+  name: Transform(LinearRgba)
+  href: v0.1/api/Mu3D.Color.LinearRgbToOklabTransform.html#Mu3D_Color_LinearRgbToOklabTransform_Transform_Mu3D_Color_LinearRgba_
+  commentId: M:Mu3D.Color.LinearRgbToOklabTransform.Transform(Mu3D.Color.LinearRgba)
+  fullName: Mu3D.Color.LinearRgbToOklabTransform.Transform(Mu3D.Color.LinearRgba)
+  nameWithType: LinearRgbToOklabTransform.Transform(LinearRgba)
+- uid: Mu3D.Color.LinearRgbToOklabTransform.Transform*
+  name: Transform
+  href: v0.1/api/Mu3D.Color.LinearRgbToOklabTransform.html#Mu3D_Color_LinearRgbToOklabTransform_Transform_
+  commentId: Overload:Mu3D.Color.LinearRgbToOklabTransform.Transform
+  fullName: Mu3D.Color.LinearRgbToOklabTransform.Transform
+  nameWithType: LinearRgbToOklabTransform.Transform
 - uid: Mu3D.Color.LinearRgba
   name: LinearRgba
   href: v0.1/api/Mu3D.Color.LinearRgba.html
@@ -3085,6 +3953,717 @@ references:
   commentId: Overload:Mu3D.Color.LinearRgbaImage.Width
   fullName: Mu3D.Color.LinearRgbaImage.Width
   nameWithType: LinearRgbaImage.Width
+- uid: Mu3D.Color.LumaChromaColor
+  name: LumaChromaColor
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html
+  commentId: T:Mu3D.Color.LumaChromaColor
+  fullName: Mu3D.Color.LumaChromaColor
+  nameWithType: LumaChromaColor
+- uid: Mu3D.Color.LumaChromaColor.#ctor(System.Single,System.Single,System.Single,System.Single,Mu3D.Color.StandardRgbEncoding,Mu3D.Color.LumaChromaModel)
+  name: LumaChromaColor(float, float, float, float, StandardRgbEncoding, LumaChromaModel)
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor__ctor_System_Single_System_Single_System_Single_System_Single_Mu3D_Color_StandardRgbEncoding_Mu3D_Color_LumaChromaModel_
+  commentId: M:Mu3D.Color.LumaChromaColor.#ctor(System.Single,System.Single,System.Single,System.Single,Mu3D.Color.StandardRgbEncoding,Mu3D.Color.LumaChromaModel)
+  name.vb: New(Single, Single, Single, Single, StandardRgbEncoding, LumaChromaModel)
+  fullName: Mu3D.Color.LumaChromaColor.LumaChromaColor(float, float, float, float, Mu3D.Color.StandardRgbEncoding, Mu3D.Color.LumaChromaModel)
+  fullName.vb: Mu3D.Color.LumaChromaColor.New(Single, Single, Single, Single, Mu3D.Color.StandardRgbEncoding, Mu3D.Color.LumaChromaModel)
+  nameWithType: LumaChromaColor.LumaChromaColor(float, float, float, float, StandardRgbEncoding, LumaChromaModel)
+  nameWithType.vb: LumaChromaColor.New(Single, Single, Single, Single, StandardRgbEncoding, LumaChromaModel)
+- uid: Mu3D.Color.LumaChromaColor.#ctor*
+  name: LumaChromaColor
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor__ctor_
+  commentId: Overload:Mu3D.Color.LumaChromaColor.#ctor
+  name.vb: New
+  fullName: Mu3D.Color.LumaChromaColor.LumaChromaColor
+  fullName.vb: Mu3D.Color.LumaChromaColor.New
+  nameWithType: LumaChromaColor.LumaChromaColor
+  nameWithType.vb: LumaChromaColor.New
+- uid: Mu3D.Color.LumaChromaColor.Alpha
+  name: Alpha
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_Alpha
+  commentId: P:Mu3D.Color.LumaChromaColor.Alpha
+  fullName: Mu3D.Color.LumaChromaColor.Alpha
+  nameWithType: LumaChromaColor.Alpha
+- uid: Mu3D.Color.LumaChromaColor.Alpha*
+  name: Alpha
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_Alpha_
+  commentId: Overload:Mu3D.Color.LumaChromaColor.Alpha
+  fullName: Mu3D.Color.LumaChromaColor.Alpha
+  nameWithType: LumaChromaColor.Alpha
+- uid: Mu3D.Color.LumaChromaColor.ChromaBlue
+  name: ChromaBlue
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_ChromaBlue
+  commentId: P:Mu3D.Color.LumaChromaColor.ChromaBlue
+  fullName: Mu3D.Color.LumaChromaColor.ChromaBlue
+  nameWithType: LumaChromaColor.ChromaBlue
+- uid: Mu3D.Color.LumaChromaColor.ChromaBlue*
+  name: ChromaBlue
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_ChromaBlue_
+  commentId: Overload:Mu3D.Color.LumaChromaColor.ChromaBlue
+  fullName: Mu3D.Color.LumaChromaColor.ChromaBlue
+  nameWithType: LumaChromaColor.ChromaBlue
+- uid: Mu3D.Color.LumaChromaColor.ChromaRed
+  name: ChromaRed
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_ChromaRed
+  commentId: P:Mu3D.Color.LumaChromaColor.ChromaRed
+  fullName: Mu3D.Color.LumaChromaColor.ChromaRed
+  nameWithType: LumaChromaColor.ChromaRed
+- uid: Mu3D.Color.LumaChromaColor.ChromaRed*
+  name: ChromaRed
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_ChromaRed_
+  commentId: Overload:Mu3D.Color.LumaChromaColor.ChromaRed
+  fullName: Mu3D.Color.LumaChromaColor.ChromaRed
+  nameWithType: LumaChromaColor.ChromaRed
+- uid: Mu3D.Color.LumaChromaColor.Encoding
+  name: Encoding
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_Encoding
+  commentId: P:Mu3D.Color.LumaChromaColor.Encoding
+  fullName: Mu3D.Color.LumaChromaColor.Encoding
+  nameWithType: LumaChromaColor.Encoding
+- uid: Mu3D.Color.LumaChromaColor.Encoding*
+  name: Encoding
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_Encoding_
+  commentId: Overload:Mu3D.Color.LumaChromaColor.Encoding
+  fullName: Mu3D.Color.LumaChromaColor.Encoding
+  nameWithType: LumaChromaColor.Encoding
+- uid: Mu3D.Color.LumaChromaColor.Equals(Mu3D.Color.LumaChromaColor)
+  name: Equals(LumaChromaColor)
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_Equals_Mu3D_Color_LumaChromaColor_
+  commentId: M:Mu3D.Color.LumaChromaColor.Equals(Mu3D.Color.LumaChromaColor)
+  fullName: Mu3D.Color.LumaChromaColor.Equals(Mu3D.Color.LumaChromaColor)
+  nameWithType: LumaChromaColor.Equals(LumaChromaColor)
+- uid: Mu3D.Color.LumaChromaColor.Equals(System.Object)
+  name: Equals(object)
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_Equals_System_Object_
+  commentId: M:Mu3D.Color.LumaChromaColor.Equals(System.Object)
+  name.vb: Equals(Object)
+  fullName: Mu3D.Color.LumaChromaColor.Equals(object)
+  fullName.vb: Mu3D.Color.LumaChromaColor.Equals(Object)
+  nameWithType: LumaChromaColor.Equals(object)
+  nameWithType.vb: LumaChromaColor.Equals(Object)
+- uid: Mu3D.Color.LumaChromaColor.Equals*
+  name: Equals
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_Equals_
+  commentId: Overload:Mu3D.Color.LumaChromaColor.Equals
+  fullName: Mu3D.Color.LumaChromaColor.Equals
+  nameWithType: LumaChromaColor.Equals
+- uid: Mu3D.Color.LumaChromaColor.GetHashCode
+  name: GetHashCode()
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_GetHashCode
+  commentId: M:Mu3D.Color.LumaChromaColor.GetHashCode
+  fullName: Mu3D.Color.LumaChromaColor.GetHashCode()
+  nameWithType: LumaChromaColor.GetHashCode()
+- uid: Mu3D.Color.LumaChromaColor.GetHashCode*
+  name: GetHashCode
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_GetHashCode_
+  commentId: Overload:Mu3D.Color.LumaChromaColor.GetHashCode
+  fullName: Mu3D.Color.LumaChromaColor.GetHashCode
+  nameWithType: LumaChromaColor.GetHashCode
+- uid: Mu3D.Color.LumaChromaColor.Luma
+  name: Luma
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_Luma
+  commentId: P:Mu3D.Color.LumaChromaColor.Luma
+  fullName: Mu3D.Color.LumaChromaColor.Luma
+  nameWithType: LumaChromaColor.Luma
+- uid: Mu3D.Color.LumaChromaColor.Luma*
+  name: Luma
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_Luma_
+  commentId: Overload:Mu3D.Color.LumaChromaColor.Luma
+  fullName: Mu3D.Color.LumaChromaColor.Luma
+  nameWithType: LumaChromaColor.Luma
+- uid: Mu3D.Color.LumaChromaColor.Model
+  name: Model
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_Model
+  commentId: P:Mu3D.Color.LumaChromaColor.Model
+  fullName: Mu3D.Color.LumaChromaColor.Model
+  nameWithType: LumaChromaColor.Model
+- uid: Mu3D.Color.LumaChromaColor.Model*
+  name: Model
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_Model_
+  commentId: Overload:Mu3D.Color.LumaChromaColor.Model
+  fullName: Mu3D.Color.LumaChromaColor.Model
+  nameWithType: LumaChromaColor.Model
+- uid: Mu3D.Color.LumaChromaColor.ToString
+  name: ToString()
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_ToString
+  commentId: M:Mu3D.Color.LumaChromaColor.ToString
+  fullName: Mu3D.Color.LumaChromaColor.ToString()
+  nameWithType: LumaChromaColor.ToString()
+- uid: Mu3D.Color.LumaChromaColor.ToString*
+  name: ToString
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_ToString_
+  commentId: Overload:Mu3D.Color.LumaChromaColor.ToString
+  fullName: Mu3D.Color.LumaChromaColor.ToString
+  nameWithType: LumaChromaColor.ToString
+- uid: Mu3D.Color.LumaChromaColor.op_Equality(Mu3D.Color.LumaChromaColor,Mu3D.Color.LumaChromaColor)
+  name: operator ==(LumaChromaColor, LumaChromaColor)
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_op_Equality_Mu3D_Color_LumaChromaColor_Mu3D_Color_LumaChromaColor_
+  commentId: M:Mu3D.Color.LumaChromaColor.op_Equality(Mu3D.Color.LumaChromaColor,Mu3D.Color.LumaChromaColor)
+  name.vb: =(LumaChromaColor, LumaChromaColor)
+  fullName: Mu3D.Color.LumaChromaColor.operator ==(Mu3D.Color.LumaChromaColor, Mu3D.Color.LumaChromaColor)
+  fullName.vb: Mu3D.Color.LumaChromaColor.=(Mu3D.Color.LumaChromaColor, Mu3D.Color.LumaChromaColor)
+  nameWithType: LumaChromaColor.operator ==(LumaChromaColor, LumaChromaColor)
+  nameWithType.vb: LumaChromaColor.=(LumaChromaColor, LumaChromaColor)
+- uid: Mu3D.Color.LumaChromaColor.op_Equality*
+  name: operator ==
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_op_Equality_
+  commentId: Overload:Mu3D.Color.LumaChromaColor.op_Equality
+  name.vb: =
+  fullName: Mu3D.Color.LumaChromaColor.operator ==
+  fullName.vb: Mu3D.Color.LumaChromaColor.=
+  nameWithType: LumaChromaColor.operator ==
+  nameWithType.vb: LumaChromaColor.=
+- uid: Mu3D.Color.LumaChromaColor.op_Inequality(Mu3D.Color.LumaChromaColor,Mu3D.Color.LumaChromaColor)
+  name: operator !=(LumaChromaColor, LumaChromaColor)
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_op_Inequality_Mu3D_Color_LumaChromaColor_Mu3D_Color_LumaChromaColor_
+  commentId: M:Mu3D.Color.LumaChromaColor.op_Inequality(Mu3D.Color.LumaChromaColor,Mu3D.Color.LumaChromaColor)
+  name.vb: <>(LumaChromaColor, LumaChromaColor)
+  fullName: Mu3D.Color.LumaChromaColor.operator !=(Mu3D.Color.LumaChromaColor, Mu3D.Color.LumaChromaColor)
+  fullName.vb: Mu3D.Color.LumaChromaColor.<>(Mu3D.Color.LumaChromaColor, Mu3D.Color.LumaChromaColor)
+  nameWithType: LumaChromaColor.operator !=(LumaChromaColor, LumaChromaColor)
+  nameWithType.vb: LumaChromaColor.<>(LumaChromaColor, LumaChromaColor)
+- uid: Mu3D.Color.LumaChromaColor.op_Inequality*
+  name: operator !=
+  href: v0.1/api/Mu3D.Color.LumaChromaColor.html#Mu3D_Color_LumaChromaColor_op_Inequality_
+  commentId: Overload:Mu3D.Color.LumaChromaColor.op_Inequality
+  name.vb: <>
+  fullName: Mu3D.Color.LumaChromaColor.operator !=
+  fullName.vb: Mu3D.Color.LumaChromaColor.<>
+  nameWithType: LumaChromaColor.operator !=
+  nameWithType.vb: LumaChromaColor.<>
+- uid: Mu3D.Color.LumaChromaConverter
+  name: LumaChromaConverter
+  href: v0.1/api/Mu3D.Color.LumaChromaConverter.html
+  commentId: T:Mu3D.Color.LumaChromaConverter
+  fullName: Mu3D.Color.LumaChromaConverter
+  nameWithType: LumaChromaConverter
+- uid: Mu3D.Color.LumaChromaConverter.FromRgb(Mu3D.Color.StandardEncodedRgba,Mu3D.Color.LumaChromaModel)
+  name: FromRgb(StandardEncodedRgba, LumaChromaModel)
+  href: v0.1/api/Mu3D.Color.LumaChromaConverter.html#Mu3D_Color_LumaChromaConverter_FromRgb_Mu3D_Color_StandardEncodedRgba_Mu3D_Color_LumaChromaModel_
+  commentId: M:Mu3D.Color.LumaChromaConverter.FromRgb(Mu3D.Color.StandardEncodedRgba,Mu3D.Color.LumaChromaModel)
+  fullName: Mu3D.Color.LumaChromaConverter.FromRgb(Mu3D.Color.StandardEncodedRgba, Mu3D.Color.LumaChromaModel)
+  nameWithType: LumaChromaConverter.FromRgb(StandardEncodedRgba, LumaChromaModel)
+- uid: Mu3D.Color.LumaChromaConverter.FromRgb*
+  name: FromRgb
+  href: v0.1/api/Mu3D.Color.LumaChromaConverter.html#Mu3D_Color_LumaChromaConverter_FromRgb_
+  commentId: Overload:Mu3D.Color.LumaChromaConverter.FromRgb
+  fullName: Mu3D.Color.LumaChromaConverter.FromRgb
+  nameWithType: LumaChromaConverter.FromRgb
+- uid: Mu3D.Color.LumaChromaConverter.ToRgb(Mu3D.Color.LumaChromaColor)
+  name: ToRgb(LumaChromaColor)
+  href: v0.1/api/Mu3D.Color.LumaChromaConverter.html#Mu3D_Color_LumaChromaConverter_ToRgb_Mu3D_Color_LumaChromaColor_
+  commentId: M:Mu3D.Color.LumaChromaConverter.ToRgb(Mu3D.Color.LumaChromaColor)
+  fullName: Mu3D.Color.LumaChromaConverter.ToRgb(Mu3D.Color.LumaChromaColor)
+  nameWithType: LumaChromaConverter.ToRgb(LumaChromaColor)
+- uid: Mu3D.Color.LumaChromaConverter.ToRgb*
+  name: ToRgb
+  href: v0.1/api/Mu3D.Color.LumaChromaConverter.html#Mu3D_Color_LumaChromaConverter_ToRgb_
+  commentId: Overload:Mu3D.Color.LumaChromaConverter.ToRgb
+  fullName: Mu3D.Color.LumaChromaConverter.ToRgb
+  nameWithType: LumaChromaConverter.ToRgb
+- uid: Mu3D.Color.LumaChromaModel
+  name: LumaChromaModel
+  href: v0.1/api/Mu3D.Color.LumaChromaModel.html
+  commentId: T:Mu3D.Color.LumaChromaModel
+  fullName: Mu3D.Color.LumaChromaModel
+  nameWithType: LumaChromaModel
+- uid: Mu3D.Color.LumaChromaModel.YCbCrBt2020
+  name: YCbCrBt2020
+  href: v0.1/api/Mu3D.Color.LumaChromaModel.html#Mu3D_Color_LumaChromaModel_YCbCrBt2020
+  commentId: F:Mu3D.Color.LumaChromaModel.YCbCrBt2020
+  fullName: Mu3D.Color.LumaChromaModel.YCbCrBt2020
+  nameWithType: LumaChromaModel.YCbCrBt2020
+- uid: Mu3D.Color.LumaChromaModel.YCbCrBt601
+  name: YCbCrBt601
+  href: v0.1/api/Mu3D.Color.LumaChromaModel.html#Mu3D_Color_LumaChromaModel_YCbCrBt601
+  commentId: F:Mu3D.Color.LumaChromaModel.YCbCrBt601
+  fullName: Mu3D.Color.LumaChromaModel.YCbCrBt601
+  nameWithType: LumaChromaModel.YCbCrBt601
+- uid: Mu3D.Color.LumaChromaModel.YCbCrBt709
+  name: YCbCrBt709
+  href: v0.1/api/Mu3D.Color.LumaChromaModel.html#Mu3D_Color_LumaChromaModel_YCbCrBt709
+  commentId: F:Mu3D.Color.LumaChromaModel.YCbCrBt709
+  fullName: Mu3D.Color.LumaChromaModel.YCbCrBt709
+  nameWithType: LumaChromaModel.YCbCrBt709
+- uid: Mu3D.Color.LumaChromaModel.YuvBt601
+  name: YuvBt601
+  href: v0.1/api/Mu3D.Color.LumaChromaModel.html#Mu3D_Color_LumaChromaModel_YuvBt601
+  commentId: F:Mu3D.Color.LumaChromaModel.YuvBt601
+  fullName: Mu3D.Color.LumaChromaModel.YuvBt601
+  nameWithType: LumaChromaModel.YuvBt601
+- uid: Mu3D.Color.LumaChromaToEncodedRgbTransform
+  name: LumaChromaToEncodedRgbTransform
+  href: v0.1/api/Mu3D.Color.LumaChromaToEncodedRgbTransform.html
+  commentId: T:Mu3D.Color.LumaChromaToEncodedRgbTransform
+  fullName: Mu3D.Color.LumaChromaToEncodedRgbTransform
+  nameWithType: LumaChromaToEncodedRgbTransform
+- uid: Mu3D.Color.LumaChromaToEncodedRgbTransform.Transform(Mu3D.Color.LumaChromaColor)
+  name: Transform(LumaChromaColor)
+  href: v0.1/api/Mu3D.Color.LumaChromaToEncodedRgbTransform.html#Mu3D_Color_LumaChromaToEncodedRgbTransform_Transform_Mu3D_Color_LumaChromaColor_
+  commentId: M:Mu3D.Color.LumaChromaToEncodedRgbTransform.Transform(Mu3D.Color.LumaChromaColor)
+  fullName: Mu3D.Color.LumaChromaToEncodedRgbTransform.Transform(Mu3D.Color.LumaChromaColor)
+  nameWithType: LumaChromaToEncodedRgbTransform.Transform(LumaChromaColor)
+- uid: Mu3D.Color.LumaChromaToEncodedRgbTransform.Transform*
+  name: Transform
+  href: v0.1/api/Mu3D.Color.LumaChromaToEncodedRgbTransform.html#Mu3D_Color_LumaChromaToEncodedRgbTransform_Transform_
+  commentId: Overload:Mu3D.Color.LumaChromaToEncodedRgbTransform.Transform
+  fullName: Mu3D.Color.LumaChromaToEncodedRgbTransform.Transform
+  nameWithType: LumaChromaToEncodedRgbTransform.Transform
+- uid: Mu3D.Color.OklabColor
+  name: OklabColor
+  href: v0.1/api/Mu3D.Color.OklabColor.html
+  commentId: T:Mu3D.Color.OklabColor
+  fullName: Mu3D.Color.OklabColor
+  nameWithType: OklabColor
+- uid: Mu3D.Color.OklabColor.#ctor(System.Single,System.Single,System.Single,System.Single)
+  name: OklabColor(float, float, float, float)
+  href: v0.1/api/Mu3D.Color.OklabColor.html#Mu3D_Color_OklabColor__ctor_System_Single_System_Single_System_Single_System_Single_
+  commentId: M:Mu3D.Color.OklabColor.#ctor(System.Single,System.Single,System.Single,System.Single)
+  name.vb: New(Single, Single, Single, Single)
+  fullName: Mu3D.Color.OklabColor.OklabColor(float, float, float, float)
+  fullName.vb: Mu3D.Color.OklabColor.New(Single, Single, Single, Single)
+  nameWithType: OklabColor.OklabColor(float, float, float, float)
+  nameWithType.vb: OklabColor.New(Single, Single, Single, Single)
+- uid: Mu3D.Color.OklabColor.#ctor*
+  name: OklabColor
+  href: v0.1/api/Mu3D.Color.OklabColor.html#Mu3D_Color_OklabColor__ctor_
+  commentId: Overload:Mu3D.Color.OklabColor.#ctor
+  name.vb: New
+  fullName: Mu3D.Color.OklabColor.OklabColor
+  fullName.vb: Mu3D.Color.OklabColor.New
+  nameWithType: OklabColor.OklabColor
+  nameWithType.vb: OklabColor.New
+- uid: Mu3D.Color.OklabColor.A
+  name: A
+  href: v0.1/api/Mu3D.Color.OklabColor.html#Mu3D_Color_OklabColor_A
+  commentId: P:Mu3D.Color.OklabColor.A
+  fullName: Mu3D.Color.OklabColor.A
+  nameWithType: OklabColor.A
+- uid: Mu3D.Color.OklabColor.A*
+  name: A
+  href: v0.1/api/Mu3D.Color.OklabColor.html#Mu3D_Color_OklabColor_A_
+  commentId: Overload:Mu3D.Color.OklabColor.A
+  fullName: Mu3D.Color.OklabColor.A
+  nameWithType: OklabColor.A
+- uid: Mu3D.Color.OklabColor.Alpha
+  name: Alpha
+  href: v0.1/api/Mu3D.Color.OklabColor.html#Mu3D_Color_OklabColor_Alpha
+  commentId: P:Mu3D.Color.OklabColor.Alpha
+  fullName: Mu3D.Color.OklabColor.Alpha
+  nameWithType: OklabColor.Alpha
+- uid: Mu3D.Color.OklabColor.Alpha*
+  name: Alpha
+  href: v0.1/api/Mu3D.Color.OklabColor.html#Mu3D_Color_OklabColor_Alpha_
+  commentId: Overload:Mu3D.Color.OklabColor.Alpha
+  fullName: Mu3D.Color.OklabColor.Alpha
+  nameWithType: OklabColor.Alpha
+- uid: Mu3D.Color.OklabColor.B
+  name: B
+  href: v0.1/api/Mu3D.Color.OklabColor.html#Mu3D_Color_OklabColor_B
+  commentId: P:Mu3D.Color.OklabColor.B
+  fullName: Mu3D.Color.OklabColor.B
+  nameWithType: OklabColor.B
+- uid: Mu3D.Color.OklabColor.B*
+  name: B
+  href: v0.1/api/Mu3D.Color.OklabColor.html#Mu3D_Color_OklabColor_B_
+  commentId: Overload:Mu3D.Color.OklabColor.B
+  fullName: Mu3D.Color.OklabColor.B
+  nameWithType: OklabColor.B
+- uid: Mu3D.Color.OklabColor.Equals(Mu3D.Color.OklabColor)
+  name: Equals(OklabColor)
+  href: v0.1/api/Mu3D.Color.OklabColor.html#Mu3D_Color_OklabColor_Equals_Mu3D_Color_OklabColor_
+  commentId: M:Mu3D.Color.OklabColor.Equals(Mu3D.Color.OklabColor)
+  fullName: Mu3D.Color.OklabColor.Equals(Mu3D.Color.OklabColor)
+  nameWithType: OklabColor.Equals(OklabColor)
+- uid: Mu3D.Color.OklabColor.Equals(System.Object)
+  name: Equals(object)
+  href: v0.1/api/Mu3D.Color.OklabColor.html#Mu3D_Color_OklabColor_Equals_System_Object_
+  commentId: M:Mu3D.Color.OklabColor.Equals(System.Object)
+  name.vb: Equals(Object)
+  fullName: Mu3D.Color.OklabColor.Equals(object)
+  fullName.vb: Mu3D.Color.OklabColor.Equals(Object)
+  nameWithType: OklabColor.Equals(object)
+  nameWithType.vb: OklabColor.Equals(Object)
+- uid: Mu3D.Color.OklabColor.Equals*
+  name: Equals
+  href: v0.1/api/Mu3D.Color.OklabColor.html#Mu3D_Color_OklabColor_Equals_
+  commentId: Overload:Mu3D.Color.OklabColor.Equals
+  fullName: Mu3D.Color.OklabColor.Equals
+  nameWithType: OklabColor.Equals
+- uid: Mu3D.Color.OklabColor.GetHashCode
+  name: GetHashCode()
+  href: v0.1/api/Mu3D.Color.OklabColor.html#Mu3D_Color_OklabColor_GetHashCode
+  commentId: M:Mu3D.Color.OklabColor.GetHashCode
+  fullName: Mu3D.Color.OklabColor.GetHashCode()
+  nameWithType: OklabColor.GetHashCode()
+- uid: Mu3D.Color.OklabColor.GetHashCode*
+  name: GetHashCode
+  href: v0.1/api/Mu3D.Color.OklabColor.html#Mu3D_Color_OklabColor_GetHashCode_
+  commentId: Overload:Mu3D.Color.OklabColor.GetHashCode
+  fullName: Mu3D.Color.OklabColor.GetHashCode
+  nameWithType: OklabColor.GetHashCode
+- uid: Mu3D.Color.OklabColor.Lightness
+  name: Lightness
+  href: v0.1/api/Mu3D.Color.OklabColor.html#Mu3D_Color_OklabColor_Lightness
+  commentId: P:Mu3D.Color.OklabColor.Lightness
+  fullName: Mu3D.Color.OklabColor.Lightness
+  nameWithType: OklabColor.Lightness
+- uid: Mu3D.Color.OklabColor.Lightness*
+  name: Lightness
+  href: v0.1/api/Mu3D.Color.OklabColor.html#Mu3D_Color_OklabColor_Lightness_
+  commentId: Overload:Mu3D.Color.OklabColor.Lightness
+  fullName: Mu3D.Color.OklabColor.Lightness
+  nameWithType: OklabColor.Lightness
+- uid: Mu3D.Color.OklabColor.ToString
+  name: ToString()
+  href: v0.1/api/Mu3D.Color.OklabColor.html#Mu3D_Color_OklabColor_ToString
+  commentId: M:Mu3D.Color.OklabColor.ToString
+  fullName: Mu3D.Color.OklabColor.ToString()
+  nameWithType: OklabColor.ToString()
+- uid: Mu3D.Color.OklabColor.ToString*
+  name: ToString
+  href: v0.1/api/Mu3D.Color.OklabColor.html#Mu3D_Color_OklabColor_ToString_
+  commentId: Overload:Mu3D.Color.OklabColor.ToString
+  fullName: Mu3D.Color.OklabColor.ToString
+  nameWithType: OklabColor.ToString
+- uid: Mu3D.Color.OklabColor.op_Equality(Mu3D.Color.OklabColor,Mu3D.Color.OklabColor)
+  name: operator ==(OklabColor, OklabColor)
+  href: v0.1/api/Mu3D.Color.OklabColor.html#Mu3D_Color_OklabColor_op_Equality_Mu3D_Color_OklabColor_Mu3D_Color_OklabColor_
+  commentId: M:Mu3D.Color.OklabColor.op_Equality(Mu3D.Color.OklabColor,Mu3D.Color.OklabColor)
+  name.vb: =(OklabColor, OklabColor)
+  fullName: Mu3D.Color.OklabColor.operator ==(Mu3D.Color.OklabColor, Mu3D.Color.OklabColor)
+  fullName.vb: Mu3D.Color.OklabColor.=(Mu3D.Color.OklabColor, Mu3D.Color.OklabColor)
+  nameWithType: OklabColor.operator ==(OklabColor, OklabColor)
+  nameWithType.vb: OklabColor.=(OklabColor, OklabColor)
+- uid: Mu3D.Color.OklabColor.op_Equality*
+  name: operator ==
+  href: v0.1/api/Mu3D.Color.OklabColor.html#Mu3D_Color_OklabColor_op_Equality_
+  commentId: Overload:Mu3D.Color.OklabColor.op_Equality
+  name.vb: =
+  fullName: Mu3D.Color.OklabColor.operator ==
+  fullName.vb: Mu3D.Color.OklabColor.=
+  nameWithType: OklabColor.operator ==
+  nameWithType.vb: OklabColor.=
+- uid: Mu3D.Color.OklabColor.op_Inequality(Mu3D.Color.OklabColor,Mu3D.Color.OklabColor)
+  name: operator !=(OklabColor, OklabColor)
+  href: v0.1/api/Mu3D.Color.OklabColor.html#Mu3D_Color_OklabColor_op_Inequality_Mu3D_Color_OklabColor_Mu3D_Color_OklabColor_
+  commentId: M:Mu3D.Color.OklabColor.op_Inequality(Mu3D.Color.OklabColor,Mu3D.Color.OklabColor)
+  name.vb: <>(OklabColor, OklabColor)
+  fullName: Mu3D.Color.OklabColor.operator !=(Mu3D.Color.OklabColor, Mu3D.Color.OklabColor)
+  fullName.vb: Mu3D.Color.OklabColor.<>(Mu3D.Color.OklabColor, Mu3D.Color.OklabColor)
+  nameWithType: OklabColor.operator !=(OklabColor, OklabColor)
+  nameWithType.vb: OklabColor.<>(OklabColor, OklabColor)
+- uid: Mu3D.Color.OklabColor.op_Inequality*
+  name: operator !=
+  href: v0.1/api/Mu3D.Color.OklabColor.html#Mu3D_Color_OklabColor_op_Inequality_
+  commentId: Overload:Mu3D.Color.OklabColor.op_Inequality
+  name.vb: <>
+  fullName: Mu3D.Color.OklabColor.operator !=
+  fullName.vb: Mu3D.Color.OklabColor.<>
+  nameWithType: OklabColor.operator !=
+  nameWithType.vb: OklabColor.<>
+- uid: Mu3D.Color.OklabToLinearRgbTransform
+  name: OklabToLinearRgbTransform
+  href: v0.1/api/Mu3D.Color.OklabToLinearRgbTransform.html
+  commentId: T:Mu3D.Color.OklabToLinearRgbTransform
+  fullName: Mu3D.Color.OklabToLinearRgbTransform
+  nameWithType: OklabToLinearRgbTransform
+- uid: Mu3D.Color.OklabToLinearRgbTransform.#ctor(Mu3D.Color.StandardRgbColorSpaceReference)
+  name: OklabToLinearRgbTransform(StandardRgbColorSpaceReference)
+  href: v0.1/api/Mu3D.Color.OklabToLinearRgbTransform.html#Mu3D_Color_OklabToLinearRgbTransform__ctor_Mu3D_Color_StandardRgbColorSpaceReference_
+  commentId: M:Mu3D.Color.OklabToLinearRgbTransform.#ctor(Mu3D.Color.StandardRgbColorSpaceReference)
+  name.vb: New(StandardRgbColorSpaceReference)
+  fullName: Mu3D.Color.OklabToLinearRgbTransform.OklabToLinearRgbTransform(Mu3D.Color.StandardRgbColorSpaceReference)
+  fullName.vb: Mu3D.Color.OklabToLinearRgbTransform.New(Mu3D.Color.StandardRgbColorSpaceReference)
+  nameWithType: OklabToLinearRgbTransform.OklabToLinearRgbTransform(StandardRgbColorSpaceReference)
+  nameWithType.vb: OklabToLinearRgbTransform.New(StandardRgbColorSpaceReference)
+- uid: Mu3D.Color.OklabToLinearRgbTransform.#ctor*
+  name: OklabToLinearRgbTransform
+  href: v0.1/api/Mu3D.Color.OklabToLinearRgbTransform.html#Mu3D_Color_OklabToLinearRgbTransform__ctor_
+  commentId: Overload:Mu3D.Color.OklabToLinearRgbTransform.#ctor
+  name.vb: New
+  fullName: Mu3D.Color.OklabToLinearRgbTransform.OklabToLinearRgbTransform
+  fullName.vb: Mu3D.Color.OklabToLinearRgbTransform.New
+  nameWithType: OklabToLinearRgbTransform.OklabToLinearRgbTransform
+  nameWithType.vb: OklabToLinearRgbTransform.New
+- uid: Mu3D.Color.OklabToLinearRgbTransform.Destination
+  name: Destination
+  href: v0.1/api/Mu3D.Color.OklabToLinearRgbTransform.html#Mu3D_Color_OklabToLinearRgbTransform_Destination
+  commentId: P:Mu3D.Color.OklabToLinearRgbTransform.Destination
+  fullName: Mu3D.Color.OklabToLinearRgbTransform.Destination
+  nameWithType: OklabToLinearRgbTransform.Destination
+- uid: Mu3D.Color.OklabToLinearRgbTransform.Destination*
+  name: Destination
+  href: v0.1/api/Mu3D.Color.OklabToLinearRgbTransform.html#Mu3D_Color_OklabToLinearRgbTransform_Destination_
+  commentId: Overload:Mu3D.Color.OklabToLinearRgbTransform.Destination
+  fullName: Mu3D.Color.OklabToLinearRgbTransform.Destination
+  nameWithType: OklabToLinearRgbTransform.Destination
+- uid: Mu3D.Color.OklabToLinearRgbTransform.Transform(Mu3D.Color.OklabColor)
+  name: Transform(OklabColor)
+  href: v0.1/api/Mu3D.Color.OklabToLinearRgbTransform.html#Mu3D_Color_OklabToLinearRgbTransform_Transform_Mu3D_Color_OklabColor_
+  commentId: M:Mu3D.Color.OklabToLinearRgbTransform.Transform(Mu3D.Color.OklabColor)
+  fullName: Mu3D.Color.OklabToLinearRgbTransform.Transform(Mu3D.Color.OklabColor)
+  nameWithType: OklabToLinearRgbTransform.Transform(OklabColor)
+- uid: Mu3D.Color.OklabToLinearRgbTransform.Transform*
+  name: Transform
+  href: v0.1/api/Mu3D.Color.OklabToLinearRgbTransform.html#Mu3D_Color_OklabToLinearRgbTransform_Transform_
+  commentId: Overload:Mu3D.Color.OklabToLinearRgbTransform.Transform
+  fullName: Mu3D.Color.OklabToLinearRgbTransform.Transform
+  nameWithType: OklabToLinearRgbTransform.Transform
+- uid: Mu3D.Color.OklchColor
+  name: OklchColor
+  href: v0.1/api/Mu3D.Color.OklchColor.html
+  commentId: T:Mu3D.Color.OklchColor
+  fullName: Mu3D.Color.OklchColor
+  nameWithType: OklchColor
+- uid: Mu3D.Color.OklchColor.#ctor(System.Single,System.Single,System.Single,System.Single)
+  name: OklchColor(float, float, float, float)
+  href: v0.1/api/Mu3D.Color.OklchColor.html#Mu3D_Color_OklchColor__ctor_System_Single_System_Single_System_Single_System_Single_
+  commentId: M:Mu3D.Color.OklchColor.#ctor(System.Single,System.Single,System.Single,System.Single)
+  name.vb: New(Single, Single, Single, Single)
+  fullName: Mu3D.Color.OklchColor.OklchColor(float, float, float, float)
+  fullName.vb: Mu3D.Color.OklchColor.New(Single, Single, Single, Single)
+  nameWithType: OklchColor.OklchColor(float, float, float, float)
+  nameWithType.vb: OklchColor.New(Single, Single, Single, Single)
+- uid: Mu3D.Color.OklchColor.#ctor*
+  name: OklchColor
+  href: v0.1/api/Mu3D.Color.OklchColor.html#Mu3D_Color_OklchColor__ctor_
+  commentId: Overload:Mu3D.Color.OklchColor.#ctor
+  name.vb: New
+  fullName: Mu3D.Color.OklchColor.OklchColor
+  fullName.vb: Mu3D.Color.OklchColor.New
+  nameWithType: OklchColor.OklchColor
+  nameWithType.vb: OklchColor.New
+- uid: Mu3D.Color.OklchColor.Alpha
+  name: Alpha
+  href: v0.1/api/Mu3D.Color.OklchColor.html#Mu3D_Color_OklchColor_Alpha
+  commentId: P:Mu3D.Color.OklchColor.Alpha
+  fullName: Mu3D.Color.OklchColor.Alpha
+  nameWithType: OklchColor.Alpha
+- uid: Mu3D.Color.OklchColor.Alpha*
+  name: Alpha
+  href: v0.1/api/Mu3D.Color.OklchColor.html#Mu3D_Color_OklchColor_Alpha_
+  commentId: Overload:Mu3D.Color.OklchColor.Alpha
+  fullName: Mu3D.Color.OklchColor.Alpha
+  nameWithType: OklchColor.Alpha
+- uid: Mu3D.Color.OklchColor.Chroma
+  name: Chroma
+  href: v0.1/api/Mu3D.Color.OklchColor.html#Mu3D_Color_OklchColor_Chroma
+  commentId: P:Mu3D.Color.OklchColor.Chroma
+  fullName: Mu3D.Color.OklchColor.Chroma
+  nameWithType: OklchColor.Chroma
+- uid: Mu3D.Color.OklchColor.Chroma*
+  name: Chroma
+  href: v0.1/api/Mu3D.Color.OklchColor.html#Mu3D_Color_OklchColor_Chroma_
+  commentId: Overload:Mu3D.Color.OklchColor.Chroma
+  fullName: Mu3D.Color.OklchColor.Chroma
+  nameWithType: OklchColor.Chroma
+- uid: Mu3D.Color.OklchColor.Equals(Mu3D.Color.OklchColor)
+  name: Equals(OklchColor)
+  href: v0.1/api/Mu3D.Color.OklchColor.html#Mu3D_Color_OklchColor_Equals_Mu3D_Color_OklchColor_
+  commentId: M:Mu3D.Color.OklchColor.Equals(Mu3D.Color.OklchColor)
+  fullName: Mu3D.Color.OklchColor.Equals(Mu3D.Color.OklchColor)
+  nameWithType: OklchColor.Equals(OklchColor)
+- uid: Mu3D.Color.OklchColor.Equals(System.Object)
+  name: Equals(object)
+  href: v0.1/api/Mu3D.Color.OklchColor.html#Mu3D_Color_OklchColor_Equals_System_Object_
+  commentId: M:Mu3D.Color.OklchColor.Equals(System.Object)
+  name.vb: Equals(Object)
+  fullName: Mu3D.Color.OklchColor.Equals(object)
+  fullName.vb: Mu3D.Color.OklchColor.Equals(Object)
+  nameWithType: OklchColor.Equals(object)
+  nameWithType.vb: OklchColor.Equals(Object)
+- uid: Mu3D.Color.OklchColor.Equals*
+  name: Equals
+  href: v0.1/api/Mu3D.Color.OklchColor.html#Mu3D_Color_OklchColor_Equals_
+  commentId: Overload:Mu3D.Color.OklchColor.Equals
+  fullName: Mu3D.Color.OklchColor.Equals
+  nameWithType: OklchColor.Equals
+- uid: Mu3D.Color.OklchColor.GetHashCode
+  name: GetHashCode()
+  href: v0.1/api/Mu3D.Color.OklchColor.html#Mu3D_Color_OklchColor_GetHashCode
+  commentId: M:Mu3D.Color.OklchColor.GetHashCode
+  fullName: Mu3D.Color.OklchColor.GetHashCode()
+  nameWithType: OklchColor.GetHashCode()
+- uid: Mu3D.Color.OklchColor.GetHashCode*
+  name: GetHashCode
+  href: v0.1/api/Mu3D.Color.OklchColor.html#Mu3D_Color_OklchColor_GetHashCode_
+  commentId: Overload:Mu3D.Color.OklchColor.GetHashCode
+  fullName: Mu3D.Color.OklchColor.GetHashCode
+  nameWithType: OklchColor.GetHashCode
+- uid: Mu3D.Color.OklchColor.HueDegrees
+  name: HueDegrees
+  href: v0.1/api/Mu3D.Color.OklchColor.html#Mu3D_Color_OklchColor_HueDegrees
+  commentId: P:Mu3D.Color.OklchColor.HueDegrees
+  fullName: Mu3D.Color.OklchColor.HueDegrees
+  nameWithType: OklchColor.HueDegrees
+- uid: Mu3D.Color.OklchColor.HueDegrees*
+  name: HueDegrees
+  href: v0.1/api/Mu3D.Color.OklchColor.html#Mu3D_Color_OklchColor_HueDegrees_
+  commentId: Overload:Mu3D.Color.OklchColor.HueDegrees
+  fullName: Mu3D.Color.OklchColor.HueDegrees
+  nameWithType: OklchColor.HueDegrees
+- uid: Mu3D.Color.OklchColor.Lightness
+  name: Lightness
+  href: v0.1/api/Mu3D.Color.OklchColor.html#Mu3D_Color_OklchColor_Lightness
+  commentId: P:Mu3D.Color.OklchColor.Lightness
+  fullName: Mu3D.Color.OklchColor.Lightness
+  nameWithType: OklchColor.Lightness
+- uid: Mu3D.Color.OklchColor.Lightness*
+  name: Lightness
+  href: v0.1/api/Mu3D.Color.OklchColor.html#Mu3D_Color_OklchColor_Lightness_
+  commentId: Overload:Mu3D.Color.OklchColor.Lightness
+  fullName: Mu3D.Color.OklchColor.Lightness
+  nameWithType: OklchColor.Lightness
+- uid: Mu3D.Color.OklchColor.ToString
+  name: ToString()
+  href: v0.1/api/Mu3D.Color.OklchColor.html#Mu3D_Color_OklchColor_ToString
+  commentId: M:Mu3D.Color.OklchColor.ToString
+  fullName: Mu3D.Color.OklchColor.ToString()
+  nameWithType: OklchColor.ToString()
+- uid: Mu3D.Color.OklchColor.ToString*
+  name: ToString
+  href: v0.1/api/Mu3D.Color.OklchColor.html#Mu3D_Color_OklchColor_ToString_
+  commentId: Overload:Mu3D.Color.OklchColor.ToString
+  fullName: Mu3D.Color.OklchColor.ToString
+  nameWithType: OklchColor.ToString
+- uid: Mu3D.Color.OklchColor.op_Equality(Mu3D.Color.OklchColor,Mu3D.Color.OklchColor)
+  name: operator ==(OklchColor, OklchColor)
+  href: v0.1/api/Mu3D.Color.OklchColor.html#Mu3D_Color_OklchColor_op_Equality_Mu3D_Color_OklchColor_Mu3D_Color_OklchColor_
+  commentId: M:Mu3D.Color.OklchColor.op_Equality(Mu3D.Color.OklchColor,Mu3D.Color.OklchColor)
+  name.vb: =(OklchColor, OklchColor)
+  fullName: Mu3D.Color.OklchColor.operator ==(Mu3D.Color.OklchColor, Mu3D.Color.OklchColor)
+  fullName.vb: Mu3D.Color.OklchColor.=(Mu3D.Color.OklchColor, Mu3D.Color.OklchColor)
+  nameWithType: OklchColor.operator ==(OklchColor, OklchColor)
+  nameWithType.vb: OklchColor.=(OklchColor, OklchColor)
+- uid: Mu3D.Color.OklchColor.op_Equality*
+  name: operator ==
+  href: v0.1/api/Mu3D.Color.OklchColor.html#Mu3D_Color_OklchColor_op_Equality_
+  commentId: Overload:Mu3D.Color.OklchColor.op_Equality
+  name.vb: =
+  fullName: Mu3D.Color.OklchColor.operator ==
+  fullName.vb: Mu3D.Color.OklchColor.=
+  nameWithType: OklchColor.operator ==
+  nameWithType.vb: OklchColor.=
+- uid: Mu3D.Color.OklchColor.op_Inequality(Mu3D.Color.OklchColor,Mu3D.Color.OklchColor)
+  name: operator !=(OklchColor, OklchColor)
+  href: v0.1/api/Mu3D.Color.OklchColor.html#Mu3D_Color_OklchColor_op_Inequality_Mu3D_Color_OklchColor_Mu3D_Color_OklchColor_
+  commentId: M:Mu3D.Color.OklchColor.op_Inequality(Mu3D.Color.OklchColor,Mu3D.Color.OklchColor)
+  name.vb: <>(OklchColor, OklchColor)
+  fullName: Mu3D.Color.OklchColor.operator !=(Mu3D.Color.OklchColor, Mu3D.Color.OklchColor)
+  fullName.vb: Mu3D.Color.OklchColor.<>(Mu3D.Color.OklchColor, Mu3D.Color.OklchColor)
+  nameWithType: OklchColor.operator !=(OklchColor, OklchColor)
+  nameWithType.vb: OklchColor.<>(OklchColor, OklchColor)
+- uid: Mu3D.Color.OklchColor.op_Inequality*
+  name: operator !=
+  href: v0.1/api/Mu3D.Color.OklchColor.html#Mu3D_Color_OklchColor_op_Inequality_
+  commentId: Overload:Mu3D.Color.OklchColor.op_Inequality
+  name.vb: <>
+  fullName: Mu3D.Color.OklchColor.operator !=
+  fullName.vb: Mu3D.Color.OklchColor.<>
+  nameWithType: OklchColor.operator !=
+  nameWithType.vb: OklchColor.<>
+- uid: Mu3D.Color.PerceptualColorConverter
+  name: PerceptualColorConverter
+  href: v0.1/api/Mu3D.Color.PerceptualColorConverter.html
+  commentId: T:Mu3D.Color.PerceptualColorConverter
+  fullName: Mu3D.Color.PerceptualColorConverter
+  nameWithType: PerceptualColorConverter
+- uid: Mu3D.Color.PerceptualColorConverter.FromLab(Mu3D.Color.CieLabColor,Mu3D.Color.StandardRgbColorSpaceReference)
+  name: FromLab(CieLabColor, StandardRgbColorSpaceReference)
+  href: v0.1/api/Mu3D.Color.PerceptualColorConverter.html#Mu3D_Color_PerceptualColorConverter_FromLab_Mu3D_Color_CieLabColor_Mu3D_Color_StandardRgbColorSpaceReference_
+  commentId: M:Mu3D.Color.PerceptualColorConverter.FromLab(Mu3D.Color.CieLabColor,Mu3D.Color.StandardRgbColorSpaceReference)
+  fullName: Mu3D.Color.PerceptualColorConverter.FromLab(Mu3D.Color.CieLabColor, Mu3D.Color.StandardRgbColorSpaceReference)
+  nameWithType: PerceptualColorConverter.FromLab(CieLabColor, StandardRgbColorSpaceReference)
+- uid: Mu3D.Color.PerceptualColorConverter.FromLab*
+  name: FromLab
+  href: v0.1/api/Mu3D.Color.PerceptualColorConverter.html#Mu3D_Color_PerceptualColorConverter_FromLab_
+  commentId: Overload:Mu3D.Color.PerceptualColorConverter.FromLab
+  fullName: Mu3D.Color.PerceptualColorConverter.FromLab
+  nameWithType: PerceptualColorConverter.FromLab
+- uid: Mu3D.Color.PerceptualColorConverter.FromLch(Mu3D.Color.CieLchColor)
+  name: FromLch(CieLchColor)
+  href: v0.1/api/Mu3D.Color.PerceptualColorConverter.html#Mu3D_Color_PerceptualColorConverter_FromLch_Mu3D_Color_CieLchColor_
+  commentId: M:Mu3D.Color.PerceptualColorConverter.FromLch(Mu3D.Color.CieLchColor)
+  fullName: Mu3D.Color.PerceptualColorConverter.FromLch(Mu3D.Color.CieLchColor)
+  nameWithType: PerceptualColorConverter.FromLch(CieLchColor)
+- uid: Mu3D.Color.PerceptualColorConverter.FromLch*
+  name: FromLch
+  href: v0.1/api/Mu3D.Color.PerceptualColorConverter.html#Mu3D_Color_PerceptualColorConverter_FromLch_
+  commentId: Overload:Mu3D.Color.PerceptualColorConverter.FromLch
+  fullName: Mu3D.Color.PerceptualColorConverter.FromLch
+  nameWithType: PerceptualColorConverter.FromLch
+- uid: Mu3D.Color.PerceptualColorConverter.FromOklab(Mu3D.Color.OklabColor,Mu3D.Color.StandardRgbColorSpaceReference)
+  name: FromOklab(OklabColor, StandardRgbColorSpaceReference)
+  href: v0.1/api/Mu3D.Color.PerceptualColorConverter.html#Mu3D_Color_PerceptualColorConverter_FromOklab_Mu3D_Color_OklabColor_Mu3D_Color_StandardRgbColorSpaceReference_
+  commentId: M:Mu3D.Color.PerceptualColorConverter.FromOklab(Mu3D.Color.OklabColor,Mu3D.Color.StandardRgbColorSpaceReference)
+  fullName: Mu3D.Color.PerceptualColorConverter.FromOklab(Mu3D.Color.OklabColor, Mu3D.Color.StandardRgbColorSpaceReference)
+  nameWithType: PerceptualColorConverter.FromOklab(OklabColor, StandardRgbColorSpaceReference)
+- uid: Mu3D.Color.PerceptualColorConverter.FromOklab*
+  name: FromOklab
+  href: v0.1/api/Mu3D.Color.PerceptualColorConverter.html#Mu3D_Color_PerceptualColorConverter_FromOklab_
+  commentId: Overload:Mu3D.Color.PerceptualColorConverter.FromOklab
+  fullName: Mu3D.Color.PerceptualColorConverter.FromOklab
+  nameWithType: PerceptualColorConverter.FromOklab
+- uid: Mu3D.Color.PerceptualColorConverter.FromOklch(Mu3D.Color.OklchColor)
+  name: FromOklch(OklchColor)
+  href: v0.1/api/Mu3D.Color.PerceptualColorConverter.html#Mu3D_Color_PerceptualColorConverter_FromOklch_Mu3D_Color_OklchColor_
+  commentId: M:Mu3D.Color.PerceptualColorConverter.FromOklch(Mu3D.Color.OklchColor)
+  fullName: Mu3D.Color.PerceptualColorConverter.FromOklch(Mu3D.Color.OklchColor)
+  nameWithType: PerceptualColorConverter.FromOklch(OklchColor)
+- uid: Mu3D.Color.PerceptualColorConverter.FromOklch*
+  name: FromOklch
+  href: v0.1/api/Mu3D.Color.PerceptualColorConverter.html#Mu3D_Color_PerceptualColorConverter_FromOklch_
+  commentId: Overload:Mu3D.Color.PerceptualColorConverter.FromOklch
+  fullName: Mu3D.Color.PerceptualColorConverter.FromOklch
+  nameWithType: PerceptualColorConverter.FromOklch
+- uid: Mu3D.Color.PerceptualColorConverter.ToLab(Mu3D.Color.LinearRgba)
+  name: ToLab(LinearRgba)
+  href: v0.1/api/Mu3D.Color.PerceptualColorConverter.html#Mu3D_Color_PerceptualColorConverter_ToLab_Mu3D_Color_LinearRgba_
+  commentId: M:Mu3D.Color.PerceptualColorConverter.ToLab(Mu3D.Color.LinearRgba)
+  fullName: Mu3D.Color.PerceptualColorConverter.ToLab(Mu3D.Color.LinearRgba)
+  nameWithType: PerceptualColorConverter.ToLab(LinearRgba)
+- uid: Mu3D.Color.PerceptualColorConverter.ToLab*
+  name: ToLab
+  href: v0.1/api/Mu3D.Color.PerceptualColorConverter.html#Mu3D_Color_PerceptualColorConverter_ToLab_
+  commentId: Overload:Mu3D.Color.PerceptualColorConverter.ToLab
+  fullName: Mu3D.Color.PerceptualColorConverter.ToLab
+  nameWithType: PerceptualColorConverter.ToLab
+- uid: Mu3D.Color.PerceptualColorConverter.ToLch(Mu3D.Color.CieLabColor)
+  name: ToLch(CieLabColor)
+  href: v0.1/api/Mu3D.Color.PerceptualColorConverter.html#Mu3D_Color_PerceptualColorConverter_ToLch_Mu3D_Color_CieLabColor_
+  commentId: M:Mu3D.Color.PerceptualColorConverter.ToLch(Mu3D.Color.CieLabColor)
+  fullName: Mu3D.Color.PerceptualColorConverter.ToLch(Mu3D.Color.CieLabColor)
+  nameWithType: PerceptualColorConverter.ToLch(CieLabColor)
+- uid: Mu3D.Color.PerceptualColorConverter.ToLch*
+  name: ToLch
+  href: v0.1/api/Mu3D.Color.PerceptualColorConverter.html#Mu3D_Color_PerceptualColorConverter_ToLch_
+  commentId: Overload:Mu3D.Color.PerceptualColorConverter.ToLch
+  fullName: Mu3D.Color.PerceptualColorConverter.ToLch
+  nameWithType: PerceptualColorConverter.ToLch
+- uid: Mu3D.Color.PerceptualColorConverter.ToOklab(Mu3D.Color.LinearRgba)
+  name: ToOklab(LinearRgba)
+  href: v0.1/api/Mu3D.Color.PerceptualColorConverter.html#Mu3D_Color_PerceptualColorConverter_ToOklab_Mu3D_Color_LinearRgba_
+  commentId: M:Mu3D.Color.PerceptualColorConverter.ToOklab(Mu3D.Color.LinearRgba)
+  fullName: Mu3D.Color.PerceptualColorConverter.ToOklab(Mu3D.Color.LinearRgba)
+  nameWithType: PerceptualColorConverter.ToOklab(LinearRgba)
+- uid: Mu3D.Color.PerceptualColorConverter.ToOklab*
+  name: ToOklab
+  href: v0.1/api/Mu3D.Color.PerceptualColorConverter.html#Mu3D_Color_PerceptualColorConverter_ToOklab_
+  commentId: Overload:Mu3D.Color.PerceptualColorConverter.ToOklab
+  fullName: Mu3D.Color.PerceptualColorConverter.ToOklab
+  nameWithType: PerceptualColorConverter.ToOklab
+- uid: Mu3D.Color.PerceptualColorConverter.ToOklch(Mu3D.Color.OklabColor)
+  name: ToOklch(OklabColor)
+  href: v0.1/api/Mu3D.Color.PerceptualColorConverter.html#Mu3D_Color_PerceptualColorConverter_ToOklch_Mu3D_Color_OklabColor_
+  commentId: M:Mu3D.Color.PerceptualColorConverter.ToOklch(Mu3D.Color.OklabColor)
+  fullName: Mu3D.Color.PerceptualColorConverter.ToOklch(Mu3D.Color.OklabColor)
+  nameWithType: PerceptualColorConverter.ToOklch(OklabColor)
+- uid: Mu3D.Color.PerceptualColorConverter.ToOklch*
+  name: ToOklch
+  href: v0.1/api/Mu3D.Color.PerceptualColorConverter.html#Mu3D_Color_PerceptualColorConverter_ToOklch_
+  commentId: Overload:Mu3D.Color.PerceptualColorConverter.ToOklch
+  fullName: Mu3D.Color.PerceptualColorConverter.ToOklch
+  nameWithType: PerceptualColorConverter.ToOklch
 - uid: Mu3D.Color.PixelPrecision
   name: PixelPrecision
   href: v0.1/api/Mu3D.Color.PixelPrecision.html
