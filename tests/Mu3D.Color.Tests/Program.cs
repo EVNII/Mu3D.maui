@@ -2,6 +2,7 @@ using System.Numerics;
 using Mu3D.Color;
 
 StandardEncodingTests.Run();
+PaintingColorSpaceTests.Run();
 
 StandardRgbColorSpaceReference srgb = StandardColorSpaces.LinearSrgb;
 StandardRgbColorSpaceReference aces = StandardColorSpaces.AcesCg;

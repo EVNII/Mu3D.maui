@@ -10,6 +10,7 @@ List<string> failures = [];
 ColorSpaceReference sourceSpace = StandardColorSpaces.AcesCg;
 ColorSpaceReference destinationSpace = StandardColorSpaces.LinearRec2020;
 LinearRgbLut3D table = MakeTable(ColorLutRangePolicy.Clamp);
+LinearRgbLut3D paintingTable = PaintingTransformChecks.CreateTable(Expect);
 using RecordingGraphicsDevice device = new();
 LinearRgbLutGpuTransform transform = new(device, table, PixelPrecision.Float32);
 Expect(transform.SourceSpace == sourceSpace && transform.DestinationSpace == destinationSpace &&
@@ -114,6 +115,8 @@ if (args.Contains("--native", StringComparer.Ordinal))
         foreach (GraphicsTextureFormat inputFormat in new[] { GraphicsTextureFormat.Rgba16Float, GraphicsTextureFormat.Rgba32Float })
         {
             await VerifyNative(native, inputFormat, outputPrecision);
+            await VerifyNative(native, inputFormat, outputPrecision, paintingTable,
+                PaintingTransformChecks.CreateGpuPixels(), "painting Lab chroma edit");
         }
         Console.WriteLine("Headless native FP16/FP32 texture LUT comparisons completed; no surface or UI was created.");
     }
@@ -139,9 +142,11 @@ LinearRgbLut3D MakeTable(ColorLutRangePolicy policy) => LinearRgbLut3D.Bake(3,
 static GraphicsTexture Texture(GraphicsDevice gpu, GraphicsTextureFormat format, GraphicsTextureUsage usage) =>
     gpu.CreateTexture(new GraphicsTextureDescriptor(new GraphicsExtent3D(4, 2), format, usage));
 
-async Task VerifyNative(WgpuGraphicsDevice gpu, GraphicsTextureFormat inputFormat, PixelPrecision outputPrecision)
+async Task VerifyNative(WgpuGraphicsDevice gpu, GraphicsTextureFormat inputFormat, PixelPrecision outputPrecision,
+    LinearRgbLut3D? referenceTable = null, Vector4[]? suppliedPixels = null, string scenario = "baseline")
 {
-    Vector4[] pixels =
+    referenceTable ??= table;
+    Vector4[] pixels = suppliedPixels ??
     [
         new(-1f, -1f, -1f, 0f), new(4f, 4f, 4f, 1f), new(0.13f, 1.82f, 3.4f, 0.333f), new(-0.5f, 2.6f, 0.7f, 0.5f),
         new(-8f, 9f, 2f, 0.25f), new(2.5f, 0f, -0.27f, 0.8f), new(0f, 0f, 0f, 0.4f), new(3f, 0.51f, 3.1f, 0.75f),
@@ -161,10 +166,10 @@ async Task VerifyNative(WgpuGraphicsDevice gpu, GraphicsTextureFormat inputForma
     {
         gpu.Queue.WriteTexture(input, 0, default, input.Descriptor.Size, MemoryMarshal.AsBytes(pixels.AsSpan()), 64, 2);
     }
-    using LinearRgbLutGpuTransform gpuTransform = new(gpu, table, outputPrecision);
+    using LinearRgbLutGpuTransform gpuTransform = new(gpu, referenceTable, outputPrecision);
     using GraphicsTexture output = Texture(gpu, gpuTransform.OutputFormat,
         GraphicsTextureUsage.RenderAttachment | GraphicsTextureUsage.CopySource);
-    gpuTransform.Apply(input, sourceSpace, output, destinationSpace);
+    gpuTransform.Apply(input, referenceTable.SourceSpace, output, referenceTable.DestinationSpace);
     using GraphicsBuffer readback = gpu.CreateBuffer(new GraphicsBufferDescriptor(512,
         GraphicsBufferUsage.CopyDestination | GraphicsBufferUsage.MapRead));
     using GraphicsCommandEncoder encoder = gpu.CreateCommandEncoder("Color LUT numerical verification");
@@ -172,9 +177,11 @@ async Task VerifyNative(WgpuGraphicsDevice gpu, GraphicsTextureFormat inputForma
     using GraphicsCommandBuffer commands = encoder.Finish();
     gpu.Queue.Submit(commands);
     byte[] bytes = await readback.ReadAsync(0, 512).WaitAsync(TimeSpan.FromSeconds(15));
+    float maximumError = 0;
     for (int i = 0; i < pixels.Length; i++)
     {
-        LinearRgba expected = table.Transform(new LinearRgba(pixels[i].X, pixels[i].Y, pixels[i].Z, pixels[i].W, sourceSpace));
+        LinearRgba expected = referenceTable.Transform(new LinearRgba(
+            pixels[i].X, pixels[i].Y, pixels[i].Z, pixels[i].W, referenceTable.SourceSpace));
         int offset = i / 4 * 256 + i % 4 * (outputPrecision == PixelPrecision.Float16 ? 8 : 16);
         Vector4 actual = outputPrecision == PixelPrecision.Float16
             ? new Vector4((float)BitConverter.ToHalf(bytes, offset), (float)BitConverter.ToHalf(bytes, offset + 2),
@@ -185,10 +192,39 @@ async Task VerifyNative(WgpuGraphicsDevice gpu, GraphicsTextureFormat inputForma
         float tolerance = outputPrecision == PixelPrecision.Float16 ? 0.004f : 1e-5f;
         for (int channel = 0; channel < 4; channel++)
         {
-            Expect(float.IsFinite(actual[channel]) && MathF.Abs(actual[channel] - expectedValue[channel]) <= tolerance,
-                $"native {inputFormat}->{outputPrecision} pixel {i} channel {channel}: {actual[channel]} vs {expectedValue[channel]}");
+            float error = MathF.Abs(actual[channel] - expectedValue[channel]);
+            maximumError = MathF.Max(maximumError, error);
+            Expect(float.IsFinite(actual[channel]) && error <= tolerance,
+                $"native {scenario} {inputFormat}->{outputPrecision} pixel {i} channel {channel}: {actual[channel]} vs {expectedValue[channel]}");
         }
+        (float alphaMinimum, float alphaMaximum) = AlphaStorageInterval(expected.Alpha, outputPrecision);
+        Expect(float.IsFinite(actual.W) && actual.W >= alphaMinimum && actual.W <= alphaMaximum,
+            $"native {scenario} {inputFormat}->{outputPrecision} pixel {i} alpha {actual.W:G9} from {expected.Alpha:G9} " +
+            $"must lie in [{alphaMinimum:G9}, {alphaMaximum:G9}] (storage ULP {alphaMaximum - alphaMinimum:G9})");
+        if (outputPrecision == PixelPrecision.Float16 && actual.W != (float)(Half)expected.Alpha)
+            Console.WriteLine($"{scenario} {inputFormat}->Float16 pixel {i} alpha storage: " +
+                $"source {expected.Alpha:G9}, actual {actual.W:G9}, CPU nearest {(float)(Half)expected.Alpha:G9}, " +
+                $"adjacent bounds [{alphaMinimum:G9}, {alphaMaximum:G9}].");
     }
+    Console.WriteLine($"{scenario} GPU vs CPU LUT {inputFormat}->{outputPrecision}: " +
+        $"max RGBA error {maximumError:G9}; precision tolerance {(outputPrecision == PixelPrecision.Float16 ? 0.004f : 1e-5f):G9}.");
+}
+
+static (float Minimum, float Maximum) AlphaStorageInterval(float alpha, PixelPrecision precision)
+{
+    if (precision == PixelPrecision.Float32)
+        return (alpha, alpha);
+    Half nearest = (Half)alpha;
+    float rounded = (float)nearest;
+    // An exactly representable alpha, including 0 and 1, needs no storage rounding.
+    if (rounded == alpha)
+        return (alpha, alpha);
+    // WGSL conversion permits either adjacent representable value, not only CPU ties-to-even.
+    // https://www.w3.org/TR/WGSL/#floating-point-conversion
+    ushort bits = BitConverter.HalfToUInt16Bits(nearest);
+    return rounded < alpha
+        ? (rounded, (float)BitConverter.UInt16BitsToHalf((ushort)(bits + 1)))
+        : ((float)BitConverter.UInt16BitsToHalf((ushort)(bits - 1)), rounded);
 }
 
 void Expect(bool condition, string message)

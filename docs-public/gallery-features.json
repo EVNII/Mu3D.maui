@@ -187,6 +187,11 @@
       "article": "articles/features/color-management.html"
     },
     {
+      "id": "painting-color-spaces",
+      "route": "gallery-painting-color-spaces",
+      "article": "articles/features/painting-color-spaces.html"
+    },
+    {
       "id": "cmyk-printing",
       "route": "gallery-cmyk-printing",
       "article": "articles/features/cmyk-printing.html"

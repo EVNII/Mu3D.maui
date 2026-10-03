@@ -32,6 +32,7 @@ internal static class GalleryPageFactory
         "openpbr-materialx" => new Pages.OpenPbrPage(),
         "openpbr-white-furnace" => new Legacy.OpenPbrFurnacePage(),
         "color-management" => new Pages.ColorRampsPage(),
+        "painting-color-spaces" => new Pages.PaintingColorSpacesPage(),
 #if MU3D_PRINTING
         "cmyk-printing" => new Legacy.CmykPrintingPage(),
 #endif

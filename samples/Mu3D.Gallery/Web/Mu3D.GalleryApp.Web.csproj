@@ -38,7 +38,7 @@
     <Compile Include="../Legacy/Pages/ColorComparisonRenderer.cs" Link="Examples/ColorComparisonRenderer.cs" />
     <Compile Include="../Legacy/Pages/GltfScenePresenter.cs;../Legacy/Pages/KtxTextureLabPresenter.cs;../Legacy/Pages/ModelLabPresenter.cs;../Legacy/Pages/AnimationLabPresenter.cs;../Legacy/Pages/GalleryEnvironment.cs" Link="Examples/%(Filename)%(Extension)" />
     <EmbeddedResource Include="../Legacy/Pages/*Page.xaml" LogicalName="Mu3D.GalleryApp.NativePages.%(Filename).xaml" />
-    <EmbeddedResource Include="../Pages/EmissiveMaterialPage.xaml;../Pages/TranslucentCanvasPage.xaml;../Pages/LicensePage.xaml"
+    <EmbeddedResource Include="../Pages/EmissiveMaterialPage.xaml;../Pages/TranslucentCanvasPage.xaml;../Pages/PaintingColorSpacesPage.xaml;../Pages/LicensePage.xaml"
                       LogicalName="Mu3D.GalleryApp.NativePages.%(Filename).xaml" />
     <Content Include="../Resources/Raw/**" Link="wwwroot/assets/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="../Legacy/Pages/*.xaml;../Legacy/Pages/*.cs;../Legacy/Examples/*.cs" Exclude="../Legacy/Pages/CmykPrinting*;../Legacy/Examples/CmykPrintingExample.cs" Link="wwwroot/GallerySource/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />

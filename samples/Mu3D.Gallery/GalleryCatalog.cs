@@ -44,6 +44,9 @@ internal static class GalleryCatalog
         entries.Add(new("translucent-canvas", "Translucent HDR Canvas",
             "Paint HDR dabs in ACEScg and inspect explicit surface alpha and its fallback.",
             "basics", "Basics", "hdr-canvas"));
+        entries.Add(new("painting-color-spaces", "Painting Color Spaces",
+            "Adjust Lab, LCh, OKLab, OKLCh, YUV, YCbCr, HSL and HSV with live color ramps. 绘画调色空间",
+            "basics", "Basics", "painting-color-spaces"));
         entries.Add(new("procedural-feed", "Procedural 3D Feed",
             "Inspect shared-device surface proxies using generated geometry and scroll visibility.",
             "assets", "Assets", "gltf-product-feed"));

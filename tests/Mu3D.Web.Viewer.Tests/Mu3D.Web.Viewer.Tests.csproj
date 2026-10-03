@@ -5,6 +5,8 @@
     <DefineConstants Condition="'$(EnableMu3DPrinting)' == 'true'">$(DefineConstants);MU3D_PRINTING</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../Mu3D.Color.Tests/PaintingColorSpaceTests.cs" Link="PaintingColorSpaceTests.cs" />
+    <Compile Include="../Mu3D.Color.Tests/ColorBatchTests.cs" Link="ColorBatchTests.cs" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="10.0.12" />
     <Compile Include="../../samples/Mu3D.Gallery/Web/Infrastructure/GalleryPage.cs" Link="Gallery/GalleryPage.cs" />
     <Compile Include="../../samples/Mu3D.Gallery/GalleryCatalog.cs" Link="Gallery/GalleryCatalog.cs" />
@@ -22,9 +24,9 @@
     <Compile Include="../../samples/Mu3D.Gallery/Web/Infrastructure/SharedValidationScene.cs" Link="SharedValidationScene.cs" />
     <Compile Include="../../samples/Mu3D.Gallery/Web/Infrastructure/NativeGalleryScene.cs;../../samples/Mu3D.Gallery/Web/Infrastructure/ProgressGalleryExample.cs;../../samples/Mu3D.Gallery/Web/Infrastructure/GalleryPlayable.cs" Link="Gallery/%(Filename)%(Extension)" />
     <Compile Include="../../samples/Mu3D.Gallery/Legacy/Examples/SceneAssetExample.cs" Link="Gallery/SceneAssetExample.cs" />
-    <Compile Include="../../samples/Mu3D.Gallery/Legacy/Examples/EmissiveMaterialExample.cs;../../samples/Mu3D.Gallery/Legacy/Examples/HdrCanvasExample.cs;../../samples/Mu3D.Gallery/Legacy/Examples/ProceduralFeedExample.cs" Link="Gallery/%(Filename)%(Extension)" />
+    <Compile Include="../../samples/Mu3D.Gallery/Legacy/Examples/EmissiveMaterialExample.cs;../../samples/Mu3D.Gallery/Legacy/Examples/HdrCanvasExample.cs;../../samples/Mu3D.Gallery/Legacy/Examples/ProceduralFeedExample.cs;../../samples/Mu3D.Gallery/Legacy/Examples/PaintingColorSpacesExample.cs;../../samples/Mu3D.Gallery/Legacy/Examples/PaintingColorPickerLayout.cs;../../samples/Mu3D.Gallery/Legacy/Examples/PaintingColorPickerPolicy.cs;../../samples/Mu3D.Gallery/Legacy/Examples/PaintingColorPickerRenderer.cs" Link="Gallery/%(Filename)%(Extension)" />
     <EmbeddedResource Include="../../samples/Mu3D.Gallery/Legacy/Pages/*Page.xaml" LogicalName="Mu3D.GalleryApp.NativePages.%(Filename).xaml" />
-    <EmbeddedResource Include="../../samples/Mu3D.Gallery/Pages/EmissiveMaterialPage.xaml;../../samples/Mu3D.Gallery/Pages/TranslucentCanvasPage.xaml" LogicalName="Mu3D.GalleryApp.NativePages.%(Filename).xaml" />
+    <EmbeddedResource Include="../../samples/Mu3D.Gallery/Pages/EmissiveMaterialPage.xaml;../../samples/Mu3D.Gallery/Pages/TranslucentCanvasPage.xaml;../../samples/Mu3D.Gallery/Pages/PaintingColorSpacesPage.xaml" LogicalName="Mu3D.GalleryApp.NativePages.%(Filename).xaml" />
     <Compile Include="../../samples/Mu3D.Gallery/Legacy/GallerySourceCatalog.cs;../../samples/Mu3D.Gallery/Legacy/GalleryNavigationCatalog.cs;../../samples/Mu3D.Gallery/Legacy/GalleryFeatureCatalog.cs;../../samples/Mu3D.Gallery/Legacy/GalleryRoutes.cs;../../samples/Mu3D.Gallery/Web/Infrastructure/GalleryWebCatalog.cs" Link="Gallery/%(Filename)%(Extension)" />
     <EmbeddedResource Include="../../samples/Mu3D.Gallery/Legacy/Pages/*.cs;../../samples/Mu3D.Gallery/Legacy/Examples/*.cs" Exclude="../../samples/Mu3D.Gallery/Legacy/Pages/CmykPrinting*;../../samples/Mu3D.Gallery/Legacy/Examples/CmykPrintingExample.cs" LogicalName="Mu3D.GalleryApp.Sources.%(Filename)%(Extension)" />
     <EmbeddedResource Include="../../samples/Mu3D.Gallery/Legacy/Pages/CmykPrinting*.cs;../../samples/Mu3D.Gallery/Legacy/Examples/CmykPrintingExample.cs" Condition="'$(EnableMu3DPrinting)' == 'true'" LogicalName="Mu3D.GalleryApp.Sources.%(Filename)%(Extension)" />

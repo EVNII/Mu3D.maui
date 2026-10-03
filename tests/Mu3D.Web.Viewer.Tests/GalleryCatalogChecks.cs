@@ -7,8 +7,8 @@ internal static class GalleryCatalogChecks
     internal static void Validate(Action<bool, string> check)
     {
         IReadOnlyList<GalleryEntry> entries = GalleryCatalog.Examples;
-        check(entries.Count == GalleryNavigationCatalog.Examples.Count + 5,
-            "Adaptive Gallery must retain every focused example and its five additional entries.");
+        check(entries.Count == GalleryNavigationCatalog.Examples.Count + 6,
+            "Adaptive Gallery must retain every focused example and its six additional entries.");
         check(entries.Select(entry => entry.Id).Distinct(StringComparer.Ordinal).Count() == entries.Count,
             "Navigation IDs must be unique.");
         check(GalleryCatalog.Sections.Count == 5 && GalleryCatalog.Sections.All(section =>
@@ -27,8 +27,12 @@ internal static class GalleryCatalogChecks
         HashSet<string> features = GalleryNavigationCatalog.Examples
             .Select(example => GalleryFeatureCatalog.FeatureId(example.Route)).ToHashSet(StringComparer.Ordinal);
         features.Add(GalleryFeatureCatalog.FeatureId(GalleryRoutes.ModelLab));
+        features.Add("painting-color-spaces");
         check(entries.All(entry => entry.FeatureId is null || features.Contains(entry.FeatureId)),
-            "Additional examples must link to existing documented features.");
+            "Additional examples must link to a documented feature.");
+        check(GalleryCatalog.Search("Lab").Any(entry => entry.Id == "painting-color-spaces") &&
+            GalleryCatalog.Search("绘画").Any(entry => entry.Id == "painting-color-spaces"),
+            "Painting coordinates are searchable by model and purpose.");
         check(GalleryCatalog.Search(null).SequenceEqual(entries) && GalleryCatalog.Search(" \t\n").SequenceEqual(entries),
             "Empty searches preserve the complete catalog and its stable order.");
         check(GalleryCatalog.Search("OpenPBR WHITE").Select(entry => entry.Id)
@@ -44,9 +48,9 @@ internal static class GalleryCatalogChecks
         check(!GalleryCatalog.Search("OpenPBR", "assets").Any(), "Search must respect its category scope.");
         ValidateWebNavigation(check);
 #if MU3D_PRINTING
-        check(entries.Count == 43 && entries.Any(entry => entry.Id == "cmyk-printing"), "Printing builds retain CMYK.");
+        check(entries.Count == 44 && entries.Any(entry => entry.Id == "cmyk-printing"), "Printing builds retain CMYK.");
 #else
-        check(entries.Count == 42 && !entries.Any(entry => entry.Id == "cmyk-printing"), "Printing-free builds omit CMYK only.");
+        check(entries.Count == 43 && !entries.Any(entry => entry.Id == "cmyk-printing"), "Printing-free builds omit CMYK only.");
 #endif
     }
 

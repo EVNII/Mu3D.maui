@@ -5,10 +5,10 @@ MAUI/XAML and native presentation; there is no Blazor Hybrid/WebView conversion.
 browser navigation and controls. One .NET runtime uses the shared Core, renderer and Toolkit;
 thin Canvas/input handlers connect the existing experimental WebGPU bridge.
 
-Native and Web use the same portable `GalleryCatalog`: **43 entries** (42 with
+Native and Web use the same portable `GalleryCatalog`: **44 entries** (43 with
 `EnableMu3DPrinting=false`) in Basics, Rendering, Toolkit, Assets and About, with shared case IDs,
 order and search policy. This includes all 38 focused cases, Advanced Material Conformance,
-Emissive Material, Translucent HDR Canvas, Procedural 3D Feed and Licenses. OpenPBR/MaterialX,
+Emissive Material, Translucent HDR Canvas, Painting Color Spaces, Procedural 3D Feed and Licenses. OpenPBR/MaterialX,
 white furnace and Device/Surface Probe retain their actual examples. The old `pbr-material` URL
 redirects to the `pbr-material-textures` example.
 
@@ -79,6 +79,11 @@ including `artifacts/validation/next-step/profiles` when those test inputs are p
 
 Existing dirty or incorrectly pinned codec checkouts are preserved and rejected. The helper
 selects `MU3D_DOTNET`, the repository-local SDK or `PATH`; `--dotnet` overrides it.
+After publishing, it reuses the desktop host-check consumer to read the actual trimmed Gallery
+assembly metadata. Every shared catalog entry and the navigation/alias routes must retain a
+public Razor component with a `RouteAttribute`. A missing page fails the build helper, even if
+the HTTP server returns its SPA startup page successfully. Rendering and live controls still
+require browser acceptance.
 
 ## GitHub Pages
 

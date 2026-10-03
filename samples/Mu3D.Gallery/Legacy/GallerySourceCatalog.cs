@@ -9,6 +9,7 @@ internal static class GallerySourceCatalog
         "openpbr-materialx" => "OpenPbrPage", "color-management" => "ColorRampsPage",
         "color-lut" => "ColorLutPage", "emissive-material" => "EmissiveMaterialPage",
         "translucent-canvas" => "TranslucentCanvasPage", "procedural-feed" => "FeedPage",
+        "painting-color-spaces" => "PaintingColorSpacesPage",
         _ => null,
     };
 
@@ -26,6 +27,7 @@ internal static class GallerySourceCatalog
         "FeedPage" => ["ProceduralFeedExample.cs"],
         "ColorRampsPage" => ["ColorComparisonRenderer.cs"],
         "ColorLutPage" => ["ColorLutExample.cs"],
+        "PaintingColorSpacesPage" => ["PaintingColorSpacesExample.cs", "PaintingColorPickerLayout.cs", "PaintingColorPickerPolicy.cs", "PaintingColorPickerRenderer.cs"],
         "HdrProbePage" => ["SurfaceReferencePattern.cs"],
         _ => [],
         };

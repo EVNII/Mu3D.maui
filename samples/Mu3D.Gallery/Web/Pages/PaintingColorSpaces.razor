@@ -1,0 +1,143 @@
+@page "/examples/painting-color-spaces"
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+@using System.Globalization
+@using Mu3D.GalleryApp.Examples
+@using Mu3D.Graphics
+
+<main class="painting-picker">
+<h1>绘画选色</h1>
+<p class="description">拖动选区探索颜色；切换模型会保留当前色。</p>
+<div class="controls"><label>色彩模型 <select @key="selectionRevision" value="@example.Model" @onchange="SelectModel">
+@for (int i = 0; i < PaintingColorSpacesExample.Models.Length; i++) { <option value="@i">@PaintingColorSpacesExample.Models[i]</option> }
+</select></label><button @onclick="Reset">重置颜色</button></div>
+<div class="painting-workspace">
+    <section aria-label="可拖动选色区">
+        <p class="painting-axes">@PlaneLabel · 右上：当前色</p>
+        <div @ref="pickerElement" class="painting-surface">
+            <GalleryCanvas @ref="canvas" Title="Painting color picker" Draw="Draw" Disconnected="example.Dispose" />
+            <div class="painting-overlays">
+            @for (int i = 0; i < 3; i++)
+            {
+                int channel = i; var range = example.GetChannel(channel);
+                <label class="painting-preview" style="top:@(Number(PaintingColorPickerLayout.Track(channel).Y * 100))%">
+                    <span>@range.Name · @Number(example.GetValue(channel)) <small>@Number(range.Minimum) – @Number(range.Maximum)</small></span>
+                    <input aria-label="@($"{range.Name} 颜色预览滑块")" type="range" min="@Number(range.Minimum)" max="@Number(range.Maximum)"
+                        step="@Number(range.Step)" @bind:get="example.GetValue(channel)" @bind:set="value => SetChannel(channel, value)" @bind:event="oninput" />
+                </label>
+            }
+            </div>
+        </div>
+        <p class="description">三条轨道预览只改变对应通道后的颜色。灰色棋盘区不可选，白线标出边界；色相探索固定当前 OKLCh 明度与彩度。</p>
+    </section>
+    <section class="painting-values" aria-label="当前颜色与精确坐标">
+        <h2>当前颜色</h2>
+        <div class="painting-channel" @key="(example.Model, inputRevision)">
+        @for (int i = 0; i < 3; i++)
+        {
+            int channel = i; var range = example.GetChannel(channel);
+            <label>@range.Name <input aria-label="@($"{range.Name} 精确数值")" type="number" step="@Number(range.Step)"
+                value="@Number(example.GetValue(channel))" @onchange="e => SetValue(channel, e)" /></label>
+        }
+        </div>
+        <p class="painting-readout">@example.Readout</p>
+        @if (boundary.Length > 0) { <p role="status" class="description">@boundary</p> }
+        @if (error.Length > 0) { <p role="alert" class="painting-error">@error</p> }
+        <details><summary>模型与预览说明</summary>
+            <p>@example.Notes</p>
+            <p>选色限制最终线性 sRGB 的 RGB 分量非负；Lab 的 a*/b*、YUV 色差等坐标仍可为负，HDR 大于 1 的颜色保留。
+            精确数值可超出轨道范围，遇到不可选区域会停在边界。色相探索采用固定 OKLCh L/C，不保证相同物理亮度。</p>
+        </details>
+    </section>
+</div>
+</main>
+
+@code {
+    private readonly PaintingColorSpacesExample example = new();
+    private GalleryCanvas? canvas;
+    private ElementReference pickerElement;
+    private IJSObjectReference? module, picker;
+    private DotNetObjectReference<PaintingColorSpaces>? reference;
+    private Task? startup, disposal;
+    private bool disposed;
+    private string error = "", boundary = "";
+    private int selectionRevision, inputRevision;
+    private string PlaneLabel => example.Shape == 1 ? "色相沿圆周 · 彩度从中心向外" :
+        $"横向 {example.GetChannel(example.PlaneX).Name} · 向上 {example.GetChannel(example.PlaneY).Name}";
+    private static string Number(float value) => value.ToString("0.######", CultureInfo.InvariantCulture);
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    { if (firstRender) { startup = StartPicker(); await startup; } }
+    private async Task StartPicker()
+    {
+        try
+        {
+            module = await JS.InvokeAsync<IJSObjectReference>("import", "./painting-picker.mjs");
+            if (disposed) return;
+            reference = DotNetObjectReference.Create(this);
+            picker = await module.InvokeAsync<IJSObjectReference>("attach", pickerElement, reference);
+        }
+        catch (JSException failure) { if (!disposed) { error = failure.Message; await InvokeAsync(StateHasChanged); } }
+    }
+    [JSInvokable]
+    public int BeginPick(float u, float v, float width, float height) => disposed || width <= 0 || height <= 0 ? 0 :
+        new PaintingColorPickerLayout(width, height).RegionAt(u, v);
+    [JSInvokable]
+    public async Task Pick(int region, float u, float v, float width, float height)
+    {
+        if (disposed) return;
+        try { SetBoundary(new PaintingColorPickerLayout(width, height).Apply(example, region, u, v)); error = ""; }
+        catch (ArgumentException failure) { error = failure.Message; }
+        catch (InvalidOperationException failure) { error = failure.Message; }
+        await Invalidate(); await InvokeAsync(StateHasChanged);
+    }
+    private async Task SelectModel(ChangeEventArgs e)
+    {
+        if (picker is not null) await picker.InvokeVoidAsync("cancel");
+        try { example.SelectModel(int.Parse(e.Value!.ToString()!, CultureInfo.InvariantCulture)); error = boundary = ""; }
+        catch (InvalidOperationException failure) { error = failure.Message; selectionRevision++; }
+        await Invalidate();
+    }
+    private async Task SetValue(int channel, ChangeEventArgs e)
+    {
+        if (!float.TryParse(e.Value?.ToString(), NumberStyles.Float, CultureInfo.InvariantCulture, out float value) || !float.IsFinite(value))
+        { error = "请输入有限数值。"; inputRevision++; }
+        else
+        {
+            try { bool reached = example.PickValue(channel, value); SetBoundary(reached); error = ""; if (!reached) inputRevision++; }
+            catch (ArgumentException failure) { error = failure.Message; inputRevision++; }
+            catch (InvalidOperationException failure) { error = failure.Message; inputRevision++; }
+        }
+        await Invalidate();
+    }
+    private async Task SetChannel(int channel, float value)
+    {
+        if (disposed) return;
+        try { SetBoundary(example.PickValue(channel, value)); error = ""; }
+        catch (ArgumentException failure) { error = failure.Message; }
+        catch (InvalidOperationException failure) { error = failure.Message; }
+        await Invalidate();
+    }
+    private void SetBoundary(bool reached) => boundary = reached ? "" : "已到可选颜色边界；灰区不能选取。";
+    private async Task Reset()
+    { if (picker is not null) await picker.InvokeVoidAsync("cancel"); example.Reset(); error = boundary = ""; inputRevision++; await Invalidate(); }
+    private Task Invalidate() => canvas?.InvalidateAsync() ?? Task.CompletedTask;
+    private void Draw(GraphicsDevice device, GraphicsTexture target, GraphicsTexture? depth, double delta) => example.Draw(device, target);
+    /// <inheritdoc />
+    public ValueTask DisposeAsync() => new(disposal ??= DisposeCore());
+    private async Task DisposeCore()
+    {
+        disposed = true;
+        try
+        {
+            if (startup is not null) await startup;
+            if (picker is not null)
+            { try { await picker.InvokeVoidAsync("dispose"); } finally { await picker.DisposeAsync(); } }
+        }
+        finally
+        {
+            reference?.Dispose();
+            try { if (module is not null) await module.DisposeAsync(); }
+            finally { try { if (canvas is not null) await canvas.DisposeAsync(); } finally { example.Dispose(); } }
+        }
+    }
+}

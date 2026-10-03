@@ -82,5 +82,7 @@
 
 - name: Color management
   href: features/color-management.md
+- name: Painting color spaces
+  href: features/painting-color-spaces.md
 - name: Optional CMYK printing
   href: features/cmyk-printing.md

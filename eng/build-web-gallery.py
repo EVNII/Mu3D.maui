@@ -119,6 +119,7 @@ def main():
         common.append(f"-p:Mu3DPrintProfileDirectory={profiles}")
     modes = ("interpreted", "aot") if args.mode == "both" else (args.mode,)
     published = {}
+    route_assemblies = []
     for mode in modes:
         aot = mode == "aot"
         properties = [*common, f"-p:RunAOTCompilation={'true' if aot else 'false'}"]
@@ -133,6 +134,14 @@ def main():
             raise RuntimeError(f"Gallery publish omitted its boot files: {root}")
         files = [path for path in root.rglob("*") if path.is_file()]
         published[mode] = {"wwwroot": str(root), "files": len(files), "bytes": sum(path.stat().st_size for path in files)}
+        route_assemblies.append(PROJECT.parent / "obj/Release" / ("Aot" if aot else "Interpreted") /
+                                "net10.0/linked/Mu3D.GalleryApp.Web.dll")
+    # SPA HTTP 200 does not establish that trimming retained the routable component.
+    checks = REPO / "tests/Mu3D.Web.Viewer.Tests/Mu3D.Web.Viewer.Tests.csproj"
+    run([dotnet, "build", checks, "-c", "Release", "--disable-build-servers", "-m:1", "-nr:false",
+         "-p:UseSharedCompilation=false", "-p:NuGetAudit=false", "-p:EnableMu3DPrinting=true"], env)
+    run([dotnet, checks.parent / "bin/Release/net10.0/Mu3D.Web.Viewer.Tests.dll",
+         "--published-gallery", *route_assemblies], env)
     print(json.dumps({"published": published}, indent=2), flush=True)
 
 

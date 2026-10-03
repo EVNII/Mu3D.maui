@@ -32,6 +32,7 @@ internal static class GalleryDocumentation
         new("openpbr-materialx", "articles/features/openpbr-materialx.html"),
         new("openpbr-white-furnace", "articles/features/openpbr-white-furnace.html"),
         new("color-management", "articles/features/color-management.html"),
+        new("painting-color-spaces", "articles/features/painting-color-spaces.html"),
 #if MU3D_PRINTING
         new("cmyk-printing", "articles/features/cmyk-printing.html"),
 #endif

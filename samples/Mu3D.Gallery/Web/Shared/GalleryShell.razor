@@ -27,7 +27,7 @@
             {
                 GalleryEntry[] entries = GalleryCatalog.Search(query, section.Id).ToArray();
                 <details class="gallery-section" open="@(section.Id == activeSection || !string.IsNullOrEmpty(query))">
-                    <summary><img src="@($"navigation/{section.Icon}")" alt="" /><a href="@($"sections/{section.Id}")">@section.Title</a><span>@entries.Length</span></summary>
+                    <summary><span class="gallery-icon" aria-hidden="true" style="@($"--gallery-icon:url('navigation/{section.Icon}')")"></span><a href="@($"sections/{section.Id}")">@section.Title</a><span>@entries.Length</span></summary>
                     @foreach (GalleryEntry entry in entries)
                     {
                         <a class="gallery-destination @(current?.Id == entry.Id ? "active" : "")" href="@GalleryWebCatalog.Href(entry)"
@@ -45,7 +45,7 @@
         {
             <a class="@(section.Id == activeSection ? "active" : "")" href="@($"sections/{section.Id}")"
                aria-current="@(section.Id == activeSection ? "page" : null)">
-                <img src="@($"navigation/{section.Icon}")" alt="" />@section.Title
+                <span class="gallery-icon" aria-hidden="true" style="@($"--gallery-icon:url('navigation/{section.Icon}')")"></span>@section.Title
             </a>
         }
     </nav>

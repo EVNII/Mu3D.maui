@@ -494,7 +494,8 @@ internal static partial class Program
             throw new InvalidDataException("The public feature TOC and Gallery article catalog differ.");
         }
 
-        string legacyRoot = Path.Combine(root, "samples", "Mu3D.Gallery", "Legacy");
+        string galleryRoot = Path.Combine(root, "samples", "Mu3D.Gallery");
+        string legacyRoot = Path.Combine(galleryRoot, "Legacy");
         Mu3D.Gallery.GalleryEntry[] adaptiveCases = Mu3D.Gallery.GalleryCatalog.Examples.ToArray();
         if (adaptiveCases.Select(entry => entry.Id).Distinct(StringComparer.Ordinal).Count() != adaptiveCases.Length ||
             !adaptiveCases.Where(entry => entry.FeatureId is not null).Select(entry => entry.FeatureId!)
@@ -506,14 +507,49 @@ internal static partial class Program
         HashSet<string> declaredRoutes = GalleryRouteRegex().Matches(routeSource)
             .Select(match => match.Groups[2].Value)
             .ToHashSet(StringComparer.Ordinal);
+        Dictionary<string, string> canonicalPages = CanonicalGalleryPageRegex()
+            .Matches(File.ReadAllText(Path.Combine(galleryRoot, "GalleryPageFactory.cs")))
+            .ToDictionary(match => match.Groups["id"].Value, match => match.Groups["page"].Value,
+                StringComparer.Ordinal);
+        string shellSource = File.ReadAllText(Path.Combine(galleryRoot, "AppShell.xaml.cs"));
+        HashSet<string> legacyFeatureIds = new(StringComparer.Ordinal);
         HashSet<string> toolbarIds = new(StringComparer.Ordinal);
         foreach (Feature feature in catalog.Features)
         {
-            if (!declaredRoutes.Contains(feature.Route) ||
-                Mu3D.GalleryApp.GalleryFeatureCatalog.FeatureId(feature.Route) != feature.Id)
+            if (!declaredRoutes.Contains(feature.Route))
+            {
+                // New examples use the canonical catalog and factory, without recreating retired
+                // Legacy pages or route constants solely to satisfy documentation validation.
+                Mu3D.Gallery.GalleryEntry? canonicalEntry = adaptiveCases.SingleOrDefault(entry => entry.Id == feature.Id);
+                string? canonicalPageName = Mu3D.GalleryApp.GallerySourceCatalog.AdaptivePageName(feature.Id);
+                if (canonicalEntry is null || canonicalEntry.FeatureId != feature.Id || canonicalEntry.LegacyRoute is not null ||
+                    feature.Route != $"gallery-{canonicalEntry.Id}" || canonicalPageName is null ||
+                    !canonicalPages.TryGetValue(canonicalEntry.Id, out string? factoryPage) || factoryPage != canonicalPageName ||
+                    !File.Exists(Path.Combine(galleryRoot, "Pages", canonicalPageName + ".xaml")) ||
+                    !File.Exists(Path.Combine(galleryRoot, "Pages", canonicalPageName + ".xaml.cs")))
+                {
+                    throw new InvalidDataException(
+                        $"Canonical Gallery feature '{feature.Id}' has no matching catalog, factory and source page.");
+                }
+                Match[] canonicalToolbarMatches = GalleryToolbarFeatureRegex().Matches(
+                    File.ReadAllText(Path.Combine(galleryRoot, "Pages", canonicalPageName + ".xaml"))).ToArray();
+                if (canonicalToolbarMatches.Length > 1 ||
+                    canonicalToolbarMatches.Length == 1 && canonicalToolbarMatches[0].Groups[1].Value != feature.Id)
+                {
+                    throw new InvalidDataException(
+                        $"Canonical Gallery page '{canonicalPageName}' has duplicate or mismatched Docs actions.");
+                }
+                if (canonicalToolbarMatches.Length == 0 && !CanonicalGalleryDocsActionRegex().IsMatch(shellSource))
+                {
+                    throw new InvalidDataException("Canonical Gallery features have no host-provided Docs action.");
+                }
+                continue;
+            }
+            if (Mu3D.GalleryApp.GalleryFeatureCatalog.FeatureId(feature.Route) != feature.Id)
             {
                 throw new InvalidDataException($"Gallery feature '{feature.Id}' has an invalid route mapping.");
             }
+            legacyFeatureIds.Add(feature.Id);
             string pageName = Mu3D.GalleryApp.GallerySourceCatalog.PageName(feature.Route);
             string pageSource = File.ReadAllText(Path.Combine(legacyRoot, "Pages", pageName + ".xaml"));
             Match[] toolbarMatches = GalleryToolbarFeatureRegex().Matches(pageSource).ToArray();
@@ -529,12 +565,12 @@ internal static partial class Program
             .SelectMany(path => GalleryToolbarFeatureRegex().Matches(File.ReadAllText(path)))
             .Select(match => match.Groups[1].Value)
             .ToArray();
-        if (allToolbarIds.Length != ids.Count ||
-            !toolbarIds.SetEquals(ids) ||
-            !allToolbarIds.ToHashSet(StringComparer.Ordinal).SetEquals(ids))
+        if (allToolbarIds.Length != legacyFeatureIds.Count ||
+            !toolbarIds.SetEquals(legacyFeatureIds) ||
+            !allToolbarIds.ToHashSet(StringComparer.Ordinal).SetEquals(legacyFeatureIds))
         {
             throw new InvalidDataException(
-                "Every Gallery feature must have exactly one cataloged Docs action.");
+                "Every retained Legacy Gallery feature must have exactly one cataloged Docs action.");
         }
 
         string galleryMappings = File.ReadAllText(Path.Combine(
@@ -853,6 +889,12 @@ internal static partial class Program
 
     [GeneratedRegex("GalleryDocumentationToolbarItem FeatureId=\\\"([^\\\"]+)\\\"", RegexOptions.CultureInvariant)]
     private static partial Regex GalleryToolbarFeatureRegex();
+
+    [GeneratedRegex("\"(?<id>[a-z0-9-]+)\"\\s*=>\\s*new\\s+Pages\\.(?<page>\\w+)\\(\\)", RegexOptions.CultureInvariant)]
+    private static partial Regex CanonicalGalleryPageRegex();
+
+    [GeneratedRegex("Page\\s+page\\s*=\\s*GalleryPageFactory\\.Create\\(entry\\.Id\\);.*?entry\\.FeatureId\\s+is\\s+string\\s+featureId.*?page\\.ToolbarItems\\.Add\\(new\\s+GalleryDocumentationToolbarItem\\s*\\{\\s*FeatureId\\s*=\\s*featureId\\s*\\}\\)", RegexOptions.Singleline | RegexOptions.CultureInvariant)]
+    private static partial Regex CanonicalGalleryDocsActionRegex();
 
     [GeneratedRegex("href: features/([a-z0-9-]+)\\.md", RegexOptions.CultureInvariant)]
     private static partial Regex FeatureTocArticleRegex();

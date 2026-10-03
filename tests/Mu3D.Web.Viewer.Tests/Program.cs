@@ -3,6 +3,17 @@ using static ViewerTestChecks;
 using Mu3D.SceneGraph;
 using Mu3D.GalleryApp.Web.Infrastructure;
 
+#if !MU3D_WEB_CONTRACTS
+if (args is ["--published-gallery", .. var publications])
+{
+    if (publications.Length == 0) throw new ArgumentException("Provide at least one published Gallery assembly.");
+    foreach (string publication in publications) GalleryPublishedRouteChecks.Validate(publication);
+    return;
+}
+#endif
+
+PaintingColorSpaceTests.Run();
+
 static void Check(bool condition, string message)
 {
     if (!condition) throw new InvalidOperationException(message);
@@ -14,23 +25,33 @@ static (Scene, ViewerScene) Open()
 }
 static ViewerInput Input() => new(1f / 60, 1f / 60, true, 0, 0, 0, 0.35f, 0.28f, false);
 
-ValidateViewerProperties();
-ValidateGizmoInput();
-ValidateAnchorBridge();
-ValidateBenchmark();
-ViewerStatisticsChecks.Validate(Check);
-ViewerNodeAnchorChecks.Validate(Check);
-ViewerSelectionChecks.Validate(Check);
-CanvasViewHandlerChecks.Validate(Check);
-GalleryPortChecks.Validate(Check);
-NewGalleryCaseChecks.Validate(Check);
-GalleryCatalogChecks.Validate(Check);
-await GalleryRoutingChecks.Validate(Check);
+try
+{
+    ValidateViewerProperties();
+    ValidateGizmoInput();
+    ValidateAnchorBridge();
+    ValidateBenchmark();
+    ViewerStatisticsChecks.Validate(Check);
+    ViewerNodeAnchorChecks.Validate(Check);
+    ViewerSelectionChecks.Validate(Check);
+    CanvasViewHandlerChecks.Validate(Check);
+    GalleryPortChecks.Validate(Check);
+    NewGalleryCaseChecks.Validate(Check);
+    PaintingGalleryChecks.Validate(Check);
+    GalleryCatalogChecks.Validate(Check);
+    await GalleryRoutingChecks.Validate(Check);
 #if MU3D_WEB_CONTRACTS
-SceneNodeAnchorSourceChecks.Validate(Check);
-await SceneNodeAnchorSourceChecks.ValidateBorrowedReferences(Check);
+    SceneNodeAnchorSourceChecks.Validate(Check);
+    await SceneNodeAnchorSourceChecks.ValidateBorrowedReferences(Check);
 #endif
-Console.WriteLine("Viewer host checks passed: property/input mapping, selection/node binding, Canvas lifecycle, submitted-frame diagnostics, serialization and validation benchmark accounting.");
+    Console.WriteLine("Viewer host checks passed: property/input mapping, selection/node binding, Canvas lifecycle, submitted-frame diagnostics, serialization and validation benchmark accounting.");
+}
+catch (Exception failure)
+{
+    // Node's managed Promise rejection omits inner managed stacks; keep test failures actionable.
+    Console.Error.WriteLine(failure.ToString());
+    throw;
+}
 
 static void ValidateViewerProperties()
 {
