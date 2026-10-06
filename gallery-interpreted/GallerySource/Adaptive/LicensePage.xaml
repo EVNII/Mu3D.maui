@@ -14,7 +14,7 @@
             <Label Text="The distributable NuGet packages contain the complete applicable notices and license texts. This page is a readable index for Gallery users." />
 
             <VerticalStackLayout Padding="0,12" Spacing="6">
-                <Label FontAttributes="Bold" FontSize="18" Text="AdaptiveShell.Maui 0.2.1" />
+                <Label FontAttributes="Bold" FontSize="18" Text="AdaptiveShell.Maui 0.2.3" />
                 <Label Text="MIT" />
                 <Label Text="Adaptive shell navigation for .NET MAUI: sidebar, rail and bottom navigation that adapt to platform, window size and navigation groups." />
             </VerticalStackLayout>

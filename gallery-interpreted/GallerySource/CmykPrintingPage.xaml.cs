@@ -34,9 +34,24 @@ public partial class CmykPrintingPage : ContentPage
         if (!loaded)
         {
             loaded = true;
-            // Optional local build inputs, never downloaded or embedded by default.
-            foreach (string name in new[] { "JapanColor2011Coated.icc", "GRACoL2013_CRPC6.icc", "SWOP2013C3_CRPC5.icc", "PSOcoated_v3.icc", "PSOuncoated_v3_FOGRA52.icc" })
+            try
             {
+                var defaults = await CmykPrintingProfiles.LoadDefaultsAsync(GalleryAssets.ReadBytesAsync, CancellationToken.None);
+                foreach (var entry in defaults)
+                {
+                    profiles.Add(entry.Profile); ProfilePicker.Items.Add(entry.FileName);
+                }
+            }
+            catch (Exception error)
+            {
+                loaded = false;
+                StatusLabel.Text = $"内置印刷 ICC 加载失败：{error.Message}";
+                await Refresh(); return;
+            }
+            // Supplied regional profiles remain optional local inputs with their provider terms.
+            foreach (string name in CmykPrintingProfiles.OptionalFileNames)
+            {
+                if (ProfilePicker.Items.Contains(name)) continue;
                 try
                 {
                     string path = "PrintProfiles/" + name;
@@ -47,7 +62,7 @@ public partial class CmykPrintingPage : ContentPage
                 }
                 catch (Exception error) { StatusLabel.Text = error.Message; }
             }
-            if (profiles.Count > 0) ProfilePicker.SelectedIndex = 0;
+            if (profiles.Count > 0 && ProfilePicker.SelectedIndex < 0) ProfilePicker.SelectedIndex = 0;
             else await Refresh();
         }
         else await Refresh();
