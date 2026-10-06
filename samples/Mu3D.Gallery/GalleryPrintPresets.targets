@@ -1,0 +1,10 @@
+<Project>
+  <ItemGroup Condition="'$(EnableMu3DPrinting)' == 'true'">
+    <_Mu3DGalleryPrintPreset Include="$(MSBuildThisFileDirectory)Resources/PrintPresets/GRACoL2013_CRPC6.icc;$(MSBuildThisFileDirectory)Resources/PrintPresets/SWOP2013C3_CRPC5.icc;$(MSBuildThisFileDirectory)Resources/PrintPresets/catalog.json;$(MSBuildThisFileDirectory)Resources/PrintPresets/NOTICE.md" />
+  </ItemGroup>
+  <Target Name="ValidateGalleryPrintPresets" BeforeTargets="PrepareForBuild"
+          Condition="'$(EnableMu3DPrinting)' == 'true'">
+    <Error Condition="!Exists('%(_Mu3DGalleryPrintPreset.Identity)')"
+           Text="Missing bundled Gallery print preset: %(_Mu3DGalleryPrintPreset.Identity)" />
+  </Target>
+</Project>

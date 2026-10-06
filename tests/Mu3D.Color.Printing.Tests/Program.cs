@@ -1,6 +1,7 @@
 using System.Numerics;
 using Mu3D.Color;
 using Mu3D.Color.Printing;
+using Mu3D.Color.Printing.Tests;
 
 int checks=0;
 void Check(bool value,string message){checks++;if(!value)throw new Exception(message);}
@@ -63,10 +64,14 @@ for(int i=1;i<=30;i++)
 }
 Check(retainsWide,"AgX print retains colors outside sRGB");
 Throws<ArgumentOutOfRangeException>(()=>new PrintRgbTransform(StandardColorSpaces.LinearSrgb,StandardColorSpaces.LinearAdobeRgb,(PrintToneMapping)99));
-string? directory=Environment.GetEnvironmentVariable("MU3D_PRINT_PROFILE_TEST_DIR");
+string defaultsDirectory=CmykPrintingProfileChecks.FindDefaultDirectory();
+await CmykPrintingProfileChecks.ValidateAsync(defaultsDirectory,Check);
+string? configuredDirectory=Environment.GetEnvironmentVariable("MU3D_PRINT_PROFILE_TEST_DIR");
+string directory=string.IsNullOrWhiteSpace(configuredDirectory)?defaultsDirectory:configuredDirectory;
 Throws<InvalidDataException>(()=>new CmykProfile(new byte[132]));
-if(directory is null) throw new Exception("Set MU3D_PRINT_PROFILE_TEST_DIR to official print profiles (see README). They are never bundled.");
-foreach(string file in Directory.GetFiles(directory,"*.icc"))
+string[] profileFiles=Directory.GetFiles(directory,"*.icc");
+Check(profileFiles.Length>0,"Numerical checks require actual ICC profiles.");
+foreach(string file in profileFiles)
 {
  var bytes=File.ReadAllBytes(file);var profile=new CmykProfile(bytes);Check(profile.ToArray().SequenceEqual(bytes),"ICC preservation");
  byte original=bytes[36];bytes[36]=0;Check(profile.ToArray()[36]==original,"copy ownership");

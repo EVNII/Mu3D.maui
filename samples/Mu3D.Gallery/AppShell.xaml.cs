@@ -136,7 +136,7 @@ public partial class AppShell : AShell
     {
         if (ReferenceEquals(CurrentItem, destination))
         {
-            // Native back-to-group leaves CurrentItem unchanged in AdaptiveShell 0.2.1.
+            // Native back-to-group preserves CurrentItem; reselecting must still display its page.
             Handler?.UpdateValue(nameof(CurrentItem));
             ActivateCurrentPage();
         }

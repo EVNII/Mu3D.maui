@@ -37,6 +37,59 @@ def verify_tree(root):
     return total
 
 
+def verify_print_presets(web):
+    presets = web / "assets/PrintPresets"
+    printing = (web / "GallerySource/CmykPrintingExample.cs").is_file()
+    if not printing:
+        if presets.exists():
+            raise ValueError("Printing-disabled Gallery must not include default print presets")
+        return
+
+    source = ROOT / "samples/Mu3D.Gallery/Resources/PrintPresets"
+    catalog_path = source / "catalog.json"
+    if not catalog_path.is_file():
+        raise ValueError("Missing sample print preset catalog")
+    verify_tree(source)
+    catalog = json.loads(catalog_path.read_text())
+    profiles = catalog.get("profiles") if isinstance(catalog, dict) else None
+    if not isinstance(profiles, list) or not profiles:
+        raise ValueError("Sample print preset catalog must declare profiles")
+    declared = set()
+    declared_assets = {Path("catalog.json"), Path("NOTICE.md")}
+    for profile in profiles:
+        name = profile.get("fileName") if isinstance(profile, dict) else None
+        digest = profile.get("sha256") if isinstance(profile, dict) else None
+        if not isinstance(name, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]*\.icc", name):
+            raise ValueError("Print presets must declare exact ICC file names")
+        if name.casefold() in declared:
+            raise ValueError(f"Duplicate sample print preset: {name}")
+        declared.add(name.casefold())
+        declared_assets.add(Path(name))
+        if not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest):
+            raise ValueError(f"Invalid sample print preset hash: {name}")
+        profile_path = source / name
+        if not profile_path.is_file():
+            raise ValueError(f"Missing sample print preset: {name}")
+        if hashlib.sha256(profile_path.read_bytes()).hexdigest() != digest:
+            raise ValueError(f"Sample print preset hash mismatch: {name}")
+    source_files = {path.relative_to(source): path for path in source.rglob("*") if path.is_file()}
+    if Path("NOTICE.md") not in source_files:
+        raise ValueError("Missing sample print preset notice")
+    unexpected_source = source_files.keys() - declared_assets
+    if unexpected_source:
+        raise ValueError(f"Unexpected sample print preset asset: {sorted(unexpected_source)[0]}")
+    published_files = {path.relative_to(presets): path for path in presets.rglob("*") if path.is_file()}
+    missing = source_files.keys() - published_files.keys()
+    if missing:
+        raise ValueError(f"Missing default print preset: {sorted(missing)[0]}")
+    unexpected = published_files.keys() - source_files.keys()
+    if unexpected:
+        raise ValueError(f"Unexpected default print preset: {sorted(unexpected)[0]}")
+    for relative, original in source_files.items():
+        if original.read_bytes() != published_files[relative].read_bytes():
+            raise ValueError(f"Default print preset differs from the actual sample: {relative}")
+
+
 def verify_gallery(web):
     verify_tree(web)
     for name in ("dotnet.js", "blazor.webassembly.js"):
@@ -82,6 +135,7 @@ def verify_gallery(web):
     for original in raw.rglob("*"):
         if original.is_file() and original.read_bytes() != (web / "assets" / original.relative_to(raw)).read_bytes():
             raise ValueError(f"Gallery asset differs from the actual sample: {original.name}")
+    verify_print_presets(web)
     return {item["name"] for item in resources}, sum("hash" in item for item in resources)
 
 
@@ -117,7 +171,8 @@ def stage(args):
         resources, hashed_count = verify_gallery(web)
         destination = site / name
         shutil.copytree(web, destination)
-        # Supplied ICCs are optional local validation inputs, not public Gallery assets.
+        # Default PrintPresets remain byte-identical to the sample. Supplied ICCs in
+        # PrintProfiles are optional local validation inputs, not public Gallery assets.
         # Remove only their documented external-input location from the staged copy.
         profiles = destination / "assets/PrintProfiles"
         if profiles.is_dir():

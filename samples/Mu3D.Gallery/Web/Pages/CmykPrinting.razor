@@ -84,13 +84,22 @@
     private bool paper = true, mark, disposed;
     private float exposure, inkThreshold = 300;
     private string grayValues = "", inkStatus = "等待分色";
-    private string status = "请选择 ICC。未内置第三方配置文件，可加载印厂提供的 .icc / .icm。";
+    private string status = "正在加载内置印刷 ICC；也可加载印厂提供的 .icc / .icm。";
     private string TargetName => targetSpace == 1 ? "ProPhoto RGB" : "Adobe RGB";
     protected override async Task OnInitializedAsync()
     {
         await Refresh();
-        foreach (string name in new[] { "JapanColor2011Coated.icc", "GRACoL2013_CRPC6.icc", "SWOP2013C3_CRPC5.icc", "PSOcoated_v3.icc", "PSOuncoated_v3_FOGRA52.icc" })
+        try
         {
+            var defaults = await CmykPrintingProfiles.LoadDefaultsAsync(GalleryAssets.ReadBytesAsync, lifetime.Token);
+            if (disposed) return;
+            foreach (var entry in defaults) { profiles.Add(entry.Profile); names.Add(entry.FileName); }
+        }
+        catch (OperationCanceledException) when (lifetime.IsCancellationRequested) { return; }
+        catch (Exception error) { if (!disposed) status = $"内置印刷 ICC 加载失败：{error.Message}"; return; }
+        foreach (string name in CmykPrintingProfiles.OptionalFileNames)
+        {
+            if (names.Contains(name)) continue;
             try
             {
                 byte[] bytes = await GalleryAssets.ReadBytesAsync("PrintProfiles/" + name, lifetime.Token);
@@ -135,7 +144,7 @@
         if (index < 0)
         {
             separation = null; proofColors = []; excessInk = null; UpdateInk();
-            status = "请选择 ICC。未内置第三方配置文件，可加载印厂提供的 .icc / .icm。"; return;
+            status = "请选择印刷 ICC，或加载印厂提供的 .icc / .icm。"; return;
         }
         var profile = profiles[index]; string profileName = names[index];
         status = "正在分色并计算软打样…"; await InvokeAsync(StateHasChanged);

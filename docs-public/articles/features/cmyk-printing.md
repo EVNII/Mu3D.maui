@@ -92,7 +92,8 @@ Load the profile specified by the printer rather than selecting a country alone:
 | Specific printer, paper and ink | Vendor or measured custom ICC |
 
 [ICC registry](https://registry.color.org/profile-registry/) lists conditions, profiles and individual
-license terms. Profiles are not bundled; some permit embedding but restrict redistribution.
+license terms. Library packages do not bundle profiles. Gallery includes only the two reviewed
+presets described below; other profiles may restrict redistribution.
 
 Supported: ICC v2/v4 CMYK output profiles with Lab/XYZ PCS, lut8/lut16 and v4 mAB/mBA, including
 3D and 4D CLUTs. Missing requested intent tables fail explicitly. MPE, spectral, DeviceLink and
@@ -115,16 +116,26 @@ The preview uses ordinary MAUI controls; assign an application-owned `IDrawable`
 </Grid>
 ```
 
-Open **Examples → CMYK + Soft Proof**. Load an ICC with the file picker, compare the original
+Open **Examples → CMYK + Soft Proof**. Select a bundled ICC or load one with the file picker, compare the original
 RGB chart and print preview, select relative/perceptual/saturation intent, toggle paper-white
 simulation or proof-error highlighting, and adjust the total ink warning threshold.
 This example is explicitly SDR and uses MAUI sRGB drawing; out-of-display-gamut preview values
 are explicitly clipped and counted. It does not alter native HDR presentation elsewhere.
 
-For local verification only, `-p:Mu3DPrintProfileDirectory=/path/to/profiles` bundles supplied
-`.icc` files into that Gallery build. The five documented regional filenames appear automatically.
-No third-party profiles are checked into the repository. Respect provider redistribution terms
-before sharing a build containing those files. Without that property, use the file picker.
+Every printing-enabled Gallery build includes unchanged GRACoL2013_CRPC6 and SWOP2013C3_CRPC5
+presets on native and Web, without extra build properties. One shared catalog loads and verifies
+the same profile bytes; their copyright/permission text and official sources accompany the assets.
+These are examples of particular printing conditions; load the profile supplied by your printer
+for its actual paper and ink. Mu3D library packages do not contain these sample presets.
+
+For local verification only, `-p:Mu3DPrintProfileDirectory=/path/to/profiles` additionally bundles
+supplied `.icc` files. The five documented regional filenames are recognized; bundled names are
+not duplicated. Respect each provider's redistribution terms before sharing supplied files.
+Pages retains the reviewed default `PrintPresets` and excludes these external `PrintProfiles`.
+`EnableMu3DPrinting=false` excludes the printing page, helper and assembly from the current
+dependency graph and removes printing assets/source from reused outputs. An existing raw
+publication directory can retain old binaries; Pages prunes stale WASM files against its current
+boot configuration. Windows target-host publication checks remain pending.
 
 Validation currently includes five real regional profiles and 1,280 independent macOS ColorSync
 patch comparisons. Maximum observed XYZ component difference is 0.0044503 and ink coverage

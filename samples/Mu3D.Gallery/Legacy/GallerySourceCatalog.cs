@@ -65,7 +65,7 @@ internal static class GallerySourceCatalog
             "KtxTextureLabPage" => ["KtxTextureLabPresenter.cs"],
             "ModelLabPage" => ["ModelLabCatalog.cs", "ModelLabAssets.cs", "ModelLabPresenter.cs"],
     #if MU3D_PRINTING
-            "CmykPrintingPage" => ["CmykPrintingExample.cs", "CmykPrintingPattern.cs"],
+            "CmykPrintingPage" => ["CmykPrintingExample.cs", "CmykPrintingPattern.cs", "CmykPrintingProfiles.cs"],
     #endif
             _ => [],
         };

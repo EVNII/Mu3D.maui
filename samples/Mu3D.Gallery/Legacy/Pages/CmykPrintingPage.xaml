@@ -41,7 +41,7 @@
     <GraphicsView x:Name="OriginalView" Grid.Row="1" />
     <GraphicsView x:Name="ProofView" Grid.Row="1" Grid.Column="1" />
    </Grid>
-   <Label x:Name="StatusLabel" Text="请选择 ICC。未内置第三方配置文件，可加载印厂提供的 .icc / .icm。" />
+   <Label x:Name="StatusLabel" Text="正在加载内置印刷 ICC；也可加载印厂提供的 .icc / .icm。" />
    <Label Text="总墨量警戒值（%）" />
    <Slider x:Name="InkSlider" Minimum="0" Maximum="400" Value="300" ValueChanged="OnInkChanged" />
    <Label x:Name="InkLabel" />

@@ -33,11 +33,8 @@
     <SingleProject>true</SingleProject>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <!-- MAUI generates public resource-dictionary helpers without XML documentation.
-         NU1608: AdaptiveShell.Maui pulls Xamarin.Google.Android.Material 1.14, whose AndroidX
-         closures resolve slightly newer than MAUI 10.0.100's pinned expectations; the drift is
-         the usual AndroidX binding version skew, not an API break. -->
-    <NoWarn>$(NoWarn);CS1591;XCODE_27_0_PREVIEW;NU1608</NoWarn>
+    <!-- MAUI generates public resource-dictionary helpers without XML documentation. -->
+    <NoWarn>$(NoWarn);CS1591;XCODE_27_0_PREVIEW</NoWarn>
     <ApplicationTitle>Mu3D Gallery</ApplicationTitle>
     <ApplicationId>com.mu3d.adaptivegallery</ApplicationId>
     <ApplicationDisplayVersion>0.1.0</ApplicationDisplayVersion>
@@ -46,7 +43,7 @@
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">26.0</SupportedOSPlatformVersion>
     <!-- AdaptiveShell.Maui declares an iOS 18.0 minimum; this sample adopts it. -->
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">18.0</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">17.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">18.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
     <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
   </PropertyGroup>
@@ -91,14 +88,40 @@
     <EnableMu3DPrinting Condition="'$(EnableMu3DPrinting)' == ''">true</EnableMu3DPrinting>
     <DefineConstants Condition="'$(EnableMu3DPrinting)' == 'true'">$(DefineConstants);MU3D_PRINTING</DefineConstants>
   </PropertyGroup>
+  <Import Project="GalleryPrintPresets.targets" />
+  <!-- Apple copies current resources but leaves removed assets in an existing app bundle. -->
+  <Target Name="RemoveDisabledApplePrintAssets" BeforeTargets="_CopyResourcesToBundle"
+          DependsOnTargets="_GenerateBundleName"
+          Condition="'$(EnableMu3DPrinting)' != 'true' And ($([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' Or $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst')">
+    <ItemGroup>
+      <_Mu3DDisabledApplePrintSources Include="$(_AppResourcesPath)GallerySource/CmykPrinting*"
+                                     Condition="'$(_AppResourcesPath)' != ''" />
+    </ItemGroup>
+    <RemoveDir Directories="$(_AppResourcesPath)PrintPresets;$(_AppResourcesPath)PrintProfiles"
+               Condition="'$(_AppResourcesPath)' != ''" />
+    <Delete Files="@(_Mu3DDisabledApplePrintSources)" />
+  </Target>
+  <!-- IncrementalClean covers Windows OutDir, but an external PublishDir may retain old content. -->
+  <Target Name="RemoveDisabledWindowsPrintAssets" BeforeTargets="CopyFilesToPublishDirectory"
+          Condition="'$(EnableMu3DPrinting)' != 'true' And $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' And '$(PublishDir)' != ''">
+    <PropertyGroup>
+      <_Mu3DDisabledPrintPublishRoot>$([MSBuild]::NormalizeDirectory('$(MSBuildProjectDirectory)', '$(PublishDir)'))</_Mu3DDisabledPrintPublishRoot>
+    </PropertyGroup>
+    <ItemGroup>
+      <_Mu3DDisabledWindowsPrintSources Include="$(_Mu3DDisabledPrintPublishRoot)GallerySource/CmykPrinting*" />
+    </ItemGroup>
+    <RemoveDir Directories="$(_Mu3DDisabledPrintPublishRoot)PrintPresets;$(_Mu3DDisabledPrintPublishRoot)PrintProfiles" />
+    <Delete Files="@(_Mu3DDisabledWindowsPrintSources)" />
+  </Target>
   <ItemGroup Condition="'$(EnableMu3DPrinting)' == 'true'">
     <ProjectReference Include="../../src/Mu3D.Color.Printing/Mu3D.Color.Printing.csproj" />
-    <!-- Optional local test inputs; no third-party profiles are stored in this repository. -->
+    <MauiAsset Include="@(_Mu3DGalleryPrintPreset)" LogicalName="PrintPresets/%(Filename)%(Extension)" />
+    <!-- Other provider profiles remain optional local test inputs. -->
     <MauiAsset Include="$(Mu3DPrintProfileDirectory)/*.icc" LogicalName="PrintProfiles/%(Filename)%(Extension)"
                Condition="'$(Mu3DPrintProfileDirectory)' != ''" />
   </ItemGroup>
   <ItemGroup Condition="'$(EnableMu3DPrinting)' != 'true'">
-    <Compile Remove="Legacy/Pages/CmykPrinting*.cs;Legacy/Examples/CmykPrintingExample.cs" />
+    <Compile Remove="Legacy/Pages/CmykPrinting*.cs;Legacy/Examples/CmykPrinting*.cs" />
     <MauiXaml Remove="Legacy/Pages/CmykPrintingPage.xaml" />
   </ItemGroup>
 
@@ -165,12 +188,12 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(EnableMu3DPrinting)' != 'true'">
-    <MauiAsset Remove="Legacy/Pages/CmykPrintingPage.xaml;Legacy/Pages/CmykPrinting*.cs;Legacy/Examples/CmykPrintingExample.cs" />
+    <MauiAsset Remove="Legacy/Pages/CmykPrintingPage.xaml;Legacy/Pages/CmykPrinting*.cs;Legacy/Examples/CmykPrinting*.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.100" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.11" />
-    <PackageReference Include="AdaptiveShell.Maui" Version="0.2.1" />
+    <PackageReference Include="AdaptiveShell.Maui" Version="0.2.3" />
     <ProjectReference Include="../../src/Mu3D.Native.Wgpu/Mu3D.Native.Wgpu.csproj" />
     <ProjectReference Include="../../src/Mu3D.Maui/Mu3D.Maui.csproj" />
     <ProjectReference Include="../../src/Mu3D.Toolkit/Mu3D.Toolkit.csproj" />

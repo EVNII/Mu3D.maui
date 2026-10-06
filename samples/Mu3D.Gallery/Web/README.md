@@ -50,9 +50,10 @@ both modes; application-selected AOT remains compatible with every offered Web f
 
 ## Publish and serve
 
-Run from the repository root with its pinned SDK and wasm-tools workload. Optional local ICC
-inputs use the same `Mu3DPrintProfileDirectory` property as native Gallery; third-party profiles
-are not committed, and the browser also accepts an explicit ICC upload. The shared local/Actions
+Run from the repository root with its pinned SDK and wasm-tools workload. Printing-enabled builds
+include the same unchanged GRACoL2013 and SWOP2013 presets as native Gallery, with their reviewed
+copyright terms and hash catalog. Additional local ICC inputs use `Mu3DPrintProfileDirectory`;
+the browser also accepts an explicit ICC upload. The shared local/Actions
 build helper prepares the existing Emdawn compatibility port and clean official codec checkouts
 at the commits pinned in `eng/Mu3D.{UltraHdr,Ktx}NativeVersion.props`:
 
@@ -79,8 +80,9 @@ python3 eng/build-web-gallery.py --mode both --print-profile-directory /path/to/
 ```
 
 This forwards `Mu3DPrintProfileDirectory` to restore and publish. The directory must contain
-`.icc` files; the Gallery picker discovers its five documented regional filenames. Defaults do
-not download or bundle third-party profiles. An existing local verification directory may be used,
+`.icc` files; the Gallery picker discovers its five documented regional filenames. Defaults
+include the two reviewed sample presets; additional provider profiles are not downloaded or bundled
+automatically. An existing local verification directory may be used,
 including `artifacts/validation/next-step/profiles` when those test inputs are present.
 
 Existing dirty or incorrectly pinned codec checkouts are preserved and rejected. The helper
@@ -101,9 +103,10 @@ The deployment target is the public [EVNII/Mu3D.maui](https://github.com/EVNII/M
 
 The published app includes the Gallery source drawer and its exact assets. Public documentation
 comes from `docs-public`; generated output goes into `artifacts`.
-The Pages publisher excludes optional local `assets/PrintProfiles` from staged public copies;
-the local publication inputs retain those files. On the public site, load an ICC through the
-browser file picker.
+The Pages publisher preserves and verifies the bundled `assets/PrintPresets`, including the
+catalog and copyright notice. It rejects missing or changed defaults. Optional local
+`assets/PrintProfiles` are excluded from public copies while publication inputs retain them.
+The public site offers bundled profiles and a browser file picker for your printer's ICC.
 
 After building both modes, build the allowlisted public docs if updating them, then stage locally:
 

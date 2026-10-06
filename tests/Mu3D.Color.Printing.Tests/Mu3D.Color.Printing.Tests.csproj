@@ -1,4 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
  <PropertyGroup><TargetFramework>net10.0</TargetFramework><OutputType>Exe</OutputType><IsPackable>false</IsPackable></PropertyGroup>
- <ItemGroup><ProjectReference Include="../../src/Mu3D.Color.Printing/Mu3D.Color.Printing.csproj" /></ItemGroup>
+ <ItemGroup>
+  <ProjectReference Include="../../src/Mu3D.Color.Printing/Mu3D.Color.Printing.csproj" />
+  <Compile Include="../../samples/Mu3D.Gallery/Legacy/Examples/CmykPrintingProfiles.cs" Link="Gallery/CmykPrintingProfiles.cs" />
+ </ItemGroup>
 </Project>

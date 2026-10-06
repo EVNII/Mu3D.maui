@@ -28,7 +28,7 @@
     <EmbeddedResource Include="../../samples/Mu3D.Gallery/Legacy/Pages/*Page.xaml" LogicalName="Mu3D.GalleryApp.NativePages.%(Filename).xaml" />
     <EmbeddedResource Include="../../samples/Mu3D.Gallery/Pages/EmissiveMaterialPage.xaml;../../samples/Mu3D.Gallery/Pages/TranslucentCanvasPage.xaml;../../samples/Mu3D.Gallery/Pages/PaintingColorSpacesPage.xaml" LogicalName="Mu3D.GalleryApp.NativePages.%(Filename).xaml" />
     <Compile Include="../../samples/Mu3D.Gallery/Legacy/GallerySourceCatalog.cs;../../samples/Mu3D.Gallery/Legacy/GalleryNavigationCatalog.cs;../../samples/Mu3D.Gallery/Legacy/GalleryFeatureCatalog.cs;../../samples/Mu3D.Gallery/Legacy/GalleryRoutes.cs;../../samples/Mu3D.Gallery/Web/Infrastructure/GalleryWebCatalog.cs" Link="Gallery/%(Filename)%(Extension)" />
-    <EmbeddedResource Include="../../samples/Mu3D.Gallery/Legacy/Pages/*.cs;../../samples/Mu3D.Gallery/Legacy/Examples/*.cs" Exclude="../../samples/Mu3D.Gallery/Legacy/Pages/CmykPrinting*;../../samples/Mu3D.Gallery/Legacy/Examples/CmykPrintingExample.cs" LogicalName="Mu3D.GalleryApp.Sources.%(Filename)%(Extension)" />
-    <EmbeddedResource Include="../../samples/Mu3D.Gallery/Legacy/Pages/CmykPrinting*.cs;../../samples/Mu3D.Gallery/Legacy/Examples/CmykPrintingExample.cs" Condition="'$(EnableMu3DPrinting)' == 'true'" LogicalName="Mu3D.GalleryApp.Sources.%(Filename)%(Extension)" />
+    <EmbeddedResource Include="../../samples/Mu3D.Gallery/Legacy/Pages/*.cs;../../samples/Mu3D.Gallery/Legacy/Examples/*.cs" Exclude="../../samples/Mu3D.Gallery/Legacy/Pages/CmykPrinting*;../../samples/Mu3D.Gallery/Legacy/Examples/CmykPrinting*.cs" LogicalName="Mu3D.GalleryApp.Sources.%(Filename)%(Extension)" />
+    <EmbeddedResource Include="../../samples/Mu3D.Gallery/Legacy/Pages/CmykPrinting*.cs;../../samples/Mu3D.Gallery/Legacy/Examples/CmykPrinting*.cs" Condition="'$(EnableMu3DPrinting)' == 'true'" LogicalName="Mu3D.GalleryApp.Sources.%(Filename)%(Extension)" />
   </ItemGroup>
 </Project>

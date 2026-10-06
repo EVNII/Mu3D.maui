@@ -1,0 +1,14 @@
+{
+  "profiles": [
+    {
+      "fileName": "GRACoL2013_CRPC6.icc",
+      "sha256": "4ebbfad6bc9cfc033fdafdd8ac5df8159208932cb16d9a6596d349ae7ab50443",
+      "source": "https://registry.color.org/profile-registry/GRACoL2013_CRPC6"
+    },
+    {
+      "fileName": "SWOP2013C3_CRPC5.icc",
+      "sha256": "01123776855855378ed540228875458dfe88fca233a14d5b537800353c04faaf",
+      "source": "https://registry.color.org/profile-registry/SWOP2013C3_CRPC5"
+    }
+  ]
+}
