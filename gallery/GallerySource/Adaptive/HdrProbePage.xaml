@@ -29,6 +29,15 @@
                     Clicked="OnPresentClicked"
                     IsEnabled="False"
                     Text="Present extended-linear sRGB reference pattern" />
+                <Button
+                    x:Name="ReadbackButton"
+                    Clicked="OnReadbackClicked"
+                    IsEnabled="False"
+                    IsVisible="{OnPlatform Default=False, Android=True}"
+                    Text="Read actual reference pixels" />
+                <Button
+                    Clicked="OnCopyDiagnosticsClicked"
+                    Text="Copy diagnostics" />
                 <Label
                     x:Name="ProbeDetails"
                     FontFamily="OpenSansRegular"

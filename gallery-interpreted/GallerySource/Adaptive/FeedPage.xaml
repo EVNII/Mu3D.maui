@@ -16,6 +16,7 @@
             <Label
                 FontSize="12"
                 Text="Every card presents its own shared-device surface; scrolling preloads near rows, suspends rendering just outside them and releases content far away." />
+            <Label FontSize="12" Text="Transparent preview: the MAUI checkerboard is visible outside the opaque 3D object." />
             <Label x:Name="StatusLabel" FontSize="12" Text="Preparing shared device…" />
             <Label
                 x:Name="ErrorLabel"
@@ -26,6 +27,7 @@
         <toolkit:SceneViewProxyHost
             x:Name="ProxyHost"
             Grid.Row="1"
+            IsClippedToBounds="{OnPlatform Android=True, Default=False}"
             SurfaceError="OnProxyHostSurfaceError">
             <CollectionView
                 x:Name="ProductsView"
@@ -44,6 +46,7 @@
                         <Grid
                             BackgroundColor="#FFF4F5F7"
                             HeightRequest="240"
+                            IsClippedToBounds="{OnPlatform Android=True, Default=False}"
                             MaximumHeightRequest="240"
                             MinimumHeightRequest="240"
                             Padding="8"
@@ -55,14 +58,18 @@
                                 HorizontalOptions="Fill"
                                 Host="{x:Reference ProxyHost}"
                                 InputTransparent="True"
+                                IsClippedToBounds="{OnPlatform Android=True, Default=False}"
                                 IsRenderingEnabled="{Binding IsLive}"
                                 MaximumHeightRequest="170"
                                 MinimumHeightRequest="170"
                                 Scene="{Binding Scene}"
-                                SceneBackgroundColor="#FF7D8998"
+                                SceneBackgroundColor="Transparent"
                                 FramePresented="OnProxyFramePresented"
                                 SurfaceError="OnProxySurfaceError"
                                 VerticalOptions="Fill">
+                                <toolkit:SceneViewProxy.Underlay>
+                                    <pages:FeedCheckerboard />
+                                </toolkit:SceneViewProxy.Underlay>
                                 <toolkit:SceneViewProxy.Placeholder>
                                     <Grid BackgroundColor="#182238">
                                         <Label

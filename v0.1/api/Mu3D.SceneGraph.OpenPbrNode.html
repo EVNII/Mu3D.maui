@@ -575,6 +575,48 @@ an authored graph. Color arithmetic is scene-linear ACEScg; raw channels never r
 </h2>
 
 
+  <a id="Mu3D_SceneGraph_OpenPbrNode_Abs_" data-uid="Mu3D.SceneGraph.OpenPbrNode.Abs*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrNode_Abs_Mu3D_SceneGraph_OpenPbrNode_" data-uid="Mu3D.SceneGraph.OpenPbrNode.Abs(Mu3D.SceneGraph.OpenPbrNode)">
+  Abs(OpenPbrNode)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Takes the absolute value of every component of a numeric operand.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static OpenPbrNode Abs(OpenPbrNode input)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>input</code> <a class="xref" href="Mu3D.SceneGraph.OpenPbrNode.html">OpenPbrNode</a></dt>
+    <dd><p>The numeric operand, whose type is retained.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrNode.html">OpenPbrNode</a></dt>
+    <dd><p>The componentwise absolute value with finite conservative bounds.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Mu3D_SceneGraph_OpenPbrNode_Abs_Mu3D_SceneGraph_OpenPbrNode__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Color operands remain scene-linear ACEScg. No clipping or color mapping is implicit.</p>
+</div>
+
+
+
+
   <a id="Mu3D_SceneGraph_OpenPbrNode_Add_" data-uid="Mu3D.SceneGraph.OpenPbrNode.Add*"></a>
 
   <h3 id="Mu3D_SceneGraph_OpenPbrNode_Add_Mu3D_SceneGraph_OpenPbrNode_Mu3D_SceneGraph_OpenPbrNode_" data-uid="Mu3D.SceneGraph.OpenPbrNode.Add(Mu3D.SceneGraph.OpenPbrNode,Mu3D.SceneGraph.OpenPbrNode)">
@@ -729,6 +771,64 @@ an authored graph. Color arithmetic is scene-linear ACEScg; raw channels never r
 
 
 
+  <a id="Mu3D_SceneGraph_OpenPbrNode_Divide_" data-uid="Mu3D.SceneGraph.OpenPbrNode.Divide*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrNode_Divide_Mu3D_SceneGraph_OpenPbrNode_Mu3D_SceneGraph_OpenPbrNode_" data-uid="Mu3D.SceneGraph.OpenPbrNode.Divide(Mu3D.SceneGraph.OpenPbrNode,Mu3D.SceneGraph.OpenPbrNode)">
+  Divide(OpenPbrNode, OpenPbrNode)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Divides like numeric types, or a numeric first operand by a scalar second operand.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static OpenPbrNode Divide(OpenPbrNode a, OpenPbrNode b)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="Mu3D.SceneGraph.OpenPbrNode.html">OpenPbrNode</a></dt>
+    <dd><p>The numeric numerator, whose type is retained.</p>
+</dd>
+    <dt><code>b</code> <a class="xref" href="Mu3D.SceneGraph.OpenPbrNode.html">OpenPbrNode</a></dt>
+    <dd><p>A matching numeric denominator or a scalar broadcast to every component.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrNode.html">OpenPbrNode</a></dt>
+    <dd><p>The componentwise quotient with finite conservative bounds.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Mu3D_SceneGraph_OpenPbrNode_Divide_Mu3D_SceneGraph_OpenPbrNode_Mu3D_SceneGraph_OpenPbrNode__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Each semantic denominator interval must stay strictly positive or strictly negative and
+its endpoint nearest zero must be a normal FP32 value. Zero-crossing and subnormal domains
+are rejected without adding an epsilon, avoiding tiny divisors that may be flushed to zero
+by a GPU. Scalar results are replicated internally; unused vector components are zero.
+Color arithmetic remains scene-linear ACEScg, without implicit clipping or color mapping.</p>
+</div>
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
+    <dd><p>The operands are boolean or have incompatible numeric types.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p>A semantic denominator interval includes zero or subnormal values, or the quotient bounds are not finite.</p>
+</dd>
+  </dl>
+
+
+
   <a id="Mu3D_SceneGraph_OpenPbrNode_Extract_" data-uid="Mu3D.SceneGraph.OpenPbrNode.Extract*"></a>
 
   <h3 id="Mu3D_SceneGraph_OpenPbrNode_Extract_Mu3D_SceneGraph_OpenPbrNode_System_Int32_" data-uid="Mu3D.SceneGraph.OpenPbrNode.Extract(Mu3D.SceneGraph.OpenPbrNode,System.Int32)">
@@ -855,6 +955,96 @@ an authored graph. Color arithmetic is scene-linear ACEScg; raw channels never r
 
 
 
+  <a id="Mu3D_SceneGraph_OpenPbrNode_Max_" data-uid="Mu3D.SceneGraph.OpenPbrNode.Max*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrNode_Max_Mu3D_SceneGraph_OpenPbrNode_Mu3D_SceneGraph_OpenPbrNode_" data-uid="Mu3D.SceneGraph.OpenPbrNode.Max(Mu3D.SceneGraph.OpenPbrNode,Mu3D.SceneGraph.OpenPbrNode)">
+  Max(OpenPbrNode, OpenPbrNode)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Selects the maximum of like numeric types, or a numeric first operand and a scalar second operand.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static OpenPbrNode Max(OpenPbrNode a, OpenPbrNode b)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="Mu3D.SceneGraph.OpenPbrNode.html">OpenPbrNode</a></dt>
+    <dd><p>The numeric first operand, whose type is retained.</p>
+</dd>
+    <dt><code>b</code> <a class="xref" href="Mu3D.SceneGraph.OpenPbrNode.html">OpenPbrNode</a></dt>
+    <dd><p>A matching numeric operand or a scalar broadcast to every component.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrNode.html">OpenPbrNode</a></dt>
+    <dd><p>The componentwise maximum with finite conservative bounds.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Mu3D_SceneGraph_OpenPbrNode_Max_Mu3D_SceneGraph_OpenPbrNode_Mu3D_SceneGraph_OpenPbrNode__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Color operands remain scene-linear ACEScg. No clipping or color mapping is implicit.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrNode_Min_" data-uid="Mu3D.SceneGraph.OpenPbrNode.Min*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrNode_Min_Mu3D_SceneGraph_OpenPbrNode_Mu3D_SceneGraph_OpenPbrNode_" data-uid="Mu3D.SceneGraph.OpenPbrNode.Min(Mu3D.SceneGraph.OpenPbrNode,Mu3D.SceneGraph.OpenPbrNode)">
+  Min(OpenPbrNode, OpenPbrNode)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Selects the minimum of like numeric types, or a numeric first operand and a scalar second operand.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static OpenPbrNode Min(OpenPbrNode a, OpenPbrNode b)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="Mu3D.SceneGraph.OpenPbrNode.html">OpenPbrNode</a></dt>
+    <dd><p>The numeric first operand, whose type is retained.</p>
+</dd>
+    <dt><code>b</code> <a class="xref" href="Mu3D.SceneGraph.OpenPbrNode.html">OpenPbrNode</a></dt>
+    <dd><p>A matching numeric operand or a scalar broadcast to every component.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrNode.html">OpenPbrNode</a></dt>
+    <dd><p>The componentwise minimum with finite conservative bounds.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Mu3D_SceneGraph_OpenPbrNode_Min_Mu3D_SceneGraph_OpenPbrNode_Mu3D_SceneGraph_OpenPbrNode__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Color operands remain scene-linear ACEScg. No clipping or color mapping is implicit.</p>
+</div>
+
+
+
+
   <a id="Mu3D_SceneGraph_OpenPbrNode_Mix_" data-uid="Mu3D.SceneGraph.OpenPbrNode.Mix*"></a>
 
   <h3 id="Mu3D_SceneGraph_OpenPbrNode_Mix_Mu3D_SceneGraph_OpenPbrNode_Mu3D_SceneGraph_OpenPbrNode_Mu3D_SceneGraph_OpenPbrNode_" data-uid="Mu3D.SceneGraph.OpenPbrNode.Mix(Mu3D.SceneGraph.OpenPbrNode,Mu3D.SceneGraph.OpenPbrNode,Mu3D.SceneGraph.OpenPbrNode)">
@@ -973,6 +1163,104 @@ an authored graph. Color arithmetic is scene-linear ACEScg; raw channels never r
   <h4 class="section" id="Mu3D_SceneGraph_OpenPbrNode_NormalMap_Mu3D_SceneGraph_OpenPbrNode_System_Single__remarks">Remarks</h4>
   <div class="markdown level1 remarks"><p>Uses the inherited mesh normal and tangent with its handedness. A zero decoded
 vector falls back to the inherited normal. Only tangent-space normal maps are supported.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrNode_Sqrt_" data-uid="Mu3D.SceneGraph.OpenPbrNode.Sqrt*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrNode_Sqrt_Mu3D_SceneGraph_OpenPbrNode_" data-uid="Mu3D.SceneGraph.OpenPbrNode.Sqrt(Mu3D.SceneGraph.OpenPbrNode)">
+  Sqrt(OpenPbrNode)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Takes the square root of nonnegative scalar or vector data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static OpenPbrNode Sqrt(OpenPbrNode input)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>input</code> <a class="xref" href="Mu3D.SceneGraph.OpenPbrNode.html">OpenPbrNode</a></dt>
+    <dd><p>A Float, Vector2, Vector3 or Vector4 operand, whose type is retained.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrNode.html">OpenPbrNode</a></dt>
+    <dd><p>The componentwise square root with finite conservative bounds.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Mu3D_SceneGraph_OpenPbrNode_Sqrt_Mu3D_SceneGraph_OpenPbrNode__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Every semantic component must have a nonnegative conservative lower bound. No absolute
+value, epsilon or clamp is implicit. Scalar results are replicated internally; unused
+vector components are zero. Color3 and Boolean operands are not supported.</p>
+</div>
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></dt>
+    <dd><p>The operand is Color3 or Boolean.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception">ArgumentOutOfRangeException</a></dt>
+    <dd><p>A semantic component has a negative conservative lower bound.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Mu3D_SceneGraph_OpenPbrNode_Subtract_" data-uid="Mu3D.SceneGraph.OpenPbrNode.Subtract*"></a>
+
+  <h3 id="Mu3D_SceneGraph_OpenPbrNode_Subtract_Mu3D_SceneGraph_OpenPbrNode_Mu3D_SceneGraph_OpenPbrNode_" data-uid="Mu3D.SceneGraph.OpenPbrNode.Subtract(Mu3D.SceneGraph.OpenPbrNode,Mu3D.SceneGraph.OpenPbrNode)">
+  Subtract(OpenPbrNode, OpenPbrNode)
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Subtracts like numeric types, or a scalar second operand from a numeric first operand.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static OpenPbrNode Subtract(OpenPbrNode a, OpenPbrNode b)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="Mu3D.SceneGraph.OpenPbrNode.html">OpenPbrNode</a></dt>
+    <dd><p>The numeric first operand, whose type is retained.</p>
+</dd>
+    <dt><code>b</code> <a class="xref" href="Mu3D.SceneGraph.OpenPbrNode.html">OpenPbrNode</a></dt>
+    <dd><p>A matching numeric operand or a scalar broadcast to every component.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.SceneGraph.OpenPbrNode.html">OpenPbrNode</a></dt>
+    <dd><p>The componentwise difference with finite conservative bounds.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Mu3D_SceneGraph_OpenPbrNode_Subtract_Mu3D_SceneGraph_OpenPbrNode_Mu3D_SceneGraph_OpenPbrNode__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Color operands remain scene-linear ACEScg. No clipping or color mapping is implicit.</p>
 </div>
 
 

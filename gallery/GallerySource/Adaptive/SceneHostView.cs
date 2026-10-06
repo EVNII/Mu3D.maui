@@ -4,6 +4,7 @@ using Mu3D.Maui.Controls;
 using Mu3D.Maui.Toolkit.Controls;
 using Mu3D.Maui.Toolkit.Diagnostics;
 using Mu3D.Toolkit.Controls;
+using Mu3D.Toolkit.Diagnostics;
 using Mu3D.Toolkit.Helpers;
 
 using MauiColor = Microsoft.Maui.Graphics.Color;
@@ -53,7 +54,7 @@ public partial class SceneHostView : Grid
         };
         statisticsOverlay = new FrameStatisticsOverlay
         {
-            IsDetailed = false,
+            DisplayMode = FrameStatisticsDisplayMode.Compact,
             IsGraphVisible = true,
             Margin = 12,
             MaximumWidth = 420,
@@ -88,9 +89,9 @@ public partial class SceneHostView : Grid
         dynamicRangePicker.SelectedIndex = 0;
         dynamicRangePicker.SelectedIndexChanged += OnDynamicRangeChanged;
 
-        evSlider = new Slider(-4, 4, 0) { MinimumWidthRequest = 140, IsEnabled = false };
+        evSlider = new Slider(-4, 4, 0) { MinimumWidthRequest = 140 };
         evSlider.ValueChanged += OnExposureChanged;
-        evLabel = new Label { Text = "Select a view for EV", VerticalTextAlignment = TextAlignment.Center };
+        evLabel = new Label { Text = "EV +0.00", VerticalTextAlignment = TextAlignment.Center };
 
         outputLabel = new Label { FontSize = 11, Text = "Waiting for surface…" };
         errorLabel = new Label { FontSize = 11, TextColor = Colors.OrangeRed };
@@ -268,14 +269,11 @@ public partial class SceneHostView : Grid
         if (presetPicker.SelectedIndex == 0)
         {
             sceneView.DisplayTransform = null;
-            evSlider.IsEnabled = false;
-            evLabel.Text = "Select a view for EV";
             return;
         }
 
         displayTransform.Preset = ViewPresets[presetPicker.SelectedIndex - 1];
         sceneView.DisplayTransform = displayTransform;
-        evSlider.IsEnabled = true;
         evLabel.Text = $"EV {displayTransform.ExposureStops:+0.00;-0.00;+0.00}";
     }
 
@@ -300,11 +298,8 @@ public partial class SceneHostView : Grid
     private void OnExposureChanged(object? sender, ValueChangedEventArgs e)
     {
         _ = sender;
-        if (sceneView.DisplayTransform is null)
-        {
-            return;
-        }
         float stops = (float)Math.Round(e.NewValue * 4, MidpointRounding.ToEven) / 4f;
+        sceneView.SceneLinearExposureStops = stops;
         displayTransform.ExposureStops = stops;
         evLabel.Text = $"EV {stops:+0.00;-0.00;+0.00}";
     }

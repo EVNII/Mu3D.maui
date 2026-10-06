@@ -18,7 +18,9 @@ const emptySnapshot = Object.freeze(Object.fromEntries([
   ...countFields.map(key => [key, 0]), ...numberFields.map(key => [key, 0]),
   ...optionalFields.map(key => [key, null]), ['resourceCounts', null],
 ]));
-const defaults = Object.freeze({isDetailed: false, isGraphVisible: true, textColor: '#ffffff',
+const displayModes = Object.freeze(['compact', 'normal', 'detail']);
+const inputEvents = ['pointerdown', 'pointermove', 'pointerup', 'pointercancel', 'wheel', 'dblclick', 'contextmenu'];
+const defaults = Object.freeze({displayMode: 'normal', isDetailed: false, isGraphVisible: true, textColor: '#ffffff',
   graphColor: '#00ffff', graphBackgroundColor: 'rgb(0 3.5% 9%)'});
 const placements = new Set(['top-left', 'top-center', 'top-right', 'center-left', 'center',
   'center-right', 'bottom-left', 'bottom-center', 'bottom-right']);
@@ -52,6 +54,13 @@ function boolean(value, name) {
 function color(value, name) {
   if (typeof value !== 'string' || !value.trim()) throw new TypeError(`${name} must be a CSS color.`);
   return value;
+}
+function displayOption(key, value) {
+  if (key === 'displayMode') {
+    if (!displayModes.includes(value)) throw new TypeError('displayMode must be compact, normal or detail.');
+    return value;
+  }
+  return key.startsWith('is') ? boolean(value, key) : color(value, key);
 }
 function snapshotCopy(value) {
   if (value == null || typeof value !== 'object') throw new TypeError('A managed statistics snapshot is required.');
@@ -148,14 +157,15 @@ function resourcesText(counts) {
   }
   return values.length ? `Resources  ${values.join('  ·  ')}` : 'Resources  —';
 }
-function text(snapshot, detailed, history) {
+function text(snapshot, mode, history) {
+  if (mode === 'compact') return [snapshot.sampleCount === 0 ? '— FPS' : `${format(snapshot.framesPerSecond, 0)} FPS`, ''];
   if (snapshot.sampleCount === 0) return ['Waiting for frame samples…', snapshot.resourceCounts
     ? resourcesText(snapshot.resourceCounts) : 'No completed frame interval has been sampled.'];
   const headline = history.length
     ? `${format(snapshot.framesPerSecond, 0)} FPS (${format(Math.min(...history), 0)}–${format(Math.max(...history), 0)})  ·  ${format(snapshot.averageFrameMilliseconds, 2)} ms`
     : `${format(snapshot.framesPerSecond, 1)} FPS  ·  ${format(snapshot.averageFrameMilliseconds, 2)} ms`;
   const summary = `Render ${milliseconds(snapshot.averageRendererTotalMilliseconds)}  ·  Present ${milliseconds(snapshot.averagePresentationTotalMilliseconds)}\nDraws ${average(snapshot.averageDrawCallCount)}  ·  Primitives ${average(snapshot.averagePrimitiveCount)}`;
-  if (!detailed) return [headline, summary];
+  if (mode !== 'detail') return [headline, summary];
   return [headline,
     `Frame  min ${format(snapshot.minimumFrameMilliseconds, 2)} ms  ·  avg ${format(snapshot.averageFrameMilliseconds, 2)} ms  ·  max ${format(snapshot.maximumFrameMilliseconds, 2)} ms  ·  samples ${snapshot.sampleCount}\n` +
     `Presentation  acquire ${milliseconds(snapshot.averageAcquireMilliseconds)}  ·  render ${milliseconds(snapshot.averagePresentationRenderMilliseconds)}  ·  present ${milliseconds(snapshot.averagePresentMilliseconds)}  ·  total ${milliseconds(snapshot.averagePresentationTotalMilliseconds)}\n` +
@@ -166,21 +176,28 @@ function text(snapshot, detailed, history) {
 /**
  * Creates a real DOM view, borrowing its source. 120 published snapshots feed a 52 CSS-pixel
  * graph, independently of renderer cadence. append element to mount it; detach/attach suspend and
- * resume source observation while retaining displayed history. dispose removes owned DOM only.
+ * resume source observation/input while retaining displayed history. displayMode defaults to normal;
+ * click/Enter/Space cycle compact, normal and detail without resetting collection/history.
+ * isDetailed remains a compatibility setter: true selects detail, false selects normal.
+ * Compact hides the graph without changing isGraphVisible. dispose removes owned DOM/listeners only.
  */
 export function createFrameStatisticsView({source = null, document = globalThis.document, ...display} = {}) {
   if (!document?.createElement || !document?.createElementNS) throw new TypeError('A DOM document is required.');
   source = requireSource(source);
   const options = {...defaults};
   for (const key of Object.keys(defaults)) if (display[key] !== undefined)
-    options[key] = key.startsWith('is') ? boolean(display[key], key) : color(display[key], key);
+    options[key] = displayOption(key, display[key]);
+  if (display.displayMode === undefined) options.displayMode = options.isDetailed ? 'detail' : 'normal';
+  options.isDetailed = options.displayMode === 'detail';
   const element = document.createElement('div'), headline = document.createElement('div'), details = document.createElement('div');
   const graph = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   element.dataset.mu3dFrameStatistics = '';
+  element.setAttribute('role', 'button'); element.setAttribute('tabindex', '0');
   headline.dataset.mu3dStatisticsHeadline = ''; details.dataset.mu3dStatisticsDetails = '';
   graph.dataset.mu3dStatisticsGraph = ''; graph.setAttribute('aria-hidden', 'true');
   Object.assign(element.style, {display: 'flex', flexDirection: 'column', gap: '3px', padding: '10px',
-    boxSizing: 'border-box', minWidth: '0', fontFamily: 'system-ui, sans-serif'});
+    boxSizing: 'border-box', minWidth: '0', fontFamily: 'system-ui, sans-serif', cursor: 'pointer',
+    pointerEvents: 'auto', touchAction: 'none', userSelect: 'none'});
   Object.assign(headline.style, {fontWeight: 'bold', fontSize: '16px', whiteSpace: 'nowrap'});
   Object.assign(details.style, {fontSize: '12px', whiteSpace: 'pre-wrap', overflowWrap: 'break-word'});
   Object.assign(graph.style, {width: '100%', height: '52px', flexShrink: '0', pointerEvents: 'none'});
@@ -191,13 +208,42 @@ export function createFrameStatisticsView({source = null, document = globalThis.
   const ResizeObserver = document.defaultView?.ResizeObserver;
   const observer = ResizeObserver ? new ResizeObserver(() => { if (attached && !disposed) refreshGraph(); }) : null;
   function live() { if (disposed) throw new Error('The frame statistics view is disposed.'); }
+  function setMode(value) {
+    if (options.displayMode === value) return;
+    options.displayMode = value; options.isDetailed = value === 'detail';
+    refresh(); changes.notify(view.options);
+  }
+  function stopInput(event) { if (attached && !disposed) event.stopPropagation(); }
+  function activate(event) {
+    if (!attached || disposed) return;
+    if (event.type === 'keydown') {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.stopPropagation(); event.preventDefault();
+      if (event.repeat) return;
+    } else {
+      event.stopPropagation();
+      if (event.button > 0) return;
+    }
+    setMode(displayModes[(displayModes.indexOf(options.displayMode) + 1) % displayModes.length]);
+  }
+  function keyUp(event) {
+    if (attached && !disposed && (event.key === 'Enter' || event.key === ' ')) {
+      event.stopPropagation(); event.preventDefault();
+    }
+  }
+  function observeInput(observe) {
+    const method = observe ? 'addEventListener' : 'removeEventListener';
+    element[method]('click', activate); element[method]('keydown', activate); element[method]('keyup', keyUp);
+    for (const type of inputEvents) element[method](type, stopInput);
+  }
   function refreshGraph() {
     graph.replaceChildren();
-    graph.hidden = !options.isGraphVisible; graph.style.display = options.isGraphVisible ? 'block' : 'none';
+    const visible = options.displayMode !== 'compact' && options.isGraphVisible;
+    graph.hidden = !visible; graph.style.display = visible ? 'block' : 'none';
     graph.style.backgroundColor = options.graphBackgroundColor;
     const width = graph.getBoundingClientRect?.().width || 119, height = 52;
     graph.setAttribute('viewBox', `0 0 ${width} ${height}`);
-    if (!history.length) return;
+    if (!visible || !history.length) return;
     function shape(tag, attributes) {
       const node = document.createElementNS('http://www.w3.org/2000/svg', tag);
       for (const [key, value] of Object.entries(attributes)) node.setAttribute(key, String(value));
@@ -219,7 +265,14 @@ export function createFrameStatisticsView({source = null, document = globalThis.
     }
   }
   function refresh() {
-    [headline.textContent, details.textContent] = text(latest, options.isDetailed, history);
+    const compact = options.displayMode === 'compact';
+    [headline.textContent, details.textContent] = text(latest, options.displayMode, history);
+    details.hidden = compact; details.style.display = compact ? 'none' : 'block';
+    element.style.padding = compact ? '5px 7px' : '10px';
+    element.style.gap = compact ? '0' : '3px'; headline.style.fontSize = compact ? '12px' : '16px';
+    element.dataset.mu3dStatisticsDisplayMode = options.displayMode;
+    const next = displayModes[(displayModes.indexOf(options.displayMode) + 1) % displayModes.length];
+    element.setAttribute('aria-label', `Frame statistics, ${options.displayMode} display. Activate for ${next} display.`);
     headline.style.color = details.style.color = options.textColor; refreshGraph();
   }
   function apply(snapshot, append) {
@@ -257,28 +310,34 @@ export function createFrameStatisticsView({source = null, document = globalThis.
     get isAttached() { return attached; },
     subscribe(listener) { live(); return snapshots.add(listener); },
     subscribeOptions(listener) { live(); return changes.add(listener); },
-    attach() { live(); if (attached) return; attached = true; observer?.observe(graph); observeSource(); },
-    detach() { live(); attached = false; subscriptionVersion++; unsubscribe?.(); unsubscribe = null; observer?.disconnect(); },
+    attach() { live(); if (attached) return; attached = true; observeInput(true); observer?.observe(graph); observeSource(); },
+    detach() {
+      live(); attached = false; subscriptionVersion++; unsubscribe?.(); unsubscribe = null;
+      observeInput(false); observer?.disconnect();
+    },
     dispose() {
       if (disposed) return;
       disposed = true; attached = false; unsubscribe?.(); unsubscribe = null;
-      observer?.disconnect(); snapshots.clear(); changes.clear(); element.remove(); source = null;
+      observeInput(false); observer?.disconnect(); snapshots.clear(); changes.clear(); element.remove(); source = null;
     },
   };
   for (const key of Object.keys(defaults)) Object.defineProperty(view, key, {
     enumerable: true, get: () => options[key], set(value) {
-      live(); value = key.startsWith('is') ? boolean(value, key) : color(value, key);
+      live(); value = displayOption(key, value);
+      if (key === 'displayMode') { setMode(value); return; }
+      if (key === 'isDetailed') { setMode(value ? 'detail' : 'normal'); return; }
       if (options[key] === value) return;
       options[key] = value; refresh(); changes.notify(view.options);
     },
   });
-  try { refresh(); observer?.observe(graph); observeSource(); }
+  try { refresh(); observeInput(true); observer?.observe(graph); observeSource(); }
   catch (error) { view.dispose(); throw error; }
   return view;
 }
 
 /**
- * Creates an owned, pass-through statistics panel in a borrowed positioned Canvas container.
+ * Creates an owned statistics panel in a borrowed positioned Canvas container. The panel handles
+ * display-mode activation and stops camera input; the surrounding overlay passes input through.
  * Placement/margin/width use CSS logical pixels. source is borrowed, never reset/disposed on
  * replacement or teardown. isEnabled/interval proxy that source; visibility affects display only.
  * detach removes subscriptions/DOM; attach restores them. reset explicitly resets the bound source.
@@ -303,7 +362,7 @@ export function createFrameStatisticsOverlay({container, source = null, ...setti
   Object.assign(element.style, {position: 'absolute', inset: '0', display: 'flex', overflow: 'hidden',
     pointerEvents: 'none', boxSizing: 'border-box'});
   Object.assign(panel.style, {boxSizing: 'border-box', minWidth: '0', border: '1px solid #53647d',
-    borderRadius: '7px', pointerEvents: 'none'});
+    borderRadius: '7px', pointerEvents: 'auto'});
   const view = createFrameStatisticsView({document, ...settings});
   if (!options.isVisible) view.detach();
   try { view.source = source; }
@@ -312,10 +371,24 @@ export function createFrameStatisticsOverlay({container, source = null, ...setti
   try {
     for (const key of Object.keys(collection)) if (settings[key] !== undefined && source) source[key] = collection[key];
   } catch (error) { view.dispose(); element.remove(); throw error; }
-  let attached = true, disposed = false, unsubscribe = null, unsubscribeOptions = null, subscriptionVersion = 0,
+  let attached = true, disposed = false, inputAttached = false, unsubscribe = null, unsubscribeOptions = null, subscriptionVersion = 0,
     latest = source?.latestSnapshot ?? emptySnapshot;
   const snapshots = subscriptions(), changes = subscriptions();
   function live() { if (disposed) throw new Error('The frame statistics overlay is disposed.'); }
+  function stopPanelInput(event) { if (attached && options.isVisible && !disposed) event.stopPropagation(); }
+  function activatePanel(event) {
+    if (!attached || !options.isVisible || disposed) return;
+    event.stopPropagation();
+    if (event.button > 0) return;
+    view.displayMode = displayModes[(displayModes.indexOf(view.displayMode) + 1) % displayModes.length];
+  }
+  function observePanelInput(observe) {
+    if (inputAttached === observe) return;
+    inputAttached = observe;
+    const method = observe ? 'addEventListener' : 'removeEventListener';
+    panel[method]('click', activatePanel);
+    for (const type of inputEvents) panel[method](type, stopPanelInput);
+  }
   function refresh() {
     element.hidden = !options.isVisible; element.style.display = options.isVisible ? 'flex' : 'none';
     element.style.padding = `${options.margin}px`;
@@ -324,6 +397,7 @@ export function createFrameStatisticsOverlay({container, source = null, ...setti
     element.style.justifyContent = column === 'left' ? 'flex-start' : column === 'right' ? 'flex-end' : 'center';
     panel.style.maxWidth = `${options.maximumWidth}px`; panel.style.width = 'max-content';
     panel.style.maxHeight = '100%'; panel.style.backgroundColor = options.backgroundColor;
+    observePanelInput(attached && options.isVisible);
     if (attached && options.isVisible) view.attach(); else view.detach();
   }
   function observeSource() {
@@ -369,7 +443,7 @@ export function createFrameStatisticsOverlay({container, source = null, ...setti
     detach() {
       live(); attached = false; subscriptionVersion++;
       unsubscribe?.(); unsubscribeOptions?.(); unsubscribe = unsubscribeOptions = null;
-      view.detach(); element.remove();
+      observePanelInput(false); view.detach(); element.remove();
     },
     dispose() {
       if (disposed) return;

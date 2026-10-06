@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Class FrameStatisticsOverlay | Mu3D documentation ">
       
-      <meta name="description" content="Collects throttled frame statistics and displays them in a pass-through MAUI viewport overlay.">
+      <meta name="description" content="Collects throttled frame statistics and displays them in an interactive MAUI viewport overlay.">
       <link rel="icon" href="../../favicon.ico">
       <link rel="stylesheet" href="../../public/docfx.min.css">
       <link rel="stylesheet" href="../../public/main.css">
@@ -97,7 +97,7 @@ Class FrameStatisticsOverlay
   <dl><dt>Assembly</dt><dd>Mu3D.Maui.Toolkit.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>Collects throttled frame statistics and displays them in a pass-through MAUI viewport overlay.</p>
+  <div class="markdown summary"><p>Collects throttled frame statistics and displays them in an interactive MAUI viewport overlay.</p>
 </div>
   <div class="markdown conceptual"></div>
 
@@ -203,7 +203,8 @@ Class FrameStatisticsOverlay
   <h2 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsOverlay_remarks">Remarks</h2>
   <div class="markdown level0 remarks"><p>The tool creates one attachment-owned <a class="xref" href="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.html">FrameStatisticsBehavior</a> and one
 <a class="xref" href="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.html">FrameStatisticsView</a>. It borrows the application-visible <a class="xref" href="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsOverlay_Collector">Collector</a>,
-owns no render loop and uses the common per-viewport overlay manager for layout and lifecycle.</p>
+owns no render loop and uses the common per-viewport overlay manager for layout and lifecycle.
+Clicking the indicator cycles Compact, Normal and Detail without passing the click to the camera.</p>
 </div>
 
 
@@ -284,6 +285,37 @@ owns no render loop and uses the common per-viewport overlay manager for layout 
 
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static readonly BindableProperty CollectorProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsOverlay_DisplayModeProperty" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.DisplayModeProperty">
+  DisplayModeProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsOverlay_DisplayMode">DisplayMode</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty DisplayModeProperty</code></pre>
   </div>
 
 
@@ -774,6 +806,43 @@ owns no render loop and uses the common per-viewport overlay manager for layout 
 
 
 
+  <a id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsOverlay_DisplayMode_" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.DisplayMode*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsOverlay_DisplayMode" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.DisplayMode">
+  DisplayMode
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the amount of indicator information. The default is Normal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FrameStatisticsDisplayMode DisplayMode { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Toolkit.Diagnostics.FrameStatisticsDisplayMode.html">FrameStatisticsDisplayMode</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsOverlay_DisplayMode_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Compact shows only FPS and temporarily hides the graph. Clicks cycle Compact to Normal to
+Detail to Compact and update this property. Its default binding mode is two-way.
+Prefer this property over <a class="xref" href="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsOverlay_IsDetailed">IsDetailed</a> when binding display state.</p>
+</div>
+
+
+
+
   <a id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsOverlay_DrawCallCount_" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.DrawCallCount*"></a>
 
   <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsOverlay_DrawCallCount" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.DrawCallCount">
@@ -877,7 +946,7 @@ owns no render loop and uses the common per-viewport overlay manager for layout 
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Gets or sets whether timing and resource details are shown.</p>
+  <div class="markdown level1 summary"><p>Gets or sets the legacy Normal/Detail display choice.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -898,6 +967,14 @@ owns no render loop and uses the common per-viewport overlay manager for layout 
 
 
 
+  <h4 class="section" id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsOverlay_IsDetailed_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Assigning this CLR property selects Detail for true and Normal for false, even when the
+boolean is unchanged. Compact reports false. An unchanged bindable-property write does not
+change modes; use <a class="xref" href="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsOverlay_DisplayMode">DisplayMode</a> for explicit mode selection.
+Use <a class="xref" href="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsOverlay_DisplayMode">DisplayMode</a>
+to distinguish all modes, and avoid binding both selectors to independent state. The default
+binding mode is now two-way so indicator clicks can update a legacy bound selector.</p>
+</div>
 
 
 

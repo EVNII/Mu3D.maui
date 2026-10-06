@@ -18239,6 +18239,24 @@ references:
   commentId: F:Mu3D.Maui.Controls.Mu3DSceneView.SceneContentProperty
   fullName: Mu3D.Maui.Controls.Mu3DSceneView.SceneContentProperty
   nameWithType: Mu3DSceneView.SceneContentProperty
+- uid: Mu3D.Maui.Controls.Mu3DSceneView.SceneLinearExposureStops
+  name: SceneLinearExposureStops
+  href: v0.1/api/Mu3D.Maui.Controls.Mu3DSceneView.html#Mu3D_Maui_Controls_Mu3DSceneView_SceneLinearExposureStops
+  commentId: P:Mu3D.Maui.Controls.Mu3DSceneView.SceneLinearExposureStops
+  fullName: Mu3D.Maui.Controls.Mu3DSceneView.SceneLinearExposureStops
+  nameWithType: Mu3DSceneView.SceneLinearExposureStops
+- uid: Mu3D.Maui.Controls.Mu3DSceneView.SceneLinearExposureStops*
+  name: SceneLinearExposureStops
+  href: v0.1/api/Mu3D.Maui.Controls.Mu3DSceneView.html#Mu3D_Maui_Controls_Mu3DSceneView_SceneLinearExposureStops_
+  commentId: Overload:Mu3D.Maui.Controls.Mu3DSceneView.SceneLinearExposureStops
+  fullName: Mu3D.Maui.Controls.Mu3DSceneView.SceneLinearExposureStops
+  nameWithType: Mu3DSceneView.SceneLinearExposureStops
+- uid: Mu3D.Maui.Controls.Mu3DSceneView.SceneLinearExposureStopsProperty
+  name: SceneLinearExposureStopsProperty
+  href: v0.1/api/Mu3D.Maui.Controls.Mu3DSceneView.html#Mu3D_Maui_Controls_Mu3DSceneView_SceneLinearExposureStopsProperty
+  commentId: F:Mu3D.Maui.Controls.Mu3DSceneView.SceneLinearExposureStopsProperty
+  fullName: Mu3D.Maui.Controls.Mu3DSceneView.SceneLinearExposureStopsProperty
+  nameWithType: Mu3DSceneView.SceneLinearExposureStopsProperty
 - uid: Mu3D.Maui.Controls.Mu3DSceneView.SceneProperty
   name: SceneProperty
   href: v0.1/api/Mu3D.Maui.Controls.Mu3DSceneView.html#Mu3D_Maui_Controls_Mu3DSceneView_SceneProperty
@@ -27959,6 +27977,24 @@ references:
   commentId: F:Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.CollectorProperty
   fullName: Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.CollectorProperty
   nameWithType: FrameStatisticsOverlay.CollectorProperty
+- uid: Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.DisplayMode
+  name: DisplayMode
+  href: v0.1/api/Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsOverlay_DisplayMode
+  commentId: P:Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.DisplayMode
+  fullName: Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.DisplayMode
+  nameWithType: FrameStatisticsOverlay.DisplayMode
+- uid: Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.DisplayMode*
+  name: DisplayMode
+  href: v0.1/api/Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsOverlay_DisplayMode_
+  commentId: Overload:Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.DisplayMode
+  fullName: Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.DisplayMode
+  nameWithType: FrameStatisticsOverlay.DisplayMode
+- uid: Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.DisplayModeProperty
+  name: DisplayModeProperty
+  href: v0.1/api/Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsOverlay_DisplayModeProperty
+  commentId: F:Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.DisplayModeProperty
+  fullName: Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.DisplayModeProperty
+  nameWithType: FrameStatisticsOverlay.DisplayModeProperty
 - uid: Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.DrawCallCount
   name: DrawCallCount
   href: v0.1/api/Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsOverlay_DrawCallCount
@@ -28295,6 +28331,24 @@ references:
   fullName.vb: Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.New
   nameWithType: FrameStatisticsView.FrameStatisticsView
   nameWithType.vb: FrameStatisticsView.New
+- uid: Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.DisplayMode
+  name: DisplayMode
+  href: v0.1/api/Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsView_DisplayMode
+  commentId: P:Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.DisplayMode
+  fullName: Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.DisplayMode
+  nameWithType: FrameStatisticsView.DisplayMode
+- uid: Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.DisplayMode*
+  name: DisplayMode
+  href: v0.1/api/Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsView_DisplayMode_
+  commentId: Overload:Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.DisplayMode
+  fullName: Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.DisplayMode
+  nameWithType: FrameStatisticsView.DisplayMode
+- uid: Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.DisplayModeProperty
+  name: DisplayModeProperty
+  href: v0.1/api/Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsView_DisplayModeProperty
+  commentId: F:Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.DisplayModeProperty
+  fullName: Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.DisplayModeProperty
+  nameWithType: FrameStatisticsView.DisplayModeProperty
 - uid: Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.Dispose
   name: Dispose()
   href: v0.1/api/Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsView_Dispose
@@ -31706,6 +31760,18 @@ references:
   commentId: Overload:Mu3D.Native.Wgpu.WgpuSurfaceSession.Resize
   fullName: Mu3D.Native.Wgpu.WgpuSurfaceSession.Resize
   nameWithType: WgpuSurfaceSession.Resize
+- uid: Mu3D.Native.Wgpu.WgpuSurfaceSession.TryEnableReadback
+  name: TryEnableReadback()
+  href: v0.1/api/Mu3D.Native.Wgpu.WgpuSurfaceSession.html#Mu3D_Native_Wgpu_WgpuSurfaceSession_TryEnableReadback
+  commentId: M:Mu3D.Native.Wgpu.WgpuSurfaceSession.TryEnableReadback
+  fullName: Mu3D.Native.Wgpu.WgpuSurfaceSession.TryEnableReadback()
+  nameWithType: WgpuSurfaceSession.TryEnableReadback()
+- uid: Mu3D.Native.Wgpu.WgpuSurfaceSession.TryEnableReadback*
+  name: TryEnableReadback
+  href: v0.1/api/Mu3D.Native.Wgpu.WgpuSurfaceSession.html#Mu3D_Native_Wgpu_WgpuSurfaceSession_TryEnableReadback_
+  commentId: Overload:Mu3D.Native.Wgpu.WgpuSurfaceSession.TryEnableReadback
+  fullName: Mu3D.Native.Wgpu.WgpuSurfaceSession.TryEnableReadback
+  nameWithType: WgpuSurfaceSession.TryEnableReadback
 - uid: Mu3D.Native.Wgpu.WgpuSurfaceSession.Width
   name: Width
   href: v0.1/api/Mu3D.Native.Wgpu.WgpuSurfaceSession.html#Mu3D_Native_Wgpu_WgpuSurfaceSession_Width
@@ -38444,6 +38510,18 @@ references:
   commentId: Overload:Mu3D.SceneGraph.OpenPbrNode.A
   fullName: Mu3D.SceneGraph.OpenPbrNode.A
   nameWithType: OpenPbrNode.A
+- uid: Mu3D.SceneGraph.OpenPbrNode.Abs(Mu3D.SceneGraph.OpenPbrNode)
+  name: Abs(OpenPbrNode)
+  href: v0.1/api/Mu3D.SceneGraph.OpenPbrNode.html#Mu3D_SceneGraph_OpenPbrNode_Abs_Mu3D_SceneGraph_OpenPbrNode_
+  commentId: M:Mu3D.SceneGraph.OpenPbrNode.Abs(Mu3D.SceneGraph.OpenPbrNode)
+  fullName: Mu3D.SceneGraph.OpenPbrNode.Abs(Mu3D.SceneGraph.OpenPbrNode)
+  nameWithType: OpenPbrNode.Abs(OpenPbrNode)
+- uid: Mu3D.SceneGraph.OpenPbrNode.Abs*
+  name: Abs
+  href: v0.1/api/Mu3D.SceneGraph.OpenPbrNode.html#Mu3D_SceneGraph_OpenPbrNode_Abs_
+  commentId: Overload:Mu3D.SceneGraph.OpenPbrNode.Abs
+  fullName: Mu3D.SceneGraph.OpenPbrNode.Abs
+  nameWithType: OpenPbrNode.Abs
 - uid: Mu3D.SceneGraph.OpenPbrNode.Add(Mu3D.SceneGraph.OpenPbrNode,Mu3D.SceneGraph.OpenPbrNode)
   name: Add(OpenPbrNode, OpenPbrNode)
   href: v0.1/api/Mu3D.SceneGraph.OpenPbrNode.html#Mu3D_SceneGraph_OpenPbrNode_Add_Mu3D_SceneGraph_OpenPbrNode_Mu3D_SceneGraph_OpenPbrNode_
@@ -38546,6 +38624,18 @@ references:
   commentId: Overload:Mu3D.SceneGraph.OpenPbrNode.Color
   fullName: Mu3D.SceneGraph.OpenPbrNode.Color
   nameWithType: OpenPbrNode.Color
+- uid: Mu3D.SceneGraph.OpenPbrNode.Divide(Mu3D.SceneGraph.OpenPbrNode,Mu3D.SceneGraph.OpenPbrNode)
+  name: Divide(OpenPbrNode, OpenPbrNode)
+  href: v0.1/api/Mu3D.SceneGraph.OpenPbrNode.html#Mu3D_SceneGraph_OpenPbrNode_Divide_Mu3D_SceneGraph_OpenPbrNode_Mu3D_SceneGraph_OpenPbrNode_
+  commentId: M:Mu3D.SceneGraph.OpenPbrNode.Divide(Mu3D.SceneGraph.OpenPbrNode,Mu3D.SceneGraph.OpenPbrNode)
+  fullName: Mu3D.SceneGraph.OpenPbrNode.Divide(Mu3D.SceneGraph.OpenPbrNode, Mu3D.SceneGraph.OpenPbrNode)
+  nameWithType: OpenPbrNode.Divide(OpenPbrNode, OpenPbrNode)
+- uid: Mu3D.SceneGraph.OpenPbrNode.Divide*
+  name: Divide
+  href: v0.1/api/Mu3D.SceneGraph.OpenPbrNode.html#Mu3D_SceneGraph_OpenPbrNode_Divide_
+  commentId: Overload:Mu3D.SceneGraph.OpenPbrNode.Divide
+  fullName: Mu3D.SceneGraph.OpenPbrNode.Divide
+  nameWithType: OpenPbrNode.Divide
 - uid: Mu3D.SceneGraph.OpenPbrNode.Extract(Mu3D.SceneGraph.OpenPbrNode,System.Int32)
   name: Extract(OpenPbrNode, int)
   href: v0.1/api/Mu3D.SceneGraph.OpenPbrNode.html#Mu3D_SceneGraph_OpenPbrNode_Extract_Mu3D_SceneGraph_OpenPbrNode_System_Int32_
@@ -38615,6 +38705,18 @@ references:
   commentId: Overload:Mu3D.SceneGraph.OpenPbrNode.IsUniform
   fullName: Mu3D.SceneGraph.OpenPbrNode.IsUniform
   nameWithType: OpenPbrNode.IsUniform
+- uid: Mu3D.SceneGraph.OpenPbrNode.Max(Mu3D.SceneGraph.OpenPbrNode,Mu3D.SceneGraph.OpenPbrNode)
+  name: Max(OpenPbrNode, OpenPbrNode)
+  href: v0.1/api/Mu3D.SceneGraph.OpenPbrNode.html#Mu3D_SceneGraph_OpenPbrNode_Max_Mu3D_SceneGraph_OpenPbrNode_Mu3D_SceneGraph_OpenPbrNode_
+  commentId: M:Mu3D.SceneGraph.OpenPbrNode.Max(Mu3D.SceneGraph.OpenPbrNode,Mu3D.SceneGraph.OpenPbrNode)
+  fullName: Mu3D.SceneGraph.OpenPbrNode.Max(Mu3D.SceneGraph.OpenPbrNode, Mu3D.SceneGraph.OpenPbrNode)
+  nameWithType: OpenPbrNode.Max(OpenPbrNode, OpenPbrNode)
+- uid: Mu3D.SceneGraph.OpenPbrNode.Max*
+  name: Max
+  href: v0.1/api/Mu3D.SceneGraph.OpenPbrNode.html#Mu3D_SceneGraph_OpenPbrNode_Max_
+  commentId: Overload:Mu3D.SceneGraph.OpenPbrNode.Max
+  fullName: Mu3D.SceneGraph.OpenPbrNode.Max
+  nameWithType: OpenPbrNode.Max
 - uid: Mu3D.SceneGraph.OpenPbrNode.Maximum
   name: Maximum
   href: v0.1/api/Mu3D.SceneGraph.OpenPbrNode.html#Mu3D_SceneGraph_OpenPbrNode_Maximum
@@ -38627,6 +38729,18 @@ references:
   commentId: Overload:Mu3D.SceneGraph.OpenPbrNode.Maximum
   fullName: Mu3D.SceneGraph.OpenPbrNode.Maximum
   nameWithType: OpenPbrNode.Maximum
+- uid: Mu3D.SceneGraph.OpenPbrNode.Min(Mu3D.SceneGraph.OpenPbrNode,Mu3D.SceneGraph.OpenPbrNode)
+  name: Min(OpenPbrNode, OpenPbrNode)
+  href: v0.1/api/Mu3D.SceneGraph.OpenPbrNode.html#Mu3D_SceneGraph_OpenPbrNode_Min_Mu3D_SceneGraph_OpenPbrNode_Mu3D_SceneGraph_OpenPbrNode_
+  commentId: M:Mu3D.SceneGraph.OpenPbrNode.Min(Mu3D.SceneGraph.OpenPbrNode,Mu3D.SceneGraph.OpenPbrNode)
+  fullName: Mu3D.SceneGraph.OpenPbrNode.Min(Mu3D.SceneGraph.OpenPbrNode, Mu3D.SceneGraph.OpenPbrNode)
+  nameWithType: OpenPbrNode.Min(OpenPbrNode, OpenPbrNode)
+- uid: Mu3D.SceneGraph.OpenPbrNode.Min*
+  name: Min
+  href: v0.1/api/Mu3D.SceneGraph.OpenPbrNode.html#Mu3D_SceneGraph_OpenPbrNode_Min_
+  commentId: Overload:Mu3D.SceneGraph.OpenPbrNode.Min
+  fullName: Mu3D.SceneGraph.OpenPbrNode.Min
+  nameWithType: OpenPbrNode.Min
 - uid: Mu3D.SceneGraph.OpenPbrNode.Minimum
   name: Minimum
   href: v0.1/api/Mu3D.SceneGraph.OpenPbrNode.html#Mu3D_SceneGraph_OpenPbrNode_Minimum
@@ -38690,6 +38804,30 @@ references:
   commentId: Overload:Mu3D.SceneGraph.OpenPbrNode.Operation
   fullName: Mu3D.SceneGraph.OpenPbrNode.Operation
   nameWithType: OpenPbrNode.Operation
+- uid: Mu3D.SceneGraph.OpenPbrNode.Sqrt(Mu3D.SceneGraph.OpenPbrNode)
+  name: Sqrt(OpenPbrNode)
+  href: v0.1/api/Mu3D.SceneGraph.OpenPbrNode.html#Mu3D_SceneGraph_OpenPbrNode_Sqrt_Mu3D_SceneGraph_OpenPbrNode_
+  commentId: M:Mu3D.SceneGraph.OpenPbrNode.Sqrt(Mu3D.SceneGraph.OpenPbrNode)
+  fullName: Mu3D.SceneGraph.OpenPbrNode.Sqrt(Mu3D.SceneGraph.OpenPbrNode)
+  nameWithType: OpenPbrNode.Sqrt(OpenPbrNode)
+- uid: Mu3D.SceneGraph.OpenPbrNode.Sqrt*
+  name: Sqrt
+  href: v0.1/api/Mu3D.SceneGraph.OpenPbrNode.html#Mu3D_SceneGraph_OpenPbrNode_Sqrt_
+  commentId: Overload:Mu3D.SceneGraph.OpenPbrNode.Sqrt
+  fullName: Mu3D.SceneGraph.OpenPbrNode.Sqrt
+  nameWithType: OpenPbrNode.Sqrt
+- uid: Mu3D.SceneGraph.OpenPbrNode.Subtract(Mu3D.SceneGraph.OpenPbrNode,Mu3D.SceneGraph.OpenPbrNode)
+  name: Subtract(OpenPbrNode, OpenPbrNode)
+  href: v0.1/api/Mu3D.SceneGraph.OpenPbrNode.html#Mu3D_SceneGraph_OpenPbrNode_Subtract_Mu3D_SceneGraph_OpenPbrNode_Mu3D_SceneGraph_OpenPbrNode_
+  commentId: M:Mu3D.SceneGraph.OpenPbrNode.Subtract(Mu3D.SceneGraph.OpenPbrNode,Mu3D.SceneGraph.OpenPbrNode)
+  fullName: Mu3D.SceneGraph.OpenPbrNode.Subtract(Mu3D.SceneGraph.OpenPbrNode, Mu3D.SceneGraph.OpenPbrNode)
+  nameWithType: OpenPbrNode.Subtract(OpenPbrNode, OpenPbrNode)
+- uid: Mu3D.SceneGraph.OpenPbrNode.Subtract*
+  name: Subtract
+  href: v0.1/api/Mu3D.SceneGraph.OpenPbrNode.html#Mu3D_SceneGraph_OpenPbrNode_Subtract_
+  commentId: Overload:Mu3D.SceneGraph.OpenPbrNode.Subtract
+  fullName: Mu3D.SceneGraph.OpenPbrNode.Subtract
+  nameWithType: OpenPbrNode.Subtract
 - uid: Mu3D.SceneGraph.OpenPbrNode.Texcoord(System.Int32)
   name: Texcoord(int)
   href: v0.1/api/Mu3D.SceneGraph.OpenPbrNode.html#Mu3D_SceneGraph_OpenPbrNode_Texcoord_System_Int32_
@@ -38783,6 +38921,12 @@ references:
   commentId: T:Mu3D.SceneGraph.OpenPbrNodeOperation
   fullName: Mu3D.SceneGraph.OpenPbrNodeOperation
   nameWithType: OpenPbrNodeOperation
+- uid: Mu3D.SceneGraph.OpenPbrNodeOperation.Abs
+  name: Abs
+  href: v0.1/api/Mu3D.SceneGraph.OpenPbrNodeOperation.html#Mu3D_SceneGraph_OpenPbrNodeOperation_Abs
+  commentId: F:Mu3D.SceneGraph.OpenPbrNodeOperation.Abs
+  fullName: Mu3D.SceneGraph.OpenPbrNodeOperation.Abs
+  nameWithType: OpenPbrNodeOperation.Abs
 - uid: Mu3D.SceneGraph.OpenPbrNodeOperation.Add
   name: Add
   href: v0.1/api/Mu3D.SceneGraph.OpenPbrNodeOperation.html#Mu3D_SceneGraph_OpenPbrNodeOperation_Add
@@ -38801,6 +38945,12 @@ references:
   commentId: F:Mu3D.SceneGraph.OpenPbrNodeOperation.Constant
   fullName: Mu3D.SceneGraph.OpenPbrNodeOperation.Constant
   nameWithType: OpenPbrNodeOperation.Constant
+- uid: Mu3D.SceneGraph.OpenPbrNodeOperation.Divide
+  name: Divide
+  href: v0.1/api/Mu3D.SceneGraph.OpenPbrNodeOperation.html#Mu3D_SceneGraph_OpenPbrNodeOperation_Divide
+  commentId: F:Mu3D.SceneGraph.OpenPbrNodeOperation.Divide
+  fullName: Mu3D.SceneGraph.OpenPbrNodeOperation.Divide
+  nameWithType: OpenPbrNodeOperation.Divide
 - uid: Mu3D.SceneGraph.OpenPbrNodeOperation.Extract
   name: Extract
   href: v0.1/api/Mu3D.SceneGraph.OpenPbrNodeOperation.html#Mu3D_SceneGraph_OpenPbrNodeOperation_Extract
@@ -38813,6 +38963,18 @@ references:
   commentId: F:Mu3D.SceneGraph.OpenPbrNodeOperation.Image
   fullName: Mu3D.SceneGraph.OpenPbrNodeOperation.Image
   nameWithType: OpenPbrNodeOperation.Image
+- uid: Mu3D.SceneGraph.OpenPbrNodeOperation.Max
+  name: Max
+  href: v0.1/api/Mu3D.SceneGraph.OpenPbrNodeOperation.html#Mu3D_SceneGraph_OpenPbrNodeOperation_Max
+  commentId: F:Mu3D.SceneGraph.OpenPbrNodeOperation.Max
+  fullName: Mu3D.SceneGraph.OpenPbrNodeOperation.Max
+  nameWithType: OpenPbrNodeOperation.Max
+- uid: Mu3D.SceneGraph.OpenPbrNodeOperation.Min
+  name: Min
+  href: v0.1/api/Mu3D.SceneGraph.OpenPbrNodeOperation.html#Mu3D_SceneGraph_OpenPbrNodeOperation_Min
+  commentId: F:Mu3D.SceneGraph.OpenPbrNodeOperation.Min
+  fullName: Mu3D.SceneGraph.OpenPbrNodeOperation.Min
+  nameWithType: OpenPbrNodeOperation.Min
 - uid: Mu3D.SceneGraph.OpenPbrNodeOperation.Mix
   name: Mix
   href: v0.1/api/Mu3D.SceneGraph.OpenPbrNodeOperation.html#Mu3D_SceneGraph_OpenPbrNodeOperation_Mix
@@ -38831,6 +38993,18 @@ references:
   commentId: F:Mu3D.SceneGraph.OpenPbrNodeOperation.NormalMap
   fullName: Mu3D.SceneGraph.OpenPbrNodeOperation.NormalMap
   nameWithType: OpenPbrNodeOperation.NormalMap
+- uid: Mu3D.SceneGraph.OpenPbrNodeOperation.Sqrt
+  name: Sqrt
+  href: v0.1/api/Mu3D.SceneGraph.OpenPbrNodeOperation.html#Mu3D_SceneGraph_OpenPbrNodeOperation_Sqrt
+  commentId: F:Mu3D.SceneGraph.OpenPbrNodeOperation.Sqrt
+  fullName: Mu3D.SceneGraph.OpenPbrNodeOperation.Sqrt
+  nameWithType: OpenPbrNodeOperation.Sqrt
+- uid: Mu3D.SceneGraph.OpenPbrNodeOperation.Subtract
+  name: Subtract
+  href: v0.1/api/Mu3D.SceneGraph.OpenPbrNodeOperation.html#Mu3D_SceneGraph_OpenPbrNodeOperation_Subtract
+  commentId: F:Mu3D.SceneGraph.OpenPbrNodeOperation.Subtract
+  fullName: Mu3D.SceneGraph.OpenPbrNodeOperation.Subtract
+  nameWithType: OpenPbrNodeOperation.Subtract
 - uid: Mu3D.SceneGraph.OpenPbrNodeOperation.Texcoord
   name: Texcoord
   href: v0.1/api/Mu3D.SceneGraph.OpenPbrNodeOperation.html#Mu3D_SceneGraph_OpenPbrNodeOperation_Texcoord
@@ -45570,6 +45744,30 @@ references:
   commentId: Overload:Mu3D.Toolkit.Diagnostics.FrameStatisticsCollector.UpdateResourceCounts
   fullName: Mu3D.Toolkit.Diagnostics.FrameStatisticsCollector.UpdateResourceCounts
   nameWithType: FrameStatisticsCollector.UpdateResourceCounts
+- uid: Mu3D.Toolkit.Diagnostics.FrameStatisticsDisplayMode
+  name: FrameStatisticsDisplayMode
+  href: v0.1/api/Mu3D.Toolkit.Diagnostics.FrameStatisticsDisplayMode.html
+  commentId: T:Mu3D.Toolkit.Diagnostics.FrameStatisticsDisplayMode
+  fullName: Mu3D.Toolkit.Diagnostics.FrameStatisticsDisplayMode
+  nameWithType: FrameStatisticsDisplayMode
+- uid: Mu3D.Toolkit.Diagnostics.FrameStatisticsDisplayMode.Compact
+  name: Compact
+  href: v0.1/api/Mu3D.Toolkit.Diagnostics.FrameStatisticsDisplayMode.html#Mu3D_Toolkit_Diagnostics_FrameStatisticsDisplayMode_Compact
+  commentId: F:Mu3D.Toolkit.Diagnostics.FrameStatisticsDisplayMode.Compact
+  fullName: Mu3D.Toolkit.Diagnostics.FrameStatisticsDisplayMode.Compact
+  nameWithType: FrameStatisticsDisplayMode.Compact
+- uid: Mu3D.Toolkit.Diagnostics.FrameStatisticsDisplayMode.Detail
+  name: Detail
+  href: v0.1/api/Mu3D.Toolkit.Diagnostics.FrameStatisticsDisplayMode.html#Mu3D_Toolkit_Diagnostics_FrameStatisticsDisplayMode_Detail
+  commentId: F:Mu3D.Toolkit.Diagnostics.FrameStatisticsDisplayMode.Detail
+  fullName: Mu3D.Toolkit.Diagnostics.FrameStatisticsDisplayMode.Detail
+  nameWithType: FrameStatisticsDisplayMode.Detail
+- uid: Mu3D.Toolkit.Diagnostics.FrameStatisticsDisplayMode.Normal
+  name: Normal
+  href: v0.1/api/Mu3D.Toolkit.Diagnostics.FrameStatisticsDisplayMode.html#Mu3D_Toolkit_Diagnostics_FrameStatisticsDisplayMode_Normal
+  commentId: F:Mu3D.Toolkit.Diagnostics.FrameStatisticsDisplayMode.Normal
+  fullName: Mu3D.Toolkit.Diagnostics.FrameStatisticsDisplayMode.Normal
+  nameWithType: FrameStatisticsDisplayMode.Normal
 - uid: Mu3D.Toolkit.Diagnostics.FrameStatisticsSample
   name: FrameStatisticsSample
   href: v0.1/api/Mu3D.Toolkit.Diagnostics.FrameStatisticsSample.html

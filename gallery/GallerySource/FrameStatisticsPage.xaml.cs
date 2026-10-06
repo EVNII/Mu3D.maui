@@ -45,7 +45,15 @@ public partial class FrameStatisticsPage : ContentPage
         StatisticsOverlay.PrimitiveCount = geometry.Indices.Count / 3;
         SceneView.FramePresented += OnFramePresented;
         ContinuousSwitch.Toggled += OnContinuousChanged;
-        DetailedSwitch.Toggled += OnDetailedChanged;
+        DisplayModePicker.ItemsSource = new[]
+        {
+            FrameStatisticsDisplayMode.Compact,
+            FrameStatisticsDisplayMode.Normal,
+            FrameStatisticsDisplayMode.Detail,
+        };
+        DisplayModePicker.SetBinding(Picker.SelectedItemProperty,
+            static (FrameStatisticsOverlay overlay) => overlay.DisplayMode,
+            mode: BindingMode.TwoWay, source: StatisticsOverlay);
         IntervalStepper.ValueChanged += OnIntervalChanged;
         SceneView.Scene = scene;
         SceneView.Camera = camera;
@@ -126,12 +134,6 @@ public partial class FrameStatisticsPage : ContentPage
             StatisticsOverlay.PublishSnapshot();
             StatusLabel.Text = "Rendering paused";
         }
-    }
-
-    private void OnDetailedChanged(object? sender, ToggledEventArgs e)
-    {
-        _ = sender;
-        StatisticsOverlay.IsDetailed = e.Value;
     }
 
     private void OnIntervalChanged(object? sender, ValueChangedEventArgs e)

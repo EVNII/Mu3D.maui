@@ -688,7 +688,9 @@ Class FrameStatisticsView
   <h2 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsView_remarks">Remarks</h2>
   <div class="markdown level0 remarks"><p>The view borrows <a class="xref" href="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsView_Source">Source</a> and never attaches it to a scene view, resets it, or
 disposes it. Text and graph history change only when the source publishes a snapshot or display
-properties change; rendering frames do not directly invalidate MAUI layout.</p>
+properties change; rendering frames do not directly invalidate MAUI layout.
+Tapping or clicking cycles Compact, Normal and Detail. Bind <a class="xref" href="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsView_DisplayMode">DisplayMode</a> two-way
+when application state must track this interaction.</p>
 </div>
 
 
@@ -725,6 +727,37 @@ properties change; rendering frames do not directly invalidate MAUI layout.</p>
 
   <h2 class="section" id="fields">Fields
 </h2>
+
+
+
+  <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsView_DisplayModeProperty" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.DisplayModeProperty">
+  DisplayModeProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsView_DisplayMode">DisplayMode</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty DisplayModeProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
 
 
 
@@ -917,6 +950,43 @@ properties change; rendering frames do not directly invalidate MAUI layout.</p>
 </h2>
 
 
+  <a id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsView_DisplayMode_" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.DisplayMode*"></a>
+
+  <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsView_DisplayMode" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.DisplayMode">
+  DisplayMode
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets the amount of information shown. The default is Normal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FrameStatisticsDisplayMode DisplayMode { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Mu3D.Toolkit.Diagnostics.FrameStatisticsDisplayMode.html">FrameStatisticsDisplayMode</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsView_DisplayMode_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Compact shows only FPS and hides the graph without changing <a class="xref" href="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsView_IsGraphVisible">IsGraphVisible</a>.
+Tapping cycles Compact to Normal to Detail to Compact. The default binding mode is two-way.
+Prefer this property to the legacy <a class="xref" href="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsView_IsDetailed">IsDetailed</a> alias when binding display state.</p>
+</div>
+
+
+
+
   <a id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsView_GraphBackgroundColor_" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.GraphBackgroundColor*"></a>
 
   <h3 id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsView_GraphBackgroundColor" data-uid="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.GraphBackgroundColor">
@@ -988,7 +1058,7 @@ properties change; rendering frames do not directly invalidate MAUI layout.</p>
   
   </h3>
 
-  <div class="markdown level1 summary"><p>Gets or sets whether timing breakdowns and resource counts are shown.</p>
+  <div class="markdown level1 summary"><p>Gets or sets the legacy Normal/Detail display choice.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -1009,6 +1079,14 @@ properties change; rendering frames do not directly invalidate MAUI layout.</p>
 
 
 
+  <h4 class="section" id="Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsView_IsDetailed_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Assigning this CLR property selects Detail for true and Normal for false, even when the
+boolean is unchanged. Compact reports false. An unchanged bindable-property write does not
+change modes; use <a class="xref" href="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsView_DisplayMode">DisplayMode</a> for explicit mode selection.
+Use <a class="xref" href="Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.html#Mu3D_Maui_Toolkit_Diagnostics_FrameStatisticsView_DisplayMode">DisplayMode</a>
+to distinguish all three modes, and avoid binding both properties to independent state.
+The default binding mode is now two-way so clicks can update a legacy bound selector.</p>
+</div>
 
 
 

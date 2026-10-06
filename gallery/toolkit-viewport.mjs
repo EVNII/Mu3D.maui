@@ -12,7 +12,13 @@ export function create(canvas, container, managed, maxDimension, id, cyanLabel, 
   let mapKeys = ['A', 'D', 'W', 'S', 'E', 'Q'];
   const statistics = createFrameStatisticsSource({snapshotIntervalMilliseconds: 100});
   const panel = createFrameStatisticsOverlay({container, source: statistics, isVisible: false,
-    placement: id === 'declarative-tools' ? 'top-left' : 'top-right', graphColor: '#42E8FF'});
+    displayMode: 'compact', placement: id === 'declarative-tools' ? 'top-left' : 'top-right', graphColor: '#42E8FF'});
+  let configuringStatistics = false, statisticsMode = panel.displayMode;
+  const unsubscribeStatisticsMode = panel.subscribeOptions(({displayMode}) => {
+    if (configuringStatistics || displayMode === statisticsMode) return;
+    statisticsMode = displayMode;
+    void managed.invokeMethodAsync('StatisticsDisplayModeChanged', displayMode).catch(console.error);
+  });
   const frameListeners = new Set();
   let anchorSource, anchorOverlay;
   if (id === 'ui-anchors') {
@@ -174,6 +180,7 @@ export function create(canvas, container, managed, maxDimension, id, cyanLabel, 
   function dispose() {
     if (!disposal) {
       cancel(); events.abort(); canvas.style.touchAction = previousTouchAction;
+      unsubscribeStatisticsMode();
       anchorOverlay?.dispose(); anchorSource?.dispose(); panel.dispose(); statistics.dispose();
       disposal = handler.dispose();
     }
@@ -182,11 +189,15 @@ export function create(canvas, container, managed, maxDimension, id, cyanLabel, 
   window.addEventListener('pagehide', () => { void dispose().catch(console.error); }, options);
   window.addEventListener('pageshow', event => { if (event.persisted) location.reload(); }, options);
   return {
-    configure(enableNavigation, hdr, animate, showStatistics, detailed, interval, keys, enableGizmo = true) {
+    configure(enableNavigation, hdr, animate, showStatistics, displayMode, interval, keys, enableGizmo = true) {
       if (enabled !== enableNavigation || keys.some((key, index) => key !== mapKeys[index]) ||
           !enableGizmo && [...pointers.values()].some(pointer => pointer.claim === 1)) cancel();
       enabled = enableNavigation; mapKeys = [...keys]; continuous = animate;
-      panel.isVisible = showStatistics; panel.isDetailed = detailed; statistics.snapshotIntervalMilliseconds = interval;
+      configuringStatistics = true;
+      try {
+        panel.displayMode = displayMode; statisticsMode = panel.displayMode;
+      } finally { configuringStatistics = false; }
+      panel.isVisible = showStatistics; statistics.snapshotIntervalMilliseconds = interval;
       schedule(); handler.setProperties({hdr}); handler.invalidate();
     },
     resetStatistics() { statistics.reset(); },

@@ -106,7 +106,7 @@
                         Placement="TopRight" />
                     <diagnostics:FrameStatisticsOverlay
                         x:Name="SceneStatistics"
-                        IsDetailed="False"
+                        DisplayMode="Compact"
                         IsGraphVisible="True"
                         IsVisible="False"
                         Placement="TopLeft" />

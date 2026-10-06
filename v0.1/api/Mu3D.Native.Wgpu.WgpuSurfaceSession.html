@@ -190,6 +190,12 @@ Class WgpuSurfaceSession
 
 
 
+  <h4 class="section" id="Mu3D_Native_Wgpu_WgpuSurfaceSession_AlphaMode_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This is the native transport mode used for configuration, including Inherit. Through
+<a class="xref" href="Mu3D.Graphics.IPresentationSurfaceSession.html#Mu3D_Graphics_IPresentationSurfaceSession_AlphaMode">AlphaMode</a>, the session instead reports the
+resolved pixel association when the platform-owned source supplies that contract.
+An external source with unknown inherited association continues to report Inherit.</p>
+</div>
 
 
 
@@ -767,6 +773,57 @@ acquisition because a surface can have only one current presentation texture.</p
 
 
 
+
+
+
+  <a id="Mu3D_Native_Wgpu_WgpuSurfaceSession_TryEnableReadback_" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.TryEnableReadback*"></a>
+
+  <h3 id="Mu3D_Native_Wgpu_WgpuSurfaceSession_TryEnableReadback" data-uid="Mu3D.Native.Wgpu.WgpuSurfaceSession.TryEnableReadback">
+  TryEnableReadback()
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Opts this session into copying acquired presentation textures for diagnostics.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryEnableReadback()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True when copy-source usage is enabled; false when this exact surface does not advertise it.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Mu3D_Native_Wgpu_WgpuSurfaceSession_TryEnableReadback_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Call outside the control's Draw callback, then request a normal frame. This reconfigures only
+this session, preserving its output format, color encoding, present mode, alpha mode and size.
+Copy-source usage remains enabled across resize until the session is disposed; ordinary
+sessions retain their default usage. Enabling copies may affect presentation performance.
+Submit copies through the Draw target before the callback returns. Do not retain, acquire,
+present or dispose the control-owned target/session. A readback observes GPU texture values
+before presentation, not the queued buffer, compositor interpretation or physical HDR output.</p>
+</div>
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.objectdisposedexception">ObjectDisposedException</a></dt>
+    <dd><p>The session is being released or has been disposed.</p>
+</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
+    <dd><p>Called inside an active rendering callback.</p>
+</dd>
+  </dl>
 
 
 

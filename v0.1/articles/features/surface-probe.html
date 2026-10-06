@@ -169,7 +169,47 @@ scaled. Alpha, scene accumulation and exposure are unchanged by presentation whi
 correct HDR pixels. Check that the reference values 1, 2 and 4 remain distinguishable with
 sufficient display headroom. If they collapse, investigate actual buffer format/dataspace and
 composition separately from the display request. Ordinary SDR screenshots cannot verify HDR
-content or luminance. Android content acceptance remains open.</p>
+content or luminance. Remaining Android device and quantitative checks stay separate from
+the observed visual recovery on the tested Xiaomi/Android16 device.</p>
+<p>The native Android Gallery probe also reads its current producer window after configuration,
+manual probing and reference presentation. It reports device/API version, buffer format and size,
+current buffers dataspace (API 28+) and the separate consumer-default dataspace (API 34+).
+The expected FP16/linear-scRGB producer values are format <code>22</code> and dataspace <code>0x18410000</code>.
+Unavailable, unknown and native errors remain distinct. These queries observe producer
+configuration; they do not read the queued buffer, SurfaceFlinger layer or physical display.
+This diagnostic uses the control's borrowed native source on the UI thread and does not alter
+its pixels, output settings or ownership. Use <strong>Copy diagnostics</strong> to share the report after
+presenting the reference pattern; copying refreshes the producer/display snapshot at click time.</p>
+<p>The Android report also reads the control host's attached display and window: attachment,
+hardware acceleration, supported HDR types, current HDR/SDR ratio when reporting is available
+(API 34+), highest possible ratio (API 36+), and requested window color mode/headroom. Window
+settings are independent of the SurfaceView and are labeled accordingly. A missing ratio query
+remains unknown rather than the platform getter's default 1. For a settled reading, present the
+pattern, wait a few seconds, then use <strong>Probe surface capabilities</strong> and <strong>Copy diagnostics</strong>.
+An available ratio above 1 reports brightness headroom; it does not verify preserved reference pixels.</p>
+<p>The Android example also provides <strong>Read actual reference pixels</strong>. This explicitly enables
+<a class="xref" href="../../api/Mu3D.Native.Wgpu.WgpuSurfaceSession.html#Mu3D_Native_Wgpu_WgpuSurfaceSession_TryEnableReadback">TryEnableReadback()</a> only on the current diagnostic session,
+after checking the surface's native copy-source capabilities. Unsupported surfaces report
+unavailable. Ordinary sessions keep their default usage; enabling copies may affect performance
+and remains enabled through resize until that session is retired.</p>
+<p>The normal control-owned Draw callback renders the same reference pattern, then submits six
+one-pixel copies from the acquired presentation texture before returning. The report includes
+native-verified texture properties, original FP16 channel bits, decoded RGBA, expected values
+and the frame's present status. The asynchronous read retains a small staging buffer, not the
+surface texture. It performs no tone mapping or normalization. Session replacement, navigation
+and timeout cancel the managed wait while native cleanup retains the necessary resources.
+This checks the GPU attachment before presentation; it does not read the queued buffer,
+compositor layer or physical display. The diagnostic changes the session's copy usage, so its
+result must be identified as that opt-in path. Use the button, wait for the result, then
+<strong>Copy diagnostics</strong> to share both the pixel data and a fresh display snapshot.</p>
+<p>On Android 16 and later, automatic alpha with Automatic/Hdr output uses an alpha-capable
+SurfaceView carrier to avoid the opaque-FP16 branch in upstream Android composition. The native
+backend still configures FP16/scRGB buffers. Pixels with alpha 1 keep opaque coverage; alpha
+below 1 may blend with the content behind the surface. The carrier retains the existing z-order
+and control-owned surface lifecycle. Explicit alpha modes and SDR output keep their existing
+policy. A tested Xiaomi/Android16 device reports visible HDR recovery, with the consumer's opaque
+flag cleared. The exact vendor shader remains unverified; other-device, quantitative and lifecycle
+checks remain open.</p>
 <p>Display HDR information helps an application choose an explicit display-mapping target. It does not
 decide whether a surface can be configured for HDR; the advertised format/color-space pair remains
 the capability gate. Re-query live display information after a window moves, resizes, changes

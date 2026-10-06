@@ -92,7 +92,7 @@ frame timing/resource data and publishes immutable
 <a class="xref" href="../../api/Mu3D.Toolkit.Diagnostics.FrameStatisticsSnapshot.html">FrameStatisticsSnapshot</a> values at a caller-selected cadence.</p>
 <p><a class="xref" href="../../api/Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay.html">FrameStatisticsOverlay</a> is the concise XAML path. It creates an
 attachment-owned <a class="xref" href="../../api/Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.html">FrameStatisticsBehavior</a> and
-<a class="xref" href="../../api/Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.html">FrameStatisticsView</a>, then mounts the pass-through panel through
+<a class="xref" href="../../api/Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.html">FrameStatisticsView</a>, then mounts the clickable panel through
 the viewport's common overlay manager:</p>
 <pre><code class="lang-xaml">&lt;mu3d:Mu3DSceneView&gt;
   &lt;mu3d:Mu3DSceneView.Features&gt;
@@ -101,7 +101,7 @@ the viewport's common overlay manager:</p>
           x:Name=&quot;Statistics&quot;
           Placement=&quot;TopRight&quot;
           SnapshotInterval=&quot;0:0:0.1&quot;
-          IsDetailed=&quot;False&quot;
+          DisplayMode=&quot;Compact&quot;
           IsGraphVisible=&quot;True&quot; /&gt;
     &lt;/toolkit:ViewportTools&gt;
   &lt;/mu3d:Mu3DSceneView.Features&gt;
@@ -109,8 +109,21 @@ the viewport's common overlay manager:</p>
 </code></pre>
 <p>The overlay exposes its application-visible <code>Collector</code>, latest snapshot, reset/immediate-publish
 methods and optional application-known draw/primitive counts. Visibility controls only the panel;
-<code>IsEnabled</code> independently controls collection. Its pass-through MAUI content cannot block camera,
-selection or Gizmo input.</p>
+<code>IsEnabled</code> independently controls collection. Tapping the panel cycles <strong>Compact → Normal → Detail →
+Compact</strong>. Compact is a small box showing only FPS; Normal shows a short summary and the optional
+graph; Detail adds frame, presentation, renderer and resource breakdowns. The panel handles input
+within its bounds; the surrounding viewport remains available for camera, selection and Gizmo input.</p>
+<p>The backend-independent <a class="xref" href="../../api/Mu3D.Toolkit.Diagnostics.FrameStatisticsDisplayMode.html">FrameStatisticsDisplayMode</a> selects the mode.
+Library controls default to Normal; Gallery indicators start in Compact. Switching modes preserves
+collected samples and graph history. Compact hides the graph without changing <code>IsGraphVisible</code>.
+<code>DisplayMode</code> supports two-way binding so tapping also updates the application's selection.
+The legacy <code>IsDetailed</code> selector remains available: setting true selects Detail and setting false
+selects Normal. Its default binding mode is now two-way. Bind one selector, preferably <code>DisplayMode</code>.
+On MAUI, assigning the CLR alias selects a mode even if the bool is unchanged; an unchanged
+<code>SetValue(IsDetailedProperty, ...)</code> does not trigger a mode change.</p>
+<p>Web's <code>createFrameStatisticsView</code> and <code>createFrameStatisticsOverlay</code> use the same cycle with
+<code>displayMode: 'compact' | 'normal' | 'detail'</code>. The focused panel also accepts Enter or Space.
+<code>isDetailed</code> remains the corresponding compatibility selector.</p>
 <p>Applications that place diagnostics outside the viewport may still attach
 <a class="xref" href="../../api/Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior.html">FrameStatisticsBehavior</a> directly and let a standalone
 <a class="xref" href="../../api/Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView.html">FrameStatisticsView</a> borrow it.</p>

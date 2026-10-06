@@ -173,7 +173,9 @@ Implementations must serialize resize, rendering, presentation and disposal.</p>
   <h4 class="section" id="Mu3D_Graphics_IPresentationSurfaceSession_AlphaMode_remarks">Remarks</h4>
   <div class="markdown level1 remarks"><p>The default is Unknown for sessions that do not report it. Consumers that apply nonlinear
 display transforms must require a resolved Opaque, Premultiplied or Unpremultiplied mode;
-the application's requested Automatic or Inherit mode is not an association contract.</p>
+the application's requested Automatic or Inherit mode is not an association contract.
+A platform-owned carrier may resolve an inherited association independently of the
+backend's native transport mode; an unknown external carrier must remain unresolved.</p>
 </div>
 
 

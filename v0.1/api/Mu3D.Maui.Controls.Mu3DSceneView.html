@@ -1092,6 +1092,37 @@ session is invalidated. Scene objects remain application-owned and mutable; call
 
 
 
+  <h3 id="Mu3D_Maui_Controls_Mu3DSceneView_SceneLinearExposureStopsProperty" data-uid="Mu3D.Maui.Controls.Mu3DSceneView.SceneLinearExposureStopsProperty">
+  SceneLinearExposureStopsProperty
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Identifies the <a class="xref" href="Mu3D.Maui.Controls.Mu3DSceneView.html#Mu3D_Maui_Controls_Mu3DSceneView_SceneLinearExposureStops">SceneLinearExposureStops</a> bindable property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly BindableProperty SceneLinearExposureStopsProperty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.maui.controls.bindableproperty">BindableProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <h3 id="Mu3D_Maui_Controls_Mu3DSceneView_SceneProperty" data-uid="Mu3D.Maui.Controls.Mu3DSceneView.SceneProperty">
   SceneProperty
   
@@ -1284,7 +1315,8 @@ black; no tone mapping, gamut mapping, or display encoding is applied implicitly
 
 
   <h4 class="section" id="Mu3D_Maui_Controls_Mu3DSceneView_DisplayTransform_remarks">Remarks</h4>
-  <div class="markdown level1 remarks"><p>Null preserves the existing scene-linear presentation. Selecting a view uses an owned FP16
+  <div class="markdown level1 remarks"><p>Null preserves scene-linear presentation, optionally scaled by <a class="xref" href="Mu3D.Maui.Controls.Mu3DSceneView.html#Mu3D_Maui_Controls_Mu3DSceneView_SceneLinearExposureStops">SceneLinearExposureStops</a>.
+Selecting a view uses an owned FP16
 intermediate, or FP32 when the output is FP32. HDR presets require HDR extended-linear sRGB
 presentation. Custom passes must produce premultiplied scene-linear RGB, as the default scene
 and OpenPBR passes do. Display changes do not reset application-owned progressive accumulation.</p>
@@ -1743,6 +1775,46 @@ value, but must not dispose it. It becomes null before its presentation session 
   <div class="markdown level1 remarks"><p>While assigned, the facade supplies the lower-level <a class="xref" href="Mu3D.Maui.Controls.Mu3DSceneView.html#Mu3D_Maui_Controls_Mu3DSceneView_Scene">Scene</a> and
 <a class="xref" href="Mu3D.Maui.Controls.Mu3DSceneView.html#Mu3D_Maui_Controls_Mu3DSceneView_Camera">Camera</a> values and invalidates this view when its bindable nodes or materials
 change. Set this property to null before independently assigning those lower-level values.</p>
+</div>
+
+
+
+
+  <a id="Mu3D_Maui_Controls_Mu3DSceneView_SceneLinearExposureStops_" data-uid="Mu3D.Maui.Controls.Mu3DSceneView.SceneLinearExposureStops*"></a>
+
+  <h3 id="Mu3D_Maui_Controls_Mu3DSceneView_SceneLinearExposureStops" data-uid="Mu3D.Maui.Controls.Mu3DSceneView.SceneLinearExposureStops">
+  SceneLinearExposureStops
+  
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets or sets scene-linear exposure from -32 through +32 stops. Defaults to zero.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float SceneLinearExposureStops { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Mu3D_Maui_Controls_Mu3DSceneView_SceneLinearExposureStops_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Applies only when <a class="xref" href="Mu3D.Maui.Controls.Mu3DSceneView.html#Mu3D_Maui_Controls_Mu3DSceneView_DisplayTransform">DisplayTransform</a> is null. Non-zero exposure requires an
+extended-linear HDR Float16 or Float32 presentation target; SDR output is rejected explicitly.
+The final RGB is multiplied by 2 raised to this value, without tone mapping or changing alpha.
+Zero retains the direct presentation path without an extra pass. Exposure changes request a
+frame without changing scene lighting or resetting application-owned progressive accumulation.
+When a display view is attached, use <a class="xref" href="Mu3D.Maui.Controls.ColorView3D.html#Mu3D_Maui_Controls_ColorView3D_ExposureStops">ExposureStops</a> instead.</p>
 </div>
 
 

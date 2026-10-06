@@ -24,7 +24,7 @@
             </mu3d:Scene3D>
         </mu3d:Mu3DSceneView>
         <ScrollView Grid.Row="1" MaximumHeightRequest="380">
-            <VerticalStackLayout Spacing="5">
+            <VerticalStackLayout x:Name="SettingsPanel" Spacing="5">
                 <Label Text="白色熔炉 · OpenPBR 能量检查" FontAttributes="Bold" />
                 <Label Text="均匀白色环境，无直接灯光、无色调映射。无吸收材质充分收敛后应融入背景；默认白漫反射看不到球是预期结果。" FontSize="12" />
                 <Grid ColumnDefinitions="*,*" ColumnSpacing="8">

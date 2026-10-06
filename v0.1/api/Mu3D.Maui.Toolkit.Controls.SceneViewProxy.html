@@ -1385,7 +1385,9 @@ Fractional background alpha remains deferred. The host converts opaque sRGB RGB 
 light. On Apple, transparent FP16 frames are converted on-GPU from the renderer's
 premultiplied representation to Metal straight alpha. On Windows, opaque output uses the
 direct HDR Surface while transparent output uses the compositor-owned binary-mask drawing
-surface; applications must not assume every alpha carrier retains physical HDR headroom.</p>
+surface; applications must not assume every alpha carrier retains physical HDR headroom.
+On Android, a filled background keeps clear alpha one while negotiating a supported
+Surface alpha mode; pixel coverage does not require swapchain Opaque support.</p>
 </div>
 
 

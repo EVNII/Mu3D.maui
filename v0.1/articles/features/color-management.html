@@ -101,7 +101,17 @@ interactive/reference OpenPBR passes.</p>
 </code></pre>
 <p>The component is bindable. Exposure changes request a frame and reuse the GPU program; they do not
 reset OpenPBR's accumulated radiance. Leaving <code>DisplayTransform</code> null retains linear presentation.
-The control owns the floating-point intermediate and uses its existing automatic surface and
+To adjust exposure without selecting a display view, set <code>Mu3DSceneView.SceneLinearExposureStops</code>:</p>
+<pre><code class="lang-xaml">&lt;mu3d:Mu3DSceneView SceneLinearExposureStops=&quot;1&quot; /&gt;
+</code></pre>
+<p>This multiplies final scene-linear RGB by <code>2^EV</code>, preserves alpha and applies no tone mapping.
+The default zero adds no pass. Nonzero values, bounded to -32 through +32 stops, require an
+extended-linear HDR Float16 or Float32 output; SDR output is rejected explicitly. The property only
+applies while <code>DisplayTransform</code> is null; attached display views retain their own <code>ExposureStops</code>.
+Changing either exposure requests a frame without changing lighting or resetting progressive
+accumulation. The Gallery's shared EV slider controls the active path in both Scene linear and
+display-view modes.</p>
+<p>The control owns the floating-point intermediate and uses its existing automatic surface and
 scheduling. Custom render pipelines must produce premultiplied scene-linear RGB. Clear colors are
 associated with alpha before rendering; the view unassociates color for nonlinear processing and
 restores the negotiated presentation alpha association. A custom session must report its actual

@@ -24,7 +24,7 @@
                         x:Name="StatisticsOverlay"
                         BackgroundColor="#D9192438"
                         GraphColor="#42E8FF"
-                        IsDetailed="False"
+                        DisplayMode="Compact"
                         IsGraphVisible="True"
                         Margin="12"
                         MaximumWidth="520"
@@ -41,18 +41,20 @@
                 <Label
                     FontSize="12"
                     Text="MAUI VSync requests frames while visible. FrameStatisticsOverlay owns collection/view attachment but no render loop." />
-                <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,*,Auto" ColumnSpacing="10">
+                <Grid ColumnDefinitions="Auto,Auto,Auto,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="8">
                     <Label VerticalOptions="Center" Text="Continuous" />
                     <Switch
                         x:Name="ContinuousSwitch"
                         Grid.Column="1"
                         IsToggled="True" />
-                    <Label Grid.Column="2" VerticalOptions="Center" Text="Detailed" />
-                    <Switch x:Name="DetailedSwitch" Grid.Column="3" />
-                    <Label Grid.Column="4" VerticalOptions="Center" Text="Refresh" />
+                    <Label Grid.Column="2" VerticalOptions="Center" Text="Display" />
+                    <Picker x:Name="DisplayModePicker" Grid.Column="3" Title="Statistics display" />
+                    <Label Grid.Row="1" VerticalOptions="Center" Text="Refresh" />
                     <Stepper
                         x:Name="IntervalStepper"
-                        Grid.Column="5"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
                         HorizontalOptions="Start"
                         Increment="50"
                         Maximum="1000"
@@ -60,7 +62,8 @@
                         Value="100" />
                     <Label
                         x:Name="IntervalLabel"
-                        Grid.Column="6"
+                        Grid.Row="1"
+                        Grid.Column="3"
                         VerticalOptions="Center"
                         Text="100 ms" />
                 </Grid>
