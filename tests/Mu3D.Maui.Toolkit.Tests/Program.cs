@@ -16,6 +16,8 @@ List<string> failures = [];
 ValidateSurfaceFrameScheduling(failures);
 ValidateRenderOutputToolState(failures);
 ValidatePlaybackToolbarState(failures);
+ValidateIncrementalMultiTouchPinch(failures);
+ValidateNativeTouchTransform(failures);
 
 Expect(
     (int)ViewportDragAction.Rotate == 0 &&
@@ -229,7 +231,9 @@ Expect(
     multiTouchGesture.TryGetPanDelta(16d, 17d, out double multiDeltaX, out double multiDeltaY) &&
     multiDeltaX == 6d && multiDeltaY == -3d &&
     multiTouchGesture.TryGetPinchRatio(1.5d, out double multiPinchRatio) &&
-    multiPinchRatio == 1.5d,
+    multiPinchRatio == 1.5d &&
+    multiTouchGesture.TryGetPinchRatio(3d, out double nextMultiPinchRatio) &&
+    nextMultiPinchRatio == 2d,
     "two-pointer translation and pinch retain independent cumulative state",
     failures);
 multiTouchGesture.EndPan();
@@ -982,17 +986,17 @@ textCollector.UpdateResourceCounts(new RenderResourceCounts(
     materialCount: 1,
     textureCount: 0));
 FrameStatisticsSnapshot textSnapshot = textCollector.CaptureSnapshot();
-FrameStatisticsText compactStatistics = FrameStatisticsTextFormatter.Format(
+FrameStatisticsText normalStatistics = FrameStatisticsTextFormatter.Format(
     textSnapshot,
     isDetailed: false);
 FrameStatisticsText detailedStatistics = FrameStatisticsTextFormatter.Format(
     textSnapshot,
     isDetailed: true);
 Expect(
-    compactStatistics.Headline == "50.0 FPS  ·  20.00 ms" &&
-    compactStatistics.Details.Contains("Draws 2.0", StringComparison.Ordinal) &&
-    !compactStatistics.Details.Contains("Resources", StringComparison.Ordinal),
-    "compact statistics text reports headline and primary counts",
+    normalStatistics.Headline == "50.0 FPS  ·  20.00 ms" &&
+    normalStatistics.Details.Contains("Draws 2.0", StringComparison.Ordinal) &&
+    !normalStatistics.Details.Contains("Resources", StringComparison.Ordinal),
+    "legacy normal statistics text retains its headline and primary counts",
     failures);
 Expect(
     detailedStatistics.Details.Contains("Presentation  acquire 1.00 ms", StringComparison.Ordinal) &&
@@ -1006,6 +1010,40 @@ Expect(
         "Waiting for frame samples…",
     "empty statistics text reports its waiting state",
     failures);
+FrameStatisticsText compactStatistics = FrameStatisticsTextFormatter.Format(
+    textSnapshot, FrameStatisticsDisplayMode.Compact, minimumFps: 30d, maximumFps: 70d);
+FrameStatisticsText normalRangeStatistics = FrameStatisticsTextFormatter.Format(
+    textSnapshot, FrameStatisticsDisplayMode.Normal, minimumFps: 30d, maximumFps: 70d);
+FrameStatisticsText detailRangeStatistics = FrameStatisticsTextFormatter.Format(
+    textSnapshot, FrameStatisticsDisplayMode.Detail, minimumFps: 30d, maximumFps: 70d);
+Expect(
+    compactStatistics.Headline == "50 FPS" && compactStatistics.Details == string.Empty &&
+    !FrameStatisticsDisplayState.ShowsGraph(FrameStatisticsDisplayMode.Compact, isGraphVisible: true),
+    "Compact omits timing, range, resources and graph despite available measurements and history",
+    failures);
+Expect(
+    normalRangeStatistics.Headline == "50 FPS (30–70)  ·  20.00 ms" &&
+    normalRangeStatistics.Details == normalStatistics.Details &&
+    FrameStatisticsDisplayState.ShowsGraph(FrameStatisticsDisplayMode.Normal, isGraphVisible: true),
+    "Normal retains the previous rolling-range headline, short summary and requested graph",
+    failures);
+Expect(
+    detailRangeStatistics.Headline == normalRangeStatistics.Headline &&
+    detailRangeStatistics.Details == detailedStatistics.Details &&
+    FrameStatisticsDisplayState.ShowsGraph(FrameStatisticsDisplayMode.Detail, isGraphVisible: true),
+    "Detail retains full timing/resources with the rolling range and requested graph",
+    failures);
+foreach (FrameStatisticsDisplayMode mode in Enum.GetValues<FrameStatisticsDisplayMode>())
+{
+    Expect(!FrameStatisticsDisplayState.ShowsGraph(mode, isGraphVisible: false),
+        $"{mode} retains an explicitly hidden graph preference", failures);
+}
+FrameStatisticsCollector waitingTextCollector = new();
+waitingTextCollector.UpdateResourceCounts(new RenderResourceCounts(meshCount: 1));
+FrameStatisticsText waitingCompact = FrameStatisticsTextFormatter.Format(
+    waitingTextCollector.CaptureSnapshot(), FrameStatisticsDisplayMode.Compact);
+Expect(waitingCompact.Headline == "— FPS" && waitingCompact.Details == string.Empty,
+    "Compact waiting text omits known resource counts and sample explanations", failures);
 
 FrameStatisticsHistory statisticsHistory = new(capacity: 3);
 statisticsHistory.Add(30d);
@@ -1066,6 +1104,192 @@ if (failures.Count != 0)
 Console.WriteLine(
     "Validated non-reentrant surface scheduling, render-output ownership, playback-toolbar state, MAUI gesture/hardware/gizmo-pointer mapping, arbitration, statistics cadence, display text and graph history.");
 return 0;
+
+static void ValidateIncrementalMultiTouchPinch(ICollection<string> failures)
+{
+    ViewportControlArbiter arbiter = new();
+    using ViewportMultiTouchGestureState gesture = new();
+    PerspectiveCamera camera = new(aspectRatio: 1f);
+    camera.Transform.Position = new Vector3(0f, 0f, 10f);
+    using OrbitController controller = new(camera, Vector3.Zero);
+
+    Expect(
+        gesture.BeginPan(10d, 20d, arbiter) && gesture.BeginPinch(arbiter),
+        "incremental pinch begins beside an active pan",
+        failures);
+    ViewportControlLease? sharedLease = arbiter.CurrentLease;
+    for (int update = 0; update < 3; update++)
+    {
+        bool accepted = gesture.TryGetPinchRatio(1.1d, out double ratio, isIncremental: true);
+        Expect(
+            accepted && ratio == 1.1d,
+            $"repeated incremental pinch update {update + 1} retains its dolly change",
+            failures);
+        if (accepted) controller.Dolly((float)Math.Log(ratio));
+    }
+    ExpectNear(
+        controller.Distance,
+        10f / (1.1f * 1.1f * 1.1f),
+        0.00001f,
+        "three incremental pinch updates accumulate camera zoom",
+        failures);
+
+    float distanceBeforePause = controller.Distance;
+    bool pauseAccepted = gesture.TryGetPinchRatio(1d, out double pauseRatio, isIncremental: true);
+    Expect(pauseAccepted && pauseRatio == 1d, "stationary incremental pinch has no reverse delta", failures);
+    if (pauseAccepted) controller.Dolly((float)Math.Log(pauseRatio));
+    ExpectNear(controller.Distance, distanceBeforePause, 0f, "stationary pinch preserves the achieved zoom", failures);
+
+    bool reverseAccepted = gesture.TryGetPinchRatio(0.9d, out double reverseRatio, isIncremental: true);
+    Expect(reverseAccepted && reverseRatio == 0.9d, "incremental pinch accepts an inward finger movement", failures);
+    if (reverseAccepted) controller.Dolly((float)Math.Log(reverseRatio));
+    ExpectNear(
+        controller.Distance,
+        10f / (1.1f * 1.1f * 1.1f * 0.9f),
+        0.00001f,
+        "reversing pinch moves the camera back without discarding earlier zoom",
+        failures);
+
+    gesture.EndPinch();
+    Expect(
+        !gesture.TryGetPinchRatio(1.1d, out _, isIncremental: true) &&
+        gesture.IsActive && ReferenceEquals(arbiter.CurrentLease, sharedLease) &&
+        gesture.TryGetPanDelta(16d, 17d, out double panX, out double panY) &&
+        panX == 6d && panY == -3d,
+        "ended pinch rejects updates while its shared pan retains totals and ownership",
+        failures);
+    Expect(
+        gesture.BeginPinch(arbiter) &&
+        ReferenceEquals(arbiter.CurrentLease, sharedLease) &&
+        gesture.TryGetPinchRatio(1.5d, out double restartedRatio) && restartedRatio == 1.5d &&
+        gesture.TryGetPinchRatio(3d, out double nextRatio) && nextRatio == 2d,
+        "restarted pinch resets cumulative scale without replacing the pan lease",
+        failures);
+    gesture.EndPinch();
+    gesture.EndPan();
+    Expect(!gesture.IsActive && arbiter.CurrentLease is null, "the final pan releases incremental pinch ownership", failures);
+}
+
+static void ValidateNativeTouchTransform(ICollection<string> failures)
+{
+    ViewportTouchTransformState touch = new();
+    ViewportControlArbiter arbiter = new();
+    using ViewportMultiTouchGestureState gesture = new();
+    PerspectiveCamera camera = new(aspectRatio: 1f);
+    camera.Transform.Position = new Vector3(0f, 0f, 10f);
+    using OrbitController controller = new(camera, Vector3.Zero);
+
+    void ApplySample(ViewportTouchTransformSample sample)
+    {
+        if (sample.IsRebased)
+        {
+            Expect(
+                gesture.BeginPan(sample.CenterX, sample.CenterY, arbiter) && gesture.BeginPinch(arbiter),
+                "native touch transform establishes a shared centroid/span baseline",
+                failures);
+            return;
+        }
+        bool hasPan = gesture.TryGetPanDelta(sample.CenterX, sample.CenterY, out double x, out double y);
+        bool hasPinch = gesture.TryGetPinchRatio(sample.ScaleRatio, out double ratio, isIncremental: true);
+        Expect(hasPan && hasPinch, "one native touch sample supplies both pan and pinch", failures);
+        if (hasPan)
+        {
+            controller.Pan(ViewportGestureState.MapDragDelta(
+                x, y, 100d, 100d, ViewportDragAction.Pan, 1f, 1f, true));
+        }
+        if (hasPinch) controller.Dolly((float)Math.Log(ratio));
+    }
+
+    Expect(
+        touch.TryUpdate(3, 0d, 0d, 7, 100d, 0d, false, out ViewportTouchTransformSample start) &&
+        start.IsRebased && start.CenterX == 50d && start.CenterY == 0d && start.ScaleRatio == 1d,
+        "the first native finger pair begins without a camera jump",
+        failures);
+    ApplySample(start);
+    ViewportControlLease? lease = arbiter.CurrentLease;
+    Expect(
+        touch.TryUpdate(3, -10d, 20d, 7, 130d, 20d, false, out ViewportTouchTransformSample moved) &&
+        !moved.IsRebased && moved.CenterX == 60d && moved.CenterY == 20d && moved.ScaleRatio == 1.4d,
+        "translating and spreading the same fingers produces centroid and span changes together",
+        failures);
+    ApplySample(moved);
+    Expect(
+        controller.Target != Vector3.Zero && ReferenceEquals(arbiter.CurrentLease, lease),
+        "a simultaneous native pan changes the camera target under the existing pinch lease",
+        failures);
+    ExpectNear(controller.Distance, 10f / 1.4f, 0.00001f,
+        "the same native sample also changes camera distance", failures);
+
+    Expect(
+        touch.TryUpdate(7, 144d, 30d, 3, -10d, 30d, false, out ViewportTouchTransformSample reordered) &&
+        !reordered.IsRebased && reordered.CenterX == 67d && reordered.CenterY == 30d &&
+        Math.Abs(reordered.ScaleRatio - 1.1d) < 1e-12d,
+        "Android pointer-index reordering retains the original pair and incremental span",
+        failures);
+    ApplySample(reordered);
+    ExpectNear(controller.Distance, 10f / (1.4f * 1.1f), 0.00001f,
+        "reordered pointers continue the achieved zoom", failures);
+
+    Vector3 targetBeforeRebase = controller.Target;
+    float distanceBeforeRebase = controller.Distance;
+    Expect(
+        touch.TryUpdate(3, 900d, 30d, 8, 1100d, 30d, true, out ViewportTouchTransformSample replaced) &&
+        replaced.IsRebased && replaced.ScaleRatio == 1d,
+        "lifting one pointer and choosing another finger rebases the transform",
+        failures);
+    ApplySample(replaced);
+    Expect(
+        controller.Target == targetBeforeRebase && controller.Distance == distanceBeforeRebase &&
+        ReferenceEquals(arbiter.CurrentLease, lease),
+        "a replacement finger cannot jump pan or dolly and keeps the joint lease",
+        failures);
+    Expect(
+        touch.TryUpdate(8, 1100d, 30d, 3, 900d, 30d, true, out ViewportTouchTransformSample countChanged) &&
+        countChanged.IsRebased && countChanged.ScaleRatio == 1d,
+        "a third-finger down or up can rebase the retained pair without changing its scale",
+        failures);
+    ApplySample(countChanged);
+
+    using (ViewportControlLease priorityLease = arbiter.TryAcquire("native touch test gizmo", ViewportControlPriorities.Gizmo)!)
+    {
+        Expect(
+            !gesture.TryGetPanDelta(1010d, 40d, out _, out _) &&
+            !gesture.TryGetPinchRatio(1.1d, out _, isIncremental: true) &&
+            !gesture.BeginPan(1000d, 30d, arbiter) && !gesture.BeginPinch(arbiter),
+            "a tool revocation rejects both native transform components",
+            failures);
+    }
+    gesture.End();
+    touch.Reset();
+    Expect(touch.FirstPointerId == -1 && touch.SecondPointerId == -1 && arbiter.CurrentLease is null,
+        "native cancellation or detachment clears pointer identity and camera ownership", failures);
+
+    Expect(
+        touch.TryUpdate(1, 50d, 50d, 2, 50d, 50d, false, out ViewportTouchTransformSample coincident) &&
+        coincident.IsRebased && coincident.ScaleRatio == 1d,
+        "coincident fingers establish a finite native transform", failures);
+    ApplySample(coincident);
+    Expect(
+        touch.TryUpdate(1, 60d, 70d, 2, 60d, 70d, false, out ViewportTouchTransformSample translated) &&
+        translated.CenterX == 60d && translated.CenterY == 70d && translated.ScaleRatio == 1d,
+        "coincident fingers can still translate without an invalid pinch ratio", failures);
+    ApplySample(translated);
+    ExpectNear(controller.Distance, distanceBeforeRebase, 0f,
+        "zero-span translation preserves the current camera distance", failures);
+    Expect(
+        touch.TryUpdate(1, 50d, 70d, 2, 70d, 70d, false, out ViewportTouchTransformSample separated) &&
+        separated.ScaleRatio == 1d &&
+        touch.TryUpdate(1, 40d, 70d, 2, 80d, 70d, false, out ViewportTouchTransformSample spread) &&
+        spread.ScaleRatio == 2d,
+        "the first positive span establishes a baseline before subsequent zoom", failures);
+    Expect(
+        !touch.TryUpdate(1, 0d, 0d, 1, 100d, 0d, false, out _) &&
+        !touch.TryUpdate(1, double.NaN, 0d, 2, 100d, 0d, false, out _),
+        "invalid native pointer identity and coordinates are rejected without a control-flow exception",
+        failures);
+    gesture.End();
+    touch.Reset();
+}
 
 static void ValidateSurfaceFrameScheduling(ICollection<string> failures)
 {

@@ -95,6 +95,12 @@ internal static class Program
         await ExpectCooperativeOwnedHandleCancellationAsync(failures).ConfigureAwait(false);
         ExpectSurfaceOutputNegotiation(failures);
         ExpectNegotiatedAlphaInterfaceMapping(failures);
+        ExpectInheritedSurfaceAlphaAssociation(failures);
+        AssertUnmanaged<NativeSurfaceSource>();
+        Expect(!RuntimeHelpers.IsReferenceOrContainsReferences<NativeSurfaceSource>(),
+            "NativeSurfaceSource retains its public unmanaged value contract", failures);
+        await ExpectNativeSurfaceLifetimeAsync(failures).ConfigureAwait(false);
+        ExpectTextureViewOutputCapabilities(failures);
         ExpectSynchronizedSurfaceUsageSelection(failures);
         ExpectSurfaceFrameStatusMapping(failures);
         ExpectInvalidSurfaceInputs(failures);
@@ -1202,6 +1208,8 @@ internal static class Program
         }
     }
 
+    private static void AssertUnmanaged<T>() where T : unmanaged { }
+
     private static void ExpectCount(int actual, int expected, string scenario, List<string> failures)
     {
         if (actual != expected)
@@ -1278,11 +1286,255 @@ internal static class Program
 
     private static void ExpectNegotiatedAlphaInterfaceMapping(List<string> failures)
     {
-        InterfaceMapping mapping = typeof(WgpuSurfaceSession).GetInterfaceMap(typeof(IPresentationSurfaceSession));
-        int getter = Array.FindIndex(mapping.InterfaceMethods, static method => method.Name == "get_AlphaMode");
-        Expect(getter >= 0 && mapping.TargetMethods[getter].DeclaringType == typeof(WgpuSurfaceSession) &&
-            mapping.TargetMethods[getter].Name == "get_AlphaMode",
-            "backend-independent session resolves the negotiated native alpha mode rather than the default Unknown", failures);
+        foreach (Type sessionType in new[] { typeof(WgpuSurfaceSession), typeof(WgpuTexturePresentationSession) })
+        {
+            InterfaceMapping mapping = sessionType.GetInterfaceMap(typeof(IPresentationSurfaceSession));
+            int getter = Array.FindIndex(mapping.InterfaceMethods, static method => method.Name == "get_AlphaMode");
+            Expect(getter >= 0 && mapping.TargetMethods[getter].DeclaringType == sessionType &&
+                mapping.TargetMethods[getter].Name.EndsWith(".get_AlphaMode", StringComparison.Ordinal),
+                $"{sessionType.Name} explicitly reports its resolved alpha association rather than the default Unknown", failures);
+        }
+    }
+
+    private static unsafe void ExpectInheritedSurfaceAlphaAssociation(List<string> failures)
+    {
+        SurfaceCapabilities inheritOnly = new(
+            [PresentationFormat.Rgba16Float],
+            [SurfacePresentMode.Fifo],
+            [SurfaceAlphaMode.Inherit],
+            SupportsRgba16Float: true,
+            []);
+        SurfaceAlphaMode selected = WgpuSurfaceSession.SelectAlphaMode(
+            inheritOnly, SurfaceAlphaMode.Automatic);
+        Expect(selected == SurfaceAlphaMode.Inherit,
+            "automatic Android-style surface negotiation keeps the advertised Inherit transport", failures);
+        try
+        {
+            _ = WgpuSurfaceSession.SelectAlphaMode(inheritOnly, SurfaceAlphaMode.Opaque);
+            failures.Add("inherit-only surface accepted an explicit unsupported Opaque mode.");
+        }
+        catch (NotSupportedException)
+        {
+        }
+
+        // Exercise the real session getters without creating a GPU or native window. The
+        // constructor only retains these values; neither lifecycle nor render methods run.
+        using WgpuSurfaceHandle surface = new((WGPUSurfaceImpl*)0);
+        ConstructorInfo constructor = typeof(WgpuSurfaceSession)
+            .GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic).Single();
+        SurfaceOutputPlan outputPlan = SurfaceOutputNegotiator.Negotiate(inheritOnly, OutputSettings.Default);
+        WgpuSurfaceSession CreateSession(NativeSurfaceSource source, SurfaceAlphaMode nativeAlpha) =>
+            (WgpuSurfaceSession)constructor.Invoke(
+                [source, surface, null, inheritOnly, outputPlan, nativeAlpha,
+                    1u, 1u, GraphicsTextureUsage.RenderAttachment, false, null]);
+
+        NativeSurfaceSource knownSource = NativeSurfaceSource.FromAndroidSurfaceView((nint)1);
+        NativeSurfaceSource externalSource = NativeSurfaceSource.FromAndroidNativeWindow((nint)1);
+        WgpuSurfaceSession knownSession = CreateSession(knownSource, selected);
+        WgpuSurfaceSession externalSession = CreateSession(externalSource, selected);
+        Expect(knownSession.AlphaMode == SurfaceAlphaMode.Inherit,
+            "owned SurfaceView still configures, resizes and reads back using native Inherit", failures);
+        Expect(((IPresentationSurfaceSession)knownSession).AlphaMode == SurfaceAlphaMode.Premultiplied,
+            "owned Android SurfaceView reports its actual premultiplied pixel association to display views", failures);
+        Expect(externalSession.AlphaMode == SurfaceAlphaMode.Inherit &&
+            ((IPresentationSurfaceSession)externalSession).AlphaMode == SurfaceAlphaMode.Inherit,
+            "external ANativeWindow does not acquire an assumed inherited alpha association", failures);
+        Expect(knownSource != externalSource,
+            "source identity observes a change in the inherited platform association contract", failures);
+
+        using NativeSurfaceLifetime textureLifetime = new(() => { });
+        NativeSurfaceSource textureSource = NativeSurfaceSource.FromAndroidTextureView(
+            (nint)1, textureLifetime, supportsHdr: true);
+        WgpuSurfaceSession textureSession = CreateSession(textureSource, selected);
+        Expect(textureSession.AlphaMode == SurfaceAlphaMode.Inherit &&
+            ((IPresentationSurfaceSession)textureSession).AlphaMode == SurfaceAlphaMode.Premultiplied,
+            "owned TextureView preserves native Inherit while reporting HWUI's premultiplied association", failures);
+
+        foreach (NativeSurfaceSource reboundSource in new[]
+            {
+                knownSource with { Handle = (nint)2 },
+                knownSource with { Kind = NativeSurfaceKind.MetalLayer },
+                knownSource with { AuxiliaryHandle = (nint)2 },
+                textureSource with { Handle = (nint)2 },
+                textureSource with { Kind = NativeSurfaceKind.MetalLayer },
+                textureSource with { AuxiliaryHandle = (nint)2 },
+            })
+        {
+            Expect(((IPresentationSurfaceSession)CreateSession(reboundSource, selected)).AlphaMode == SurfaceAlphaMode.Inherit,
+                "copying a known carrier onto another native source cannot retain its alpha association", failures);
+        }
+
+        foreach (SurfaceAlphaMode explicitAlpha in new[]
+            { SurfaceAlphaMode.Opaque, SurfaceAlphaMode.Premultiplied, SurfaceAlphaMode.Unpremultiplied })
+        {
+            WgpuSurfaceSession session = CreateSession(knownSource, explicitAlpha);
+            Expect(session.AlphaMode == explicitAlpha &&
+                ((IPresentationSurfaceSession)session).AlphaMode == explicitAlpha,
+                $"explicit {explicitAlpha} transport is not overridden by inherited carrier metadata", failures);
+        }
+    }
+
+    private static async Task ExpectNativeSurfaceLifetimeAsync(List<string> failures)
+    {
+        int releases = 0;
+        NativeSurfaceLifetime lifetime = new(() => Interlocked.Increment(ref releases));
+        NativeSurfaceSource source = NativeSurfaceSource.FromAndroidTextureView((nint)1, lifetime, supportsHdr: true);
+        IDisposable first = source.AcquireLifetime()!, second = source.AcquireLifetime()!;
+        foreach (NativeSurfaceSource rebound in new[]
+            {
+                source with { Handle = (nint)2 },
+                source with { Kind = NativeSurfaceKind.MetalLayer },
+                source with { AuxiliaryHandle = (nint)2 },
+            })
+        {
+            Expect(rebound.AcquireLifetime() is null,
+                "a rebound native source cannot lease the original TextureView lifetime", failures);
+        }
+        Expect(NativeSurfaceSource.FromAndroidNativeWindow((nint)1).AcquireLifetime() is null,
+            "an external ANativeWindow has no host-owned lifetime lease", failures);
+        lifetime.Dispose(); lifetime.Dispose();
+        Expect(releases == 0, "host destruction retains both active surface leases", failures);
+        try
+        {
+            using IDisposable unexpected = source.AcquireLifetime()!;
+            failures.Add("a destroyed native host accepted a new surface lease.");
+        }
+        catch (ObjectDisposedException) { }
+        first.Dispose(); first.Dispose();
+        Expect(releases == 0, "one retired surface cannot release another surface's native carrier", failures);
+        second.Dispose(); second.Dispose(); lifetime.Dispose();
+        Expect(releases == 1, "the last lease releases the carrier exactly once", failures);
+
+        // Model a worker still presenting when its TextureView destruction callback returns false.
+        releases = 0;
+        lifetime = new(() => Interlocked.Increment(ref releases));
+        source = NativeSurfaceSource.FromAndroidTextureView((nint)1, lifetime, supportsHdr: true);
+        IDisposable workerLease = source.AcquireLifetime()!;
+        TaskCompletionSource resume = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        Task worker = Task.Run(async () =>
+        {
+            using (workerLease) await resume.Task.ConfigureAwait(false);
+        });
+        lifetime.Dispose();
+        Expect(releases == 0, "an in-flight worker keeps a destroyed TextureView carrier alive", failures);
+        resume.SetResult(); await worker.ConfigureAwait(false);
+        Expect(releases == 1, "worker completion releases the destroyed carrier once", failures);
+
+        // Acquisition and host teardown may win in either order; neither may release early or twice.
+        for (int iteration = 0; iteration < 64; iteration++)
+        {
+            int count = 0;
+            NativeSurfaceLifetime racing = new(() => Interlocked.Increment(ref count));
+            NativeSurfaceSource racingSource = NativeSurfaceSource.FromAndroidTextureView((nint)1, racing, supportsHdr: true);
+            IDisposable guard = racingSource.AcquireLifetime()!;
+            IDisposable? racedLease = null;
+            Parallel.Invoke(
+                () => { racing.Dispose(); racing.Dispose(); },
+                () => { try { racedLease = racingSource.AcquireLifetime(); } catch (ObjectDisposedException) { } });
+            Expect(count == 0, "acquire/host-destroy race retains an already-acquired surface", failures);
+            racedLease?.Dispose();
+            Parallel.Invoke(guard.Dispose, guard.Dispose, racing.Dispose);
+            Expect(count == 1, "concurrent duplicate lease/host disposal invokes teardown once", failures);
+        }
+
+        using NativeSurfaceLifetime laterLifetime = new(() => { });
+        Expect(laterLifetime.Token != lifetime.Token,
+            "a later native carrier cannot reuse a closed source's lifetime token", failures);
+        try
+        {
+            using IDisposable unexpected = source.AcquireLifetime()!;
+            failures.Add("a closed source acquired a later carrier through a reused token.");
+        }
+        catch (ObjectDisposedException) { }
+
+        // These real backend exits occur before native calls, keeping the regression portable.
+        int canceledReleases = 0;
+        using NativeSurfaceLifetime canceledLifetime = new(() => canceledReleases++);
+        NativeSurfaceSource canceledSource = NativeSurfaceSource.FromAndroidTextureView(
+            (nint)1, canceledLifetime, supportsHdr: true);
+        using CancellationTokenSource canceled = new(); canceled.Cancel();
+        WgpuSurfaceSession? canceledSession = await WgpuSurfaceSession.TryCreateForLifecycleAsync(
+            canceledSource, 1, 1, OutputSettings.Default, TimeSpan.FromSeconds(1), canceled.Token).ConfigureAwait(false);
+        Expect(canceledSession is null, "pre-canceled surface creation does not start a native request", failures);
+        try
+        {
+            await WgpuSurfaceProbe.ProbeAsync(canceledSource, TimeSpan.FromSeconds(1), canceled.Token).ConfigureAwait(false);
+            failures.Add("pre-canceled surface probe started a native request.");
+        }
+        catch (OperationCanceledException) { }
+        Expect(canceledReleases == 0, "pre-canceled probe does not dispose its borrowed host lifetime", failures);
+        using (canceledSource.AcquireLifetime())
+        {
+            Expect(canceledReleases == 0, "pre-canceled probe leaves the live host available for another surface", failures);
+        }
+        canceledLifetime.Dispose();
+        Expect(canceledReleases == 1, "pre-canceled creation leaves no retained native lifetime", failures);
+        try
+        {
+            await WgpuSurfaceSession.CreateAsync(canceledSource, 1, 1, OutputSettings.Default,
+                TimeSpan.FromSeconds(1)).ConfigureAwait(false);
+            failures.Add("surface creation accepted an already-destroyed TextureView carrier.");
+        }
+        catch (ObjectDisposedException) { }
+        Expect(canceledReleases == 1, "failed acquisition does not release the carrier a second time", failures);
+        try
+        {
+            await WgpuSurfaceProbe.ProbeAsync(canceledSource, TimeSpan.FromSeconds(1)).ConfigureAwait(false);
+            failures.Add("surface probe accepted an already-destroyed TextureView carrier.");
+        }
+        catch (ObjectDisposedException) { }
+        Expect(canceledReleases == 1, "closed-host probe fails before native creation without releasing twice", failures);
+    }
+
+    private static void ExpectTextureViewOutputCapabilities(List<string> failures)
+    {
+        SurfaceCapabilities advertised = new(
+            [PresentationFormat.Rgba16Float, PresentationFormat.Bgra8UnormSrgb],
+            [SurfacePresentMode.Fifo], [SurfaceAlphaMode.Inherit], true, [])
+        {
+            FormatCapabilities =
+            [new(PresentationFormat.Rgba16Float, [ColorEncoding.ExtendedSrgbLinear]),
+             new(PresentationFormat.Bgra8UnormSrgb, [ColorEncoding.Srgb])],
+        };
+        using NativeSurfaceLifetime lifetime = new(() => { });
+        NativeSurfaceSource limited = NativeSurfaceSource.FromAndroidTextureView((nint)1, lifetime, supportsHdr: false);
+        SurfaceCapabilities constrained = limited.ConstrainCapabilities(advertised);
+        Expect(!constrained.SupportsRgba16Float &&
+            constrained.Formats.SequenceEqual([PresentationFormat.Bgra8UnormSrgb]) &&
+            constrained.FormatCapabilities.Count == 1 &&
+            constrained.FormatCapabilities[0].Format == PresentationFormat.Bgra8UnormSrgb &&
+            constrained.AlphaModes.SequenceEqual(advertised.AlphaModes),
+            "limited TextureView removes float HDR formats and pairs while retaining native transport modes", failures);
+        SurfaceOutputPlan clamp = SurfaceOutputNegotiator.Negotiate(constrained, OutputSettings.Default);
+        Expect(clamp.Output.DynamicRange == OutputDynamicRange.Sdr &&
+            clamp.Output.Format == PresentationFormat.Bgra8UnormSrgb &&
+            clamp.Output.FallbackReason is not null && !clamp.RequiresToneMapping,
+            "limited TextureView uses the existing explicit Clamp fallback and reports its reason", failures);
+        try
+        {
+            _ = SurfaceOutputNegotiator.Negotiate(constrained, OutputSettings.Default with { SdrFallback = SdrFallbackMode.Fail });
+            failures.Add("strict HDR accepted a TextureView without proven app-window HDR.");
+        }
+        catch (InvalidOperationException) { }
+        NativeSurfaceSource supported = NativeSurfaceSource.FromAndroidTextureView((nint)1, lifetime, supportsHdr: true);
+        Expect(ReferenceEquals(supported.ConstrainCapabilities(advertised), advertised) &&
+            SurfaceOutputNegotiator.Negotiate(supported.ConstrainCapabilities(advertised), OutputSettings.Default)
+                .Output.DynamicRange == OutputDynamicRange.Hdr,
+            "HDR-capable TextureView retains the advertised extended-linear float output", failures);
+        foreach (NativeSurfaceSource other in new[]
+            {
+                NativeSurfaceSource.FromAndroidSurfaceView((nint)1),
+                NativeSurfaceSource.FromAndroidNativeWindow((nint)1),
+                limited with { Handle = (nint)2 },
+                limited with { Kind = NativeSurfaceKind.MetalLayer },
+                limited with { AuxiliaryHandle = (nint)2 },
+            })
+        {
+            Expect(ReferenceEquals(other.ConstrainCapabilities(advertised), advertised),
+                "TextureView's HDR boundary does not mutate external, legacy or rebound surface capabilities", failures);
+        }
+        Expect(advertised.SupportsRgba16Float && advertised.Formats.Count == 2 && advertised.FormatCapabilities.Count == 2,
+            "capability filtering leaves the backend's borrowed snapshot intact", failures);
     }
 
     private static void ExpectSurfaceFrameStatusMapping(List<string> failures)

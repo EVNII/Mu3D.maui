@@ -134,8 +134,20 @@ the event budget truncates long paths. This is RGB path tracing, not a spectral 
   outside this domain fail explicitly, while the independent authoring data remains intact.
 - `MetersPerSceneUnit` defines geometry units; surface distances honor `MetersPerUnit`. Thin-film
   thickness stays in micrometres. Active emission requires explicit `NitsPerSceneUnit`.
-- Constants and typed graphs support color/data textures, UV0/UV1, add/multiply/mix/clamp, channel
-  extraction and tangent normal maps. Graphs are bounded to 64 nodes, textures to four million texels
+- Constants and typed graphs support color/data textures, UV0/UV1, add/subtract/multiply/divide,
+  min/max/abs/sqrt/mix/clamp, channel extraction and tangent normal maps. Subtract, Min, Max and
+  Divide accept matching numeric types or a scalar second operand; Abs acts componentwise. Add retains matching-type operands. Each
+  node requires finite conservative numeric bounds; graph binding checks the physical input domain.
+  Divide requires denominator intervals strictly on one side of zero, with their nearest bound
+  normal and finite in FP32; tiny/subnormal divisors fail to avoid GPU flush-to-zero and reciprocal
+  overflow. Sqrt accepts only nonnegative raw Float/Vector2/Vector3/Vector4 data and introduces
+  no absolute value or epsilon. The
+  [scaled microfacet-alpha recipe](../../docs-public/articles/features/openpbr-materialx.md#scaled-microfacet-alpha-to-roughness)
+  explicitly divides by an authored scale, bounds to [0,1] and takes the square root for roughness.
+  Explicit Min/Max can bound inverse gloss before it drives roughness; Abs applies an authored
+  magnitude policy to signed data. See the
+  [copyable graph example](../../docs-public/articles/features/openpbr-materialx.md#inverse-gloss-with-bounded-arithmetic).
+  Graphs are bounded to 64 nodes, textures to four million texels
   each, with a default combined 64 MiB texture/program budget. Image filtering is level-zero nearest
   or bilinear; mip filtering and arbitrary MaterialX nodes are not implemented. The default Mu3D renderer rejects the distinct OpenPBR root, preventing silent
   conversion to glTF PBR.

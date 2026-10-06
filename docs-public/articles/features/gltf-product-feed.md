@@ -160,8 +160,8 @@ that do not need this shared-device host. Use
 multiple logical regions into one Mu3D Surface and accepts separate coordination of that layer.
 
 Platform compositor details differ, so alpha transport uses platform-specific MAUI Handlers while
-the XAML above remains portable. Android requests a translucent native Surface and wgpu's inherited
-alpha mode. Apple marks its `UIView`/`CAMetalLayer` carrier non-opaque and requests Metal's
+the XAML above remains portable. Android API34+ uses a nonopaque TextureView in an HDR UI window
+and wgpu's inherited premultiplied association. Apple marks its `UIView`/`CAMetalLayer` carrier non-opaque and requests Metal's
 straight-alpha mode. Because the scene renderer produces premultiplied RGBA, Apple renders once to a
 reusable FP16 intermediate and uses a full-screen texture-load pass to divide RGB by nonzero alpha
 before presentation. This preserves extended-range color and per-pixel alpha without CPU readback,
@@ -202,3 +202,26 @@ normal camera, selection or gizmo tools.
 For a like-for-like visual check, repeating `Emissive row` products alternate between transparent
 FP16-mask and opaque direct-HDR presentation. Their card titles state the selected carrier, so the
 same emissive glTF can be compared without inferring the path from its item number.
+
+The canonical Procedural 3D Feed also demonstrates a transparent preview background. Each preview clears to
+transparent and places a sample-owned MAUI GraphicsView checkerboard in `SceneViewProxy.Underlay`.
+All sphere/cone materials remain opaque. The board is ordinary host UI beneath the HDR surface,
+visible outside each object's silhouette through the fully transparent background; it is not drawn
+into the 3D scene. The Web counterpart uses a CSS board and premultiplied Canvas.
+Loading and suspended previews retain their explicit placeholders. Authored RGB and native HDR
+transport are preserved; actual composition still requires observing the target compositor.
+
+On Android API34+, the presented image belongs to the ordinary native View tree. MAUI/native sibling
+ordering, ancestor clipping, scroll transforms and opacity apply, including partially visible
+previews. The sample declares rectangular `IsClippedToBounds` policy on its viewport, card and
+preview; it has no window-wide crop, coordinate follower or whole-preview suppression.
+
+The Handler retains the FP16/scRGB producer and shares a scoped HDR, alpha-capable window request
+between attached controls. API35+ requests headroom 4; API34 uses system policy. HDR requires
+display/configuration support and a matching Activity window root. An unidentified popup/dialog
+root or unsupported UI consumer reports SDR fallback, or fails under the caller's strict output
+policy. Below API34, opaque HDR retains its legacy SurfaceView; transparent UI is SDR. Window
+settings are restored after the final request, preserving intervening application changes.
+Native texture availability and session leases own creation, resize and teardown; consumer updates
+do not start another render loop. Physical HDR, underlay, sibling/partial clipping and navigation
+still require target-device validation.

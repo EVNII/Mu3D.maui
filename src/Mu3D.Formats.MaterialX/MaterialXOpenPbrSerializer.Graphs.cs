@@ -8,7 +8,8 @@ namespace Mu3D.Formats.MaterialX;
 
 public static partial class MaterialXOpenPbrSerializer
 {
-    private static readonly string[] GraphCategories = ["constant", "texcoord", "image", "add", "multiply", "mix", "clamp", "normalmap", "extract", "convert"];
+    private static readonly string[] GraphCategories = ["constant", "texcoord", "image", "add", "multiply",
+        "subtract", "min", "max", "absval", "divide", "sqrt", "mix", "clamp", "normalmap", "extract", "convert"];
     private static string TypeName(OpenPbrNodeType type) => type switch
     {
         OpenPbrNodeType.Float => "float", OpenPbrNodeType.Color3 => "color3", OpenPbrNodeType.Vector2 => "vector2",
@@ -104,6 +105,8 @@ public static partial class MaterialXOpenPbrSerializer
             var node = nodes[name]; string kind = node.Name.LocalName;
             string scope = name.Contains('/') ? name[..(name.LastIndexOf('/') + 1)] : "";
             OpenPbrNodeType type = NodeType(Required(node, "type"));
+            if (kind == "sqrt" && type == OpenPbrNodeType.Color3)
+                throw new NotSupportedException("MaterialX sqrt supports float and vector types, not color3.");
             if (channelData && type == OpenPbrNodeType.Color3) type = OpenPbrNodeType.Vector3;
             var space = node.Attribute("colorspace")?.Value;
             if (channelData && space is not null && space != "raw") throw new NotSupportedException("Numeric channel distances cannot carry a color transform.");
@@ -151,6 +154,19 @@ public static partial class MaterialXOpenPbrSerializer
                     result = OpenPbrNode.Image(image, type, uv, u, v, filter); break;
                 case "add": result = OpenPbrNode.Add(Operand("in1"), Operand("in2")); break;
                 case "multiply": result = OpenPbrNode.Multiply(Operand("in1"), Operand("in2")); break;
+                case "subtract": case "min": case "max":
+                    // MaterialX 1.39.4 defines zero defaults for both like-type and scalar-RHS ports.
+                    var zero = DefaultZero(type);
+                    var first = Operand("in1", zero); var second = Operand("in2", zero);
+                    result = kind switch {
+                        "subtract" => OpenPbrNode.Subtract(first, second),
+                        "min" => OpenPbrNode.Min(first, second),
+                        _ => OpenPbrNode.Max(first, second),
+                    };
+                    break;
+                case "absval": result = OpenPbrNode.Abs(Operand("in", DefaultZero(type))); break;
+                case "divide": result = OpenPbrNode.Divide(Operand("in1", DefaultZero(type)), Operand("in2", DefaultOne(type))); break;
+                case "sqrt": result = OpenPbrNode.Sqrt(Operand("in", DefaultZero(type))); break;
                 case "mix":
                     var fg = Operand("fg"); var bg = Operand("bg");
                     result = OpenPbrNode.Mix(bg, fg, Operand("mix", OpenPbrNode.Float(.5f))); break;
@@ -178,6 +194,24 @@ public static partial class MaterialXOpenPbrSerializer
             if (result.Type != type) throw new InvalidDataException($"Graph node '{name}' output type is inconsistent with its operands.");
             active.Remove((name, channelData)); built.Add((name, channelData), result); return result;
         }
+        private static OpenPbrNode DefaultZero(OpenPbrNodeType type) => type switch
+        {
+            OpenPbrNodeType.Float => OpenPbrNode.Float(0),
+            OpenPbrNodeType.Color3 => OpenPbrNode.Color(new LinearRgba(0, 0, 0, 1, StandardColorSpaces.AcesCg)),
+            OpenPbrNodeType.Vector2 => OpenPbrNode.Vector2(Vector2.Zero),
+            OpenPbrNodeType.Vector3 => OpenPbrNode.Vector3(Vector3.Zero),
+            OpenPbrNodeType.Vector4 => OpenPbrNode.Vector4(Vector4.Zero),
+            _ => throw new NotSupportedException($"Arithmetic graph nodes do not support '{TypeName(type)}'."),
+        };
+        private static OpenPbrNode DefaultOne(OpenPbrNodeType type) => type switch
+        {
+            OpenPbrNodeType.Float => OpenPbrNode.Float(1),
+            OpenPbrNodeType.Color3 => OpenPbrNode.Color(new LinearRgba(1, 1, 1, 1, StandardColorSpaces.AcesCg)),
+            OpenPbrNodeType.Vector2 => OpenPbrNode.Vector2(Vector2.One),
+            OpenPbrNodeType.Vector3 => OpenPbrNode.Vector3(Vector3.One),
+            OpenPbrNodeType.Vector4 => OpenPbrNode.Vector4(Vector4.One),
+            _ => throw new NotSupportedException($"Arithmetic graph nodes do not support '{TypeName(type)}'."),
+        };
         private static int ParseInteger(string text) => int.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out int value)
             ? value : throw new InvalidDataException("Expected an integer graph literal.");
         private static OpenPbrAddressMode Address(string value) => value switch
@@ -226,7 +260,8 @@ public static partial class MaterialXOpenPbrSerializer
         XElement Literal(string name, string type, string value) => new("input", new XAttribute("name", name), new XAttribute("type", type), new XAttribute("value", value));
         foreach (var n in graph.Nodes)
         {
-            string kind = n.Operation switch { OpenPbrNodeOperation.NormalMap => "normalmap", _ => n.Operation.ToString().ToLowerInvariant() };
+            string kind = n.Operation switch { OpenPbrNodeOperation.NormalMap => "normalmap", OpenPbrNodeOperation.Abs => "absval",
+                _ => n.Operation.ToString().ToLowerInvariant() };
             var node = new XElement(kind, new XAttribute("name", ids[n]), new XAttribute("type", TypeName(n.Type)));
             switch (n.Operation)
             {
@@ -252,7 +287,11 @@ public static partial class MaterialXOpenPbrSerializer
                         Literal("vaddressmode", "string", n.AddressV.ToString().ToLowerInvariant()),
                         Literal("filtertype", "string", n.Filter.ToString().ToLowerInvariant())); break;
                 case OpenPbrNodeOperation.Add: case OpenPbrNodeOperation.Multiply:
+                case OpenPbrNodeOperation.Subtract: case OpenPbrNodeOperation.Min: case OpenPbrNodeOperation.Max:
+                case OpenPbrNodeOperation.Divide:
                     node.Add(Input("in1", n.A!), Input("in2", n.B!)); break;
+                case OpenPbrNodeOperation.Abs: node.Add(Input("in", n.A!)); break;
+                case OpenPbrNodeOperation.Sqrt: node.Add(Input("in", n.A!)); break;
                 case OpenPbrNodeOperation.Mix: node.Add(Input("bg", n.A!), Input("fg", n.B!), Input("mix", n.C!)); break;
                 case OpenPbrNodeOperation.Clamp:
                     node.Add(Input("in", n.A!), Literal("low", "float", Format(n.Value.X)), Literal("high", "float", Format(n.Value.Y))); break;

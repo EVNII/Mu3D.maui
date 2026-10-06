@@ -64,6 +64,7 @@ public sealed class Mu3DSceneView : Grid
     private long featureRenderPassSequence;
     private GraphicsTexture? displaySceneTexture;
     private ColorViewGpuTransform? displayGpuTransform;
+    private PresentationWhitePass? sceneLinearExposurePass;
     private ColorView3D? subscribedDisplayTransform;
     private GraphicsTexture? depthTexture;
     private GraphicsExtent3D depthExtent;
@@ -137,6 +138,12 @@ public sealed class Mu3DSceneView : Grid
         nameof(DisplayTransform), typeof(ColorView3D), typeof(Mu3DSceneView), null,
         propertyChanged: static (owner, _, _) => ((Mu3DSceneView)owner).OnDisplayTransformChanged());
 
+    /// <summary>Identifies the <see cref="SceneLinearExposureStops"/> bindable property.</summary>
+    public static readonly BindableProperty SceneLinearExposureStopsProperty = BindableProperty.Create(
+        nameof(SceneLinearExposureStops), typeof(float), typeof(Mu3DSceneView), 0f,
+        validateValue: static (_, value) => value is float stops && float.IsFinite(stops) && stops is >= -32 and <= 32,
+        propertyChanged: static (owner, _, _) => ((Mu3DSceneView)owner).InvalidateScene());
+
     /// <summary>Identifies the <see cref="RenderOutput"/> bindable property.</summary>
     public static readonly BindableProperty RenderOutputProperty = BindableProperty.Create(
         nameof(RenderOutput),
@@ -179,7 +186,8 @@ public sealed class Mu3DSceneView : Grid
 
     /// <summary>Gets or sets an explicit AgX or ACES 2 view applied after the scene render pipeline.</summary>
     /// <remarks>
-    /// Null preserves the existing scene-linear presentation. Selecting a view uses an owned FP16
+    /// Null preserves scene-linear presentation, optionally scaled by <see cref="SceneLinearExposureStops"/>.
+    /// Selecting a view uses an owned FP16
     /// intermediate, or FP32 when the output is FP32. HDR presets require HDR extended-linear sRGB
     /// presentation. Custom passes must produce premultiplied scene-linear RGB, as the default scene
     /// and OpenPBR passes do. Display changes do not reset application-owned progressive accumulation.
@@ -188,6 +196,21 @@ public sealed class Mu3DSceneView : Grid
     {
         get => (ColorView3D?)GetValue(DisplayTransformProperty);
         set => SetValue(DisplayTransformProperty, value);
+    }
+
+    /// <summary>Gets or sets scene-linear exposure from -32 through +32 stops. Defaults to zero.</summary>
+    /// <remarks>
+    /// Applies only when <see cref="DisplayTransform"/> is null. Non-zero exposure requires an
+    /// extended-linear HDR Float16 or Float32 presentation target; SDR output is rejected explicitly.
+    /// The final RGB is multiplied by 2 raised to this value, without tone mapping or changing alpha.
+    /// Zero retains the direct presentation path without an extra pass. Exposure changes request a
+    /// frame without changing scene lighting or resetting application-owned progressive accumulation.
+    /// When a display view is attached, use <see cref="ColorView3D.ExposureStops"/> instead.
+    /// </remarks>
+    public float SceneLinearExposureStops
+    {
+        get => (float)GetValue(SceneLinearExposureStopsProperty);
+        set => SetValue(SceneLinearExposureStopsProperty, value);
     }
 
     private void OnDisplayTransformChanged()
@@ -377,10 +400,17 @@ public sealed class Mu3DSceneView : Grid
         Scene? scene = Scene;
         Camera? camera = Camera;
         ColorViewTransform? display = DisplayTransform?.ToTransform(StandardColorSpaces.LinearSrgb);
+        float linearExposureStops = display is null ? SceneLinearExposureStops : 0f;
+        bool applyLinearExposure = linearExposureStops != 0f;
+        if (applyLinearExposure &&
+            (e.OutputPlan.Output.DynamicRange != OutputDynamicRange.Hdr ||
+             e.OutputPlan.Output.Encoding != ColorEncoding.ExtendedSrgbLinear ||
+             e.Target.Descriptor.Format is not (GraphicsTextureFormat.Rgba16Float or GraphicsTextureFormat.Rgba32Float)))
+            throw new NotSupportedException("Scene-linear exposure requires an extended-linear HDR Float16 or Float32 surface. Select HDR output or reset SceneLinearExposureStops to zero.");
         if (display is not null && OutputSettings.WhiteMode == OutputWhiteMode.FixedAbsolute &&
             display.ReferenceWhiteNits != OutputSettings.ReferenceWhiteNits)
             throw new InvalidOperationException("Fixed absolute presentation requires OutputSettings.ReferenceWhiteNits to match DisplayTransform.ReferenceWhiteNits.");
-        if (display is null && (scene is null || camera is null))
+        if (display is null && !applyLinearExposure && (scene is null || camera is null))
         {
             ClearTarget(e.Device, e.Target, ClearColor);
             return;
@@ -392,7 +422,9 @@ public sealed class Mu3DSceneView : Grid
         GraphicsTextureFormat sceneFormat = display is null ? e.Target.Descriptor.Format :
             e.Target.Descriptor.Format == GraphicsTextureFormat.Rgba32Float ? GraphicsTextureFormat.Rgba32Float : GraphicsTextureFormat.Rgba16Float;
         SceneRenderer currentRenderer = EnsureRenderer(e.Device, sceneFormat);
-        GraphicsTexture sceneTarget = display is null ? e.Target : EnsureDisplaySceneTexture(e.Device, e.Width, e.Height, sceneFormat);
+        GraphicsTexture sceneTarget = display is not null
+            ? EnsureDisplaySceneTexture(e.Device, e.Width, e.Height, sceneFormat)
+            : applyLinearExposure ? EnsureSceneLinearExposurePass(e.Device, sceneFormat).GetInput(e.Target) : e.Target;
         LinearRgba clear = ClearColor;
         // Scene attachments are premultiplied. Keep the default path's legacy clear behavior intact.
         if (display is not null)
@@ -401,6 +433,7 @@ public sealed class Mu3DSceneView : Grid
         {
             ClearTarget(e.Device, sceneTarget, clear);
             if (display is not null) ApplyDisplayTransform(e, sceneTarget, display);
+            else if (applyLinearExposure) sceneLinearExposurePass!.Apply(e.Target, MathF.Pow(2, linearExposureStops));
             return;
         }
 
@@ -427,6 +460,7 @@ public sealed class Mu3DSceneView : Grid
         }
 
         if (display is not null) ApplyDisplayTransform(e, sceneTarget, display);
+        else if (applyLinearExposure) sceneLinearExposurePass!.Apply(e.Target, MathF.Pow(2, linearExposureStops));
 
         pendingFrameSnapshot = new ViewportFrameSnapshot(
             successfulFrameId == ulong.MaxValue ? ulong.MaxValue : successfulFrameId + 1,
@@ -436,6 +470,17 @@ public sealed class Mu3DSceneView : Grid
             e.Height,
             ResolveLogicalExtent(Width, e.Width),
             ResolveLogicalExtent(Height, e.Height));
+    }
+
+    private PresentationWhitePass EnsureSceneLinearExposurePass(GraphicsDevice device, GraphicsTextureFormat format)
+    {
+        if (sceneLinearExposurePass is null || sceneLinearExposurePass.Format != format)
+        {
+            PresentationWhitePass replacement = new(device, format);
+            sceneLinearExposurePass?.Dispose();
+            sceneLinearExposurePass = replacement;
+        }
+        return sceneLinearExposurePass;
     }
 
     private GraphicsTexture EnsureDisplaySceneTexture(GraphicsDevice device, uint width, uint height, GraphicsTextureFormat format)
@@ -679,6 +724,8 @@ public sealed class Mu3DSceneView : Grid
         DisposeDefaultScenePass();
         displayGpuTransform?.Dispose();
         displayGpuTransform = null;
+        sceneLinearExposurePass?.Dispose();
+        sceneLinearExposurePass = null;
         displaySceneTexture?.Dispose();
         displaySceneTexture = null;
         depthTexture?.Dispose();

@@ -247,6 +247,11 @@ internal sealed class OpenPbrFastBake
                 OpenPbrNodeOperation.Texcoord => new(n.Value.X == 0 ? uv0 : uv1, 0, 0),
                 OpenPbrNodeOperation.Image => Sample(n, new(a.X, a.Y)),
                 OpenPbrNodeOperation.Add => a + b,
+                OpenPbrNodeOperation.Subtract => a - b,
+                OpenPbrNodeOperation.Min => Vector4.Min(a, b),
+                OpenPbrNodeOperation.Max => Vector4.Max(a, b),
+                OpenPbrNodeOperation.Abs => Vector4.Abs(a),
+                OpenPbrNodeOperation.Divide or OpenPbrNodeOperation.Sqrt => EvaluateDomainOperation(n, a, b),
                 OpenPbrNodeOperation.Multiply => a * b,
                 OpenPbrNodeOperation.Mix => Vector4.Lerp(a, b, c.X),
                 OpenPbrNodeOperation.Clamp => Vector4.Clamp(a, new(n.Value.X), new(n.Value.Y)),
@@ -256,6 +261,17 @@ internal sealed class OpenPbrFastBake
             values.Add(n, value);
         }
         return values[target];
+
+        static Vector4 EvaluateDomainOperation(OpenPbrNode node, Vector4 a, Vector4 b)
+        {
+            int channels = node.Type == OpenPbrNodeType.Float ? 1 : node.Type == OpenPbrNodeType.Vector2 ? 2 :
+                node.Type == OpenPbrNodeType.Vector4 ? 4 : 3;
+            Vector4 value = default;
+            for (int channel = 0; channel < channels; channel++)
+                value[channel] = node.Operation == OpenPbrNodeOperation.Sqrt ? MathF.Sqrt(a[channel]) :
+                    a[channel] / b[node.B!.Type == OpenPbrNodeType.Float ? 0 : channel];
+            return node.Type == OpenPbrNodeType.Float ? new(value.X) : value;
+        }
 
         static Vector4 Sample(OpenPbrNode node, Vector2 uv)
         {

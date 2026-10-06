@@ -223,9 +223,12 @@ groups or loading a preset discards unapplied edits. Applied edits also redraw w
 
 Connected inputs show **Use texture / graph** and disable the inactive constant field. Turn
 that switch off and apply to disconnect only that input; the other connections remain intact.
-The texture preset's specular roughness is a map multiplied by 0.3 (range 0.21–0.3), while its
-coat has weight 0.4 and independent roughness 0.2. To examine a uniformly rough, uncoated
-surface, disconnect `specular_roughness`, set it to 1, and set `coat_weight` to 0 in the Coat
+The texture preset takes the magnitude of a signed gloss map, subtracts it from one, explicitly
+bounds it with Min/Max to [0,1], then multiplies by the roughness slider (default 0.3,
+resulting range 0.21–0.3). Its coat has weight 0.4 and an independent raw microfacet-alpha map:
+Divide removes the authored scale of 65535, then Sqrt maps alpha to roughness (mathematical
+range 0.2–0.3). To examine a uniformly rough, uncoated surface, disconnect `specular_roughness`,
+set it to 1, and set `coat_weight` to 0 in the Coat
 group. Reloading **Texture material** restores the preset and its connections.
 
 Mode-incompatible transmission, opacity or subsurface settings are reported before applying.
@@ -255,9 +258,85 @@ var surface = new OpenPbrSurface
 Use `OpenPbrTexture.FromData` for normal, roughness and packed numeric channels. Colors are converted
 to ACEScg; data is never color transformed. MaterialX uses bottom-left UVs, while supplied pixel rows
 run top-to-bottom. UV0/UV1, closest/bilinear sampling and repeat/clamp/mirror addressing are supported.
-Graphs also support add, multiply, mix, explicit clamp, channel extract and tangent normal maps.
+Graphs also support add, subtract, multiply, divide, min, max, absolute value, square root, mix, explicit clamp,
+channel extract and tangent normal maps.
 Each surface is limited to 64 distinct nodes; textures and total GPU graph data have explicit budgets.
 There is no implicit mip generation/filtering. Geometry must contain the referenced UV sets.
+
+### Inverse gloss with bounded arithmetic
+
+Treat gloss as raw numeric data. Subtracting it from one creates inverse gloss; this example
+uses that value as specular roughness and explicitly limits it to [0.05,0.95]. Abs preserves
+ordinary nonnegative gloss. Applying it to signed data deliberately interprets the magnitude
+as gloss; choose that policy only when it matches the authored map.
+
+```csharp
+using System.Collections.Generic;
+using System.Numerics;
+using Mu3D.SceneGraph;
+
+// The application owns the resource represented by this filename.
+var glossTexture = OpenPbrTexture.FromData(2, 1,
+    [new Vector4(0.2f), new Vector4(0.8f)], "gloss.exr");
+var gloss = OpenPbrNode.Image(glossTexture, OpenPbrNodeType.Float);
+var inverseGloss = OpenPbrNode.Subtract(OpenPbrNode.Float(1), OpenPbrNode.Abs(gloss));
+var roughness = OpenPbrNode.Min(
+    OpenPbrNode.Max(inverseGloss, OpenPbrNode.Float(0.05f)), OpenPbrNode.Float(0.95f));
+var surface = new OpenPbrSurface
+{
+    Graph = new OpenPbrGraph([
+        new KeyValuePair<OpenPbrInput, OpenPbrNode>(OpenPbrInput.SpecularRoughness, roughness)]),
+};
+```
+
+Subtract, Min and Max accept matching numeric types or a `Float` second operand, which is
+broadcast across the first operand's components. Abs is unary and componentwise; Boolean
+operands are unsupported. Add still requires matching types. Construction rejects non-finite
+conservative bounds, including overflow in an intermediate node; a later clamp cannot repair
+such a node. Graph binding then checks the final conservative interval against the physical
+input domain. Min/Max here impose an application-selected interval rather than implicit color
+or material clipping. MaterialX import/export uses `subtract`, `min`, `max` and `absval` for
+these operations.
+
+### Scaled microfacet alpha to roughness
+
+When an authored map stores GGX microfacet alpha multiplied by a known scale, explicitly divide
+out that scale and use the square root to obtain roughness. The example chooses 65535 as the
+scale and bounds normalized alpha to [0,1] before Sqrt. These are application authoring policies;
+the file format does not automatically select the scale or the mapping.
+
+```csharp
+using System.Collections.Generic;
+using System.Numerics;
+using Mu3D.SceneGraph;
+
+var alphaTexture = OpenPbrTexture.FromData(2, 1,
+    [new Vector4(0.04f * 65535), new Vector4(0.09f * 65535)], "coat-alpha.exr");
+var encodedAlpha = OpenPbrNode.Image(alphaTexture, OpenPbrNodeType.Float);
+var normalizedAlpha = OpenPbrNode.Divide(encodedAlpha, OpenPbrNode.Float(65535));
+var boundedAlpha = OpenPbrNode.Min(
+    OpenPbrNode.Max(normalizedAlpha, OpenPbrNode.Float(0)), OpenPbrNode.Float(1));
+var surface = new OpenPbrSurface
+{
+    CoatWeight = 0.4f,
+    Graph = new OpenPbrGraph([
+        new KeyValuePair<OpenPbrInput, OpenPbrNode>(
+            OpenPbrInput.CoatRoughness, OpenPbrNode.Sqrt(boundedAlpha))]),
+};
+```
+
+Divide accepts matching numeric types or a scalar second operand. Each semantic denominator
+channel must have a conservative interval entirely above or entirely below zero; its bound
+nearest zero must be normal and finite in FP32 (magnitude at least 2^-126). Zero-crossing,
+zero and subnormal divisors fail explicitly, preventing denominator flush-to-zero and reciprocal
+overflow. Arithmetic bounds must also remain finite.
+
+Sqrt accepts raw Float/Vector2/Vector3/Vector4 with nonnegative conservative bounds. Color3
+and Boolean are unsupported. Negative inputs are rejected; Sqrt applies no hidden Abs, clamp
+or epsilon. The example's explicit Min/Max supplies its chosen domain. MaterialX uses `divide`
+and `sqrt`; arbitrary nodes remain unsupported.
+
+### MaterialX resource resolution
 
 MaterialX import supports root connections and named nodegraph outputs. Set
 `MaterialXImportOptions.TextureResolver` to resolve only resources your application permits. The

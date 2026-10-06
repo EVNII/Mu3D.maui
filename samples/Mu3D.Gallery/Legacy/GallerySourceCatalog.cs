@@ -24,11 +24,12 @@ internal static class GallerySourceCatalog
         "Toolkit3DPage" => ["Adaptive/SceneHostView.cs"],
         "EmissiveMaterialPage" => ["Adaptive/SceneHostView.cs", "EmissiveMaterialExample.cs"],
         "TranslucentCanvasPage" => ["Adaptive/SceneHostView.cs", "HdrCanvasExample.cs"],
-        "FeedPage" => ["ProceduralFeedExample.cs"],
+        "FeedPage" => ["ProceduralFeedExample.cs", "Adaptive/FeedCheckerboard.cs"],
         "ColorRampsPage" => ["ColorComparisonRenderer.cs"],
         "ColorLutPage" => ["ColorLutExample.cs"],
         "PaintingColorSpacesPage" => ["PaintingColorSpacesExample.cs", "PaintingColorPickerLayout.cs", "PaintingColorPickerPolicy.cs", "PaintingColorPickerRenderer.cs"],
-        "HdrProbePage" => ["SurfaceReferencePattern.cs"],
+        "HdrProbePage" => ["SurfaceReferencePattern.cs", "Adaptive/AndroidHdrBufferDiagnostics.cs",
+            "Adaptive/HdrProbePage.Readback.cs", "Adaptive/SurfaceReferenceReadback.cs"],
         _ => [],
         };
         return ["Adaptive/IGalleryPageActivation.cs", .. helpers];

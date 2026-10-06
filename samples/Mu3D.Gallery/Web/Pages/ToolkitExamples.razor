@@ -109,7 +109,9 @@
             @if (id == "frame-statistics")
             {
                 <label><input type="checkbox" @bind="example.Continuous" @bind:after="SettingsChanged" /> Continuous</label>
-                <label><input type="checkbox" @bind="example.StatisticsDetailed" @bind:after="SettingsChanged" /> Detailed</label>
+                <label>Display <select @bind="StatisticsMode" @bind:after="SettingsChanged">
+                    <option value="compact">Compact</option><option value="normal">Normal</option><option value="detail">Detail</option>
+                </select></label>
                 <label>Refresh <input type="number" min="50" max="1000" step="50" @bind="SnapshotInterval" @bind:event="oninput" @bind:after="SettingsChanged" /> ms</label>
                 <button @onclick="ResetStatistics">Reset statistics and graph</button>
             }

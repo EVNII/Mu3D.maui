@@ -644,12 +644,7 @@ public sealed class SceneViewProxyHost : Grid
     }
 
     private static SurfaceAlphaMode GetAlphaMode(IPresentationSurfaceSession session) =>
-        session switch
-        {
-            WgpuTexturePresentationSession texture => texture.AlphaMode,
-            WgpuSurfaceSession surface => surface.AlphaMode,
-            _ => SurfaceAlphaMode.Opaque,
-        };
+        session.AlphaMode;
 
     private SceneRenderer EnsureRenderer(
         WgpuGraphicsDevice device,

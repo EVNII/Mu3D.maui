@@ -180,6 +180,8 @@ public sealed class SceneViewProxy : Grid
     /// premultiplied representation to Metal straight alpha. On Windows, opaque output uses the
     /// direct HDR Surface while transparent output uses the compositor-owned binary-mask drawing
     /// surface; applications must not assume every alpha carrier retains physical HDR headroom.
+    /// On Android, a filled background keeps clear alpha one while negotiating a supported
+    /// Surface alpha mode; pixel coverage does not require swapchain Opaque support.
     /// </remarks>
     public MauiColor SceneBackgroundColor
     {
@@ -270,7 +272,7 @@ public sealed class SceneViewProxy : Grid
     {
         hostOutputSettings = settings ?? throw new ArgumentNullException(nameof(settings));
         SurfaceAlphaMode alphaMode = SceneBackgroundColor.Alpha == 1f
-            ? SurfaceAlphaMode.Opaque
+            ? PlatformOpaqueAlphaMode
             : settings.AlphaMode switch
             {
                 SurfaceAlphaMode.Automatic or SurfaceAlphaMode.Opaque =>
@@ -281,6 +283,21 @@ public sealed class SceneViewProxy : Grid
         if (surfaceView.OutputSettings != effective)
         {
             surfaceView.OutputSettings = effective;
+        }
+    }
+
+    private static SurfaceAlphaMode PlatformOpaqueAlphaMode
+    {
+        get
+        {
+#if ANDROID
+            // Android Vulkan can advertise only Inherit. Automatic also lets Mu3DView select
+            // its HDR carrier without declaring the FP16 buffer opaque to Android 16's Skia.
+            // The rendered background still has alpha one and completely covers its pixels.
+            return SurfaceAlphaMode.Automatic;
+#else
+            return SurfaceAlphaMode.Opaque;
+#endif
         }
     }
 

@@ -13,6 +13,8 @@
              Link="Controls/SurfaceFrameScheduler.cs" />
     <Compile Include="../../src/Mu3D.Maui.Toolkit/Controls/OrbitGestureState.cs"
              Link="Controls/OrbitGestureState.cs" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Controls/ViewportTouchTransformState.cs"
+             Link="Controls/ViewportTouchTransformState.cs" />
     <Compile Include="../../src/Mu3D.Maui.Toolkit/Controls/FlyNavigationAction.cs"
              Link="Controls/FlyNavigationAction.cs" />
     <Compile Include="../../src/Mu3D.Maui.Toolkit/Controls/FlyNavigationState.cs"

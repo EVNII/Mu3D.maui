@@ -42,6 +42,12 @@ modes. The [Web validation guide](../../../tests/Mu3D.Web.Validation/README.md) 
 host-contract and browser-rendering checks. CPU import measurements, browser FPS and physical HDR
 display measurements describe different boundaries.
 
+Mono interpreting prebuilt application IL and AOT are both supported execution modes. The Web
+port introduces no runtime user-authored C# scripting, dynamic compilation or executable hot-code
+authoring/loading system. Live scene/material values and supported declarative graphs retain their
+normal contracts. Stability, consistent native/shared behavior and measured performance apply in
+both modes; application-selected AOT remains compatible with every offered Web feature.
+
 ## Publish and serve
 
 Run from the repository root with its pinned SDK and wasm-tools workload. Optional local ICC

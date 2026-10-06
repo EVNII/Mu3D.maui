@@ -2,6 +2,7 @@
 @implements IAsyncDisposable
 @inject IJSRuntime JS
 @using System.Diagnostics.CodeAnalysis
+@using Mu3D.Color
 @using Mu3D.Gallery.Pages
 @using Mu3D.GalleryApp.Web.Infrastructure
 @using Mu3D.Graphics
@@ -13,6 +14,7 @@
 <h1>Procedural 3D Feed</h1>
 <p>24 native Gallery sphere/cone previews share one GPU device. Visible rows and one neighboring row are live;
     three neighboring rows keep preloaded scenes; distant rows release their content and Canvas surfaces.</p>
+<p>The checkerboard is visible outside the opaque objects through the transparent Canvas background.</p>
 <p role="status">@status</p>
 <canvas id="procedural-device" style="display:none" aria-hidden="true"></canvas>
 <div class="product-feed" @ref="feed">
@@ -21,8 +23,8 @@
         int current = index;
         FeedProduct product = products[current];
         <article class="product-card" @key="current">
-            <div class="product-output" style="height:170px">
-                <canvas id="@($"procedural-{current}")" data-product="@current" data-transparent="false" aria-label="@product.Name" style="height:170px"></canvas>
+            <div class="product-output" style="height:170px;background:repeating-conic-gradient(#a5a5a5 0 25%,#f4f4f4 0 50%) 0 0/24px 24px">
+                <canvas id="@($"procedural-{current}")" data-product="@current" data-transparent="true" aria-label="@product.Name" style="height:170px"></canvas>
                 @if (!presented[current])
                 { <div class="product-poster">@(errors[current] ?? (product.Scene is null ? "Preparing preview…" : product.IsLive ? "Connecting preview…" : "Preloaded"))</div> }
             </div>
@@ -34,7 +36,8 @@
 </main>
 
 @code {
-    private readonly FeedProduct[] products = Enumerable.Range(0, ProductCount).Select(index => new FeedProduct(index)).ToArray();
+    private readonly FeedProduct[] products = Enumerable.Range(0, ProductCount)
+        .Select(index => new FeedProduct(index)).ToArray();
     private readonly RenderSession?[] sessions = new RenderSession?[ProductCount];
     private readonly bool[] presented = new bool[ProductCount];
     private readonly string?[] errors = new string?[ProductCount];
@@ -90,7 +93,7 @@
             }
             else if (sessions[index] is null && errors[index] is null)
             {
-                sessions[index] = deviceOwner.CreateSharedCanvas($"#procedural-{index}");
+                sessions[index] = deviceOwner.CreateSharedCanvas($"#procedural-{index}", transparent: true);
                 await host.InvokeVoidAsync("setReady", index, true, false);
             }
         }
@@ -107,7 +110,7 @@
             products[index].Scene is not Scene scene || products[index].Camera is not Camera camera) return;
         if (camera is PerspectiveCamera perspective) perspective.AspectRatio = (float)width / height;
         await session.DrawExampleAsync(width, height, 0, true, refresh, (_, target, depth) =>
-            renderer.Render(scene, camera, target, depth!, NativeGalleryScene.Color("#7D8998")));
+            renderer.Render(scene, camera, target, depth!, new LinearRgba(0, 0, 0, 0, StandardColorSpaces.LinearSrgb)));
         if (disposed) return;
         bool first = !presented[index]; presented[index] = true;
         if (first) { PublishStatus(); await InvokeAsync(StateHasChanged); }

@@ -1,3 +1,6 @@
+using Microsoft.Maui.Dispatching;
+
+DispatcherProvider.SetCurrent(new StatisticsTestDispatcherProvider());
 List<string> failures = [];
 void Run(string name, Action test)
 {
@@ -8,6 +11,7 @@ void Run(string name, Action test)
 Run("real MAUI Gizmo pointer behavior eligibility/cancel/capture/lifetime", PointerBehaviorChecks.Verify);
 Run("real MAUI generic overlay eligibility/projection/input/lifetime", OverlayChecks.VerifyGeneric);
 Run("real MAUI node-anchor layer eligibility/projection/load/manager lifetime", OverlayChecks.VerifyLayer);
+Run("real MAUI statistics display binding/tap/graph/overlay/lifetime", FrameStatisticsChecks.Verify);
 foreach (string failure in failures) Console.Error.WriteLine(failure);
 if (failures.Count != 0) return 1;
 Console.WriteLine("PASS: actual source-linked MAUI adapters on real Controls with explicit GPU-view/platform-capture fixture; no native UI, GPU or platform capture execution claim.");

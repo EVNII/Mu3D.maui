@@ -12,7 +12,7 @@ frame timing/resource data and publishes immutable
 
 <xref:Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsOverlay> is the concise XAML path. It creates an
 attachment-owned <xref:Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior> and
-<xref:Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView>, then mounts the pass-through panel through
+<xref:Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsView>, then mounts the clickable panel through
 the viewport's common overlay manager:
 
 ```xaml
@@ -23,7 +23,7 @@ the viewport's common overlay manager:
           x:Name="Statistics"
           Placement="TopRight"
           SnapshotInterval="0:0:0.1"
-          IsDetailed="False"
+          DisplayMode="Compact"
           IsGraphVisible="True" />
     </toolkit:ViewportTools>
   </mu3d:Mu3DSceneView.Features>
@@ -32,8 +32,23 @@ the viewport's common overlay manager:
 
 The overlay exposes its application-visible `Collector`, latest snapshot, reset/immediate-publish
 methods and optional application-known draw/primitive counts. Visibility controls only the panel;
-`IsEnabled` independently controls collection. Its pass-through MAUI content cannot block camera,
-selection or Gizmo input.
+`IsEnabled` independently controls collection. Tapping the panel cycles **Compact → Normal → Detail →
+Compact**. Compact is a small box showing only FPS; Normal shows a short summary and the optional
+graph; Detail adds frame, presentation, renderer and resource breakdowns. The panel handles input
+within its bounds; the surrounding viewport remains available for camera, selection and Gizmo input.
+
+The backend-independent <xref:Mu3D.Toolkit.Diagnostics.FrameStatisticsDisplayMode> selects the mode.
+Library controls default to Normal; Gallery indicators start in Compact. Switching modes preserves
+collected samples and graph history. Compact hides the graph without changing `IsGraphVisible`.
+`DisplayMode` supports two-way binding so tapping also updates the application's selection.
+The legacy `IsDetailed` selector remains available: setting true selects Detail and setting false
+selects Normal. Its default binding mode is now two-way. Bind one selector, preferably `DisplayMode`.
+On MAUI, assigning the CLR alias selects a mode even if the bool is unchanged; an unchanged
+`SetValue(IsDetailedProperty, ...)` does not trigger a mode change.
+
+Web's `createFrameStatisticsView` and `createFrameStatisticsOverlay` use the same cycle with
+`displayMode: 'compact' | 'normal' | 'detail'`. The focused panel also accepts Enter or Space.
+`isDetailed` remains the corresponding compatibility selector.
 
 Applications that place diagnostics outside the viewport may still attach
 <xref:Mu3D.Maui.Toolkit.Diagnostics.FrameStatisticsBehavior> directly and let a standalone

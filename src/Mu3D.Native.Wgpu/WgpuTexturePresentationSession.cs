@@ -57,6 +57,8 @@ internal sealed class WgpuTexturePresentationSession :
 
     internal SurfaceAlphaMode AlphaMode { get; }
 
+    SurfaceAlphaMode IPresentationSurfaceSession.AlphaMode => AlphaMode;
+
     internal static async Task<WgpuTexturePresentationSession> CreateAsync(
         IWgpuTexturePresentationSink sink,
         uint width,

@@ -151,11 +151,17 @@ or render clock. Explicit Toolkit hit-test/drag mathematics remain available to 
 `FrameStatisticsBehavior` records successful `Mu3DSceneView` presentation frames into an
 application-replaceable `FrameStatisticsCollector` and publishes immutable snapshots on a separate,
 configurable cadence. Applications may supply current draw-call and primitive counts when those
-values are known. `FrameStatisticsView` borrows one behavior and renders either a compact summary or
-detailed frame, presentation, renderer and resource breakdown plus a 120-point rolling FPS graph.
+values are known. `FrameStatisticsView` borrows one behavior and cycles Compact → Normal → Detail
+on tap. Compact shows only FPS in a small box; Normal shows the short summary; Detail adds frame,
+presentation, renderer and resource breakdowns. Normal and Detail can show the 120-point FPS graph.
+`DisplayMode` defaults to Normal and supports two-way binding; Gallery starts in Compact. The legacy
+`IsDetailed` selector maps true to Detail and false to Normal and now also defaults to two-way binding.
+Bind one selector, preferably `DisplayMode`. Compact hides the graph without changing its preference
+or clearing collected history.
 `FrameStatisticsOverlay` is the XAML-first combination: it creates the behavior/view at
 `ViewportTools` attachment, exposes the collector and reset/snapshot operations, and mounts the
-pass-through panel through the common nine-position viewport overlay.
+interactive panel through the common nine-position viewport overlay. Only the panel's bounds claim
+input; the rest of the viewport remains available to camera, selection and gizmo controls.
 The indicator follows the current/minimum/maximum convention used by Three.js performance panels,
 but text and graph redraw only when a throttled snapshot is published rather than on every frame. It
 unsubscribes when unloaded or disposed and never attaches, resets or disposes the source behavior.

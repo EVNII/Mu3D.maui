@@ -61,6 +61,22 @@ void load_material(int index, float4 uv, float3 inheritedNormal, float4 inherite
             value = float4(dot(world, world) > 1e-20 ? normalize(world) : inheritedNormal, 0);
         }
         else if (code == 8) value = float4(values[int(op.y)][int(parameter.x)]);
+        else if (code == 9) value = values[int(op.y)] - values[int(op.z)];
+        else if (code == 10) value = min(values[int(op.y)], values[int(op.z)]);
+        else if (code == 11) value = max(values[int(op.y)], values[int(op.z)]);
+        else if (code == 12) value = abs(values[int(op.y)]);
+        else if (code == 13 || code == 14)
+        {
+            int type = int(graphProgram[at + 2].w);
+            float4 a = values[int(op.y)];
+            float4 b = code == 13 ? values[int(op.z)] : float4(1);
+            // Only semantic lanes participate: inactive zeros must never become 0/0 or sqrt(-x).
+            if (type == 2) { a.zw = float2(0); b.zw = float2(1); }
+            else if (type == 1 || type == 3) { a.w = 0; b.w = 1; }
+            if (code == 13) value = a / b;
+            else value = sqrt(a);
+            if (type == 0) value = float4(value.x);
+        }
         values[i] = value;
     }
     for (int b = 0; b < int(p[18].w); ++b)

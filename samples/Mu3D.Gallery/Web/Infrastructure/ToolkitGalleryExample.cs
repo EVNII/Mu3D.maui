@@ -34,7 +34,8 @@ internal sealed class ToolkitGalleryExample : IDisposable
     internal FrameStatisticsCollector Statistics { get; } = new();
     internal SceneNodeAnchorSource? Anchors { get; }
     internal bool FeaturesEnabled = true, GridVisible = true, AxesInteractive = true, AxesVisible = true, BoundsVisible = true, OutlineVisible = true;
-    internal bool OverlayDepth = false, Continuous = false, StatisticsVisible = false, StatisticsDetailed = false;
+    internal bool OverlayDepth = false, Continuous = false, StatisticsVisible = false;
+    internal FrameStatisticsDisplayMode StatisticsDisplayMode = FrameStatisticsDisplayMode.Compact;
     internal bool SelectionEnabled = true, GizmoEnabled = true;
     internal double SnapshotInterval = 100;
     internal string Status { get; private set; } = "Ready";

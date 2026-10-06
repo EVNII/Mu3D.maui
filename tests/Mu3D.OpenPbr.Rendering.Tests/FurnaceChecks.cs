@@ -34,6 +34,7 @@ internal static class FurnaceChecks
         scene.Add(new Mesh(MeshPrimitives.CreateUvSphere(), material));
         using var furnace = new OpenPbrFurnaceRenderer();
         furnace.Transport.Mode = OpenPbrRenderMode.Raster;
+        await furnace.Transport.PrepareAsync(device, GraphicsTextureFormat.Rgba32Float);
         RenderPassContext Context() => new(scene, camera, target, null, StandardColorSpaces.LinearSrgb);
         async Task<FurnaceMeasurement> Measure()
         {
@@ -81,6 +82,7 @@ internal static class FurnaceChecks
         furnace.ExpectedRatio = 1; furnace.EnvironmentLevel = 1; furnace.DisplayMode = 0;
         material.Surface = FurnaceMaterials.Create(0, 0, 0);
         furnace.Transport.Mode = OpenPbrRenderMode.Reference;
+        await furnace.Transport.PrepareAsync(device, GraphicsTextureFormat.Rgba32Float);
         var first = await Measure();
         furnace.DisplayMode = 1;
         var second = await Measure();

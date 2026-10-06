@@ -36,7 +36,7 @@ function openToolkit(id = 'map-controls', {claim = 0, draw} = {}) {
     },
   };
   const host = toolkit.create(env.canvas, container, managed, 4096, id);
-  host.configure(true,true,false,false,false,100,['A','D','W','S','E','Q']); env.resize(); env.show();
+  host.configure(true,true,false,false,'compact',100,['A','D','W','S','E','Q']); env.resize(); env.show();
   return {...env,host,calls,container};
 }
 test('Map native left-pan/right-rotate routes remain distinct; quick taps do not orbit', async () => {
@@ -73,7 +73,7 @@ test('Fly held composite keys advance the single RAF and release even after focu
 test('Map key conflicts follow native first-match priority, including PageUp alternate bindings', async () => {
   const env = openToolkit();
   try {
-    env.host.configure(true,true,false,false,false,100,['PageUp','D','W','S','PageUp','Q']);
+    env.host.configure(true,true,false,false,'compact',100,['PageUp','D','W','S','PageUp','Q']);
     await env.next(100); await flush(); sendEvent(window,'keydown',{key:'PageUp'});
     await env.next(200); await flush();
     assert.equal(env.calls.filter(call=>call[0]==='DrawFrame').at(-1)[13],1,'first rotate binding wins over duplicate and alternate dolly');
@@ -98,7 +98,7 @@ test('Live diagnostics changes retain a captured Gizmo clock; cancellation resto
   try {
     await env.next(100); await flush(); sendEvent(env.canvas,'pointerdown',primaryPointer);
     await env.next(200); await flush();
-    env.host.configure(true,true,false,true,true,50,['A','D','W','S','E','Q']);
+    env.host.configure(true,true,false,true,'detail',50,['A','D','W','S','E','Q']);
     await env.next(300); await flush();
     assert.equal(env.calls.filter(call => call[0] === 'DrawFrame').at(-1)[3],.1);
     assert.equal(env.calls.filter(call => call[0] === 'EndContact').length,0);
@@ -111,10 +111,10 @@ test('Paused settings invalidate one frame; disabling Gizmo releases capture whi
   const env = openToolkit('transform-gizmo',{claim:1});
   try {
     await env.next(100); await flush(); assert.equal(env.frames.size,0);
-    env.host.configure(true,true,false,false,false,100,['A','D','W','S','E','Q']);
+    env.host.configure(true,true,false,false,'compact',100,['A','D','W','S','E','Q']);
     await env.next(200); await flush(); assert.equal(env.calls.filter(call=>call[0]==='DrawFrame').length,2);
     sendEvent(env.canvas,'pointerdown',primaryPointer);
-    env.host.configure(true,true,false,false,false,100,['A','D','W','S','E','Q'],false);
+    env.host.configure(true,true,false,false,'compact',100,['A','D','W','S','E','Q'],false);
     assert.equal(env.canvas.capture,null);
     assert.deepEqual(env.calls.filter(call=>call[0]==='EndContact'),[['EndContact',true]]);
     await env.next(300); await flush(); assert.equal(env.frames.size,0);
@@ -129,6 +129,31 @@ test('Toolkit overlapping disposal waits for submission, suppresses late publica
   release(); await a;
   assert.equal(env.calls.filter(call => call[0]==='Disconnect').length,1);
   assert.equal(env.container.children.length,0); assert.equal(env.frames.size,0);
+});
+test('Gallery statistics click cycle updates managed selection and survives other settings without drawing', async () => {
+  const env = openToolkit('frame-statistics'), keys = ['A','D','W','S','E','Q'];
+  const view = env.container.children[0].children[0].children[0];
+  try {
+    env.host.configure(true,true,false,true,'compact',100,keys);
+    await env.next(100); await flush();
+    assert.equal(view.dataset.mu3dStatisticsDisplayMode,'compact');
+    for (const [index, mode] of ['normal','detail','compact'].entries()) {
+      const draws = env.calls.filter(call => call[0] === 'DrawFrame').length;
+      sendEvent(view,'click',{button:0}); await flush();
+      assert.equal(view.dataset.mu3dStatisticsDisplayMode,mode);
+      assert.deepEqual(env.calls.filter(call => call[0] === 'StatisticsDisplayModeChanged').at(-1),
+        ['StatisticsDisplayModeChanged',mode]);
+      assert.equal(env.calls.filter(call => call[0] === 'DrawFrame').length,draws);
+      assert.equal(env.frames.size,0,'diagnostic activation must not start the render clock');
+      env.host.configure(true,true,false,true,mode,50 + index * 10,keys);
+      assert.equal(view.dataset.mu3dStatisticsDisplayMode,mode);
+      assert.equal(env.calls.filter(call => call[0] === 'StatisticsDisplayModeChanged').length,index + 1,
+        'managed settings must not echo the selected mode back');
+      await env.next(200 + index * 100); await flush();
+    }
+  } finally { await env.host.dispose(); }
+  sendEvent(view,'click',{button:0}); await flush();
+  assert.equal(env.calls.filter(call => call[0] === 'StatisticsDisplayModeChanged').length,3);
 });
 test('Pen actual coalesced pressure/tilt survive unchanged; pen proximity suppresses direct-touch contact', async () => {
   const env = canvasEnvironment(), calls = [], cursor = {style:{},hidden:true}, line={style:{}};

@@ -12,48 +12,68 @@ internal sealed unsafe partial class WgpuGraphicsBuffer
         int byteCount,
         CancellationToken cancellationToken)
     {
+        nuint nativeOffset = checked((nuint)offset);
+        nuint nativeByteCount = checked((nuint)byteCount);
         WGPUBufferImpl* retained = pointer;
         if (retained is null)
         {
             throw new ObjectDisposedException(nameof(WgpuGraphicsBuffer));
         }
-        WgpuNative.wgpuBufferAddRef(retained);
-        BufferReadState state = new(
-            (WgpuGraphicsDevice)Device,
-            retained,
-            offset,
-            byteCount,
-            cancellationToken);
-        GCHandle stateHandle = GCHandle.Alloc(state);
-        WGPUBufferMapCallbackInfo callbackInfo = new()
-        {
-            mode = WGPUCallbackMode.AllowSpontaneous,
-            callback = &OnReadMapped,
-            userdata1 = (void*)GCHandle.ToIntPtr(stateHandle),
-        };
+        WgpuGraphicsDevice.NativeDeviceReadLease? deviceLease = null;
+        BufferReadState? state = null;
+        bool bufferRetained = false;
+        bool workerQueued = false;
+        bool mappingSubmitted = false;
         try
         {
-            _ = WgpuNative.wgpuBufferMapAsync(
-                retained,
-                WgpuNative.WGPUMapMode_Read,
-                checked((nuint)offset),
-                checked((nuint)byteCount),
-                callbackInfo);
-            // wgpu-native does not guarantee that submitted Metal work and mapping callbacks make
-            // progress merely because AllowSpontaneous was requested. Drive its device poll on a
-            // worker so the public async API never blocks the UI/calling thread.
-            ThreadPool.UnsafeQueueUserWorkItem(
+            deviceLease = ((WgpuGraphicsDevice)Device).RetainNativeDeviceForRead();
+            WgpuNative.wgpuBufferAddRef(retained);
+            bufferRetained = true;
+            state = new(deviceLease, retained, offset, byteCount, cancellationToken);
+            state.CallbackHandle = GCHandle.Alloc(state);
+            WGPUBufferMapCallbackInfo callbackInfo = new()
+            {
+                mode = WGPUCallbackMode.AllowSpontaneous,
+                callback = &OnReadMapped,
+                userdata1 = (void*)GCHandle.ToIntPtr(state.CallbackHandle),
+            };
+
+            // Reserve progress before native code owns the callback. The worker waits for setup,
+            // so a queue/setup failure cannot abandon an accepted mapping or its retained handles.
+            workerQueued = ThreadPool.UnsafeQueueUserWorkItem<BufferReadState>(
                 static readState => readState.PumpDevice(),
                 state,
                 preferLocal: false);
+            if (!workerQueued)
+            {
+                throw new InvalidOperationException("Unable to queue the mapped-buffer device-poll worker.");
+            }
+            _ = WgpuNative.wgpuBufferMapAsync(
+                retained,
+                WgpuNative.WGPUMapMode_Read,
+                nativeOffset,
+                nativeByteCount,
+                callbackInfo);
+            mappingSubmitted = true;
             return state.Completion.Task;
         }
-        catch
+        finally
         {
-            state.CancellationRegistration.Dispose();
-            stateHandle.Free();
-            WgpuNative.wgpuBufferRelease(retained);
-            throw;
+            if (state is not null)
+            {
+                state.FinishSetup(mappingSubmitted, workerQueued);
+            }
+            else
+            {
+                try
+                {
+                    if (bufferRetained) WgpuNative.wgpuBufferRelease(retained);
+                }
+                finally
+                {
+                    deviceLease?.Dispose();
+                }
+            }
         }
     }
 
@@ -100,26 +120,34 @@ internal sealed unsafe partial class WgpuGraphicsBuffer
         }
         finally
         {
-            if (mapped)
+            try
             {
-                WgpuNative.wgpuBufferUnmap(state.Buffer);
+                state.CleanupCallback(mapped);
             }
-            state.CancellationRegistration.Dispose();
-            WgpuNative.wgpuBufferRelease(state.Buffer);
-            stateHandle.Free();
+            catch (Exception exception)
+            {
+                state.Completion.TrySetException(exception);
+            }
         }
     }
 
     private sealed unsafe class BufferReadState
     {
+        private readonly WgpuGraphicsDevice.NativeDeviceReadLease deviceLease;
+        private readonly object setupGate = new();
+        private int remainingParticipants = 3; // Setup, callback cleanup and poll worker.
+        private int callbackCleanupStarted;
+        private bool setupComplete;
+        private bool mappingSubmitted;
+
         internal BufferReadState(
-            WgpuGraphicsDevice device,
+            WgpuGraphicsDevice.NativeDeviceReadLease deviceLease,
             WGPUBufferImpl* buffer,
             ulong offset,
             int byteCount,
             CancellationToken cancellationToken)
         {
-            Device = device;
+            this.deviceLease = deviceLease;
             Buffer = buffer;
             Offset = offset;
             ByteCount = byteCount;
@@ -134,9 +162,9 @@ internal sealed unsafe partial class WgpuGraphicsBuffer
                 (Completion, cancellationToken));
         }
 
-        internal WgpuGraphicsDevice Device { get; }
-
         internal WGPUBufferImpl* Buffer { get; }
+
+        internal GCHandle CallbackHandle { get; set; }
 
         internal ulong Offset { get; }
 
@@ -146,16 +174,87 @@ internal sealed unsafe partial class WgpuGraphicsBuffer
 
         internal CancellationTokenRegistration CancellationRegistration { get; }
 
+        internal void FinishSetup(bool submitted, bool workerQueued)
+        {
+            try
+            {
+                if (!submitted) CleanupCallback(mapped: false);
+            }
+            finally
+            {
+                lock (setupGate)
+                {
+                    mappingSubmitted = submitted;
+                    setupComplete = true;
+                    Monitor.PulseAll(setupGate);
+                }
+                if (!workerQueued) CompleteParticipant();
+                CompleteParticipant();
+            }
+        }
+
+        internal void CleanupCallback(bool mapped)
+        {
+            if (Interlocked.Exchange(ref callbackCleanupStarted, 1) != 0) return;
+            try
+            {
+                if (mapped) WgpuNative.wgpuBufferUnmap(Buffer);
+            }
+            finally
+            {
+                try
+                {
+                    CancellationRegistration.Dispose();
+                }
+                finally
+                {
+                    try
+                    {
+                        WgpuNative.wgpuBufferRelease(Buffer);
+                    }
+                    finally
+                    {
+                        try
+                        {
+                            GCHandle callbackHandle = CallbackHandle;
+                            CallbackHandle = default;
+                            if (callbackHandle.IsAllocated) callbackHandle.Free();
+                        }
+                        finally
+                        {
+                            CompleteParticipant();
+                        }
+                    }
+                }
+            }
+        }
+
         internal void PumpDevice()
         {
             try
             {
-                Device.WaitForSubmittedWork("mapped buffer read");
+                lock (setupGate)
+                {
+                    while (!setupComplete) Monitor.Wait(setupGate);
+                    if (!mappingSubmitted) return;
+                }
+                // Keep both the stable native pointer and its callback sinks alive even if the
+                // public task is cancelled/completed and the owning session is disposed meanwhile.
+                deviceLease.WaitForSubmittedWork("mapped buffer read");
             }
             catch (Exception exception)
             {
                 Completion.TrySetException(exception);
             }
+            finally
+            {
+                CompleteParticipant();
+            }
+        }
+
+        private void CompleteParticipant()
+        {
+            if (Interlocked.Decrement(ref remainingParticipants) == 0) deviceLease.Dispose();
         }
     }
 }

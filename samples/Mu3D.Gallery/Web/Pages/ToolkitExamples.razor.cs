@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Mu3D.GalleryApp.Web.Infrastructure;
 using Mu3D.Toolkit.Gizmos;
+using Mu3D.Toolkit.Diagnostics;
 
 namespace Mu3D.GalleryApp.Web.Pages;
 
@@ -49,6 +50,18 @@ public partial class ToolkitExamples
     private float RotationStep { get => (example?.Gizmo?.RotationSnapRadians ?? 0) * 180 / MathF.PI; set { if (example?.Gizmo is { } gizmo) gizmo.RotationSnapRadians = Math.Clamp(value, 0, 90) * MathF.PI / 180; } }
     private float ScaleStep { get => example?.Gizmo?.ScaleSnap ?? 0; set { if (example?.Gizmo is { } gizmo) gizmo.ScaleSnap = Math.Clamp(value, 0, 1); } }
     private double SnapshotInterval { get => example?.SnapshotInterval ?? 100; set { if (example is not null) example.SnapshotInterval = Math.Clamp(value, 50, 1000); } }
+    private string StatisticsMode
+    {
+        get => (example?.StatisticsDisplayMode ?? FrameStatisticsDisplayMode.Compact).ToString().ToLowerInvariant();
+        set { if (example is not null) example.StatisticsDisplayMode = ParseStatisticsMode(value); }
+    }
+    private static FrameStatisticsDisplayMode ParseStatisticsMode(string mode) => mode switch
+    {
+        "compact" => FrameStatisticsDisplayMode.Compact,
+        "normal" => FrameStatisticsDisplayMode.Normal,
+        "detail" => FrameStatisticsDisplayMode.Detail,
+        _ => throw new ArgumentOutOfRangeException(nameof(mode)),
+    };
 
     protected override async Task OnParametersSetAsync()
     {
@@ -75,7 +88,7 @@ public partial class ToolkitExamples
         if (example is null || host is null || disposed) return;
         if (!example.FeaturesEnabled || !example.GizmoEnabled) example.EndContact(true);
         await host.InvokeVoidAsync("configure", ControllerEnabled && example.FeaturesEnabled, hdr, example.Continuous,
-            example.StatisticsVisible, example.StatisticsDetailed, example.SnapshotInterval, mapKeys,
+            example.StatisticsVisible, StatisticsMode, example.SnapshotInterval, mapKeys,
             example.GizmoEnabled && example.FeaturesEnabled);
     }
     private async Task NavigateButton(string action)
@@ -115,6 +128,12 @@ public partial class ToolkitExamples
     [JSInvokable] public string ConfigureAnchor(string registration, string target, double x, double y, double z) => example!.ConfigureAnchor(registration, target, x, y, z);
     [JSInvokable] public long RemoveAnchor(string registration) => example!.RemoveAnchor(registration);
     [JSInvokable] public Task RenderFailed(string message) { if (disposed) return Task.CompletedTask; status = message; return InvokeAsync(StateHasChanged); }
+    [JSInvokable] public Task StatisticsDisplayModeChanged(string mode)
+    {
+        if (disposed || example is null) return Task.CompletedTask;
+        example.StatisticsDisplayMode = ParseStatisticsMode(mode);
+        return InvokeAsync(StateHasChanged);
+    }
     [JSInvokable] public void Disconnect() { session?.Dispose(); session = null; }
     private async Task StopAsync()
     {

@@ -14,6 +14,18 @@ function environment() {
     resize(width) { if (this.observed) { this.observed.width = width; this.callback(); } }
   }
   const document = createTestDocument({width: 238, height: 52});
+  const createElement = document.createElement;
+  document.createElement = tag => {
+    const node = createElement(tag), listeners = new Map();
+    const add = node.addEventListener.bind(node), remove = node.removeEventListener.bind(node);
+    node.addEventListener = (type, listener, options) => {
+      if (!listeners.has(type)) listeners.set(type, new Set());
+      listeners.get(type).add(listener); add(type, listener, options);
+    };
+    node.removeEventListener = (type, listener, options) => { listeners.get(type)?.delete(listener); remove(type, listener, options); };
+    node.listenerCount = () => [...listeners.values()].reduce((sum, entries) => sum + entries.size, 0);
+    return node;
+  };
   document.defaultView.ResizeObserver = ResizeObserver;
   return {document, container: document.createElement('div'), observers};
 }
@@ -32,6 +44,15 @@ const parts = view => {
   const [headline, graph, details] = view.element.children;
   return {headline, graph, details};
 };
+// EventTarget dispatch exercises actual registered handlers; the owned fixture supplies bubbling.
+function send(node, type, properties = {}) {
+  const event = Object.assign(new Event(type, {bubbles: true, cancelable: true}), properties);
+  let stopped = false;
+  const stop = event.stopPropagation.bind(event);
+  event.stopPropagation = () => { stopped = true; stop(); };
+  for (let current = node; current && !stopped; current = current.parentNode) current.dispatchEvent(event);
+  return {event, stopped};
+}
 
 test('source freezes shared snapshots deeply and observes collection settings without duplicates', () => {
   const source = createFrameStatisticsSource(), snapshots = [], options = [], resets = [];
@@ -76,10 +97,10 @@ test('malformed publications and options are rejected atomically; distinct dupli
   source.publish(snapshot(55)); assert.equal(calls, 1); source.dispose();
 });
 
-test('native default hierarchy, waiting text, compact missing-data text and display options', () => {
+test('native normal default hierarchy, waiting text, missing-data text and display options', () => {
   const {document} = environment(), source = createFrameStatisticsSource();
   const view = createFrameStatisticsView({document, source}); const {headline, graph, details} = parts(view);
-  assert.equal(view.isDetailed, false); assert.equal(view.isGraphVisible, true);
+  assert.equal(view.displayMode, 'normal'); assert.equal(view.isDetailed, false); assert.equal(view.isGraphVisible, true);
   assert.equal(graph.tag, 'svg'); assert.equal(graph.style.height, '52px');
   assert.equal(graph.style.backgroundColor, 'rgb(0 3.5% 9%)');
   assert.equal(view.element.style.padding, '10px'); assert.equal(view.element.style.gap, '3px');
@@ -100,6 +121,111 @@ test('native default hierarchy, waiting text, compact missing-data text and disp
   view.isGraphVisible = true; assert.equal(graph.style.display, 'block');
   assert.equal(graph.children[0].attributes.stroke, '#fedcba');
   view.dispose(); source.dispose();
+});
+
+test('compact is FPS-only while history, graph preference and collection keep their state', () => {
+  const {document} = environment(), source = createFrameStatisticsSource({snapshotIntervalMilliseconds: 250});
+  const view = createFrameStatisticsView({document, source, displayMode: 'compact', isDetailed: true});
+  const {headline, graph, details} = parts(view), collection = [], resets = [], updates = [];
+  source.subscribeOptions(value => collection.push(value)); source.subscribeReset(() => resets.push('reset'));
+  view.subscribe(value => updates.push(value));
+  assert.equal(view.isDetailed, false, 'An explicit display mode takes precedence over the legacy constructor option');
+  assert.equal(headline.textContent, '— FPS'); assert.equal(details.textContent, '');
+  assert.equal(details.hidden, true); assert.equal(details.style.display, 'none');
+  assert.equal(graph.hidden, true); assert.equal(graph.style.display, 'none'); assert.equal(graph.children.length, 0);
+  assert.equal(view.element.style.padding, '5px 7px'); assert.equal(headline.style.fontSize, '12px');
+  source.publish(snapshot(59.5)); source.publish(snapshot(50));
+  assert.equal(headline.textContent, '50 FPS'); assert.deepEqual(view.history, [59.5, 50]);
+  view.isGraphVisible = false; view.displayMode = 'normal';
+  assert.equal(graph.hidden, true); assert.equal(details.hidden, false);
+  assert.equal(view.element.style.padding, '10px'); assert.equal(headline.style.fontSize, '16px');
+  assert.equal(headline.textContent, '50 FPS (50–60)  ·  20.00 ms');
+  view.displayMode = 'compact'; view.isGraphVisible = true;
+  assert.equal(graph.hidden, true); assert.equal(view.isGraphVisible, true);
+  view.displayMode = 'detail'; assert.equal(graph.hidden, false); assert.ok(graph.children.length > 0);
+  assert.equal(view.isDetailed, true); assert.match(details.textContent, /^Frame  min/);
+  assert.equal(view.source, source); assert.equal(source.isEnabled, true); assert.equal(source.snapshotIntervalMilliseconds, 250);
+  assert.deepEqual(view.history, [59.5, 50]); assert.equal(updates.length, 2);
+  assert.deepEqual(collection, []); assert.deepEqual(resets, []);
+  view.dispose(); source.dispose();
+});
+
+test('display mode and legacy detailed bindings emit one consistent change without overwriting compact', () => {
+  const {container} = environment(), source = createFrameStatisticsSource();
+  const overlay = createFrameStatisticsOverlay({container, source}), changes = [];
+  overlay.subscribeOptions(value => changes.push(value));
+  overlay.displayMode = 'compact'; overlay.displayMode = 'compact';
+  assert.equal(overlay.view.displayMode, 'compact'); assert.equal(overlay.isDetailed, false);
+  assert.equal(changes.length, 1); assert.equal(changes[0].displayMode, 'compact'); assert.equal(changes[0].isDetailed, false);
+  overlay.view.displayMode = 'detail';
+  assert.equal(overlay.displayMode, 'detail'); assert.equal(overlay.isDetailed, true); assert.equal(changes.length, 2);
+  overlay.isDetailed = false; assert.equal(overlay.displayMode, 'normal'); assert.equal(changes.length, 3);
+  overlay.view.displayMode = 'compact'; overlay.view.isDetailed = false;
+  assert.equal(overlay.displayMode, 'normal', 'Explicit legacy false selects normal even when compact also reports false');
+  assert.equal(changes.length, 5);
+  overlay.isDetailed = true; overlay.isDetailed = true;
+  assert.equal(overlay.displayMode, 'detail'); assert.equal(changes.length, 6);
+  for (const mode of ['Compact', 'detailed', '', null, false, 1])
+    assert.throws(() => { overlay.displayMode = mode; }, TypeError);
+  assert.equal(overlay.displayMode, 'detail'); assert.equal(changes.length, 6);
+  assert.ok(changes.every(value => Object.isFrozen(value) && value.isDetailed === (value.displayMode === 'detail')));
+  assert.throws(() => createFrameStatisticsView({document: container.ownerDocument, displayMode: 'invalid'}), TypeError);
+  overlay.dispose(); source.dispose();
+});
+
+test('click, Enter and Space cycle the existing indicator and isolate pointer/key events from camera input', () => {
+  const {container} = environment(), source = createFrameStatisticsSource();
+  const overlay = createFrameStatisticsOverlay({container, source, displayMode: 'compact'}), view = overlay.view;
+  const {headline} = parts(view), panel = overlay.element.children[0], changes = [], camera = [];
+  const types = ['click', 'pointerdown', 'pointermove', 'pointerup', 'pointercancel', 'wheel', 'dblclick', 'contextmenu', 'keydown', 'keyup'];
+  for (const type of types) container.addEventListener(type, () => camera.push(type));
+  overlay.subscribeOptions(value => changes.push(value.displayMode));
+  source.publish(snapshot(60)); source.publish(snapshot(45)); const history = view.history;
+  assert.equal(view.element.attributes.role, 'button'); assert.equal(view.element.attributes.tabindex, '0');
+  send(headline, 'click'); assert.equal(overlay.displayMode, 'normal');
+  const enter = send(view.element, 'keydown', {key: 'Enter', repeat: false});
+  assert.equal(enter.event.defaultPrevented, true); assert.equal(overlay.displayMode, 'detail');
+  send(view.element, 'keydown', {key: 'Enter', repeat: true}); assert.equal(overlay.displayMode, 'detail');
+  send(view.element, 'keyup', {key: 'Enter'}); assert.equal(overlay.displayMode, 'detail');
+  const space = send(view.element, 'keydown', {key: ' ', repeat: false});
+  assert.equal(space.event.defaultPrevented, true); assert.equal(overlay.displayMode, 'compact');
+  send(view.element, 'keyup', {key: ' '}); assert.equal(overlay.displayMode, 'compact');
+  for (const type of types.filter(type => type !== 'click' && !type.startsWith('key'))) {
+    assert.equal(send(headline, type).stopped, true);
+    assert.equal(send(panel, type).stopped, true, 'The carrier border also isolates camera input');
+  }
+  send(panel, 'click'); assert.equal(overlay.displayMode, 'normal');
+  assert.deepEqual(changes, ['normal', 'detail', 'compact', 'normal']); assert.deepEqual(camera, []);
+  assert.equal(overlay.source, source); assert.equal(view.source, source); assert.deepEqual(view.history, history);
+  source.publish(snapshot(30)); assert.deepEqual(view.history, [60, 45, 30]);
+  assert.match(view.element.attributes['aria-label'], /normal display.*detail display/);
+  send(overlay.element, 'pointerdown'); assert.deepEqual(camera, ['pointerdown'], 'Outside the panel input remains pass-through');
+  overlay.dispose(); source.dispose();
+});
+
+test('hidden, detached and disposed indicators remove input handlers and reattach exactly once', () => {
+  const {container} = environment(), source = createFrameStatisticsSource();
+  const overlay = createFrameStatisticsOverlay({container, source, displayMode: 'compact'}), view = overlay.view;
+  const panel = overlay.element.children[0], viewListeners = view.element.listenerCount(), panelListeners = panel.listenerCount();
+  assert.ok(viewListeners > 0); assert.ok(panelListeners > 0);
+  source.publish(snapshot(60)); overlay.isVisible = false;
+  assert.equal(view.element.listenerCount(), 0); assert.equal(panel.listenerCount(), 0);
+  assert.equal(send(view.element, 'click').stopped, false); assert.equal(overlay.displayMode, 'compact');
+  source.publish(snapshot(50)); overlay.isVisible = true;
+  assert.equal(view.element.listenerCount(), viewListeners); assert.equal(panel.listenerCount(), panelListeners);
+  assert.deepEqual(view.history, [60]); send(view.element, 'click'); assert.equal(overlay.displayMode, 'normal');
+  overlay.detach(); overlay.detach();
+  assert.equal(view.element.listenerCount(), 0); assert.equal(panel.listenerCount(), 0);
+  assert.equal(send(panel, 'pointerdown').stopped, false);
+  send(view.element, 'keydown', {key: ' '}); assert.equal(overlay.displayMode, 'normal');
+  source.publish(snapshot(40)); overlay.attach(); overlay.attach();
+  assert.equal(view.element.listenerCount(), viewListeners); assert.equal(panel.listenerCount(), panelListeners);
+  assert.deepEqual(view.history, [60]); send(view.element, 'click'); assert.equal(overlay.displayMode, 'detail');
+  overlay.dispose(); overlay.dispose();
+  assert.equal(view.element.listenerCount(), 0); assert.equal(panel.listenerCount(), 0);
+  send(view.element, 'click'); send(panel, 'click');
+  assert.equal(overlay.displayMode, 'detail'); assert.equal(source.isEnabled, true);
+  assert.throws(() => { overlay.displayMode = 'normal'; }); source.dispose();
 });
 
 test('detailed formatter follows native row order, invariant decimal/grouping and byte thresholds', () => {
@@ -258,12 +384,12 @@ test('an immediate custom source subscription initializes once and reattachment 
   assert.equal(view.latestSnapshot.framesPerSecond, 40); assert.deepEqual(view.history, [50]); view.dispose();
 });
 
-test('overlay defaults, all placements and mutable width/margin/colors are pass-through without input listeners', () => {
+test('overlay defaults, all placements and mutable width/margin/colors restrict input to the panel', () => {
   const {container} = environment(), source = createFrameStatisticsSource();
   const overlay = createFrameStatisticsOverlay({container, source});
   const panel = overlay.element.children[0];
   assert.equal(overlay.placement, 'top-right'); assert.equal(overlay.margin, 12); assert.equal(overlay.maximumWidth, 520);
-  assert.equal(overlay.element.style.pointerEvents, 'none'); assert.equal(panel.style.pointerEvents, 'none');
+  assert.equal(overlay.element.style.pointerEvents, 'none'); assert.equal(panel.style.pointerEvents, 'auto');
   assert.equal(panel.style.border, '1px solid #53647d'); assert.equal(panel.style.borderRadius, '7px');
   assert.equal(panel.style.backgroundColor, 'rgba(25, 36, 56, 0.8509803921568627)');
   for (const [placement, vertical, horizontal] of [['top-left', 'flex-start', 'flex-start'],

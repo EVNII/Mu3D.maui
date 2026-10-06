@@ -31,11 +31,33 @@ public static class OpenPbrGraphEvaluator
                 OpenPbrNodeOperation.Clamp => Vector4.Clamp(a, new(n.Value.X), new(n.Value.Y)),
                 OpenPbrNodeOperation.NormalMap => MapNormal(a, n.Value.X, normal, tangent),
                 OpenPbrNodeOperation.Extract => new(a[(int)n.Value.X]),
+                OpenPbrNodeOperation.Subtract => a - b,
+                OpenPbrNodeOperation.Min => Vector4.Min(a, b),
+                OpenPbrNodeOperation.Max => Vector4.Max(a, b),
+                OpenPbrNodeOperation.Abs => Vector4.Abs(a),
+                OpenPbrNodeOperation.Divide => EvaluateDomainOperation(n, a, b),
+                OpenPbrNodeOperation.Sqrt => EvaluateDomainOperation(n, a, b),
                 _ => throw new InvalidOperationException(),
             };
             OpenPbrTexture.RequireFinite(value); values.Add(n, value);
         }
         return values[output];
+    }
+    private static Vector4 EvaluateDomainOperation(OpenPbrNode node, Vector4 a, Vector4 b)
+    {
+        int channels = node.Type switch
+        {
+            OpenPbrNodeType.Float => 1,
+            OpenPbrNodeType.Vector2 => 2,
+            OpenPbrNodeType.Color3 or OpenPbrNodeType.Vector3 => 3,
+            OpenPbrNodeType.Vector4 => 4,
+            _ => throw new InvalidOperationException("Expected a numeric node type."),
+        };
+        Vector4 value = default;
+        for (int channel = 0; channel < channels; channel++)
+            value[channel] = node.Operation == OpenPbrNodeOperation.Sqrt ? MathF.Sqrt(a[channel]) :
+                a[channel] / b[node.B!.Type == OpenPbrNodeType.Float ? 0 : channel];
+        return node.Type == OpenPbrNodeType.Float ? new(value.X) : value;
     }
     private static Vector4 MapNormal(Vector4 data, float scale, Vector3 normal, Vector4 tangent)
     {

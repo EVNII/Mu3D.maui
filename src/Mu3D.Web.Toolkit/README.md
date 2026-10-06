@@ -9,6 +9,12 @@ execution; applications choose whether to enable AOT. Native and browser hosts s
 behavior while using their own input and UI controls. See the [Web validation guide](../../tests/Mu3D.Web.Validation/README.md)
 and [Gallery host](../../samples/Mu3D.Gallery/Web/README.md) for build and verification instructions.
 
+Mono's interpreter executes IL from prebuilt application assemblies. This supported execution
+mode adds no runtime user-authored C# scripting, dynamic C# compilation or executable hotcode
+feature. Live values and shared material graphs retain their existing contracts; development hot
+reload is a separate toolchain feature. Verify stability, native/shared behavior consistency and
+representative performance in both build modes.
+
 ## Orbit and raw pointer input
 
 ```js
@@ -222,8 +228,8 @@ Native `FrameStatisticsOverlay IsDetailed="True" SnapshotInterval="00:00:00.250"
 ```js
 import {createFrameStatisticsSource, createFrameStatisticsOverlay} from './mu3d/frame-statistics.mjs';
 const source = createFrameStatisticsSource();
-const overlay = createFrameStatisticsOverlay({container: canvasFrame, source});
-overlay.isDetailed = true;
+const overlay = createFrameStatisticsOverlay({container: canvasFrame, source, displayMode: 'compact'});
+overlay.displayMode = 'detail';
 source.snapshotIntervalMilliseconds = 250;
 source.publish(managedReport.snapshot); // newly captured/versioned snapshots only
 overlay.dispose(); source.dispose();
@@ -235,7 +241,8 @@ overlay.dispose(); source.dispose();
 | `IsEnabled`, `SnapshotInterval` | Source/overlay `isEnabled`, `snapshotIntervalMilliseconds` | true, 500 ms; zero publishes every positive sample |
 | `DrawCallCount`, `PrimitiveCount` | Source/overlay `drawCallCount`, `primitiveCount` | null; nonnegative safe integer or unavailable |
 | `LatestSnapshot`, `SnapshotUpdated` | `latestSnapshot`, `subscribe` | Immutable camelCase snapshot, subsequent notifications |
-| `IsDetailed`, `IsGraphVisible` | View/overlay `isDetailed`, `isGraphVisible` | false, true |
+| `DisplayMode` | View/overlay `displayMode` | `'normal'`; also `'compact'` and `'detail'` |
+| `IsDetailed`, `IsGraphVisible` | View/overlay `isDetailed`, `isGraphVisible` | false, true; legacy detail selection and graph preference |
 | Text/graph colors | `textColor`, `graphColor` | White, cyan |
 | Graph background | `graphBackgroundColor` | Opaque RGB `(0,0.035,0.09)` |
 | Overlay background | `backgroundColor` | RGB `(25,36,56)`, alpha 217/255 (`#D9192438`) |
@@ -243,11 +250,24 @@ overlay.dispose(); source.dispose();
 | Visibility | Overlay `isVisible` | true; independent of collection |
 | History/graph | Read-only view `history` | 120 published FPS values; graph height 52 CSS px |
 
-The collector's 120 raw frame samples differ from 120 throttled graph entries. Headline shows
-FPS, average ms and displayed-history extrema; compact details show renderer/presentation totals
-and draws/primitives; detailed mode adds interval extrema, sample count, CPU stages/resources.
-Graph is right-aligned with bars/lines/guides and scale at least 60 FPS. Appearance changes update
-existing DOM. Missing fields/resources stay null and display `—`; measured zero stays zero.
+The collector's 120 raw frame samples differ from 120 throttled graph entries. Compact uses a
+small box with one FPS line (`— FPS` before sampling); it hides frame milliseconds, extrema,
+details and graph while continuing history collection. Normal retains the existing headline with
+FPS, average ms and displayed-history extrema, plus renderer/presentation totals and draws/primitives.
+Detail adds interval extrema, sample count, CPU stages/resources. Normal and Detail show the graph
+when `isGraphVisible` is true. Compact hides it without changing that preference. Graph is
+right-aligned with bars/lines/guides and scale at least 60 FPS. Missing fields/resources stay null
+and display `—`; measured zero stays zero.
+
+Click the indicator or focus it and press Enter/Space to cycle Compact → Normal → Detail → Compact.
+Held-key repeats do not cycle again. The indicator isolates pointer/wheel input from camera handlers;
+the surrounding overlay remains pass-through. Activation only changes the existing DOM display:
+it does not replace the source, reset history, restart a sampler or change the collection interval.
+`displayMode` is observable on both view and overlay; changing `overlay.view.displayMode` also
+updates overlay getters/options/subscriptions. The legacy `isDetailed` setter explicitly selects
+Detail for true and Normal for false, including when Compact currently reports false. A mode update
+synchronizes `isDetailed` without invoking that setter. If both construction options are supplied,
+`displayMode` takes precedence after both values are validated. Existing callers retain Normal by default.
 
 Writable source/display options expose frozen `options`/`subscribeOptions`; read once initially,
 then receive effective changes. Subscriptions return unsubscribe. Interval must be finite,
@@ -264,10 +284,13 @@ Overlay forwards these operations to its source.
 View starts observing immediately; append `view.element`, call `detach()` on unmount (DOM removal
 alone does not unsubscribe), and `attach()` on reuse. Reattachment preserves history/applies latest
 without inventing missed entries. Source replacement clears history/unsubscribes; null shows empty.
-Overlay mounts itself in the borrowed positioned Canvas container and passes through input.
+Overlay mounts itself in the borrowed positioned Canvas container; only its indicator accepts input.
 Hide detaches its view while source collection/overlay observation may continue; show retains
-history/applies latest. Detach removes DOM/subscriptions; attach restores them. Idempotent disposal
-removes owned DOM/resize observers/subscriptions without changing source/collector/renderer/container.
+history/applies latest. Hide/detach remove indicator click, keyboard and pointer listeners; reattachment
+restores one set and retains display mode/history. Overlay detach also removes DOM/source subscriptions.
+Idempotent disposal removes owned DOM/input listeners/resize observers/subscriptions without changing
+source/collector/renderer/container. A standalone view's `detach()` likewise suspends input/source
+observation; the caller still owns its mounting location.
 Dispose borrowers before an application-owned source.
 
 The validation host samples positive completion-to-completion intervals after complete successful

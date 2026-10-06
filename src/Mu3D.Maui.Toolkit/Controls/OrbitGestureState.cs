@@ -281,7 +281,7 @@ internal sealed class ViewportMultiTouchGestureState : IDisposable
         return true;
     }
 
-    internal bool TryGetPinchRatio(double scale, out double ratio)
+    internal bool TryGetPinchRatio(double scale, out double ratio, bool isIncremental = false)
     {
         ratio = 1d;
         if (!pinchActive)
@@ -292,8 +292,11 @@ internal sealed class ViewportMultiTouchGestureState : IDisposable
         {
             throw new ArgumentOutOfRangeException(nameof(scale), "Pinch scale must be positive and finite.");
         }
-        ratio = scale / previousPinchScale;
-        previousPinchScale = scale;
+        ratio = isIncremental ? scale : scale / previousPinchScale;
+        if (!isIncremental)
+        {
+            previousPinchScale = scale;
+        }
         return true;
     }
 

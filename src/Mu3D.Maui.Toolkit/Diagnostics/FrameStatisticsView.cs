@@ -1,4 +1,3 @@
-using System.Globalization;
 using Microsoft.Maui.Graphics;
 using Mu3D.Toolkit.Diagnostics;
 using MauiColor = Microsoft.Maui.Graphics.Color;
@@ -10,6 +9,8 @@ namespace Mu3D.Maui.Toolkit.Diagnostics;
 /// The view borrows <see cref="Source"/> and never attaches it to a scene view, resets it, or
 /// disposes it. Text and graph history change only when the source publishes a snapshot or display
 /// properties change; rendering frames do not directly invalidate MAUI layout.
+/// Tapping or clicking cycles Compact, Normal and Detail. Bind <see cref="DisplayMode"/> two-way
+/// when application state must track this interaction.
 /// </remarks>
 public sealed class FrameStatisticsView : ContentView, IDisposable
 {
@@ -18,7 +19,11 @@ public sealed class FrameStatisticsView : ContentView, IDisposable
     private readonly GraphicsView graphView;
     private readonly FrameStatisticsHistory history = new(capacity: 120);
     private readonly FrameStatisticsGraphDrawable graphDrawable;
+    private readonly VerticalStackLayout contentLayout;
+    private readonly TapGestureRecognizer modeTap = new();
+    private View? modeTapTarget;
     private FrameStatisticsBehavior? subscribedSource;
+    private bool synchronizingDetailed;
     private bool isLoaded;
     private bool disposed;
 
@@ -31,14 +36,27 @@ public sealed class FrameStatisticsView : ContentView, IDisposable
         propertyChanged: static (bindable, _, _) =>
             ((FrameStatisticsView)bindable).OnSourceChanged());
 
+    /// <summary>Identifies the <see cref="DisplayMode"/> bindable property.</summary>
+    public static readonly BindableProperty DisplayModeProperty = BindableProperty.Create(
+        nameof(DisplayMode),
+        typeof(FrameStatisticsDisplayMode),
+        typeof(FrameStatisticsView),
+        FrameStatisticsDisplayMode.Normal,
+        BindingMode.TwoWay,
+        validateValue: static (_, value) =>
+            value is FrameStatisticsDisplayMode mode && Enum.IsDefined(mode),
+        propertyChanged: static (bindable, _, _) =>
+            ((FrameStatisticsView)bindable).OnDisplayModeChanged());
+
     /// <summary>Identifies the <see cref="IsDetailed"/> bindable property.</summary>
     public static readonly BindableProperty IsDetailedProperty = BindableProperty.Create(
         nameof(IsDetailed),
         typeof(bool),
         typeof(FrameStatisticsView),
         false,
-        propertyChanged: static (bindable, _, _) =>
-            ((FrameStatisticsView)bindable).RefreshText());
+        BindingMode.TwoWay,
+        propertyChanged: static (bindable, _, value) =>
+            ((FrameStatisticsView)bindable).OnIsDetailedChanged((bool)value));
 
     /// <summary>Identifies the <see cref="TextColor"/> bindable property.</summary>
     public static readonly BindableProperty TextColorProperty = BindableProperty.Create(
@@ -85,12 +103,14 @@ public sealed class FrameStatisticsView : ContentView, IDisposable
             FontSize = 16d,
             LineBreakMode = LineBreakMode.NoWrap,
             TextColor = TextColor,
+            InputTransparent = true,
         };
         detailsLabel = new Label
         {
             FontSize = 12d,
             LineBreakMode = LineBreakMode.WordWrap,
             TextColor = TextColor,
+            InputTransparent = true,
         };
         graphDrawable = new FrameStatisticsGraphDrawable(history)
         {
@@ -104,7 +124,7 @@ public sealed class FrameStatisticsView : ContentView, IDisposable
             InputTransparent = true,
             IsVisible = IsGraphVisible,
         };
-        Content = new VerticalStackLayout
+        contentLayout = new VerticalStackLayout
         {
             Spacing = 3d,
             Children =
@@ -114,7 +134,10 @@ public sealed class FrameStatisticsView : ContentView, IDisposable
                 detailsLabel,
             },
         };
+        Content = contentLayout;
         Padding = 10d;
+        modeTap.Tapped += OnModeTapped;
+        SetModeTapTarget(this);
         Loaded += OnLoaded;
         Unloaded += OnUnloaded;
         RefreshText();
@@ -127,11 +150,38 @@ public sealed class FrameStatisticsView : ContentView, IDisposable
         set => SetValue(SourceProperty, value);
     }
 
-    /// <summary>Gets or sets whether timing breakdowns and resource counts are shown.</summary>
+    /// <summary>Gets or sets the amount of information shown. The default is Normal.</summary>
+    /// <remarks>
+    /// Compact shows only FPS and hides the graph without changing <see cref="IsGraphVisible"/>.
+    /// Tapping cycles Compact to Normal to Detail to Compact. The default binding mode is two-way.
+    /// Prefer this property to the legacy <see cref="IsDetailed"/> alias when binding display state.
+    /// </remarks>
+    public FrameStatisticsDisplayMode DisplayMode
+    {
+        get => (FrameStatisticsDisplayMode)GetValue(DisplayModeProperty);
+        set => SetValue(DisplayModeProperty, value);
+    }
+
+    /// <summary>Gets or sets the legacy Normal/Detail display choice.</summary>
+    /// <remarks>
+    /// Assigning this CLR property selects Detail for true and Normal for false, even when the
+    /// boolean is unchanged. Compact reports false. An unchanged bindable-property write does not
+    /// change modes; use <see cref="DisplayMode"/> for explicit mode selection.
+    /// Use <see cref="DisplayMode"/>
+    /// to distinguish all three modes, and avoid binding both properties to independent state.
+    /// The default binding mode is now two-way so clicks can update a legacy bound selector.
+    /// </remarks>
     public bool IsDetailed
     {
         get => (bool)GetValue(IsDetailedProperty);
-        set => SetValue(IsDetailedProperty, value);
+        set
+        {
+            SetValue(IsDetailedProperty, value);
+            if (!synchronizingDetailed)
+            {
+                DisplayMode = value ? FrameStatisticsDisplayMode.Detail : FrameStatisticsDisplayMode.Normal;
+            }
+        }
     }
 
     /// <summary>Gets or sets the color used by both statistics labels.</summary>
@@ -173,6 +223,8 @@ public sealed class FrameStatisticsView : ContentView, IDisposable
             return;
         }
         disposed = true;
+        modeTap.Tapped -= OnModeTapped;
+        SetModeTapTarget(null);
         Loaded -= OnLoaded;
         Unloaded -= OnUnloaded;
         DetachSource();
@@ -272,15 +324,64 @@ public sealed class FrameStatisticsView : ContentView, IDisposable
         {
             return;
         }
-        FrameStatisticsText text = FrameStatisticsTextFormatter.Format(LatestSnapshot, IsDetailed);
-        headlineLabel.Text = history.Count == 0
-            ? text.Headline
-            : string.Create(
-                CultureInfo.InvariantCulture,
-                $"{LatestSnapshot.FramesPerSecond:0} FPS " +
-                $"({history.Minimum:0}–{history.Maximum:0})  ·  " +
-                $"{LatestSnapshot.AverageFrameMilliseconds:0.00} ms");
+        FrameStatisticsText text = FrameStatisticsTextFormatter.Format(
+            LatestSnapshot,
+            DisplayMode,
+            history.Count == 0 ? null : history.Minimum,
+            history.Count == 0 ? null : history.Maximum);
+        headlineLabel.Text = text.Headline;
         detailsLabel.Text = text.Details;
+        detailsLabel.IsVisible = DisplayMode != FrameStatisticsDisplayMode.Compact;
+    }
+
+    private void OnDisplayModeChanged()
+    {
+        synchronizingDetailed = true;
+        try
+        {
+            SetValue(IsDetailedProperty, DisplayMode == FrameStatisticsDisplayMode.Detail);
+        }
+        finally
+        {
+            synchronizingDetailed = false;
+        }
+        if (contentLayout is not null)
+        {
+            bool compact = DisplayMode == FrameStatisticsDisplayMode.Compact;
+            contentLayout.Spacing = compact ? 0d : 3d;
+            Padding = compact ? new Thickness(6d, 4d) : new Thickness(10d);
+            headlineLabel.FontSize = compact ? 12d : 16d;
+        }
+        ApplyGraphVisibility(IsGraphVisible);
+        RefreshText();
+    }
+
+    private void OnIsDetailedChanged(bool isDetailed)
+    {
+        if (!synchronizingDetailed)
+        {
+            DisplayMode = isDetailed ? FrameStatisticsDisplayMode.Detail : FrameStatisticsDisplayMode.Normal;
+        }
+    }
+
+    private void OnModeTapped(object? sender, TappedEventArgs e)
+    {
+        _ = e;
+        if (!disposed && IsEnabled && ReferenceEquals(sender, modeTapTarget))
+        {
+            DisplayMode = FrameStatisticsDisplayState.Next(DisplayMode);
+        }
+    }
+
+    internal void SetModeTapTarget(View? target)
+    {
+        if (ReferenceEquals(modeTapTarget, target))
+        {
+            return;
+        }
+        modeTapTarget?.GestureRecognizers.Remove(modeTap);
+        modeTapTarget = target;
+        target?.GestureRecognizers.Add(modeTap);
     }
 
     private void ApplyTextColor(MauiColor color)
@@ -299,7 +400,7 @@ public sealed class FrameStatisticsView : ContentView, IDisposable
     {
         if (graphView is not null)
         {
-            graphView.IsVisible = isVisible;
+            graphView.IsVisible = FrameStatisticsDisplayState.ShowsGraph(DisplayMode, isVisible);
         }
     }
 

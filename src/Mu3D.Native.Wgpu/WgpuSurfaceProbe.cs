@@ -30,6 +30,10 @@ public static class WgpuSurfaceProbe
             throw new ArgumentOutOfRangeException(nameof(timeout), "Probe timeout must be positive.");
         }
 
+        cancellationToken.ThrowIfCancellationRequested();
+        // The asynchronous adapter request must not outlive a host-owned native consumer.
+        // Using-declaration order releases the surface before returning this producer lease.
+        using IDisposable? sourceLifetimeLease = source.AcquireLifetime();
         using WgpuInstanceHandle instance = CreateInstance(source.Kind);
         using WgpuSurfaceHandle surface = CreateSurface(instance, source);
         using WgpuAdapterHandle adapter = await WaitForOwnedHandleAsync(
@@ -37,7 +41,8 @@ public static class WgpuSurfaceProbe
             timeout,
             cancellationToken).ConfigureAwait(false);
 
-        return new WgpuSurfaceProbeResult(ReadBackend(adapter), ReadCapabilities(surface, adapter));
+        return new WgpuSurfaceProbeResult(ReadBackend(adapter),
+            source.ConstrainCapabilities(ReadCapabilities(surface, adapter)));
     }
 
     internal static async Task<THandle> WaitForOwnedHandleAsync<THandle>(
@@ -325,7 +330,7 @@ public static class WgpuSurfaceProbe
         }
     }
 
-    private static GraphicsTextureUsage MapTextureUsages(ulong usages)
+    internal static GraphicsTextureUsage MapTextureUsages(ulong usages)
     {
         GraphicsTextureUsage result = GraphicsTextureUsage.None;
         AddUsage(usages, WgpuNative.WGPUTextureUsage_CopySrc, GraphicsTextureUsage.CopySource, ref result);

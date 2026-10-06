@@ -1,4 +1,5 @@
 using System.Numerics;
+using Mu3D.Graphics;
 using Mu3D.Maui.Toolkit.Overlays;
 using Mu3D.Rendering;
 using Mu3D.SceneGraph;
@@ -12,6 +13,8 @@ namespace Mu3D.Maui.Controls
     public sealed class Mu3DSceneView : Grid
     {
         private EventHandler<ViewportFrameSnapshotChangedEventArgs>? frameChanged;
+        private EventHandler<SurfaceFramePresentedEventArgs>? framePresented;
+        private EventHandler<PresentationSessionChangedEventArgs>? sessionChanged;
         private ulong frameId;
         /// <summary>The scene assignment is a real MAUI bindable property.</summary>
         public static readonly BindableProperty SceneProperty = BindableProperty.Create(
@@ -38,6 +41,24 @@ namespace Mu3D.Maui.Controls
             remove { frameChanged -= value; FrameSubscriberCount--; }
         }
         internal int FrameSubscriberCount { get; private set; }
+        /// <summary>Supplies the presentation-frame subscription protocol without a GPU.</summary>
+        public event EventHandler<SurfaceFramePresentedEventArgs>? FramePresented
+        {
+            add { framePresented += value; }
+            remove { framePresented -= value; }
+        }
+        /// <summary>Supplies the presentation-session subscription protocol without a native surface.</summary>
+        public event EventHandler<PresentationSessionChangedEventArgs>? PresentationSessionChanged
+        {
+            add { sessionChanged += value; }
+            remove { sessionChanged -= value; }
+        }
+        /// <summary>No presentation session is created by this headless fixture.</summary>
+        public IPresentationSurfaceSession? PresentationSession => null;
+        /// <summary>No renderer is created by this headless fixture.</summary>
+        public SceneRenderer? Renderer => null;
+        internal int PresentationSubscriberCount => framePresented?.GetInvocationList().Length ?? 0;
+        internal int SessionSubscriberCount => sessionChanged?.GetInvocationList().Length ?? 0;
         internal int InvalidationCount { get; private set; }
         internal Action? OnInvalidation { get; set; }
         /// <summary>Records coalescible requests without constructing a render loop.</summary>
@@ -71,6 +92,16 @@ namespace Mu3D.Maui.Controls
         /// <summary>Gets the published snapshot or explicit invalidation.</summary>
         public ViewportFrameSnapshot? Snapshot { get; } = snapshot;
     }
+
+    /// <summary>Only the frame-status event protocol consumed by the actual statistics behavior.</summary>
+    public sealed class SurfaceFramePresentedEventArgs(PresentationSurfaceFrameStatus status) : EventArgs
+    {
+        /// <summary>Gets the explicitly supplied fixture status.</summary>
+        public PresentationSurfaceFrameStatus Status { get; } = status;
+    }
+
+    /// <summary>Only the session-change event protocol consumed by the actual statistics behavior.</summary>
+    public sealed class PresentationSessionChangedEventArgs : EventArgs;
 
     /// <summary>Only the declarative-to-Core facade needed by the real anchor's public contract.</summary>
     public sealed class SceneNode3D(SceneNode node) : BindableObject

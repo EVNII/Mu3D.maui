@@ -14,6 +14,7 @@ public partial class HdrProbePage : ContentPage, IGalleryPageActivation
     private bool referencePatternPresented;
     private SurfaceReferencePattern? pattern;
     private bool navigationActive;
+    private string? lastSurfaceError;
 
     /// <summary>Initializes the surface probe page.</summary>
     public HdrProbePage()
@@ -38,19 +39,22 @@ public partial class HdrProbePage : ContentPage, IGalleryPageActivation
         PresentationSessionChangedEventArgs e)
     {
         _ = sender;
+        CancelReferenceReadback();
+        lastSurfaceError = null;
         pattern?.Dispose();
         pattern = null;
         referencePatternPresented = false;
         session = e.Session as WgpuSurfaceSession;
         ProbeButton.IsEnabled = session is not null;
         PresentButton.IsEnabled = session is not null;
+        ReadbackButton.IsEnabled = session is not null;
         ProbeStatus.Text = e.Session switch
         {
             null => "Presentation surface unavailable",
             WgpuSurfaceSession => "Control-managed wgpu surface ready",
             _ => "The configured backend does not support this wgpu diagnostic",
         };
-        ProbeDetails.Text = session is null ? string.Empty : Format(session);
+        ProbeDetails.Text = session is null ? string.Empty : Format(session, "after configure");
     }
 
     private void OnProbeClicked(object? sender, EventArgs e)
@@ -64,7 +68,7 @@ public partial class HdrProbePage : ContentPage, IGalleryPageActivation
         ProbeStatus.Text = current.OutputPlan.Output.DynamicRange == OutputDynamicRange.Hdr
             ? "RGBA16Float HDR surface configured"
             : "SDR fallback surface configured";
-        ProbeDetails.Text = Format(current);
+        RefreshReport(current, "manual probe");
     }
 
     private void OnPresentClicked(object? sender, EventArgs e)
@@ -75,8 +79,24 @@ public partial class HdrProbePage : ContentPage, IGalleryPageActivation
             return;
         }
 
+        CancelReferenceReadback();
         referencePatternPresented = true;
         SurfaceView.InvalidateSurface();
+    }
+
+    private async void OnCopyDiagnosticsClicked(object? sender, EventArgs e)
+    {
+        _ = sender;
+        try
+        {
+            if (session is WgpuSurfaceSession current)
+                RefreshReport(current, "at copy");
+            await Clipboard.Default.SetTextAsync($"{ProbeStatus.Text}\n{ProbeDetails.Text}");
+        }
+        catch (Exception exception)
+        {
+            ProbeStatus.Text = $"Copy diagnostics failed: {exception.Message}";
+        }
     }
 
     private void OnDraw(object? sender, SurfaceDrawEventArgs e)
@@ -99,21 +119,33 @@ public partial class HdrProbePage : ContentPage, IGalleryPageActivation
             pattern = replacement;
         }
         pattern.Draw(e.Device, e.Target);
+        SubmitReferenceReadback(e.Device, e.Target);
     }
 
     private void OnFramePresented(object? sender, SurfaceFramePresentedEventArgs e)
     {
         if (!referencePatternPresented || session is null) return;
+        RecordReferenceReadbackFrameStatus(e.Status.ToString());
+        lastSurfaceError = null;
         ProbeStatus.Text = $"Reference pattern: {e.Status}";
-        ProbeDetails.Text = "Pattern space: extended-linear sRGB\n" +
+        RefreshReport(session, $"after present ({e.Status})");
+    }
+
+    private void RefreshReport(IPresentationSurfaceSession current, string captureStage)
+    {
+        ProbeDetails.Text = (referencePatternPresented ? "Pattern space: extended-linear sRGB\n" +
             "Top: smooth neutral ramp 0–4\nBottom: 0 | 0.18 | 0.5 | 1 | 2 | 4\n" +
             $"Windows SDR white matching: {SurfaceView.WindowsMatchSdrWhite}\n" +
-            $"System SDR white: {SurfaceView.SystemSdrWhiteNits?.ToString("0.##") ?? "unknown"} nits\n" + Format(session);
+            $"System SDR white: {SurfaceView.SystemSdrWhiteNits?.ToString("0.##") ?? "unknown"} nits\n"
+            : string.Empty) + Format(current, captureStage) + FormatReferenceReadback() +
+            (lastSurfaceError is null ? string.Empty : $"\nLast surface error:\n{lastSurfaceError}");
     }
 
     private void OnSurfaceError(object? sender, SurfaceErrorEventArgs e)
     {
         _ = sender;
+        FailReferenceReadback(e.Exception, $"error ({e.Operation})");
+        lastSurfaceError = e.Exception.ToString();
         ProbeStatus.Text = $"Presentation {e.Operation} failed";
         ProbeDetails.Text = e.Exception.ToString();
     }
@@ -132,13 +164,14 @@ public partial class HdrProbePage : ContentPage, IGalleryPageActivation
     private void OnPageUnloaded(object? sender, EventArgs e)
     {
         _ = sender;
+        CancelReferenceReadback();
         pattern?.Dispose();
         pattern = null;
         referencePatternPresented = false;
         session = null;
     }
 
-    private static string Format(IPresentationSurfaceSession session)
+    private string Format(IPresentationSurfaceSession session, string captureStage)
     {
         DisplayHdrInfo displayInfo = session.QueryDisplayHdrInfo();
         StringBuilder text = new();
@@ -167,7 +200,12 @@ public partial class HdrProbePage : ContentPage, IGalleryPageActivation
             }
         }
         _ = text.AppendLine($"Present modes: {string.Join(", ", session.Capabilities.PresentModes)}");
-        _ = text.AppendLine("Physical HDR output verified: false");
+#if ANDROID
+        _ = text.AppendLine($"Android producer snapshot: {captureStage}");
+        AndroidHdrBufferDiagnostics.Append(text, SurfaceView.NativeSurfaceSource,
+            SurfaceView.Handler?.PlatformView as global::Android.Views.View);
+#endif
+        _ = text.AppendLine("Physical HDR output: not measured by this probe");
         return text.ToString();
     }
 

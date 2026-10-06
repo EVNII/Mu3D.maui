@@ -69,8 +69,11 @@ public sealed partial class WgpuGraphicsDevice
     }
 
     internal unsafe void ThrowIfNativeErrors(string operation)
+        => ThrowIfNativeErrors(NativeDevice, operation);
+
+    private unsafe void ThrowIfNativeErrors(WGPUDeviceImpl* retainedDevice, string operation)
     {
-        _ = WgpuNative.wgpuDevicePoll(NativeDevice, 0, null);
+        _ = WgpuNative.wgpuDevicePoll(retainedDevice, 0, null);
         IReadOnlyList<WgpuDeviceError> errors = device.DrainErrors();
         if (errors.Count != 0)
         {
@@ -80,12 +83,56 @@ public sealed partial class WgpuGraphicsDevice
     }
 
     internal unsafe void WaitForSubmittedWork(string operation)
+        => WaitForSubmittedWork(NativeDevice, operation);
+
+    private unsafe void WaitForSubmittedWork(WGPUDeviceImpl* retainedDevice, string operation)
     {
-        _ = WgpuNative.wgpuDevicePoll(NativeDevice, 1, null);
-        ThrowIfNativeErrors(operation);
+        _ = WgpuNative.wgpuDevicePoll(retainedDevice, 1, null);
+        ThrowIfNativeErrors(retainedDevice, operation);
         if (State == GraphicsDeviceState.Lost)
         {
             throw new InvalidOperationException($"The graphics device was lost: {LostReason}");
+        }
+    }
+
+    internal NativeDeviceReadLease RetainNativeDeviceForRead() => new(this, device);
+
+    // Retain the SafeHandle itself: a native AddRef alone would not keep its callback GCHandles alive.
+    internal sealed unsafe class NativeDeviceReadLease : IDisposable
+    {
+        private readonly WgpuGraphicsDevice owner;
+        private readonly WgpuDeviceHandle handle;
+        private readonly WGPUDeviceImpl* pointer;
+        private int retained;
+
+        internal NativeDeviceReadLease(WgpuGraphicsDevice owner, WgpuDeviceHandle handle)
+        {
+            this.owner = owner;
+            this.handle = handle;
+            bool addedReference = false;
+            try
+            {
+                handle.DangerousAddRef(ref addedReference);
+                pointer = handle.DangerousGetPointer();
+                if (pointer is null)
+                {
+                    throw new ObjectDisposedException(nameof(WgpuGraphicsDevice));
+                }
+                retained = 1;
+            }
+            catch
+            {
+                if (addedReference) handle.DangerousRelease();
+                throw;
+            }
+        }
+
+        internal void WaitForSubmittedWork(string operation) =>
+            owner.WaitForSubmittedWork(pointer, operation);
+
+        public void Dispose()
+        {
+            if (Interlocked.Exchange(ref retained, 0) != 0) handle.DangerousRelease();
         }
     }
 

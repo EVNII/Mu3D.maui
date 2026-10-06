@@ -5,14 +5,44 @@ namespace Mu3D.Maui.Toolkit.Diagnostics;
 
 internal readonly record struct FrameStatisticsText(string Headline, string Details);
 
+internal static class FrameStatisticsDisplayState
+{
+    internal static FrameStatisticsDisplayMode Next(FrameStatisticsDisplayMode mode) => mode switch
+    {
+        FrameStatisticsDisplayMode.Compact => FrameStatisticsDisplayMode.Normal,
+        FrameStatisticsDisplayMode.Normal => FrameStatisticsDisplayMode.Detail,
+        FrameStatisticsDisplayMode.Detail => FrameStatisticsDisplayMode.Compact,
+        _ => throw new ArgumentOutOfRangeException(nameof(mode)),
+    };
+
+    internal static bool ShowsGraph(FrameStatisticsDisplayMode mode, bool isGraphVisible) =>
+        mode != FrameStatisticsDisplayMode.Compact && isGraphVisible;
+}
+
 internal static class FrameStatisticsTextFormatter
 {
     private const string Unavailable = "—";
 
     public static FrameStatisticsText Format(
         FrameStatisticsSnapshot snapshot,
-        bool isDetailed)
+        bool isDetailed) => Format(snapshot, isDetailed
+            ? FrameStatisticsDisplayMode.Detail
+            : FrameStatisticsDisplayMode.Normal);
+
+    internal static FrameStatisticsText Format(
+        FrameStatisticsSnapshot snapshot,
+        FrameStatisticsDisplayMode mode,
+        double? minimumFps = null,
+        double? maximumFps = null)
     {
+        if (mode == FrameStatisticsDisplayMode.Compact)
+        {
+            return new FrameStatisticsText(
+                snapshot.SampleCount == 0
+                    ? "— FPS"
+                    : string.Create(CultureInfo.InvariantCulture, $"{snapshot.FramesPerSecond:0} FPS"),
+                string.Empty);
+        }
         if (snapshot.SampleCount == 0)
         {
             return new FrameStatisticsText(
@@ -22,15 +52,20 @@ internal static class FrameStatisticsTextFormatter
                     : "No completed frame interval has been sampled.");
         }
 
-        string headline = string.Create(
-            CultureInfo.InvariantCulture,
-            $"{snapshot.FramesPerSecond:0.0} FPS  ·  {snapshot.AverageFrameMilliseconds:0.00} ms");
+        string headline = minimumFps is double minimum && maximumFps is double maximum
+            ? string.Create(
+                CultureInfo.InvariantCulture,
+                $"{snapshot.FramesPerSecond:0} FPS ({minimum:0}–{maximum:0})  ·  " +
+                $"{snapshot.AverageFrameMilliseconds:0.00} ms")
+            : string.Create(
+                CultureInfo.InvariantCulture,
+                $"{snapshot.FramesPerSecond:0.0} FPS  ·  {snapshot.AverageFrameMilliseconds:0.00} ms");
         string summary =
             $"Render {FormatMilliseconds(snapshot.AverageRendererTotalMilliseconds)}  ·  " +
             $"Present {FormatMilliseconds(snapshot.AveragePresentationTotalMilliseconds)}\n" +
             $"Draws {FormatAverage(snapshot.AverageDrawCallCount)}  ·  " +
             $"Primitives {FormatAverage(snapshot.AveragePrimitiveCount)}";
-        if (!isDetailed)
+        if (mode != FrameStatisticsDisplayMode.Detail)
         {
             return new FrameStatisticsText(headline, summary);
         }

@@ -41,6 +41,18 @@ public enum OpenPbrNodeOperation
     NormalMap,
     /// <summary>Extracts one numeric component.</summary>
     Extract,
+    /// <summary>Componentwise difference, optionally subtracting a scalar.</summary>
+    Subtract = 9,
+    /// <summary>Componentwise minimum, optionally against a scalar.</summary>
+    Min = 10,
+    /// <summary>Componentwise maximum, optionally against a scalar.</summary>
+    Max = 11,
+    /// <summary>Componentwise absolute value.</summary>
+    Abs = 12,
+    /// <summary>Componentwise quotient with a normal FP32 denominator domain.</summary>
+    Divide = 13,
+    /// <summary>Componentwise square root of nonnegative scalar or vector data.</summary>
+    Sqrt = 14,
 }
 
 /// <summary>An immutable typed expression used by OpenPBR input bindings.</summary>
@@ -133,6 +145,77 @@ public sealed class OpenPbrNode
         Numeric(a); Numeric(b); if (a.Type != b.Type && b.Type != OpenPbrNodeType.Float) throw new ArgumentException("Incompatible multiply types.");
         return new(OpenPbrNodeOperation.Multiply, a.Type, default, a, b);
     }
+    /// <summary>Subtracts like numeric types, or a scalar second operand from a numeric first operand.</summary>
+    /// <param name="a">The numeric first operand, whose type is retained.</param>
+    /// <param name="b">A matching numeric operand or a scalar broadcast to every component.</param>
+    /// <returns>The componentwise difference with finite conservative bounds.</returns>
+    /// <remarks>Color operands remain scene-linear ACEScg. No clipping or color mapping is implicit.</remarks>
+    public static OpenPbrNode Subtract(OpenPbrNode a, OpenPbrNode b) => Binary(OpenPbrNodeOperation.Subtract, a, b);
+    /// <summary>Selects the minimum of like numeric types, or a numeric first operand and a scalar second operand.</summary>
+    /// <param name="a">The numeric first operand, whose type is retained.</param>
+    /// <param name="b">A matching numeric operand or a scalar broadcast to every component.</param>
+    /// <returns>The componentwise minimum with finite conservative bounds.</returns>
+    /// <remarks>Color operands remain scene-linear ACEScg. No clipping or color mapping is implicit.</remarks>
+    public static OpenPbrNode Min(OpenPbrNode a, OpenPbrNode b) => Binary(OpenPbrNodeOperation.Min, a, b);
+    /// <summary>Selects the maximum of like numeric types, or a numeric first operand and a scalar second operand.</summary>
+    /// <param name="a">The numeric first operand, whose type is retained.</param>
+    /// <param name="b">A matching numeric operand or a scalar broadcast to every component.</param>
+    /// <returns>The componentwise maximum with finite conservative bounds.</returns>
+    /// <remarks>Color operands remain scene-linear ACEScg. No clipping or color mapping is implicit.</remarks>
+    public static OpenPbrNode Max(OpenPbrNode a, OpenPbrNode b) => Binary(OpenPbrNodeOperation.Max, a, b);
+    /// <summary>Takes the absolute value of every component of a numeric operand.</summary>
+    /// <param name="input">The numeric operand, whose type is retained.</param>
+    /// <returns>The componentwise absolute value with finite conservative bounds.</returns>
+    /// <remarks>Color operands remain scene-linear ACEScg. No clipping or color mapping is implicit.</remarks>
+    public static OpenPbrNode Abs(OpenPbrNode input)
+    {
+        Numeric(input);
+        return new(OpenPbrNodeOperation.Abs, input.Type, default, input);
+    }
+    /// <summary>Divides like numeric types, or a numeric first operand by a scalar second operand.</summary>
+    /// <param name="a">The numeric numerator, whose type is retained.</param>
+    /// <param name="b">A matching numeric denominator or a scalar broadcast to every component.</param>
+    /// <returns>The componentwise quotient with finite conservative bounds.</returns>
+    /// <remarks>
+    /// Each semantic denominator interval must stay strictly positive or strictly negative and
+    /// its endpoint nearest zero must be a normal FP32 value. Zero-crossing and subnormal domains
+    /// are rejected without adding an epsilon, avoiding tiny divisors that may be flushed to zero
+    /// by a GPU. Scalar results are replicated internally; unused vector components are zero.
+    /// Color arithmetic remains scene-linear ACEScg, without implicit clipping or color mapping.
+    /// </remarks>
+    /// <exception cref="ArgumentException">The operands are boolean or have incompatible numeric types.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">A semantic denominator interval includes zero or subnormal values, or the quotient bounds are not finite.</exception>
+    public static OpenPbrNode Divide(OpenPbrNode a, OpenPbrNode b)
+    {
+        Numeric(a); Numeric(b);
+        if (a.Type != b.Type && b.Type != OpenPbrNodeType.Float) throw new ArgumentException("Incompatible Divide types.");
+        for (int channel = 0; channel < SemanticChannels(b.Type); channel++)
+        {
+            float low = b.Minimum[channel], high = b.Maximum[channel];
+            if (low <= 0 && high >= 0 || !float.IsNormal(low > 0 ? low : high))
+                throw new ArgumentOutOfRangeException(nameof(b), "Denominator intervals must exclude zero and contain only normal FP32 values.");
+        }
+        return new(OpenPbrNodeOperation.Divide, a.Type, default, a, b);
+    }
+    /// <summary>Takes the square root of nonnegative scalar or vector data.</summary>
+    /// <param name="input">A Float, Vector2, Vector3 or Vector4 operand, whose type is retained.</param>
+    /// <returns>The componentwise square root with finite conservative bounds.</returns>
+    /// <remarks>
+    /// Every semantic component must have a nonnegative conservative lower bound. No absolute
+    /// value, epsilon or clamp is implicit. Scalar results are replicated internally; unused
+    /// vector components are zero. Color3 and Boolean operands are not supported.
+    /// </remarks>
+    /// <exception cref="ArgumentException">The operand is Color3 or Boolean.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">A semantic component has a negative conservative lower bound.</exception>
+    public static OpenPbrNode Sqrt(OpenPbrNode input)
+    {
+        Numeric(input);
+        if (input.Type == OpenPbrNodeType.Color3) throw new ArgumentException("Square roots require scalar or vector data.", nameof(input));
+        for (int channel = 0; channel < SemanticChannels(input.Type); channel++)
+            if (input.Minimum[channel] < 0)
+                throw new ArgumentOutOfRangeException(nameof(input), "Square roots require nonnegative semantic component bounds.");
+        return new(OpenPbrNodeOperation.Sqrt, input.Type, default, input);
+    }
     /// <summary>Interpolates background to foreground using a scalar fraction in [0,1].</summary>
     public static OpenPbrNode Mix(OpenPbrNode background, OpenPbrNode foreground, OpenPbrNode amount)
     {
@@ -178,6 +261,44 @@ public sealed class OpenPbrNode
         if (node.Type == OpenPbrNodeType.Boolean) throw new ArgumentException("Boolean nodes are uniform constants.");
     }
     private static void Same(OpenPbrNode a, OpenPbrNode b) { Numeric(a); Require(b, a.Type); }
+    private static OpenPbrNode Binary(OpenPbrNodeOperation operation, OpenPbrNode a, OpenPbrNode b)
+    {
+        Numeric(a); Numeric(b);
+        if (a.Type != b.Type && b.Type != OpenPbrNodeType.Float) throw new ArgumentException($"Incompatible {operation} types.");
+        return new(operation, a.Type, default, a, b);
+    }
+    private static int SemanticChannels(OpenPbrNodeType type) => type switch
+    {
+        OpenPbrNodeType.Float => 1,
+        OpenPbrNodeType.Vector2 => 2,
+        OpenPbrNodeType.Color3 or OpenPbrNodeType.Vector3 => 3,
+        OpenPbrNodeType.Vector4 => 4,
+        _ => throw new ArgumentException("Expected a numeric node type.", nameof(type)),
+    };
+    private (Vector4, Vector4) DivideBounds()
+    {
+        Vector4 low = default, high = default;
+        for (int channel = 0; channel < SemanticChannels(Type); channel++)
+        {
+            int denominatorChannel = B!.Type == OpenPbrNodeType.Float ? 0 : channel;
+            float denominatorLow = B.Minimum[denominatorChannel], denominatorHigh = B.Maximum[denominatorChannel];
+            float aa = A!.Minimum[channel] / denominatorLow, ab = A.Minimum[channel] / denominatorHigh,
+                ba = A.Maximum[channel] / denominatorLow, bb = A.Maximum[channel] / denominatorHigh;
+            low[channel] = MathF.Min(MathF.Min(aa, ab), MathF.Min(ba, bb));
+            high[channel] = MathF.Max(MathF.Max(aa, ab), MathF.Max(ba, bb));
+        }
+        return Type == OpenPbrNodeType.Float ? (new(low.X), new(high.X)) : (low, high);
+    }
+    private (Vector4, Vector4) SqrtBounds()
+    {
+        Vector4 low = default, high = default;
+        for (int channel = 0; channel < SemanticChannels(Type); channel++)
+        {
+            low[channel] = MathF.Sqrt(A!.Minimum[channel]);
+            high[channel] = MathF.Sqrt(A.Maximum[channel]);
+        }
+        return Type == OpenPbrNodeType.Float ? (new(low.X), new(high.X)) : (low, high);
+    }
     private (Vector4, Vector4) Bounds()
     {
         switch (Operation)
@@ -196,6 +317,19 @@ public sealed class OpenPbrNode
             case OpenPbrNodeOperation.Clamp: return (System.Numerics.Vector4.Clamp(A!.Minimum, new(Value.X), new(Value.Y)), System.Numerics.Vector4.Clamp(A.Maximum, new(Value.X), new(Value.Y)));
             case OpenPbrNodeOperation.NormalMap: return (new(-1, -1, -1, 0), new(1, 1, 1, 0));
             case OpenPbrNodeOperation.Extract: return (new(A!.Minimum[(int)Value.X]), new(A.Maximum[(int)Value.X]));
+            case OpenPbrNodeOperation.Subtract: return (A!.Minimum - B!.Maximum, A.Maximum - B.Minimum);
+            case OpenPbrNodeOperation.Min:
+                return (System.Numerics.Vector4.Min(A!.Minimum, B!.Minimum), System.Numerics.Vector4.Min(A.Maximum, B.Maximum));
+            case OpenPbrNodeOperation.Max:
+                return (System.Numerics.Vector4.Max(A!.Minimum, B!.Minimum), System.Numerics.Vector4.Max(A.Maximum, B.Maximum));
+            case OpenPbrNodeOperation.Abs:
+                Vector4 absoluteMinimum = System.Numerics.Vector4.Abs(A!.Minimum), absoluteMaximum = System.Numerics.Vector4.Abs(A.Maximum);
+                Vector4 minimum = System.Numerics.Vector4.Min(absoluteMinimum, absoluteMaximum);
+                for (int channel = 0; channel < 4; channel++)
+                    if (A.Minimum[channel] <= 0 && A.Maximum[channel] >= 0) minimum[channel] = 0;
+                return (minimum, System.Numerics.Vector4.Max(absoluteMinimum, absoluteMaximum));
+            case OpenPbrNodeOperation.Divide: return DivideBounds();
+            case OpenPbrNodeOperation.Sqrt: return SqrtBounds();
             default: throw new InvalidOperationException();
         }
     }

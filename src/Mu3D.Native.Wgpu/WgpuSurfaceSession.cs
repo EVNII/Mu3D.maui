@@ -9,14 +9,15 @@ namespace Mu3D.Native.Wgpu;
 /// Dispose a session created for a Windows swap-chain panel on the panel's UI thread. The
 /// <c>Mu3DView</c> handler performs this automatically for control-owned sessions.
 /// </remarks>
-public sealed class WgpuSurfaceSession : IPresentationSurfaceSession, IWgpuPresentationSessionLifecycle
+public sealed partial class WgpuSurfaceSession : IPresentationSurfaceSession, IWgpuPresentationSessionLifecycle
 {
     private readonly object surfaceGate = new();
     private readonly NativeSurfaceSource source;
     private readonly WgpuSurfaceHandle surface;
     private readonly WgpuGraphicsDevice graphicsDevice;
     private readonly bool ownsGraphicsDevice;
-    private readonly GraphicsTextureUsage textureUsage;
+    private readonly IDisposable? sourceLifetimeLease;
+    private GraphicsTextureUsage textureUsage;
     private uint width;
     private uint height;
     private bool frameInProgress;
@@ -35,7 +36,8 @@ public sealed class WgpuSurfaceSession : IPresentationSurfaceSession, IWgpuPrese
         uint width,
         uint height,
         GraphicsTextureUsage textureUsage,
-        bool ownsGraphicsDevice)
+        bool ownsGraphicsDevice,
+        IDisposable? sourceLifetimeLease = null)
     {
         this.source = source;
         this.surface = surface;
@@ -47,6 +49,7 @@ public sealed class WgpuSurfaceSession : IPresentationSurfaceSession, IWgpuPrese
         AlphaMode = alphaMode;
         this.textureUsage = textureUsage;
         this.ownsGraphicsDevice = ownsGraphicsDevice;
+        this.sourceLifetimeLease = sourceLifetimeLease;
     }
 
     /// <summary>Gets the capabilities used to configure this surface.</summary>
@@ -56,7 +59,19 @@ public sealed class WgpuSurfaceSession : IPresentationSurfaceSession, IWgpuPrese
     public SurfaceOutputPlan OutputPlan { get; }
 
     /// <summary>Gets the alpha mode used by the configured native compositor surface.</summary>
+    /// <remarks>
+    /// This is the native transport mode used for configuration, including Inherit. Through
+    /// <see cref="IPresentationSurfaceSession.AlphaMode"/>, the session instead reports the
+    /// resolved pixel association when the platform-owned source supplies that contract.
+    /// An external source with unknown inherited association continues to report Inherit.
+    /// </remarks>
     public SurfaceAlphaMode AlphaMode { get; }
+
+    SurfaceAlphaMode IPresentationSurfaceSession.AlphaMode =>
+        AlphaMode == SurfaceAlphaMode.Inherit &&
+        source.InheritedAlphaAssociation != SurfaceAlphaMode.Unknown
+            ? source.InheritedAlphaAssociation
+            : AlphaMode;
 
     internal GraphicsTextureUsage TextureUsage => textureUsage;
 
@@ -167,8 +182,10 @@ public sealed class WgpuSurfaceSession : IPresentationSurfaceSession, IWgpuPrese
         WgpuAdapterHandle? adapter = null;
         WgpuDeviceHandle? device = null;
         WgpuGraphicsDevice? graphicsDevice = null;
+        IDisposable? sourceLifetimeLease = null;
         try
         {
+            sourceLifetimeLease = source.AcquireLifetime();
             instance = WgpuSurfaceProbe.CreateInstance(source.Kind);
             surface = WgpuSurfaceProbe.CreateSurface(instance, source);
             Task<WgpuAdapterHandle> adapterRequest =
@@ -186,7 +203,8 @@ public sealed class WgpuSurfaceSession : IPresentationSurfaceSession, IWgpuPrese
             {
                 return null;
             }
-            SurfaceCapabilities capabilities = WgpuSurfaceProbe.ReadCapabilities(surface, adapter);
+            SurfaceCapabilities capabilities = source.ConstrainCapabilities(
+                WgpuSurfaceProbe.ReadCapabilities(surface, adapter));
             SurfaceOutputPlan outputPlan = SurfaceOutputNegotiator.Negotiate(capabilities, settings);
             WgpuEnabledFeatures enabledFeatures = WgpuGraphicsDevice.ReadEnabledFeatures(adapter);
             WgpuDeviceLostSink deviceLostSink = new();
@@ -248,18 +266,27 @@ public sealed class WgpuSurfaceSession : IPresentationSurfaceSession, IWgpuPrese
                 width,
                 height,
                 GraphicsTextureUsage.RenderAttachment,
-                ownsGraphicsDevice: true);
+                ownsGraphicsDevice: true,
+                sourceLifetimeLease: sourceLifetimeLease);
             surface = null;
             graphicsDevice = null;
+            sourceLifetimeLease = null;
             return result;
         }
         finally
         {
-            surface?.Dispose();
-            graphicsDevice?.Dispose();
-            device?.Dispose();
-            adapter?.Dispose();
-            instance?.Dispose();
+            try { surface?.Dispose(); }
+            finally
+            {
+                try { sourceLifetimeLease?.Dispose(); }
+                finally
+                {
+                    graphicsDevice?.Dispose();
+                    device?.Dispose();
+                    adapter?.Dispose();
+                    instance?.Dispose();
+                }
+            }
         }
     }
 
@@ -324,13 +351,16 @@ public sealed class WgpuSurfaceSession : IPresentationSurfaceSession, IWgpuPrese
             sharedDevice);
 
         WgpuSurfaceHandle? surface = null;
+        IDisposable? sourceLifetimeLease = null;
         try
         {
+            sourceLifetimeLease = source.AcquireLifetime();
             surface = WgpuSurfaceProbe.CreateSurface(sharedDevice.NativeInstance, source);
             SurfaceCapabilities capabilities = WgpuSurfaceProbe.ReadCapabilities(
                 surface,
                 sharedDevice.NativeAdapter,
                 out GraphicsTextureUsage supportedUsages);
+            capabilities = source.ConstrainCapabilities(capabilities);
             GraphicsTextureUsage textureUsage = SelectCompatibleTextureUsage(
                 supportedUsages,
                 preferredTextureUsage,
@@ -357,13 +387,16 @@ public sealed class WgpuSurfaceSession : IPresentationSurfaceSession, IWgpuPrese
                 width,
                 height,
                 textureUsage,
-                ownsGraphicsDevice: false);
+                ownsGraphicsDevice: false,
+                sourceLifetimeLease: sourceLifetimeLease);
             surface = null;
+            sourceLifetimeLease = null;
             return result;
         }
         finally
         {
-            surface?.Dispose();
+            try { surface?.Dispose(); }
+            finally { sourceLifetimeLease?.Dispose(); }
         }
     }
 
@@ -567,15 +600,7 @@ public sealed class WgpuSurfaceSession : IPresentationSurfaceSession, IWgpuPrese
                         $"Surface acquisition reported {surfaceTexture.status} without a texture.");
                 }
 
-                GraphicsTextureDescriptor descriptor = new(
-                    new GraphicsExtent3D(width, height),
-                    MapGraphicsFormat(OutputPlan.Output.Format),
-                    textureUsage,
-                    label: "acquired surface texture");
-                using GraphicsTexture target = new WgpuGraphicsTexture(
-                    graphicsDevice,
-                    descriptor,
-                    surfaceTexture.texture);
+                using GraphicsTexture target = WrapAcquiredTexture(surfaceTexture.texture);
                 long renderStarted = Stopwatch.GetTimestamp();
                 render(target);
                 double renderMilliseconds = Stopwatch.GetElapsedTime(renderStarted).TotalMilliseconds;
@@ -614,16 +639,23 @@ public sealed class WgpuSurfaceSession : IPresentationSurfaceSession, IWgpuPrese
 
             dependentResourceReleaseStarted = true;
             disposed = true;
-            if (ownsGraphicsDevice)
+            try
             {
-                DrainSubmittedWorkForDisposalOnce();
+                if (ownsGraphicsDevice || sourceLifetimeLease is not null)
+                {
+                    DrainSubmittedWorkForDisposalOnce();
+                }
+                DetachNativePresentation();
+                Unconfigure(surface);
             }
-            DetachNativePresentation();
-            Unconfigure(surface);
-            surface.Dispose();
-            if (ownsGraphicsDevice)
+            finally
             {
-                graphicsDevice.Dispose();
+                try { surface.Dispose(); }
+                finally
+                {
+                    try { sourceLifetimeLease?.Dispose(); }
+                    finally { if (ownsGraphicsDevice) graphicsDevice.Dispose(); }
+                }
             }
         }
     }
@@ -635,7 +667,7 @@ public sealed class WgpuSurfaceSession : IPresentationSurfaceSession, IWgpuPrese
         {
             ObjectDisposedException.ThrowIf(disposed, this);
             dependentResourceReleaseStarted = true;
-            if (ownsGraphicsDevice)
+            if (ownsGraphicsDevice || sourceLifetimeLease is not null)
             {
                 DrainSubmittedWorkForDisposalOnce();
             }
@@ -787,7 +819,7 @@ public sealed class WgpuSurfaceSession : IPresentationSurfaceSession, IWgpuPrese
             : throw new InvalidOperationException("Surface advertised no supported present mode.");
     }
 
-    private static SurfaceAlphaMode SelectAlphaMode(
+    internal static SurfaceAlphaMode SelectAlphaMode(
         SurfaceCapabilities capabilities,
         SurfaceAlphaMode requested)
     {

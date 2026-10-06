@@ -72,8 +72,19 @@ on failure. Export validates model semantics before writing and leaves the outpu
 
 This is a deliberately bounded interchange subset, not a general MaterialX evaluator or an
 OpenPBR renderer. The supported graph operations are constant, texcoord (UV0/UV1), image, add,
-multiply, mix, clamp, extract and tangent normalmap, plus raw radius-channel conversion. Root
-connections and named nodegraph outputs support forward references. Cycles and unreachable nodes
+subtract, multiply, divide, min, max, absval, sqrt, mix, clamp, extract and tangent normalmap,
+plus raw radius-channel conversion. `subtract`, `min`, `max` and `divide` accept matching numeric
+types or a scalar `float` second operand; `absval` is unary componentwise absolute value. Core exposes these as
+`OpenPbrNode.Subtract`, `Min`, `Max`, `Abs`, `Divide` and `Sqrt`; `add` still requires matching types.
+`divide` requires every denominator component's conservative interval to stay entirely positive
+or entirely negative, with its nearest bound a normal finite FP32 value. Zero-crossing and
+subnormal divisors are rejected. `sqrt` accepts raw `float`/`vector2`/`vector3`/`vector4` with
+nonnegative bounds, excluding `color3`; it adds no absolute value or epsilon. See the
+[scaled-alpha recipe](../../docs-public/articles/features/openpbr-materialx.md#scaled-microfacet-alpha-to-roughness).
+Every node's conservative numeric bounds must remain finite, and connected results must fit the target
+OpenPBR input domain. Use explicit bounds when needed, as in the
+[inverse-gloss example](../../docs-public/articles/features/openpbr-materialx.md#inverse-gloss-with-bounded-arithmetic).
+Root connections and named nodegraph outputs support forward references. Cycles and unreachable nodes
 are rejected. Arbitrary graphs, UDIM, animation, displacement and custom unit systems are outside
 this adapter. XML graph limits default to 256 document nodes and 64 connected nodes per surface. `OpenPbrSurface.ToPbrPreview` is a separate explicit approximation boundary with its
 own diagnostics and policy; successful XML interchange never implies OpenPBR rendering conformance.

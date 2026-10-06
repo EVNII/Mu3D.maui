@@ -24,6 +24,8 @@ public interface IPresentationSurfaceSession : IResizablePresentationSurface, ID
     /// The default is Unknown for sessions that do not report it. Consumers that apply nonlinear
     /// display transforms must require a resolved Opaque, Premultiplied or Unpremultiplied mode;
     /// the application's requested Automatic or Inherit mode is not an association contract.
+    /// A platform-owned carrier may resolve an inherited association independently of the
+    /// backend's native transport mode; an unknown external carrier must remain unresolved.
     /// </remarks>
     SurfaceAlphaMode AlphaMode => SurfaceAlphaMode.Unknown;
 

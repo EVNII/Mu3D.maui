@@ -19,6 +19,20 @@
              Link="Actual/ViewportOverlay.cs" />
     <Compile Include="../../src/Mu3D.Maui.Toolkit/Overlays/SceneNodeAnchorLayer.cs"
              Link="Actual/SceneNodeAnchorLayer.cs" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Diagnostics/FrameStatisticsBehavior.cs"
+             Link="Actual/FrameStatisticsBehavior.cs" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Diagnostics/FrameStatisticsView.cs"
+             Link="Actual/FrameStatisticsView.cs" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Diagnostics/FrameStatisticsOverlay.cs"
+             Link="Actual/FrameStatisticsOverlay.cs" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Diagnostics/FrameStatisticsSamplingState.cs"
+             Link="Actual/FrameStatisticsSamplingState.cs" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Diagnostics/FrameStatisticsHistory.cs"
+             Link="Actual/FrameStatisticsHistory.cs" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Diagnostics/FrameStatisticsTextFormatter.cs"
+             Link="Actual/FrameStatisticsTextFormatter.cs" />
+    <Compile Include="../../src/Mu3D.Maui.Toolkit/Diagnostics/FrameStatisticsGraphDrawable.cs"
+             Link="Actual/FrameStatisticsGraphDrawable.cs" />
     <Compile Include="../../src/Mu3D.Toolkit/Helpers/SceneTargetEligibility.cs"
              Link="Actual/SceneTargetEligibility.cs" />
   </ItemGroup>

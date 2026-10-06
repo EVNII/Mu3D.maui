@@ -9,17 +9,19 @@ using MauiColor = Microsoft.Maui.Graphics.Color;
 namespace Mu3D.Maui.Toolkit.Diagnostics;
 
 /// <summary>
-/// Collects throttled frame statistics and displays them in a pass-through MAUI viewport overlay.
+/// Collects throttled frame statistics and displays them in an interactive MAUI viewport overlay.
 /// </summary>
 /// <remarks>
 /// The tool creates one attachment-owned <see cref="FrameStatisticsBehavior"/> and one
 /// <see cref="FrameStatisticsView"/>. It borrows the application-visible <see cref="Collector"/>,
 /// owns no render loop and uses the common per-viewport overlay manager for layout and lifecycle.
+/// Clicking the indicator cycles Compact, Normal and Detail without passing the click to the camera.
 /// </remarks>
 public sealed class FrameStatisticsOverlay : BindableObject, IViewportTool
 {
     private ToolAttachment? attachment;
     private FrameStatisticsSnapshot latestSnapshot;
+    private bool synchronizingDetailed;
 
     /// <summary>Identifies the <see cref="Collector"/> bindable property.</summary>
     public static readonly BindableProperty CollectorProperty = BindableProperty.Create(
@@ -80,14 +82,27 @@ public sealed class FrameStatisticsOverlay : BindableObject, IViewportTool
         propertyChanged: static (bindable, _, _) =>
             ((FrameStatisticsOverlay)bindable).attachment?.ApplyCollectionProperties());
 
+    /// <summary>Identifies the <see cref="DisplayMode"/> bindable property.</summary>
+    public static readonly BindableProperty DisplayModeProperty = BindableProperty.Create(
+        nameof(DisplayMode),
+        typeof(FrameStatisticsDisplayMode),
+        typeof(FrameStatisticsOverlay),
+        FrameStatisticsDisplayMode.Normal,
+        BindingMode.TwoWay,
+        validateValue: static (_, value) =>
+            value is FrameStatisticsDisplayMode mode && Enum.IsDefined(mode),
+        propertyChanged: static (bindable, _, _) =>
+            ((FrameStatisticsOverlay)bindable).OnDisplayModeChanged());
+
     /// <summary>Identifies the <see cref="IsDetailed"/> bindable property.</summary>
     public static readonly BindableProperty IsDetailedProperty = BindableProperty.Create(
         nameof(IsDetailed),
         typeof(bool),
         typeof(FrameStatisticsOverlay),
         false,
-        propertyChanged: static (bindable, _, _) =>
-            ((FrameStatisticsOverlay)bindable).attachment?.ApplyDisplayProperties());
+        BindingMode.TwoWay,
+        propertyChanged: static (bindable, _, value) =>
+            ((FrameStatisticsOverlay)bindable).OnIsDetailedChanged((bool)value));
 
     /// <summary>Identifies the <see cref="IsGraphVisible"/> bindable property.</summary>
     public static readonly BindableProperty IsGraphVisibleProperty = BindableProperty.Create(
@@ -217,11 +232,38 @@ public sealed class FrameStatisticsOverlay : BindableObject, IViewportTool
         set => SetValue(PrimitiveCountProperty, value);
     }
 
-    /// <summary>Gets or sets whether timing and resource details are shown.</summary>
+    /// <summary>Gets or sets the amount of indicator information. The default is Normal.</summary>
+    /// <remarks>
+    /// Compact shows only FPS and temporarily hides the graph. Clicks cycle Compact to Normal to
+    /// Detail to Compact and update this property. Its default binding mode is two-way.
+    /// Prefer this property over <see cref="IsDetailed"/> when binding display state.
+    /// </remarks>
+    public FrameStatisticsDisplayMode DisplayMode
+    {
+        get => (FrameStatisticsDisplayMode)GetValue(DisplayModeProperty);
+        set => SetValue(DisplayModeProperty, value);
+    }
+
+    /// <summary>Gets or sets the legacy Normal/Detail display choice.</summary>
+    /// <remarks>
+    /// Assigning this CLR property selects Detail for true and Normal for false, even when the
+    /// boolean is unchanged. Compact reports false. An unchanged bindable-property write does not
+    /// change modes; use <see cref="DisplayMode"/> for explicit mode selection.
+    /// Use <see cref="DisplayMode"/>
+    /// to distinguish all modes, and avoid binding both selectors to independent state. The default
+    /// binding mode is now two-way so indicator clicks can update a legacy bound selector.
+    /// </remarks>
     public bool IsDetailed
     {
         get => (bool)GetValue(IsDetailedProperty);
-        set => SetValue(IsDetailedProperty, value);
+        set
+        {
+            SetValue(IsDetailedProperty, value);
+            if (!synchronizingDetailed)
+            {
+                DisplayMode = value ? FrameStatisticsDisplayMode.Detail : FrameStatisticsDisplayMode.Normal;
+            }
+        }
     }
 
     /// <summary>Gets or sets whether the rolling FPS graph is shown.</summary>
@@ -350,6 +392,27 @@ public sealed class FrameStatisticsOverlay : BindableObject, IViewportTool
         OnPropertyChanged(nameof(LatestSnapshot));
     }
 
+    private void OnDisplayModeChanged()
+    {
+        synchronizingDetailed = true;
+        try
+        {
+            SetValue(IsDetailedProperty, DisplayMode == FrameStatisticsDisplayMode.Detail);
+        }
+        finally
+        {
+            synchronizingDetailed = false;
+        }
+    }
+
+    private void OnIsDetailedChanged(bool isDetailed)
+    {
+        if (!synchronizingDetailed)
+        {
+            DisplayMode = isDetailed ? FrameStatisticsDisplayMode.Detail : FrameStatisticsDisplayMode.Normal;
+        }
+    }
+
     private sealed class ToolAttachment : IDisposable
     {
         private static readonly MauiColor StrokeColor = MauiColor.FromArgb("#FF53647D");
@@ -371,6 +434,11 @@ public sealed class FrameStatisticsOverlay : BindableObject, IViewportTool
         internal void Attach()
         {
             ObjectDisposedException.ThrowIf(disposed, this);
+            statisticsView.SetBinding(
+                FrameStatisticsView.DisplayModeProperty,
+                static (FrameStatisticsOverlay source) => source.DisplayMode,
+                mode: BindingMode.TwoWay,
+                source: owner);
             ApplyCollectionProperties();
             ApplyDisplayProperties();
             behavior.SnapshotUpdated += OnSnapshotUpdated;
@@ -401,7 +469,6 @@ public sealed class FrameStatisticsOverlay : BindableObject, IViewportTool
         internal void ApplyDisplayProperties()
         {
             ObjectDisposedException.ThrowIf(disposed, this);
-            statisticsView.IsDetailed = owner.IsDetailed;
             statisticsView.IsGraphVisible = owner.IsGraphVisible;
             statisticsView.TextColor = owner.TextColor;
             statisticsView.GraphColor = owner.GraphColor;
@@ -425,10 +492,13 @@ public sealed class FrameStatisticsOverlay : BindableObject, IViewportTool
                 StrokeShape = new RoundRectangle { CornerRadius = new CornerRadius(7d) },
                 StrokeThickness = 1d,
             };
+            // Use one recognizer for the complete indicator, including its border/padding.
+            // Moving the view's route avoids a nested parent/child double transition.
+            statisticsView.SetModeTapTarget(chrome);
             ViewportOverlay createdHost = new()
             {
                 Content = chrome,
-                InputMode = ViewportOverlayInputMode.PassThrough,
+                InputMode = ViewportOverlayInputMode.Interactive,
                 Margin = new Thickness(owner.Margin),
                 MaximumWidthRequest = owner.MaximumWidth,
                 Placement = owner.Placement,
@@ -459,6 +529,7 @@ public sealed class FrameStatisticsOverlay : BindableObject, IViewportTool
 
             disposed = true;
             RemoveOverlay();
+            statisticsView.RemoveBinding(FrameStatisticsView.DisplayModeProperty);
             statisticsView.Source = null;
             statisticsView.Dispose();
             behavior.SnapshotUpdated -= OnSnapshotUpdated;
@@ -476,6 +547,7 @@ public sealed class FrameStatisticsOverlay : BindableObject, IViewportTool
 
         private void RemoveOverlay()
         {
+            statisticsView.SetModeTapTarget(null);
             overlayLease?.Dispose();
             overlayLease = null;
             if (overlayHost is ViewportOverlay previous)

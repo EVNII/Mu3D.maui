@@ -62,6 +62,33 @@ internal static class PresentationWhiteChecks
             }
         }
         }
+        foreach (var format in new[] { GraphicsTextureFormat.Rgba32Float, GraphicsTextureFormat.Rgba16Float })
+        {
+            using var target = device.CreateTexture(new(new(4, 2), format,
+                GraphicsTextureUsage.RenderAttachment | GraphicsTextureUsage.CopySource));
+            using var exposure = new PresentationWhitePass(device, format);
+            GraphicsTexture input = exposure.GetInput(target);
+            using (var encoder = device.CreateCommandEncoder())
+            {
+                using (encoder.BeginRenderPass(new GraphicsRenderPassDescriptor(
+                    new GraphicsRenderPassColorAttachment(input, GraphicsLoadOperation.Clear,
+                        GraphicsStoreOperation.Store, new GraphicsClearColor(.5f, 2f, 4f, .5f))))) { }
+                using var commands = encoder.Finish(); device.Queue.Submit(commands);
+            }
+            foreach (var sample in new (float Stops, Vector4 Expected)[]
+            {
+                (-2, new(.125f, .5f, 1f, .5f)),
+                (-1, new(.25f, 1f, 2f, .5f)),
+                (0, new(.5f, 2f, 4f, .5f)),
+                (1, new(1f, 4f, 8f, .5f)),
+                (2, new(2f, 8f, 16f, .5f)),
+            })
+            {
+                exposure.Apply(target, MathF.Pow(2f, sample.Stops));
+                Check((await ReadAsync(target)).All(pixel => Vector4.Distance(pixel, sample.Expected) < .00001f),
+                    $"scene-linear EV {sample.Stops}: HDR ratios and alpha preserved in {format}");
+            }
+        }
         using (var target = device.CreateTexture(new(new(6, 2), GraphicsTextureFormat.Rgba32Float,
             GraphicsTextureUsage.RenderAttachment | GraphicsTextureUsage.CopySource)))
         using (var white = new PresentationWhitePass(device, GraphicsTextureFormat.Rgba32Float))

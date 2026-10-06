@@ -136,7 +136,7 @@ public partial class AppShell : AShell
     {
         if (ReferenceEquals(CurrentItem, destination))
         {
-            // Native back-to-group leaves CurrentItem unchanged in AdaptiveShell 0.1.1.
+            // Native back-to-group leaves CurrentItem unchanged in AdaptiveShell 0.2.1.
             Handler?.UpdateValue(nameof(CurrentItem));
             ActivateCurrentPage();
         }

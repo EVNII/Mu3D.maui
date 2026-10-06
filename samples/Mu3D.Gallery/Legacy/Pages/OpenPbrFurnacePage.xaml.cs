@@ -20,6 +20,7 @@ public partial class OpenPbrFurnacePage : ContentPage
     public OpenPbrFurnacePage()
     {
         InitializeComponent();
+        SceneView.PrepareGraphicsAsync = PrepareGraphicsAsync;
         settingsUpdates = new(Dispatcher, () => { if (visible) ApplySettings(); });
         ready = true;
         EnsureRenderer(); ApplySettings();
@@ -43,6 +44,31 @@ public partial class OpenPbrFurnacePage : ContentPage
     {
         furnace ??= new(); SceneView.RenderPipeline = furnace.Pipeline;
     }
+    private async Task PrepareGraphicsAsync(GraphicsDevice device, GraphicsTextureFormat format,
+        CancellationToken cancellationToken)
+    {
+        if (format is not (GraphicsTextureFormat.Rgba16Float or GraphicsTextureFormat.Rgba32Float))
+            throw new NotSupportedException("熔炉显示需要 FP16/FP32 HDR 表面。");
+        EnsureRenderer();
+        settingsUpdates.Cancel();
+        ApplySettings();
+        OpenPbrFurnaceRenderer preparing = furnace!;
+        SettingsPanel.IsEnabled = false;
+        StatusLabel.Text = "正在准备 OpenPBR 熔炉着色器；准备期间可以离开此页。";
+        try
+        {
+            // The furnace measures its FP32 radiance source, independently of the FP16 carrier.
+            // The control keeps the unpublished session/device alive until compilation finishes.
+            await preparing.Transport.PrepareAsync(device, GraphicsTextureFormat.Rgba32Float, cancellationToken);
+            if (ReferenceEquals(furnace, preparing) && visible)
+                StatusLabel.Text = "OpenPBR 熔炉已就绪。有限采样和反弹截断仍会影响结果。";
+        }
+        finally
+        {
+            if (ReferenceEquals(furnace, preparing) && !cancellationToken.IsCancellationRequested)
+                SettingsPanel.IsEnabled = true;
+        }
+    }
     private void OnSettingsChanged(object? sender, EventArgs e)
     { if (ready && !updating) settingsUpdates.Request(); }
     private void OnValueChanged(object? sender, ValueChangedEventArgs e) => OnSettingsChanged(sender, e);
@@ -61,6 +87,7 @@ public partial class OpenPbrFurnacePage : ContentPage
                 StatusLabel.Text = modeIndex == 4
                     ? "Fast 模式与光栅一样拒绝透射（玻璃），已选择 Reference。"
                     : "光栅模式不支持玻璃/次表面，已选择 Reference。";
+                modeIndex = 0;
             }
             else if (modeIndex == 4 && preset == 5)
                 StatusLabel.Text = "Fast 丢弃次表面 lobe 并计入近似报告；扩散/高光项仍参与。数值不自动判定通过或失败。";

@@ -429,7 +429,8 @@ public sealed partial class ViewportNavigationBehavior : Behavior<Mu3DSceneView>
         }
     }
 
-    internal void ProcessPinch(GestureStatus status, double scale, bool isTrackpad = false)
+    internal void ProcessPinch(GestureStatus status, double scale, bool isTrackpad = false,
+        bool isIncremental = false)
     {
         bool enabled = isTrackpad
             ? TrackpadInput.IsEnabled &&
@@ -453,7 +454,7 @@ public sealed partial class ViewportNavigationBehavior : Behavior<Mu3DSceneView>
                     }
                     break;
                 case GestureStatus.Running:
-                    if (!multiTouchGestureState.TryGetPinchRatio(scale, out double ratio))
+                    if (!multiTouchGestureState.TryGetPinchRatio(scale, out double ratio, isIncremental))
                     {
                         return;
                     }
@@ -744,7 +745,7 @@ public sealed partial class ViewportNavigationBehavior : Behavior<Mu3DSceneView>
             panGesture.PanUpdated += OnPanUpdated;
             sceneView.GestureRecognizers.Add(panGesture);
         }
-        if (TouchscreenInput.IsEnabled &&
+        if (!OperatingSystem.IsAndroid() && TouchscreenInput.IsEnabled &&
             TouchscreenInput.TwoFingerDragAction != ViewportDragAction.None)
         {
             twoFingerPanGesture.PanUpdated += OnTwoFingerPanUpdated;
@@ -809,6 +810,9 @@ public sealed partial class ViewportNavigationBehavior : Behavior<Mu3DSceneView>
         gestureState.End();
         multiTouchGestureState.End();
         pointerButtonGestureState.End();
+#if ANDROID
+        ClearPlatformTouchSequence();
+#endif
         onePointerDragSuppressed = false;
         activeOnePointerDragAction = ViewportDragAction.None;
         activePointerButtonDragAction = ViewportDragAction.None;
@@ -874,14 +878,26 @@ public sealed partial class ViewportNavigationBehavior : Behavior<Mu3DSceneView>
         InteractionFailed?.Invoke(this, new ViewportNavigationFailedEventArgs(exception));
     }
 
-    private void OnPanUpdated(object? sender, PanUpdatedEventArgs e) =>
+    private void OnPanUpdated(object? sender, PanUpdatedEventArgs e)
+    {
+#if ANDROID
+        // Once a native two-finger transform takes over, MAUI's old one-finger totals
+        // must not resume when a finger lifts. Native input establishes a fresh baseline.
+        if (platformNativeTouchSequence)
+        {
+            return;
+        }
+#endif
         ProcessPan(e.StatusType, e.TotalX, e.TotalY);
+    }
 
     private void OnTwoFingerPanUpdated(object? sender, PanUpdatedEventArgs e) =>
         ProcessTwoFingerPan(e.StatusType, e.TotalX, e.TotalY);
 
     private void OnPinchUpdated(object? sender, PinchGestureUpdatedEventArgs e) =>
-        ProcessPinch(e.Status, e.Scale);
+        // MAUI reports scale relative to the previous update. Native Apple recognizers instead
+        // call ProcessPinch with cumulative scale, so preserve that separate input contract.
+        ProcessPinch(e.Status, e.Scale, isIncremental: true);
 
     private void OnFramePresented(object? sender, SurfaceFramePresentedEventArgs e)
     {

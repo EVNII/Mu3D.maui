@@ -15,7 +15,7 @@
   <Import Project="../../eng/Mu3D.KtxNativeVersion.props" />
 
   <PropertyGroup>
-    <!-- AdaptiveShell.Maui 0.1.1 ships net10.0-android / net10.0-ios26.5 / net10.0-maccatalyst26.5
+    <!-- AdaptiveShell.Maui ships net10.0-android / net10.0-ios26.5 / net10.0-maccatalyst26.5
          and net10.0-windows10.0.19041.0, so this sample targets all four 1.0 platforms. -->
     <TargetFrameworks>net10.0-android</TargetFrameworks>
     <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('linux'))">$(TargetFrameworks);net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
@@ -154,7 +154,7 @@
   <!-- The in-app source drawer is desktop-only. Keep copyable source out of Android and iOS
        packages instead of shipping assets that those layouts never expose. -->
   <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst' Or $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
-    <MauiAsset Include="Pages/*Page.xaml;Pages/*Page.xaml.cs;Pages/*Presenter.cs;Pages/SampleEnvironment.cs;Controls/SceneHostView.cs;Controls/IGalleryPageActivation.cs"
+    <MauiAsset Include="Pages/*Page.xaml;Pages/*Page.xaml.cs;Pages/*Presenter.cs;Pages/SampleEnvironment.cs;Pages/AndroidHdrBufferDiagnostics.cs;Pages/HdrProbePage.Readback.cs;Pages/SurfaceReferenceReadback.cs;Pages/FeedCheckerboard.cs;Controls/SceneHostView.cs;Controls/IGalleryPageActivation.cs"
                LogicalName="GallerySource/Adaptive/%(Filename)%(Extension)" />
     <MauiAsset Include="Legacy\Pages\*Page.xaml"
                LogicalName="GallerySource/%(Filename)%(Extension)" />
@@ -170,7 +170,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.100" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.11" />
-    <PackageReference Include="AdaptiveShell.Maui" Version="0.1.1" />
+    <PackageReference Include="AdaptiveShell.Maui" Version="0.2.1" />
     <ProjectReference Include="../../src/Mu3D.Native.Wgpu/Mu3D.Native.Wgpu.csproj" />
     <ProjectReference Include="../../src/Mu3D.Maui/Mu3D.Maui.csproj" />
     <ProjectReference Include="../../src/Mu3D.Toolkit/Mu3D.Toolkit.csproj" />

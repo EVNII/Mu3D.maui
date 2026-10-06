@@ -19,7 +19,7 @@
   <ItemGroup>
     <Compile Include="../GalleryCatalog.cs" Link="Gallery/GalleryCatalog.cs" />
     <Content Include="../Resources/Images/*.svg" Link="wwwroot/navigation/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="../Pages/*Page.xaml;../Pages/*Page.xaml.cs;../Pages/*Presenter.cs;../Pages/SampleEnvironment.cs;../Controls/SceneHostView.cs;../Controls/IGalleryPageActivation.cs"
+    <Content Include="../Pages/*Page.xaml;../Pages/*Page.xaml.cs;../Pages/*Presenter.cs;../Pages/SampleEnvironment.cs;../Pages/AndroidHdrBufferDiagnostics.cs;../Pages/HdrProbePage.Readback.cs;../Pages/SurfaceReferenceReadback.cs;../Pages/FeedCheckerboard.cs;../Controls/SceneHostView.cs;../Controls/IGalleryPageActivation.cs"
              Link="wwwroot/GallerySource/Adaptive/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.12" />
     <ProjectReference Include="../../../src/Mu3D.Web.Toolkit/Mu3D.Web.Toolkit.csproj" />

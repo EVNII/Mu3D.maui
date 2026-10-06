@@ -61,6 +61,8 @@ draw calls and primitives are independently optional; `RenderResourceCounts` dis
 unavailable value from a measured zero. Snapshot creation has no UI dependency, so telemetry and
 diagnostics overlays can refresh less often than rendering. These wall-clock values are not GPU
 timestamp queries.
+`FrameStatisticsDisplayMode` supplies the backend-independent Compact, Normal and Detail choices
+for optional host indicators; the collector does not change collection when display mode changes.
 
 Toolkit objects are explicitly constructed and application-owned. The package performs no assembly
 scanning, reflection-based activation or backend-native interop.

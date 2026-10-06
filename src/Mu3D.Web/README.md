@@ -31,6 +31,12 @@ behavior; applications choose whether to enable AOT. See the [Web validation gui
 for build commands and browser checks, and the [Gallery host](../../samples/Mu3D.Gallery/Web/README.md)
 for a complete application using these handlers.
 
+Mono IL execution of prebuilt application assemblies is supported. Mu3D introduces no runtime
+user-authored C# scripting, dynamic C# compilation or executable hotcode feature. Ordinary live
+values and shared material graphs retain their existing contracts; development hot reload is a
+separate toolchain feature. Verify stability and native/shared behavior consistency, and record
+representative performance for both supported build modes.
+
 The normal JS entry point is `createManagedViewportHandler` in `wwwroot/mu3d/viewport-handler.mjs`:
 
 ```js

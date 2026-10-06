@@ -446,7 +446,108 @@ fn load_material_0( index_0 : i32,  uv_1 : vec4<f32>,  inheritedNormal_0 : vec3<
                                     }
                                     else
                                     {
-                                        value_1 = parameter_0;
+                                        if(code_0 == i32(9))
+                                        {
+                                            value_1 = values_0[i32(op_0.y)] - values_0[i32(op_0.z)];
+                                        }
+                                        else
+                                        {
+                                            if(code_0 == i32(10))
+                                            {
+                                                value_1 = min(values_0[i32(op_0.y)], values_0[i32(op_0.z)]);
+                                            }
+                                            else
+                                            {
+                                                if(code_0 == i32(11))
+                                                {
+                                                    value_1 = max(values_0[i32(op_0.y)], values_0[i32(op_0.z)]);
+                                                }
+                                                else
+                                                {
+                                                    if(code_0 == i32(12))
+                                                    {
+                                                        value_1 = abs(values_0[i32(op_0.y)]);
+                                                    }
+                                                    else
+                                                    {
+                                                        var _S52 : bool = code_0 == i32(13);
+                                                        var _S53 : bool;
+                                                        if(_S52)
+                                                        {
+                                                            _S53 = true;
+                                                        }
+                                                        else
+                                                        {
+                                                            _S53 = code_0 == i32(14);
+                                                        }
+                                                        if(_S53)
+                                                        {
+                                                            var type_0 : i32 = i32(graphProgram_0[at_0 + i32(2)].w);
+                                                            var a_3 : vec4<f32> = values_0[i32(op_0.y)];
+                                                            var b_2 : vec4<f32>;
+                                                            var _S54 : vec4<f32>;
+                                                            if(_S52)
+                                                            {
+                                                                _S54 = values_0[i32(op_0.z)];
+                                                            }
+                                                            else
+                                                            {
+                                                                _S54 = vec4<f32>(vec4<i32>(i32(1)));
+                                                            }
+                                                            b_2 = _S54;
+                                                            if(type_0 == i32(2))
+                                                            {
+                                                                var _S55 : vec2<f32> = vec2<f32>(vec2<i32>(i32(0)));
+                                                                a_3.z = _S55.x;
+                                                                a_3.w = _S55.y;
+                                                                var _S56 : vec2<f32> = vec2<f32>(vec2<i32>(i32(1)));
+                                                                b_2.z = _S56.x;
+                                                                b_2.w = _S56.y;
+                                                            }
+                                                            else
+                                                            {
+                                                                var _S57 : bool;
+                                                                if(type_0 == i32(1))
+                                                                {
+                                                                    _S57 = true;
+                                                                }
+                                                                else
+                                                                {
+                                                                    _S57 = type_0 == i32(3);
+                                                                }
+                                                                if(_S57)
+                                                                {
+                                                                    a_3[i32(3)] = 0.0f;
+                                                                    b_2[i32(3)] = 1.0f;
+                                                                }
+                                                            }
+                                                            if(_S52)
+                                                            {
+                                                                value_1 = a_3 / b_2;
+                                                            }
+                                                            else
+                                                            {
+                                                                value_1 = sqrt(a_3);
+                                                            }
+                                                            var value_2 : vec4<f32>;
+                                                            if(type_0 == i32(0))
+                                                            {
+                                                                value_2 = vec4<f32>(value_1.x);
+                                                            }
+                                                            else
+                                                            {
+                                                                value_2 = value_1;
+                                                            }
+                                                            value_1 = value_2;
+                                                        }
+                                                        else
+                                                        {
+                                                            value_1 = parameter_0;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -458,29 +559,29 @@ fn load_material_0( index_0 : i32,  uv_1 : vec4<f32>,  inheritedNormal_0 : vec3<
         values_0[i_1] = value_1;
         i_1 = i_1 + i32(1);
     }
-    var b_2 : i32 = i32(0);
+    var b_3 : i32 = i32(0);
     for(;;)
     {
-        if(b_2 < i32((*p_3)[i32(18)].w))
+        if(b_3 < i32((*p_3)[i32(18)].w))
         {
         }
         else
         {
             break;
         }
-        var binding_0 : vec4<f32> = graphProgram_0[_S45 + _S46 * i32(4) + b_2];
+        var binding_0 : vec4<f32> = graphProgram_0[_S45 + _S46 * i32(4) + b_3];
         var slot_0 : i32 = i32(binding_0.x);
         var channel_0 : i32 = i32(binding_0.y);
-        var value_2 : vec4<f32> = values_0[i32(binding_0.z)];
+        var value_3 : vec4<f32> = values_0[i32(binding_0.z)];
         if(channel_0 < i32(0))
         {
-            var _S52 : vec3<f32> = value_2.xyz;
-            (*p_3)[slot_0].x = _S52.x;
-            (*p_3)[slot_0].y = _S52.y;
-            (*p_3)[slot_0].z = _S52.z;
+            var _S58 : vec3<f32> = value_3.xyz;
+            (*p_3)[slot_0].x = _S58.x;
+            (*p_3)[slot_0].y = _S58.y;
+            (*p_3)[slot_0].z = _S58.z;
             if(slot_0 >= i32(14))
             {
-                if((dot(_S52, _S52)) > 9.99999968265522539e-21f)
+                if((dot(_S58, _S58)) > 9.99999968265522539e-21f)
                 {
                     i_1 = i32(1);
                 }
@@ -493,30 +594,30 @@ fn load_material_0( index_0 : i32,  uv_1 : vec4<f32>,  inheritedNormal_0 : vec3<
         }
         else
         {
-            var _S53 : f32 = value_2.x;
-            var _S54 : f32;
+            var _S59 : f32 = value_3.x;
+            var _S60 : f32;
             if((binding_0.w) > 0.0f)
             {
-                _S54 = (*p_3)[i32(13)].w / Frame_0.frame_0[i32(14)].x;
+                _S60 = (*p_3)[i32(13)].w / Frame_0.frame_0[i32(14)].x;
             }
             else
             {
-                _S54 = 1.0f;
+                _S60 = 1.0f;
             }
-            (*p_3)[slot_0][channel_0] = _S53 * _S54;
+            (*p_3)[slot_0][channel_0] = _S59 * _S60;
         }
-        b_2 = b_2 + i32(1);
+        b_3 = b_3 + i32(1);
     }
     return;
 }
 
-fn OpenPBR_Basis_x24init_0( t_2 : vec3<f32>,  b_3 : vec3<f32>,  n_3 : vec3<f32>) -> OpenPBR_Basis_0
+fn OpenPBR_Basis_x24init_0( t_2 : vec3<f32>,  b_4 : vec3<f32>,  n_3 : vec3<f32>) -> OpenPBR_Basis_0
 {
-    var _S55 : OpenPBR_Basis_0;
-    _S55.t_0 = t_2;
-    _S55.b_0 = b_3;
-    _S55.n_0 = n_3;
-    return _S55;
+    var _S61 : OpenPBR_Basis_0;
+    _S61.t_0 = t_2;
+    _S61.b_0 = b_4;
+    _S61.n_0 = n_3;
+    return _S61;
 }
 
 struct OpenPBR_ResolvedInputs_0
@@ -568,35 +669,35 @@ fn openpbr_make_default_resolved_inputs_0() -> OpenPBR_ResolvedInputs_0
 {
     var inputs_0 : OpenPBR_ResolvedInputs_0;
     inputs_0.base_weight_0 = 1.0f;
-    var _S56 : vec3<f32> = vec3<f32>(0.80000001192092896f);
-    inputs_0.base_color_0 = _S56;
+    var _S62 : vec3<f32> = vec3<f32>(0.80000001192092896f);
+    inputs_0.base_color_0 = _S62;
     inputs_0.base_diffuse_roughness_0 = 0.0f;
     inputs_0.base_metalness_0 = 0.0f;
     inputs_0.subsurface_weight_0 = 0.0f;
-    inputs_0.subsurface_color_0 = _S56;
+    inputs_0.subsurface_color_0 = _S62;
     inputs_0.subsurface_radius_0 = 1.0f;
     inputs_0.subsurface_radius_scale_0 = vec3<f32>(1.0f, 0.5f, 0.25f);
     inputs_0.subsurface_scatter_anisotropy_0 = 0.0f;
     inputs_0.specular_weight_0 = 1.0f;
-    var _S57 : vec3<f32> = vec3<f32>(1.0f);
-    inputs_0.specular_color_0 = _S57;
+    var _S63 : vec3<f32> = vec3<f32>(1.0f);
+    inputs_0.specular_color_0 = _S63;
     inputs_0.specular_roughness_0 = 0.30000001192092896f;
     inputs_0.specular_roughness_anisotropy_0 = 0.0f;
     inputs_0.specular_ior_0 = 1.5f;
-    const _S58 : vec2<f32> = vec2<f32>(1.0f, 0.0f);
-    inputs_0.specular_anisotropy_rotation_cos_sin_0 = _S58;
+    const _S64 : vec2<f32> = vec2<f32>(1.0f, 0.0f);
+    inputs_0.specular_anisotropy_rotation_cos_sin_0 = _S64;
     inputs_0.coat_weight_0 = 0.0f;
-    inputs_0.coat_color_0 = _S57;
+    inputs_0.coat_color_0 = _S63;
     inputs_0.coat_roughness_0 = 0.0f;
     inputs_0.coat_roughness_anisotropy_0 = 0.0f;
     inputs_0.coat_ior_0 = 1.60000002384185791f;
     inputs_0.coat_darkening_0 = 1.0f;
-    inputs_0.coat_anisotropy_rotation_cos_sin_0 = _S58;
+    inputs_0.coat_anisotropy_rotation_cos_sin_0 = _S64;
     inputs_0.fuzz_weight_0 = 0.0f;
-    inputs_0.fuzz_color_0 = _S57;
+    inputs_0.fuzz_color_0 = _S63;
     inputs_0.fuzz_roughness_0 = 0.5f;
     inputs_0.transmission_weight_0 = 0.0f;
-    inputs_0.transmission_color_0 = _S57;
+    inputs_0.transmission_color_0 = _S63;
     inputs_0.transmission_depth_0 = 0.0f;
     inputs_0.transmission_scatter_0 = vec3<f32>(0.0f);
     inputs_0.transmission_scatter_anisotropy_0 = 0.0f;
@@ -606,12 +707,12 @@ fn openpbr_make_default_resolved_inputs_0() -> OpenPBR_ResolvedInputs_0
     inputs_0.thin_film_thickness_0 = 0.5f;
     inputs_0.thin_film_ior_0 = 1.39999997615814209f;
     inputs_0.emission_luminance_0 = 0.0f;
-    inputs_0.emission_color_0 = _S57;
+    inputs_0.emission_color_0 = _S63;
     inputs_0.geometry_opacity_0 = 1.0f;
     inputs_0.geometry_thin_walled_0 = false;
-    var _S59 : OpenPBR_Basis_0 = OpenPBR_Basis_x24init_0(vec3<f32>(1.0f, 0.0f, 0.0f), vec3<f32>(0.0f, 1.0f, 0.0f), vec3<f32>(0.0f, 0.0f, 1.0f));
-    inputs_0.geometry_basis_0 = _S59;
-    inputs_0.geometry_coat_basis_0 = _S59;
+    var _S65 : OpenPBR_Basis_0 = OpenPBR_Basis_x24init_0(vec3<f32>(1.0f, 0.0f, 0.0f), vec3<f32>(0.0f, 1.0f, 0.0f), vec3<f32>(0.0f, 0.0f, 1.0f));
+    inputs_0.geometry_basis_0 = _S65;
+    inputs_0.geometry_coat_basis_0 = _S65;
     return inputs_0;
 }
 
@@ -663,15 +764,15 @@ fn resolve_material_0( hit_1 : Hit_0,  view_0 : vec3<f32>,  geometricNormal_0 : 
     var base_1 : i32 = hit_1.triangle_0 * i32(12);
     var material_0 : i32 = i32(triangles_0[base_1].w);
     var offset_0 : i32 = material_0 * i32(19);
-    var _S60 : i32 = base_1 + i32(1);
-    (*object_0) = i32(triangles_0[_S60].w);
+    var _S66 : i32 = base_1 + i32(1);
+    (*object_0) = i32(triangles_0[_S66].w);
     (*nits_0) = materials_0[offset_0 + i32(18)].x;
-    var _S61 : i32 = base_1 + i32(2);
-    (*geometricNormal_0) = normalize(cross(triangles_0[_S60].xyz - triangles_0[base_1].xyz, triangles_0[_S61].xyz - triangles_0[base_1].xyz));
-    var _S62 : f32 = hit_1.bary_0.x;
-    var _S63 : f32 = hit_1.bary_0.y;
-    var _S64 : f32 = hit_1.bary_0.z;
-    var interpolated_0 : vec3<f32> = triangles_0[base_1 + i32(3)].xyz * vec3<f32>(_S62) + triangles_0[base_1 + i32(4)].xyz * vec3<f32>(_S63) + triangles_0[base_1 + i32(5)].xyz * vec3<f32>(_S64);
+    var _S67 : i32 = base_1 + i32(2);
+    (*geometricNormal_0) = normalize(cross(triangles_0[_S66].xyz - triangles_0[base_1].xyz, triangles_0[_S67].xyz - triangles_0[base_1].xyz));
+    var _S68 : f32 = hit_1.bary_0.x;
+    var _S69 : f32 = hit_1.bary_0.y;
+    var _S70 : f32 = hit_1.bary_0.z;
+    var interpolated_0 : vec3<f32> = triangles_0[base_1 + i32(3)].xyz * vec3<f32>(_S68) + triangles_0[base_1 + i32(4)].xyz * vec3<f32>(_S69) + triangles_0[base_1 + i32(5)].xyz * vec3<f32>(_S70);
     var normal_2 : vec3<f32>;
     if((dot(interpolated_0, interpolated_0)) > 9.99999968265522539e-21f)
     {
@@ -681,45 +782,45 @@ fn resolve_material_0( hit_1 : Hit_0,  view_0 : vec3<f32>,  geometricNormal_0 : 
     {
         normal_2 = (*geometricNormal_0);
     }
-    var _S65 : vec4<f32> = vec4<f32>(_S62);
-    var _S66 : vec4<f32> = vec4<f32>(_S63);
-    var _S67 : vec4<f32> = vec4<f32>(_S64);
-    var _S68 : vec4<f32> = triangles_0[base_1 + i32(6)] * _S65 + triangles_0[base_1 + i32(7)] * _S66 + triangles_0[base_1 + i32(8)] * _S67;
-    var tangent_1 : vec4<f32> = _S68;
-    var _S69 : vec3<f32> = _S68.xyz;
-    if((dot(_S69, _S69)) < 1.00000000362749373e-15f)
+    var _S71 : vec4<f32> = vec4<f32>(_S68);
+    var _S72 : vec4<f32> = vec4<f32>(_S69);
+    var _S73 : vec4<f32> = vec4<f32>(_S70);
+    var _S74 : vec4<f32> = triangles_0[base_1 + i32(6)] * _S71 + triangles_0[base_1 + i32(7)] * _S72 + triangles_0[base_1 + i32(8)] * _S73;
+    var tangent_1 : vec4<f32> = _S74;
+    var _S75 : vec3<f32> = _S74.xyz;
+    if((dot(_S75, _S75)) < 1.00000000362749373e-15f)
     {
-        var _S70 : i32 = base_1 + i32(9);
-        var du_0 : vec2<f32> = triangles_0[base_1 + i32(10)].xy - triangles_0[_S70].xy;
-        var dv_0 : vec2<f32> = triangles_0[base_1 + i32(11)].xy - triangles_0[_S70].xy;
-        var _S71 : f32 = du_0.x;
-        var _S72 : f32 = dv_0.y;
-        var _S73 : f32 = du_0.y;
-        var _S74 : f32 = dv_0.x;
-        var determinant_0 : f32 = _S71 * _S72 - _S73 * _S74;
+        var _S76 : i32 = base_1 + i32(9);
+        var du_0 : vec2<f32> = triangles_0[base_1 + i32(10)].xy - triangles_0[_S76].xy;
+        var dv_0 : vec2<f32> = triangles_0[base_1 + i32(11)].xy - triangles_0[_S76].xy;
+        var _S77 : f32 = du_0.x;
+        var _S78 : f32 = dv_0.y;
+        var _S79 : f32 = du_0.y;
+        var _S80 : f32 = dv_0.x;
+        var determinant_0 : f32 = _S77 * _S78 - _S79 * _S80;
         if((abs(determinant_0)) > 1.00000000362749373e-15f)
         {
-            var edge1_0 : vec3<f32> = triangles_0[_S60].xyz - triangles_0[base_1].xyz;
-            var edge2_0 : vec3<f32> = triangles_0[_S61].xyz - triangles_0[base_1].xyz;
-            var _S75 : vec3<f32> = vec3<f32>(determinant_0);
-            var _S76 : vec3<f32> = (edge1_0 * vec3<f32>(_S72) - edge2_0 * vec3<f32>(_S73)) / _S75;
-            tangent_1.x = _S76.x;
-            tangent_1.y = _S76.y;
-            tangent_1.z = _S76.z;
-            var _S77 : i32;
-            if((dot(cross(normal_2, tangent_1.xyz), (edge2_0 * vec3<f32>(_S71) - edge1_0 * vec3<f32>(_S74)) / _S75)) < 0.0f)
+            var edge1_0 : vec3<f32> = triangles_0[_S66].xyz - triangles_0[base_1].xyz;
+            var edge2_0 : vec3<f32> = triangles_0[_S67].xyz - triangles_0[base_1].xyz;
+            var _S81 : vec3<f32> = vec3<f32>(determinant_0);
+            var _S82 : vec3<f32> = (edge1_0 * vec3<f32>(_S78) - edge2_0 * vec3<f32>(_S79)) / _S81;
+            tangent_1.x = _S82.x;
+            tangent_1.y = _S82.y;
+            tangent_1.z = _S82.z;
+            var _S83 : i32;
+            if((dot(cross(normal_2, tangent_1.xyz), (edge2_0 * vec3<f32>(_S77) - edge1_0 * vec3<f32>(_S80)) / _S81)) < 0.0f)
             {
-                _S77 = i32(-1);
+                _S83 = i32(-1);
             }
             else
             {
-                _S77 = i32(1);
+                _S83 = i32(1);
             }
-            tangent_1[i32(3)] = f32(_S77);
+            tangent_1[i32(3)] = f32(_S83);
         }
     }
     var p_5 : array<vec4<f32>, i32(19)>;
-    load_material_0(material_0, triangles_0[base_1 + i32(9)] * _S65 + triangles_0[base_1 + i32(10)] * _S66 + triangles_0[base_1 + i32(11)] * _S67, normal_2, tangent_1, &(p_5));
+    load_material_0(material_0, triangles_0[base_1 + i32(9)] * _S71 + triangles_0[base_1 + i32(10)] * _S72 + triangles_0[base_1 + i32(11)] * _S73, normal_2, tangent_1, &(p_5));
     if((p_5[i32(14)].w) > 0.0f)
     {
         normal_2 = normalize(p_5[i32(14)].xyz);
@@ -734,10 +835,10 @@ fn resolve_material_0( hit_1 : Hit_0,  view_0 : vec3<f32>,  geometricNormal_0 : 
     }
     if((p_5[i32(15)].w) > 0.0f)
     {
-        var _S78 : vec3<f32> = p_5[i32(15)].xyz;
-        tangent_1.x = _S78.x;
-        tangent_1.y = _S78.y;
-        tangent_1.z = _S78.z;
+        var _S84 : vec3<f32> = p_5[i32(15)].xyz;
+        tangent_1.x = _S84.x;
+        tangent_1.y = _S84.y;
+        tangent_1.z = _S84.z;
     }
     var coatNormal_0 : vec3<f32>;
     if((p_5[i32(16)].w) > 0.0f)
@@ -776,15 +877,15 @@ fn resolve_material_1( hit_2 : Hit_0,  view_1 : vec3<f32>,  geometricNormal_1 : 
     var base_2 : i32 = hit_2.triangle_0 * i32(12);
     var material_1 : i32 = i32(triangles_0[base_2].w);
     var offset_1 : i32 = material_1 * i32(19);
-    var _S79 : i32 = base_2 + i32(1);
-    (*object_1) = i32(triangles_0[_S79].w);
+    var _S85 : i32 = base_2 + i32(1);
+    (*object_1) = i32(triangles_0[_S85].w);
     (*nits_1) = materials_0[offset_1 + i32(18)].x;
-    var _S80 : i32 = base_2 + i32(2);
-    (*geometricNormal_1) = normalize(cross(triangles_0[_S79].xyz - triangles_0[base_2].xyz, triangles_0[_S80].xyz - triangles_0[base_2].xyz));
-    var _S81 : f32 = hit_2.bary_0.x;
-    var _S82 : f32 = hit_2.bary_0.y;
-    var _S83 : f32 = hit_2.bary_0.z;
-    var interpolated_1 : vec3<f32> = triangles_0[base_2 + i32(3)].xyz * vec3<f32>(_S81) + triangles_0[base_2 + i32(4)].xyz * vec3<f32>(_S82) + triangles_0[base_2 + i32(5)].xyz * vec3<f32>(_S83);
+    var _S86 : i32 = base_2 + i32(2);
+    (*geometricNormal_1) = normalize(cross(triangles_0[_S85].xyz - triangles_0[base_2].xyz, triangles_0[_S86].xyz - triangles_0[base_2].xyz));
+    var _S87 : f32 = hit_2.bary_0.x;
+    var _S88 : f32 = hit_2.bary_0.y;
+    var _S89 : f32 = hit_2.bary_0.z;
+    var interpolated_1 : vec3<f32> = triangles_0[base_2 + i32(3)].xyz * vec3<f32>(_S87) + triangles_0[base_2 + i32(4)].xyz * vec3<f32>(_S88) + triangles_0[base_2 + i32(5)].xyz * vec3<f32>(_S89);
     var normal_3 : vec3<f32>;
     if((dot(interpolated_1, interpolated_1)) > 9.99999968265522539e-21f)
     {
@@ -794,45 +895,45 @@ fn resolve_material_1( hit_2 : Hit_0,  view_1 : vec3<f32>,  geometricNormal_1 : 
     {
         normal_3 = (*geometricNormal_1);
     }
-    var _S84 : vec4<f32> = vec4<f32>(_S81);
-    var _S85 : vec4<f32> = vec4<f32>(_S82);
-    var _S86 : vec4<f32> = vec4<f32>(_S83);
-    var _S87 : vec4<f32> = triangles_0[base_2 + i32(6)] * _S84 + triangles_0[base_2 + i32(7)] * _S85 + triangles_0[base_2 + i32(8)] * _S86;
-    var tangent_2 : vec4<f32> = _S87;
-    var _S88 : vec3<f32> = _S87.xyz;
-    if((dot(_S88, _S88)) < 1.00000000362749373e-15f)
+    var _S90 : vec4<f32> = vec4<f32>(_S87);
+    var _S91 : vec4<f32> = vec4<f32>(_S88);
+    var _S92 : vec4<f32> = vec4<f32>(_S89);
+    var _S93 : vec4<f32> = triangles_0[base_2 + i32(6)] * _S90 + triangles_0[base_2 + i32(7)] * _S91 + triangles_0[base_2 + i32(8)] * _S92;
+    var tangent_2 : vec4<f32> = _S93;
+    var _S94 : vec3<f32> = _S93.xyz;
+    if((dot(_S94, _S94)) < 1.00000000362749373e-15f)
     {
-        var _S89 : i32 = base_2 + i32(9);
-        var du_1 : vec2<f32> = triangles_0[base_2 + i32(10)].xy - triangles_0[_S89].xy;
-        var dv_1 : vec2<f32> = triangles_0[base_2 + i32(11)].xy - triangles_0[_S89].xy;
-        var _S90 : f32 = du_1.x;
-        var _S91 : f32 = dv_1.y;
-        var _S92 : f32 = du_1.y;
-        var _S93 : f32 = dv_1.x;
-        var determinant_1 : f32 = _S90 * _S91 - _S92 * _S93;
+        var _S95 : i32 = base_2 + i32(9);
+        var du_1 : vec2<f32> = triangles_0[base_2 + i32(10)].xy - triangles_0[_S95].xy;
+        var dv_1 : vec2<f32> = triangles_0[base_2 + i32(11)].xy - triangles_0[_S95].xy;
+        var _S96 : f32 = du_1.x;
+        var _S97 : f32 = dv_1.y;
+        var _S98 : f32 = du_1.y;
+        var _S99 : f32 = dv_1.x;
+        var determinant_1 : f32 = _S96 * _S97 - _S98 * _S99;
         if((abs(determinant_1)) > 1.00000000362749373e-15f)
         {
-            var edge1_1 : vec3<f32> = triangles_0[_S79].xyz - triangles_0[base_2].xyz;
-            var edge2_1 : vec3<f32> = triangles_0[_S80].xyz - triangles_0[base_2].xyz;
-            var _S94 : vec3<f32> = vec3<f32>(determinant_1);
-            var _S95 : vec3<f32> = (edge1_1 * vec3<f32>(_S91) - edge2_1 * vec3<f32>(_S92)) / _S94;
-            tangent_2.x = _S95.x;
-            tangent_2.y = _S95.y;
-            tangent_2.z = _S95.z;
-            var _S96 : i32;
-            if((dot(cross(normal_3, tangent_2.xyz), (edge2_1 * vec3<f32>(_S90) - edge1_1 * vec3<f32>(_S93)) / _S94)) < 0.0f)
+            var edge1_1 : vec3<f32> = triangles_0[_S85].xyz - triangles_0[base_2].xyz;
+            var edge2_1 : vec3<f32> = triangles_0[_S86].xyz - triangles_0[base_2].xyz;
+            var _S100 : vec3<f32> = vec3<f32>(determinant_1);
+            var _S101 : vec3<f32> = (edge1_1 * vec3<f32>(_S97) - edge2_1 * vec3<f32>(_S98)) / _S100;
+            tangent_2.x = _S101.x;
+            tangent_2.y = _S101.y;
+            tangent_2.z = _S101.z;
+            var _S102 : i32;
+            if((dot(cross(normal_3, tangent_2.xyz), (edge2_1 * vec3<f32>(_S96) - edge1_1 * vec3<f32>(_S99)) / _S100)) < 0.0f)
             {
-                _S96 = i32(-1);
+                _S102 = i32(-1);
             }
             else
             {
-                _S96 = i32(1);
+                _S102 = i32(1);
             }
-            tangent_2[i32(3)] = f32(_S96);
+            tangent_2[i32(3)] = f32(_S102);
         }
     }
     var p_6 : array<vec4<f32>, i32(19)>;
-    load_material_0(material_1, triangles_0[base_2 + i32(9)] * _S84 + triangles_0[base_2 + i32(10)] * _S85 + triangles_0[base_2 + i32(11)] * _S86, normal_3, tangent_2, &(p_6));
+    load_material_0(material_1, triangles_0[base_2 + i32(9)] * _S90 + triangles_0[base_2 + i32(10)] * _S91 + triangles_0[base_2 + i32(11)] * _S92, normal_3, tangent_2, &(p_6));
     if((p_6[i32(14)].w) > 0.0f)
     {
         normal_3 = normalize(p_6[i32(14)].xyz);
@@ -847,10 +948,10 @@ fn resolve_material_1( hit_2 : Hit_0,  view_1 : vec3<f32>,  geometricNormal_1 : 
     }
     if((p_6[i32(15)].w) > 0.0f)
     {
-        var _S97 : vec3<f32> = p_6[i32(15)].xyz;
-        tangent_2.x = _S97.x;
-        tangent_2.y = _S97.y;
-        tangent_2.z = _S97.z;
+        var _S103 : vec3<f32> = p_6[i32(15)].xyz;
+        tangent_2.x = _S103.x;
+        tangent_2.y = _S103.y;
+        tangent_2.z = _S103.z;
     }
     var coatNormal_1 : vec3<f32>;
     if((p_6[i32(16)].w) > 0.0f)
@@ -902,8 +1003,8 @@ fn openpbr_make_volume_from_extinction_coefficient_and_albedo_and_anisotropy_0( 
 
 fn openpbr_make_empty_volume_0() -> OpenPBR_HomogeneousVolume_0
 {
-    var _S98 : vec3<f32> = vec3<f32>(0.0f);
-    return openpbr_make_volume_from_extinction_coefficient_and_albedo_and_anisotropy_0(_S98, _S98, 0.0f);
+    var _S104 : vec3<f32> = vec3<f32>(0.0f);
+    return openpbr_make_volume_from_extinction_coefficient_and_albedo_and_anisotropy_0(_S104, _S104, 0.0f);
 }
 
 fn openpbr_clamp_input_distance_0( distance_1 : vec3<f32>) -> vec3<f32>
@@ -918,18 +1019,18 @@ fn openpbr_clamp_input_anisotropy_0( anisotropy_2 : f32) -> f32
 
 fn openpbr_square_0( v_1 : vec3<f32>) -> vec3<f32>
 {
-    var _S99 : f32 = v_1.x;
-    var _S100 : f32 = v_1.y;
-    var _S101 : f32 = v_1.z;
-    return vec3<f32>(_S99 * _S99, _S100 * _S100, _S101 * _S101);
+    var _S105 : f32 = v_1.x;
+    var _S106 : f32 = v_1.y;
+    var _S107 : f32 = v_1.z;
+    return vec3<f32>(_S105 * _S105, _S106 * _S106, _S107 * _S107);
 }
 
 fn openpbr_create_subsurface_volume_from_openpbr_params_0( subsurface_radius_1 : f32,  subsurface_radius_scale_1 : vec3<f32>,  subsurface_color_1 : vec3<f32>,  subsurface_scatter_anisotropy_1 : f32) -> OpenPBR_HomogeneousVolume_0
 {
-    var _S102 : vec3<f32> = vec3<f32>(1.0f);
+    var _S108 : vec3<f32> = vec3<f32>(1.0f);
     var clamped_subsurface_anisotropy_0 : f32 = openpbr_clamp_input_anisotropy_0(subsurface_scatter_anisotropy_1);
-    var _S103 : vec3<f32> = openpbr_square_0(vec3<f32>(4.09711980819702148f) + vec3<f32>(4.20863008499145508f) * subsurface_color_1 - sqrt(vec3<f32>(9.59216976165771484f) + vec3<f32>(41.6808013916015625f) * subsurface_color_1 + vec3<f32>(17.7126007080078125f) * openpbr_square_0(subsurface_color_1)));
-    return openpbr_make_volume_from_extinction_coefficient_and_albedo_and_anisotropy_0(_S102 / openpbr_clamp_input_distance_0(vec3<f32>(subsurface_radius_1) * subsurface_radius_scale_1), clamp((_S102 - _S103) / (_S102 - vec3<f32>(clamped_subsurface_anisotropy_0) * _S103), vec3<f32>(0.0f), _S102), clamped_subsurface_anisotropy_0);
+    var _S109 : vec3<f32> = openpbr_square_0(vec3<f32>(4.09711980819702148f) + vec3<f32>(4.20863008499145508f) * subsurface_color_1 - sqrt(vec3<f32>(9.59216976165771484f) + vec3<f32>(41.6808013916015625f) * subsurface_color_1 + vec3<f32>(17.7126007080078125f) * openpbr_square_0(subsurface_color_1)));
+    return openpbr_make_volume_from_extinction_coefficient_and_albedo_and_anisotropy_0(_S108 / openpbr_clamp_input_distance_0(vec3<f32>(subsurface_radius_1) * subsurface_radius_scale_1), clamp((_S108 - _S109) / (_S108 - vec3<f32>(clamped_subsurface_anisotropy_0) * _S109), vec3<f32>(0.0f), _S108), clamped_subsurface_anisotropy_0);
 }
 
 fn openpbr_min3_0( v_2 : vec3<f32>) -> f32
@@ -955,9 +1056,9 @@ fn openpbr_clamp_input_distance_1( distance_2 : f32) -> f32
 fn openpbr_make_volume_from_absorption_and_scattering_coefficients_and_anisotropy_0( absorption_coefficient_0 : vec3<f32>,  scattering_coefficient_0 : vec3<f32>,  anisotropy_3 : f32) -> OpenPBR_HomogeneousVolume_0
 {
     var volume_1 : OpenPBR_HomogeneousVolume_0;
-    var _S104 : vec3<f32> = absorption_coefficient_0 + scattering_coefficient_0;
-    volume_1.extinction_coefficient_0 = _S104;
-    if((all((_S104 > vec3<f32>(0.0f)))))
+    var _S110 : vec3<f32> = absorption_coefficient_0 + scattering_coefficient_0;
+    volume_1.extinction_coefficient_0 = _S110;
+    if((all((_S110 > vec3<f32>(0.0f)))))
     {
         volume_1.albedo_0 = scattering_coefficient_0 / volume_1.extinction_coefficient_0;
     }
@@ -973,16 +1074,16 @@ fn openpbr_make_volume_from_absorption_and_scattering_coefficients_and_anisotrop
             {
                 break;
             }
-            var _S105 : f32;
+            var _S111 : f32;
             if((volume_1.extinction_coefficient_0[color_channel_0]) > 0.0f)
             {
-                _S105 = scattering_coefficient_0[color_channel_0] / volume_1.extinction_coefficient_0[color_channel_0];
+                _S111 = scattering_coefficient_0[color_channel_0] / volume_1.extinction_coefficient_0[color_channel_0];
             }
             else
             {
-                _S105 = 0.0f;
+                _S111 = 0.0f;
             }
-            volume_1.albedo_0[color_channel_0] = _S105;
+            volume_1.albedo_0[color_channel_0] = _S111;
             color_channel_0 = color_channel_0 + i32(1);
         }
     }
@@ -992,27 +1093,27 @@ fn openpbr_make_volume_from_absorption_and_scattering_coefficients_and_anisotrop
 
 fn openpbr_create_volume_from_openpbr_params_0( transmission_color_1 : vec3<f32>,  transmission_depth_1 : f32,  transmission_scatter_1 : vec3<f32>,  transmission_anisotropy_0 : f32) -> OpenPBR_HomogeneousVolume_0
 {
-    var _S106 : bool;
+    var _S112 : bool;
     if((openpbr_min3_0(transmission_color_1)) >= 1.0f)
     {
-        _S106 = (openpbr_max3_0(transmission_scatter_1)) <= 0.0f;
+        _S112 = (openpbr_max3_0(transmission_scatter_1)) <= 0.0f;
     }
     else
     {
-        _S106 = false;
+        _S112 = false;
     }
-    if(_S106)
+    if(_S112)
     {
         return openpbr_make_empty_volume_0();
     }
-    var _S107 : vec3<f32> = vec3<f32>((1.0f / openpbr_clamp_input_distance_1(transmission_depth_1)));
-    var scattering_coefficient_1 : vec3<f32> = transmission_scatter_1 * _S107;
-    var absorption_coefficient_1 : vec3<f32> = (vec3<f32>(0) - log(openpbr_clamp_input_color_0(transmission_color_1))) * _S107 - scattering_coefficient_1;
-    var _S108 : f32 = openpbr_min3_0(absorption_coefficient_1);
+    var _S113 : vec3<f32> = vec3<f32>((1.0f / openpbr_clamp_input_distance_1(transmission_depth_1)));
+    var scattering_coefficient_1 : vec3<f32> = transmission_scatter_1 * _S113;
+    var absorption_coefficient_1 : vec3<f32> = (vec3<f32>(0) - log(openpbr_clamp_input_color_0(transmission_color_1))) * _S113 - scattering_coefficient_1;
+    var _S114 : f32 = openpbr_min3_0(absorption_coefficient_1);
     var absorption_coefficient_2 : vec3<f32>;
-    if(_S108 < 0.0f)
+    if(_S114 < 0.0f)
     {
-        absorption_coefficient_2 = absorption_coefficient_1 - vec3<f32>(_S108);
+        absorption_coefficient_2 = absorption_coefficient_1 - vec3<f32>(_S114);
     }
     else
     {
@@ -1023,16 +1124,16 @@ fn openpbr_create_volume_from_openpbr_params_0( transmission_color_1 : vec3<f32>
 
 fn openpbr_safe_divide_0( numerator_0 : f32,  denominator_0 : f32,  fallback_0 : f32) -> f32
 {
-    var _S109 : f32;
+    var _S115 : f32;
     if(denominator_0 != 0.0f)
     {
-        _S109 = numerator_0 / denominator_0;
+        _S115 = numerator_0 / denominator_0;
     }
     else
     {
-        _S109 = fallback_0;
+        _S115 = fallback_0;
     }
-    return _S109;
+    return _S115;
 }
 
 fn openpbr_calculate_absorption_coefficient_0( volume_2 : OpenPBR_HomogeneousVolume_0) -> vec3<f32>
@@ -1047,9 +1148,9 @@ fn openpbr_calculate_scattering_coefficient_0( volume_3 : OpenPBR_HomogeneousVol
 
 fn openpbr_add_volumes_0( volume_A_0 : OpenPBR_HomogeneousVolume_0,  volume_B_0 : OpenPBR_HomogeneousVolume_0,  volume_A_weight_0 : f32,  volume_B_weight_0 : f32) -> OpenPBR_HomogeneousVolume_0
 {
-    var _S110 : vec3<f32> = vec3<f32>(volume_A_weight_0);
-    var _S111 : vec3<f32> = vec3<f32>(volume_B_weight_0);
-    return openpbr_make_volume_from_absorption_and_scattering_coefficients_and_anisotropy_0(openpbr_calculate_absorption_coefficient_0(volume_A_0) * _S110 + openpbr_calculate_absorption_coefficient_0(volume_B_0) * _S111, openpbr_calculate_scattering_coefficient_0(volume_A_0) * _S110 + openpbr_calculate_scattering_coefficient_0(volume_B_0) * _S111, openpbr_safe_divide_0(volume_A_0.anisotropy_0 * volume_A_weight_0 + volume_B_0.anisotropy_0 * volume_B_weight_0, volume_A_weight_0 + volume_B_weight_0, 0.0f));
+    var _S116 : vec3<f32> = vec3<f32>(volume_A_weight_0);
+    var _S117 : vec3<f32> = vec3<f32>(volume_B_weight_0);
+    return openpbr_make_volume_from_absorption_and_scattering_coefficients_and_anisotropy_0(openpbr_calculate_absorption_coefficient_0(volume_A_0) * _S116 + openpbr_calculate_absorption_coefficient_0(volume_B_0) * _S117, openpbr_calculate_scattering_coefficient_0(volume_A_0) * _S116 + openpbr_calculate_scattering_coefficient_0(volume_B_0) * _S117, openpbr_safe_divide_0(volume_A_0.anisotropy_0 * volume_A_weight_0 + volume_B_0.anisotropy_0 * volume_B_weight_0, volume_A_weight_0 + volume_B_weight_0, 0.0f));
 }
 
 struct OpenPBR_VolumeDerivedProps_0
@@ -1201,10 +1302,10 @@ struct OpenPBR_PreparedBsdf_0
 
 fn openpbr_prepare_volume_0( resolved_inputs_0 : OpenPBR_ResolvedInputs_0,  volume_derived_props_0 : ptr<function, OpenPBR_VolumeDerivedProps_0>,  prepared_0 : ptr<function, OpenPBR_PreparedBsdf_0>,  volumes_enabled_0 : bool)
 {
-    var _S112 : bool;
+    var _S118 : bool;
     if(volumes_enabled_0)
     {
-        var _S113 : OpenPBR_HomogeneousVolume_0 = openpbr_make_empty_volume_0();
+        var _S119 : OpenPBR_HomogeneousVolume_0 = openpbr_make_empty_volume_0();
         (*volume_derived_props_0).thin_wall_subsurface_color_0 = vec3<f32>(0.0f);
         (*volume_derived_props_0).thin_wall_subsurface_anisotropy_0 = 0.0f;
         var subsurface_volume_0 : OpenPBR_HomogeneousVolume_0;
@@ -1218,12 +1319,12 @@ fn openpbr_prepare_volume_0( resolved_inputs_0 : OpenPBR_ResolvedInputs_0,  volu
             {
                 (*volume_derived_props_0).thin_wall_subsurface_color_0 = resolved_inputs_0.subsurface_color_0;
                 (*volume_derived_props_0).thin_wall_subsurface_anisotropy_0 = resolved_inputs_0.subsurface_scatter_anisotropy_0;
-                subsurface_volume_0 = _S113;
+                subsurface_volume_0 = _S119;
             }
         }
         else
         {
-            subsurface_volume_0 = _S113;
+            subsurface_volume_0 = _S119;
         }
         (*volume_derived_props_0).transmission_tint_0 = vec3<f32>(1.0f);
         var transmission_volume_0 : OpenPBR_HomogeneousVolume_0;
@@ -1231,16 +1332,16 @@ fn openpbr_prepare_volume_0( resolved_inputs_0 : OpenPBR_ResolvedInputs_0,  volu
         {
             if((resolved_inputs_0.transmission_depth_0) == 0.0f)
             {
-                _S112 = true;
+                _S118 = true;
             }
             else
             {
-                _S112 = resolved_inputs_0.geometry_thin_walled_0;
+                _S118 = resolved_inputs_0.geometry_thin_walled_0;
             }
-            if(_S112)
+            if(_S118)
             {
                 (*volume_derived_props_0).transmission_tint_0 = resolved_inputs_0.transmission_color_0;
-                transmission_volume_0 = _S113;
+                transmission_volume_0 = _S119;
             }
             else
             {
@@ -1249,7 +1350,7 @@ fn openpbr_prepare_volume_0( resolved_inputs_0 : OpenPBR_ResolvedInputs_0,  volu
         }
         else
         {
-            transmission_volume_0 = _S113;
+            transmission_volume_0 = _S119;
         }
         var subsurface_fraction_of_dielectric_0 : f32 = (1.0f - resolved_inputs_0.transmission_weight_0) * resolved_inputs_0.subsurface_weight_0;
         var reciprocal_of_subsurface_and_transmission_fraction_of_dielectric_0 : f32 = openpbr_safe_divide_0(1.0f, subsurface_fraction_of_dielectric_0 + resolved_inputs_0.transmission_weight_0, 0.0f);
@@ -1269,13 +1370,13 @@ fn openpbr_prepare_volume_0( resolved_inputs_0 : OpenPBR_ResolvedInputs_0,  volu
         }
         if((resolved_inputs_0.transmission_depth_0) == 0.0f)
         {
-            _S112 = true;
+            _S118 = true;
         }
         else
         {
-            _S112 = resolved_inputs_0.geometry_thin_walled_0;
+            _S118 = resolved_inputs_0.geometry_thin_walled_0;
         }
-        if(_S112)
+        if(_S118)
         {
             (*volume_derived_props_0).transmission_tint_0 = resolved_inputs_0.transmission_color_0;
         }
@@ -1290,10 +1391,10 @@ fn openpbr_prepare_volume_0( resolved_inputs_0 : OpenPBR_ResolvedInputs_0,  volu
 
 fn openpbr_prepare_volume_1( resolved_inputs_1 : OpenPBR_ResolvedInputs_0,  volume_derived_props_1 : ptr<function, OpenPBR_VolumeDerivedProps_0>,  prepared_1 : ptr<function, OpenPBR_PreparedBsdf_0>,  volumes_enabled_1 : bool)
 {
-    var _S114 : bool;
+    var _S120 : bool;
     if(volumes_enabled_1)
     {
-        var _S115 : OpenPBR_HomogeneousVolume_0 = openpbr_make_empty_volume_0();
+        var _S121 : OpenPBR_HomogeneousVolume_0 = openpbr_make_empty_volume_0();
         (*volume_derived_props_1).thin_wall_subsurface_color_0 = vec3<f32>(0.0f);
         (*volume_derived_props_1).thin_wall_subsurface_anisotropy_0 = 0.0f;
         var subsurface_volume_1 : OpenPBR_HomogeneousVolume_0;
@@ -1307,12 +1408,12 @@ fn openpbr_prepare_volume_1( resolved_inputs_1 : OpenPBR_ResolvedInputs_0,  volu
             {
                 (*volume_derived_props_1).thin_wall_subsurface_color_0 = resolved_inputs_1.subsurface_color_0;
                 (*volume_derived_props_1).thin_wall_subsurface_anisotropy_0 = resolved_inputs_1.subsurface_scatter_anisotropy_0;
-                subsurface_volume_1 = _S115;
+                subsurface_volume_1 = _S121;
             }
         }
         else
         {
-            subsurface_volume_1 = _S115;
+            subsurface_volume_1 = _S121;
         }
         (*volume_derived_props_1).transmission_tint_0 = vec3<f32>(1.0f);
         var transmission_volume_1 : OpenPBR_HomogeneousVolume_0;
@@ -1320,16 +1421,16 @@ fn openpbr_prepare_volume_1( resolved_inputs_1 : OpenPBR_ResolvedInputs_0,  volu
         {
             if((resolved_inputs_1.transmission_depth_0) == 0.0f)
             {
-                _S114 = true;
+                _S120 = true;
             }
             else
             {
-                _S114 = resolved_inputs_1.geometry_thin_walled_0;
+                _S120 = resolved_inputs_1.geometry_thin_walled_0;
             }
-            if(_S114)
+            if(_S120)
             {
                 (*volume_derived_props_1).transmission_tint_0 = resolved_inputs_1.transmission_color_0;
-                transmission_volume_1 = _S115;
+                transmission_volume_1 = _S121;
             }
             else
             {
@@ -1338,7 +1439,7 @@ fn openpbr_prepare_volume_1( resolved_inputs_1 : OpenPBR_ResolvedInputs_0,  volu
         }
         else
         {
-            transmission_volume_1 = _S115;
+            transmission_volume_1 = _S121;
         }
         var subsurface_fraction_of_dielectric_1 : f32 = (1.0f - resolved_inputs_1.transmission_weight_0) * resolved_inputs_1.subsurface_weight_0;
         var reciprocal_of_subsurface_and_transmission_fraction_of_dielectric_1 : f32 = openpbr_safe_divide_0(1.0f, subsurface_fraction_of_dielectric_1 + resolved_inputs_1.transmission_weight_0, 0.0f);
@@ -1358,13 +1459,13 @@ fn openpbr_prepare_volume_1( resolved_inputs_1 : OpenPBR_ResolvedInputs_0,  volu
         }
         if((resolved_inputs_1.transmission_depth_0) == 0.0f)
         {
-            _S114 = true;
+            _S120 = true;
         }
         else
         {
-            _S114 = resolved_inputs_1.geometry_thin_walled_0;
+            _S120 = resolved_inputs_1.geometry_thin_walled_0;
         }
-        if(_S114)
+        if(_S120)
         {
             (*volume_derived_props_1).transmission_tint_0 = resolved_inputs_1.transmission_color_0;
         }
@@ -1384,16 +1485,16 @@ fn openpbr_fast_normalize_1( v_4 : vec2<f32>) -> vec2<f32>
 
 fn openpbr_get_basis_handedness_0( normal_4 : vec3<f32>,  tangent_3 : vec3<f32>,  bitangent_0 : vec3<f32>) -> f32
 {
-    var _S116 : f32;
+    var _S122 : f32;
     if((dot(cross(tangent_3, bitangent_0), normal_4)) >= 0.0f)
     {
-        _S116 = 1.0f;
+        _S122 = 1.0f;
     }
     else
     {
-        _S116 = -1.0f;
+        _S122 = -1.0f;
     }
-    return _S116;
+    return _S122;
 }
 
 fn openpbr_get_basis_handedness_1( basis_4 : OpenPBR_Basis_0) -> f32
@@ -1403,11 +1504,11 @@ fn openpbr_get_basis_handedness_1( basis_4 : OpenPBR_Basis_0) -> f32
 
 fn openpbr_rotate_basis_around_normal_0( basis_5 : ptr<function, OpenPBR_Basis_0>,  cos_sin_0 : vec2<f32>,  handedness_2 : f32)
 {
-    var _S117 : vec3<f32> = vec3<f32>(cos_sin_0.x);
-    var _S118 : vec3<f32> = vec3<f32>(handedness_2);
-    var _S119 : vec3<f32> = vec3<f32>(cos_sin_0.y);
-    var rotated_bitangent_0 : vec3<f32> = (*basis_5).b_0 * _S117 - _S118 * (*basis_5).t_0 * _S119;
-    (*basis_5).t_0 = (*basis_5).t_0 * _S117 + _S118 * (*basis_5).b_0 * _S119;
+    var _S123 : vec3<f32> = vec3<f32>(cos_sin_0.x);
+    var _S124 : vec3<f32> = vec3<f32>(handedness_2);
+    var _S125 : vec3<f32> = vec3<f32>(cos_sin_0.y);
+    var rotated_bitangent_0 : vec3<f32> = (*basis_5).b_0 * _S123 - _S124 * (*basis_5).t_0 * _S125;
+    (*basis_5).t_0 = (*basis_5).t_0 * _S123 + _S124 * (*basis_5).b_0 * _S125;
     (*basis_5).b_0 = rotated_bitangent_0;
     return;
 }
@@ -1430,10 +1531,10 @@ fn openpbr_apply_anisotropy_rotation_0( basis_7 : ptr<function, OpenPBR_Basis_0>
 
 fn openpbr_invert_basis_0( basis_8 : ptr<function, OpenPBR_Basis_0>)
 {
-    var _S120 : vec3<f32> = vec3<f32>(-1.0f);
-    (*basis_8).t_0 = (*basis_8).t_0 * _S120;
-    (*basis_8).b_0 = (*basis_8).b_0 * _S120;
-    (*basis_8).n_0 = (*basis_8).n_0 * _S120;
+    var _S126 : vec3<f32> = vec3<f32>(-1.0f);
+    (*basis_8).t_0 = (*basis_8).t_0 * _S126;
+    (*basis_8).b_0 = (*basis_8).b_0 * _S126;
+    (*basis_8).n_0 = (*basis_8).n_0 * _S126;
     return;
 }
 
@@ -1461,16 +1562,16 @@ fn openpbr_ior_from_f0_0( f0_0 : f32) -> f32
 fn openpbr_apply_specular_weight_to_ior_0( eta_t_over_eta_i_4 : f32,  specular_weight_1 : f32) -> f32
 {
     var external_ior_0 : f32 = openpbr_ior_from_f0_0(min(openpbr_f0_from_ior_0(eta_t_over_eta_i_4) * specular_weight_1, 0.99989998340606689f));
-    var _S121 : f32;
+    var _S127 : f32;
     if(eta_t_over_eta_i_4 < 1.0f)
     {
-        _S121 = 1.0f / external_ior_0;
+        _S127 = 1.0f / external_ior_0;
     }
     else
     {
-        _S121 = external_ior_0;
+        _S127 = external_ior_0;
     }
-    return _S121;
+    return _S127;
 }
 
 fn openpbr_sum_0( v_5 : vec3<f32>) -> f32
@@ -1497,27 +1598,27 @@ fn openpbr_fourth_root_0( x_11 : f32) -> f32
 fn openpbr_compute_anisotropic_alpha_0( isotropic_alpha_1 : f32,  openpbr_anisotropy_0 : f32,  delta_specular_supported_0 : bool,  min_microfacet_alpha_0 : f32) -> vec2<f32>
 {
     var anisotropic_alpha_0 : vec2<f32>;
-    var _S122 : bool = openpbr_anisotropy_0 > 0.0f;
-    if(_S122)
+    var _S128 : bool = openpbr_anisotropy_0 > 0.0f;
+    if(_S128)
     {
-        var _S123 : f32 = 1.0f - openpbr_anisotropy_0;
-        anisotropic_alpha_0[i32(0)] = isotropic_alpha_1 * sqrt(2.0f / (1.0f + openpbr_square_1(_S123)));
-        anisotropic_alpha_0[i32(1)] = _S123 * anisotropic_alpha_0.x;
+        var _S129 : f32 = 1.0f - openpbr_anisotropy_0;
+        anisotropic_alpha_0[i32(0)] = isotropic_alpha_1 * sqrt(2.0f / (1.0f + openpbr_square_1(_S129)));
+        anisotropic_alpha_0[i32(1)] = _S129 * anisotropic_alpha_0.x;
     }
     else
     {
         anisotropic_alpha_0 = vec2<f32>(isotropic_alpha_1);
     }
-    var _S124 : bool;
-    if(_S122)
+    var _S130 : bool;
+    if(_S128)
     {
-        _S124 = true;
+        _S130 = true;
     }
     else
     {
-        _S124 = !delta_specular_supported_0;
+        _S130 = !delta_specular_supported_0;
     }
-    if(_S124)
+    if(_S130)
     {
         anisotropic_alpha_0 = max(anisotropic_alpha_0, vec2<f32>(min_microfacet_alpha_0));
     }
@@ -1538,8 +1639,8 @@ fn openpbr_sixth_power_0( x_13 : f32) -> f32
 
 fn openpbr_compute_metal_schlick_b_factor_0( f0_1 : vec3<f32>,  f82_tint_0 : vec3<f32>) -> vec3<f32>
 {
-    var _S125 : vec3<f32> = vec3<f32>(1.0f);
-    return (f0_1 + (_S125 - f0_1) * vec3<f32>(openpbr_fifth_power_0(0.8571428656578064f))) * (_S125 - f82_tint_0) * vec3<f32>((1.0f / (0.1428571492433548f * openpbr_sixth_power_0(0.8571428656578064f))));
+    var _S131 : vec3<f32> = vec3<f32>(1.0f);
+    return (f0_1 + (_S131 - f0_1) * vec3<f32>(openpbr_fifth_power_0(0.8571428656578064f))) * (_S131 - f82_tint_0) * vec3<f32>((1.0f / (0.1428571492433548f * openpbr_sixth_power_0(0.8571428656578064f))));
 }
 
 fn openpbr_metal_average_fresnel_with_f82_tint_0( f0_2 : vec3<f32>,  f82_tint_1 : vec3<f32>) -> vec3<f32>
@@ -1555,18 +1656,18 @@ fn openpbr_average_fresnel_0( eta_t_over_eta_i_5 : f32) -> f32
     }
     else
     {
-        var _S126 : f32 = eta_t_over_eta_i_5 * eta_t_over_eta_i_5;
-        return 0.99711799621582031f + 0.10140000283718109f * eta_t_over_eta_i_5 - 0.96524101495742798f * _S126 - 0.1306069940328598f * _S126 * eta_t_over_eta_i_5;
+        var _S132 : f32 = eta_t_over_eta_i_5 * eta_t_over_eta_i_5;
+        return 0.99711799621582031f + 0.10140000283718109f * eta_t_over_eta_i_5 - 0.96524101495742798f * _S132 - 0.1306069940328598f * _S132 * eta_t_over_eta_i_5;
     }
 }
 
 fn OpenPBR_AnisotropicGGXSmithVNDFMicrofacetDistribution_x24init_0( alpha_4 : vec2<f32>,  basis_ff_1 : OpenPBR_Basis_0,  isotropic_alpha_2 : f32) -> OpenPBR_AnisotropicGGXSmithVNDFMicrofacetDistribution_0
 {
-    var _S127 : OpenPBR_AnisotropicGGXSmithVNDFMicrofacetDistribution_0;
-    _S127.alpha_0 = alpha_4;
-    _S127.basis_ff_0 = basis_ff_1;
-    _S127.isotropic_alpha_0 = isotropic_alpha_2;
-    return _S127;
+    var _S133 : OpenPBR_AnisotropicGGXSmithVNDFMicrofacetDistribution_0;
+    _S133.alpha_0 = alpha_4;
+    _S133.basis_ff_0 = basis_ff_1;
+    _S133.isotropic_alpha_0 = isotropic_alpha_2;
+    return _S133;
 }
 
 fn openpbr_abbe_number_V_d_0( dispersion_param_0 : f32) -> f32
@@ -1653,18 +1754,18 @@ fn openpbr_thin_wall_fresnel_0( eta_t_over_eta_i_7 : f32,  cos_theta_i_1 : f32) 
 
 fn OpenPBR_ConstantReflectionCoefficient_x24init_0( color_2 : vec3<f32>) -> OpenPBR_ConstantReflectionCoefficient_0
 {
-    var _S128 : OpenPBR_ConstantReflectionCoefficient_0;
-    _S128.color_1 = color_2;
-    return _S128;
+    var _S134 : OpenPBR_ConstantReflectionCoefficient_0;
+    _S134.color_1 = color_2;
+    return _S134;
 }
 
 fn OpenPBR_MinimalMicrofacetReflectionLobe_AnisotropicGGXSmithVNDFMicrofacetDistribution_ConstantReflectionCoefficient_x24init_0( normal_ff_7 : vec3<f32>,  microfacet_distr_3 : OpenPBR_AnisotropicGGXSmithVNDFMicrofacetDistribution_0,  refl_trans_coeff_3 : OpenPBR_ConstantReflectionCoefficient_0) -> OpenPBR_MinimalMicrofacetReflectionLobe_AnisotropicGGXSmithVNDFMicrofacetDistribution_ConstantReflectionCoefficient_0
 {
-    var _S129 : OpenPBR_MinimalMicrofacetReflectionLobe_AnisotropicGGXSmithVNDFMicrofacetDistribution_ConstantReflectionCoefficient_0;
-    _S129.normal_ff_4 = normal_ff_7;
-    _S129.microfacet_distr_1 = microfacet_distr_3;
-    _S129.refl_trans_coeff_1 = refl_trans_coeff_3;
-    return _S129;
+    var _S135 : OpenPBR_MinimalMicrofacetReflectionLobe_AnisotropicGGXSmithVNDFMicrofacetDistribution_ConstantReflectionCoefficient_0;
+    _S135.normal_ff_4 = normal_ff_7;
+    _S135.microfacet_distr_1 = microfacet_distr_3;
+    _S135.refl_trans_coeff_1 = refl_trans_coeff_3;
+    return _S135;
 }
 
 fn openpbr_initialize_lobe_0( lobe_0 : ptr<function, OpenPBR_MinimalMicrofacetReflectionLobe_AnisotropicGGXSmithVNDFMicrofacetDistribution_ConstantReflectionCoefficient_0>,  normal_ff_8 : vec3<f32>,  microfacet_distr_4 : OpenPBR_AnisotropicGGXSmithVNDFMicrofacetDistribution_0,  refl_trans_coeff_4 : OpenPBR_ConstantReflectionCoefficient_0)
@@ -1678,10 +1779,10 @@ fn openpbr_initialize_lobe_1( lobe_1 : ptr<function, OpenPBR_ThinWallSpecularTra
     var flipped_normal_0 : vec3<f32> = (vec3<f32>(0) - normal_ff_9);
     var flipped_microfacet_distr_0 : OpenPBR_AnisotropicGGXSmithVNDFMicrofacetDistribution_0 = microfacet_distr_5;
     flipped_microfacet_distr_0.basis_ff_0.n_0 = flipped_microfacet_distr_0.basis_ff_0.n_0 * vec3<f32>(-1.0f);
-    var _S130 : OpenPBR_ConstantReflectionCoefficient_0 = OpenPBR_ConstantReflectionCoefficient_x24init_0(trans_color_0);
-    var _S131 : OpenPBR_MinimalMicrofacetReflectionLobe_AnisotropicGGXSmithVNDFMicrofacetDistribution_ConstantReflectionCoefficient_0 = (*lobe_1).flipped_lobe_0;
-    openpbr_initialize_lobe_0(&(_S131), flipped_normal_0, flipped_microfacet_distr_0, _S130);
-    (*lobe_1).flipped_lobe_0 = _S131;
+    var _S136 : OpenPBR_ConstantReflectionCoefficient_0 = OpenPBR_ConstantReflectionCoefficient_x24init_0(trans_color_0);
+    var _S137 : OpenPBR_MinimalMicrofacetReflectionLobe_AnisotropicGGXSmithVNDFMicrofacetDistribution_ConstantReflectionCoefficient_0 = (*lobe_1).flipped_lobe_0;
+    openpbr_initialize_lobe_0(&(_S137), flipped_normal_0, flipped_microfacet_distr_0, _S136);
+    (*lobe_1).flipped_lobe_0 = _S137;
     return;
 }
 
@@ -1753,18 +1854,18 @@ fn openPbrOffset_0( id_0 : i32) -> u32
 
 fn openPbrFetch3_0( id_1 : i32,  index_1 : vec3<i32>) -> f32
 {
-    var _S132 : vec3<i32> = clamp(index_1, vec3<i32>(i32(0)), vec3<i32>(i32(31)));
-    return openPbrLookup_0[openPbrOffset_0(id_1) + u32((_S132.z * i32(32) + _S132.y) * i32(32) + _S132.x)];
+    var _S138 : vec3<i32> = clamp(index_1, vec3<i32>(i32(0)), vec3<i32>(i32(31)));
+    return openPbrLookup_0[openPbrOffset_0(id_1) + u32((_S138.z * i32(32) + _S138.y) * i32(32) + _S138.x)];
 }
 
 fn openPbrSample3_0( id_2 : i32,  uv_2 : vec3<f32>) -> vec4<f32>
 {
     var p_7 : vec3<f32> = uv_2 * vec3<f32>(32.0f) - vec3<f32>(0.5f);
-    var _S133 : vec3<i32> = vec3<i32>(floor(p_7));
-    var t_3 : vec3<f32> = p_7 - vec3<f32>(_S133);
-    var _S134 : f32 = t_3.x;
-    var _S135 : f32 = t_3.y;
-    return vec4<f32>(mix(mix(mix(openPbrFetch3_0(id_2, _S133), openPbrFetch3_0(id_2, _S133 + vec3<i32>(i32(1), i32(0), i32(0))), _S134), mix(openPbrFetch3_0(id_2, _S133 + vec3<i32>(i32(0), i32(1), i32(0))), openPbrFetch3_0(id_2, _S133 + vec3<i32>(i32(1), i32(1), i32(0))), _S134), _S135), mix(mix(openPbrFetch3_0(id_2, _S133 + vec3<i32>(i32(0), i32(0), i32(1))), openPbrFetch3_0(id_2, _S133 + vec3<i32>(i32(1), i32(0), i32(1))), _S134), mix(openPbrFetch3_0(id_2, _S133 + vec3<i32>(i32(0), i32(1), i32(1))), openPbrFetch3_0(id_2, _S133 + vec3<i32>(i32(1), i32(1), i32(1))), _S134), _S135), t_3.z), 0.0f, 0.0f, 0.0f);
+    var _S139 : vec3<i32> = vec3<i32>(floor(p_7));
+    var t_3 : vec3<f32> = p_7 - vec3<f32>(_S139);
+    var _S140 : f32 = t_3.x;
+    var _S141 : f32 = t_3.y;
+    return vec4<f32>(mix(mix(mix(openPbrFetch3_0(id_2, _S139), openPbrFetch3_0(id_2, _S139 + vec3<i32>(i32(1), i32(0), i32(0))), _S140), mix(openPbrFetch3_0(id_2, _S139 + vec3<i32>(i32(0), i32(1), i32(0))), openPbrFetch3_0(id_2, _S139 + vec3<i32>(i32(1), i32(1), i32(0))), _S140), _S141), mix(mix(openPbrFetch3_0(id_2, _S139 + vec3<i32>(i32(0), i32(0), i32(1))), openPbrFetch3_0(id_2, _S139 + vec3<i32>(i32(1), i32(0), i32(1))), _S140), mix(openPbrFetch3_0(id_2, _S139 + vec3<i32>(i32(0), i32(1), i32(1))), openPbrFetch3_0(id_2, _S139 + vec3<i32>(i32(1), i32(1), i32(1))), _S140), _S141), t_3.z), 0.0f, 0.0f, 0.0f);
 }
 
 fn openpbr_look_up_trilinear_0( lut_id_0 : i32,  exact_index_x_0 : f32,  exact_index_y_0 : f32,  exact_index_z_0 : f32) -> f32
@@ -1774,16 +1875,16 @@ fn openpbr_look_up_trilinear_0( lut_id_0 : i32,  exact_index_x_0 : f32,  exact_i
 
 fn openpbr_extrapolate_table_value_beyond_ior_max_if_needed_0( table_value_0 : f32,  ior_1 : f32) -> f32
 {
-    var _S136 : bool;
+    var _S142 : bool;
     if(ior_1 > 2.5f)
     {
-        _S136 = true;
+        _S142 = true;
     }
     else
     {
-        _S136 = ior_1 < 0.40000000596046448f;
+        _S142 = ior_1 < 0.40000000596046448f;
     }
-    if(_S136)
+    if(_S142)
     {
         var F0Max_0 : f32 = openpbr_f0_from_ior_0(2.5f);
         return (1.0f - (openpbr_f0_from_ior_0(ior_1) - F0Max_0) * (1.0f / (1.0f - F0Max_0))) * table_value_0;
@@ -1801,31 +1902,31 @@ fn openpbr_look_up_opaque_dielectric_energy_complement_0( ior_2 : f32,  alpha_6 
 
 fn openPbrFetch2_0( id_3 : i32,  index_2 : vec2<i32>) -> vec3<f32>
 {
-    var _S137 : vec2<i32> = vec2<i32>(i32(0));
-    var _S138 : i32;
+    var _S143 : vec2<i32> = vec2<i32>(i32(0));
+    var _S144 : i32;
     if(id_3 == i32(6))
     {
-        _S138 = i32(0);
+        _S144 = i32(0);
     }
     else
     {
-        _S138 = i32(31);
+        _S144 = i32(31);
     }
-    var _S139 : vec2<i32> = clamp(index_2, _S137, vec2<i32>(i32(31), _S138));
-    var _S140 : u32 = openPbrOffset_0(id_3);
-    var _S141 : u32 = u32(_S139.y * i32(32) + _S139.x);
-    var _S142 : bool = id_3 == i32(7);
-    var _S143 : u32;
-    if(_S142)
+    var _S145 : vec2<i32> = clamp(index_2, _S143, vec2<i32>(i32(31), _S144));
+    var _S146 : u32 = openPbrOffset_0(id_3);
+    var _S147 : u32 = u32(_S145.y * i32(32) + _S145.x);
+    var _S148 : bool = id_3 == i32(7);
+    var _S149 : u32;
+    if(_S148)
     {
-        _S143 = u32(3);
+        _S149 = u32(3);
     }
     else
     {
-        _S143 = u32(1);
+        _S149 = u32(1);
     }
-    var address_0 : u32 = _S140 + _S141 * _S143;
-    if(_S142)
+    var address_0 : u32 = _S146 + _S147 * _S149;
+    if(_S148)
     {
         return vec3<f32>(openPbrLookup_0[address_0], openPbrLookup_0[address_0 + u32(1)], openPbrLookup_0[address_0 + u32(2)]);
     }
@@ -1834,20 +1935,20 @@ fn openPbrFetch2_0( id_3 : i32,  index_2 : vec2<i32>) -> vec3<f32>
 
 fn openPbrSample2_0( id_4 : i32,  uv_3 : vec2<f32>) -> vec4<f32>
 {
-    var _S144 : i32;
+    var _S150 : i32;
     if(id_4 == i32(6))
     {
-        _S144 = i32(1);
+        _S150 = i32(1);
     }
     else
     {
-        _S144 = i32(32);
+        _S150 = i32(32);
     }
-    var p_8 : vec2<f32> = uv_3 * vec2<f32>(32.0f, f32(_S144)) - vec2<f32>(0.5f);
-    var _S145 : vec2<i32> = vec2<i32>(floor(p_8));
-    var t_4 : vec2<f32> = p_8 - vec2<f32>(_S145);
-    var _S146 : vec3<f32> = vec3<f32>(t_4.x);
-    return vec4<f32>(mix(mix(openPbrFetch2_0(id_4, _S145), openPbrFetch2_0(id_4, _S145 + vec2<i32>(i32(1), i32(0))), _S146), mix(openPbrFetch2_0(id_4, _S145 + vec2<i32>(i32(0), i32(1))), openPbrFetch2_0(id_4, _S145 + vec2<i32>(i32(1), i32(1))), _S146), vec3<f32>(t_4.y)), 0.0f);
+    var p_8 : vec2<f32> = uv_3 * vec2<f32>(32.0f, f32(_S150)) - vec2<f32>(0.5f);
+    var _S151 : vec2<i32> = vec2<i32>(floor(p_8));
+    var t_4 : vec2<f32> = p_8 - vec2<f32>(_S151);
+    var _S152 : vec3<f32> = vec3<f32>(t_4.x);
+    return vec4<f32>(mix(mix(openPbrFetch2_0(id_4, _S151), openPbrFetch2_0(id_4, _S151 + vec2<i32>(i32(1), i32(0))), _S152), mix(openPbrFetch2_0(id_4, _S151 + vec2<i32>(i32(0), i32(1))), openPbrFetch2_0(id_4, _S151 + vec2<i32>(i32(1), i32(1))), _S152), vec3<f32>(t_4.y)), 0.0f);
 }
 
 fn openpbr_look_up_bilinear_0( lut_id_1 : i32,  exact_index_x_1 : f32,  exact_index_y_1 : f32) -> f32
@@ -1889,42 +1990,42 @@ fn openpbr_initialize_lobe_3( lobe_3 : ptr<function, OpenPBR_ThinWallDiffuseTran
     {
         reflected_view_1 = reflected_view_0;
     }
-    var _S147 : OpenPBR_EnergyConservingRoughDiffuseLobe_0 = (*lobe_3).flipped_lobe_1;
-    openpbr_initialize_lobe_2(&(_S147), flipped_normal_1, reflected_view_1, diffuse_albedo_2, diffuse_roughness_2, specular_alpha_2, specular_eta_t_over_eta_i_2);
-    (*lobe_3).flipped_lobe_1 = _S147;
+    var _S153 : OpenPBR_EnergyConservingRoughDiffuseLobe_0 = (*lobe_3).flipped_lobe_1;
+    openpbr_initialize_lobe_2(&(_S153), flipped_normal_1, reflected_view_1, diffuse_albedo_2, diffuse_roughness_2, specular_alpha_2, specular_eta_t_over_eta_i_2);
+    (*lobe_3).flipped_lobe_1 = _S153;
     return;
 }
 
 fn OpenPBR_ComprehensiveReflectionTransmissionCoefficient_x24init_0( eta_t_over_eta_i_for_transparent_part_1 : vec3<f32>,  eta_t_over_eta_i_for_opaque_part_1 : vec3<f32>,  scale_for_reflection_for_transparent_part_1 : vec3<f32>,  scale_for_reflection_for_opaque_part_1 : vec3<f32>,  transmission_1 : vec3<f32>,  f0_for_metal_1 : vec3<f32>,  f82_tint_for_metal_1 : vec3<f32>,  metal_amount_1 : f32,  thin_film_weight_2 : f32,  thin_film_thickness_nm_1 : f32,  thin_film_exterior_ior_1 : f32,  thin_film_ior_2 : f32,  thin_film_interior_ior_1 : vec3<f32>,  rgb_wavelengths_nm_1 : vec3<f32>,  thin_wall_constant_reflection_albedo_1 : vec3<f32>) -> OpenPBR_ComprehensiveReflectionTransmissionCoefficient_0
 {
-    var _S148 : OpenPBR_ComprehensiveReflectionTransmissionCoefficient_0;
-    _S148.eta_t_over_eta_i_for_transparent_part_0 = eta_t_over_eta_i_for_transparent_part_1;
-    _S148.eta_t_over_eta_i_for_opaque_part_0 = eta_t_over_eta_i_for_opaque_part_1;
-    _S148.scale_for_reflection_for_transparent_part_0 = scale_for_reflection_for_transparent_part_1;
-    _S148.scale_for_reflection_for_opaque_part_0 = scale_for_reflection_for_opaque_part_1;
-    _S148.transmission_0 = transmission_1;
-    _S148.f0_for_metal_0 = f0_for_metal_1;
-    _S148.f82_tint_for_metal_0 = f82_tint_for_metal_1;
-    _S148.metal_amount_0 = metal_amount_1;
-    _S148.thin_film_weight_1 = thin_film_weight_2;
-    _S148.thin_film_thickness_nm_0 = thin_film_thickness_nm_1;
-    _S148.thin_film_exterior_ior_0 = thin_film_exterior_ior_1;
-    _S148.thin_film_ior_1 = thin_film_ior_2;
-    _S148.thin_film_interior_ior_0 = thin_film_interior_ior_1;
-    _S148.rgb_wavelengths_nm_0 = rgb_wavelengths_nm_1;
-    _S148.thin_wall_constant_reflection_albedo_0 = thin_wall_constant_reflection_albedo_1;
-    return _S148;
+    var _S154 : OpenPBR_ComprehensiveReflectionTransmissionCoefficient_0;
+    _S154.eta_t_over_eta_i_for_transparent_part_0 = eta_t_over_eta_i_for_transparent_part_1;
+    _S154.eta_t_over_eta_i_for_opaque_part_0 = eta_t_over_eta_i_for_opaque_part_1;
+    _S154.scale_for_reflection_for_transparent_part_0 = scale_for_reflection_for_transparent_part_1;
+    _S154.scale_for_reflection_for_opaque_part_0 = scale_for_reflection_for_opaque_part_1;
+    _S154.transmission_0 = transmission_1;
+    _S154.f0_for_metal_0 = f0_for_metal_1;
+    _S154.f82_tint_for_metal_0 = f82_tint_for_metal_1;
+    _S154.metal_amount_0 = metal_amount_1;
+    _S154.thin_film_weight_1 = thin_film_weight_2;
+    _S154.thin_film_thickness_nm_0 = thin_film_thickness_nm_1;
+    _S154.thin_film_exterior_ior_0 = thin_film_exterior_ior_1;
+    _S154.thin_film_ior_1 = thin_film_ior_2;
+    _S154.thin_film_interior_ior_0 = thin_film_interior_ior_1;
+    _S154.rgb_wavelengths_nm_0 = rgb_wavelengths_nm_1;
+    _S154.thin_wall_constant_reflection_albedo_0 = thin_wall_constant_reflection_albedo_1;
+    return _S154;
 }
 
 fn OpenPBR_ComprehensiveMicrofacetReflectionTransmissionLobe_x24init_0( normal_ff_12 : vec3<f32>,  microfacet_distr_6 : OpenPBR_AnisotropicGGXSmithVNDFMicrofacetDistribution_0,  refl_trans_coeff_5 : OpenPBR_ComprehensiveReflectionTransmissionCoefficient_0,  eta_t_over_eta_i_8 : vec3<f32>,  path_throughput_1 : vec3<f32>) -> OpenPBR_ComprehensiveMicrofacetReflectionTransmissionLobe_0
 {
-    var _S149 : OpenPBR_ComprehensiveMicrofacetReflectionTransmissionLobe_0;
-    _S149.normal_ff_0 = normal_ff_12;
-    _S149.microfacet_distr_0 = microfacet_distr_6;
-    _S149.refl_trans_coeff_0 = refl_trans_coeff_5;
-    _S149.eta_t_over_eta_i_0 = eta_t_over_eta_i_8;
-    _S149.path_throughput_0 = path_throughput_1;
-    return _S149;
+    var _S155 : OpenPBR_ComprehensiveMicrofacetReflectionTransmissionLobe_0;
+    _S155.normal_ff_0 = normal_ff_12;
+    _S155.microfacet_distr_0 = microfacet_distr_6;
+    _S155.refl_trans_coeff_0 = refl_trans_coeff_5;
+    _S155.eta_t_over_eta_i_0 = eta_t_over_eta_i_8;
+    _S155.path_throughput_0 = path_throughput_1;
+    return _S155;
 }
 
 fn openpbr_initialize_lobe_4( lobe_4 : ptr<function, OpenPBR_ComprehensiveMicrofacetReflectionTransmissionLobe_0>,  normal_ff_13 : vec3<f32>,  microfacet_distr_7 : OpenPBR_AnisotropicGGXSmithVNDFMicrofacetDistribution_0,  refl_trans_coeff_6 : OpenPBR_ComprehensiveReflectionTransmissionCoefficient_0,  eta_t_over_eta_i_9 : vec3<f32>,  path_throughput_2 : vec3<f32>)
@@ -2035,59 +2136,59 @@ fn openpbr_compute_fresnel_dielectric_polarized_amplitude_0( cos_theta_i_3 : f32
         (*cos_theta_t_1) = 0.0f;
         return;
     }
-    var _S150 : f32 = sqrt(saturate(1.0f - sin_theta_t_0 * sin_theta_t_0));
-    (*cos_theta_t_1) = _S150;
+    var _S156 : f32 = sqrt(saturate(1.0f - sin_theta_t_0 * sin_theta_t_0));
+    (*cos_theta_t_1) = _S156;
     var eta_i_cos_theta_i_0 : f32 = eta_i_0 * cos_theta_i_3;
-    var eta_t_cos_theta_t_0 : f32 = eta_t_0 * _S150;
+    var eta_t_cos_theta_t_0 : f32 = eta_t_0 * _S156;
     var eta_t_cos_theta_i_0 : f32 = eta_t_0 * cos_theta_i_3;
-    var eta_i_cos_theta_t_0 : f32 = eta_i_0 * _S150;
+    var eta_i_cos_theta_t_0 : f32 = eta_i_0 * _S156;
     var denom_0 : OpenPBR_PolarizedFloat_0;
-    var _S151 : f32 = eta_i_cos_theta_i_0 + eta_t_cos_theta_t_0;
-    denom_0.s_3 = _S151;
+    var _S157 : f32 = eta_i_cos_theta_i_0 + eta_t_cos_theta_t_0;
+    denom_0.s_3 = _S157;
     denom_0.p_9 = eta_t_cos_theta_i_0 + eta_i_cos_theta_t_0;
-    var _S152 : f32;
-    if((abs(_S151)) < 9.99999971718068537e-10f)
+    var _S158 : f32;
+    if((abs(_S157)) < 9.99999971718068537e-10f)
     {
         if((denom_0.s_3) >= 0.0f)
         {
-            _S152 = 9.99999971718068537e-10f;
+            _S158 = 9.99999971718068537e-10f;
         }
         else
         {
-            _S152 = -9.99999971718068537e-10f;
+            _S158 = -9.99999971718068537e-10f;
         }
     }
     else
     {
-        _S152 = denom_0.s_3;
+        _S158 = denom_0.s_3;
     }
-    denom_0.s_3 = _S152;
+    denom_0.s_3 = _S158;
     if((abs(denom_0.p_9)) < 9.99999971718068537e-10f)
     {
         if((denom_0.p_9) >= 0.0f)
         {
-            _S152 = 9.99999971718068537e-10f;
+            _S158 = 9.99999971718068537e-10f;
         }
         else
         {
-            _S152 = -9.99999971718068537e-10f;
+            _S158 = -9.99999971718068537e-10f;
         }
     }
     else
     {
-        _S152 = denom_0.p_9;
+        _S158 = denom_0.p_9;
     }
-    denom_0.p_9 = _S152;
+    denom_0.p_9 = _S158;
     var rcp_denom_0 : OpenPBR_PolarizedFloat_0;
-    var _S153 : f32 = 1.0f / denom_0.s_3;
-    rcp_denom_0.s_3 = _S153;
-    var _S154 : f32 = 1.0f / _S152;
-    rcp_denom_0.p_9 = _S154;
-    (*r_0).s_3 = (eta_i_cos_theta_i_0 - eta_t_cos_theta_t_0) * _S153;
-    (*r_0).p_9 = (eta_t_cos_theta_i_0 - eta_i_cos_theta_t_0) * _S154;
-    var _S155 : f32 = 2.0f * eta_i_cos_theta_i_0;
-    (*t_5).s_3 = _S155 * _S153;
-    (*t_5).p_9 = _S155 * _S154;
+    var _S159 : f32 = 1.0f / denom_0.s_3;
+    rcp_denom_0.s_3 = _S159;
+    var _S160 : f32 = 1.0f / _S158;
+    rcp_denom_0.p_9 = _S160;
+    (*r_0).s_3 = (eta_i_cos_theta_i_0 - eta_t_cos_theta_t_0) * _S159;
+    (*r_0).p_9 = (eta_t_cos_theta_i_0 - eta_i_cos_theta_t_0) * _S160;
+    var _S161 : f32 = 2.0f * eta_i_cos_theta_i_0;
+    (*t_5).s_3 = _S161 * _S159;
+    (*t_5).p_9 = _S161 * _S160;
     return;
 }
 
@@ -2099,11 +2200,11 @@ fn openpbr_complex_divide_0( z1_0 : vec2<f32>,  z2_0 : vec2<f32>,  min_denom_mag
         return fallback_1;
     }
     var rcp_denom_1 : f32 = 1.0f / denom_1;
-    var _S156 : f32 = z1_0.x;
-    var _S157 : f32 = z2_0.x;
-    var _S158 : f32 = z1_0.y;
-    var _S159 : f32 = z2_0.y;
-    return vec2<f32>((_S156 * _S157 + _S158 * _S159) * rcp_denom_1, (_S158 * _S157 - _S156 * _S159) * rcp_denom_1);
+    var _S162 : f32 = z1_0.x;
+    var _S163 : f32 = z2_0.x;
+    var _S164 : f32 = z1_0.y;
+    var _S165 : f32 = z2_0.y;
+    return vec2<f32>((_S162 * _S163 + _S164 * _S165) * rcp_denom_1, (_S164 * _S163 - _S162 * _S165) * rcp_denom_1);
 }
 
 fn openpbr_complex_scalar_multiply_0( scalar_0 : f32,  z_0 : vec2<f32>) -> vec2<f32>
@@ -2113,11 +2214,11 @@ fn openpbr_complex_scalar_multiply_0( scalar_0 : f32,  z_0 : vec2<f32>) -> vec2<
 
 fn openpbr_complex_multiply_0( z1_1 : vec2<f32>,  z2_1 : vec2<f32>) -> vec2<f32>
 {
-    var _S160 : f32 = z1_1.x;
-    var _S161 : f32 = z2_1.x;
-    var _S162 : f32 = z1_1.y;
-    var _S163 : f32 = z2_1.y;
-    return vec2<f32>(_S160 * _S161 - _S162 * _S163, _S160 * _S163 + _S162 * _S161);
+    var _S166 : f32 = z1_1.x;
+    var _S167 : f32 = z2_1.x;
+    var _S168 : f32 = z1_1.y;
+    var _S169 : f32 = z2_1.y;
+    return vec2<f32>(_S166 * _S167 - _S168 * _S169, _S166 * _S169 + _S168 * _S167);
 }
 
 fn openpbr_complex_subtract_0( z1_2 : vec2<f32>,  z2_2 : vec2<f32>) -> vec2<f32>
@@ -2127,23 +2228,23 @@ fn openpbr_complex_subtract_0( z1_2 : vec2<f32>,  z2_2 : vec2<f32>) -> vec2<f32>
 
 fn openpbr_sign_nonzero_0( x_14 : f32) -> f32
 {
-    var _S164 : f32;
+    var _S170 : f32;
     if(x_14 >= 0.0f)
     {
-        _S164 = 1.0f;
+        _S170 = 1.0f;
     }
     else
     {
-        _S164 = -1.0f;
+        _S170 = -1.0f;
     }
-    return _S164;
+    return _S170;
 }
 
 fn openpbr_complex_sqrt_0( z_1 : vec2<f32>) -> vec2<f32>
 {
     var r_1 : f32 = length(z_1);
-    var _S165 : f32 = z_1.x;
-    return vec2<f32>(sqrt(max((r_1 + _S165) * 0.5f, 0.0f)), openpbr_sign_nonzero_0(z_1.y) * sqrt(max((r_1 - _S165) * 0.5f, 0.0f)));
+    var _S171 : f32 = z_1.x;
+    return vec2<f32>(sqrt(max((r_1 + _S171) * 0.5f, 0.0f)), openpbr_sign_nonzero_0(z_1.y) * sqrt(max((r_1 - _S171) * 0.5f, 0.0f)));
 }
 
 fn openpbr_complex_negate_0( z_2 : vec2<f32>) -> vec2<f32>
@@ -2153,23 +2254,23 @@ fn openpbr_complex_negate_0( z_2 : vec2<f32>) -> vec2<f32>
 
 fn openpbr_enforce_decaying_branch_0( eta_t_1 : vec2<f32>,  cos_theta_t_2 : vec2<f32>) -> vec2<f32>
 {
-    var _S166 : vec2<f32>;
+    var _S172 : vec2<f32>;
     if((openpbr_complex_multiply_0(eta_t_1, cos_theta_t_2).y) < 0.0f)
     {
-        _S166 = openpbr_complex_negate_0(cos_theta_t_2);
+        _S172 = openpbr_complex_negate_0(cos_theta_t_2);
     }
     else
     {
-        _S166 = cos_theta_t_2;
+        _S172 = cos_theta_t_2;
     }
-    return _S166;
+    return _S172;
 }
 
 fn openpbr_snell_cos_unified_0( cos_theta_i_4 : f32,  eta_i_1 : f32,  eta_t_2 : vec2<f32>) -> vec2<f32>
 {
-    const _S167 : vec2<f32> = vec2<f32>(1.0f, 0.0f);
-    var sin_theta_t_1 : vec2<f32> = openpbr_complex_scalar_multiply_0(sqrt(saturate(1.0f - cos_theta_i_4 * cos_theta_i_4)), openpbr_complex_divide_0(vec2<f32>(eta_i_1, 0.0f), eta_t_2, 9.99999971718068537e-10f, _S167));
-    return openpbr_enforce_decaying_branch_0(eta_t_2, openpbr_complex_sqrt_0(openpbr_complex_subtract_0(_S167, openpbr_complex_multiply_0(sin_theta_t_1, sin_theta_t_1))));
+    const _S173 : vec2<f32> = vec2<f32>(1.0f, 0.0f);
+    var sin_theta_t_1 : vec2<f32> = openpbr_complex_scalar_multiply_0(sqrt(saturate(1.0f - cos_theta_i_4 * cos_theta_i_4)), openpbr_complex_divide_0(vec2<f32>(eta_i_1, 0.0f), eta_t_2, 9.99999971718068537e-10f, _S173));
+    return openpbr_enforce_decaying_branch_0(eta_t_2, openpbr_complex_sqrt_0(openpbr_complex_subtract_0(_S173, openpbr_complex_multiply_0(sin_theta_t_1, sin_theta_t_1))));
 }
 
 fn openpbr_complex_add_0( z1_3 : vec2<f32>,  z2_3 : vec2<f32>) -> vec2<f32>
@@ -2190,9 +2291,9 @@ fn openpbr_compute_fresnel_unified_polarized_reflection_amplitude_0( cos_theta_i
     var eta_t_cos_theta_t_1 : vec2<f32> = openpbr_complex_multiply_0(eta_t_3, cos_theta_t_3);
     var eta_t_cos_theta_i_1 : vec2<f32> = openpbr_complex_scalar_multiply_0(cos_theta_i_5, eta_t_3);
     var eta_i_cos_theta_t_1 : vec2<f32> = openpbr_complex_scalar_multiply_0(eta_i_2, cos_theta_t_3);
-    const _S168 : vec2<f32> = vec2<f32>(1.0f, 0.0f);
-    (*r_2).s_4 = openpbr_complex_divide_0(openpbr_complex_subtract_0(eta_i_cos_theta_i_1, eta_t_cos_theta_t_1), openpbr_complex_add_0(eta_i_cos_theta_i_1, eta_t_cos_theta_t_1), 9.99999971718068537e-10f, _S168);
-    (*r_2).p_10 = openpbr_complex_divide_0(openpbr_complex_subtract_0(eta_t_cos_theta_i_1, eta_i_cos_theta_t_1), openpbr_complex_add_0(eta_t_cos_theta_i_1, eta_i_cos_theta_t_1), 9.99999971718068537e-10f, _S168);
+    const _S174 : vec2<f32> = vec2<f32>(1.0f, 0.0f);
+    (*r_2).s_4 = openpbr_complex_divide_0(openpbr_complex_subtract_0(eta_i_cos_theta_i_1, eta_t_cos_theta_t_1), openpbr_complex_add_0(eta_i_cos_theta_i_1, eta_t_cos_theta_t_1), 9.99999971718068537e-10f, _S174);
+    (*r_2).p_10 = openpbr_complex_divide_0(openpbr_complex_subtract_0(eta_t_cos_theta_i_1, eta_i_cos_theta_t_1), openpbr_complex_add_0(eta_t_cos_theta_i_1, eta_i_cos_theta_t_1), 9.99999971718068537e-10f, _S174);
     return;
 }
 
@@ -2231,21 +2332,21 @@ fn openpbr_compute_dielectric_reflectance_0( r12_2 : OpenPBR_PolarizedFloat_0,  
         {
             break;
         }
-        var _S169 : bool;
+        var _S175 : bool;
         if(enable_dispersion_1)
         {
-            _S169 = true;
+            _S175 = true;
         }
         else
         {
-            _S169 = color_channel_1 == i32(0);
+            _S175 = color_channel_1 == i32(0);
         }
-        if(_S169)
+        if(_S175)
         {
-            var _S170 : vec2<f32> = vec2<f32>(eta_base_0[color_channel_1], 0.0f);
-            var _S171 : OpenPBR_PolarizedComplex_0 = r23_2[color_channel_1];
-            openpbr_compute_fresnel_unified_polarized_reflection_amplitude_0(cos_theta_t_film_0, eta_film_0, _S170, &(_S171));
-            r23_2[color_channel_1] = _S171;
+            var _S176 : vec2<f32> = vec2<f32>(eta_base_0[color_channel_1], 0.0f);
+            var _S177 : OpenPBR_PolarizedComplex_0 = r23_2[color_channel_1];
+            openpbr_compute_fresnel_unified_polarized_reflection_amplitude_0(cos_theta_t_film_0, eta_film_0, _S176, &(_S177));
+            r23_2[color_channel_1] = _S177;
         }
         else
         {
@@ -2328,19 +2429,19 @@ struct OpenPBR_ThinFilmResults_0
 fn openpbr_thin_film_and_base_reflectance_0( cos_theta_i_6 : f32,  eta_exterior_0 : f32,  eta_film_2 : f32,  eta_base_1 : vec3<f32>,  enable_dispersion_2 : bool,  metal_F0_1 : vec3<f32>,  metal_F82_tint_1 : vec3<f32>,  enable_dielectric_0 : bool,  enable_metal_0 : bool,  thin_film_thickness_nm_3 : f32,  lambda_rgb_nm_0 : vec3<f32>) -> OpenPBR_ThinFilmResults_0
 {
     var results_0 : OpenPBR_ThinFilmResults_0;
-    var _S172 : vec3<f32> = vec3<f32>(0.0f);
-    results_0.reflectance_dielectric_1 = _S172;
-    results_0.reflectance_metal_1 = _S172;
-    var _S173 : bool;
+    var _S178 : vec3<f32> = vec3<f32>(0.0f);
+    results_0.reflectance_dielectric_1 = _S178;
+    results_0.reflectance_metal_1 = _S178;
+    var _S179 : bool;
     if(enable_dielectric_0)
     {
-        _S173 = true;
+        _S179 = true;
     }
     else
     {
-        _S173 = enable_metal_0;
+        _S179 = enable_metal_0;
     }
-    if(!_S173)
+    if(!_S179)
     {
         return results_0;
     }
@@ -2387,10 +2488,10 @@ struct OpenPBR_AllCoefficients_0
 
 fn OpenPBR_AllCoefficients_x24init_0( reflection_coefficient_1 : vec3<f32>,  transmission_coefficient_1 : vec3<f32>) -> OpenPBR_AllCoefficients_0
 {
-    var _S174 : OpenPBR_AllCoefficients_0;
-    _S174.reflection_coefficient_0 = reflection_coefficient_1;
-    _S174.transmission_coefficient_0 = transmission_coefficient_1;
-    return _S174;
+    var _S180 : OpenPBR_AllCoefficients_0;
+    _S180.reflection_coefficient_0 = reflection_coefficient_1;
+    _S180.transmission_coefficient_0 = transmission_coefficient_1;
+    return _S180;
 }
 
 fn openpbr_all_coefficients_0( refl_trans_coeff_8 : OpenPBR_ComprehensiveReflectionTransmissionCoefficient_0,  idoth_1 : f32) -> OpenPBR_AllCoefficients_0
@@ -2402,9 +2503,9 @@ fn openpbr_all_coefficients_0( refl_trans_coeff_8 : OpenPBR_ComprehensiveReflect
     if(thin_film_presence_0 < 1.0f)
     {
         var fresnel_for_transparent_part_0 : vec3<f32> = openpbr_fresnel_rgb_0(refl_trans_coeff_8.eta_t_over_eta_i_for_transparent_part_0, idoth_1, true);
-        var _S175 : vec3<f32> = refl_trans_coeff_8.transmission_0 * (vec3<f32>(1.0f) - fresnel_for_transparent_part_0);
+        var _S181 : vec3<f32> = refl_trans_coeff_8.transmission_0 * (vec3<f32>(1.0f) - fresnel_for_transparent_part_0);
         standard_refl_coeff_1 = refl_trans_coeff_8.scale_for_reflection_for_transparent_part_0 * fresnel_for_transparent_part_0 + refl_trans_coeff_8.scale_for_reflection_for_opaque_part_0 * openpbr_fresnel_rgb_0(refl_trans_coeff_8.eta_t_over_eta_i_for_opaque_part_0, idoth_1, true) + vec3<f32>(refl_trans_coeff_8.metal_amount_0) * openpbr_metal_schlick_with_f82_tint_0(refl_trans_coeff_8.f0_for_metal_0, refl_trans_coeff_8.f82_tint_for_metal_0, idoth_1);
-        standard_trans_coeff_0 = _S175;
+        standard_trans_coeff_0 = _S181;
     }
     else
     {
@@ -2415,27 +2516,27 @@ fn openpbr_all_coefficients_0( refl_trans_coeff_8 : OpenPBR_ComprehensiveReflect
     var thin_film_trans_coeff_0 : vec3<f32>;
     if(thin_film_presence_0 > 0.0f)
     {
-        var _S176 : bool;
+        var _S182 : bool;
         if((any(((refl_trans_coeff_8.scale_for_reflection_for_transparent_part_0) > standard_refl_coeff_0))))
         {
-            _S176 = true;
+            _S182 = true;
         }
         else
         {
-            _S176 = (any(((refl_trans_coeff_8.scale_for_reflection_for_opaque_part_0) > standard_refl_coeff_0)));
+            _S182 = (any(((refl_trans_coeff_8.scale_for_reflection_for_opaque_part_0) > standard_refl_coeff_0)));
         }
-        var thin_film_results_0 : OpenPBR_ThinFilmResults_0 = openpbr_thin_film_and_base_reflectance_0(idoth_1, refl_trans_coeff_8.thin_film_exterior_ior_0, refl_trans_coeff_8.thin_film_ior_1, refl_trans_coeff_8.thin_film_interior_ior_0, true, refl_trans_coeff_8.f0_for_metal_0, refl_trans_coeff_8.f82_tint_for_metal_0, _S176, (refl_trans_coeff_8.metal_amount_0) > 0.0f, refl_trans_coeff_8.thin_film_thickness_nm_0, refl_trans_coeff_8.rgb_wavelengths_nm_0);
-        var _S177 : vec3<f32> = refl_trans_coeff_8.transmission_0 * (vec3<f32>(1.0f) - thin_film_results_0.reflectance_dielectric_1);
+        var thin_film_results_0 : OpenPBR_ThinFilmResults_0 = openpbr_thin_film_and_base_reflectance_0(idoth_1, refl_trans_coeff_8.thin_film_exterior_ior_0, refl_trans_coeff_8.thin_film_ior_1, refl_trans_coeff_8.thin_film_interior_ior_0, true, refl_trans_coeff_8.f0_for_metal_0, refl_trans_coeff_8.f82_tint_for_metal_0, _S182, (refl_trans_coeff_8.metal_amount_0) > 0.0f, refl_trans_coeff_8.thin_film_thickness_nm_0, refl_trans_coeff_8.rgb_wavelengths_nm_0);
+        var _S183 : vec3<f32> = refl_trans_coeff_8.transmission_0 * (vec3<f32>(1.0f) - thin_film_results_0.reflectance_dielectric_1);
         thin_film_refl_coeff_0 = refl_trans_coeff_8.scale_for_reflection_for_transparent_part_0 * thin_film_results_0.reflectance_dielectric_1 + refl_trans_coeff_8.scale_for_reflection_for_opaque_part_0 * thin_film_results_0.reflectance_dielectric_1 + vec3<f32>(refl_trans_coeff_8.metal_amount_0) * thin_film_results_0.reflectance_metal_1;
-        thin_film_trans_coeff_0 = _S177;
+        thin_film_trans_coeff_0 = _S183;
     }
     else
     {
         thin_film_refl_coeff_0 = standard_refl_coeff_0;
         thin_film_trans_coeff_0 = standard_refl_coeff_0;
     }
-    var _S178 : vec3<f32> = vec3<f32>(thin_film_presence_0);
-    return OpenPBR_AllCoefficients_x24init_0(mix(standard_refl_coeff_1, thin_film_refl_coeff_0, _S178) + refl_trans_coeff_8.thin_wall_constant_reflection_albedo_0, mix(standard_trans_coeff_0, thin_film_trans_coeff_0, _S178));
+    var _S184 : vec3<f32> = vec3<f32>(thin_film_presence_0);
+    return OpenPBR_AllCoefficients_x24init_0(mix(standard_refl_coeff_1, thin_film_refl_coeff_0, _S184) + refl_trans_coeff_8.thin_wall_constant_reflection_albedo_0, mix(standard_trans_coeff_0, thin_film_trans_coeff_0, _S184));
 }
 
 fn openpbr_max_component_of_throughput_weighted_color_0( path_throughput_3 : vec3<f32>,  x_15 : vec3<f32>) -> f32
@@ -2520,18 +2621,18 @@ fn openpbr_initialize_lobe_7( lobe_14 : ptr<function, OpenPBR_AggregateLobe_0>, 
 
 fn OpenPBR_IorReflectionCoefficient_x24init_0( eta_t_over_eta_i_12 : f32) -> OpenPBR_IorReflectionCoefficient_0
 {
-    var _S179 : OpenPBR_IorReflectionCoefficient_0;
-    _S179.eta_t_over_eta_i_2 = eta_t_over_eta_i_12;
-    return _S179;
+    var _S185 : OpenPBR_IorReflectionCoefficient_0;
+    _S185.eta_t_over_eta_i_2 = eta_t_over_eta_i_12;
+    return _S185;
 }
 
 fn OpenPBR_MinimalMicrofacetReflectionLobe_AnisotropicGGXSmithVNDFMicrofacetDistribution_IorReflectionCoefficient_x24init_0( normal_ff_16 : vec3<f32>,  microfacet_distr_9 : OpenPBR_AnisotropicGGXSmithVNDFMicrofacetDistribution_0,  refl_trans_coeff_13 : OpenPBR_IorReflectionCoefficient_0) -> OpenPBR_MinimalMicrofacetReflectionLobe_AnisotropicGGXSmithVNDFMicrofacetDistribution_IorReflectionCoefficient_0
 {
-    var _S180 : OpenPBR_MinimalMicrofacetReflectionLobe_AnisotropicGGXSmithVNDFMicrofacetDistribution_IorReflectionCoefficient_0;
-    _S180.normal_ff_5 = normal_ff_16;
-    _S180.microfacet_distr_2 = microfacet_distr_9;
-    _S180.refl_trans_coeff_2 = refl_trans_coeff_13;
-    return _S180;
+    var _S186 : OpenPBR_MinimalMicrofacetReflectionLobe_AnisotropicGGXSmithVNDFMicrofacetDistribution_IorReflectionCoefficient_0;
+    _S186.normal_ff_5 = normal_ff_16;
+    _S186.microfacet_distr_2 = microfacet_distr_9;
+    _S186.refl_trans_coeff_2 = refl_trans_coeff_13;
+    return _S186;
 }
 
 fn openpbr_initialize_lobe_8( lobe_15 : ptr<function, OpenPBR_MinimalMicrofacetReflectionLobe_AnisotropicGGXSmithVNDFMicrofacetDistribution_IorReflectionCoefficient_0>,  normal_ff_17 : vec3<f32>,  microfacet_distr_10 : OpenPBR_AnisotropicGGXSmithVNDFMicrofacetDistribution_0,  refl_trans_coeff_14 : OpenPBR_IorReflectionCoefficient_0)
@@ -2564,37 +2665,37 @@ fn openpbr_proportion_reflected_0( lobe_16 : OpenPBR_CoatingLobe_AggregateLobe_0
     }
 }
 
-fn openpbr_safe_pow_0( a_3 : f32,  b_4 : f32) -> f32
+fn openpbr_safe_pow_0( a_4 : f32,  b_5 : f32) -> f32
 {
-    var _S181 : f32;
-    if(a_3 > 0.0f)
+    var _S187 : f32;
+    if(a_4 > 0.0f)
     {
-        _S181 = pow(a_3, b_4);
+        _S187 = pow(a_4, b_5);
     }
     else
     {
-        _S181 = 0.0f;
+        _S187 = 0.0f;
     }
-    return _S181;
+    return _S187;
 }
 
-fn openpbr_safe_pow_1( a_4 : vec3<f32>,  b_5 : vec3<f32>) -> vec3<f32>
+fn openpbr_safe_pow_1( a_5 : vec3<f32>,  b_6 : vec3<f32>) -> vec3<f32>
 {
-    return vec3<f32>(openpbr_safe_pow_0(a_4.x, b_5.x), openpbr_safe_pow_0(a_4.y, b_5.y), openpbr_safe_pow_0(a_4.z, b_5.z));
+    return vec3<f32>(openpbr_safe_pow_0(a_5.x, b_6.x), openpbr_safe_pow_0(a_5.y, b_6.y), openpbr_safe_pow_0(a_5.z, b_6.z));
 }
 
 fn openpbr_coat_passage_color_multiplier_0( lobe_17 : OpenPBR_CoatingLobe_AggregateLobe_0,  cosine_1 : f32) -> vec3<f32>
 {
-    var _S182 : bool;
+    var _S188 : bool;
     if(cosine_1 > 0.0f)
     {
-        _S182 = (openpbr_min3_0(lobe_17.tint_0)) < 1.0f;
+        _S188 = (openpbr_min3_0(lobe_17.tint_0)) < 1.0f;
     }
     else
     {
-        _S182 = false;
+        _S188 = false;
     }
-    if(_S182)
+    if(_S188)
     {
         return mix(vec3<f32>(1.0f), openpbr_safe_pow_1(sqrt(lobe_17.tint_0), vec3<f32>((1.0f / sqrt(max(0.0f, 1.0f - (1.0f - openpbr_square_1(cosine_1)) / openpbr_square_1(lobe_17.coat_reflection_lobe_0.refl_trans_coeff_2.eta_t_over_eta_i_2)))))), vec3<f32>(lobe_17.presence_0));
     }
@@ -2616,9 +2717,9 @@ fn openpbr_initialize_lobe_9( lobe_19 : ptr<function, OpenPBR_CoatingLobe_Aggreg
     (*lobe_19).presence_0 = presence_2;
     (*lobe_19).inside_0 = inside_1;
     var idotn_4 : f32 = dot(view_direction_13, normal_ff_18);
-    var _S183 : f32 = openpbr_proportion_reflected_0((*lobe_19), idotn_4);
-    (*lobe_19).in_reflected_0 = _S183;
-    (*lobe_19).in_base_layer_scale_0 = openpbr_base_layer_scale_one_side_0((*lobe_19), idotn_4, _S183) * extra_base_layer_scale_0;
+    var _S189 : f32 = openpbr_proportion_reflected_0((*lobe_19), idotn_4);
+    (*lobe_19).in_reflected_0 = _S189;
+    (*lobe_19).in_base_layer_scale_0 = openpbr_base_layer_scale_one_side_0((*lobe_19), idotn_4, _S189) * extra_base_layer_scale_0;
     return;
 }
 
@@ -2651,11 +2752,11 @@ fn openpbr_initialize_lobe_10( lobe_22 : ptr<function, OpenPBR_FuzzLobe_CoatingL
     (*lobe_22).alpha_3 = roughness_0;
     (*lobe_22).tint_1 = tint_3;
     (*lobe_22).presence_1 = presence_3;
-    var _S184 : OpenPBR_Basis_0 = openpbr_make_basis_1(normal_ff_19);
-    (*lobe_22).basis_3 = _S184;
-    var _S185 : vec3<f32> = openpbr_world_to_local_0(_S184, view_direction_14);
-    (*lobe_22).view_dir_local_0 = _S185;
-    (*lobe_22).view_reflected_0 = openpbr_proportion_reflected_1((*lobe_22), _S185);
+    var _S190 : OpenPBR_Basis_0 = openpbr_make_basis_1(normal_ff_19);
+    (*lobe_22).basis_3 = _S190;
+    var _S191 : vec3<f32> = openpbr_world_to_local_0(_S190, view_direction_14);
+    (*lobe_22).view_dir_local_0 = _S191;
+    (*lobe_22).view_reflected_0 = openpbr_proportion_reflected_1((*lobe_22), _S191);
     return;
 }
 
@@ -2713,10 +2814,10 @@ fn openpbr_prepare_lobes_0( resolved_inputs_2 : OpenPBR_ResolvedInputs_0,  volum
     if(inside_2)
     {
         var relative_ior_for_refraction_2 : f32 = exterior_ior_0 / weighted_specular_ior_0;
-        var _S186 : f32 = weighted_specular_ior_0 / exterior_ior_0;
+        var _S192 : f32 = weighted_specular_ior_0 / exterior_ior_0;
         relative_ior_for_refraction_1 = relative_ior_for_refraction_2;
         relative_coat_ior_0 = 1.0f;
-        relative_ior_for_opaque_reflection_0 = _S186;
+        relative_ior_for_opaque_reflection_0 = _S192;
         relative_ior_for_trans_reflection_0 = relative_ior_for_refraction_2;
     }
     else
@@ -2747,11 +2848,11 @@ fn openpbr_prepare_lobes_0( resolved_inputs_2 : OpenPBR_ResolvedInputs_0,  volum
             relative_ior_for_refraction_1 = relative_ior_for_refraction_3;
             relative_coat_ior_0 = 1.0f;
         }
-        var _S187 : f32 = relative_ior_for_refraction_1;
-        var _S188 : f32 = relative_ior_for_refraction_1;
+        var _S193 : f32 = relative_ior_for_refraction_1;
+        var _S194 : f32 = relative_ior_for_refraction_1;
         relative_ior_for_refraction_1 = relative_ior_for_refraction_3;
-        relative_ior_for_opaque_reflection_0 = _S188;
-        relative_ior_for_trans_reflection_0 = _S187;
+        relative_ior_for_opaque_reflection_0 = _S194;
+        relative_ior_for_trans_reflection_0 = _S193;
     }
     if(relative_ior_for_refraction_1 >= 1.0f)
     {
@@ -2784,16 +2885,16 @@ fn openpbr_prepare_lobes_0( resolved_inputs_2 : OpenPBR_ResolvedInputs_0,  volum
     var sss_0 : f32 = non_trans_0 * dielectric_0 * resolved_inputs_2.subsurface_weight_0;
     var darkened_metal_0 : f32 = resolved_inputs_2.base_metalness_0 * resolved_inputs_2.specular_weight_0;
     var weighted_base_color_0 : vec3<f32> = resolved_inputs_2.base_color_0 * vec3<f32>(resolved_inputs_2.base_weight_0);
-    var _S189 : vec3<f32> = openpbr_metal_average_fresnel_with_f82_tint_0(weighted_base_color_0, resolved_inputs_2.specular_color_0);
+    var _S195 : vec3<f32> = openpbr_metal_average_fresnel_with_f82_tint_0(weighted_base_color_0, resolved_inputs_2.specular_color_0);
     var K_s_0 : f32 = openpbr_average_fresnel_0(relative_coat_ior_0);
     var specularity_opaque_dielectric_0 : f32 = openpbr_average_fresnel_0(relative_ior_for_opaque_reflection_0);
     var K_0 : f32 = mix(K_s_0, 1.0f - (1.0f - K_s_0) / openpbr_square_1(relative_coat_ior_0), mix(1.0f, adjusted_specular_roughness_0, opaque_dielectric_0 * specularity_opaque_dielectric_0 + (sss_0 + trans_0) * openpbr_average_fresnel_0(relative_ior_for_trans_reflection_0) + resolved_inputs_2.base_metalness_0));
-    var _S190 : vec3<f32> = vec3<f32>(darkened_metal_0);
-    var _S191 : vec3<f32> = vec3<f32>(1.0f);
-    var _S192 : vec3<f32> = vec3<f32>(opaque_dielectric_0);
-    var _S193 : vec3<f32> = vec3<f32>(sss_0);
+    var _S196 : vec3<f32> = vec3<f32>(darkened_metal_0);
+    var _S197 : vec3<f32> = vec3<f32>(1.0f);
+    var _S198 : vec3<f32> = vec3<f32>(opaque_dielectric_0);
+    var _S199 : vec3<f32> = vec3<f32>(sss_0);
     var base_albedo_from_trans_0 : vec3<f32> = vec3<f32>(trans_0);
-    var modulated_coat_darkening_0 : vec3<f32> = mix(_S191, vec3<f32>((1.0f - K_0)) / (_S191 - (_S190 * _S189 + _S192 * mix(weighted_base_color_0, _S191, vec3<f32>(specularity_opaque_dielectric_0)) + _S193 * resolved_inputs_2.subsurface_color_0 + base_albedo_from_trans_0) * vec3<f32>(K_0)), vec3<f32>((resolved_inputs_2.coat_weight_0 * resolved_inputs_2.coat_darkening_0)));
+    var modulated_coat_darkening_0 : vec3<f32> = mix(_S197, vec3<f32>((1.0f - K_0)) / (_S197 - (_S196 * _S195 + _S198 * mix(weighted_base_color_0, _S197, vec3<f32>(specularity_opaque_dielectric_0)) + _S199 * resolved_inputs_2.subsurface_color_0 + base_albedo_from_trans_0) * vec3<f32>(K_0)), vec3<f32>((resolved_inputs_2.coat_weight_0 * resolved_inputs_2.coat_darkening_0)));
     var microfacet_distr_11 : OpenPBR_AnisotropicGGXSmithVNDFMicrofacetDistribution_0 = OpenPBR_AnisotropicGGXSmithVNDFMicrofacetDistribution_x24init_0(anisotropic_specular_alpha_0, specular_anisotropy_basis_ff_0, specular_alpha_3);
     var trans_including_sss_0 : f32 = trans_0 + sss_0;
     var thin_wall_specular_transmission_albedo_scale_0 : vec3<f32>;
@@ -2803,10 +2904,10 @@ fn openpbr_prepare_lobes_0( resolved_inputs_2 : OpenPBR_ResolvedInputs_0,  volum
     if(inside_2)
     {
         var scale_for_trans_reflection_1 : vec3<f32> = vec3<f32>(trans_including_sss_0);
-        var _S194 : vec3<f32> = resolved_inputs_2.specular_color_0 * _S192;
+        var _S200 : vec3<f32> = resolved_inputs_2.specular_color_0 * _S198;
         thin_wall_specular_transmission_albedo_scale_0 = vec3<f32>(0.0f);
         thin_wall_aware_scale_for_trans_reflection_0 = scale_for_trans_reflection_1;
-        scale_for_opaque_reflection_0 = _S194;
+        scale_for_opaque_reflection_0 = _S200;
         scale_for_trans_reflection_0 = scale_for_trans_reflection_1;
     }
     else
@@ -2814,16 +2915,16 @@ fn openpbr_prepare_lobes_0( resolved_inputs_2 : OpenPBR_ResolvedInputs_0,  volum
         var scale_for_trans_reflection_2 : vec3<f32> = resolved_inputs_2.specular_color_0 * vec3<f32>(trans_including_sss_0);
         if(resolved_inputs_2.geometry_thin_walled_0)
         {
-            var _S195 : vec3<f32> = resolved_inputs_2.specular_color_0 * _S193;
+            var _S201 : vec3<f32> = resolved_inputs_2.specular_color_0 * _S199;
             thin_wall_specular_transmission_albedo_scale_0 = resolved_inputs_2.specular_color_0 * base_albedo_from_trans_0;
-            thin_wall_aware_scale_for_trans_reflection_0 = _S195;
+            thin_wall_aware_scale_for_trans_reflection_0 = _S201;
         }
         else
         {
             thin_wall_specular_transmission_albedo_scale_0 = vec3<f32>(0.0f);
             thin_wall_aware_scale_for_trans_reflection_0 = scale_for_trans_reflection_2;
         }
-        scale_for_opaque_reflection_0 = resolved_inputs_2.specular_color_0 * _S192;
+        scale_for_opaque_reflection_0 = resolved_inputs_2.specular_color_0 * _S198;
         scale_for_trans_reflection_0 = scale_for_trans_reflection_2;
     }
     var relative_ior_for_refraction_with_dispersion_0 : vec3<f32>;
@@ -2849,7 +2950,7 @@ fn openpbr_prepare_lobes_0( resolved_inputs_2 : OpenPBR_ResolvedInputs_0,  volum
     var channel_1 : i32;
     if(enter_coat_0)
     {
-        var _S196 : f32 = openpbr_safe_divide_0(20.0f, openpbr_safe_divide_0(resolved_inputs_2.transmission_dispersion_abbe_number_0, resolved_inputs_2.transmission_dispersion_scale_0, 0.0f), 0.0f);
+        var _S202 : f32 = openpbr_safe_divide_0(20.0f, openpbr_safe_divide_0(resolved_inputs_2.transmission_dispersion_abbe_number_0, resolved_inputs_2.transmission_dispersion_scale_0, 0.0f), 0.0f);
         channel_1 = i32(0);
         for(;;)
         {
@@ -2860,15 +2961,15 @@ fn openpbr_prepare_lobes_0( resolved_inputs_2 : OpenPBR_ResolvedInputs_0,  volum
             {
                 break;
             }
-            var _S197 : i32 = channel_1;
-            relative_ior_for_refraction_with_dispersion_0[channel_1] = openpbr_dispersion_adjusted_ior_0(relative_ior_for_refraction_1, _S196, rgb_wavelengths_nm_2[channel_1]);
+            var _S203 : i32 = channel_1;
+            relative_ior_for_refraction_with_dispersion_0[channel_1] = openpbr_dispersion_adjusted_ior_0(relative_ior_for_refraction_1, _S202, rgb_wavelengths_nm_2[channel_1]);
             if(relative_ior_for_trans_reflection_0 == relative_ior_for_refraction_1)
             {
                 dispersion_0 = relative_ior_for_refraction_with_dispersion_0[channel_1];
             }
             else
             {
-                dispersion_0 = openpbr_dispersion_adjusted_ior_0(relative_ior_for_trans_reflection_0, _S196, rgb_wavelengths_nm_2[_S197]);
+                dispersion_0 = openpbr_dispersion_adjusted_ior_0(relative_ior_for_trans_reflection_0, _S202, rgb_wavelengths_nm_2[_S203]);
             }
             relative_ior_for_trans_reflection_with_dispersion_0[channel_1] = dispersion_0;
             if(relative_ior_for_opaque_reflection_0 == relative_ior_for_trans_reflection_0)
@@ -2877,12 +2978,12 @@ fn openpbr_prepare_lobes_0( resolved_inputs_2 : OpenPBR_ResolvedInputs_0,  volum
             }
             else
             {
-                thin_wall_weight_0 = openpbr_dispersion_adjusted_ior_0(relative_ior_for_opaque_reflection_0, _S196, rgb_wavelengths_nm_2[_S197]);
+                thin_wall_weight_0 = openpbr_dispersion_adjusted_ior_0(relative_ior_for_opaque_reflection_0, _S202, rgb_wavelengths_nm_2[_S203]);
             }
             relative_ior_for_opaque_reflection_with_dispersion_0[channel_1] = thin_wall_weight_0;
             channel_1 = channel_1 + i32(1);
         }
-        dispersion_0 = _S196;
+        dispersion_0 = _S202;
     }
     else
     {
@@ -2910,7 +3011,7 @@ fn openpbr_prepare_lobes_0( resolved_inputs_2 : OpenPBR_ResolvedInputs_0,  volum
         thin_wall_aware_cos_theta_0 = cos_theta_6;
     }
     var tinted_trans_0 : vec3<f32> = base_albedo_from_trans_0 * openpbr_compute_final_transmission_tint_0(volume_derived_props_2.transmission_tint_0, resolved_inputs_2.geometry_thin_walled_0, thin_wall_aware_cos_theta_0, relative_ior_for_refraction_1);
-    var tinted_trans_including_sss_0 : vec3<f32> = tinted_trans_0 + _S193;
+    var tinted_trans_including_sss_0 : vec3<f32> = tinted_trans_0 + _S199;
     var thin_wall_aware_tinted_trans_including_sss_0 : vec3<f32> = vec3<f32>(non_thin_wall_weight_0) * tinted_trans_including_sss_0;
     var thin_film_interior_ior_2 : vec3<f32>;
     var thin_film_exterior_ior_2 : f32;
@@ -2940,67 +3041,67 @@ fn openpbr_prepare_lobes_0( resolved_inputs_2 : OpenPBR_ResolvedInputs_0,  volum
         }
         thin_film_exterior_ior_2 = weighted_coat_ior_0;
     }
-    var _S198 : vec3<f32> = vec3<f32>(0.0f);
+    var _S204 : vec3<f32> = vec3<f32>(0.0f);
     var thin_wall_specular_transmission_albedo_0 : vec3<f32>;
     var thin_wall_specular_reflection_albedo_0 : vec3<f32>;
     if(resolved_inputs_2.geometry_thin_walled_0)
     {
-        var _S199 : vec3<f32> = thin_wall_specular_transmission_albedo_scale_0 * vec3<f32>(openpbr_thin_wall_fresnel_0(relative_ior_for_trans_reflection_0, thin_wall_aware_cos_theta_0));
+        var _S205 : vec3<f32> = thin_wall_specular_transmission_albedo_scale_0 * vec3<f32>(openpbr_thin_wall_fresnel_0(relative_ior_for_trans_reflection_0, thin_wall_aware_cos_theta_0));
         thin_wall_specular_transmission_albedo_0 = tinted_trans_0 * vec3<f32>((1.0f - openpbr_thin_wall_fresnel_0(relative_ior_for_refraction_1, thin_wall_aware_cos_theta_0)));
-        thin_wall_specular_reflection_albedo_0 = _S199;
+        thin_wall_specular_reflection_albedo_0 = _S205;
     }
     else
     {
-        thin_wall_specular_transmission_albedo_0 = _S198;
-        thin_wall_specular_reflection_albedo_0 = _S198;
+        thin_wall_specular_transmission_albedo_0 = _S204;
+        thin_wall_specular_reflection_albedo_0 = _S204;
     }
-    var _S200 : OpenPBR_ThinWallSpecularTransmissionLobe_0 = (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.thin_wall_specular_trans_lobe_0;
-    openpbr_initialize_lobe_1(&(_S200), normal_ff_20, microfacet_distr_11, thin_wall_specular_transmission_albedo_0);
-    (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.thin_wall_specular_trans_lobe_0 = _S200;
+    var _S206 : OpenPBR_ThinWallSpecularTransmissionLobe_0 = (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.thin_wall_specular_trans_lobe_0;
+    openpbr_initialize_lobe_1(&(_S206), normal_ff_20, microfacet_distr_11, thin_wall_specular_transmission_albedo_0);
+    (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.thin_wall_specular_trans_lobe_0 = _S206;
     var thin_wall_subsurface_transmission_albedo_0 : vec3<f32>;
     var thin_wall_subsurface_reflection_albedo_0 : vec3<f32>;
     if(resolved_inputs_2.geometry_thin_walled_0)
     {
         var thin_wall_subsurface_transmission_proportion_0 : f32 = (volume_derived_props_2.thin_wall_subsurface_anisotropy_0 + 1.0f) * 0.5f;
-        var thin_wall_subsurface_albedo_0 : vec3<f32> = _S193 * volume_derived_props_2.thin_wall_subsurface_color_0;
-        var _S201 : vec3<f32> = thin_wall_subsurface_albedo_0 * vec3<f32>((1.0f - thin_wall_subsurface_transmission_proportion_0));
+        var thin_wall_subsurface_albedo_0 : vec3<f32> = _S199 * volume_derived_props_2.thin_wall_subsurface_color_0;
+        var _S207 : vec3<f32> = thin_wall_subsurface_albedo_0 * vec3<f32>((1.0f - thin_wall_subsurface_transmission_proportion_0));
         thin_wall_subsurface_transmission_albedo_0 = thin_wall_subsurface_albedo_0 * vec3<f32>(thin_wall_subsurface_transmission_proportion_0);
-        thin_wall_subsurface_reflection_albedo_0 = _S201;
+        thin_wall_subsurface_reflection_albedo_0 = _S207;
     }
     else
     {
-        thin_wall_subsurface_transmission_albedo_0 = _S198;
-        thin_wall_subsurface_reflection_albedo_0 = _S198;
+        thin_wall_subsurface_transmission_albedo_0 = _S204;
+        thin_wall_subsurface_reflection_albedo_0 = _S204;
     }
-    var _S202 : OpenPBR_ThinWallDiffuseTransmissionLobe_0 = (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.thin_wall_diffuse_trans_lobe_0;
-    openpbr_initialize_lobe_3(&(_S202), normal_ff_20, view_direction_15, thin_wall_subsurface_transmission_albedo_0, resolved_inputs_2.base_diffuse_roughness_0, specular_alpha_3, relative_ior_for_opaque_reflection_0);
-    (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.thin_wall_diffuse_trans_lobe_0 = _S202;
+    var _S208 : OpenPBR_ThinWallDiffuseTransmissionLobe_0 = (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.thin_wall_diffuse_trans_lobe_0;
+    openpbr_initialize_lobe_3(&(_S208), normal_ff_20, view_direction_15, thin_wall_subsurface_transmission_albedo_0, resolved_inputs_2.base_diffuse_roughness_0, specular_alpha_3, relative_ior_for_opaque_reflection_0);
+    (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.thin_wall_diffuse_trans_lobe_0 = _S208;
     var refl_trans_coeff_15 : OpenPBR_ComprehensiveReflectionTransmissionCoefficient_0 = OpenPBR_ComprehensiveReflectionTransmissionCoefficient_x24init_0(relative_ior_for_trans_reflection_with_dispersion_0, relative_ior_for_opaque_reflection_with_dispersion_0, thin_wall_aware_scale_for_trans_reflection_0, scale_for_opaque_reflection_0, thin_wall_aware_tinted_trans_including_sss_0, weighted_base_color_0, resolved_inputs_2.specular_color_0, darkened_metal_0, resolved_inputs_2.thin_film_weight_0, resolved_inputs_2.thin_film_thickness_0 * 1000.0f, thin_film_exterior_ior_2, resolved_inputs_2.thin_film_ior_0, thin_film_interior_ior_2, rgb_wavelengths_nm_2, thin_wall_specular_reflection_albedo_0);
-    var _S203 : OpenPBR_ComprehensiveMicrofacetReflectionTransmissionLobe_0 = (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.specular_lobe_0;
-    openpbr_initialize_lobe_4(&(_S203), normal_ff_20, microfacet_distr_11, refl_trans_coeff_15, relative_ior_for_refraction_with_dispersion_0, path_throughput_16);
-    (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.specular_lobe_0 = _S203;
-    var _S204 : OpenPBR_DielectricMicrofacetMultipleScatteringLobe_0 = (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.dielectric_mms_lobe_0;
-    openpbr_initialize_lobe_5(&(_S204), normal_ff_20, view_direction_15, specular_alpha_3, relative_ior_for_refraction_1, scale_for_trans_reflection_0, tinted_trans_including_sss_0);
-    (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.dielectric_mms_lobe_0 = _S204;
-    var scale_for_metal_reflection_0 : vec3<f32> = openpbr_square_0(_S189) * _S190;
-    var _S205 : OpenPBR_MetalMicrofacetMultipleScatteringLobe_0 = (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.metal_mms_lobe_0;
-    openpbr_initialize_lobe_6(&(_S205), normal_ff_20, view_direction_15, specular_alpha_3, scale_for_metal_reflection_0);
-    (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.metal_mms_lobe_0 = _S205;
-    var thin_wall_aware_diffuse_albedo_0 : vec3<f32> = weighted_base_color_0 * _S192 + thin_wall_subsurface_reflection_albedo_0;
-    var _S206 : OpenPBR_EnergyConservingRoughDiffuseLobe_0 = (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.diffuse_lobe_0;
-    openpbr_initialize_lobe_2(&(_S206), normal_ff_20, view_direction_15, thin_wall_aware_diffuse_albedo_0, resolved_inputs_2.base_diffuse_roughness_0, specular_alpha_3, relative_ior_for_opaque_reflection_0);
-    (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.diffuse_lobe_0 = _S206;
-    var _S207 : OpenPBR_AggregateLobe_0 = (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0;
-    openpbr_initialize_lobe_7(&(_S207), view_direction_15, path_throughput_16);
-    (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0 = _S207;
+    var _S209 : OpenPBR_ComprehensiveMicrofacetReflectionTransmissionLobe_0 = (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.specular_lobe_0;
+    openpbr_initialize_lobe_4(&(_S209), normal_ff_20, microfacet_distr_11, refl_trans_coeff_15, relative_ior_for_refraction_with_dispersion_0, path_throughput_16);
+    (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.specular_lobe_0 = _S209;
+    var _S210 : OpenPBR_DielectricMicrofacetMultipleScatteringLobe_0 = (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.dielectric_mms_lobe_0;
+    openpbr_initialize_lobe_5(&(_S210), normal_ff_20, view_direction_15, specular_alpha_3, relative_ior_for_refraction_1, scale_for_trans_reflection_0, tinted_trans_including_sss_0);
+    (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.dielectric_mms_lobe_0 = _S210;
+    var scale_for_metal_reflection_0 : vec3<f32> = openpbr_square_0(_S195) * _S196;
+    var _S211 : OpenPBR_MetalMicrofacetMultipleScatteringLobe_0 = (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.metal_mms_lobe_0;
+    openpbr_initialize_lobe_6(&(_S211), normal_ff_20, view_direction_15, specular_alpha_3, scale_for_metal_reflection_0);
+    (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.metal_mms_lobe_0 = _S211;
+    var thin_wall_aware_diffuse_albedo_0 : vec3<f32> = weighted_base_color_0 * _S198 + thin_wall_subsurface_reflection_albedo_0;
+    var _S212 : OpenPBR_EnergyConservingRoughDiffuseLobe_0 = (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.diffuse_lobe_0;
+    openpbr_initialize_lobe_2(&(_S212), normal_ff_20, view_direction_15, thin_wall_aware_diffuse_albedo_0, resolved_inputs_2.base_diffuse_roughness_0, specular_alpha_3, relative_ior_for_opaque_reflection_0);
+    (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0.diffuse_lobe_0 = _S212;
+    var _S213 : OpenPBR_AggregateLobe_0 = (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0;
+    openpbr_initialize_lobe_7(&(_S213), view_direction_15, path_throughput_16);
+    (*prepared_2).fuzz_lobe_0.coating_lobe_0.base_lobe_0 = _S213;
     var coat_refl_trans_coeff_0 : OpenPBR_IorReflectionCoefficient_0 = OpenPBR_IorReflectionCoefficient_x24init_0(relative_coat_ior_0);
     var coat_microfacet_distr_0 : OpenPBR_AnisotropicGGXSmithVNDFMicrofacetDistribution_0 = OpenPBR_AnisotropicGGXSmithVNDFMicrofacetDistribution_x24init_0(anisotropic_coat_alpha_0, coat_anisotropy_basis_ff_0, coat_alpha_0);
-    var _S208 : OpenPBR_MinimalMicrofacetReflectionLobe_AnisotropicGGXSmithVNDFMicrofacetDistribution_IorReflectionCoefficient_0 = (*prepared_2).fuzz_lobe_0.coating_lobe_0.coat_reflection_lobe_0;
-    openpbr_initialize_lobe_8(&(_S208), coat_normal_ff_0, coat_microfacet_distr_0, coat_refl_trans_coeff_0);
-    (*prepared_2).fuzz_lobe_0.coating_lobe_0.coat_reflection_lobe_0 = _S208;
-    var _S209 : OpenPBR_CoatingLobe_AggregateLobe_0 = (*prepared_2).fuzz_lobe_0.coating_lobe_0;
-    openpbr_initialize_lobe_9(&(_S209), coat_normal_ff_0, view_direction_15, resolved_inputs_2.coat_color_0, resolved_inputs_2.coat_weight_0, modulated_coat_darkening_0, inside_2);
-    (*prepared_2).fuzz_lobe_0.coating_lobe_0 = _S209;
+    var _S214 : OpenPBR_MinimalMicrofacetReflectionLobe_AnisotropicGGXSmithVNDFMicrofacetDistribution_IorReflectionCoefficient_0 = (*prepared_2).fuzz_lobe_0.coating_lobe_0.coat_reflection_lobe_0;
+    openpbr_initialize_lobe_8(&(_S214), coat_normal_ff_0, coat_microfacet_distr_0, coat_refl_trans_coeff_0);
+    (*prepared_2).fuzz_lobe_0.coating_lobe_0.coat_reflection_lobe_0 = _S214;
+    var _S215 : OpenPBR_CoatingLobe_AggregateLobe_0 = (*prepared_2).fuzz_lobe_0.coating_lobe_0;
+    openpbr_initialize_lobe_9(&(_S215), coat_normal_ff_0, view_direction_15, resolved_inputs_2.coat_color_0, resolved_inputs_2.coat_weight_0, modulated_coat_darkening_0, inside_2);
+    (*prepared_2).fuzz_lobe_0.coating_lobe_0 = _S215;
     var fuzz_normal_ff_0 : vec3<f32> = openpbr_fast_normalize_0(mix(normal_ff_20, coat_normal_ff_0, vec3<f32>(resolved_inputs_2.coat_weight_0)));
     if(inside_2)
     {
@@ -3010,9 +3111,9 @@ fn openpbr_prepare_lobes_0( resolved_inputs_2 : OpenPBR_ResolvedInputs_0,  volum
     {
         weighted_coat_ior_0 = resolved_inputs_2.fuzz_weight_0;
     }
-    var _S210 : OpenPBR_FuzzLobe_CoatingLobe_AggregateLobe_0 = (*prepared_2).fuzz_lobe_0;
-    openpbr_initialize_lobe_10(&(_S210), fuzz_normal_ff_0, view_direction_15, resolved_inputs_2.fuzz_roughness_0, resolved_inputs_2.fuzz_color_0, weighted_coat_ior_0);
-    (*prepared_2).fuzz_lobe_0 = _S210;
+    var _S216 : OpenPBR_FuzzLobe_CoatingLobe_AggregateLobe_0 = (*prepared_2).fuzz_lobe_0;
+    openpbr_initialize_lobe_10(&(_S216), fuzz_normal_ff_0, view_direction_15, resolved_inputs_2.fuzz_roughness_0, resolved_inputs_2.fuzz_color_0, weighted_coat_ior_0);
+    (*prepared_2).fuzz_lobe_0 = _S216;
     return;
 }
 
@@ -3093,48 +3194,48 @@ fn openpbr_prepare_0( resolved_inputs_6 : OpenPBR_ResolvedInputs_0,  path_throug
 
 fn sample_light_0( position_0 : vec3<f32>,  light_0 : i32,  rng_0 : ptr<function, u32>,  direction_2 : ptr<function, vec3<f32>>,  distance_3 : ptr<function, f32>,  pdf_0 : ptr<function, f32>) -> vec3<f32>
 {
-    var _S211 : i32 = light_0 * i32(4);
-    var p_11 : vec4<f32> = lights_0[_S211];
-    var color_3 : vec4<f32> = lights_0[_S211 + i32(1)];
-    var extra_0 : vec4<f32> = lights_0[_S211 + i32(2)];
+    var _S217 : i32 = light_0 * i32(4);
+    var p_11 : vec4<f32> = lights_0[_S217];
+    var color_3 : vec4<f32> = lights_0[_S217 + i32(1)];
+    var extra_0 : vec4<f32> = lights_0[_S217 + i32(2)];
     (*pdf_0) = 1.0f;
     (*distance_3) = 1.00000001504746622e+30f;
-    var _S212 : f32 = p_11.w;
-    if(_S212 == 0.0f)
+    var _S218 : f32 = p_11.w;
+    if(_S218 == 0.0f)
     {
         (*direction_2) = p_11.xyz;
         if((Frame_0.frame_0[i32(8)].z) == 2.0f)
         {
             return color_3.xyz;
         }
-        var _S213 : f32 = extra_0.w;
-        if(_S213 < 1.0f)
+        var _S219 : f32 = extra_0.w;
+        if(_S219 < 1.0f)
         {
-            var _S214 : f32 = random_0(&((*rng_0)));
-            var z_4 : f32 = mix(_S213, 1.0f, _S214);
-            var _S215 : f32 = random_0(&((*rng_0)));
-            var phi_0 : f32 = 6.28318548202514648f * _S215;
+            var _S220 : f32 = random_0(&((*rng_0)));
+            var z_4 : f32 = mix(_S219, 1.0f, _S220);
+            var _S221 : f32 = random_0(&((*rng_0)));
+            var phi_0 : f32 = 6.28318548202514648f * _S221;
             var basis_10 : OpenPBR_Basis_0 = openpbr_make_basis_1((*direction_2));
             (*direction_2) = normalize(basis_10.n_0 * vec3<f32>(z_4) + vec3<f32>(sqrt(max(0.0f, 1.0f - z_4 * z_4))) * (basis_10.t_0 * vec3<f32>(cos(phi_0)) + basis_10.b_0 * vec3<f32>(sin(phi_0))));
-            (*pdf_0) = 1.0f / (6.28318548202514648f * (1.0f - _S213));
-            return color_3.xyz / vec3<f32>((3.14159274101257324f * (1.0f - _S213 * _S213)));
+            (*pdf_0) = 1.0f / (6.28318548202514648f * (1.0f - _S219));
+            return color_3.xyz / vec3<f32>((3.14159274101257324f * (1.0f - _S219 * _S219)));
         }
         return color_3.xyz;
     }
-    var _S216 : vec3<f32> = p_11.xyz - position_0;
-    (*direction_2) = _S216;
-    var _S217 : f32 = length(_S216);
-    (*distance_3) = _S217;
-    var _S218 : bool;
-    if(_S217 <= 0.0f)
+    var _S222 : vec3<f32> = p_11.xyz - position_0;
+    (*direction_2) = _S222;
+    var _S223 : f32 = length(_S222);
+    (*distance_3) = _S223;
+    var _S224 : bool;
+    if(_S223 <= 0.0f)
     {
-        _S218 = true;
+        _S224 = true;
     }
     else
     {
-        _S218 = (*distance_3) > (color_3.w);
+        _S224 = (*distance_3) > (color_3.w);
     }
-    if(_S218)
+    if(_S224)
     {
         (*direction_2) = vec3<f32>(0.0f, 0.0f, 1.0f);
         return vec3<f32>(vec3<i32>(i32(0)));
@@ -3142,14 +3243,14 @@ fn sample_light_0( position_0 : vec3<f32>,  light_0 : i32,  rng_0 : ptr<function
     (*direction_2) = (*direction_2) / vec3<f32>((*distance_3));
     var attenuation_0 : f32 = 1.0f / ((*distance_3) * (*distance_3));
     var attenuation_1 : f32;
-    if(_S212 == 2.0f)
+    if(_S218 == 2.0f)
     {
         var cosine_3 : f32 = dot((vec3<f32>(0) - (*direction_2)), extra_0.xyz);
-        var outer_0 : f32 = lights_0[_S211 + i32(3)].x;
-        var _S219 : f32 = extra_0.w;
-        if(_S219 > outer_0)
+        var outer_0 : f32 = lights_0[_S217 + i32(3)].x;
+        var _S225 : f32 = extra_0.w;
+        if(_S225 > outer_0)
         {
-            attenuation_1 = saturate((cosine_3 - outer_0) / (_S219 - outer_0));
+            attenuation_1 = saturate((cosine_3 - outer_0) / (_S225 - outer_0));
         }
         else
         {
@@ -3173,48 +3274,48 @@ fn sample_light_0( position_0 : vec3<f32>,  light_0 : i32,  rng_0 : ptr<function
 
 fn sample_light_1( position_1 : vec3<f32>,  light_1 : i32,  rng_1 : ptr<function, u32>,  direction_3 : ptr<function, vec3<f32>>,  distance_4 : ptr<function, f32>,  pdf_1 : ptr<function, f32>) -> vec3<f32>
 {
-    var _S220 : i32 = light_1 * i32(4);
-    var p_12 : vec4<f32> = lights_0[_S220];
-    var color_4 : vec4<f32> = lights_0[_S220 + i32(1)];
-    var extra_1 : vec4<f32> = lights_0[_S220 + i32(2)];
+    var _S226 : i32 = light_1 * i32(4);
+    var p_12 : vec4<f32> = lights_0[_S226];
+    var color_4 : vec4<f32> = lights_0[_S226 + i32(1)];
+    var extra_1 : vec4<f32> = lights_0[_S226 + i32(2)];
     (*pdf_1) = 1.0f;
     (*distance_4) = 1.00000001504746622e+30f;
-    var _S221 : f32 = p_12.w;
-    if(_S221 == 0.0f)
+    var _S227 : f32 = p_12.w;
+    if(_S227 == 0.0f)
     {
         (*direction_3) = p_12.xyz;
         if((Frame_0.frame_0[i32(8)].z) == 2.0f)
         {
             return color_4.xyz;
         }
-        var _S222 : f32 = extra_1.w;
-        if(_S222 < 1.0f)
+        var _S228 : f32 = extra_1.w;
+        if(_S228 < 1.0f)
         {
-            var _S223 : f32 = random_0(&((*rng_1)));
-            var z_5 : f32 = mix(_S222, 1.0f, _S223);
-            var _S224 : f32 = random_0(&((*rng_1)));
-            var phi_1 : f32 = 6.28318548202514648f * _S224;
+            var _S229 : f32 = random_0(&((*rng_1)));
+            var z_5 : f32 = mix(_S228, 1.0f, _S229);
+            var _S230 : f32 = random_0(&((*rng_1)));
+            var phi_1 : f32 = 6.28318548202514648f * _S230;
             var basis_11 : OpenPBR_Basis_0 = openpbr_make_basis_1((*direction_3));
             (*direction_3) = normalize(basis_11.n_0 * vec3<f32>(z_5) + vec3<f32>(sqrt(max(0.0f, 1.0f - z_5 * z_5))) * (basis_11.t_0 * vec3<f32>(cos(phi_1)) + basis_11.b_0 * vec3<f32>(sin(phi_1))));
-            (*pdf_1) = 1.0f / (6.28318548202514648f * (1.0f - _S222));
-            return color_4.xyz / vec3<f32>((3.14159274101257324f * (1.0f - _S222 * _S222)));
+            (*pdf_1) = 1.0f / (6.28318548202514648f * (1.0f - _S228));
+            return color_4.xyz / vec3<f32>((3.14159274101257324f * (1.0f - _S228 * _S228)));
         }
         return color_4.xyz;
     }
-    var _S225 : vec3<f32> = p_12.xyz - position_1;
-    (*direction_3) = _S225;
-    var _S226 : f32 = length(_S225);
-    (*distance_4) = _S226;
-    var _S227 : bool;
-    if(_S226 <= 0.0f)
+    var _S231 : vec3<f32> = p_12.xyz - position_1;
+    (*direction_3) = _S231;
+    var _S232 : f32 = length(_S231);
+    (*distance_4) = _S232;
+    var _S233 : bool;
+    if(_S232 <= 0.0f)
     {
-        _S227 = true;
+        _S233 = true;
     }
     else
     {
-        _S227 = (*distance_4) > (color_4.w);
+        _S233 = (*distance_4) > (color_4.w);
     }
-    if(_S227)
+    if(_S233)
     {
         (*direction_3) = vec3<f32>(0.0f, 0.0f, 1.0f);
         return vec3<f32>(vec3<i32>(i32(0)));
@@ -3222,14 +3323,14 @@ fn sample_light_1( position_1 : vec3<f32>,  light_1 : i32,  rng_1 : ptr<function
     (*direction_3) = (*direction_3) / vec3<f32>((*distance_4));
     var attenuation_2 : f32 = 1.0f / ((*distance_4) * (*distance_4));
     var attenuation_3 : f32;
-    if(_S221 == 2.0f)
+    if(_S227 == 2.0f)
     {
         var cosine_4 : f32 = dot((vec3<f32>(0) - (*direction_3)), extra_1.xyz);
-        var outer_1 : f32 = lights_0[_S220 + i32(3)].x;
-        var _S228 : f32 = extra_1.w;
-        if(_S228 > outer_1)
+        var outer_1 : f32 = lights_0[_S226 + i32(3)].x;
+        var _S234 : f32 = extra_1.w;
+        if(_S234 > outer_1)
         {
-            attenuation_3 = saturate((cosine_4 - outer_1) / (_S228 - outer_1));
+            attenuation_3 = saturate((cosine_4 - outer_1) / (_S234 - outer_1));
         }
         else
         {
@@ -3253,16 +3354,16 @@ fn sample_light_1( position_1 : vec3<f32>,  light_1 : i32,  rng_1 : ptr<function
 
 fn directional_visibility_0( light_2 : i32,  position_2 : vec3<f32>,  normal_5 : vec3<f32>,  lightDirection_0 : vec3<f32>) -> f32
 {
-    var _S229 : bool;
+    var _S235 : bool;
     if((Shadow_0.shadowFrame_0[i32(4)].x) < 0.0f)
     {
-        _S229 = true;
+        _S235 = true;
     }
     else
     {
-        _S229 = light_2 != i32(Shadow_0.shadowFrame_0[i32(4)].x);
+        _S235 = light_2 != i32(Shadow_0.shadowFrame_0[i32(4)].x);
     }
-    if(_S229)
+    if(_S235)
     {
         return 1.0f;
     }
@@ -3279,60 +3380,60 @@ fn directional_visibility_0( light_2 : i32,  position_2 : vec3<f32>,  normal_5 :
     var clip_0 : vec4<f32> = Shadow_0.shadowFrame_0[i32(0)] * vec4<f32>(p_13.x) + Shadow_0.shadowFrame_0[i32(1)] * vec4<f32>(p_13.y) + Shadow_0.shadowFrame_0[i32(2)] * vec4<f32>(p_13.z) + Shadow_0.shadowFrame_0[i32(3)];
     var ndc_0 : vec3<f32> = clip_0.xyz / vec3<f32>(clip_0.w);
     var uv_4 : vec2<f32> = vec2<f32>(ndc_0.x * 0.5f + 0.5f, 0.5f - ndc_0.y * 0.5f);
-    var _S230 : vec2<f32> = vec2<f32>(0.0f);
-    if((any((uv_4 < _S230))))
+    var _S236 : vec2<f32> = vec2<f32>(0.0f);
+    if((any((uv_4 < _S236))))
     {
-        _S229 = true;
+        _S235 = true;
     }
     else
     {
-        _S229 = (any((uv_4 > vec2<f32>(1.0f))));
+        _S235 = (any((uv_4 > vec2<f32>(1.0f))));
     }
-    if(_S229)
+    if(_S235)
     {
-        _S229 = true;
+        _S235 = true;
     }
     else
     {
-        _S229 = (ndc_0.z) < 0.0f;
+        _S235 = (ndc_0.z) < 0.0f;
     }
-    if(_S229)
+    if(_S235)
     {
-        _S229 = true;
+        _S235 = true;
     }
     else
     {
-        _S229 = (ndc_0.z) > 1.0f;
+        _S235 = (ndc_0.z) > 1.0f;
     }
-    if(_S229)
+    if(_S235)
     {
         return 1.0f;
     }
-    var _S231 : vec3<f32>;
+    var _S237 : vec3<f32>;
     if((abs(n_6.z)) < 0.99000000953674316f)
     {
-        _S231 = vec3<f32>(0.0f, 0.0f, 1.0f);
+        _S237 = vec3<f32>(0.0f, 0.0f, 1.0f);
     }
     else
     {
-        _S231 = vec3<f32>(0.0f, 1.0f, 0.0f);
+        _S237 = vec3<f32>(0.0f, 1.0f, 0.0f);
     }
-    var tangent_4 : vec3<f32> = normalize(cross(n_6, _S231));
+    var tangent_4 : vec3<f32> = normalize(cross(n_6, _S237));
     var bitangent_1 : vec3<f32> = cross(n_6, tangent_4);
     var plane_0 : vec3<f32> = cross(Shadow_0.shadowFrame_0[i32(0)].xyz * vec3<f32>(tangent_4.x) + Shadow_0.shadowFrame_0[i32(1)].xyz * vec3<f32>(tangent_4.y) + Shadow_0.shadowFrame_0[i32(2)].xyz * vec3<f32>(tangent_4.z), Shadow_0.shadowFrame_0[i32(0)].xyz * vec3<f32>(bitangent_1.x) + Shadow_0.shadowFrame_0[i32(1)].xyz * vec3<f32>(bitangent_1.y) + Shadow_0.shadowFrame_0[i32(2)].xyz * vec3<f32>(bitangent_1.z));
-    var _S232 : f32 = plane_0.z;
-    var _S233 : vec2<f32>;
-    if((abs(_S232)) > 9.999999960041972e-13f)
+    var _S238 : f32 = plane_0.z;
+    var _S239 : vec2<f32>;
+    if((abs(_S238)) > 9.999999960041972e-13f)
     {
-        _S233 = (vec2<f32>(0) - plane_0.xy) / vec2<f32>(_S232);
+        _S239 = (vec2<f32>(0) - plane_0.xy) / vec2<f32>(_S238);
     }
     else
     {
-        _S233 = vec2<f32>(vec2<i32>(i32(0)));
+        _S239 = vec2<f32>(vec2<i32>(i32(0)));
     }
     var radius_0 : i32 = i32(Shadow_0.shadowFrame_0[i32(4)].w);
-    var _S234 : i32 = - radius_0;
-    var y_1 : i32 = _S234;
+    var _S240 : i32 = - radius_0;
+    var y_1 : i32 = _S240;
     var visibility_0 : f32 = 0.0f;
     for(;;)
     {
@@ -3343,7 +3444,7 @@ fn directional_visibility_0( light_2 : i32,  position_2 : vec3<f32>,  normal_5 :
         {
             break;
         }
-        var x_16 : i32 = _S234;
+        var x_16 : i32 = _S240;
         for(;;)
         {
             if(x_16 <= radius_0)
@@ -3354,25 +3455,25 @@ fn directional_visibility_0( light_2 : i32,  position_2 : vec3<f32>,  normal_5 :
                 break;
             }
             var tap_0 : vec2<f32> = (floor(uv_4 * vec2<f32>(Shadow_0.shadowFrame_0[i32(5)].x)) + vec2<f32>(0.5f) + vec2<f32>(f32(x_16), f32(y_1))) / vec2<f32>(Shadow_0.shadowFrame_0[i32(5)].x);
-            var compareDepth_0 : f32 = ndc_0.z + dot(_S233, (tap_0 - uv_4) * vec2<f32>(2.0f, -2.0f)) - Shadow_0.shadowFrame_0[i32(4)].y;
-            if((any((tap_0 < _S230))))
+            var compareDepth_0 : f32 = ndc_0.z + dot(_S239, (tap_0 - uv_4) * vec2<f32>(2.0f, -2.0f)) - Shadow_0.shadowFrame_0[i32(4)].y;
+            if((any((tap_0 < _S236))))
             {
-                _S229 = true;
+                _S235 = true;
             }
             else
             {
-                _S229 = (any((tap_0 > vec2<f32>(1.0f))));
+                _S235 = (any((tap_0 > vec2<f32>(1.0f))));
             }
-            var _S235 : f32;
-            if(_S229)
+            var _S241 : f32;
+            if(_S235)
             {
-                _S235 = 1.0f;
+                _S241 = 1.0f;
             }
             else
             {
-                _S235 = (textureSampleCompareLevel((directionalDepth_0), (shadowSampler_0), (tap_0), (compareDepth_0)));
+                _S241 = (textureSampleCompareLevel((directionalDepth_0), (shadowSampler_0), (tap_0), (compareDepth_0)));
             }
-            var visibility_1 : f32 = visibility_0 + _S235;
+            var visibility_1 : f32 = visibility_0 + _S241;
             x_16 = x_16 + i32(1);
             visibility_0 = visibility_1;
         }
@@ -3398,15 +3499,15 @@ fn openpbr_make_diffuse_specular_0( diffuse_1 : vec3<f32>,  specular_1 : vec3<f3
 
 fn openpbr_make_zero_diffuse_specular_0() -> OpenPBR_DiffuseSpecular_0
 {
-    var _S236 : vec3<f32> = vec3<f32>(0.0f);
-    return openpbr_make_diffuse_specular_0(_S236, _S236);
+    var _S242 : vec3<f32> = vec3<f32>(0.0f);
+    return openpbr_make_diffuse_specular_0(_S242, _S242);
 }
 
 fn openpbr_eval_aniso_ggx_0( n_7 : vec3<f32>,  alpha_14 : vec2<f32>) -> f32
 {
-    var _S237 : f32 = alpha_14.x;
-    var _S238 : f32 = alpha_14.y;
-    return 1.0f / (3.14159274101257324f * _S237 * _S238 * openpbr_square_1(openpbr_square_1(n_7.x / _S237) + openpbr_square_1(n_7.y / _S238) + openpbr_square_1(n_7.z)));
+    var _S243 : f32 = alpha_14.x;
+    var _S244 : f32 = alpha_14.y;
+    return 1.0f / (3.14159274101257324f * _S243 * _S244 * openpbr_square_1(openpbr_square_1(n_7.x / _S243) + openpbr_square_1(n_7.y / _S244) + openpbr_square_1(n_7.z)));
 }
 
 fn openpbr_eval_ggx_0( microfacet_distr_12 : OpenPBR_AnisotropicGGXSmithVNDFMicrofacetDistribution_0,  half_vector_0 : vec3<f32>,  normal_ff_21 : vec3<f32>) -> f32
@@ -3430,16 +3531,16 @@ fn openpbr_reflection_coefficient_0( refl_trans_coeff_16 : OpenPBR_Comprehensive
     var thin_film_refl_coeff_1 : vec3<f32>;
     if(thin_film_presence_1 > 0.0f)
     {
-        var _S239 : bool;
+        var _S245 : bool;
         if((any(((refl_trans_coeff_16.scale_for_reflection_for_transparent_part_0) > standard_refl_coeff_2))))
         {
-            _S239 = true;
+            _S245 = true;
         }
         else
         {
-            _S239 = (any(((refl_trans_coeff_16.scale_for_reflection_for_opaque_part_0) > standard_refl_coeff_2)));
+            _S245 = (any(((refl_trans_coeff_16.scale_for_reflection_for_opaque_part_0) > standard_refl_coeff_2)));
         }
-        var thin_film_results_1 : OpenPBR_ThinFilmResults_0 = openpbr_thin_film_and_base_reflectance_0(idoth_2, refl_trans_coeff_16.thin_film_exterior_ior_0, refl_trans_coeff_16.thin_film_ior_1, refl_trans_coeff_16.thin_film_interior_ior_0, true, refl_trans_coeff_16.f0_for_metal_0, refl_trans_coeff_16.f82_tint_for_metal_0, _S239, (refl_trans_coeff_16.metal_amount_0) > 0.0f, refl_trans_coeff_16.thin_film_thickness_nm_0, refl_trans_coeff_16.rgb_wavelengths_nm_0);
+        var thin_film_results_1 : OpenPBR_ThinFilmResults_0 = openpbr_thin_film_and_base_reflectance_0(idoth_2, refl_trans_coeff_16.thin_film_exterior_ior_0, refl_trans_coeff_16.thin_film_ior_1, refl_trans_coeff_16.thin_film_interior_ior_0, true, refl_trans_coeff_16.f0_for_metal_0, refl_trans_coeff_16.f82_tint_for_metal_0, _S245, (refl_trans_coeff_16.metal_amount_0) > 0.0f, refl_trans_coeff_16.thin_film_thickness_nm_0, refl_trans_coeff_16.rgb_wavelengths_nm_0);
         thin_film_refl_coeff_1 = refl_trans_coeff_16.scale_for_reflection_for_transparent_part_0 * thin_film_results_1.reflectance_dielectric_1 + refl_trans_coeff_16.scale_for_reflection_for_opaque_part_0 * thin_film_results_1.reflectance_dielectric_1 + vec3<f32>(refl_trans_coeff_16.metal_amount_0) * thin_film_results_1.reflectance_metal_1;
     }
     else
@@ -3476,32 +3577,32 @@ fn openpbr_make_diffuse_specular_from_specular_0( specular_2 : vec3<f32>) -> Ope
 
 fn openpbr_validate_half_vector_for_transmission_0( lobe_25 : OpenPBR_ComprehensiveMicrofacetReflectionTransmissionLobe_0,  half_vector_1 : vec3<f32>) -> bool
 {
-    var _S240 : f32 = lobe_25.eta_t_over_eta_i_0.x;
-    var _S241 : bool;
-    if(_S240 >= 1.0f)
+    var _S246 : f32 = lobe_25.eta_t_over_eta_i_0.x;
+    var _S247 : bool;
+    if(_S246 >= 1.0f)
     {
-        _S241 = (dot(lobe_25.normal_ff_0, half_vector_1)) > 0.0f;
+        _S247 = (dot(lobe_25.normal_ff_0, half_vector_1)) > 0.0f;
     }
     else
     {
-        _S241 = false;
+        _S247 = false;
     }
-    if(_S241)
+    if(_S247)
     {
-        _S241 = true;
+        _S247 = true;
     }
     else
     {
-        if(_S240 < 1.0f)
+        if(_S246 < 1.0f)
         {
-            _S241 = (dot(lobe_25.normal_ff_0, half_vector_1)) < 0.0f;
+            _S247 = (dot(lobe_25.normal_ff_0, half_vector_1)) < 0.0f;
         }
         else
         {
-            _S241 = false;
+            _S247 = false;
         }
     }
-    return _S241;
+    return _S247;
 }
 
 fn openpbr_transmission_coefficient_0( refl_trans_coeff_17 : OpenPBR_ComprehensiveReflectionTransmissionCoefficient_0,  idoth_3 : f32) -> vec3<f32>
@@ -3533,15 +3634,15 @@ fn openpbr_calculate_lobe_value_0( lobe_26 : OpenPBR_ComprehensiveMicrofacetRefl
 {
     var idotn_6 : f32 = dot(lobe_26.normal_ff_0, view_direction_19);
     var odotn_1 : f32 = dot(lobe_26.normal_ff_0, light_direction_1);
-    var _S242 : f32 = idotn_6 * odotn_1;
-    if(_S242 > 0.0f)
+    var _S248 : f32 = idotn_6 * odotn_1;
+    if(_S248 > 0.0f)
     {
         var half_vector_2 : vec3<f32> = openpbr_fast_normalize_0(view_direction_19 + light_direction_1);
         return openpbr_make_diffuse_specular_from_specular_0(vec3<f32>(openpbr_eval_smith_g2_0(lobe_26.microfacet_distr_0, view_direction_19, light_direction_1, idotn_6, odotn_1)) * (vec3<f32>((openpbr_eval_ggx_0(lobe_26.microfacet_distr_0, half_vector_2, lobe_26.normal_ff_0) * (1.0f / (4.0f * idotn_6)))) * openpbr_reflection_coefficient_0(lobe_26.refl_trans_coeff_0, abs(dot(view_direction_19, half_vector_2)))));
     }
     else
     {
-        if(_S242 < 0.0f)
+        if(_S248 < 0.0f)
         {
             var D_other_terms_F_0 : vec3<f32>;
             var channel_2 : i32 = i32(0);
@@ -3554,7 +3655,7 @@ fn openpbr_calculate_lobe_value_0( lobe_26 : OpenPBR_ComprehensiveMicrofacetRefl
                 {
                     break;
                 }
-                var _S243 : i32 = channel_2;
+                var _S249 : i32 = channel_2;
                 var half_vector_3 : vec3<f32> = (vec3<f32>(0) - openpbr_fast_normalize_0(view_direction_19 + light_direction_1 * vec3<f32>(lobe_26.eta_t_over_eta_i_0[channel_2])));
                 if(!openpbr_validate_half_vector_for_transmission_0(lobe_26, half_vector_3))
                 {
@@ -3570,8 +3671,8 @@ fn openpbr_calculate_lobe_value_0( lobe_26 : OpenPBR_ComprehensiveMicrofacetRefl
                     channel_2 = channel_2 + i32(1);
                     continue;
                 }
-                var _S244 : f32 = abs(idoth_4);
-                D_other_terms_F_0[channel_2] = openpbr_eval_ggx_0(lobe_26.microfacet_distr_0, half_vector_3, lobe_26.normal_ff_0) * (openpbr_square_1(lobe_26.eta_t_over_eta_i_0[_S243]) * _S244 * abs(odoth_0) / (openpbr_square_1(idoth_4 + lobe_26.eta_t_over_eta_i_0[_S243] * odoth_0) * idotn_6)) * openpbr_transmission_coefficient_0(lobe_26.refl_trans_coeff_0, _S244)[channel_2];
+                var _S250 : f32 = abs(idoth_4);
+                D_other_terms_F_0[channel_2] = openpbr_eval_ggx_0(lobe_26.microfacet_distr_0, half_vector_3, lobe_26.normal_ff_0) * (openpbr_square_1(lobe_26.eta_t_over_eta_i_0[_S249]) * _S250 * abs(odoth_0) / (openpbr_square_1(idoth_4 + lobe_26.eta_t_over_eta_i_0[_S249] * odoth_0) * idotn_6)) * openpbr_transmission_coefficient_0(lobe_26.refl_trans_coeff_0, _S250)[channel_2];
                 channel_2 = channel_2 + i32(1);
             }
             return openpbr_make_diffuse_specular_from_specular_0(vec3<f32>(openpbr_eval_smith_g2_0(lobe_26.microfacet_distr_0, view_direction_19, light_direction_1, idotn_6, odotn_1)) * D_other_terms_F_0);
@@ -3583,9 +3684,9 @@ fn openpbr_calculate_lobe_value_0( lobe_26 : OpenPBR_ComprehensiveMicrofacetRefl
     }
 }
 
-fn openpbr_add_diffuse_specular_0( a_5 : OpenPBR_DiffuseSpecular_0,  b_6 : OpenPBR_DiffuseSpecular_0) -> OpenPBR_DiffuseSpecular_0
+fn openpbr_add_diffuse_specular_0( a_6 : OpenPBR_DiffuseSpecular_0,  b_7 : OpenPBR_DiffuseSpecular_0) -> OpenPBR_DiffuseSpecular_0
 {
-    return openpbr_make_diffuse_specular_0(a_5.diffuse_0 + b_6.diffuse_0, a_5.specular_0 + b_6.specular_0);
+    return openpbr_make_diffuse_specular_0(a_6.diffuse_0 + b_7.diffuse_0, a_6.specular_0 + b_7.specular_0);
 }
 
 fn openpbr_look_up_ideal_dielectric_average_energy_complement_0( ior_7 : f32,  alpha_17 : f32) -> f32
@@ -3597,22 +3698,22 @@ fn openpbr_clamped_tabulated_factors_including_ratio_0( lobe_27 : OpenPBR_Dielec
 {
     var ior_to_use_0 : f32;
     var ratio_to_use_0 : f32;
-    var _S245 : f32;
+    var _S251 : f32;
     if(odotn_2 > 0.0f)
     {
         ior_to_use_0 = lobe_27.eta_t_over_eta_i_1;
         ratio_to_use_0 = lobe_27.reflection_ratio_ti_0;
-        _S245 = odotn_2;
+        _S251 = odotn_2;
     }
     else
     {
-        var _S246 : f32 = odotn_2 * -1.0f;
-        var _S247 : f32 = 1.0f - lobe_27.reflection_ratio_ti_0;
+        var _S252 : f32 = odotn_2 * -1.0f;
+        var _S253 : f32 = 1.0f - lobe_27.reflection_ratio_ti_0;
         ior_to_use_0 = 1.0f / lobe_27.eta_t_over_eta_i_1;
-        ratio_to_use_0 = _S247;
-        _S245 = _S246;
+        ratio_to_use_0 = _S253;
+        _S251 = _S252;
     }
-    return min(lobe_27.energy_complement_ti_idotn_0 * openpbr_look_up_ideal_dielectric_energy_complement_0(ior_to_use_0, lobe_27.alpha_1, _S245) / openpbr_clamp_average_energy_complement_above_zero_0(openpbr_look_up_ideal_dielectric_average_energy_complement_0(ior_to_use_0, lobe_27.alpha_1)) * ratio_to_use_0, openpbr_safe_divide_0(1.0f, _S245, 0.0f));
+    return min(lobe_27.energy_complement_ti_idotn_0 * openpbr_look_up_ideal_dielectric_energy_complement_0(ior_to_use_0, lobe_27.alpha_1, _S251) / openpbr_clamp_average_energy_complement_above_zero_0(openpbr_look_up_ideal_dielectric_average_energy_complement_0(ior_to_use_0, lobe_27.alpha_1)) * ratio_to_use_0, openpbr_safe_divide_0(1.0f, _S251, 0.0f));
 }
 
 fn openpbr_calculate_lobe_value_1( lobe_28 : OpenPBR_DielectricMicrofacetMultipleScatteringLobe_0,  view_direction_20 : vec3<f32>,  light_direction_2 : vec3<f32>) -> OpenPBR_DiffuseSpecular_0
@@ -3670,9 +3771,9 @@ fn openpbr_E_FON_exact_0( mu_0 : f32,  roughness_1 : f32) -> f32
     var AF_0 : f32 = 1.0f / (1.0f + 0.28779339790344238f * roughness_1);
     var clamped_mu_0 : f32 = clamp(mu_0, 0.0f, 1.0f);
     var Si_0 : f32 = sqrt(1.0f - openpbr_square_1(clamped_mu_0));
-    var _S248 : f32 = Si_0 * clamped_mu_0;
-    var _S249 : f32 = 1.0f + Si_0;
-    return AF_0 + roughness_1 * AF_0 * 0.31830987334251404f * (Si_0 * (acos(clamped_mu_0) - _S248) + 0.66666668653488159f * (_S248 * (_S249 + Si_0 * Si_0) / _S249 - Si_0));
+    var _S254 : f32 = Si_0 * clamped_mu_0;
+    var _S255 : f32 = 1.0f + Si_0;
+    return AF_0 + roughness_1 * AF_0 * 0.31830987334251404f * (Si_0 * (acos(clamped_mu_0) - _S254) + 0.66666668653488159f * (_S254 * (_S255 + Si_0 * Si_0) / _S255 - Si_0));
 }
 
 fn openpbr_E_FON_approx_0( mu_1 : f32,  roughness_2 : f32) -> f32
@@ -3696,8 +3797,8 @@ fn openpbr_f_EON_0( rho_0 : vec3<f32>,  roughness_3 : f32,  wi_local_0 : vec3<f3
         sovertF_0 = s_5;
     }
     var AF_1 : f32 = 1.0f / (1.0f + 0.28779339790344238f * roughness_3);
-    var _S250 : vec3<f32> = vec3<f32>(0.31830987334251404f);
-    var f_ss_0 : vec3<f32> = rho_0 * _S250 * vec3<f32>(AF_1) * vec3<f32>((1.0f + roughness_3 * sovertF_0));
+    var _S256 : vec3<f32> = vec3<f32>(0.31830987334251404f);
+    var f_ss_0 : vec3<f32> = rho_0 * _S256 * vec3<f32>(AF_1) * vec3<f32>((1.0f + roughness_3 * sovertF_0));
     var EFo_0 : f32;
     if(exact_0)
     {
@@ -3717,8 +3818,8 @@ fn openpbr_f_EON_0( rho_0 : vec3<f32>,  roughness_3 : f32,  wi_local_0 : vec3<f3
         EFi_0 = openpbr_E_FON_approx_0(mu_i_0, roughness_3);
     }
     var avgEF_0 : f32 = AF_1 * (1.0f + 0.07248824834823608f * roughness_3);
-    var _S251 : f32 = 1.0f - avgEF_0;
-    return f_ss_0 + rho_0 * rho_0 * vec3<f32>(avgEF_0) / (vec3<f32>(1.0f) - rho_0 * vec3<f32>(_S251)) * _S250 * vec3<f32>(max(1.00000001168609742e-07f, 1.0f - EFo_0)) * vec3<f32>(max(1.00000001168609742e-07f, 1.0f - EFi_0)) / vec3<f32>(max(1.00000001168609742e-07f, _S251));
+    var _S257 : f32 = 1.0f - avgEF_0;
+    return f_ss_0 + rho_0 * rho_0 * vec3<f32>(avgEF_0) / (vec3<f32>(1.0f) - rho_0 * vec3<f32>(_S257)) * _S256 * vec3<f32>(max(1.00000001168609742e-07f, 1.0f - EFo_0)) * vec3<f32>(max(1.00000001168609742e-07f, 1.0f - EFi_0)) / vec3<f32>(max(1.00000001168609742e-07f, _S257));
 }
 
 fn openpbr_diffuse_brdf_value_adjusted_for_specular_local_0( lobe_31 : OpenPBR_EnergyConservingRoughDiffuseLobe_0,  wi_local_1 : vec3<f32>,  wo_local_1 : vec3<f32>) -> vec3<f32>
@@ -3809,8 +3910,8 @@ fn openpbr_calculate_lobe_value_8( lobe_38 : OpenPBR_MinimalMicrofacetReflection
 
 fn openpbr_scale_diffuse_specular_1( diffuse_specular_1 : OpenPBR_DiffuseSpecular_0,  scale_3 : f32) -> OpenPBR_DiffuseSpecular_0
 {
-    var _S252 : vec3<f32> = vec3<f32>(scale_3);
-    return openpbr_make_diffuse_specular_0(diffuse_specular_1.diffuse_0 * _S252, diffuse_specular_1.specular_0 * _S252);
+    var _S258 : vec3<f32> = vec3<f32>(scale_3);
+    return openpbr_make_diffuse_specular_0(diffuse_specular_1.diffuse_0 * _S258, diffuse_specular_1.specular_0 * _S258);
 }
 
 fn openpbr_base_layer_scale_outgoing_0( lobe_39 : OpenPBR_CoatingLobe_AggregateLobe_0,  light_direction_11 : vec3<f32>) -> vec3<f32>
@@ -3855,55 +3956,55 @@ fn openpbr_disney_sheen_rotate_vector_0( v_8 : vec3<f32>,  wo_xy_0 : vec2<f32>) 
     var inv_r_0 : f32 = openpbr_fast_rcp_sqrt_0(r2_0);
     var sin_phi_0 : f32 = wo_xy_0.y * inv_r_0;
     var cos_phi_0 : f32 = wo_xy_0.x * inv_r_0;
-    var _S253 : f32 = v_8.x;
-    var _S254 : f32 = v_8.y;
-    return vec3<f32>(cos_phi_0 * _S253 + sin_phi_0 * - _S254, cos_phi_0 * _S254 + sin_phi_0 * _S253, v_8.z);
+    var _S259 : f32 = v_8.x;
+    var _S260 : f32 = v_8.y;
+    return vec3<f32>(cos_phi_0 * _S259 + sin_phi_0 * - _S260, cos_phi_0 * _S260 + sin_phi_0 * _S259, v_8.z);
 }
 
 fn openpbr_disney_sheen_eval_ltc_0( wi_local_2 : vec3<f32>,  ltc_coeffs_0 : vec3<f32>) -> f32
 {
-    var _S255 : f32 = wi_local_2.z;
-    var wi_original_local_0 : vec3<f32> = vec3<f32>(ltc_coeffs_0[i32(0)] * wi_local_2.x + ltc_coeffs_0[i32(1)] * _S255, ltc_coeffs_0[i32(0)] * wi_local_2.y, _S255);
-    var _S256 : f32 = max(0.0f, _S255);
+    var _S261 : f32 = wi_local_2.z;
+    var wi_original_local_0 : vec3<f32> = vec3<f32>(ltc_coeffs_0[i32(0)] * wi_local_2.x + ltc_coeffs_0[i32(1)] * _S261, ltc_coeffs_0[i32(0)] * wi_local_2.y, _S261);
+    var _S262 : f32 = max(0.0f, _S261);
     var len_squared_0 : f32 = dot(wi_original_local_0, wi_original_local_0);
-    var _S257 : bool;
+    var _S263 : bool;
     if(len_squared_0 == 0.0f)
     {
-        _S257 = true;
+        _S263 = true;
     }
     else
     {
-        _S257 = (ltc_coeffs_0[i32(0)]) == 0.0f;
+        _S263 = (ltc_coeffs_0[i32(0)]) == 0.0f;
     }
-    if(_S257)
+    if(_S263)
     {
-        _S257 = true;
+        _S263 = true;
     }
     else
     {
-        _S257 = _S256 == 0.0f;
+        _S263 = _S262 == 0.0f;
     }
-    if(_S257)
+    if(_S263)
     {
         return 0.0f;
     }
     var a_inv_over_len_squared_0 : f32 = ltc_coeffs_0[i32(0)] / len_squared_0;
-    return 0.31830987334251404f * (_S256 * a_inv_over_len_squared_0) * a_inv_over_len_squared_0;
+    return 0.31830987334251404f * (_S262 * a_inv_over_len_squared_0) * a_inv_over_len_squared_0;
 }
 
 fn openpbr_disney_sheen_f_0( lobe_43 : OpenPBR_FuzzLobe_CoatingLobe_AggregateLobe_0,  wo_local_2 : vec3<f32>,  wi_local_3 : vec3<f32>) -> vec3<f32>
 {
     var cos_theta_i_7 : f32 = openpbr_get_cos_theta_local_0(wi_local_3);
-    var _S258 : bool;
+    var _S264 : bool;
     if((openpbr_get_cos_theta_local_0(wo_local_2)) <= 0.0f)
     {
-        _S258 = true;
+        _S264 = true;
     }
     else
     {
-        _S258 = cos_theta_i_7 <= 0.0f;
+        _S264 = cos_theta_i_7 <= 0.0f;
     }
-    if(_S258)
+    if(_S264)
     {
         return vec3<f32>(0.0f);
     }
@@ -3991,9 +4092,9 @@ fn openpbr_sample_unit_hemisphere_cosine_0( s_6 : vec2<f32>) -> vec3<f32>
 fn openpbr_disney_sheen_sample_ltc_0( ltc_coeffs_2 : vec3<f32>,  rand_0 : vec2<f32>) -> vec3<f32>
 {
     var wi_original_local_1 : vec3<f32> = openpbr_sample_unit_hemisphere_cosine_0(rand_0);
-    var a_6 : f32 = 1.0f / ltc_coeffs_2[i32(0)];
-    var _S259 : f32 = wi_original_local_1.z;
-    return openpbr_fast_normalize_0(vec3<f32>(wi_original_local_1.x * a_6 - _S259 * ltc_coeffs_2[i32(1)] * a_6, wi_original_local_1.y * a_6, _S259));
+    var a_7 : f32 = 1.0f / ltc_coeffs_2[i32(0)];
+    var _S265 : f32 = wi_original_local_1.z;
+    return openpbr_fast_normalize_0(vec3<f32>(wi_original_local_1.x * a_7 - _S265 * ltc_coeffs_2[i32(1)] * a_7, wi_original_local_1.y * a_7, _S265));
 }
 
 fn openpbr_are_in_same_hemisphere_local_0( direction_local_3 : vec3<f32>,  other_direction_local_0 : vec3<f32>) -> bool
@@ -4008,9 +4109,9 @@ fn openpbr_disney_sheen_sample_f_0( lobe_50 : OpenPBR_FuzzLobe_CoatingLobe_Aggre
         (*wi_local_4) = vec3<f32>(0.0f);
         return false;
     }
-    var _S260 : vec3<f32> = openpbr_disney_sheen_rotate_vector_0(openpbr_disney_sheen_sample_ltc_0(openpbr_disney_sheen_fetch_coeffs_0(lobe_50, wo_local_3), rand_1), vec2<f32>(wo_local_3.x, wo_local_3.y));
-    (*wi_local_4) = _S260;
-    if(!openpbr_are_in_same_hemisphere_local_0(wo_local_3, _S260))
+    var _S266 : vec3<f32> = openpbr_disney_sheen_rotate_vector_0(openpbr_disney_sheen_sample_ltc_0(openpbr_disney_sheen_fetch_coeffs_0(lobe_50, wo_local_3), rand_1), vec2<f32>(wo_local_3.x, wo_local_3.y));
+    (*wi_local_4) = _S266;
+    if(!openpbr_are_in_same_hemisphere_local_0(wo_local_3, _S266))
     {
         return false;
     }
@@ -4043,16 +4144,16 @@ fn openpbr_local_to_world_0( basis_13 : OpenPBR_Basis_0,  direction_4 : vec3<f32
 fn openpbr_disney_sheen_pdf_0( lobe_51 : OpenPBR_FuzzLobe_CoatingLobe_AggregateLobe_0,  wo_local_4 : vec3<f32>,  wi_local_5 : vec3<f32>) -> f32
 {
     var cos_theta_i_8 : f32 = openpbr_get_cos_theta_local_0(wi_local_5);
-    var _S261 : bool;
+    var _S267 : bool;
     if((openpbr_get_cos_theta_local_0(wo_local_4)) <= 0.0f)
     {
-        _S261 = true;
+        _S267 = true;
     }
     else
     {
-        _S261 = cos_theta_i_8 <= 0.0f;
+        _S267 = cos_theta_i_8 <= 0.0f;
     }
-    if(_S261)
+    if(_S267)
     {
         return 0.0f;
     }
@@ -4086,8 +4187,8 @@ fn openpbr_channel_probabilities_0( lobe_52 : OpenPBR_ComprehensiveMicrofacetRef
 fn openpbr_calculate_lobe_pdf_0( lobe_53 : OpenPBR_ComprehensiveMicrofacetReflectionTransmissionLobe_0,  view_direction_34 : vec3<f32>,  light_direction_20 : vec3<f32>) -> f32
 {
     var idotn_9 : f32 = dot(lobe_53.normal_ff_0, view_direction_34);
-    var _S262 : f32 = idotn_9 * dot(lobe_53.normal_ff_0, light_direction_20);
-    if(_S262 > 0.0f)
+    var _S268 : f32 = idotn_9 * dot(lobe_53.normal_ff_0, light_direction_20);
+    if(_S268 > 0.0f)
     {
         var half_vector_6 : vec3<f32> = openpbr_fast_normalize_0(view_direction_34 + light_direction_20);
         var idoth_9 : f32 = dot(view_direction_34, half_vector_6);
@@ -4100,7 +4201,7 @@ fn openpbr_calculate_lobe_pdf_0( lobe_53 : OpenPBR_ComprehensiveMicrofacetReflec
     }
     else
     {
-        if(_S262 < 0.0f)
+        if(_S268 < 0.0f)
         {
             var F_prob_D_other_terms_0 : vec3<f32>;
             var channel_3 : i32 = i32(0);
@@ -4113,7 +4214,7 @@ fn openpbr_calculate_lobe_pdf_0( lobe_53 : OpenPBR_ComprehensiveMicrofacetReflec
                 {
                     break;
                 }
-                var _S263 : i32 = channel_3;
+                var _S269 : i32 = channel_3;
                 var half_vector_7 : vec3<f32> = (vec3<f32>(0) - openpbr_fast_normalize_0(view_direction_34 + light_direction_20 * vec3<f32>(lobe_53.eta_t_over_eta_i_0[channel_3])));
                 if(!openpbr_validate_half_vector_for_transmission_0(lobe_53, half_vector_7))
                 {
@@ -4129,8 +4230,8 @@ fn openpbr_calculate_lobe_pdf_0( lobe_53 : OpenPBR_ComprehensiveMicrofacetReflec
                     channel_3 = channel_3 + i32(1);
                     continue;
                 }
-                var _S264 : f32 = abs(idoth_10);
-                F_prob_D_other_terms_0[channel_3] = openpbr_transmission_probability_0(lobe_53.refl_trans_coeff_0, lobe_53.path_throughput_0, _S264) * openpbr_eval_ggx_0(lobe_53.microfacet_distr_0, half_vector_7, lobe_53.normal_ff_0) * (openpbr_square_1(lobe_53.eta_t_over_eta_i_0[_S263]) * _S264 * abs(odoth_2) / (openpbr_square_1(idoth_10 + lobe_53.eta_t_over_eta_i_0[_S263] * odoth_2) * idotn_9));
+                var _S270 : f32 = abs(idoth_10);
+                F_prob_D_other_terms_0[channel_3] = openpbr_transmission_probability_0(lobe_53.refl_trans_coeff_0, lobe_53.path_throughput_0, _S270) * openpbr_eval_ggx_0(lobe_53.microfacet_distr_0, half_vector_7, lobe_53.normal_ff_0) * (openpbr_square_1(lobe_53.eta_t_over_eta_i_0[_S269]) * _S270 * abs(odoth_2) / (openpbr_square_1(idoth_10 + lobe_53.eta_t_over_eta_i_0[_S269] * odoth_2) * idotn_9));
                 channel_3 = channel_3 + i32(1);
             }
             return openpbr_eval_smith_g1_0(lobe_53.microfacet_distr_0, view_direction_34, idotn_9) * dot(F_prob_D_other_terms_0, openpbr_channel_probabilities_0(lobe_53));
@@ -4213,16 +4314,16 @@ fn openpbr_calculate_lobe_pdf_7( lobe_60 : OpenPBR_AggregateLobe_0,  view_direct
 {
     var sum_0 : f32 = lobe_60.lobe_weights_0[i32(0)] * openpbr_calculate_lobe_pdf_0(lobe_60.specular_lobe_0, view_direction_41, light_direction_27) + lobe_60.lobe_weights_0[i32(1)] * openpbr_calculate_lobe_pdf_1(lobe_60.dielectric_mms_lobe_0, view_direction_41, light_direction_27) + lobe_60.lobe_weights_0[i32(2)] * openpbr_calculate_lobe_pdf_2(lobe_60.metal_mms_lobe_0, view_direction_41, light_direction_27) + lobe_60.lobe_weights_0[i32(3)] * openpbr_calculate_lobe_pdf_3(lobe_60.diffuse_lobe_0, view_direction_41, light_direction_27) + lobe_60.lobe_weights_0[i32(4)] * openpbr_calculate_lobe_pdf_5(lobe_60.thin_wall_specular_trans_lobe_0, view_direction_41, light_direction_27) + lobe_60.lobe_weights_0[i32(5)] * openpbr_calculate_lobe_pdf_6(lobe_60.thin_wall_diffuse_trans_lobe_0, view_direction_41, light_direction_27);
     var total_weight_0 : f32 = lobe_60.lobe_weights_0[i32(0)] + lobe_60.lobe_weights_0[i32(1)] + lobe_60.lobe_weights_0[i32(2)] + lobe_60.lobe_weights_0[i32(3)] + lobe_60.lobe_weights_0[i32(4)] + lobe_60.lobe_weights_0[i32(5)];
-    var _S265 : f32;
+    var _S271 : f32;
     if(total_weight_0 > 0.0f)
     {
-        _S265 = sum_0 / total_weight_0;
+        _S271 = sum_0 / total_weight_0;
     }
     else
     {
-        _S265 = 0.0f;
+        _S271 = 0.0f;
     }
-    return _S265;
+    return _S271;
 }
 
 fn openpbr_calculate_lobe_pdf_8( lobe_61 : OpenPBR_MinimalMicrofacetReflectionLobe_AnisotropicGGXSmithVNDFMicrofacetDistribution_IorReflectionCoefficient_0,  view_direction_42 : vec3<f32>,  light_direction_28 : vec3<f32>) -> f32
@@ -4281,9 +4382,9 @@ fn openpbr_clamp_remapped_random_number_1( rand_3 : ptr<function, f32>)
 
 fn openpbr_select_lobe_0( lobe_64 : OpenPBR_AggregateLobe_0,  rand_4 : ptr<function, f32>,  selected_lobe_weight_0 : ptr<function, f32>,  total_weight_1 : ptr<function, f32>) -> i32
 {
-    var _S266 : f32 = lobe_64.lobe_weights_0[i32(0)] + lobe_64.lobe_weights_0[i32(1)] + lobe_64.lobe_weights_0[i32(2)] + lobe_64.lobe_weights_0[i32(3)] + lobe_64.lobe_weights_0[i32(4)] + lobe_64.lobe_weights_0[i32(5)];
-    (*total_weight_1) = _S266;
-    if(_S266 <= 1.17549435082228751e-38f)
+    var _S272 : f32 = lobe_64.lobe_weights_0[i32(0)] + lobe_64.lobe_weights_0[i32(1)] + lobe_64.lobe_weights_0[i32(2)] + lobe_64.lobe_weights_0[i32(3)] + lobe_64.lobe_weights_0[i32(4)] + lobe_64.lobe_weights_0[i32(5)];
+    (*total_weight_1) = _S272;
+    if(_S272 <= 1.17549435082228751e-38f)
     {
         (*selected_lobe_weight_0) = 0.0f;
         return i32(-1);
@@ -4321,12 +4422,12 @@ fn openpbr_sample_aniso_ggx_smith_vndf_0( alpha_19 : vec2<f32>,  incoming_0 : ve
 {
     var ellipsoid_to_hemisphere_0 : vec3<f32> = vec3<f32>(alpha_19.x, alpha_19.y, 1.0f);
     var incoming_hemisphere_0 : vec3<f32> = openpbr_fast_normalize_0(ellipsoid_to_hemisphere_0 * incoming_0);
-    var _S267 : f32 = min(incoming_hemisphere_0.z, 1.0f);
+    var _S273 : f32 = min(incoming_hemisphere_0.z, 1.0f);
     var angle_0 : f32 = 6.28318548202514648f * rand_5.x;
-    var one_plus_cos_0 : f32 = 1.0f + _S267;
-    var _S268 : f32 = rand_5.y;
-    var halfway_z_0 : f32 = (1.0f - _S268) * one_plus_cos_0;
-    var tangent_plane_component_0 : f32 = openpbr_fast_sqrt_0((halfway_z_0 + (1.0f - _S267)) * (_S268 * one_plus_cos_0));
+    var one_plus_cos_0 : f32 = 1.0f + _S273;
+    var _S274 : f32 = rand_5.y;
+    var halfway_z_0 : f32 = (1.0f - _S274) * one_plus_cos_0;
+    var tangent_plane_component_0 : f32 = openpbr_fast_sqrt_0((halfway_z_0 + (1.0f - _S273)) * (_S274 * one_plus_cos_0));
     return openpbr_fast_normalize_0(ellipsoid_to_hemisphere_0 * vec3<f32>(tangent_plane_component_0 * cos(angle_0) + incoming_hemisphere_0.x, tangent_plane_component_0 * sin(angle_0) + incoming_hemisphere_0.y, halfway_z_0));
 }
 
@@ -4345,12 +4446,12 @@ struct OpenPBR_AllCoefficientsAndProbabilities_0
 
 fn OpenPBR_AllCoefficientsAndProbabilities_x24init_0( reflection_coefficient_3 : vec3<f32>,  transmission_coefficient_3 : vec3<f32>,  reflection_probability_1 : f32,  transmission_probability_1 : f32) -> OpenPBR_AllCoefficientsAndProbabilities_0
 {
-    var _S269 : OpenPBR_AllCoefficientsAndProbabilities_0;
-    _S269.reflection_coefficient_2 = reflection_coefficient_3;
-    _S269.transmission_coefficient_2 = transmission_coefficient_3;
-    _S269.reflection_probability_0 = reflection_probability_1;
-    _S269.transmission_probability_0 = transmission_probability_1;
-    return _S269;
+    var _S275 : OpenPBR_AllCoefficientsAndProbabilities_0;
+    _S275.reflection_coefficient_2 = reflection_coefficient_3;
+    _S275.transmission_coefficient_2 = transmission_coefficient_3;
+    _S275.reflection_probability_0 = reflection_probability_1;
+    _S275.transmission_probability_0 = transmission_probability_1;
+    return _S275;
 }
 
 fn openpbr_all_coefficients_and_probabilities_0( refl_trans_coeff_22 : OpenPBR_ComprehensiveReflectionTransmissionCoefficient_0,  path_throughput_23 : vec3<f32>,  idoth_13 : f32) -> OpenPBR_AllCoefficientsAndProbabilities_0
@@ -4391,12 +4492,12 @@ fn openpbr_sample_lobe_0( lobe_65 : OpenPBR_ComprehensiveMicrofacetReflectionTra
         openpbr_clear_lobe_sampling_output_1(&((*light_direction_30)), &((*weight_2)), &((*pdf_4)), &((*sampled_type_2)));
         return false;
     }
-    var _S270 : f32 = rand_7.z;
-    if(_S270 < (coeffs_and_probs_0.reflection_probability_0))
+    var _S276 : f32 = rand_7.z;
+    if(_S276 < (coeffs_and_probs_0.reflection_probability_0))
     {
-        var _S271 : vec3<f32> = openpbr_fast_normalize_0((vec3<f32>(0) - view_direction_46) + half_vector_10 * vec3<f32>(2.0f) * vec3<f32>(idoth_14));
-        (*light_direction_30) = _S271;
-        var odotn_8 : f32 = dot(lobe_65.normal_ff_0, _S271);
+        var _S277 : vec3<f32> = openpbr_fast_normalize_0((vec3<f32>(0) - view_direction_46) + half_vector_10 * vec3<f32>(2.0f) * vec3<f32>(idoth_14));
+        (*light_direction_30) = _S277;
+        var odotn_8 : f32 = dot(lobe_65.normal_ff_0, _S277);
         if((idotn_12 * odotn_8) <= 0.0f)
         {
             openpbr_clear_lobe_sampling_output_1(&((*light_direction_30)), &((*weight_2)), &((*pdf_4)), &((*sampled_type_2)));
@@ -4416,7 +4517,7 @@ fn openpbr_sample_lobe_0( lobe_65 : OpenPBR_ComprehensiveMicrofacetReflectionTra
     }
     else
     {
-        var remapped_rand_z_0 : f32 = (_S270 - coeffs_and_probs_0.reflection_probability_0) / coeffs_and_probs_0.transmission_probability_0;
+        var remapped_rand_z_0 : f32 = (_S276 - coeffs_and_probs_0.reflection_probability_0) / coeffs_and_probs_0.transmission_probability_0;
         var color_channel_probabilities_0 : vec3<f32> = openpbr_channel_probabilities_0(lobe_65);
         var selected_color_channel_0 : i32;
         if(remapped_rand_z_0 < (color_channel_probabilities_0[i32(0)]))
@@ -4434,8 +4535,8 @@ fn openpbr_sample_lobe_0( lobe_65 : OpenPBR_ComprehensiveMicrofacetReflectionTra
                 selected_color_channel_0 = i32(2);
             }
         }
-        var _S272 : bool = openpbr_refract_0(view_direction_46, half_vector_10, idoth_14, lobe_65.eta_t_over_eta_i_0[selected_color_channel_0], &((*light_direction_30)));
-        if(!_S272)
+        var _S278 : bool = openpbr_refract_0(view_direction_46, half_vector_10, idoth_14, lobe_65.eta_t_over_eta_i_0[selected_color_channel_0], &((*light_direction_30)));
+        if(!_S278)
         {
             openpbr_clear_lobe_sampling_output_1(&((*light_direction_30)), &((*weight_2)), &((*pdf_4)), &((*sampled_type_2)));
             return false;
@@ -4445,9 +4546,9 @@ fn openpbr_sample_lobe_0( lobe_65 : OpenPBR_ComprehensiveMicrofacetReflectionTra
             openpbr_clear_lobe_sampling_output_1(&((*light_direction_30)), &((*weight_2)), &((*pdf_4)), &((*sampled_type_2)));
             return false;
         }
-        var _S273 : f32 = openpbr_calculate_lobe_pdf_0(lobe_65, view_direction_46, (*light_direction_30));
-        (*pdf_4) = _S273;
-        if(_S273 == 0.0f)
+        var _S279 : f32 = openpbr_calculate_lobe_pdf_0(lobe_65, view_direction_46, (*light_direction_30));
+        (*pdf_4) = _S279;
+        if(_S279 == 0.0f)
         {
             openpbr_clear_lobe_sampling_output_1(&((*light_direction_30)), &((*weight_2)), &((*pdf_4)), &((*sampled_type_2)));
             return false;
@@ -4461,19 +4562,19 @@ fn openpbr_sample_lobe_0( lobe_65 : OpenPBR_ComprehensiveMicrofacetReflectionTra
 fn openpbr_clamped_tabulated_factors_1( lobe_66 : OpenPBR_DielectricMicrofacetMultipleScatteringLobe_0,  odotn_9 : f32) -> f32
 {
     var ior_to_use_1 : f32;
-    var _S274 : f32;
+    var _S280 : f32;
     if(odotn_9 > 0.0f)
     {
         ior_to_use_1 = lobe_66.eta_t_over_eta_i_1;
-        _S274 = odotn_9;
+        _S280 = odotn_9;
     }
     else
     {
-        var _S275 : f32 = odotn_9 * -1.0f;
+        var _S281 : f32 = odotn_9 * -1.0f;
         ior_to_use_1 = 1.0f / lobe_66.eta_t_over_eta_i_1;
-        _S274 = _S275;
+        _S280 = _S281;
     }
-    return min(lobe_66.energy_complement_ti_idotn_0 * openpbr_look_up_ideal_dielectric_energy_complement_0(ior_to_use_1, lobe_66.alpha_1, _S274) / openpbr_clamp_average_energy_complement_above_zero_0(openpbr_look_up_ideal_dielectric_average_energy_complement_0(ior_to_use_1, lobe_66.alpha_1)), openpbr_safe_divide_0(1.0f, _S274, 0.0f));
+    return min(lobe_66.energy_complement_ti_idotn_0 * openpbr_look_up_ideal_dielectric_energy_complement_0(ior_to_use_1, lobe_66.alpha_1, _S280) / openpbr_clamp_average_energy_complement_above_zero_0(openpbr_look_up_ideal_dielectric_average_energy_complement_0(ior_to_use_1, lobe_66.alpha_1)), openpbr_safe_divide_0(1.0f, _S280, 0.0f));
 }
 
 fn openpbr_sample_lobe_1( lobe_67 : OpenPBR_DielectricMicrofacetMultipleScatteringLobe_0,  rand_8 : vec3<f32>,  view_direction_47 : vec3<f32>,  light_direction_31 : ptr<function, vec3<f32>>,  weight_3 : ptr<function, OpenPBR_DiffuseSpecular_0>,  pdf_5 : ptr<function, f32>,  sampled_type_3 : ptr<function, u32>) -> bool
@@ -4483,10 +4584,10 @@ fn openpbr_sample_lobe_1( lobe_67 : OpenPBR_DielectricMicrofacetMultipleScatteri
         openpbr_clear_lobe_sampling_output_0(&((*light_direction_31)), &((*weight_3)), &((*pdf_5)), &((*sampled_type_3)));
         return false;
     }
-    var _S276 : f32 = rand_8.x;
-    var rand_x_0 : f32 = _S276;
+    var _S282 : f32 = rand_8.x;
+    var rand_x_0 : f32 = _S282;
     var z_6 : f32;
-    if(_S276 < (lobe_67.reflection_ratio_ti_0))
+    if(_S282 < (lobe_67.reflection_ratio_ti_0))
     {
         rand_x_0 = rand_x_0 / lobe_67.reflection_ratio_ti_0;
         openpbr_clamp_remapped_random_number_0(&(rand_x_0));
@@ -4500,9 +4601,9 @@ fn openpbr_sample_lobe_1( lobe_67 : OpenPBR_DielectricMicrofacetMultipleScatteri
     }
     var horizontal_0 : f32 = sqrt(1.0f - openpbr_square_1(z_6));
     var azimuth_0 : f32 = 6.28318548202514648f * rand_8.y;
-    var _S277 : vec3<f32> = openpbr_local_to_world_0(openpbr_make_basis_1(lobe_67.normal_ff_1), vec3<f32>(cos(azimuth_0) * horizontal_0, sin(azimuth_0) * horizontal_0, z_6));
-    (*light_direction_31) = _S277;
-    var odotn_10 : f32 = dot(_S277, lobe_67.normal_ff_1);
+    var _S283 : vec3<f32> = openpbr_local_to_world_0(openpbr_make_basis_1(lobe_67.normal_ff_1), vec3<f32>(cos(azimuth_0) * horizontal_0, sin(azimuth_0) * horizontal_0, z_6));
+    (*light_direction_31) = _S283;
+    var odotn_10 : f32 = dot(_S283, lobe_67.normal_ff_1);
     var unscaled_weight_0 : f32 = 2.0f * abs(odotn_10) * openpbr_clamped_tabulated_factors_1(lobe_67, odotn_10);
     if(odotn_10 > 0.0f)
     {
@@ -4534,9 +4635,9 @@ fn openpbr_sample_lobe_2( lobe_69 : OpenPBR_MetalMicrofacetMultipleScatteringLob
     var z_7 : f32 = rand_9.x;
     var horizontal_1 : f32 = sqrt(1.0f - openpbr_square_1(z_7));
     var azimuth_1 : f32 = 6.28318548202514648f * rand_9.y;
-    var _S278 : vec3<f32> = openpbr_local_to_world_0(openpbr_make_basis_1(lobe_69.normal_ff_2), vec3<f32>(cos(azimuth_1) * horizontal_1, sin(azimuth_1) * horizontal_1, z_7));
-    (*light_direction_32) = _S278;
-    var odotn_11 : f32 = dot(_S278, lobe_69.normal_ff_2);
+    var _S284 : vec3<f32> = openpbr_local_to_world_0(openpbr_make_basis_1(lobe_69.normal_ff_2), vec3<f32>(cos(azimuth_1) * horizontal_1, sin(azimuth_1) * horizontal_1, z_7));
+    (*light_direction_32) = _S284;
+    var odotn_11 : f32 = dot(_S284, lobe_69.normal_ff_2);
     (*weight_4) = openpbr_make_diffuse_specular_from_specular_0(lobe_69.scale_0 * vec3<f32>((2.0f * odotn_11 * openpbr_clamped_tabulated_factors_0(lobe_69, odotn_11))));
     (*pdf_6) = 0.15915493667125702f;
     (*sampled_type_4) = openpbr_get_lobe_type_0(lobe_69);
@@ -4597,9 +4698,9 @@ fn openpbr_sample_lobe_5( lobe_74 : OpenPBR_MinimalMicrofacetReflectionLobe_Anis
         openpbr_clear_lobe_sampling_output_1(&((*light_direction_35)), &((*weight_7)), &((*pdf_9)), &((*sampled_type_7)));
         return false;
     }
-    var _S279 : vec3<f32> = openpbr_fast_normalize_0((vec3<f32>(0) - view_direction_51) + half_vector_11 * vec3<f32>(2.0f) * vec3<f32>(idoth_15));
-    (*light_direction_35) = _S279;
-    var odotn_12 : f32 = dot(lobe_74.normal_ff_4, _S279);
+    var _S285 : vec3<f32> = openpbr_fast_normalize_0((vec3<f32>(0) - view_direction_51) + half_vector_11 * vec3<f32>(2.0f) * vec3<f32>(idoth_15));
+    (*light_direction_35) = _S285;
+    var odotn_12 : f32 = dot(lobe_74.normal_ff_4, _S285);
     if((idotn_13 * odotn_12) <= 0.0f)
     {
         openpbr_clear_lobe_sampling_output_1(&((*light_direction_35)), &((*weight_7)), &((*pdf_9)), &((*sampled_type_7)));
@@ -4621,27 +4722,27 @@ fn openpbr_sample_lobe_5( lobe_74 : OpenPBR_MinimalMicrofacetReflectionLobe_Anis
 fn openpbr_swap_reflect_trans_flags_0( bsdf_lobe_type_0 : u32) -> u32
 {
     var has_t_0 : bool = bool((bsdf_lobe_type_0 & (u32(2))));
-    var _S280 : u32 = (bsdf_lobe_type_0 & (u32(4294967292)));
-    var _S281 : u32;
+    var _S286 : u32 = (bsdf_lobe_type_0 & (u32(4294967292)));
+    var _S287 : u32;
     if(bool((bsdf_lobe_type_0 & (u32(1)))))
     {
-        _S281 = (_S280 | (u32(2)));
+        _S287 = (_S286 | (u32(2)));
     }
     else
     {
-        _S281 = _S280;
+        _S287 = _S286;
     }
     if(has_t_0)
     {
-        _S281 = (_S281 | (u32(1)));
+        _S287 = (_S287 | (u32(1)));
     }
-    return _S281;
+    return _S287;
 }
 
 fn openpbr_sample_lobe_6( lobe_75 : OpenPBR_ThinWallSpecularTransmissionLobe_0,  rand_13 : vec3<f32>,  view_direction_52 : vec3<f32>,  light_direction_36 : ptr<function, vec3<f32>>,  weight_8 : ptr<function, OpenPBR_DiffuseSpecular_0>,  pdf_10 : ptr<function, f32>,  sampled_type_8 : ptr<function, u32>) -> bool
 {
-    var _S282 : bool = openpbr_sample_lobe_5(lobe_75.flipped_lobe_0, rand_13, reflect(view_direction_52, lobe_75.flipped_lobe_0.normal_ff_4), &((*light_direction_36)), &((*weight_8)), &((*pdf_10)), &((*sampled_type_8)));
-    if(!_S282)
+    var _S288 : bool = openpbr_sample_lobe_5(lobe_75.flipped_lobe_0, rand_13, reflect(view_direction_52, lobe_75.flipped_lobe_0.normal_ff_4), &((*light_direction_36)), &((*weight_8)), &((*pdf_10)), &((*sampled_type_8)));
+    if(!_S288)
     {
         return false;
     }
@@ -4651,8 +4752,8 @@ fn openpbr_sample_lobe_6( lobe_75 : OpenPBR_ThinWallSpecularTransmissionLobe_0, 
 
 fn openpbr_sample_lobe_7( lobe_76 : OpenPBR_ThinWallDiffuseTransmissionLobe_0,  rand_14 : vec3<f32>,  view_direction_53 : vec3<f32>,  light_direction_37 : ptr<function, vec3<f32>>,  weight_9 : ptr<function, OpenPBR_DiffuseSpecular_0>,  pdf_11 : ptr<function, f32>,  sampled_type_9 : ptr<function, u32>) -> bool
 {
-    var _S283 : bool = openpbr_sample_lobe_4(lobe_76.flipped_lobe_1, rand_14, reflect(view_direction_53, lobe_76.flipped_lobe_1.normal_ff_3), &((*light_direction_37)), &((*weight_9)), &((*pdf_11)), &((*sampled_type_9)));
-    if(!_S283)
+    var _S289 : bool = openpbr_sample_lobe_4(lobe_76.flipped_lobe_1, rand_14, reflect(view_direction_53, lobe_76.flipped_lobe_1.normal_ff_3), &((*light_direction_37)), &((*weight_9)), &((*pdf_11)), &((*sampled_type_9)));
+    if(!_S289)
     {
         return false;
     }
@@ -4675,43 +4776,43 @@ fn openpbr_sample_lobe_8( lobe_77 : OpenPBR_AggregateLobe_0,  rand_15 : vec3<f32
     var valid_sample_0 : bool;
     if(selected_lobe_index_0 == i32(0))
     {
-        var _S284 : bool = openpbr_sample_lobe_0(lobe_77.specular_lobe_0, remapped_rand_0, view_direction_54, &((*light_direction_38)), &((*weight_10)), &((*pdf_12)), &((*sampled_type_10)));
-        valid_sample_0 = _S284;
+        var _S290 : bool = openpbr_sample_lobe_0(lobe_77.specular_lobe_0, remapped_rand_0, view_direction_54, &((*light_direction_38)), &((*weight_10)), &((*pdf_12)), &((*sampled_type_10)));
+        valid_sample_0 = _S290;
     }
     else
     {
         if(selected_lobe_index_0 == i32(1))
         {
-            var _S285 : bool = openpbr_sample_lobe_1(lobe_77.dielectric_mms_lobe_0, remapped_rand_0, view_direction_54, &((*light_direction_38)), &((*weight_10)), &((*pdf_12)), &((*sampled_type_10)));
-            valid_sample_0 = _S285;
+            var _S291 : bool = openpbr_sample_lobe_1(lobe_77.dielectric_mms_lobe_0, remapped_rand_0, view_direction_54, &((*light_direction_38)), &((*weight_10)), &((*pdf_12)), &((*sampled_type_10)));
+            valid_sample_0 = _S291;
         }
         else
         {
             if(selected_lobe_index_0 == i32(2))
             {
-                var _S286 : bool = openpbr_sample_lobe_2(lobe_77.metal_mms_lobe_0, remapped_rand_0, view_direction_54, &((*light_direction_38)), &((*weight_10)), &((*pdf_12)), &((*sampled_type_10)));
-                valid_sample_0 = _S286;
+                var _S292 : bool = openpbr_sample_lobe_2(lobe_77.metal_mms_lobe_0, remapped_rand_0, view_direction_54, &((*light_direction_38)), &((*weight_10)), &((*pdf_12)), &((*sampled_type_10)));
+                valid_sample_0 = _S292;
             }
             else
             {
                 if(selected_lobe_index_0 == i32(3))
                 {
-                    var _S287 : bool = openpbr_sample_lobe_3(lobe_77.diffuse_lobe_0, remapped_rand_0, view_direction_54, &((*light_direction_38)), &((*weight_10)), &((*pdf_12)), &((*sampled_type_10)));
-                    valid_sample_0 = _S287;
+                    var _S293 : bool = openpbr_sample_lobe_3(lobe_77.diffuse_lobe_0, remapped_rand_0, view_direction_54, &((*light_direction_38)), &((*weight_10)), &((*pdf_12)), &((*sampled_type_10)));
+                    valid_sample_0 = _S293;
                 }
                 else
                 {
                     if(selected_lobe_index_0 == i32(4))
                     {
-                        var _S288 : bool = openpbr_sample_lobe_6(lobe_77.thin_wall_specular_trans_lobe_0, remapped_rand_0, view_direction_54, &((*light_direction_38)), &((*weight_10)), &((*pdf_12)), &((*sampled_type_10)));
-                        valid_sample_0 = _S288;
+                        var _S294 : bool = openpbr_sample_lobe_6(lobe_77.thin_wall_specular_trans_lobe_0, remapped_rand_0, view_direction_54, &((*light_direction_38)), &((*weight_10)), &((*pdf_12)), &((*sampled_type_10)));
+                        valid_sample_0 = _S294;
                     }
                     else
                     {
                         if(selected_lobe_index_0 == i32(5))
                         {
-                            var _S289 : bool = openpbr_sample_lobe_7(lobe_77.thin_wall_diffuse_trans_lobe_0, remapped_rand_0, view_direction_54, &((*light_direction_38)), &((*weight_10)), &((*pdf_12)), &((*sampled_type_10)));
-                            valid_sample_0 = _S289;
+                            var _S295 : bool = openpbr_sample_lobe_7(lobe_77.thin_wall_diffuse_trans_lobe_0, remapped_rand_0, view_direction_54, &((*light_direction_38)), &((*weight_10)), &((*pdf_12)), &((*sampled_type_10)));
+                            valid_sample_0 = _S295;
                         }
                         else
                         {
@@ -4733,9 +4834,9 @@ fn openpbr_sample_lobe_8( lobe_77 : OpenPBR_AggregateLobe_0,  rand_15 : vec3<f32
         var bsdf_cos_1 : OpenPBR_DiffuseSpecular_0;
         if(selected_lobe_index_0 != i32(0))
         {
-            var _S290 : OpenPBR_DiffuseSpecular_0 = openpbr_add_diffuse_specular_0(bsdf_cos_0, openpbr_calculate_lobe_value_0(lobe_77.specular_lobe_0, view_direction_54, (*light_direction_38)));
+            var _S296 : OpenPBR_DiffuseSpecular_0 = openpbr_add_diffuse_specular_0(bsdf_cos_0, openpbr_calculate_lobe_value_0(lobe_77.specular_lobe_0, view_direction_54, (*light_direction_38)));
             (*pdf_12) = (*pdf_12) + lobe_77.lobe_weights_0[i32(0)] * openpbr_calculate_lobe_pdf_0(lobe_77.specular_lobe_0, view_direction_54, (*light_direction_38));
-            bsdf_cos_1 = _S290;
+            bsdf_cos_1 = _S296;
         }
         else
         {
@@ -4743,37 +4844,37 @@ fn openpbr_sample_lobe_8( lobe_77 : OpenPBR_AggregateLobe_0,  rand_15 : vec3<f32
         }
         if(selected_lobe_index_0 != i32(1))
         {
-            var _S291 : OpenPBR_DiffuseSpecular_0 = openpbr_add_diffuse_specular_0(bsdf_cos_1, openpbr_calculate_lobe_value_1(lobe_77.dielectric_mms_lobe_0, view_direction_54, (*light_direction_38)));
+            var _S297 : OpenPBR_DiffuseSpecular_0 = openpbr_add_diffuse_specular_0(bsdf_cos_1, openpbr_calculate_lobe_value_1(lobe_77.dielectric_mms_lobe_0, view_direction_54, (*light_direction_38)));
             (*pdf_12) = (*pdf_12) + lobe_77.lobe_weights_0[i32(1)] * openpbr_calculate_lobe_pdf_1(lobe_77.dielectric_mms_lobe_0, view_direction_54, (*light_direction_38));
-            bsdf_cos_1 = _S291;
+            bsdf_cos_1 = _S297;
         }
         if(selected_lobe_index_0 != i32(2))
         {
-            var _S292 : OpenPBR_DiffuseSpecular_0 = openpbr_add_diffuse_specular_0(bsdf_cos_1, openpbr_calculate_lobe_value_2(lobe_77.metal_mms_lobe_0, view_direction_54, (*light_direction_38)));
+            var _S298 : OpenPBR_DiffuseSpecular_0 = openpbr_add_diffuse_specular_0(bsdf_cos_1, openpbr_calculate_lobe_value_2(lobe_77.metal_mms_lobe_0, view_direction_54, (*light_direction_38)));
             (*pdf_12) = (*pdf_12) + lobe_77.lobe_weights_0[i32(2)] * openpbr_calculate_lobe_pdf_2(lobe_77.metal_mms_lobe_0, view_direction_54, (*light_direction_38));
-            bsdf_cos_1 = _S292;
+            bsdf_cos_1 = _S298;
         }
         if(selected_lobe_index_0 != i32(3))
         {
-            var _S293 : OpenPBR_DiffuseSpecular_0 = openpbr_add_diffuse_specular_0(bsdf_cos_1, openpbr_calculate_lobe_value_3(lobe_77.diffuse_lobe_0, view_direction_54, (*light_direction_38)));
+            var _S299 : OpenPBR_DiffuseSpecular_0 = openpbr_add_diffuse_specular_0(bsdf_cos_1, openpbr_calculate_lobe_value_3(lobe_77.diffuse_lobe_0, view_direction_54, (*light_direction_38)));
             (*pdf_12) = (*pdf_12) + lobe_77.lobe_weights_0[i32(3)] * openpbr_calculate_lobe_pdf_3(lobe_77.diffuse_lobe_0, view_direction_54, (*light_direction_38));
-            bsdf_cos_1 = _S293;
+            bsdf_cos_1 = _S299;
         }
         if(selected_lobe_index_0 != i32(4))
         {
-            var _S294 : OpenPBR_DiffuseSpecular_0 = openpbr_add_diffuse_specular_0(bsdf_cos_1, openpbr_calculate_lobe_value_5(lobe_77.thin_wall_specular_trans_lobe_0, view_direction_54, (*light_direction_38)));
+            var _S300 : OpenPBR_DiffuseSpecular_0 = openpbr_add_diffuse_specular_0(bsdf_cos_1, openpbr_calculate_lobe_value_5(lobe_77.thin_wall_specular_trans_lobe_0, view_direction_54, (*light_direction_38)));
             (*pdf_12) = (*pdf_12) + lobe_77.lobe_weights_0[i32(4)] * openpbr_calculate_lobe_pdf_5(lobe_77.thin_wall_specular_trans_lobe_0, view_direction_54, (*light_direction_38));
-            bsdf_cos_1 = _S294;
+            bsdf_cos_1 = _S300;
         }
         if(selected_lobe_index_0 != i32(5))
         {
-            var _S295 : OpenPBR_DiffuseSpecular_0 = openpbr_add_diffuse_specular_0(bsdf_cos_1, openpbr_calculate_lobe_value_6(lobe_77.thin_wall_diffuse_trans_lobe_0, view_direction_54, (*light_direction_38)));
+            var _S301 : OpenPBR_DiffuseSpecular_0 = openpbr_add_diffuse_specular_0(bsdf_cos_1, openpbr_calculate_lobe_value_6(lobe_77.thin_wall_diffuse_trans_lobe_0, view_direction_54, (*light_direction_38)));
             (*pdf_12) = (*pdf_12) + lobe_77.lobe_weights_0[i32(5)] * openpbr_calculate_lobe_pdf_6(lobe_77.thin_wall_diffuse_trans_lobe_0, view_direction_54, (*light_direction_38));
-            bsdf_cos_1 = _S295;
+            bsdf_cos_1 = _S301;
         }
-        var _S296 : f32 = (*pdf_12) / total_weight_2;
-        (*pdf_12) = _S296;
-        (*weight_10) = openpbr_scale_diffuse_specular_1(bsdf_cos_1, 1.0f / _S296);
+        var _S302 : f32 = (*pdf_12) / total_weight_2;
+        (*pdf_12) = _S302;
+        (*weight_10) = openpbr_scale_diffuse_specular_1(bsdf_cos_1, 1.0f / _S302);
     }
     else
     {
@@ -4797,9 +4898,9 @@ fn openpbr_sample_lobe_9( lobe_79 : OpenPBR_MinimalMicrofacetReflectionLobe_Anis
         openpbr_clear_lobe_sampling_output_1(&((*light_direction_39)), &((*weight_11)), &((*pdf_13)), &((*sampled_type_11)));
         return false;
     }
-    var _S297 : vec3<f32> = openpbr_fast_normalize_0((vec3<f32>(0) - view_direction_55) + half_vector_12 * vec3<f32>(2.0f) * vec3<f32>(idoth_16));
-    (*light_direction_39) = _S297;
-    var odotn_13 : f32 = dot(lobe_79.normal_ff_5, _S297);
+    var _S303 : vec3<f32> = openpbr_fast_normalize_0((vec3<f32>(0) - view_direction_55) + half_vector_12 * vec3<f32>(2.0f) * vec3<f32>(idoth_16));
+    (*light_direction_39) = _S303;
+    var odotn_13 : f32 = dot(lobe_79.normal_ff_5, _S303);
     if((idotn_14 * odotn_13) <= 0.0f)
     {
         openpbr_clear_lobe_sampling_output_1(&((*light_direction_39)), &((*weight_11)), &((*pdf_13)), &((*sampled_type_11)));
@@ -4832,10 +4933,10 @@ fn openpbr_sample_lobe_10( lobe_80 : OpenPBR_CoatingLobe_AggregateLobe_0,  rand_
     else
     {
         var coat_reflection_prob_1 : f32 = openpbr_coat_reflection_probability_0(lobe_80, view_direction_56);
-        var _S298 : f32 = rand_17.x;
-        var rand_x_2 : f32 = _S298;
+        var _S304 : f32 = rand_17.x;
+        var rand_x_2 : f32 = _S304;
         var success_1 : bool;
-        if(_S298 < coat_reflection_prob_1)
+        if(_S304 < coat_reflection_prob_1)
         {
             var inverse_coat_reflection_prob_0 : f32 = 1.0f / coat_reflection_prob_1;
             rand_x_2 = rand_x_2 * inverse_coat_reflection_prob_0;
@@ -4846,9 +4947,9 @@ fn openpbr_sample_lobe_10( lobe_80 : OpenPBR_CoatingLobe_AggregateLobe_0,  rand_
                 if(!bool(((*sampled_type_12) & (u32(16)))))
                 {
                     var bsdf_cos_2 : OpenPBR_DiffuseSpecular_0 = openpbr_combine_coat_and_base_evals_0(lobe_80, openpbr_scale_diffuse_specular_1((*weight_12), (*pdf_14)), openpbr_calculate_lobe_value_7(lobe_80.base_lobe_0, view_direction_56, (*light_direction_40)), (*light_direction_40));
-                    var _S299 : f32 = openpbr_combine_coat_and_base_pdfs_0((*pdf_14), openpbr_calculate_lobe_pdf_7(lobe_80.base_lobe_0, view_direction_56, (*light_direction_40)), coat_reflection_prob_1);
-                    (*pdf_14) = _S299;
-                    (*weight_12) = openpbr_scale_diffuse_specular_1(bsdf_cos_2, 1.0f / _S299);
+                    var _S305 : f32 = openpbr_combine_coat_and_base_pdfs_0((*pdf_14), openpbr_calculate_lobe_pdf_7(lobe_80.base_lobe_0, view_direction_56, (*light_direction_40)), coat_reflection_prob_1);
+                    (*pdf_14) = _S305;
+                    (*weight_12) = openpbr_scale_diffuse_specular_1(bsdf_cos_2, 1.0f / _S305);
                 }
                 else
                 {
@@ -4868,9 +4969,9 @@ fn openpbr_sample_lobe_10( lobe_80 : OpenPBR_CoatingLobe_AggregateLobe_0,  rand_
                 if(!bool(((*sampled_type_12) & (u32(16)))))
                 {
                     var bsdf_cos_3 : OpenPBR_DiffuseSpecular_0 = openpbr_combine_coat_and_base_evals_0(lobe_80, openpbr_calculate_lobe_value_8(lobe_80.coat_reflection_lobe_0, view_direction_56, (*light_direction_40)), openpbr_scale_diffuse_specular_1((*weight_12), (*pdf_14)), (*light_direction_40));
-                    var _S300 : f32 = openpbr_combine_coat_and_base_pdfs_0(openpbr_calculate_lobe_pdf_8(lobe_80.coat_reflection_lobe_0, view_direction_56, (*light_direction_40)), (*pdf_14), coat_reflection_prob_1);
-                    (*pdf_14) = _S300;
-                    (*weight_12) = openpbr_scale_diffuse_specular_1(bsdf_cos_3, 1.0f / _S300);
+                    var _S306 : f32 = openpbr_combine_coat_and_base_pdfs_0(openpbr_calculate_lobe_pdf_8(lobe_80.coat_reflection_lobe_0, view_direction_56, (*light_direction_40)), (*pdf_14), coat_reflection_prob_1);
+                    (*pdf_14) = _S306;
+                    (*weight_12) = openpbr_scale_diffuse_specular_1(bsdf_cos_3, 1.0f / _S306);
                 }
                 else
                 {
@@ -4887,9 +4988,9 @@ fn openpbr_sample_lobe_11( lobe_81 : OpenPBR_FuzzLobe_CoatingLobe_AggregateLobe_
 {
     var sheen_prob_0 : f32 = openpbr_sheen_probability_0(lobe_81, view_direction_57);
     var base_prob_0 : f32 = 1.0f - sheen_prob_0;
-    var _S301 : f32 = rand_18.x;
-    var rand_x_3 : f32 = _S301;
-    if(_S301 < sheen_prob_0)
+    var _S307 : f32 = rand_18.x;
+    var rand_x_3 : f32 = _S307;
+    if(_S307 < sheen_prob_0)
     {
         var light_dir_local_1 : vec3<f32>;
         var success_4 : bool = openpbr_disney_sheen_sample_f_0(lobe_81, vec2<f32>(rand_18.y, rand_18.z), lobe_81.view_dir_local_0, &(light_dir_local_1));
@@ -4899,11 +5000,11 @@ fn openpbr_sample_lobe_11( lobe_81 : OpenPBR_FuzzLobe_CoatingLobe_AggregateLobe_
             return false;
         }
         (*light_direction_41) = openpbr_fast_normalize_0(openpbr_local_to_world_0(lobe_81.basis_3, light_dir_local_1));
-        var _S302 : f32 = openpbr_disney_sheen_pdf_0(lobe_81, lobe_81.view_dir_local_0, light_dir_local_1) * sheen_prob_0;
-        (*pdf_15) = _S302;
-        var _S303 : f32 = _S302 + openpbr_calculate_lobe_pdf_9(lobe_81.coating_lobe_0, view_direction_57, (*light_direction_41)) * base_prob_0;
-        (*pdf_15) = _S303;
-        (*weight_13) = openpbr_scale_diffuse_specular_1(openpbr_calculate_lobe_value_10(lobe_81, view_direction_57, (*light_direction_41)), 1.0f / _S303);
+        var _S308 : f32 = openpbr_disney_sheen_pdf_0(lobe_81, lobe_81.view_dir_local_0, light_dir_local_1) * sheen_prob_0;
+        (*pdf_15) = _S308;
+        var _S309 : f32 = _S308 + openpbr_calculate_lobe_pdf_9(lobe_81.coating_lobe_0, view_direction_57, (*light_direction_41)) * base_prob_0;
+        (*pdf_15) = _S309;
+        (*weight_13) = openpbr_scale_diffuse_specular_1(openpbr_calculate_lobe_value_10(lobe_81, view_direction_57, (*light_direction_41)), 1.0f / _S309);
         (*sampled_type_13) = u32(9);
     }
     else
@@ -4920,9 +5021,9 @@ fn openpbr_sample_lobe_11( lobe_81 : OpenPBR_FuzzLobe_CoatingLobe_AggregateLobe_
         if(!bool(((*sampled_type_13) & (u32(16)))))
         {
             var bsdf_cos_4 : OpenPBR_DiffuseSpecular_0 = openpbr_add_diffuse_specular_0(openpbr_scale_diffuse_specular_1(openpbr_scale_diffuse_specular_1((*weight_13), (*pdf_15)), openpbr_base_layer_scale_complete_1(lobe_81, light_dir_local_2)), openpbr_make_diffuse_specular_from_specular_0(openpbr_disney_sheen_f_0(lobe_81, lobe_81.view_dir_local_0, light_dir_local_2)));
-            var _S304 : f32 = (*pdf_15) * base_prob_0 + openpbr_disney_sheen_pdf_0(lobe_81, lobe_81.view_dir_local_0, light_dir_local_2) * sheen_prob_0;
-            (*pdf_15) = _S304;
-            (*weight_13) = openpbr_scale_diffuse_specular_1(bsdf_cos_4, 1.0f / _S304);
+            var _S310 : f32 = (*pdf_15) * base_prob_0 + openpbr_disney_sheen_pdf_0(lobe_81, lobe_81.view_dir_local_0, light_dir_local_2) * sheen_prob_0;
+            (*pdf_15) = _S310;
+            (*weight_13) = openpbr_scale_diffuse_specular_1(bsdf_cos_4, 1.0f / _S310);
         }
         else
         {
@@ -4934,8 +5035,8 @@ fn openpbr_sample_lobe_11( lobe_81 : OpenPBR_FuzzLobe_CoatingLobe_AggregateLobe_
 
 fn openpbr_sample_impl_0( prepared_8 : OpenPBR_PreparedBsdf_0,  rand_19 : vec3<f32>,  light_direction_42 : ptr<function, vec3<f32>>,  weight_14 : ptr<function, OpenPBR_DiffuseSpecular_0>,  pdf_16 : ptr<function, f32>,  sampled_type_14 : ptr<function, u32>)
 {
-    var _S305 : bool = openpbr_sample_lobe_11(prepared_8.fuzz_lobe_0, rand_19, prepared_8.view_direction_0, &((*light_direction_42)), &((*weight_14)), &((*pdf_16)), &((*sampled_type_14)));
-    if(!_S305)
+    var _S311 : bool = openpbr_sample_lobe_11(prepared_8.fuzz_lobe_0, rand_19, prepared_8.view_direction_0, &((*light_direction_42)), &((*weight_14)), &((*pdf_16)), &((*sampled_type_14)));
+    if(!_S311)
     {
         (*pdf_16) = 0.0f;
     }
@@ -4958,20 +5059,20 @@ fn raster_shade_0( hit_3 : Hit_0,  direction_5 : vec3<f32>) -> vec4<f32>
 {
     if((hit_3.triangle_0) < i32(0))
     {
-        var _S306 : vec3<f32> = environment_0(direction_5);
-        return vec4<f32>(_S306 * vec3<f32>(Frame_0.frame_0[i32(9)].w), Frame_0.frame_0[i32(9)].w);
+        var _S312 : vec3<f32> = environment_0(direction_5);
+        return vec4<f32>(_S312 * vec3<f32>(Frame_0.frame_0[i32(9)].w), Frame_0.frame_0[i32(9)].w);
     }
-    var _S307 : vec3<f32> = (vec3<f32>(0) - direction_5);
+    var _S313 : vec3<f32> = (vec3<f32>(0) - direction_5);
     var normal_6 : vec3<f32>;
     var object_2 : i32;
     var nits_2 : f32;
-    var inputs_1 : OpenPBR_ResolvedInputs_0 = resolve_material_0(hit_3, _S307, &(normal_6), &(object_2), &(nits_2));
-    var prepared_11 : OpenPBR_PreparedBsdf_0 = openpbr_prepare_0(inputs_1, vec3<f32>(vec3<i32>(i32(1))), vec3<f32>(620.0f, 540.0f, 450.0f), 1.0f, _S307);
-    var _S308 : vec3<f32> = prepared_11.emission_0 / vec3<f32>(nits_2);
-    var _S309 : vec3<f32> = hit_position_0(hit_3);
+    var inputs_1 : OpenPBR_ResolvedInputs_0 = resolve_material_0(hit_3, _S313, &(normal_6), &(object_2), &(nits_2));
+    var prepared_11 : OpenPBR_PreparedBsdf_0 = openpbr_prepare_0(inputs_1, vec3<f32>(vec3<i32>(i32(1))), vec3<f32>(620.0f, 540.0f, 450.0f), 1.0f, _S313);
+    var _S314 : vec3<f32> = prepared_11.emission_0 / vec3<f32>(nits_2);
+    var _S315 : vec3<f32> = hit_position_0(hit_3);
     var rng_2 : u32 = u32(1);
     var light_3 : i32 = i32(0);
-    var result_6 : vec3<f32> = _S308;
+    var result_6 : vec3<f32> = _S314;
     for(;;)
     {
         if(light_3 < i32(Frame_0.frame_0[i32(7)].z))
@@ -4984,59 +5085,59 @@ fn raster_shade_0( hit_3 : Hit_0,  direction_5 : vec3<f32>) -> vec4<f32>
         var ld_0 : vec3<f32>;
         var distance_5 : f32;
         var pdf_19 : f32;
-        var li_0 : vec3<f32> = sample_light_0(_S309, light_3, &(rng_2), &(ld_0), &(distance_5), &(pdf_19));
-        if(((dot(ld_0, normal_6) * dot(_S307, normal_6)) > 0.0f) != ((dot(ld_0, inputs_1.geometry_basis_0.n_0) * dot(_S307, inputs_1.geometry_basis_0.n_0)) > 0.0f))
+        var li_0 : vec3<f32> = sample_light_0(_S315, light_3, &(rng_2), &(ld_0), &(distance_5), &(pdf_19));
+        if(((dot(ld_0, normal_6) * dot(_S313, normal_6)) > 0.0f) != ((dot(ld_0, inputs_1.geometry_basis_0.n_0) * dot(_S313, inputs_1.geometry_basis_0.n_0)) > 0.0f))
         {
             light_3 = light_3 + i32(1);
             continue;
         }
-        result_6 = result_6 + li_0 * vec3<f32>(directional_visibility_0(light_3, _S309, normal_6, ld_0)) * openpbr_get_sum_of_diffuse_specular_0(openpbr_eval_0(prepared_11, ld_0));
+        result_6 = result_6 + li_0 * vec3<f32>(directional_visibility_0(light_3, _S315, normal_6, ld_0)) * openpbr_get_sum_of_diffuse_specular_0(openpbr_eval_0(prepared_11, ld_0));
         light_3 = light_3 + i32(1);
     }
-    var _S310 : i32 = i32(Frame_0.frame_0[i32(8)].w);
+    var _S316 : i32 = i32(Frame_0.frame_0[i32(8)].w);
     var i_2 : i32 = i32(0);
     for(;;)
     {
-        if(i_2 < _S310)
+        if(i_2 < _S316)
         {
         }
         else
         {
             break;
         }
-        var _S311 : f32 = f32(i_2);
-        var _S312 : f32 = f32(_S310);
+        var _S317 : f32 = f32(i_2);
+        var _S318 : f32 = f32(_S316);
         var ld_1 : vec3<f32>;
         var weight_17 : OpenPBR_DiffuseSpecular_0;
         var pdf_20 : f32;
-        var type_0 : u32;
-        openpbr_sample_0(prepared_11, vec3<f32>((_S311 + 0.5f) / _S312, fract(0.5f + _S311 * 0.75487768650054932f), fract(0.5f + _S311 * 0.56984031200408936f)), &(ld_1), &(weight_17), &(pdf_20), &(type_0));
-        var _S313 : bool;
+        var type_1 : u32;
+        openpbr_sample_0(prepared_11, vec3<f32>((_S317 + 0.5f) / _S318, fract(0.5f + _S317 * 0.75487768650054932f), fract(0.5f + _S317 * 0.56984031200408936f)), &(ld_1), &(weight_17), &(pdf_20), &(type_1));
+        var _S319 : bool;
         if(pdf_20 > 0.0f)
         {
-            _S313 = (dot(ld_1, normal_6) * dot(_S307, normal_6)) > 0.0f;
+            _S319 = (dot(ld_1, normal_6) * dot(_S313, normal_6)) > 0.0f;
         }
         else
         {
-            _S313 = false;
+            _S319 = false;
         }
-        if(_S313)
+        if(_S319)
         {
-            var _S314 : vec3<f32> = environment_0(ld_1);
-            result_6 = result_6 + _S314 * openpbr_get_sum_of_diffuse_specular_0(weight_17) / vec3<f32>(_S312);
+            var _S320 : vec3<f32> = environment_0(ld_1);
+            result_6 = result_6 + _S320 * openpbr_get_sum_of_diffuse_specular_0(weight_17) / vec3<f32>(_S318);
         }
         i_2 = i_2 + i32(1);
     }
-    var _S315 : vec4<f32>;
+    var _S321 : vec4<f32>;
     if((all((isfinite_1(result_6)))))
     {
-        _S315 = vec4<f32>(result_6, 1.0f);
+        _S321 = vec4<f32>(result_6, 1.0f);
     }
     else
     {
-        _S315 = vec4<f32>(1.0f, 0.0f, 1.0f, 1.0f);
+        _S321 = vec4<f32>(1.0f, 0.0f, 1.0f, 1.0f);
     }
-    return _S315;
+    return _S321;
 }
 
 fn entered_ior_0( inputs_2 : OpenPBR_ResolvedInputs_0,  exteriorIor_0 : f32) -> f32
@@ -5047,8 +5148,8 @@ fn entered_ior_0( inputs_2 : OpenPBR_ResolvedInputs_0,  exteriorIor_0 : f32) -> 
 
 fn bounds_hit_0( origin_0 : vec3<f32>,  direction_6 : vec3<f32>,  minimum_0 : vec3<f32>,  maximum_0 : vec3<f32>,  nearT_0 : f32,  farT_0 : f32) -> bool
 {
-    var _S316 : f32 = nearT_0;
-    var _S317 : f32 = farT_0;
+    var _S322 : f32 = nearT_0;
+    var _S323 : f32 = farT_0;
     var axis_0 : i32 = i32(0);
     for(;;)
     {
@@ -5059,36 +5160,36 @@ fn bounds_hit_0( origin_0 : vec3<f32>,  direction_6 : vec3<f32>,  minimum_0 : ve
         {
             break;
         }
-        var _S318 : i32 = axis_0;
+        var _S324 : i32 = axis_0;
         if((direction_6[axis_0]) == 0.0f)
         {
-            var _S319 : i32 = axis_0;
-            var _S320 : bool;
+            var _S325 : i32 = axis_0;
+            var _S326 : bool;
             if((origin_0[axis_0]) < (minimum_0[axis_0]))
             {
-                _S320 = true;
+                _S326 = true;
             }
             else
             {
-                _S320 = (origin_0[_S319]) > (maximum_0[axis_0]);
+                _S326 = (origin_0[_S325]) > (maximum_0[axis_0]);
             }
-            if(_S320)
+            if(_S326)
             {
                 return false;
             }
         }
         else
         {
-            var a_7 : f32 = (minimum_0[axis_0] - origin_0[axis_0]) / direction_6[_S318];
-            var b_7 : f32 = (maximum_0[axis_0] - origin_0[axis_0]) / direction_6[_S318];
-            var _S321 : f32 = max(_S316, min(a_7, b_7));
-            var _S322 : f32 = min(_S317, max(a_7, b_7));
-            if(_S322 < _S321)
+            var a_8 : f32 = (minimum_0[axis_0] - origin_0[axis_0]) / direction_6[_S324];
+            var b_8 : f32 = (maximum_0[axis_0] - origin_0[axis_0]) / direction_6[_S324];
+            var _S327 : f32 = max(_S322, min(a_8, b_8));
+            var _S328 : f32 = min(_S323, max(a_8, b_8));
+            if(_S328 < _S327)
             {
                 return false;
             }
-            _S316 = _S321;
-            _S317 = _S322;
+            _S322 = _S327;
+            _S323 = _S328;
         }
         axis_0 = axis_0 + i32(1);
     }
@@ -5120,7 +5221,7 @@ fn intersect_0( origin_1 : vec3<f32>,  direction_7 : vec3<f32>,  nearT_1 : f32, 
     }
     var kx_0 : i32 = (kz_0 + i32(1)) % i32(3);
     var ky_0 : i32 = (kx_0 + i32(1)) % i32(3);
-    var _S323 : i32 = kz_0;
+    var _S329 : i32 = kz_0;
     var kx_1 : i32;
     var ky_1 : i32;
     if((direction_7[kz_0]) < 0.0f)
@@ -5133,7 +5234,7 @@ fn intersect_0( origin_1 : vec3<f32>,  direction_7 : vec3<f32>,  nearT_1 : f32, 
         kx_1 = kx_0;
         ky_1 = ky_0;
     }
-    var _S324 : vec3<f32> = vec3<f32>(direction_7[kx_1], direction_7[ky_1], 1.0f) / vec3<f32>(direction_7[_S323]);
+    var _S330 : vec3<f32> = vec3<f32>(direction_7[kx_1], direction_7[ky_1], 1.0f) / vec3<f32>(direction_7[_S329]);
     var stack_0 : array<i32, i32(64)>;
     stack_0[i32(0)] = i32(0);
     var top_0 : i32 = i32(1);
@@ -5155,58 +5256,58 @@ fn intersect_0( origin_1 : vec3<f32>,  direction_7 : vec3<f32>,  nearT_1 : f32, 
             top_0 = top_1;
             continue;
         }
-        var _S325 : f32 = hi_0.w;
-        if(_S325 >= 0.0f)
+        var _S331 : f32 = hi_0.w;
+        if(_S331 >= 0.0f)
         {
             var top_2 : i32 = top_1 + i32(1);
-            stack_0[top_1] = i32(_S325);
-            var _S326 : i32 = top_2 + i32(1);
+            stack_0[top_1] = i32(_S331);
+            var _S332 : i32 = top_2 + i32(1);
             stack_0[top_2] = i32(lo_0.w);
-            top_0 = _S326;
+            top_0 = _S332;
             continue;
         }
-        var _S327 : f32 = lo_0.w;
-        var _S328 : i32 = i32(_S327 - _S325);
-        var t_6 : i32 = i32(_S327);
+        var _S333 : f32 = lo_0.w;
+        var _S334 : i32 = i32(_S333 - _S331);
+        var t_6 : i32 = i32(_S333);
         for(;;)
         {
-            if(t_6 < _S328)
+            if(t_6 < _S334)
             {
             }
             else
             {
                 break;
             }
-            var _S329 : i32 = t_6 * i32(12);
-            var a_8 : vec3<f32> = triangles_0[_S329].xyz - origin_1;
-            var b_8 : vec3<f32> = triangles_0[_S329 + i32(1)].xyz - origin_1;
-            var c_0 : vec3<f32> = triangles_0[_S329 + i32(2)].xyz - origin_1;
-            var _S330 : vec2<f32> = _S324.xy;
-            var _S331 : i32 = kz_0;
-            var ap_0 : vec2<f32> = vec2<f32>(a_8[kx_1], a_8[ky_1]) - _S330 * vec2<f32>(a_8[kz_0]);
-            var _S332 : i32 = kz_0;
-            var bp_0 : vec2<f32> = vec2<f32>(b_8[kx_1], b_8[ky_1]) - _S330 * vec2<f32>(b_8[kz_0]);
-            var _S333 : i32 = kz_0;
-            var cp_0 : vec2<f32> = vec2<f32>(c_0[kx_1], c_0[ky_1]) - _S330 * vec2<f32>(c_0[kz_0]);
-            var _S334 : f32 = cp_0.x;
-            var _S335 : f32 = bp_0.y;
-            var _S336 : f32 = cp_0.y;
-            var _S337 : f32 = bp_0.x;
-            var u_0 : f32 = _S334 * _S335 - _S336 * _S337;
-            var _S338 : f32 = ap_0.x;
-            var _S339 : f32 = ap_0.y;
-            var v_9 : f32 = _S338 * _S336 - _S339 * _S334;
-            var w_0 : f32 = _S337 * _S339 - _S335 * _S338;
-            var _S340 : bool;
+            var _S335 : i32 = t_6 * i32(12);
+            var a_9 : vec3<f32> = triangles_0[_S335].xyz - origin_1;
+            var b_9 : vec3<f32> = triangles_0[_S335 + i32(1)].xyz - origin_1;
+            var c_0 : vec3<f32> = triangles_0[_S335 + i32(2)].xyz - origin_1;
+            var _S336 : vec2<f32> = _S330.xy;
+            var _S337 : i32 = kz_0;
+            var ap_0 : vec2<f32> = vec2<f32>(a_9[kx_1], a_9[ky_1]) - _S336 * vec2<f32>(a_9[kz_0]);
+            var _S338 : i32 = kz_0;
+            var bp_0 : vec2<f32> = vec2<f32>(b_9[kx_1], b_9[ky_1]) - _S336 * vec2<f32>(b_9[kz_0]);
+            var _S339 : i32 = kz_0;
+            var cp_0 : vec2<f32> = vec2<f32>(c_0[kx_1], c_0[ky_1]) - _S336 * vec2<f32>(c_0[kz_0]);
+            var _S340 : f32 = cp_0.x;
+            var _S341 : f32 = bp_0.y;
+            var _S342 : f32 = cp_0.y;
+            var _S343 : f32 = bp_0.x;
+            var u_0 : f32 = _S340 * _S341 - _S342 * _S343;
+            var _S344 : f32 = ap_0.x;
+            var _S345 : f32 = ap_0.y;
+            var v_9 : f32 = _S344 * _S342 - _S345 * _S340;
+            var w_0 : f32 = _S343 * _S345 - _S341 * _S344;
+            var _S346 : bool;
             if((min(u_0, min(v_9, w_0))) < 0.0f)
             {
-                _S340 = (max(u_0, max(v_9, w_0))) > 0.0f;
+                _S346 = (max(u_0, max(v_9, w_0))) > 0.0f;
             }
             else
             {
-                _S340 = false;
+                _S346 = false;
             }
-            if(_S340)
+            if(_S346)
             {
                 t_6 = t_6 + i32(1);
                 continue;
@@ -5217,22 +5318,22 @@ fn intersect_0( origin_1 : vec3<f32>,  direction_7 : vec3<f32>,  nearT_1 : f32, 
                 t_6 = t_6 + i32(1);
                 continue;
             }
-            var _S341 : vec3<f32> = vec3<f32>(u_0, v_9, w_0);
-            var distance_6 : f32 = dot(_S341, vec3<f32>(a_8[_S331], b_8[_S332], c_0[_S333]) * vec3<f32>(_S324.z)) / determinant_2;
-            var _S342 : bool;
+            var _S347 : vec3<f32> = vec3<f32>(u_0, v_9, w_0);
+            var distance_6 : f32 = dot(_S347, vec3<f32>(a_9[_S337], b_9[_S338], c_0[_S339]) * vec3<f32>(_S330.z)) / determinant_2;
+            var _S348 : bool;
             if(distance_6 >= nearT_1)
             {
-                _S342 = distance_6 < (hit_4.distance_0);
+                _S348 = distance_6 < (hit_4.distance_0);
             }
             else
             {
-                _S342 = false;
+                _S348 = false;
             }
-            if(_S342)
+            if(_S348)
             {
                 hit_4.distance_0 = distance_6;
                 hit_4.triangle_0 = t_6;
-                hit_4.bary_0 = _S341 / vec3<f32>(determinant_2);
+                hit_4.bary_0 = _S347 / vec3<f32>(determinant_2);
             }
             t_6 = t_6 + i32(1);
         }
@@ -5248,38 +5349,38 @@ fn openpbr_is_empty_volume_0( volume_5 : OpenPBR_HomogeneousVolume_0) -> bool
 
 fn openpbr_is_ambient_volume_0( volume_6 : OpenPBR_HomogeneousVolume_0) -> bool
 {
-    var _S343 : bool;
+    var _S349 : bool;
     if((all(((volume_6.extinction_coefficient_0) == vec3<f32>(-3.4028234663852886e+38f)))))
     {
-        _S343 = (all(((volume_6.albedo_0) == vec3<f32>(0.0f))));
+        _S349 = (all(((volume_6.albedo_0) == vec3<f32>(0.0f))));
     }
     else
     {
-        _S343 = false;
+        _S349 = false;
     }
-    if(_S343)
+    if(_S349)
     {
-        _S343 = (volume_6.anisotropy_0) == 0.0f;
+        _S349 = (volume_6.anisotropy_0) == 0.0f;
     }
     else
     {
-        _S343 = false;
+        _S349 = false;
     }
-    return _S343;
+    return _S349;
 }
 
 fn openpbr_is_homogeneous_volume_0( volume_7 : OpenPBR_HomogeneousVolume_0) -> bool
 {
-    var _S344 : bool;
+    var _S350 : bool;
     if(!openpbr_is_empty_volume_0(volume_7))
     {
-        _S344 = !openpbr_is_ambient_volume_0(volume_7);
+        _S350 = !openpbr_is_ambient_volume_0(volume_7);
     }
     else
     {
-        _S344 = false;
+        _S350 = false;
     }
-    return _S344;
+    return _S350;
 }
 
 fn openpbr_calculate_color_channel_probability_0( volume_8 : OpenPBR_HomogeneousVolume_0,  throughput_0 : vec3<f32>) -> vec3<f32>
@@ -5301,7 +5402,7 @@ fn openpbr_sample_event_distance_0( volume_9 : OpenPBR_HomogeneousVolume_0,  thr
     var rand_distance_0 : f32;
     var sampled_color_channel_0 : i32;
     var color_channel_probability_0 : vec3<f32> = openpbr_calculate_color_channel_probability_0(volume_9, throughput_1);
-    var _S345 : f32 = rand_22 * openpbr_sum_0(color_channel_probability_0);
+    var _S351 : f32 = rand_22 * openpbr_sum_0(color_channel_probability_0);
     var cdf_0 : f32 = 0.0f;
     var i_3 : i32 = i32(0);
     for(;;)
@@ -5316,9 +5417,9 @@ fn openpbr_sample_event_distance_0( volume_9 : OpenPBR_HomogeneousVolume_0,  thr
             break;
         }
         var cdf_next_0 : f32 = cdf_0 + color_channel_probability_0[i_3];
-        if(_S345 < cdf_next_0)
+        if(_S351 < cdf_next_0)
         {
-            var rand_distance_1 : f32 = (_S345 - cdf_0) / (cdf_next_0 - cdf_0);
+            var rand_distance_1 : f32 = (_S351 - cdf_0) / (cdf_next_0 - cdf_0);
             if(rand_distance_1 == 1.0f)
             {
                 rand_distance_0 = 0.99999994039535522f;
@@ -5334,10 +5435,10 @@ fn openpbr_sample_event_distance_0( volume_9 : OpenPBR_HomogeneousVolume_0,  thr
         cdf_0 = cdf_next_0;
         i_3 = i_4;
     }
-    var _S346 : i32 = sampled_color_channel_0;
+    var _S352 : i32 = sampled_color_channel_0;
     if((volume_9.extinction_coefficient_0[sampled_color_channel_0]) > 0.0f)
     {
-        (*distance_7) = - log(1.0f - rand_distance_0) / volume_9.extinction_coefficient_0[_S346];
+        (*distance_7) = - log(1.0f - rand_distance_0) / volume_9.extinction_coefficient_0[_S352];
     }
     return;
 }
@@ -5370,37 +5471,37 @@ fn openpbr_three_halves_power_0( x_18 : f32) -> f32
 
 fn openpbr_calculate_anisotropic_phase_function_value_0( volume_13 : OpenPBR_HomogeneousVolume_0,  view_direction_58 : vec3<f32>,  light_direction_45 : vec3<f32>) -> f32
 {
-    var _S347 : f32 = openpbr_square_1(volume_13.anisotropy_0);
-    return 0.07957746833562851f * (1.0f - _S347) / openpbr_three_halves_power_0(1.0f + _S347 - 2.0f * volume_13.anisotropy_0 * dot((vec3<f32>(0) - view_direction_58), light_direction_45));
+    var _S353 : f32 = openpbr_square_1(volume_13.anisotropy_0);
+    return 0.07957746833562851f * (1.0f - _S353) / openpbr_three_halves_power_0(1.0f + _S353 - 2.0f * volume_13.anisotropy_0 * dot((vec3<f32>(0) - view_direction_58), light_direction_45));
 }
 
-fn power_weight_0( a_9 : f32,  b_9 : f32) -> f32
+fn power_weight_0( a_10 : f32,  b_10 : f32) -> f32
 {
-    var _S348 : f32 = a_9 * a_9;
-    return _S348 / max(_S348 + b_9 * b_9, 1.00000000317107685e-30f);
+    var _S354 : f32 = a_10 * a_10;
+    return _S354 / max(_S354 + b_10 * b_10, 1.00000000317107685e-30f);
 }
 
 fn offset_hit_0( hit_5 : Hit_0,  n_9 : vec3<f32>,  d_0 : vec3<f32>) -> vec3<f32>
 {
-    var _S349 : i32;
+    var _S355 : i32;
     if((dot(n_9, d_0)) < 0.0f)
     {
-        _S349 = i32(-1);
+        _S355 = i32(-1);
     }
     else
     {
-        _S349 = i32(1);
+        _S355 = i32(1);
     }
     var base_3 : i32 = hit_5.triangle_0 * i32(12);
     var p_14 : vec3<f32> = hit_position_0(hit_5);
-    return p_14 + n_9 * vec3<f32>((f32(_S349) * (dot(abs(n_9), vec3<f32>(8.34465993193589384e-07f) * (abs(triangles_0[base_3].xyz * vec3<f32>(hit_5.bary_0.x)) + abs(triangles_0[base_3 + i32(1)].xyz * vec3<f32>(hit_5.bary_0.y)) + abs(triangles_0[base_3 + i32(2)].xyz * vec3<f32>(hit_5.bary_0.z)))) + max(0.00100000004749745f, max_component_0(abs(p_14))) * 1.99999999495048542e-06f)));
+    return p_14 + n_9 * vec3<f32>((f32(_S355) * (dot(abs(n_9), vec3<f32>(8.34465993193589384e-07f) * (abs(triangles_0[base_3].xyz * vec3<f32>(hit_5.bary_0.x)) + abs(triangles_0[base_3 + i32(1)].xyz * vec3<f32>(hit_5.bary_0.y)) + abs(triangles_0[base_3 + i32(2)].xyz * vec3<f32>(hit_5.bary_0.z)))) + max(0.00100000004749745f, max_component_0(abs(p_14))) * 1.99999999495048542e-06f)));
 }
 
 fn visibility_2( origin_2 : vec3<f32>,  direction_8 : vec3<f32>,  distance_11 : f32,  rng_3 : ptr<function, u32>) -> f32
 {
-    var _S350 : vec3<f32> = origin_2;
+    var _S356 : vec3<f32> = origin_2;
     var skip_0 : i32 = i32(0);
-    var _S351 : f32 = distance_11;
+    var _S357 : f32 = distance_11;
     for(;;)
     {
         if(skip_0 < i32(64))
@@ -5410,7 +5511,7 @@ fn visibility_2( origin_2 : vec3<f32>,  direction_8 : vec3<f32>,  distance_11 : 
         {
             break;
         }
-        var h_0 : Hit_0 = intersect_0(_S350, direction_8, 0.0f, _S351);
+        var h_0 : Hit_0 = intersect_0(_S356, direction_8, 0.0f, _S357);
         if((h_0.triangle_0) < i32(0))
         {
             return 1.0f;
@@ -5419,18 +5520,18 @@ fn visibility_2( origin_2 : vec3<f32>,  direction_8 : vec3<f32>,  distance_11 : 
         var object_3 : i32;
         var nits_3 : f32;
         var blocker_0 : OpenPBR_ResolvedInputs_0 = resolve_material_1(h_0, (vec3<f32>(0) - direction_8), &(gn_0), &(object_3), &(nits_3));
-        var _S352 : f32 = random_0(&((*rng_3)));
-        if(_S352 < (blocker_0.geometry_opacity_0))
+        var _S358 : f32 = random_0(&((*rng_3)));
+        if(_S358 < (blocker_0.geometry_opacity_0))
         {
             return 0.0f;
         }
-        var _S353 : i32 = h_0.triangle_0 * i32(12);
-        var _S354 : vec3<f32> = offset_hit_0(h_0, normalize(cross(triangles_0[_S353 + i32(1)].xyz - triangles_0[_S353].xyz, triangles_0[_S353 + i32(2)].xyz - triangles_0[_S353].xyz)), direction_8);
-        var _S355 : f32 = _S351 - h_0.distance_0;
+        var _S359 : i32 = h_0.triangle_0 * i32(12);
+        var _S360 : vec3<f32> = offset_hit_0(h_0, normalize(cross(triangles_0[_S359 + i32(1)].xyz - triangles_0[_S359].xyz, triangles_0[_S359 + i32(2)].xyz - triangles_0[_S359].xyz)), direction_8);
+        var _S361 : f32 = _S357 - h_0.distance_0;
         var skip_1 : i32 = skip_0 + i32(1);
-        _S350 = _S354;
+        _S356 = _S360;
         skip_0 = skip_1;
-        _S351 = _S355;
+        _S357 = _S361;
     }
     return 0.0f;
 }
@@ -5439,8 +5540,8 @@ fn random3_0( state_2 : ptr<function, u32>) -> vec3<f32>
 {
     var x_19 : f32 = random_1(&((*state_2)));
     var y_2 : f32 = random_1(&((*state_2)));
-    var _S356 : f32 = random_1(&((*state_2)));
-    return vec3<f32>(x_19, y_2, _S356);
+    var _S362 : f32 = random_1(&((*state_2)));
+    return vec3<f32>(x_19, y_2, _S362);
 }
 
 fn openpbr_sample_anisotropic_phase_function_0( volume_14 : OpenPBR_HomogeneousVolume_0,  view_direction_59 : vec3<f32>,  rand_23 : vec2<f32>) -> vec3<f32>
@@ -5453,8 +5554,8 @@ fn openpbr_sample_anisotropic_phase_function_0( volume_14 : OpenPBR_HomogeneousV
     }
     else
     {
-        var _S357 : f32 = openpbr_square_1(volume_14.anisotropy_0);
-        cos_theta_7 = 0.5f / volume_14.anisotropy_0 * (1.0f + _S357 - openpbr_square_1((1.0f - _S357) / (1.0f + volume_14.anisotropy_0 * s_7)));
+        var _S363 : f32 = openpbr_square_1(volume_14.anisotropy_0);
+        cos_theta_7 = 0.5f / volume_14.anisotropy_0 * (1.0f + _S363 - openpbr_square_1((1.0f - _S363) / (1.0f + volume_14.anisotropy_0 * s_7)));
     }
     var sin_theta_0 : f32 = sqrt(max(0.0f, 1.0f - openpbr_square_1(cos_theta_7)));
     var phi_3 : f32 = 6.28318548202514648f * rand_23.y;
@@ -5480,47 +5581,47 @@ fn openpbr_calculate_weight_for_surface_at_distance_0( volume_16 : OpenPBR_Homog
 
 fn escape_radiance_0( direction_9 : vec3<f32>,  previousPdf_0 : f32,  previousDelta_0 : bool) -> vec3<f32>
 {
-    var _S358 : vec3<f32> = environment_0(direction_9);
-    var _S359 : i32 = i32(Frame_0.frame_0[i32(7)].z);
+    var _S364 : vec3<f32> = environment_0(direction_9);
+    var _S365 : i32 = i32(Frame_0.frame_0[i32(7)].z);
     var i_5 : i32 = i32(0);
-    var result_7 : vec3<f32> = _S358;
+    var result_7 : vec3<f32> = _S364;
     for(;;)
     {
-        if(i_5 < _S359)
+        if(i_5 < _S365)
         {
         }
         else
         {
             break;
         }
-        var _S360 : i32 = i_5 * i32(4);
-        var p_15 : vec4<f32> = lights_0[_S360];
-        var extra_2 : vec4<f32> = lights_0[_S360 + i32(2)];
-        var _S361 : bool;
+        var _S366 : i32 = i_5 * i32(4);
+        var p_15 : vec4<f32> = lights_0[_S366];
+        var extra_2 : vec4<f32> = lights_0[_S366 + i32(2)];
+        var _S367 : bool;
         if((p_15.w) != 0.0f)
         {
-            _S361 = true;
+            _S367 = true;
         }
         else
         {
-            _S361 = (extra_2.w) >= 1.0f;
+            _S367 = (extra_2.w) >= 1.0f;
         }
-        var _S362 : bool;
-        if(_S361)
+        var _S368 : bool;
+        if(_S367)
         {
-            _S362 = true;
+            _S368 = true;
         }
         else
         {
-            _S362 = (dot(direction_9, p_15.xyz)) < (extra_2.w);
+            _S368 = (dot(direction_9, p_15.xyz)) < (extra_2.w);
         }
-        if(_S362)
+        if(_S368)
         {
             i_5 = i_5 + i32(1);
             continue;
         }
-        var _S363 : f32 = extra_2.w;
-        var pdf_21 : f32 = 1.0f / (f32(_S359) * 6.28318548202514648f * (1.0f - _S363));
+        var _S369 : f32 = extra_2.w;
+        var pdf_21 : f32 = 1.0f / (f32(_S365) * 6.28318548202514648f * (1.0f - _S369));
         var weight_18 : f32;
         if(previousDelta_0)
         {
@@ -5530,7 +5631,7 @@ fn escape_radiance_0( direction_9 : vec3<f32>,  previousPdf_0 : f32,  previousDe
         {
             weight_18 = power_weight_0(previousPdf_0, pdf_21);
         }
-        result_7 = result_7 + vec3<f32>(weight_18) * lights_0[_S360 + i32(1)].xyz / vec3<f32>((3.14159274101257324f * (1.0f - _S363 * _S363)));
+        result_7 = result_7 + vec3<f32>(weight_18) * lights_0[_S366 + i32(1)].xyz / vec3<f32>((3.14159274101257324f * (1.0f - _S369 * _S369)));
         i_5 = i_5 + i32(1);
     }
     return result_7;
@@ -5592,10 +5693,10 @@ struct Medium_0
 
 fn trace_0( origin_3 : vec3<f32>,  direction_10 : vec3<f32>,  nearT_2 : f32,  farT_2 : f32,  rng_4 : ptr<function, u32>,  primary_0 : Hit_0,  usePrimary_0 : bool) -> vec4<f32>
 {
-    var _S364 : f32;
+    var _S370 : f32;
     var radiance_0 : vec3<f32>;
-    var _S365 : vec3<f32> = vec3<f32>(vec3<i32>(i32(0)));
-    var _S366 : vec3<f32> = vec3<f32>(vec3<i32>(i32(1)));
+    var _S371 : vec3<f32> = vec3<f32>(vec3<i32>(i32(0)));
+    var _S372 : vec3<f32> = vec3<f32>(vec3<i32>(i32(1)));
     var backgroundAlpha_0 : f32;
     if((Frame_0.frame_0[i32(15)].y) > 0.0f)
     {
@@ -5606,11 +5707,11 @@ fn trace_0( origin_3 : vec3<f32>,  direction_10 : vec3<f32>,  nearT_2 : f32,  fa
         backgroundAlpha_0 = 0.0f;
     }
     var media_0 : array<Medium_0, i32(8)>;
-    var _S367 : i32 = i32(Frame_0.frame_0[i32(15)].y);
+    var _S373 : i32 = i32(Frame_0.frame_0[i32(15)].y);
     var initial_0 : i32 = i32(0);
     for(;;)
     {
-        if(initial_0 < _S367)
+        if(initial_0 < _S373)
         {
         }
         else
@@ -5626,35 +5727,35 @@ fn trace_0( origin_3 : vec3<f32>,  direction_10 : vec3<f32>,  nearT_2 : f32,  fa
         media_0[initial_0].object_4 = i32(initialMedia_0[initial_0].y);
         if(initial_0 > i32(0))
         {
-            _S364 = media_0[initial_0 - i32(1)].ior_8;
+            _S370 = media_0[initial_0 - i32(1)].ior_8;
         }
         else
         {
-            _S364 = 1.0f;
+            _S370 = 1.0f;
         }
-        media_0[initial_0].ior_8 = entered_ior_0(inputs_3, _S364);
+        media_0[initial_0].ior_8 = entered_ior_0(inputs_3, _S370);
         media_0[initial_0].volume_18 = prepared_14.volume_4;
         initial_0 = initial_0 + i32(1);
     }
-    var _S368 : i32 = i32(Frame_0.frame_0[i32(7)].z);
-    var _S369 : i32 = i32(Frame_0.frame_0[i32(8)].x);
-    var _S370 : f32 = backgroundAlpha_0;
-    var _S371 : bool = usePrimary_0;
+    var _S374 : i32 = i32(Frame_0.frame_0[i32(7)].z);
+    var _S375 : i32 = i32(Frame_0.frame_0[i32(8)].x);
+    var _S376 : f32 = backgroundAlpha_0;
+    var _S377 : bool = usePrimary_0;
     var oldDirection_0 : vec3<f32> = direction_10;
     backgroundAlpha_0 = nearT_2;
-    _S364 = farT_2;
-    var alpha_20 : f32 = _S370;
+    _S370 = farT_2;
+    var alpha_20 : f32 = _S376;
     var previousPdf_1 : f32 = 0.0f;
     var previousDelta_1 : bool = true;
     var depth_0 : i32 = i32(0);
-    var _S372 : vec3<f32> = origin_3;
-    var mediumCount_0 : i32 = _S367;
-    var throughput_4 : vec3<f32> = _S366;
-    var radiance_1 : vec3<f32> = _S365;
+    var _S378 : vec3<f32> = origin_3;
+    var mediumCount_0 : i32 = _S373;
+    var throughput_4 : vec3<f32> = _S372;
+    var radiance_1 : vec3<f32> = _S371;
     var cutouts_0 : i32 = i32(0);
     for(;;)
     {
-        if(depth_0 < _S369)
+        if(depth_0 < _S375)
         {
         }
         else
@@ -5663,30 +5764,30 @@ fn trace_0( origin_3 : vec3<f32>,  direction_10 : vec3<f32>,  nearT_2 : f32,  fa
             break;
         }
         var hit_6 : Hit_0;
-        if(_S371)
+        if(_S377)
         {
             hit_6 = primary_0;
         }
         else
         {
-            hit_6 = intersect_0(_S372, oldDirection_0, backgroundAlpha_0, _S364);
+            hit_6 = intersect_0(_S378, oldDirection_0, backgroundAlpha_0, _S370);
         }
         var geometricNormal_2 : vec3<f32> = vec3<f32>(0.0f, 0.0f, 1.0f);
         var object_5 : i32 = i32(-1);
         var nits_4 : f32 = 1.0f;
-        var _S373 : OpenPBR_ResolvedInputs_0 = openpbr_make_default_resolved_inputs_0();
-        var _S374 : Hit_0 = hit_6;
+        var _S379 : OpenPBR_ResolvedInputs_0 = openpbr_make_default_resolved_inputs_0();
+        var _S380 : Hit_0 = hit_6;
         var weight_19 : f32;
         var exteriorIor_1 : f32;
         var front_0 : bool;
-        var _S375 : bool;
+        var _S381 : bool;
         var inputs_4 : OpenPBR_ResolvedInputs_0;
         if((hit_6.triangle_0) >= i32(0))
         {
-            var _S376 : OpenPBR_ResolvedInputs_0 = resolve_material_1(hit_6, (vec3<f32>(0) - oldDirection_0), &(geometricNormal_2), &(object_5), &(nits_4));
+            var _S382 : OpenPBR_ResolvedInputs_0 = resolve_material_1(hit_6, (vec3<f32>(0) - oldDirection_0), &(geometricNormal_2), &(object_5), &(nits_4));
             var front_1 : bool = (dot(oldDirection_0, geometricNormal_2)) < 0.0f;
-            var _S377 : bool = mediumCount_0 > i32(0);
-            if(_S377)
+            var _S383 : bool = mediumCount_0 > i32(0);
+            if(_S383)
             {
                 weight_19 = media_0[mediumCount_0 - i32(1)].ior_8;
             }
@@ -5696,7 +5797,7 @@ fn trace_0( origin_3 : vec3<f32>,  direction_10 : vec3<f32>,  nearT_2 : f32,  fa
             }
             if(!front_1)
             {
-                front_0 = _S377;
+                front_0 = _S383;
             }
             else
             {
@@ -5704,13 +5805,13 @@ fn trace_0( origin_3 : vec3<f32>,  direction_10 : vec3<f32>,  nearT_2 : f32,  fa
             }
             if(front_0)
             {
-                _S375 = (media_0[mediumCount_0 - i32(1)].object_4) == object_5;
+                _S381 = (media_0[mediumCount_0 - i32(1)].object_4) == object_5;
             }
             else
             {
-                _S375 = false;
+                _S381 = false;
             }
-            if(_S375)
+            if(_S381)
             {
                 if(mediumCount_0 > i32(1))
                 {
@@ -5725,69 +5826,69 @@ fn trace_0( origin_3 : vec3<f32>,  direction_10 : vec3<f32>,  nearT_2 : f32,  fa
             {
                 exteriorIor_1 = weight_19;
             }
-            inputs_4 = _S376;
+            inputs_4 = _S382;
             front_0 = front_1;
         }
         else
         {
-            inputs_4 = _S373;
+            inputs_4 = _S379;
             front_0 = true;
             exteriorIor_1 = 1.0f;
         }
-        var _S378 : bool = mediumCount_0 > i32(0);
-        if(_S378)
+        var _S384 : bool = mediumCount_0 > i32(0);
+        if(_S384)
         {
-            _S375 = openpbr_is_homogeneous_volume_0(media_0[mediumCount_0 - i32(1)].volume_18);
+            _S381 = openpbr_is_homogeneous_volume_0(media_0[mediumCount_0 - i32(1)].volume_18);
         }
         else
         {
-            _S375 = false;
+            _S381 = false;
         }
-        var _S379 : bool;
+        var _S385 : bool;
         var delta_0 : bool;
-        if(_S375)
+        if(_S381)
         {
             var volume_19 : OpenPBR_HomogeneousVolume_0 = media_0[mediumCount_0 - i32(1)].volume_18;
             var eventDistance_0 : f32 = 1.00000001504746622e+30f;
-            var _S380 : f32 = random_0(&((*rng_4)));
-            openpbr_sample_event_distance_0(media_0[mediumCount_0 - i32(1)].volume_18, throughput_4, _S380, &(eventDistance_0));
-            var _S381 : Hit_0 = hit_6;
+            var _S386 : f32 = random_0(&((*rng_4)));
+            openpbr_sample_event_distance_0(media_0[mediumCount_0 - i32(1)].volume_18, throughput_4, _S386, &(eventDistance_0));
+            var _S387 : Hit_0 = hit_6;
             if(eventDistance_0 < (hit_6.distance_0))
             {
                 var throughput_5 : vec3<f32> = throughput_4 * openpbr_calculate_weight_for_event_at_distance_0(volume_19, throughput_4, eventDistance_0);
                 if(!(all((isfinite_1(throughput_5)))))
                 {
-                    _S379 = true;
+                    _S385 = true;
                 }
                 else
                 {
-                    _S379 = (max_component_0(throughput_5)) <= 0.0f;
+                    _S385 = (max_component_0(throughput_5)) <= 0.0f;
                 }
-                if(_S379)
+                if(_S385)
                 {
                     alpha_20 = 1.0f;
                     radiance_0 = radiance_1;
                     break;
                 }
-                var _S382 : vec3<f32> = _S372 + oldDirection_0 * vec3<f32>(eventDistance_0);
-                if(_S368 > i32(0))
+                var _S388 : vec3<f32> = _S378 + oldDirection_0 * vec3<f32>(eventDistance_0);
+                if(_S374 > i32(0))
                 {
-                    var _S383 : f32 = random_0(&((*rng_4)));
-                    var _S384 : f32 = f32(_S368);
-                    var _S385 : i32 = min(i32(_S383 * _S384), _S368 - i32(1));
+                    var _S389 : f32 = random_0(&((*rng_4)));
+                    var _S390 : f32 = f32(_S374);
+                    var _S391 : i32 = min(i32(_S389 * _S390), _S374 - i32(1));
                     var ld_2 : vec3<f32>;
                     var distance_14 : f32;
                     var pdf_22 : f32;
-                    var li_1 : vec3<f32> = sample_light_1(_S382, _S385, &((*rng_4)), &(ld_2), &(distance_14), &(pdf_22));
+                    var li_1 : vec3<f32> = sample_light_1(_S388, _S391, &((*rng_4)), &(ld_2), &(distance_14), &(pdf_22));
                     var phase_0 : f32 = openpbr_calculate_anisotropic_phase_function_value_0(volume_19, (vec3<f32>(0) - oldDirection_0), ld_2);
-                    var _S386 : i32 = _S385 * i32(4);
-                    if((lights_0[_S386].w) != 0.0f)
+                    var _S392 : i32 = _S391 * i32(4);
+                    if((lights_0[_S392].w) != 0.0f)
                     {
                         delta_0 = true;
                     }
                     else
                     {
-                        delta_0 = (lights_0[_S386 + i32(2)].w) >= 1.0f;
+                        delta_0 = (lights_0[_S392 + i32(2)].w) >= 1.0f;
                     }
                     if(delta_0)
                     {
@@ -5795,73 +5896,73 @@ fn trace_0( origin_3 : vec3<f32>,  direction_10 : vec3<f32>,  nearT_2 : f32,  fa
                     }
                     else
                     {
-                        weight_19 = power_weight_0(pdf_22 / _S384, phase_0);
+                        weight_19 = power_weight_0(pdf_22 / _S390, phase_0);
                     }
-                    var _S387 : vec3<f32> = throughput_5 * li_1 * vec3<f32>((phase_0 * weight_19 * _S384 / pdf_22)) * openpbr_calculate_transmittance_at_distance_0(volume_19, distance_14);
-                    var _S388 : f32 = visibility_2(_S382, ld_2, distance_14, &((*rng_4)));
-                    radiance_0 = radiance_1 + _S387 * vec3<f32>(_S388);
+                    var _S393 : vec3<f32> = throughput_5 * li_1 * vec3<f32>((phase_0 * weight_19 * _S390 / pdf_22)) * openpbr_calculate_transmittance_at_distance_0(volume_19, distance_14);
+                    var _S394 : f32 = visibility_2(_S388, ld_2, distance_14, &((*rng_4)));
+                    radiance_0 = radiance_1 + _S393 * vec3<f32>(_S394);
                 }
                 else
                 {
                     radiance_0 = radiance_1;
                 }
-                var _S389 : vec3<f32> = (vec3<f32>(0) - oldDirection_0);
-                var _S390 : vec3<f32> = random3_0(&((*rng_4)));
-                var _S391 : vec3<f32> = normalize(openpbr_sample_anisotropic_phase_function_0(volume_19, _S389, _S390.xy));
-                var _S392 : f32 = openpbr_calculate_anisotropic_phase_function_pdf_0(volume_19, _S389, _S391);
+                var _S395 : vec3<f32> = (vec3<f32>(0) - oldDirection_0);
+                var _S396 : vec3<f32> = random3_0(&((*rng_4)));
+                var _S397 : vec3<f32> = normalize(openpbr_sample_anisotropic_phase_function_0(volume_19, _S395, _S396.xy));
+                var _S398 : f32 = openpbr_calculate_anisotropic_phase_function_pdf_0(volume_19, _S395, _S397);
                 var depth_1 : i32 = depth_0 + i32(1);
                 if(depth_1 >= i32(Frame_0.frame_0[i32(8)].y))
                 {
-                    var _S393 : f32 = min(0.94999998807907104f, max_component_0(throughput_5));
-                    if(_S393 <= 0.0f)
+                    var _S399 : f32 = min(0.94999998807907104f, max_component_0(throughput_5));
+                    if(_S399 <= 0.0f)
                     {
                         delta_0 = true;
                     }
                     else
                     {
-                        var _S394 : f32 = random_0(&((*rng_4)));
-                        delta_0 = _S394 >= _S393;
+                        var _S400 : f32 = random_0(&((*rng_4)));
+                        delta_0 = _S400 >= _S399;
                     }
                     if(delta_0)
                     {
                         alpha_20 = 1.0f;
                         break;
                     }
-                    throughput_4 = throughput_5 / vec3<f32>(_S393);
+                    throughput_4 = throughput_5 / vec3<f32>(_S399);
                 }
                 else
                 {
                     throughput_4 = throughput_5;
                 }
-                _S371 = false;
-                oldDirection_0 = _S391;
+                _S377 = false;
+                oldDirection_0 = _S397;
                 backgroundAlpha_0 = 0.0f;
-                _S364 = 1.00000001504746622e+30f;
+                _S370 = 1.00000001504746622e+30f;
                 alpha_20 = 1.0f;
-                previousPdf_1 = _S392;
+                previousPdf_1 = _S398;
                 previousDelta_1 = false;
                 depth_0 = depth_1;
-                _S372 = _S382;
+                _S378 = _S388;
                 radiance_1 = radiance_0;
                 continue;
             }
-            var throughput_6 : vec3<f32> = throughput_4 * openpbr_calculate_weight_for_surface_at_distance_0(volume_19, throughput_4, _S381.distance_0);
+            var throughput_6 : vec3<f32> = throughput_4 * openpbr_calculate_weight_for_surface_at_distance_0(volume_19, throughput_4, _S387.distance_0);
             if(!(all((isfinite_1(throughput_6)))))
             {
-                _S379 = true;
+                _S385 = true;
             }
             else
             {
-                _S379 = (max_component_0(throughput_6)) <= 0.0f;
+                _S385 = (max_component_0(throughput_6)) <= 0.0f;
             }
-            if(_S379)
+            if(_S385)
             {
                 radiance_0 = radiance_1;
                 break;
             }
             throughput_4 = throughput_6;
         }
-        if((_S374.triangle_0) < i32(0))
+        if((_S380.triangle_0) < i32(0))
         {
             if(alpha_20 > 0.0f)
             {
@@ -5871,17 +5972,17 @@ fn trace_0( origin_3 : vec3<f32>,  direction_10 : vec3<f32>,  nearT_2 : f32,  fa
             {
                 backgroundAlpha_0 = Frame_0.frame_0[i32(9)].w;
             }
-            var _S395 : vec3<f32> = escape_radiance_0(oldDirection_0, previousPdf_1, previousDelta_1);
-            var radiance_2 : vec3<f32> = radiance_1 + throughput_4 * _S395 * vec3<f32>(backgroundAlpha_0);
+            var _S401 : vec3<f32> = escape_radiance_0(oldDirection_0, previousPdf_1, previousDelta_1);
+            var radiance_2 : vec3<f32> = radiance_1 + throughput_4 * _S401 * vec3<f32>(backgroundAlpha_0);
             alpha_20 = max(alpha_20, backgroundAlpha_0);
             radiance_0 = radiance_2;
             break;
         }
         var position_3 : vec3<f32> = hit_position_0(hit_6);
-        var _S396 : f32 = random_0(&((*rng_4)));
+        var _S402 : f32 = random_0(&((*rng_4)));
         var mediumCount_1 : i32;
-        var _S397 : bool;
-        if(_S396 >= (inputs_4.geometry_opacity_0))
+        var _S403 : bool;
+        if(_S402 >= (inputs_4.geometry_opacity_0))
         {
             var cutouts_1 : i32 = cutouts_0 + i32(1);
             if(cutouts_1 >= i32(64))
@@ -5891,15 +5992,15 @@ fn trace_0( origin_3 : vec3<f32>,  direction_10 : vec3<f32>,  nearT_2 : f32,  fa
             }
             if(!inputs_4.geometry_thin_walled_0)
             {
-                _S379 = !front_0;
+                _S385 = !front_0;
             }
             else
             {
-                _S379 = false;
+                _S385 = false;
             }
-            if(_S379)
+            if(_S385)
             {
-                delta_0 = _S378;
+                delta_0 = _S384;
             }
             else
             {
@@ -5907,13 +6008,13 @@ fn trace_0( origin_3 : vec3<f32>,  direction_10 : vec3<f32>,  nearT_2 : f32,  fa
             }
             if(delta_0)
             {
-                _S397 = (media_0[mediumCount_0 - i32(1)].object_4) == object_5;
+                _S403 = (media_0[mediumCount_0 - i32(1)].object_4) == object_5;
             }
             else
             {
-                _S397 = false;
+                _S403 = false;
             }
-            if(_S397)
+            if(_S403)
             {
                 mediumCount_1 = mediumCount_0 - i32(1);
             }
@@ -5921,45 +6022,45 @@ fn trace_0( origin_3 : vec3<f32>,  direction_10 : vec3<f32>,  nearT_2 : f32,  fa
             {
                 mediumCount_1 = mediumCount_0;
             }
-            var _S398 : vec3<f32> = offset_hit_0(hit_6, geometricNormal_2, oldDirection_0);
-            var _S399 : f32 = max(0.0f, _S364 - hit_6.distance_0);
-            _S371 = false;
+            var _S404 : vec3<f32> = offset_hit_0(hit_6, geometricNormal_2, oldDirection_0);
+            var _S405 : f32 = max(0.0f, _S370 - hit_6.distance_0);
+            _S377 = false;
             backgroundAlpha_0 = 0.0f;
-            _S364 = _S399;
-            _S372 = _S398;
+            _S370 = _S405;
+            _S378 = _S404;
             mediumCount_0 = mediumCount_1;
             cutouts_0 = cutouts_1;
             continue;
         }
-        var _S400 : vec3<f32> = (vec3<f32>(0) - oldDirection_0);
-        var prepared_15 : OpenPBR_PreparedBsdf_0 = openpbr_prepare_0(inputs_4, throughput_4, vec3<f32>(620.0f, 540.0f, 450.0f), exteriorIor_1, _S400);
+        var _S406 : vec3<f32> = (vec3<f32>(0) - oldDirection_0);
+        var prepared_15 : OpenPBR_PreparedBsdf_0 = openpbr_prepare_0(inputs_4, throughput_4, vec3<f32>(620.0f, 540.0f, 450.0f), exteriorIor_1, _S406);
         var radiance_3 : vec3<f32> = radiance_1 + throughput_4 * prepared_15.emission_0 / vec3<f32>(nits_4);
-        if(_S368 > i32(0))
+        if(_S374 > i32(0))
         {
-            var _S401 : f32 = random_0(&((*rng_4)));
-            var _S402 : f32 = f32(_S368);
-            var _S403 : i32 = min(i32(_S401 * _S402), _S368 - i32(1));
+            var _S407 : f32 = random_0(&((*rng_4)));
+            var _S408 : f32 = f32(_S374);
+            var _S409 : i32 = min(i32(_S407 * _S408), _S374 - i32(1));
             var ld_3 : vec3<f32>;
             var distance_15 : f32;
             var pdf_23 : f32;
-            var li_2 : vec3<f32> = sample_light_1(position_3, _S403, &((*rng_4)), &(ld_3), &(distance_15), &(pdf_23));
-            var _S404 : vec3<f32> = openpbr_get_sum_of_diffuse_specular_0(openpbr_eval_0(prepared_15, ld_3));
-            if(((dot(ld_3, geometricNormal_2) * dot(_S400, geometricNormal_2)) > 0.0f) != ((dot(ld_3, inputs_4.geometry_basis_0.n_0) * dot(_S400, inputs_4.geometry_basis_0.n_0)) > 0.0f))
+            var li_2 : vec3<f32> = sample_light_1(position_3, _S409, &((*rng_4)), &(ld_3), &(distance_15), &(pdf_23));
+            var _S410 : vec3<f32> = openpbr_get_sum_of_diffuse_specular_0(openpbr_eval_0(prepared_15, ld_3));
+            if(((dot(ld_3, geometricNormal_2) * dot(_S406, geometricNormal_2)) > 0.0f) != ((dot(ld_3, inputs_4.geometry_basis_0.n_0) * dot(_S406, inputs_4.geometry_basis_0.n_0)) > 0.0f))
             {
-                radiance_0 = _S365;
+                radiance_0 = _S371;
             }
             else
             {
-                radiance_0 = _S404;
+                radiance_0 = _S410;
             }
-            var _S405 : i32 = _S403 * i32(4);
-            if((lights_0[_S405].w) != 0.0f)
+            var _S411 : i32 = _S409 * i32(4);
+            if((lights_0[_S411].w) != 0.0f)
             {
                 delta_0 = true;
             }
             else
             {
-                delta_0 = (lights_0[_S405 + i32(2)].w) >= 1.0f;
+                delta_0 = (lights_0[_S411 + i32(2)].w) >= 1.0f;
             }
             if(delta_0)
             {
@@ -5967,20 +6068,20 @@ fn trace_0( origin_3 : vec3<f32>,  direction_10 : vec3<f32>,  nearT_2 : f32,  fa
             }
             else
             {
-                weight_19 = power_weight_0(pdf_23 / _S402, openpbr_pdf_0(prepared_15, ld_3));
+                weight_19 = power_weight_0(pdf_23 / _S408, openpbr_pdf_0(prepared_15, ld_3));
             }
             var start_0 : vec3<f32> = offset_hit_0(hit_6, geometricNormal_2, ld_3);
-            var _S406 : OpenPBR_HomogeneousVolume_0 = openpbr_make_empty_volume_0();
+            var _S412 : OpenPBR_HomogeneousVolume_0 = openpbr_make_empty_volume_0();
             if(!inputs_4.geometry_thin_walled_0)
             {
-                _S379 = (dot(ld_3, geometricNormal_2)) < 0.0f;
+                _S385 = (dot(ld_3, geometricNormal_2)) < 0.0f;
             }
             else
             {
-                _S379 = false;
+                _S385 = false;
             }
             var connectionVolume_0 : OpenPBR_HomogeneousVolume_0;
-            if(_S379)
+            if(_S385)
             {
                 connectionVolume_0 = prepared_15.volume_4;
             }
@@ -5989,22 +6090,22 @@ fn trace_0( origin_3 : vec3<f32>,  direction_10 : vec3<f32>,  nearT_2 : f32,  fa
                 var exteriorIndex_0 : i32 = mediumCount_0 - i32(1);
                 if(!front_0)
                 {
-                    _S397 = exteriorIndex_0 >= i32(0);
+                    _S403 = exteriorIndex_0 >= i32(0);
                 }
                 else
                 {
-                    _S397 = false;
+                    _S403 = false;
                 }
-                var _S407 : bool;
-                if(_S397)
+                var _S413 : bool;
+                if(_S403)
                 {
-                    _S407 = (media_0[exteriorIndex_0].object_4) == object_5;
+                    _S413 = (media_0[exteriorIndex_0].object_4) == object_5;
                 }
                 else
                 {
-                    _S407 = false;
+                    _S413 = false;
                 }
-                if(_S407)
+                if(_S413)
                 {
                     mediumCount_1 = exteriorIndex_0 - i32(1);
                 }
@@ -6018,48 +6119,48 @@ fn trace_0( origin_3 : vec3<f32>,  direction_10 : vec3<f32>,  nearT_2 : f32,  fa
                 }
                 else
                 {
-                    connectionVolume_0 = _S406;
+                    connectionVolume_0 = _S412;
                 }
             }
-            var _S408 : vec3<f32> = throughput_4 * li_2 * radiance_0 * openpbr_calculate_transmittance_at_distance_1(connectionVolume_0.extinction_coefficient_0, distance_15) * vec3<f32>((weight_19 * _S402 / pdf_23));
-            var _S409 : f32 = visibility_2(start_0, ld_3, distance_15, &((*rng_4)));
-            radiance_0 = radiance_3 + _S408 * vec3<f32>(_S409);
+            var _S414 : vec3<f32> = throughput_4 * li_2 * radiance_0 * openpbr_calculate_transmittance_at_distance_1(connectionVolume_0.extinction_coefficient_0, distance_15) * vec3<f32>((weight_19 * _S408 / pdf_23));
+            var _S415 : f32 = visibility_2(start_0, ld_3, distance_15, &((*rng_4)));
+            radiance_0 = radiance_3 + _S414 * vec3<f32>(_S415);
         }
         else
         {
             radiance_0 = radiance_3;
         }
-        var _S410 : vec3<f32> = random3_0(&((*rng_4)));
+        var _S416 : vec3<f32> = random3_0(&((*rng_4)));
         var next_0 : vec3<f32>;
         var weight_20 : OpenPBR_DiffuseSpecular_0;
         var pdf_24 : f32;
-        var type_1 : u32;
-        openpbr_sample_1(prepared_15, _S410, &(next_0), &(weight_20), &(pdf_24), &(type_1));
+        var type_2 : u32;
+        openpbr_sample_1(prepared_15, _S416, &(next_0), &(weight_20), &(pdf_24), &(type_2));
         if(pdf_24 <= 0.0f)
         {
             alpha_20 = 1.0f;
             break;
         }
-        var _S411 : vec3<f32> = normalize(next_0);
-        next_0 = _S411;
-        var transmission_2 : bool = ((type_1 & (u32(2)))) != u32(0);
-        if(transmission_2 != ((dot(oldDirection_0, geometricNormal_2) * dot(_S411, geometricNormal_2)) > 0.0f))
+        var _S417 : vec3<f32> = normalize(next_0);
+        next_0 = _S417;
+        var transmission_2 : bool = ((type_2 & (u32(2)))) != u32(0);
+        if(transmission_2 != ((dot(oldDirection_0, geometricNormal_2) * dot(_S417, geometricNormal_2)) > 0.0f))
         {
             alpha_20 = 1.0f;
             break;
         }
         var throughput_7 : vec3<f32> = throughput_4 * openpbr_get_sum_of_diffuse_specular_0(weight_20);
-        var _S412 : f32 = pdf_24;
-        var _S413 : bool = ((type_1 & (u32(16)))) != u32(0);
+        var _S418 : f32 = pdf_24;
+        var _S419 : bool = ((type_2 & (u32(16)))) != u32(0);
         if(!inputs_4.geometry_thin_walled_0)
         {
-            _S379 = transmission_2;
+            _S385 = transmission_2;
         }
         else
         {
-            _S379 = false;
+            _S385 = false;
         }
-        if(_S379)
+        if(_S385)
         {
             if(front_0)
             {
@@ -6074,7 +6175,7 @@ fn trace_0( origin_3 : vec3<f32>,  direction_10 : vec3<f32>,  nearT_2 : f32,  fa
             }
             else
             {
-                if(_S378)
+                if(_S384)
                 {
                     delta_0 = (media_0[mediumCount_0 - i32(1)].object_4) == object_5;
                 }
@@ -6096,7 +6197,7 @@ fn trace_0( origin_3 : vec3<f32>,  direction_10 : vec3<f32>,  nearT_2 : f32,  fa
         {
             if(!front_0)
             {
-                delta_0 = _S378;
+                delta_0 = _S384;
             }
             else
             {
@@ -6104,20 +6205,20 @@ fn trace_0( origin_3 : vec3<f32>,  direction_10 : vec3<f32>,  nearT_2 : f32,  fa
             }
             if(delta_0)
             {
-                _S397 = (media_0[mediumCount_0 - i32(1)].object_4) == object_5;
+                _S403 = (media_0[mediumCount_0 - i32(1)].object_4) == object_5;
             }
             else
             {
-                _S397 = false;
+                _S403 = false;
             }
-            if(_S397)
+            if(_S403)
             {
                 media_0[mediumCount_0 - i32(1)].volume_18 = prepared_15.volume_4;
             }
             mediumCount_1 = mediumCount_0;
         }
-        var _S414 : vec3<f32> = offset_hit_0(hit_6, geometricNormal_2, next_0);
-        var _S415 : vec3<f32> = next_0;
+        var _S420 : vec3<f32> = offset_hit_0(hit_6, geometricNormal_2, next_0);
+        var _S421 : vec3<f32> = next_0;
         var depth_2 : i32 = depth_0 + i32(1);
         if(!(all((isfinite_1(throughput_7)))))
         {
@@ -6126,36 +6227,36 @@ fn trace_0( origin_3 : vec3<f32>,  direction_10 : vec3<f32>,  nearT_2 : f32,  fa
         var throughput_8 : vec3<f32>;
         if(depth_2 >= i32(Frame_0.frame_0[i32(8)].y))
         {
-            var _S416 : f32 = min(0.94999998807907104f, max_component_0(throughput_7));
-            if(_S416 <= 0.0f)
+            var _S422 : f32 = min(0.94999998807907104f, max_component_0(throughput_7));
+            if(_S422 <= 0.0f)
             {
                 delta_0 = true;
             }
             else
             {
-                var _S417 : f32 = random_0(&((*rng_4)));
-                delta_0 = _S417 >= _S416;
+                var _S423 : f32 = random_0(&((*rng_4)));
+                delta_0 = _S423 >= _S422;
             }
             if(delta_0)
             {
                 alpha_20 = 1.0f;
                 break;
             }
-            throughput_8 = throughput_7 / vec3<f32>(_S416);
+            throughput_8 = throughput_7 / vec3<f32>(_S422);
         }
         else
         {
             throughput_8 = throughput_7;
         }
-        _S371 = false;
-        oldDirection_0 = _S415;
+        _S377 = false;
+        oldDirection_0 = _S421;
         backgroundAlpha_0 = 0.0f;
-        _S364 = 1.00000001504746622e+30f;
+        _S370 = 1.00000001504746622e+30f;
         alpha_20 = 1.0f;
-        previousPdf_1 = _S412;
-        previousDelta_1 = _S413;
+        previousPdf_1 = _S418;
+        previousDelta_1 = _S419;
         depth_0 = depth_2;
-        _S372 = _S414;
+        _S378 = _S420;
         mediumCount_0 = mediumCount_1;
         throughput_4 = throughput_8;
         radiance_1 = radiance_0;
@@ -6172,12 +6273,12 @@ struct pixelOutput_0
 @fragment
 fn main(@builtin(position) pixel_0 : vec4<f32>) -> pixelOutput_0
 {
-    var _S418 : vec2<u32> = vec2<u32>(pixel_0.xy);
+    var _S424 : vec2<u32> = vec2<u32>(pixel_0.xy);
     var sampleIndex_0 : u32 = u32(Frame_0.frame_0[i32(6)].z);
-    var rng_5 : u32 = hash_0(_S418.x + _S418.y * u32(Frame_0.frame_0[i32(6)].x) + hash_0(sampleIndex_0 + u32(Frame_0.frame_0[i32(15)].x)));
-    var _S419 : f32 = random_0(&(rng_5));
-    var _S420 : f32 = random_0(&(rng_5));
-    var _S421 : vec2<f32> = vec2<f32>(_S419, _S420);
+    var rng_5 : u32 = hash_0(_S424.x + _S424.y * u32(Frame_0.frame_0[i32(6)].x) + hash_0(sampleIndex_0 + u32(Frame_0.frame_0[i32(15)].x)));
+    var _S425 : f32 = random_0(&(rng_5));
+    var _S426 : f32 = random_0(&(rng_5));
+    var _S427 : vec2<f32> = vec2<f32>(_S425, _S426);
     var rasterPrimary_0 : bool = (Frame_0.frame_0[i32(8)].z) >= 2.0f;
     var jitter_0 : vec2<f32>;
     if(rasterPrimary_0)
@@ -6186,11 +6287,11 @@ fn main(@builtin(position) pixel_0 : vec4<f32>) -> pixelOutput_0
     }
     else
     {
-        jitter_0 = _S421;
+        jitter_0 = _S427;
     }
-    var _S422 : vec2<f32> = (vec2<f32>(_S418) + jitter_0) / Frame_0.frame_0[i32(6)].xy * vec2<f32>(2.0f) - vec2<f32>(1.0f);
-    var ndc_1 : vec2<f32> = _S422;
-    ndc_1[i32(1)] = - _S422.y;
+    var _S428 : vec2<f32> = (vec2<f32>(_S424) + jitter_0) / Frame_0.frame_0[i32(6)].xy * vec2<f32>(2.0f) - vec2<f32>(1.0f);
+    var ndc_1 : vec2<f32> = _S428;
+    ndc_1[i32(1)] = - _S428.y;
     var nearPoint_0 : vec4<f32> = Frame_0.frame_0[i32(1)] * vec4<f32>(ndc_1.x) + Frame_0.frame_0[i32(2)] * vec4<f32>(ndc_1.y) + Frame_0.frame_0[i32(4)];
     var origin_4 : vec3<f32> = Frame_0.frame_0[i32(0)].xyz;
     var direction_11 : vec3<f32> = normalize(nearPoint_0.xyz / vec3<f32>(nearPoint_0.w) - origin_4);
@@ -6199,23 +6300,23 @@ fn main(@builtin(position) pixel_0 : vec4<f32>) -> pixelOutput_0
     primary_1.triangle_0 = i32(-1);
     primary_1.bary_0 = vec3<f32>(vec3<i32>(i32(0)));
     primary_1.distance_0 = farT_3;
-    var _S423 : bool;
+    var _S429 : bool;
     if(rasterPrimary_0)
     {
-        _S423 = (Frame_0.frame_0[i32(15)].z) == 0.0f;
+        _S429 = (Frame_0.frame_0[i32(15)].z) == 0.0f;
     }
     else
     {
-        _S423 = false;
+        _S429 = false;
     }
-    if(_S423)
+    if(_S429)
     {
-        var _S424 : vec3<i32> = vec3<i32>(vec2<i32>(_S418), i32(0));
-        var visibility_3 : vec4<f32> = (textureLoad((primaryVisibility_0), ((_S424)).xy, ((_S424)).z));
-        var _S425 : i32 = i32(visibility_3.w) - i32(1);
-        primary_1.triangle_0 = _S425;
+        var _S430 : vec3<i32> = vec3<i32>(vec2<i32>(_S424), i32(0));
+        var visibility_3 : vec4<f32> = (textureLoad((primaryVisibility_0), ((_S430)).xy, ((_S430)).z));
+        var _S431 : i32 = i32(visibility_3.w) - i32(1);
+        primary_1.triangle_0 = _S431;
         primary_1.bary_0 = visibility_3.xyz;
-        if(_S425 >= i32(0))
+        if(_S431 >= i32(0))
         {
             primary_1.distance_0 = length(hit_position_0(primary_1) - origin_4);
         }
@@ -6223,39 +6324,39 @@ fn main(@builtin(position) pixel_0 : vec4<f32>) -> pixelOutput_0
     var sample_0 : vec4<f32>;
     if((Frame_0.frame_0[i32(8)].z) == 2.0f)
     {
-        var _S426 : vec4<f32> = raster_shade_0(primary_1, direction_11);
-        sample_0 = _S426;
+        var _S432 : vec4<f32> = raster_shade_0(primary_1, direction_11);
+        sample_0 = _S432;
     }
     else
     {
-        var _S427 : Hit_0 = primary_1;
+        var _S433 : Hit_0 = primary_1;
         if(rasterPrimary_0)
         {
-            _S423 = (Frame_0.frame_0[i32(15)].z) == 0.0f;
+            _S429 = (Frame_0.frame_0[i32(15)].z) == 0.0f;
         }
         else
         {
-            _S423 = false;
+            _S429 = false;
         }
-        var _S428 : vec4<f32> = trace_0(origin_4, direction_11, 0.0f, farT_3, &(rng_5), _S427, _S423);
-        sample_0 = _S428;
+        var _S434 : vec4<f32> = trace_0(origin_4, direction_11, 0.0f, farT_3, &(rng_5), _S433, _S429);
+        sample_0 = _S434;
     }
     if((Frame_0.frame_0[i32(7)].w) > 0.0f)
     {
-        _S423 = sampleIndex_0 > u32(0);
+        _S429 = sampleIndex_0 > u32(0);
     }
     else
     {
-        _S423 = false;
+        _S429 = false;
     }
-    if(_S423)
+    if(_S429)
     {
-        var _S429 : vec3<i32> = vec3<i32>(vec2<i32>(_S418), i32(0));
-        var previous_0 : vec4<f32> = (textureLoad((history_0), ((_S429)).xy, ((_S429)).z));
-        var _S430 : pixelOutput_0 = pixelOutput_0( previous_0 + (sample_0 - previous_0) / vec4<f32>(f32(sampleIndex_0 + u32(1))) );
-        return _S430;
+        var _S435 : vec3<i32> = vec3<i32>(vec2<i32>(_S424), i32(0));
+        var previous_0 : vec4<f32> = (textureLoad((history_0), ((_S435)).xy, ((_S435)).z));
+        var _S436 : pixelOutput_0 = pixelOutput_0( previous_0 + (sample_0 - previous_0) / vec4<f32>(f32(sampleIndex_0 + u32(1))) );
+        return _S436;
     }
-    var _S431 : pixelOutput_0 = pixelOutput_0( sample_0 );
-    return _S431;
+    var _S437 : pixelOutput_0 = pixelOutput_0( sample_0 );
+    return _S437;
 }
 

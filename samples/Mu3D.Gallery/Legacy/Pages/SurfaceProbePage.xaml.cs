@@ -158,7 +158,7 @@ public partial class SurfaceProbePage : ContentPage
             }
         }
         _ = text.AppendLine($"Present modes: {string.Join(", ", session.Capabilities.PresentModes)}");
-        _ = text.AppendLine("Physical HDR output verified: false");
+        _ = text.AppendLine("Physical HDR output: not measured by this probe");
         return text.ToString();
     }
 
