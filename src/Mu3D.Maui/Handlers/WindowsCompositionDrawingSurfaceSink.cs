@@ -51,12 +51,8 @@ internal sealed class WindowsCompositionDrawingSurfaceSink : IWgpuTexturePresent
     private readonly Action<Exception> reportError;
     private readonly Func<Microsoft.UI.Xaml.FrameworkElement?>? resolveUnderlay;
     private readonly bool useSynchronizedHdrMask;
-    private ID3D12Device? d3d12Device;
-    private ID3D12CommandQueue? d3d12CommandQueue;
     private ID3D12Resource? d3d12Resource;
-    private ID3D11Device? d3d11Device;
-    private ID3D11DeviceContext? d3d11Context;
-    private ID3D11On12Device? d3d11On12Device;
+    private WindowsD3D11On12Bridge.Lease? bridge;
     private ID3D11Resource? wrappedSource;
     private CompositionGraphicsDevice? compositionDevice;
     private CompositionDrawingSurface? drawingSurface;
@@ -144,14 +140,15 @@ internal sealed class WindowsCompositionDrawingSurfaceSink : IWgpuTexturePresent
         });
     }
 
-    // CompositionDrawingSurface is agile and supports worker-thread interop. Each sink owns one
-    // graphics device and WgpuTexturePresentationSession serializes Present against Detach, so the
-    // D3D11On12 copy does not need to occupy the MAUI input thread.
+    // CompositionDrawingSurface supports worker-thread interop. Serialize the shared immediate
+    // context across sinks as well as each session's Present/Detach boundary.
     public void Present()
     {
         lock (sinkGate)
         {
-            PresentCore();
+            if (bridge is not { } activeBridge)
+                throw new InvalidOperationException("The Windows composition source is not attached.");
+            lock (activeBridge.Gate) PresentCore();
         }
     }
 
@@ -216,41 +213,27 @@ internal sealed class WindowsCompositionDrawingSurfaceSink : IWgpuTexturePresent
         try
         {
             // The bridge exports borrowed pointers. Give each Vortice wrapper its own COM reference.
-            _ = Marshal.AddRef(nativeD3D12Device);
-            d3d12Device = new ID3D12Device(nativeD3D12Device);
-            _ = Marshal.AddRef(nativeD3D12CommandQueue);
-            d3d12CommandQueue = new ID3D12CommandQueue(nativeD3D12CommandQueue);
+            bridge = WindowsD3D11On12Bridge.Acquire(nativeD3D12Device, nativeD3D12CommandQueue);
             _ = Marshal.AddRef(nativeD3D12Resource);
             d3d12Resource = new ID3D12Resource(nativeD3D12Resource);
-
-            Result result = Vortice.Direct3D11on12.Apis.D3D11On12CreateDevice(
-                d3d12Device,
-                DeviceCreationFlags.BgraSupport,
-                [FeatureLevel.Level_11_1, FeatureLevel.Level_11_0],
-                [d3d12CommandQueue],
-                0,
-                out ID3D11Device createdDevice,
-                out ID3D11DeviceContext createdContext,
-                out _);
-            result.CheckError();
-            d3d11Device = createdDevice;
-            d3d11Context = createdContext;
-            d3d11On12Device = d3d11Device.QueryInterface<ID3D11On12Device>();
 
             Vortice.Direct3D11on12.ResourceFlags resourceFlags = new()
             {
                 BindFlags = BindFlags.RenderTarget | BindFlags.ShaderResource,
             };
-            wrappedSource = d3d11On12Device.CreateWrappedResource<ID3D11Resource>(
-                d3d12Resource,
-                resourceFlags,
-                ResourceStates.RenderTarget,
-                ResourceStates.RenderTarget);
+            lock (bridge.Gate)
+            {
+                wrappedSource = bridge.On12.CreateWrappedResource<ID3D11Resource>(
+                    d3d12Resource,
+                    resourceFlags,
+                    ResourceStates.RenderTarget,
+                    ResourceStates.RenderTarget);
+            }
 
             if (useSynchronizedHdrMask)
             {
                 AttachSynchronizedHdrMaskCarrier(
-                    d3d11Device.NativePointer,
+                    bridge.Device.NativePointer,
                     width,
                     height,
                     format,
@@ -261,7 +244,7 @@ internal sealed class WindowsCompositionDrawingSurfaceSink : IWgpuTexturePresent
                 Compositor compositor = ElementCompositionPreview.GetElementVisual(host).Compositor;
                 compositionDevice = CreateCompositionGraphicsDevice(
                     compositor,
-                    d3d11Device.NativePointer);
+                    bridge.Device.NativePointer);
                 drawingSurface = compositionDevice.CreateDrawingSurface(
                     new Windows.Foundation.Size(width, height),
                     MapPixelFormat(format),
@@ -344,9 +327,9 @@ internal sealed class WindowsCompositionDrawingSurfaceSink : IWgpuTexturePresent
     private unsafe void PresentCore()
     {
         ObjectDisposedException.ThrowIf(disposed, this);
-        ID3D11On12Device on12 = d3d11On12Device ??
+        ID3D11On12Device on12 = bridge?.On12 ??
             throw new InvalidOperationException("The Windows composition source is not attached.");
-        ID3D11DeviceContext context = d3d11Context ??
+        ID3D11DeviceContext context = bridge?.Context ??
             throw new InvalidOperationException("The Windows composition device is unavailable.");
         ID3D11Resource source = wrappedSource ??
             throw new InvalidOperationException("The Windows composition source resource is unavailable.");
@@ -465,20 +448,15 @@ internal sealed class WindowsCompositionDrawingSurfaceSink : IWgpuTexturePresent
         drawingSurface = null;
         compositionDevice?.Dispose();
         compositionDevice = null;
-        wrappedSource?.Dispose();
+        if (bridge is { } activeBridge)
+        {
+            lock (activeBridge.Gate) wrappedSource?.Dispose();
+        }
         wrappedSource = null;
-        d3d11On12Device?.Dispose();
-        d3d11On12Device = null;
-        d3d11Context?.Dispose();
-        d3d11Context = null;
-        d3d11Device?.Dispose();
-        d3d11Device = null;
         d3d12Resource?.Dispose();
         d3d12Resource = null;
-        d3d12CommandQueue?.Dispose();
-        d3d12CommandQueue = null;
-        d3d12Device?.Dispose();
-        d3d12Device = null;
+        bridge?.Dispose();
+        bridge = null;
     }
 
     private void ApplyVisualLayout()

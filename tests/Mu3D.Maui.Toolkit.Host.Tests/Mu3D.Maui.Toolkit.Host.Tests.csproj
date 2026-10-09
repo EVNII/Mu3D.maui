@@ -7,6 +7,20 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../../samples/Mu3D.Gallery/Legacy/Examples/ProductFeedExample.cs"
+             Link="Actual/ProductFeedExample.cs" />
+    <ProjectReference Include="../../src/Mu3D.Formats.Gltf/Mu3D.Formats.Gltf.csproj" />
+    <ProjectReference Include="../../src/Mu3D.Native.UltraHdr/Mu3D.Native.UltraHdr.csproj" />
+    <Content Include="../../samples/Mu3D.Gallery/Resources/Raw/GltfSamples/*.glb"
+             Link="GltfSamples/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <Compile Include="../../samples/Mu3D.Gallery/Legacy/Pages/ProductFeedVisibleRange.cs"
+             Link="Actual/ProductFeedVisibleRange.cs" />
+    <Compile Include="../../samples/Mu3D.Gallery/Legacy/Examples/ProceduralFeedExample.cs"
+             Link="Actual/ProceduralFeedExample.cs" />
+    <Compile Include="../../samples/Mu3D.Gallery/Controls/GalleryPageActivation.cs"
+             Link="Actual/GalleryPageActivation.cs" />
+    <Compile Include="../../samples/Mu3D.Gallery/Controls/IGalleryPageActivation.cs"
+             Link="Actual/IGalleryPageActivation.cs" />
     <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.90" />
     <ProjectReference Include="../../src/Mu3D.Toolkit/Mu3D.Toolkit.csproj" />
     <Using Include="Microsoft.Maui.Controls" />

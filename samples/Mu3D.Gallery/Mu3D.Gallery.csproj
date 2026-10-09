@@ -155,7 +155,9 @@
     <_Mu3DWindowsRuntimeRid Condition="'$(RuntimeIdentifier)' == 'win-arm64' Or '$(RuntimeIdentifier)' == 'win10-arm64'">win-arm64</_Mu3DWindowsRuntimeRid>
     <_Mu3DWindowsRuntimeRid Condition="'$(RuntimeIdentifier)' == 'win-x86' Or '$(RuntimeIdentifier)' == 'win10-x86'">win-x86</_Mu3DWindowsRuntimeRid>
     <_Mu3DWindowsRuntimeRid Condition="'$(_Mu3DWindowsRuntimeRid)' == ''">win-x64</_Mu3DWindowsRuntimeRid>
-    <Mu3DEnableKtxHarness Condition="'$(Mu3DEnableKtxHarness)' == '' And $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' And Exists('$(_Mu3DKtxRuntimeRoot)\$(_Mu3DWindowsRuntimeRid)\native\ktx.dll')">true</Mu3DEnableKtxHarness>
+    <!-- Windows exposes the codec examples. A missing runtime must fail the build with setup
+         guidance instead of silently producing a managed-only KTX page. -->
+    <Mu3DEnableKtxHarness Condition="'$(Mu3DEnableKtxHarness)' == '' And $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">true</Mu3DEnableKtxHarness>
     <Mu3DEnableKtxHarness Condition="'$(Mu3DEnableKtxHarness)' == ''">false</Mu3DEnableKtxHarness>
     <_Mu3DWindowsRuntimeFile>$(_Mu3DDeviceHarnessRuntimeRoot)\$(_Mu3DWindowsRuntimeRid)\native\wgpu_native.dll</_Mu3DWindowsRuntimeFile>
     <Mu3DEnableUltraHdrHarness Condition="'$(Mu3DEnableUltraHdrHarness)' == '' And '$(Mu3DUseRuntimePackages)' == 'true'">true</Mu3DEnableUltraHdrHarness>
@@ -176,12 +178,16 @@
 
   <!-- The in-app source drawer is desktop-only. Keep copyable source out of Android and iOS
        packages instead of shipping assets that those layouts never expose. -->
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
+    <MauiAsset Include="Platforms/Windows/MauiProgram.ProductFeed.cs"
+               LogicalName="GallerySource/Windows/MauiProgram.ProductFeed.cs" />
+  </ItemGroup>
   <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst' Or $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
     <MauiAsset Include="Pages/*Page.xaml;Pages/*Page.xaml.cs;Pages/*Presenter.cs;Pages/SampleEnvironment.cs;Pages/AndroidHdrBufferDiagnostics.cs;Pages/HdrProbePage.Readback.cs;Pages/SurfaceReferenceReadback.cs;Pages/FeedCheckerboard.cs;Controls/SceneHostView.cs;Controls/IGalleryPageActivation.cs"
                LogicalName="GallerySource/Adaptive/%(Filename)%(Extension)" />
     <MauiAsset Include="Legacy\Pages\*Page.xaml"
                LogicalName="GallerySource/%(Filename)%(Extension)" />
-    <MauiAsset Include="Legacy/Examples/*.cs;Legacy/Pages/*Presenter.cs;Legacy/Pages/ColorComparisonRenderer.cs;Legacy/Pages/OpenPbrTextureExample.cs;Legacy/Pages/OpenPbrParameterEditor.cs;Legacy/Pages/SurfaceReferencePattern.cs;Legacy/Pages/OpenPbrFurnaceRenderer.cs;Legacy/Pages/FurnaceSettingsQueue.cs;Legacy/Pages/CmykPrintingPattern.cs;Legacy/Pages/HdrJpegRoundTrip.cs;Legacy/Pages/GltfInstancesExample.cs;Legacy/Pages/ModelLabCatalog.cs;Legacy/Pages/ModelLabAssets.cs;Legacy/Pages/GalleryEnvironment.cs;Legacy/Pages/GalleryAssets.cs;Legacy/Pages/PointerPenInputPage.PencilPreview.cs;Legacy/Pages/PointerPenInputPage.Windows.cs;Legacy/Pages/PenTip*.cs;Legacy/Pages/PointerInputBridge*.cs;Legacy/Pages/MapControlsPage.Keyboard.Desktop.cs;Legacy/Pages/FlyControlsPage.Keyboard.Desktop.cs;Legacy/Pages/ProductFeedData.cs;Legacy/Pages/ProductFeedPage.Output.cs;Legacy/Pages/ProductFeedPage.Diagnostics.cs"
+    <MauiAsset Include="Legacy/Examples/*.cs;Legacy/Pages/*Presenter.cs;Legacy/Pages/ColorComparisonRenderer.cs;Legacy/Pages/OpenPbrTextureExample.cs;Legacy/Pages/OpenPbrParameterEditor.cs;Legacy/Pages/SurfaceReferencePattern.cs;Legacy/Pages/OpenPbrFurnaceRenderer.cs;Legacy/Pages/FurnaceSettingsQueue.cs;Legacy/Pages/CmykPrintingPattern.cs;Legacy/Pages/HdrJpegRoundTrip.cs;Legacy/Pages/GltfInstancesExample.cs;Legacy/Pages/ModelLabCatalog.cs;Legacy/Pages/ModelLabAssets.cs;Legacy/Pages/GalleryEnvironment.cs;Legacy/Pages/GalleryAssets.cs;Legacy/Pages/PointerPenInputPage.PencilPreview.cs;Legacy/Pages/PointerPenInputPage.Windows.cs;Legacy/Pages/PenTip*.cs;Legacy/Pages/PointerInputBridge*.cs;Legacy/Pages/MapControlsPage.Keyboard.Desktop.cs;Legacy/Pages/FlyControlsPage.Keyboard.Desktop.cs;Legacy/Pages/ProductFeedData.cs;Legacy/Pages/ProductFeedVisibleRange.cs;Legacy/Pages/ProductFeedPage.Output.cs;Legacy/Pages/ProductFeedPage.Diagnostics.cs"
                LogicalName="GallerySource/%(Filename)%(Extension)" />
     <MauiAsset Include="Legacy\Pages\*Page.xaml.cs"
                LogicalName="GallerySource/%(Filename)%(Extension)" />
@@ -388,7 +394,7 @@
     <Error Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst' And '$(_Mu3DKtxRuntimeIdentifier)' != '' And !Exists('$(_Mu3DKtxRuntimeRoot)\$(_Mu3DKtxRuntimeIdentifier)\native\libktx.a')"
            Text="The verified KTX Mac Catalyst runtime for $(_Mu3DKtxRuntimeIdentifier) is missing." />
     <Error Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' And !Exists('$(_Mu3DKtxRuntimeRoot)\$(_Mu3DWindowsRuntimeRid)\native\ktx.dll')"
-           Text="The verified KTX Windows runtime for $(_Mu3DWindowsRuntimeRid) is missing." />
+           Text="The pinned KTX Windows runtime for $(_Mu3DWindowsRuntimeRid) is missing. Run eng/build-windows-native-runtimes.ps1 -RuntimeIdentifier $(_Mu3DWindowsRuntimeRid), then rebuild Gallery." />
   </Target>
   <Import Project="../../src/Mu3D.Rendering.OpenPbr/buildTransitive/Mu3D.Rendering.OpenPbr.targets" />
 </Project>

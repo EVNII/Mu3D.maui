@@ -146,10 +146,14 @@ public partial class ProductFeedPage : ContentPage
             product.CancelLoading();
         }
 
-        // Keep the bounded warm set and one page surface ready for a quick return. Normal MAUI
-        // Unloaded/handler teardown still owns final surface/device disposal.
-        ApplyRetainedScenes();
         ProxyHost.IsRenderingEnabled = false;
+        foreach (ProductPreview product in Products)
+        {
+            product.ReleaseContent();
+        }
+        assetProvider.Clear();
+        ApplyRetainedScenes();
+        // The cached page keeps navigation state; native Unloaded still owns device teardown.
         UpdateStatus();
         base.OnDisappearing();
     }

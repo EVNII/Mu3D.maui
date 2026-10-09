@@ -184,6 +184,17 @@ internal static class Program
                 forceFallbackAdapter ? WGPUBackendType.D3D12 : WGPUBackendType.Undefined)
                 .ConfigureAwait(false);
             WgpuOffscreenTriangleProbeResult result = WgpuOffscreenTriangleProbe.Probe(device);
+#if WINDOWS
+            if (device.NativeD3D12Device != 0)
+                WindowsCompositionBridgeChecks.Verify(device);
+            else
+            {
+                using WgpuGraphicsDevice compositionDevice = await WgpuGraphicsDevice.CreateForTestingAsync(
+                    TimeSpan.FromSeconds(30), forceFallbackAdapter, WGPUBackendType.D3D12)
+                    .ConfigureAwait(false);
+                WindowsCompositionBridgeChecks.Verify(compositionDevice);
+            }
+#endif
             if (!result.CommandSubmitted ||
                 !result.QueueCompletionObserved ||
                 result.DeviceState != GraphicsDeviceState.Active)

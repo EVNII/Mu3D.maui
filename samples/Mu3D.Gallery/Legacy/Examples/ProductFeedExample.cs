@@ -22,6 +22,9 @@ internal sealed class ProductAssetProvider(
 
     public void Dispose() { contentCache.Dispose(); definitionCache.Dispose(); }
 
+    // Preserve the reusable provider and page state, but retain no heavy assets while hidden.
+    internal void Clear() { contentCache.Clear(); definitionCache.Clear(); }
+
     internal ValueTask<ProductSceneContent> GetContentAsync(
         int index,
         string name,

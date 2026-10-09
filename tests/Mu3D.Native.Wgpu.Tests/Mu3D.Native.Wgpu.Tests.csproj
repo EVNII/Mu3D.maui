@@ -12,6 +12,15 @@
     <_Mu3DWindowsNativeTestRuntime Condition="$([MSBuild]::IsOSPlatform('windows'))">$(MSBuildThisFileDirectory)..\..\artifacts\wgpu-native\$(Mu3DWgpuNativeVersion)\release\runtimes\win-x64\native\wgpu_native.dll</_Mu3DWindowsNativeTestRuntime>
   </PropertyGroup>
 
+  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('windows'))">
+    <DefineConstants>$(DefineConstants);WINDOWS</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition="$([MSBuild]::IsOSPlatform('windows'))">
+    <Compile Include="../../src/Mu3D.Maui/Handlers/WindowsD3D11On12Bridge.cs" Link="Actual/WindowsD3D11On12Bridge.cs" />
+    <PackageReference Include="Vortice.Direct3D11" Version="3.8.3" />
+    <PackageReference Include="Vortice.Direct3D12" Version="3.8.3" />
+  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="../../src/Mu3D.Formats.Gltf/Mu3D.Formats.Gltf.csproj" />
     <ProjectReference Include="../../src/Mu3D.Native.Wgpu/Mu3D.Native.Wgpu.csproj" />

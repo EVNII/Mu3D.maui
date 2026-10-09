@@ -26,9 +26,6 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
          endif()
      elseif(EMSCRIPTEN)
          target_compile_definitions(${target} PRIVATE
-         endif()
-     elseif(EMSCRIPTEN)
-         target_compile_definitions(${target} PRIVATE
 diff --git a/lib/astc_codec.cpp b/lib/astc_codec.cpp
 --- a/lib/astc_codec.cpp
 +++ b/lib/astc_codec.cpp

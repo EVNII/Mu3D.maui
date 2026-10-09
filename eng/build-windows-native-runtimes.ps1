@@ -55,7 +55,8 @@ function Invoke-Checked {
         [string] $Description
     )
 
-    & $FilePath @Arguments
+    # Native stdout is diagnostic output, not part of a caller's returned source/tool path.
+    & $FilePath @Arguments | Out-Host
     if ($LASTEXITCODE -ne 0) {
         throw "$Description failed with exit code $LASTEXITCODE."
     }
@@ -110,9 +111,14 @@ function Ensure-PinnedSource {
         "-c", "filter.lfs.smudge=",
         "-c", "filter.lfs.clean=",
         "-c", "filter.lfs.required=false",
+        "-c", "core.autocrlf=false",
         "-C", $destination,
         "checkout", "--force", "--detach", "FETCH_HEAD"
     ) "Checking out pinned $Name commit"
+
+    # Also normalize a checkout created earlier under the host's core.autocrlf=true setting.
+    Invoke-Checked $GitPath @("-c", $safeDirectory, "-c", "core.autocrlf=false",
+        "-C", $destination, "checkout-index", "--force", "--all") "Preparing exact $Name source bytes"
 
     $actualCommit = (& $GitPath -c $safeDirectory -C $destination rev-parse HEAD).Trim()
     if ($LASTEXITCODE -ne 0 -or $actualCommit -ne $Commit) {
@@ -276,7 +282,10 @@ $jpegTurboSource = Ensure-PinnedSource "jpeg-turbo" "https://github.com/libjpeg-
 $requiresNasm = @($RuntimeIdentifier | Where-Object { $_ -ne "win-arm64" }).Count -gt 0
 $nasm = if ($requiresNasm) { Ensure-Nasm } else { $null }
 
-$ktxPatch = Join-Path $repositoryRoot "eng/native/KtxWindowsX86CallingConvention.patch"
+$ktxPatch = Join-Path $toolsRoot "KtxWindowsX86CallingConvention.patch"
+$checkedInKtxPatch = Join-Path $repositoryRoot "eng/native/KtxWindowsX86CallingConvention.patch"
+[System.IO.File]::WriteAllText($ktxPatch,
+    [System.IO.File]::ReadAllText($checkedInKtxPatch).Replace("`r`n", "`n"))
 $ktxSafeDirectory = "safe.directory=$($ktxSource.Replace('\', '/'))"
 Invoke-Checked $git @("-c", $ktxSafeDirectory, "-C", $ktxSource, "apply", "--check", $ktxPatch) `
     "Checking the pinned KTX Windows calling-convention patch"

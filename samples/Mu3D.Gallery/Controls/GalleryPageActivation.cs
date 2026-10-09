@@ -10,6 +10,10 @@ internal sealed partial class GalleryPageActivation : IDisposable
     private Page? selectedPage;
     private Page? activePage;
     private bool disposed;
+    private readonly Func<Page, bool> pageVisibility;
+
+    internal GalleryPageActivation(Func<Page, bool>? pageVisibility = null)
+        => this.pageVisibility = pageVisibility ?? IsPageShown;
 
     /// <summary>Registers a created page and suspends its rendering until it is selected and loaded.</summary>
     internal void Register(Page page)
@@ -33,6 +37,8 @@ internal sealed partial class GalleryPageActivation : IDisposable
         RegisterAndroidPage(page);
 #elif IOS || MACCATALYST
         RegisterApplePage(page);
+#elif WINDOWS
+        if (!landing) RegisterWindowsPage(page);
 #endif
     }
 
@@ -43,7 +49,7 @@ internal sealed partial class GalleryPageActivation : IDisposable
         if (page is not null) Register(page);
         selectedPage = page;
         if (!ReferenceEquals(activePage, page)) DeactivateActivePage();
-        if (page is not null && page.IsLoaded && IsPageShown(page)) ActivateSelectedPage();
+        if (page is not null && page.IsLoaded && pageVisibility(page)) ActivateSelectedPage();
     }
 
     /// <summary>Clears navigation activation when no destination is selected or the window stops.</summary>
@@ -56,7 +62,7 @@ internal sealed partial class GalleryPageActivation : IDisposable
     private void OnPageLoaded(object? sender, EventArgs e)
     {
         if (disposed) return;
-        if (sender is not Page page || !IsPageShown(page)) return;
+        if (sender is not Page page || !pageVisibility(page)) return;
         // A cached landing page can load below a navigation stack's visible child. Only the
         // platform visibility observer may treat it as a navigation destination.
         if (!pages[page].IsLanding && ReferenceEquals(page, selectedPage)) ActivateSelectedPage();
@@ -72,6 +78,9 @@ internal sealed partial class GalleryPageActivation : IDisposable
     {
         if (selectedPage is not Page page || ReferenceEquals(page, activePage)) return;
         activePage = page;
+        // Restore the saved application intent while the content is still detached. The page's
+        // initialization callback then owns any new decision; attaching must not overwrite it.
+        pages[page].RestoreRenderingIntent();
         // Set up scene/pass state before making native presentation views visible again.
         NotifyActivation(page, true);
         pages[page].ResumeRendering();
@@ -97,8 +106,7 @@ internal sealed partial class GalleryPageActivation : IDisposable
 #endif
     }
 
-#if ANDROID || IOS || MACCATALYST
-    private void OnNativePageVisibilityChanged(Page page, bool shown)
+    internal void OnNativePageVisibilityChanged(Page page, bool shown)
     {
         if (disposed) return;
         if (pages[page].IsLanding)
@@ -110,7 +118,6 @@ internal sealed partial class GalleryPageActivation : IDisposable
         else if (!shown && ReferenceEquals(page, activePage)) DeactivateActivePage();
         else if (shown && page.IsLoaded && ReferenceEquals(page, selectedPage)) ActivateSelectedPage();
     }
-#endif
 
     private void DeactivateActivePage()
     {
@@ -138,6 +145,8 @@ internal sealed partial class GalleryPageActivation : IDisposable
         DisposeAndroidObservers();
 #elif IOS || MACCATALYST
         DisposeAppleObservers();
+#elif WINDOWS
+        DisposeWindowsObservers();
 #endif
         foreach (Page page in pages.Keys)
         {
@@ -193,11 +202,17 @@ internal sealed partial class GalleryPageActivation : IDisposable
             }
         }
 
+        internal void RestoreRenderingIntent()
+        {
+            if (!suspended) return;
+            foreach ((SceneViewProxyHost host, bool wasRendering) in proxyRendering)
+                host.IsRenderingEnabled = wasRendering;
+        }
+
         internal void ResumeRendering()
         {
             if (!suspended) return;
             suspended = false;
-            foreach ((SceneViewProxyHost host, bool wasRendering) in proxyRendering) host.IsRenderingEnabled = wasRendering;
             if (renderingGate is not null)
             {
                 if (originalContent is not null) renderingGate.Add(originalContent);

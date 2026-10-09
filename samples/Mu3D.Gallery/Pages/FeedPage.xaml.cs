@@ -6,6 +6,11 @@ using Mu3D.Maui.Toolkit.Controls;
 
 namespace Mu3D.Gallery.Pages;
 
+/// <summary>Identifies the procedural feed for its scoped Windows visible-item handler.</summary>
+public sealed class FeedCollectionView : CollectionView
+{
+}
+
 /// <summary>
 /// Demonstrates a two-column product feed where each card hosts a live 3D preview through
 /// <see cref="SceneViewProxy"/> instances sharing one <see cref="SceneViewProxyHost"/> device.
@@ -81,17 +86,22 @@ public partial class FeedPage : ContentPage, IGalleryPageActivation
 
     private void ApplyLifecycle(int firstVisible, int lastVisible)
     {
+        lastFirstVisible = firstVisible;
+        lastLastVisible = lastVisible;
         (lastLive, lastWarm) = ProceduralFeedExample.ApplyLifecycle(Products, firstVisible, lastVisible);
         RefreshStatus();
     }
 
     private int lastLive;
     private int lastWarm;
+    private int lastFirstVisible;
+    private int lastLastVisible;
 
     private void RefreshStatus()
     {
         StatusLabel.Text = $"{ProxyHost.ProxyCount} loaded cells · " +
             $"{ProxyHost.ActiveSurfaceCount} active surfaces · {lastLive} live · {lastWarm} preloaded · " +
+            $"visible #{lastFirstVisible + 1}–#{lastLastVisible + 1} · " +
             $"shared device {(ProxyHost.HasSharedDevice ? "ready" : "PENDING")} · {ProxyHost.PendingFrameCount} queued";
     }
 
