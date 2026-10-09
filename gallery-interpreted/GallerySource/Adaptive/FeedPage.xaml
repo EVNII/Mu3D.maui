@@ -29,7 +29,7 @@
             Grid.Row="1"
             IsClippedToBounds="{OnPlatform Android=True, Default=False}"
             SurfaceError="OnProxyHostSurfaceError">
-            <CollectionView
+            <pages:FeedCollectionView
                 x:Name="ProductsView"
                 BackgroundColor="Transparent"
                 ItemsSource="{Binding Products}"
@@ -92,7 +92,7 @@
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-            </CollectionView>
+            </pages:FeedCollectionView>
         </toolkit:SceneViewProxyHost>
     </Grid>
 </ContentPage>
